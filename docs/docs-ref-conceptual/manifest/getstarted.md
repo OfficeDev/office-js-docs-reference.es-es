@@ -1,0 +1,34 @@
+# <a name="getstarted-element"></a><span data-ttu-id="9a956-101">Elemento GetStarted</span><span class="sxs-lookup"><span data-stu-id="9a956-101">GetStarted element</span></span>
+
+<span data-ttu-id="9a956-p101">Proporciona información usada por la llamada que se muestra cuando el complemento se instala en hosts de Word, Excel, PowerPoint y OneNote. El elemento **GetStarted** es un elemento secundario de [DesktopFormFactor](desktopformfactor.md).</span><span class="sxs-lookup"><span data-stu-id="9a956-p101">Provides information used by the callout that appears when the add-in is installed in Word, Excel, PowerPoint, and OneNote hosts. The **GetStarted** element is a child element of [DesktopFormFactor](desktopformfactor.md).</span></span>
+
+## <a name="child-elements"></a><span data-ttu-id="9a956-104">Elementos secundarios</span><span class="sxs-lookup"><span data-stu-id="9a956-104">Child elements</span></span>
+
+| <span data-ttu-id="9a956-105">Elemento</span><span class="sxs-lookup"><span data-stu-id="9a956-105">Element</span></span>                       | <span data-ttu-id="9a956-106">Obligatorio</span><span class="sxs-lookup"><span data-stu-id="9a956-106">Required</span></span> | <span data-ttu-id="9a956-107">Descripción</span><span class="sxs-lookup"><span data-stu-id="9a956-107">Description</span></span>                                        |
+|:------------------------------|:--------:|:---------------------------------------------------|
+| [<span data-ttu-id="9a956-108">Título</span><span class="sxs-lookup"><span data-stu-id="9a956-108">Title</span></span>](#title)               | <span data-ttu-id="9a956-109">Sí</span><span class="sxs-lookup"><span data-stu-id="9a956-109">Yes</span></span>      | <span data-ttu-id="9a956-110">Define dónde expone su funcionalidad un complemento.</span><span class="sxs-lookup"><span data-stu-id="9a956-110">Defines where an add-in exposes functionality.</span></span>     |
+| [<span data-ttu-id="9a956-111">Descripción</span><span class="sxs-lookup"><span data-stu-id="9a956-111">Description</span></span>](#description)   | <span data-ttu-id="9a956-112">Sí</span><span class="sxs-lookup"><span data-stu-id="9a956-112">Yes</span></span>      | <span data-ttu-id="9a956-113">Una dirección URL de un archivo que contiene funciones de JavaScript.</span><span class="sxs-lookup"><span data-stu-id="9a956-113">A URL to a file that contains JavaScript functions.</span></span>|
+| [<span data-ttu-id="9a956-114">LearnMoreUrl</span><span class="sxs-lookup"><span data-stu-id="9a956-114">LearnMoreUrl</span></span>](#learnmoreurl) | <span data-ttu-id="9a956-115">No</span><span class="sxs-lookup"><span data-stu-id="9a956-115">No</span></span>       | <span data-ttu-id="9a956-116">Una dirección URL de una página que explica el complemento en detalle.</span><span class="sxs-lookup"><span data-stu-id="9a956-116">A URL to a page that explains the add-in in detail.</span></span>   |
+
+### <a name="title"></a><span data-ttu-id="9a956-117">Título</span><span class="sxs-lookup"><span data-stu-id="9a956-117">Title</span></span> 
+
+<span data-ttu-id="9a956-p102">Necesario. El título que se usa para la parte superior de la llamada. El atributo **resid** hace referencia a un identificador válido del elemento **ShortStrings** en la sección [Recursos](resources.md).</span><span class="sxs-lookup"><span data-stu-id="9a956-p102">Required. The title used for the top of the callout. The **resid** attribute references a valid ID in the **ShortStrings** element in the [Resources](resources.md) section.</span></span>
+
+### <a name="description"></a><span data-ttu-id="9a956-121">Descripción</span><span class="sxs-lookup"><span data-stu-id="9a956-121">Description</span></span>
+
+<span data-ttu-id="9a956-p103">Necesario. La descripción / contenido del cuerpo de la llamada. El atributo **resid** hace referencia a un identificador válido del elemento **LongStrings** en la sección [Recursos](resources.md).</span><span class="sxs-lookup"><span data-stu-id="9a956-p103">Required. The description / body content for the callout. The **resid** attribute references a valid ID in the **LongStrings** element in the [Resources](resources.md) section.</span></span>
+
+### <a name="learnmoreurl"></a><span data-ttu-id="9a956-125">LearnMoreUrl</span><span class="sxs-lookup"><span data-stu-id="9a956-125">LearnMoreUrl</span></span>
+
+<span data-ttu-id="9a956-p104">Necesario. La dirección URL de una página donde el usuario puede encontrar más información sobre el complemento. El atributo **resid** hace referencia a un identificador válido del elemento **Urls** en la sección [Recursos](resources.md).</span><span class="sxs-lookup"><span data-stu-id="9a956-p104">Required. The URL to a page where the user can learn more about your add-in. The **resid** attribute references a valid ID in the **Urls** element in the [Resources](resources.md) section.</span></span>
+
+> [!NOTE]
+> <span data-ttu-id="9a956-129">**LearnMoreUrl** no representar actualmente en los clientes de Word, Excel o PowerPoint.</span><span class="sxs-lookup"><span data-stu-id="9a956-129">**LearnMoreUrl** does not currently render in Word, Excel, or PowerPoint clients.</span></span> <span data-ttu-id="9a956-130">Se recomienda agregar esta dirección URL a todos los clientes de forma que la dirección URL se represente cuando esté disponible.</span><span class="sxs-lookup"><span data-stu-id="9a956-130">We recommend that you add this URL for all clients so that the URL will render when it becomes available.</span></span> 
+
+## <a name="see-also"></a><span data-ttu-id="9a956-131">Vea también</span><span class="sxs-lookup"><span data-stu-id="9a956-131">See also</span></span>
+
+<span data-ttu-id="9a956-132">En los ejemplos de código siguientes se usa el elemento **GetStarted**:</span><span class="sxs-lookup"><span data-stu-id="9a956-132">The following code samples use the **GetStarted** element:</span></span>
+
+* [<span data-ttu-id="9a956-133">Complemento web de Excel para manipular el formato de tablas y gráficos</span><span class="sxs-lookup"><span data-stu-id="9a956-133">Excel Web Add-in for Manipulating Table and Chart Formatting</span></span>](https://github.com/OfficeDev/Excel-Add-in-JavaScript-SalesTracker)
+* [<span data-ttu-id="9a956-134">SpecKit de JavaScript del complemento de Word</span><span class="sxs-lookup"><span data-stu-id="9a956-134">Word Add-in JavaScript SpecKit</span></span>](https://github.com/OfficeDev/Word-Add-in-JS-SpecKit)
+* [<span data-ttu-id="9a956-135">Insertar gráficos de Excel con Microsoft Graph en un complemento de PowerPoint</span><span class="sxs-lookup"><span data-stu-id="9a956-135">Insert Excel charts using Microsoft Graph in a PowerPoint add-in</span></span>](https://github.com/OfficeDev/PowerPoint-Add-in-Microsoft-Graph-ASPNET-InsertChart)
