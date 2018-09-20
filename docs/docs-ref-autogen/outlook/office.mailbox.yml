@@ -1,0 +1,934 @@
+### YamlMime:UniversalReference
+ms.openlocfilehash: 471ef906fbf8bd1fc8e71bd48e53046deb26124b
+ms.sourcegitcommit: beffe9455dace422e85b92f0105c54ff7b594cbf
+ms.translationtype: MT
+ms.contentlocale: es-ES
+ms.lasthandoff: 09/20/2018
+ms.locfileid: "24053198"
+items:
+- uid: outlook.Office.Mailbox
+  summary: >-
+    Proporciona acceso al modelo de objeto de complemento de Outlook para Microsoft Outlook y Microsoft Outlook en el web.
+
+
+    Espacios de nombres:
+
+
+    - diagnostics: Proporciona información de diagnóstico a un complemento de Outlook.
+
+
+    - item: Proporciona métodos y propiedades para tener acceso a un mensaje o cita en un complemento de Outlook.
+
+
+    - userProfile: Proporciona información sobre el usuario en un complemento de Outlook.
+
+
+    \[[Conjunto de API: buzón 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>Restringido</td></tr>
+
+
+    <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redacción o lectura</td></tr></table>
+  name: Office.Mailbox
+  fullName: outlook.Office.Mailbox
+  langs:
+  - typeScript
+  type: interface
+  package: outlook
+  children:
+  - outlook.Office.Mailbox.addHandlerAsync
+  - outlook.Office.Mailbox.convertToEwsId
+  - outlook.Office.Mailbox.convertToLocalClientTime
+  - outlook.Office.Mailbox.convertToRestId
+  - outlook.Office.Mailbox.convertToUtcClientTime
+  - outlook.Office.Mailbox.diagnostics
+  - outlook.Office.Mailbox.displayAppointmentForm
+  - outlook.Office.Mailbox.displayMessageForm
+  - outlook.Office.Mailbox.displayNewAppointmentForm
+  - outlook.Office.Mailbox.displayNewMessageForm
+  - outlook.Office.Mailbox.ewsUrl
+  - outlook.Office.Mailbox.getCallbackTokenAsync
+  - outlook.Office.Mailbox.getUserIdentityTokenAsync
+  - outlook.Office.Mailbox.item
+  - outlook.Office.Mailbox.makeEwsRequestAsync
+  - outlook.Office.Mailbox.restUrl
+  - outlook.Office.Mailbox.userProfile
+- uid: outlook.Office.Mailbox.addHandlerAsync
+  summary: >-
+    Agrega un controlador de eventos para un evento admitido.
+
+
+    Actualmente, los tipos de eventos admitidos son `Office.EventType.ItemChanged` y `Office.EventType.OfficeThemeChanged`.
+
+
+    \[[Conjunto de API: buzón 1,5](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redacción o lectura</td></tr></table>
+
+    ####Ejemplos
+
+
+    ```javascript
+
+    Office.initialize = function (reason) {
+        $(document).ready(function () {
+            Office.context.mailbox.addHandlerAsync(Office.EventType.ItemChanged, loadNewItem, function (result) {
+            if (result.status === Office.AsyncResultStatus.Failed) {
+                    // Handle error
+                }
+            });
+        });
+    };
+
+
+    function loadNewItem(eventArgs) {
+        // Load the properties of the newly selected item
+        loadProps(Office.context.mailbox.item);
+    };
+
+    ```
+  name: addHandlerAsync(eventType, handler, options, callback)
+  fullName: outlook.Office.Mailbox.addHandlerAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'addHandlerAsync(eventType: Office.EventType, handler: (type: EventType) => void, options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<void>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: eventType
+      description: El evento que debe invocar el controlador.
+      type:
+      - Office.EventType
+    - id: handler
+      description: La función para controlar el evento. La función debe aceptar un parámetro único, que es un literal de objeto. La propiedad type en el parámetro coincidirá con el parámetro eventType se pasan a addHandlerAsync.
+      type:
+      - '(type: EventType) => void'
+    - id: options
+      description: Opcional. Proporciona una opción para conservar los datos de contexto de cualquier tipo, sin cambios, para su uso en una devolución de llamada.
+      type:
+      - office.Office.AsyncContextOptions
+    - id: callback
+      description: Opcional. Cuando finaliza el método, se llama a la función que se pasa en el parámetro de devolución de llamada con un parámetro único de tipo Office.AsyncResult.
+      type:
+      - '(result: AsyncResult<void>) => void'
+- uid: outlook.Office.Mailbox.convertToEwsId
+  summary: >-
+    Convierte un identificador de elemento con formato para REST al formato EWS.
+
+
+    Los identificadores de elemento obtenidos a través de una API de REST (como la API de correo de Outlook o Microsoft Graph) usan un formato diferente al formato que usa Exchange Web Services (EWS). El método convertToEwsId convierte un identificador con formato REST en un formato adecuado para EWS.
+
+
+    Nota: Este método no se admite en Outlook para iOS ni en Outlook para Android.
+
+
+    \[[Conjunto de API: buzón 1.3](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>Restringido</td></tr>
+
+
+    <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redacción o lectura</td></tr></table>
+
+    ####Ejemplos
+
+
+    ```javascript
+
+    // Get an item's ID from a REST API
+
+    var restId = 'AAMkAGVlOTZjNTM3LW...';
+
+
+    // Treat restId as coming from the v2.0 version of the Outlook Mail API
+
+    var ewsId = Office.context.mailbox.convertToEwsId(restId, Office.MailboxEnums.RestVersion.v2_0);
+
+    ```
+  name: convertToEwsId(itemId, restVersion)
+  fullName: outlook.Office.Mailbox.convertToEwsId
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'convertToEwsId(itemId: string, restVersion: Office.MailboxEnums.RestVersion): string;'
+    return:
+      type:
+      - string
+      description: ''
+    parameters:
+    - id: itemId
+      description: El formato de identificador de un elemento para las API de REST de Outlook.
+      type:
+      - string
+    - id: restVersion
+      description: Un valor que indica la versión de la API de REST de Outlook que se usa para recuperar el identificador de elemento.
+      type:
+      - outlook.Office.MailboxEnums.RestVersion
+- uid: outlook.Office.Mailbox.convertToLocalClientTime
+  summary: >-
+    Obtiene un diccionario con información de tiempo en el tiempo del cliente local.
+
+
+    Las fechas y horas usadas por una aplicación de correo para Outlook o Outlook Web App pueden usar distintas zonas horarias. Outlook usa la zona horaria del equipo cliente; Outlook Web App usa la zona horaria definida en el Centro de administración de Exchange (EAC). Debería tratar los valores de fecha y hora de modo que los valores que aparezcan en la interfaz de usuario sean siempre coherentes con la zona horaria que el usuario espera.
+
+
+    Si la aplicación de correo se ejecuta en Outlook, el método convertToLocalClientTime devolverá un objeto diccionario con los valores establecidos en la zona horaria del equipo cliente. Si la aplicación de correo se ejecuta en Outlook Web App, el método convertToLocalClientTime devolverá un objeto diccionario con los valores establecidos en la zona horaria especificada en el EAC.
+
+
+    \[[Conjunto de API: buzón 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redacción o lectura</td></tr></table>
+  name: convertToLocalClientTime(timeValue)
+  fullName: outlook.Office.Mailbox.convertToLocalClientTime
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'convertToLocalClientTime(timeValue: Date): LocalClientTime;'
+    return:
+      type:
+      - LocalClientTime
+      description: ''
+    parameters:
+    - id: timeValue
+      description: Un objeto Date.
+      type:
+      - Date
+- uid: outlook.Office.Mailbox.convertToRestId
+  summary: >-
+    Convierte un identificador de elemento con formato para EWS al formato REST.
+
+
+    Nota: Este método no se admite en Outlook para iOS ni en Outlook para Android.
+
+
+    \[[Conjunto de API: buzón 1.3](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>Restringido</td></tr>
+
+
+    <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redacción o lectura</td></tr></table>
+
+
+    Elemento identificadores recuperados a través de EWS o a través de la propiedad itemId utilizan un formato diferente del formato usado por las API de REST (por ejemplo, la [API de correo de Outlook](https://docs.microsoft.com/previous-versions/office/office-365-api/api/version-2.0/mail-rest-operations) o en el [Gráfico de Microsoft](http://graph.microsoft.io/)<!-- -->. El método convertToRestId convierte un identificador de formato de EWS en un formato adecuado para el resto.
+
+    #### <a name="examples"></a>Ejemplos
+
+
+    ```javascript
+
+    // Get the currently selected item's ID
+
+    var ewsId = Office.context.mailbox.item.itemId;
+
+
+    // Convert to a REST ID for the v2.0 version of the Outlook Mail API
+
+    var restId = Office.context.mailbox.convertToRestId(ewsId, Office.MailboxEnums.RestVersion.v2_0);
+
+    ```
+  name: convertToRestId(itemId, restVersion)
+  fullName: outlook.Office.Mailbox.convertToRestId
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'convertToRestId(itemId: string, restVersion: Office.MailboxEnums.RestVersion): string;'
+    return:
+      type:
+      - string
+      description: ''
+    parameters:
+    - id: itemId
+      description: Un identificador de elemento con formato para Exchange Web Services (EWS)
+      type:
+      - string
+    - id: restVersion
+      description: Un valor que indica la versión de la API de REST de Outlook con la que se usará el identificador convertido.
+      type:
+      - outlook.Office.MailboxEnums.RestVersion
+- uid: outlook.Office.Mailbox.convertToUtcClientTime
+  summary: >-
+    Obtiene un objeto Date del diccionario que contiene información de tiempo.
+
+
+    El método convertToUtcClientTime convierte un diccionario que contiene la fecha y la hora locales en un objeto Date con los valores correctos para la fecha y la hora locales.
+
+
+    \[[Conjunto de API: buzón 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redacción o lectura</td></tr></table>
+  name: convertToUtcClientTime(input)
+  fullName: outlook.Office.Mailbox.convertToUtcClientTime
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'convertToUtcClientTime(input: LocalClientTime): Date;'
+    return:
+      type:
+      - Date
+      description: Objeto Date con el tiempo expresado en UTC.
+    parameters:
+    - id: input
+      description: El valor de la hora local para convertir.
+      type:
+      - LocalClientTime
+- uid: outlook.Office.Mailbox.diagnostics
+  summary: >-
+    Proporciona información de diagnóstico a un complemento de Outlook.
+
+
+    Contiene a los siguientes miembros:
+
+
+    - nombre de host (string): una cadena que representa el nombre de la aplicación host. Es que sea uno de los siguientes valores: Outlook, Outlook Mac, OutlookIOS o OutlookWebApp.
+
+
+    - hostVersion (string): una cadena que representa la versión de la aplicación host o el servidor de Exchange. Si el complemento de correo se ejecuta en el cliente de escritorio de Outlook o Outlook para iOS, la propiedad hostVersion devuelve la versión de la aplicación host, Outlook. En Outlook Web App, la propiedad devuelve la versión del servidor de Exchange. Un ejemplo es la cadena de 15.0.468.0.
+
+
+    - OWAView (MailboxEnums.OWAView o cadena): un enum (o literal de cadena) que representa la vista actual de Outlook Web App. Si la aplicación host no es Outlook Web App, obtener acceso a esta propiedad será undefined. Outlook Web App tiene tres vistas (OneColumn - que se muestra cuando la pantalla es estrecha, TwoColumns - mostrado cuando la pantalla es más amplia y ThreeColumns - que se muestra cuando la pantalla es ancho) que se corresponden con el ancho de la pantalla y la ventana y el número de columnas que se pueden mostrar.
+
+
+    Obtener más información está bajo [Office.Diagnostics](xref:outlook.Office.Diagnostics)<!-- -->.
+
+
+    \[[Conjunto de API: buzón 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redacción o lectura</td></tr></table>
+  name: diagnostics
+  fullName: outlook.Office.Mailbox.diagnostics
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'diagnostics: Office.Diagnostics;'
+    return:
+      type:
+      - outlook.Office.Diagnostics
+- uid: outlook.Office.Mailbox.displayAppointmentForm
+  summary: >-
+    Muestra una cita de calendario existente.
+
+
+    El método displayAppointmentForm abre una cita de calendario existente en una nueva ventana del escritorio o en un cuadro de diálogo en los dispositivos móviles.
+
+
+    En Outlook para Mac, puede usar este método para mostrar una cita que no forme parte de una serie periódica o la cita principal de una serie periódica, pero no puede mostrar una instancia de la serie. Esto es porque en Outlook para Mac no se puede tener acceso a las propiedades (incluido el identificador de elemento) de las instancias de una serie periódica.
+
+
+    En Outlook Web App, este método abre el formato especificado solo si el cuerpo del formulario es inferior o igual a 32 KB en el número de caracteres.
+
+
+    Si el identificador de elemento especificado no identifica una cita existente, se abrirá una página en blanco en el dispositivo o equipo cliente y no se generará ningún mensaje de error.
+
+
+    Nota: Este método no se admite en Outlook para iOS ni en Outlook para Android.
+
+
+    \[[Conjunto de API: buzón 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redacción o lectura</td></tr></table>
+  name: displayAppointmentForm(itemId)
+  fullName: outlook.Office.Mailbox.displayAppointmentForm
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'displayAppointmentForm(itemId: string): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: itemId
+      description: Identificador de los servicios web de Exchange (EWS) para una cita de calendario existente.
+      type:
+      - string
+- uid: outlook.Office.Mailbox.displayMessageForm
+  summary: >-
+    Muestra un mensaje existente.
+
+
+    El método displayMessageForm abre un mensaje existente en una nueva ventana del escritorio o en un cuadro de diálogo en los dispositivos móviles.
+
+
+    En Outlook Web App, este método abre el formato especificado solo si el cuerpo del formulario es inferior o igual a 32 KB en el número de caracteres.
+
+
+    Si el identificador de elemento especificado no identifica un mensaje existente, no se mostrará ningún mensaje en el equipo cliente ni se generará ningún mensaje de error.
+
+
+    No use el valor displayMessageForm con un itemId que represente una cita. Use el método displayAppointmentForm para mostrar una cita existente y displayNewAppointmentForm para mostrar un formulario para crear una cita nueva.
+
+
+    Nota: Este método no se admite en Outlook para iOS ni en Outlook para Android.
+
+
+    \[[Conjunto de API: buzón 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redacción o lectura</td></tr></table>
+  name: displayMessageForm(itemId)
+  fullName: outlook.Office.Mailbox.displayMessageForm
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'displayMessageForm(itemId: string): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: itemId
+      description: Identificador de los servicios web de Exchange (EWS) para un mensaje existente.
+      type:
+      - string
+- uid: outlook.Office.Mailbox.displayNewAppointmentForm
+  summary: >-
+    Muestra un formulario para crear una nueva cita de calendario.
+
+
+    El método displayNewAppointmentForm abre un formulario que permite al usuario crear una cita o reunión. Si se especifican parámetros, los campos del formulario de la cita se rellenan automáticamente con el contenido de los parámetros.
+
+
+    En Outlook Web App y OWA para dispositivos, este método muestra siempre un formulario con un campo de asistentes. Si no especifica ningún asistente como argumento de entrada, el método muestra un formulario con un botón Guardar. Si ha especificado asistentes, el formulario incluirá a los asistentes y un botón Enviar.
+
+
+    En el cliente enriquecido de Outlook y Outlook RT, si especifica cualquier los asistentes o los recursos en el requiredAttendees, optionalAttendees o parámetro de recursos, este método muestra un formulario de reunión con un botón de envío. Si no se especifica ningún destinatario, este método muestra un formulario de cita con un guardar &amp; botón Cerrar.
+
+
+    Si cualquiera de los parámetros supera los límites de tamaño especificados o si se indica un nombre de parámetro desconocido, se genera una excepción.
+
+
+    Nota: Este método no se admite en Outlook para iOS ni en Outlook para Android.
+
+
+    \[[Conjunto de API: buzón 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Read</td></tr></table>
+
+    ####Ejemplos
+
+
+    ```javascript
+
+    var start = new Date();
+
+    var end = new Date();
+
+    end.setHours(start.getHours() + 1);
+
+
+    Office.context.mailbox.displayNewAppointmentForm(
+
+    {
+        requiredAttendees: ['bob@contoso.com'],
+        optionalAttendees: ['sam@contoso.com'],
+        start: start,
+        end: end,
+        location: 'Home',
+        resources: ['projector@contoso.com'],
+        subject: 'meeting',
+        body: 'Hello World!'
+    });
+
+    ```
+  name: displayNewAppointmentForm(parameters)
+  fullName: outlook.Office.Mailbox.displayNewAppointmentForm
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'displayNewAppointmentForm(parameters: AppointmentForm): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: parameters
+      description: Un AppointmentForm que describe la nueva cita. Todas las propiedades son opcionales.
+      type:
+      - AppointmentForm
+- uid: outlook.Office.Mailbox.displayNewMessageForm
+  summary: >-
+    Muestra un formulario para crear un mensaje nuevo.
+
+
+    El método displayNewMessageForm abre un formulario que permite al usuario crear un nuevo mensaje. Si se especifican parámetros, los campos de formulario de mensaje se rellenan automáticamente con el contenido de los parámetros.
+
+
+    Si cualquiera de los parámetros supera los límites de tamaño especificados o si se indica un nombre de parámetro desconocido, se genera una excepción.
+
+
+    \[[Conjunto de API: buzón 1.6](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Read</td></tr></table>
+
+    ####Ejemplos
+
+
+    ```javascript
+
+    Office.context.mailbox.displayNewMessageForm(
+
+    {
+        toRecipients: Office.context.mailbox.item.to, // Copy the To line from current item
+        ccRecipients: ['sam@contoso.com'],
+        subject: 'Outlook add-ins are cool!',
+        htmlBody: 'Hello <b>World</b>!<br/><img src="cid:image.png"></i>',
+        attachments: [
+        {
+            type: 'file',
+            name: 'image.png',
+            url: 'http://contoso.com/image.png',
+            isInline: true
+        }
+        ]
+    });
+
+    ```
+  name: displayNewMessageForm(parameters)
+  fullName: outlook.Office.Mailbox.displayNewMessageForm
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'displayNewMessageForm(parameters: any): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: parameters
+      description: >-
+        Un diccionario que contiene todos los valores que deben rellenarse para el usuario en el nuevo formulario. Todos los parámetros son opcionales. toRecipients: una matriz de cadenas que contiene las direcciones de correo electrónico o una matriz que contiene un objeto[Office.EmailAddressDetails](xref:outlook.Office.EmailAddressDetails) para cada uno de los destinatarios en la línea para. La matriz está limitada a un máximo de 100 entradas.
+
+
+        ccRecipients: una matriz de cadenas que contiene las direcciones de correo electrónico o una matriz que contiene un objeto [Office.EmailAddressDetails](xref:outlook.Office.EmailAddressDetails) para cada uno de los destinatarios en la línea Cc. La matriz está limitada a un máximo de 100 entradas.
+
+
+        bccRecipients: una matriz de cadenas que contiene las direcciones de correo electrónico o una matriz que contiene un objeto [Office.EmailAddressDetails](xref:outlook.Office.EmailAddressDetails) para cada uno de los destinatarios en la línea CCO. La matriz está limitada a un máximo de 100 entradas.
+
+
+        Asunto: una cadena que contiene el asunto del mensaje. La cadena está limitada a un máximo de 255 caracteres.
+
+
+        htmlBody: cuerpo HTML del mensaje. El contenido del cuerpo está limitado a un tamaño máximo de 32 KB.
+
+
+        datos adjuntos: una matriz de objetos JSON que son datos adjuntos de archivo o elemento.
+
+
+        Attachments.Type: indica el tipo de datos adjuntos. Debe ser el archivo de un archivo adjunto o un elemento para un elemento de los datos adjuntos.
+
+
+        Attachments.Name: una cadena que contiene el nombre de los datos adjuntos, hasta 255 caracteres de longitud.
+
+
+        Attachments.URL: sólo se utiliza si se definen en el archivo. El URI de la ubicación del archivo.
+
+
+        attachments.isInline: sólo se utiliza si se definen en el archivo. Si es true, indica que los datos adjuntos se muestran entre líneas en el cuerpo del mensaje y no deben mostrarse en la lista de datos adjuntos.
+
+
+        attachments.itemId: sólo se utiliza si se establece el tipo de elemento. El identificador de elemento EWS del correo electrónico existente que desea adjuntar al mensaje de nuevo. Se trata de una cadena de hasta 100 caracteres.
+      type:
+      - any
+- uid: outlook.Office.Mailbox.ewsUrl
+  summary: >-
+    Obtiene la dirección URL del punto de conexión de Servicios Web Exchange (EWS) para esta cuenta de correo electrónico. Solo modo Lectura.
+
+
+    La aplicación debe tener el permiso ReadItem especificado en su manifiesto para llamar a los miembros de ewsUrl en modo de lectura.
+
+
+    En el modo que se debe llamar al método saveAsync antes de poder utilizar al miembro ewsUrl de redacción. La aplicación debe tener permisos de ReadWriteItem para llamar al método saveAsync.
+
+
+    \[[Conjunto de API: buzón 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redacción o lectura</td></tr></table>
+
+
+    El valor de ewsUrl puede utilizarse por un servicio remoto para realizar llamadas EWS para el buzón del usuario. Por ejemplo, puede crear un servicio remoto para [obtener datos adjuntos desde el elemento seleccionado](https://docs.microsoft.com/outlook/add-ins/get-attachments-of-an-outlook-item)<!-- -->.
+
+
+    Nota: Este miembro no se admite en Outlook para iOS ni en Outlook para Android.
+  name: ewsUrl
+  fullName: outlook.Office.Mailbox.ewsUrl
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'ewsUrl: string;'
+    return:
+      type:
+      - string
+- uid: outlook.Office.Mailbox.getCallbackTokenAsync
+  summary: >-
+    Obtiene una cadena que contiene un token usado para llamar a las API de REST o a los servicios Web Exchange.
+
+
+    El método getCallbackTokenAsync realiza una llamada asincrónica para obtener un token opaco desde Exchange Server que hospeda el buzón del usuario. La duración del token de devolución de llamada es de 5 minutos.
+
+
+    *Tokens de REST*
+
+
+    Cuando se solicita un token de REST (options.isRest = true), el token resultante no funcionarán para autenticar las llamadas de servicios Web de Exchange. El token estará limitado en el ámbito para acceso de sólo lectura para el elemento actual y sus datos adjuntos, a menos que el complemento ha especificado el permiso ReadWriteMailbox en su manifiesto. Si se especifica el permiso ReadWriteMailbox, el token resultante concederá acceso de lectura y escritura a correo, calendario y contactos, incluyendo la capacidad de enviar correo.
+
+
+    El complemento debe usar la propiedad restUrl para determinar la dirección URL correcta que se utilizarán al realizar llamadas a la API de REST.
+
+
+    *Tokens EWS*
+
+
+    Cuando se solicita un token de EWS (options.isRest = false), el token resultante no funcionarán para autenticar las llamadas de API de REST. El token estará limitado en el ámbito para tener acceso al elemento actual.
+
+
+    El complemento debe usar la propiedad ewsUrl para determinar la dirección URL correcta que se utilizarán al realizar llamadas EWS.
+
+
+    Nota: Se recomienda que los complementos usen las API de REST en lugar de los servicios Web Exchange cuando sea posible.
+
+
+    \[[Conjunto de API: buzón 1,5](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redacción y lectura</td></tr></table>
+
+
+    Además de esta firma, el método tiene las siguientes firmas:
+
+
+    `getCallbackTokenAsync(callback: (result: AsyncResult<string>) => void): void;`
+
+
+    `getCallbackTokenAsync(callback: (result: AsyncResult<string>) => void, userContext?: any): void;`
+
+    #### <a name="examples"></a>Ejemplos
+
+
+    ```javascript
+
+    function getCallbackToken() {
+        var options = {
+            isRest: true,
+            asyncContext: { message: 'Hello World!' }
+        };
+
+        Office.context.mailbox.getCallbackTokenAsync(options, cb);
+    }
+
+
+    function cb(asyncResult) {
+        var token = asyncResult.value;
+    }
+
+    ```
+
+    ```javascript
+
+    function getCallbackToken() {
+        Office.context.mailbox.getCallbackTokenAsync(cb);
+    }
+
+
+    function cb(asyncResult) {
+        var token = asyncResult.value;
+    }
+
+    ```
+  name: getCallbackTokenAsync(options, callback)
+  fullName: outlook.Office.Mailbox.getCallbackTokenAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getCallbackTokenAsync(options: Office.AsyncContextOptions & { isRest?: boolean }, callback: (result: AsyncResult<string>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: options
+      description: 'Un objeto literal que contiene una o más de las siguientes propiedades. isRest: determina si se usará el token proporcionado para la API de REST de Outlook o servicios Web de Exchange. El valor predeterminado es false. asyncContext: los datos de estado que se pasan al método asincrónico.'
+      type:
+      - 'Office.AsyncContextOptions & { isRest?: boolean }'
+    - id: callback
+      description: Cuando finaliza el método, se llama a la función que se pasa en el parámetro de devolución de llamada con un parámetro único de tipo Office.AsyncResult. El token se proporciona como una cadena en la propiedad asyncResult.value.
+      type:
+      - '(result: AsyncResult<string>) => void'
+- uid: outlook.Office.Mailbox.getUserIdentityTokenAsync
+  summary: >-
+    Obtiene un token que identifica al usuario y al complemento de Office.
+
+
+    El token se proporciona como una cadena en la propiedad asyncResult.value.
+
+
+    \[[Conjunto de API: buzón 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redacción y lectura</td></tr></table>
+
+
+    El método getUserIdentityTokenAsync devuelve un token que se puede usar para identificar y [autenticar el usuario con un sistema de terceros y -](https://docs.microsoft.com/outlook/add-ins/authentication)<!-- -->.
+
+    #### <a name="examples"></a>Ejemplos
+
+
+    ```javascript
+
+    function getIdentityToken() {
+        Office.context.mailbox.getUserIdentityTokenAsync(cb);
+    }
+
+
+    function cb(asyncResult) {
+        var token = asyncResult.value;
+    }
+
+    ```
+  name: getUserIdentityTokenAsync(callback, userContext)
+  fullName: outlook.Office.Mailbox.getUserIdentityTokenAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getUserIdentityTokenAsync(callback: (result: AsyncResult<string>) => void, userContext?: any): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: callback
+      description: Cuando finaliza el método, se llama a la función que se pasa en el parámetro de devolución de llamada con un parámetro único de tipo Office.AsyncResult. El token se proporciona como una cadena en la propiedad asyncResult.value.
+      type:
+      - '(result: AsyncResult<string>) => void'
+    - id: userContext
+      description: Opcional. Cualquier dato de estado que se pasa al método asincrónico.\|
+      type:
+      - any
+- uid: outlook.Office.Mailbox.item
+  summary: 'El elemento de buzón de correo. Según el contexto en el que el complemento abierto, el elemento puede ser cualquier número de tipos. Si desea ver IntelliSense para solo un tipo específico, que debe convertir este elemento en uno de los siguientes: `ItemCompose`, `ItemRead`, `MessageCompose`, `MessageRead`, `AppointmentCompose`,`AppointmentRead`'
+  name: item
+  fullName: outlook.Office.Mailbox.item
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'item: Item & ItemCompose & ItemRead & MessageRead & MessageCompose & AppointmentRead & AppointmentCompose;'
+    return:
+      type:
+      - Item & ItemCompose & ItemRead & MessageRead & MessageCompose & AppointmentRead & AppointmentCompose
+- uid: outlook.Office.Mailbox.makeEwsRequestAsync
+  summary: >-
+    Realiza una solicitud asincrónica a un servicio de Exchange Web Services (EWS) en el servidor de Exchange que hospeda el buzón del usuario.
+
+
+    En estos casos, complementos deben usar las API de REST para tener acceso al buzón del usuario en su lugar.
+
+
+    El método makeEwsRequestAsync envía una solicitud de EWS en nombre del complemento a Exchange.
+
+
+    No puede solicitar elementos asociados de las carpetas con el método makeEwsRequestAsync.
+
+
+    La solicitud XML debe especificar codificación UTF-8. &lt;¿versión de ?xml = "1.0" encoding = "utf-8"?&gt;
+
+
+    El complemento debe tener el permiso de ReadWriteMailbox para usar el método makeEwsRequestAsync. Para obtener información sobre cómo usar el permiso ReadWriteMailbox y las operaciones de EWS que puede llamar con el método makeEwsRequestAsync, vea [especificar permisos para correo agregar en el acceso al buzón de correo del usuario](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->.
+
+
+    El resultado XML de la llamada EWS se proporciona como una cadena en la propiedad asyncResult.value. Si el resultado supera 1 MB de tamaño, se devuelve un mensaje de error en su lugar.
+
+
+    Nota: Este método no se admite en los siguientes escenarios:
+
+
+    - En Outlook para iOS o Outlook para Android.
+
+
+    - Cuando el complemento se carga en un buzón de Gmail.
+
+
+    Nota: El administrador del servidor debe establecer oauthauthentication como true en el directorio EWS del servidor de acceso de cliente para permitir que el método makeEwsRequestAsync realizar solicitudes de EWS.
+
+
+    *Diferencias de versión*
+
+
+    Si usa el método makeEwsRequestAsync en aplicaciones de correo que se ejecutan en versiones de Outlook anteriores a 15.0.4535.1004, debe establecer el valor de codificación a ISO-8859-1.
+
+
+    `&lt;?xml version="1.0" encoding="iso-8859-1"?&gt;`
+
+
+    No es necesario establecer el valor de codificación si la aplicación de correo se ejecuta en Outlook en la web. Puede averiguar si su aplicación de correo se ejecuta en Outlook o en Outlook en la web usando la propiedad mailbox.diagnostics.hostName. Para averiguar qué versión de Outlook se está ejecutando, use la propiedad mailbox.diagnostics.hostVersion.
+
+
+    \[[Conjunto de API: buzón 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteMailbox</td></tr>
+
+
+    <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redacción y lectura</td></tr></table>
+
+    ####Ejemplos
+
+
+    ```javascript
+
+    function getSubjectRequest(id) {
+        // Return a GetItem operation request for the subject of the specified item.
+        var request =
+            '<?xml version="1.0" encoding="utf-8"?>' +
+            '<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"' +
+            '               xmlns:xsd="http://www.w3.org/2001/XMLSchema"' +
+            '               xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"' +
+            '               xmlns:t="http://schemas.microsoft.com/exchange/services/2006/types">' +
+            '  <soap:Header>' +
+            '    <RequestServerVersion Version="Exchange2013" xmlns="http://schemas.microsoft.com/exchange/services/2006/types" soap:mustUnderstand="0" />' +
+            '  </soap:Header>' +
+            '  <soap:Body>' +
+            '    <GetItem xmlns="http://schemas.microsoft.com/exchange/services/2006/messages">' +
+            '      <ItemShape>' +
+            '        <t:BaseShape>IdOnly</t:BaseShape>' +
+            '        <t:AdditionalProperties>' +
+            '            <t:FieldURI FieldURI="item:Subject"/>' +
+            '        </t:AdditionalProperties>' +
+            '      </ItemShape>' +
+            '      <ItemIds><t:ItemId Id="' + id + '"/></ItemIds>' +
+            '    </GetItem>' +
+            '  </soap:Body>' +
+            '</soap:Envelope>';
+
+        return request;
+    }
+
+
+    function sendRequest() {
+        // Create a local variable that contains the mailbox.
+        Office.context.mailbox.makeEwsRequestAsync(
+            getSubjectRequest(mailbox.item.itemId), callback);
+    }
+
+
+    function callback(asyncResult)  {
+        var result = asyncResult.value;
+        var context = asyncResult.asyncContext;
+
+        // Process the returned response here.
+    }
+
+    ```
+  name: makeEwsRequestAsync(data, callback, userContext)
+  fullName: outlook.Office.Mailbox.makeEwsRequestAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'makeEwsRequestAsync(data: any, callback: (result: AsyncResult<string>) => void, userContext?: any): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: data
+      description: La solicitud de EWS.
+      type:
+      - any
+    - id: callback
+      description: Cuando finaliza el método, se llama a la función que se pasa en el parámetro de devolución de llamada con un parámetro único de tipo Office.AsyncResult. El `value` propiedad del resultado es el XML de la solicitud EWS proporcionado como una cadena. Si el resultado supera 1 MB de tamaño, se devuelve un mensaje de error en su lugar.
+      type:
+      - '(result: AsyncResult<string>) => void'
+    - id: userContext
+      description: Opcional. Cualquier dato de estado que se pasa al método asincrónico.
+      type:
+      - any
+- uid: outlook.Office.Mailbox.restUrl
+  summary: >-
+    Obtiene la URL del punto de conexión REST para esta cuenta de correo electrónico.
+
+
+    La aplicación debe tener el permiso ReadItem especificado en su manifiesto para llamar a los miembros de restUrl en modo de lectura.
+
+
+    En el modo que se debe llamar al método saveAsync antes de poder utilizar al miembro restUrl de redacción. La aplicación debe tener permisos de ReadWriteItem para llamar al método saveAsync.
+
+
+    \[[Conjunto de API: buzón 1,5](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redacción o lectura</td></tr></table>
+
+
+    El valor de restUrl se puede utilizar para realizar llamadas a la [API de REST](https://docs.microsoft.com/outlook/rest/) para el buzón del usuario.
+  name: restUrl
+  fullName: outlook.Office.Mailbox.restUrl
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'restUrl: string;'
+    return:
+      type:
+      - string
+- uid: outlook.Office.Mailbox.userProfile
+  summary: >-
+    Información sobre el usuario asociado con el buzón de correo. Esto incluye su tipo de cuenta, nombre para mostrar, dirección de correo electrónico y zona horaria.
+
+
+    Obtener más información está bajo [Office.UserProfile](xref:outlook.Office.UserProfile)
+  name: userProfile
+  fullName: outlook.Office.Mailbox.userProfile
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'userProfile: Office.UserProfile;'
+    return:
+      type:
+      - outlook.Office.UserProfile
