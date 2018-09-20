@@ -1,0 +1,614 @@
+### YamlMime:UniversalReference
+ms.openlocfilehash: 871ff6faa3d3b13d6d8ee8500ba5d820bda0d115
+ms.sourcegitcommit: beffe9455dace422e85b92f0105c54ff7b594cbf
+ms.translationtype: MT
+ms.contentlocale: es-ES
+ms.lasthandoff: 09/20/2018
+ms.locfileid: "24052336"
+items:
+- uid: excel.Excel.ChartAxis
+  summary: >-
+    Representa un solo eje de un gráfico.
+
+
+    \[[Conjunto de API: ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: Excel.ChartAxis
+  fullName: excel.Excel.ChartAxis
+  langs:
+  - typeScript
+  type: class
+  extends:
+  - OfficeExtension.ClientObject
+  package: excel
+  children:
+  - excel.Excel.ChartAxis.axisGroup
+  - excel.Excel.ChartAxis.baseTimeUnit
+  - excel.Excel.ChartAxis.categoryType
+  - excel.Excel.ChartAxis.customDisplayUnit
+  - excel.Excel.ChartAxis.displayUnit
+  - excel.Excel.ChartAxis.format
+  - excel.Excel.ChartAxis.height
+  - excel.Excel.ChartAxis.left
+  - excel.Excel.ChartAxis.load
+  - excel.Excel.ChartAxis.logBase
+  - excel.Excel.ChartAxis.majorGridlines
+  - excel.Excel.ChartAxis.majorTickMark
+  - excel.Excel.ChartAxis.majorTimeUnitScale
+  - excel.Excel.ChartAxis.majorUnit
+  - excel.Excel.ChartAxis.maximum
+  - excel.Excel.ChartAxis.minimum
+  - excel.Excel.ChartAxis.minorGridlines
+  - excel.Excel.ChartAxis.minorTickMark
+  - excel.Excel.ChartAxis.minorTimeUnitScale
+  - excel.Excel.ChartAxis.minorUnit
+  - excel.Excel.ChartAxis.reversePlotOrder
+  - excel.Excel.ChartAxis.scaleType
+  - excel.Excel.ChartAxis.setCategoryNames
+  - excel.Excel.ChartAxis.setCustomDisplayUnit
+  - excel.Excel.ChartAxis.showDisplayUnitLabel
+  - excel.Excel.ChartAxis.tickLabelPosition
+  - excel.Excel.ChartAxis.tickLabelSpacing
+  - excel.Excel.ChartAxis.tickMarkSpacing
+  - excel.Excel.ChartAxis.title
+  - excel.Excel.ChartAxis.toJSON
+  - excel.Excel.ChartAxis.top
+  - excel.Excel.ChartAxis.type
+  - excel.Excel.ChartAxis.visible
+  - excel.Excel.ChartAxis.width
+- uid: excel.Excel.ChartAxis.axisGroup
+  summary: >-
+    Representa el grupo del eje especificado. Para obtener información detallada, vea Excel.ChartAxisGroup. Solo lectura.
+
+
+    \[[Conjunto de API: ExcelApi 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: axisGroup
+  fullName: excel.Excel.ChartAxis.axisGroup
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly axisGroup: Excel.ChartAxisGroup | "Primary" | "Secondary";'
+    return:
+      type:
+      - Excel.ChartAxisGroup | "Primary" | "Secondary"
+- uid: excel.Excel.ChartAxis.baseTimeUnit
+  summary: >-
+    Devuelve o establece la unidad base del eje de categorías especificado.
+
+
+    \[[Conjunto de API: ExcelApi 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: baseTimeUnit
+  fullName: excel.Excel.ChartAxis.baseTimeUnit
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'baseTimeUnit: Excel.ChartAxisTimeUnit | "Days" | "Months" | "Years";'
+    return:
+      type:
+      - Excel.ChartAxisTimeUnit | "Days" | "Months" | "Years"
+- uid: excel.Excel.ChartAxis.categoryType
+  summary: >-
+    Devuelve o establece el tipo del eje de categorías.
+
+
+    \[[Conjunto de API: ExcelApi 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: categoryType
+  fullName: excel.Excel.ChartAxis.categoryType
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'categoryType: Excel.ChartAxisCategoryType | "Automatic" | "TextAxis" | "DateAxis";'
+    return:
+      type:
+      - Excel.ChartAxisCategoryType | "Automatic" | "TextAxis" | "DateAxis"
+- uid: excel.Excel.ChartAxis.customDisplayUnit
+  summary: >-
+    Representa el valor de unidad de visualización de eje personalizado. Solo lectura. Para establecer esta propiedad, utilice el método SetCustomDisplayUnit(double).
+
+
+    \[[Conjunto de API: ExcelApi 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: customDisplayUnit
+  fullName: excel.Excel.ChartAxis.customDisplayUnit
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly customDisplayUnit: number;'
+    return:
+      type:
+      - number
+- uid: excel.Excel.ChartAxis.displayUnit
+  summary: >-
+    Representa la unidad de presentación del eje. Para obtener información detallada, vea Excel.ChartAxisDisplayUnit.
+
+
+    \[[Conjunto de API: ExcelApi 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: displayUnit
+  fullName: excel.Excel.ChartAxis.displayUnit
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'displayUnit: Excel.ChartAxisDisplayUnit | "None" | "Hundreds" | "Thousands" | "TenThousands" | "HundredThousands" | "Millions" | "TenMillions" | "HundredMillions" | "Billions" | "Trillions" | "Custom";'
+    return:
+      type:
+      - Excel.ChartAxisDisplayUnit | "None" | "Hundreds" | "Thousands" | "TenThousands" | "HundredThousands" | "Millions" | "TenMillions" | "HundredMillions" | "Billions" | "Trillions" | "Custom"
+      description: "\n#### <a name=\"examples\"></a>Ejemplos\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n\n    let chart = sheet.charts.getItemAt(0);\n    let categoryAxis = chart.axes.categoryAxis;\n    let valueAxis = chart.axes.valueAxis;\n\n    // Load to get display unit.\n    valueAxis.load(\"displayUnit\");\n   \n    await context.sync();\n\n    OfficeHelpers.UI.notify(\"The vertical axis display unit is: \" +  valueAxis.displayUnit);\n});\n```"
+- uid: excel.Excel.ChartAxis.format
+  summary: >-
+    Representa el formato de un objeto de gráfico, que incluye el formato de línea y de fuente. Solo lectura.
+
+
+    \[[Conjunto de API: ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: format
+  fullName: excel.Excel.ChartAxis.format
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly format: Excel.ChartAxisFormat;'
+    return:
+      type:
+      - excel.Excel.ChartAxisFormat
+- uid: excel.Excel.ChartAxis.height
+  summary: >-
+    Representa el alto, en puntos, del eje del gráfico. Null si el eje no esté visible. Solo lectura.
+
+
+    \[[Conjunto de API: ExcelApi 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: height
+  fullName: excel.Excel.ChartAxis.height
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly height: number;'
+    return:
+      type:
+      - number
+- uid: excel.Excel.ChartAxis.left
+  summary: >-
+    Representa la distancia, en puntos, desde el borde izquierdo del eje a la izquierda del área del gráfico. Null si el eje no esté visible. Solo lectura.
+
+
+    \[[Conjunto de API: ExcelApi 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: left
+  fullName: excel.Excel.ChartAxis.left
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly left: number;'
+    return:
+      type:
+      - number
+- uid: excel.Excel.ChartAxis.load
+  summary: Colas de seguridad de un comando que se va a cargar las propiedades del objeto especificadas. Se debe llamar a "context.sync()" antes de leer las propiedades.
+  remarks: "Además de esta firma, este método no tiene las siguientes firmas:\n\n`load(option?: { select?: string; expand?: string; }): Excel.ChartAxis`-Donde option.select es una cadena delimitada por comas que especifica las propiedades para cargar y options.expand es una cadena delimitada por comas que especifica las propiedades de navegación para cargar.\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.ChartAxis`-Sólo está disponible en los tipos de colección. Es similar a la firma precedente. Option.Top especifica el número máximo de elementos de la colección que se puede incluir en el resultado. Option.Skip especifica el número de elementos que se pasan por alto y no se incluyen en el resultado. Si se especifica option.top, se iniciará el conjunto de resultados después de omitir el número especificado de elementos.\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\n// Get the maximum of Chart Axis from Chart1\nExcel.run(function (ctx) { \n    var chart = ctx.workbook.worksheets.getItem(\"Sheet1\").charts.getItem(\"Chart1\");    \n    var axis = chart.axes.valueAxis;\n    axis.load('maximum');\n    return ctx.sync().then(function() {\n            console.log(axis.maximum);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\n// Set the maximum, minimum, majorunit, minorunit of valueaxis. \nExcel.run(function (ctx) { \n    var chart = ctx.workbook.worksheets.getItem(\"Sheet1\").charts.getItem(\"Chart1\");    \n    chart.axes.valueAxis.maximum = 5;\n    chart.axes.valueAxis.minimum = 0;\n    chart.axes.valueAxis.majorUnit = 1;\n    chart.axes.valueAxis.minorUnit = 0.2;\n    return ctx.sync().then(function() {\n            console.log(\"Axis Settings Changed\");\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  name: load(option)
+  fullName: excel.Excel.ChartAxis.load
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(option?: string | string[]): Excel.ChartAxis;'
+    return:
+      type:
+      - excel.Excel.ChartAxis
+      description: ''
+    parameters:
+    - id: option
+      description: Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades de carga.
+      type:
+      - string | string[]
+- uid: excel.Excel.ChartAxis.logBase
+  summary: >-
+    Representa la base del logaritmo cuando se usa una escala logarítmica.
+
+
+    \[[Conjunto de API: ExcelApi 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: logBase
+  fullName: excel.Excel.ChartAxis.logBase
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'logBase: number;'
+    return:
+      type:
+      - number
+- uid: excel.Excel.ChartAxis.majorGridlines
+  summary: >-
+    Devuelve un objeto de línea de cuadrícula que representa las líneas de cuadrícula principales del eje especificado. Solo lectura.
+
+
+    \[[Conjunto de API: ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: majorGridlines
+  fullName: excel.Excel.ChartAxis.majorGridlines
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly majorGridlines: Excel.ChartGridlines;'
+    return:
+      type:
+      - excel.Excel.ChartGridlines
+- uid: excel.Excel.ChartAxis.majorTickMark
+  summary: >-
+    Representa el tipo de marcas de graduación principales del eje especificado. Para obtener información detallada, vea Excel.ChartAxisTickMark.
+
+
+    \[[Conjunto de API: ExcelApi 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: majorTickMark
+  fullName: excel.Excel.ChartAxis.majorTickMark
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'majorTickMark: Excel.ChartAxisTickMark | "None" | "Cross" | "Inside" | "Outside";'
+    return:
+      type:
+      - Excel.ChartAxisTickMark | "None" | "Cross" | "Inside" | "Outside"
+- uid: excel.Excel.ChartAxis.majorTimeUnitScale
+  summary: >-
+    Devuelve o establece el valor de la escala de unidades principales del eje de categorías cuando la propiedad CategoryType está establecida en escala temporal.
+
+
+    \[[Conjunto de API: ExcelApi 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: majorTimeUnitScale
+  fullName: excel.Excel.ChartAxis.majorTimeUnitScale
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'majorTimeUnitScale: Excel.ChartAxisTimeUnit | "Days" | "Months" | "Years";'
+    return:
+      type:
+      - Excel.ChartAxisTimeUnit | "Days" | "Months" | "Years"
+- uid: excel.Excel.ChartAxis.majorUnit
+  summary: >-
+    Representa el intervalo entre dos marcas de graduación principales. Se puede establecer en un valor numérico o una cadena vacía. El valor devuelto siempre es un número.
+
+
+    \[[Conjunto de API: ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: majorUnit
+  fullName: excel.Excel.ChartAxis.majorUnit
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'majorUnit: any;'
+    return:
+      type:
+      - any
+- uid: excel.Excel.ChartAxis.maximum
+  summary: >-
+    Representa el valor máximo en el eje de valores. Se puede establecer en un valor numérico o una cadena vacía (para valores del eje automática). El valor devuelto siempre es un número.
+
+
+    \[[Conjunto de API: ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: maximum
+  fullName: excel.Excel.ChartAxis.maximum
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'maximum: any;'
+    return:
+      type:
+      - any
+- uid: excel.Excel.ChartAxis.minimum
+  summary: >-
+    Representa el valor mínimo del eje de valores. Se puede establecer en un valor numérico o una cadena vacía (para valores del eje automática). El valor devuelto siempre es un número.
+
+
+    \[[Conjunto de API: ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: minimum
+  fullName: excel.Excel.ChartAxis.minimum
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'minimum: any;'
+    return:
+      type:
+      - any
+- uid: excel.Excel.ChartAxis.minorGridlines
+  summary: >-
+    Devuelve un objeto de línea de cuadrícula que representa las líneas de cuadrícula secundarias del eje especificado. Solo lectura.
+
+
+    \[[Conjunto de API: ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: minorGridlines
+  fullName: excel.Excel.ChartAxis.minorGridlines
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly minorGridlines: Excel.ChartGridlines;'
+    return:
+      type:
+      - excel.Excel.ChartGridlines
+- uid: excel.Excel.ChartAxis.minorTickMark
+  summary: >-
+    Representa el tipo de marcas de graduación secundarias del eje especificado. Para obtener información detallada, vea Excel.ChartAxisTickMark.
+
+
+    \[[Conjunto de API: ExcelApi 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: minorTickMark
+  fullName: excel.Excel.ChartAxis.minorTickMark
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'minorTickMark: Excel.ChartAxisTickMark | "None" | "Cross" | "Inside" | "Outside";'
+    return:
+      type:
+      - Excel.ChartAxisTickMark | "None" | "Cross" | "Inside" | "Outside"
+- uid: excel.Excel.ChartAxis.minorTimeUnitScale
+  summary: >-
+    Devuelve o establece el valor de la escala de unidades secundarias del eje de categorías cuando la propiedad CategoryType está establecida en escala temporal.
+
+
+    \[[Conjunto de API: ExcelApi 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: minorTimeUnitScale
+  fullName: excel.Excel.ChartAxis.minorTimeUnitScale
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'minorTimeUnitScale: Excel.ChartAxisTimeUnit | "Days" | "Months" | "Years";'
+    return:
+      type:
+      - Excel.ChartAxisTimeUnit | "Days" | "Months" | "Years"
+- uid: excel.Excel.ChartAxis.minorUnit
+  summary: >-
+    Representa el intervalo entre dos marcas de graduación secundarias. Se puede establecer en un valor numérico o una cadena vacía (para valores del eje automática). El valor devuelto siempre es un número.
+
+
+    \[[Conjunto de API: ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: minorUnit
+  fullName: excel.Excel.ChartAxis.minorUnit
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'minorUnit: any;'
+    return:
+      type:
+      - any
+- uid: excel.Excel.ChartAxis.reversePlotOrder
+  summary: >-
+    Indica si Microsoft Excel traza los puntos de datos desde el último al primero.
+
+
+    \[[Conjunto de API: ExcelApi 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: reversePlotOrder
+  fullName: excel.Excel.ChartAxis.reversePlotOrder
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'reversePlotOrder: boolean;'
+    return:
+      type:
+      - boolean
+- uid: excel.Excel.ChartAxis.scaleType
+  summary: >-
+    Representa el tipo de escala del eje de valor. Para obtener información detallada, vea Excel.ChartAxisScaleType.
+
+
+    \[[Conjunto de API: ExcelApi 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: scaleType
+  fullName: excel.Excel.ChartAxis.scaleType
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'scaleType: Excel.ChartAxisScaleType | "Linear" | "Logarithmic";'
+    return:
+      type:
+      - Excel.ChartAxisScaleType | "Linear" | "Logarithmic"
+- uid: excel.Excel.ChartAxis.setCategoryNames
+  summary: >-
+    Establece todos los nombres de categoría para el eje especificado.
+
+
+    \[[Conjunto de API: ExcelApi 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: setCategoryNames(sourceData)
+  fullName: excel.Excel.ChartAxis.setCategoryNames
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'setCategoryNames(sourceData: Range): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: sourceData
+      description: Objeto Range correspondiente a los datos de origen.
+      type:
+      - Range
+- uid: excel.Excel.ChartAxis.setCustomDisplayUnit
+  summary: >-
+    Establece la unidad de presentación del eje en un valor personalizado.
+
+
+    \[[Conjunto de API: ExcelApi 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: setCustomDisplayUnit(value)
+  fullName: excel.Excel.ChartAxis.setCustomDisplayUnit
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'setCustomDisplayUnit(value: number): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: value
+      description: Valor personalizado de la unidad de presentación.
+      type:
+      - number
+- uid: excel.Excel.ChartAxis.showDisplayUnitLabel
+  summary: >-
+    Representa si está visible el rótulo de unidades de presentación del eje.
+
+
+    \[[Conjunto de API: ExcelApi 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: showDisplayUnitLabel
+  fullName: excel.Excel.ChartAxis.showDisplayUnitLabel
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'showDisplayUnitLabel: boolean;'
+    return:
+      type:
+      - boolean
+      description: "\n#### <a name=\"examples\"></a>Ejemplos\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n\n    let chart = sheet.charts.getItemAt(0);\n    let axis = chart.axes.valueAxis;\n\n    // Remove display unit.\n    axis.showDisplayUnitLabel = false;\n\n    await context.sync();\n});\n```"
+- uid: excel.Excel.ChartAxis.tickLabelPosition
+  summary: >-
+    Representa la posición de los rótulos de marcas de graduación en el eje especificado. Para obtener información detallada, vea Excel.ChartAxisTickLabelPosition.
+
+
+    \[[Conjunto de API: ExcelApi 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: tickLabelPosition
+  fullName: excel.Excel.ChartAxis.tickLabelPosition
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'tickLabelPosition: Excel.ChartAxisTickLabelPosition | "NextToAxis" | "High" | "Low" | "None";'
+    return:
+      type:
+      - Excel.ChartAxisTickLabelPosition | "NextToAxis" | "High" | "Low" | "None"
+- uid: excel.Excel.ChartAxis.tickLabelSpacing
+  summary: >-
+    Representa el número de categorías o series entre rótulos de marcas de graduación. Puede ser un valor de 1 31999 a o una cadena vacía para la configuración automática. El valor devuelto siempre es un número.
+
+
+    \[[Conjunto de API: ExcelApi 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: tickLabelSpacing
+  fullName: excel.Excel.ChartAxis.tickLabelSpacing
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'tickLabelSpacing: any;'
+    return:
+      type:
+      - any
+- uid: excel.Excel.ChartAxis.tickMarkSpacing
+  summary: >-
+    Representa el número de categorías o series entre marcas de graduación.
+
+
+    \[[Conjunto de API: ExcelApi 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: tickMarkSpacing
+  fullName: excel.Excel.ChartAxis.tickMarkSpacing
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'tickMarkSpacing: number;'
+    return:
+      type:
+      - number
+- uid: excel.Excel.ChartAxis.title
+  summary: >-
+    Representa el título del eje. Solo lectura.
+
+
+    \[[Conjunto de API: ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: title
+  fullName: excel.Excel.ChartAxis.title
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly title: Excel.ChartAxisTitle;'
+    return:
+      type:
+      - excel.Excel.ChartAxisTitle
+- uid: excel.Excel.ChartAxis.toJSON
+  name: toJSON()
+  fullName: excel.Excel.ChartAxis.toJSON
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'toJSON(): Excel.Interfaces.ChartAxisData;'
+    return:
+      type:
+      - excel.Excel.Interfaces.ChartAxisData
+      description: ''
+- uid: excel.Excel.ChartAxis.top
+  summary: >-
+    Representa la distancia, en puntos, desde el borde superior del eje a la parte superior del área del gráfico. Null si el eje no esté visible. Solo lectura.
+
+
+    \[[Conjunto de API: ExcelApi 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: top
+  fullName: excel.Excel.ChartAxis.top
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly top: number;'
+    return:
+      type:
+      - number
+- uid: excel.Excel.ChartAxis.type
+  summary: >-
+    Representa el tipo de eje. Para obtener información detallada, vea Excel.ChartAxisType.
+
+
+    \[[Conjunto de API: ExcelApi 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: type
+  fullName: excel.Excel.ChartAxis.type
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly type: Excel.ChartAxisType | "Invalid" | "Category" | "Value" | "Series";'
+    return:
+      type:
+      - Excel.ChartAxisType | "Invalid" | "Category" | "Value" | "Series"
+- uid: excel.Excel.ChartAxis.visible
+  summary: >-
+    Un valor de tipo boolean representa la visibilidad del eje.
+
+
+    \[[Conjunto de API: ExcelApi 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: visible
+  fullName: excel.Excel.ChartAxis.visible
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'visible: boolean;'
+    return:
+      type:
+      - boolean
+- uid: excel.Excel.ChartAxis.width
+  summary: >-
+    Representa el ancho, en puntos, del eje del gráfico. Null si el eje no esté visible. Solo lectura.
+
+
+    \[[Conjunto de API: ExcelApi 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: width
+  fullName: excel.Excel.ChartAxis.width
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly width: number;'
+    return:
+      type:
+      - number
