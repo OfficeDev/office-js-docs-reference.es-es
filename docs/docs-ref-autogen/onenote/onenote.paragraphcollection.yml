@@ -1,0 +1,160 @@
+### YamlMime:UniversalReference
+ms.openlocfilehash: 351d118361c4817cb137cd6e561c2ff1492de3e6
+ms.sourcegitcommit: beffe9455dace422e85b92f0105c54ff7b594cbf
+ms.translationtype: MT
+ms.contentlocale: es-ES
+ms.lasthandoff: 09/20/2018
+ms.locfileid: "24054144"
+items:
+- uid: onenote.OneNote.ParagraphCollection
+  summary: >-
+    <span data-ttu-id="e5f70-101">Representa una colección de objetos Paragraph.</span><span class="sxs-lookup"><span data-stu-id="e5f70-101">Represents a collection of Paragraph objects.</span></span>
+
+
+    <span data-ttu-id="e5f70-102">\[[Conjunto de API: OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="e5f70-102">\[ [API set: OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets) \]</span></span>
+  name: OneNote.ParagraphCollection
+  fullName: onenote.OneNote.ParagraphCollection
+  langs:
+  - typeScript
+  type: class
+  extends:
+  - OfficeExtension.ClientObject
+  package: onenote
+  children:
+  - onenote.OneNote.ParagraphCollection.count
+  - onenote.OneNote.ParagraphCollection.getItem
+  - onenote.OneNote.ParagraphCollection.getItemAt
+  - onenote.OneNote.ParagraphCollection.items
+  - onenote.OneNote.ParagraphCollection.load
+  - onenote.OneNote.ParagraphCollection.toJSON
+  - onenote.OneNote.ParagraphCollection.track
+  - onenote.OneNote.ParagraphCollection.untrack
+- uid: onenote.OneNote.ParagraphCollection.count
+  summary: >-
+    <span data-ttu-id="e5f70-p101">Devuelve el número de párrafos de una página. Solo lectura.</span><span class="sxs-lookup"><span data-stu-id="e5f70-p101">Returns the number of paragraphs in the page. Read-only.</span></span>
+
+
+    <span data-ttu-id="e5f70-105">\[[Conjunto de API: OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="e5f70-105">\[ [API set: OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets) \]</span></span>
+  name: count
+  fullName: onenote.OneNote.ParagraphCollection.count
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly count: number;'
+    return:
+      type:
+      - number
+- uid: onenote.OneNote.ParagraphCollection.getItem
+  summary: >-
+    <span data-ttu-id="e5f70-p102">Obtiene un objeto Paragraph por id. o por su índice en la colección. Solo lectura.</span><span class="sxs-lookup"><span data-stu-id="e5f70-p102">Gets a Paragraph object by ID or by its index in the collection. Read-only.</span></span>
+
+
+    <span data-ttu-id="e5f70-108">\[[Conjunto de API: OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="e5f70-108">\[ [API set: OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets) \]</span></span>
+  name: getItem(index)
+  fullName: onenote.OneNote.ParagraphCollection.getItem
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getItem(index: number | string): OneNote.Paragraph;'
+    return:
+      type:
+      - onenote.OneNote.Paragraph
+      description: ''
+    parameters:
+    - id: index
+      description: <span data-ttu-id="e5f70-109">El id. del objeto Paragraph, o bien la ubicación del índice del bloc de notas en la colección.</span><span class="sxs-lookup"><span data-stu-id="e5f70-109">The ID of the Paragraph object, or the index location of the Paragraph object in the collection.</span></span>
+      type:
+      - number | string
+- uid: onenote.OneNote.ParagraphCollection.getItemAt
+  summary: >-
+    <span data-ttu-id="e5f70-110">Obtiene un párrafo según su posición en la colección.</span><span class="sxs-lookup"><span data-stu-id="e5f70-110">Gets a paragraph on its position in the collection.</span></span>
+
+
+    <span data-ttu-id="e5f70-111">\[[Conjunto de API: OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="e5f70-111">\[ [API set: OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets) \]</span></span>
+  name: getItemAt(index)
+  fullName: onenote.OneNote.ParagraphCollection.getItemAt
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getItemAt(index: number): OneNote.Paragraph;'
+    return:
+      type:
+      - onenote.OneNote.Paragraph
+      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"e5f70-112\">Ejemplos</span><span class=\"sxs-lookup\"><span data-stu-id=\"e5f70-112\">Examples</span></span>\n\n```javascript\nOneNote.run(function (context) {\n\n    // Get the collection of pageContent items from the page.\n    var pageContents = context.application.getActivePage().contents;\n\n    // Get the first PageContent on the page, and then get its Outline's first paragraph.\n    var pageContent = pageContents.getItemAt(0);\n    var paragraphs = pageContent.outline.paragraphs;\n\n    var firstParagraph = paragraphs.getItemAt(0);\n\n    // Queue a command to load the type and richText.text property of this paragraph.\n    firstParagraph.load(\"id,type\");\n\n\n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function () {\n            // Write text from paragraph to console\n            console.log(\n                \"First Paragraph found with id : \" + \n                firstParagraph.id + \" and type \" + firstParagraph.type);\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n}); \n```"
+    parameters:
+    - id: index
+      description: <span data-ttu-id="e5f70-p103">Valor de índice del objeto que se va a recuperar. Indizado con cero.</span><span class="sxs-lookup"><span data-stu-id="e5f70-p103">Index value of the object to be retrieved. Zero-indexed.</span></span>
+      type:
+      - number
+- uid: onenote.OneNote.ParagraphCollection.items
+  summary: <span data-ttu-id="e5f70-115">Obtiene al secundario cargado los elementos de esta colección.</span><span class="sxs-lookup"><span data-stu-id="e5f70-115">Gets the loaded child items in this collection.</span></span>
+  name: items
+  fullName: onenote.OneNote.ParagraphCollection.items
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly items: OneNote.Paragraph[];'
+    return:
+      type:
+      - OneNote.Paragraph[]
+- uid: onenote.OneNote.ParagraphCollection.load
+  summary: <span data-ttu-id="e5f70-116">Colas de seguridad de un comando que se va a cargar las propiedades del objeto especificadas.</span><span class="sxs-lookup"><span data-stu-id="e5f70-116">Queues up a command to load the specified properties of the object.</span></span> <span data-ttu-id="e5f70-117">Se debe llamar a "context.sync()" antes de leer las propiedades.</span><span class="sxs-lookup"><span data-stu-id="e5f70-117">You must call "context.sync()" before reading the properties.</span></span>
+  remarks: "<span data-ttu-id=\"e5f70-118\">Además de esta firma, este método no tiene las siguientes firmas:</span><span class=\"sxs-lookup\"><span data-stu-id=\"e5f70-118\">In addition to this signature, this method has the following signatures:</span></span>\n\n<span data-ttu-id=\"e5f70-119\">`load(option?: { select?: string; expand?: string; }): OneNote.ParagraphCollection`-Donde option.select es una cadena delimitada por comas que especifica las propiedades para cargar y options.expand es una cadena delimitada por comas que especifica las propiedades de navegación para cargar.</span><span class=\"sxs-lookup\"><span data-stu-id=\"e5f70-119\">`load(option?: { select?: string; expand?: string; }): OneNote.ParagraphCollection` - Where option.select is a comma-delimited string that specifies the properties to load, and options.expand is a comma-delimited string that specifies the navigation properties to load.</span></span>\n\n<span data-ttu-id=\"e5f70-120\">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): OneNote.ParagraphCollection`-Sólo está disponible en los tipos de colección.</span><span class=\"sxs-lookup\"><span data-stu-id=\"e5f70-120\">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): OneNote.ParagraphCollection` - Only available on collection types.</span></span> <span data-ttu-id=\"e5f70-121\">Es similar a la firma precedente.</span><span class=\"sxs-lookup\"><span data-stu-id=\"e5f70-121\">It is similar to the preceding signature.</span></span> <span data-ttu-id=\"e5f70-122\">Option.Top especifica el número máximo de elementos de la colección que se puede incluir en el resultado.</span><span class=\"sxs-lookup\"><span data-stu-id=\"e5f70-122\">Option.top specifies the maximum number of collection items that can be included in the result.</span></span> <span data-ttu-id=\"e5f70-123\">Option.Skip especifica el número de elementos que se pasan por alto y no se incluyen en el resultado.</span><span class=\"sxs-lookup\"><span data-stu-id=\"e5f70-123\">Option.skip specifies the number of items that are to be skipped and not included in the result.</span></span> <span data-ttu-id=\"e5f70-124\">Si se especifica option.top, se iniciará el conjunto de resultados después de omitir el número especificado de elementos.</span><span class=\"sxs-lookup\"><span data-stu-id=\"e5f70-124\">If option.top is specified, the result set will start after skipping the specified number of items.</span></span>\n#### <a name=\"examples\"></a><span data-ttu-id=\"e5f70-125\">Ejemplos</span><span class=\"sxs-lookup\"><span data-stu-id=\"e5f70-125\">Examples</span></span>\n\n```javascript\nOneNote.run(function (context) {\n\n    // Get the collection of pageContent items from the page.\n    var pageContents = context.application.getActivePage().contents;\n\n    // Get the first PageContent on the page, and then get its Outline's first paragraph.\n    var pageContent = pageContents.getItem(0);\n    var paragraphs = pageContent.outline.paragraphs;\n    \n    // Queue a command to load the id and type of each paragraph.\n    paragraphs.load(\"id,type\");\n\n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function () {\n            var firstParagraph = paragraphs.items[0];\n            // Write text from first paragraph to console\n            console.log(\n                \"First Paragraph found with id : \" + \n                firstParagraph.id + \" and type \" + firstParagraph.type);\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\nOneNote.run(function (context) {\n\n    // Get the collection of pageContent items from the page.\n    var pageContents = context.application.getActivePage().contents;\n\n    // Get the first PageContent on the page, and then get its outline's paragraphs.\n    var outlinePageContents = ;\n    var paragraphs = ;\n    var richTextParagraphs = ;\n    // Queue a command to load the id and type of each page content in the outline.\n    pageContents.load(\"id,type\");\n\n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function () {\n            // Load all page contents of type Outline\n            $.each(pageContents.items, function(index, pageContent) {\n                if(pageContent.type == 'Outline')\n                {\n                    pageContent.load('outline,outline/paragraphs,outline/paragraphs/type');\n                    outlinePageContents.push(pageContent);\n                }\n            });\n            return context.sync();\n        })\n        .then(function () {\n            // Load all rich text paragraphs across outlines\n            $.each(outlinePageContents, function(index, outlinePageContent) {\n                var outline = outlinePageContent.outline;\n                paragraphs = paragraphs.concat(outline.paragraphs.items);\n            });\n            $.each(paragraphs, function(index, paragraph) {\n                if(paragraph.type == 'RichText')\n                {\n                    richTextParagraphs.push(paragraph);\n                    paragraph.load(\"id,richText/text\");\n                }\n            });\n            return context.sync();\n        })\n        .then(function () {\n            // Display all rich text paragraphs to the console\n            $.each(richTextParagraphs, function(index, richTextParagraph) {\n                var richText = richTextParagraph.richText;\n                console.log(\n                    \"Paragraph found with richtext content : \" + \n                    richText.text + \" and richtext id : \" + richText.id);\n            });\n            return context.sync();\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  name: load(option)
+  fullName: onenote.OneNote.ParagraphCollection.load
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(option?: string | string[]): OneNote.ParagraphCollection;'
+    return:
+      type:
+      - onenote.OneNote.ParagraphCollection
+      description: ''
+    parameters:
+    - id: option
+      description: <span data-ttu-id="e5f70-126">Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades de carga.</span><span class="sxs-lookup"><span data-stu-id="e5f70-126">A comma-delimited string or an array of strings that specify the properties to load.</span></span>
+      type:
+      - string | string[]
+- uid: onenote.OneNote.ParagraphCollection.toJSON
+  name: toJSON()
+  fullName: onenote.OneNote.ParagraphCollection.toJSON
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'toJSON(): OneNote.Interfaces.ParagraphCollectionData;'
+    return:
+      type:
+      - onenote.OneNote.Interfaces.ParagraphCollectionData
+      description: ''
+- uid: onenote.OneNote.ParagraphCollection.track
+  summary: <span data-ttu-id="e5f70-127">Realizar un seguimiento del objeto para el ajuste automático en función de que lo rodea los cambios en el documento.</span><span class="sxs-lookup"><span data-stu-id="e5f70-127">Track the object for automatic adjustment based on surrounding changes in the document.</span></span> <span data-ttu-id="e5f70-128">Esta llamada es una forma abreviada para context.trackedObjects.add(thisObject).</span><span class="sxs-lookup"><span data-stu-id="e5f70-128">This call is a shorthand for context.trackedObjects.add(thisObject).</span></span> <span data-ttu-id="e5f70-129">Si va a usar este objeto a través de llamadas "Sync" y fuera de la ejecución secuencial de un lote de "ésta se ejecute" y obtenga un error de "InvalidObjectPath" al establecer una propiedad o invocar un método en el objeto, había que ha agregado el objeto al objeto marca de revisión colección cuando el objeto se crea por primera vez.</span><span class="sxs-lookup"><span data-stu-id="e5f70-129">If you are using this object across ".sync" calls and outside the sequential execution of a ".run" batch, and get an "InvalidObjectPath" error when setting a property or invoking a method on the object, you needed to have added the object to the tracked object collection when the object was first created.</span></span>
+  name: track()
+  fullName: onenote.OneNote.ParagraphCollection.track
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'track(): OneNote.ParagraphCollection;'
+    return:
+      type:
+      - onenote.OneNote.ParagraphCollection
+      description: ''
+- uid: onenote.OneNote.ParagraphCollection.untrack
+  summary: <span data-ttu-id="e5f70-130">La memoria asociada con este objeto, si lo se anteriormente hace el seguimiento de la versión.</span><span class="sxs-lookup"><span data-stu-id="e5f70-130">Release the memory associated with this object, if it has previously been tracked.</span></span> <span data-ttu-id="e5f70-131">Esta llamada es una abreviatura de context.trackedObjects.remove(thisObject).</span><span class="sxs-lookup"><span data-stu-id="e5f70-131">This call is shorthand for context.trackedObjects.remove(thisObject).</span></span> <span data-ttu-id="e5f70-132">Tener muchos objetos de marca de revisión reduce la velocidad de la aplicación host, por lo que no olvide libre de cualquier objeto que agregue, una vez que haya terminado con ellos.</span><span class="sxs-lookup"><span data-stu-id="e5f70-132">Having many tracked objects slows down the host application, so please remember to free any objects you add, once you're done using them.</span></span> <span data-ttu-id="e5f70-133">Debe llamar a "context.sync()" antes de la versión de memoria surta efecto.</span><span class="sxs-lookup"><span data-stu-id="e5f70-133">You will need to call "context.sync()" before the memory release takes effect.</span></span>
+  name: untrack()
+  fullName: onenote.OneNote.ParagraphCollection.untrack
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'untrack(): OneNote.ParagraphCollection;'
+    return:
+      type:
+      - onenote.OneNote.ParagraphCollection
+      description: ''
