@@ -1,0 +1,491 @@
+### YamlMime:UniversalReference
+ms.openlocfilehash: 932101dd810955b075f7b98dc22ff547af29976a
+ms.sourcegitcommit: beffe9455dace422e85b92f0105c54ff7b594cbf
+ms.translationtype: MT
+ms.contentlocale: es-ES
+ms.lasthandoff: 09/20/2018
+ms.locfileid: "24053345"
+items:
+- uid: word.Word.Font
+  summary: >-
+    Representa una fuente.
+
+
+    \[[Conjunto de API: WordApi 1.1](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: Word.Font
+  fullName: word.Word.Font
+  langs:
+  - typeScript
+  type: class
+  extends:
+  - OfficeExtension.ClientObject
+  package: word
+  children:
+  - word.Word.Font.bold
+  - word.Word.Font.color
+  - word.Word.Font.doubleStrikeThrough
+  - word.Word.Font.highlightColor
+  - word.Word.Font.italic
+  - word.Word.Font.load
+  - word.Word.Font.name
+  - word.Word.Font.size
+  - word.Word.Font.strikeThrough
+  - word.Word.Font.subscript
+  - word.Word.Font.superscript
+  - word.Word.Font.toJSON
+  - word.Word.Font.track
+  - word.Word.Font.underline
+  - word.Word.Font.untrack
+- uid: word.Word.Font.bold
+  summary: >-
+    Obtiene o establece un valor que indica si la fuente está en negrita. True si la fuente tiene formato de negrita; en caso contrario, false.
+
+
+    \[[Conjunto de API: WordApi 1.1](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: bold
+  fullName: word.Word.Font.bold
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'bold: boolean;'
+    return:
+      type:
+      - boolean
+- uid: word.Word.Font.color
+  summary: >-
+    Obtiene o establece el color de la fuente especificada. Puede proporcionar el valor en el '\#RRGGBB' formato o el nombre del color.
+
+
+    \[[Conjunto de API: WordApi 1.1](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: color
+  fullName: word.Word.Font.color
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'color: string;'
+    return:
+      type:
+      - string
+- uid: word.Word.Font.doubleStrikeThrough
+  summary: >-
+    Obtiene o establece un valor que indica si la fuente tiene formato de tachado doble. Es True si la fuente tiene el formato como texto de doble tachado, de lo contrario, es false.
+
+
+    \[[Conjunto de API: WordApi 1.1](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: doubleStrikeThrough
+  fullName: word.Word.Font.doubleStrikeThrough
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'doubleStrikeThrough: boolean;'
+    return:
+      type:
+      - boolean
+- uid: word.Word.Font.highlightColor
+  summary: >-
+    Obtiene o establece el color de resaltado. Para establecerla, use un valor ya sea en el '\#RRGGBB' formato o el nombre del color. Para quitar el color de resaltado, establezca en null. El color de resaltado devuelto puede ser en el '\#RRGGBB' formato, una cadena vacía para los colores de resaltado mixto, o null para no color de resaltado.
+
+
+    \[[Conjunto de API: WordApi 1.1](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: highlightColor
+  fullName: word.Word.Font.highlightColor
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'highlightColor: string;'
+    return:
+      type:
+      - string
+- uid: word.Word.Font.italic
+  summary: >-
+    Obtiene o establece un valor que indica si la fuente está en cursiva. True si la fuente está en cursiva; en caso contrario, false.
+
+
+    \[[Conjunto de API: WordApi 1.1](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: italic
+  fullName: word.Word.Font.italic
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'italic: boolean;'
+    return:
+      type:
+      - boolean
+- uid: word.Word.Font.load
+  summary: Colas de seguridad de un comando que se va a cargar las propiedades del objeto especificadas. Se debe llamar a "context.sync()" antes de leer las propiedades.
+  remarks: >-
+    Además de esta firma, este método no tiene las siguientes firmas:
+
+
+    `load(option?: { select?: string; expand?: string; }): Word.Font`-Donde option.select es una cadena delimitada por comas que especifica las propiedades para cargar y options.expand es una cadena delimitada por comas que especifica las propiedades de navegación para cargar.
+
+
+    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Word.Font`-Sólo está disponible en los tipos de colección. Es similar a la firma precedente. Option.Top especifica el número máximo de elementos de la colección que se puede incluir en el resultado. Option.Skip especifica el número de elementos que se pasan por alto y no se incluyen en el resultado. Si se especifica option.top, se iniciará el conjunto de resultados después de omitir el número especificado de elementos.
+
+    #### <a name="examples"></a>Ejemplos
+
+
+    ```javascript
+
+    // Change the font name
+
+    // Run a batch operation against the Word object model.
+
+    Word.run(function (context) {
+
+        // Create a range proxy object for the current selection.
+        var selection = context.document.getSelection();
+
+        // Queue a commmand to change the current selection's font name.
+        selection.font.name = 'Arial';
+
+        // Synchronize the document state by executing the queued commands,
+        // and return a promise to indicate task completion.
+        return context.sync().then(function () {
+            console.log('The font name has changed.');
+        });
+    })
+
+    .catch(function (error) {
+        console.log('Error: ' + JSON.stringify(error));
+        if (error instanceof OfficeExtension.Error) {
+            console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+        }
+    });
+
+    ```
+
+    ```javascript
+
+    // Change the font color
+
+    // Run a batch operation against the Word object model.
+
+    Word.run(function (context) {
+
+        // Create a range proxy object for the current selection.
+        var selection = context.document.getSelection();
+
+        // Queue a commmand to change the font color of the current selection.
+        selection.font.color = 'blue';
+
+        // Synchronize the document state by executing the queued commands,
+        // and return a promise to indicate task completion.
+        return context.sync().then(function () {
+            console.log('The font color of the selection has been changed.');
+        });
+    })
+
+    .catch(function (error) {
+        console.log('Error: ' + JSON.stringify(error));
+        if (error instanceof OfficeExtension.Error) {
+            console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+        }
+    });
+
+    ```
+
+    ```javascript
+
+    // Change the font size
+
+    // Run a batch operation against the Word object model.
+
+    Word.run(function (context) {
+
+        // Create a range proxy object for the current selection.
+        var selection = context.document.getSelection();
+
+        // Queue a commmand to change the current selection's font size.
+        selection.font.size = 20;
+
+        // Synchronize the document state by executing the queued commands,
+        // and return a promise to indicate task completion.
+        return context.sync().then(function () {
+            console.log('The font size has changed.');
+        });
+    })
+
+    .catch(function (error) {
+        console.log('Error: ' + JSON.stringify(error));
+        if (error instanceof OfficeExtension.Error) {
+            console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+        }
+    });
+
+    ```
+
+    ```javascript
+
+    // Highlight selected text
+
+    // Run a batch operation against the Word object model.
+
+    Word.run(function (context) {
+
+        // Create a range proxy object for the current selection.
+        var selection = context.document.getSelection();
+
+        // Queue a commmand to highlight the current selection.
+        selection.font.highlightColor = '#FFFF00'; // Yellow
+
+        // Synchronize the document state by executing the queued commands,
+        // and return a promise to indicate task completion.
+        return context.sync().then(function () {
+            console.log('The selection has been highlighted.');
+        });
+    })
+
+    .catch(function (error) {
+        console.log('Error: ' + JSON.stringify(error));
+        if (error instanceof OfficeExtension.Error) {
+            console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+        }
+    });
+
+    ```
+
+    ```javascript
+
+    // Bold format text
+
+    // Run a batch operation against the Word object model.
+
+    Word.run(function (context) {
+
+        // Create a range proxy object for the current selection.
+        var selection = context.document.getSelection();
+
+        // Queue a commmand to make the current selection bold.
+        selection.font.bold = true;
+
+        // Synchronize the document state by executing the queued commands,
+        // and return a promise to indicate task completion.
+        return context.sync().then(function () {
+            console.log('The selection is now bold.');
+        });
+    })
+
+    .catch(function (error) {
+        console.log('Error: ' + JSON.stringify(error));
+        if (error instanceof OfficeExtension.Error) {
+            console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+        }
+    });
+
+    ```
+
+    ```javascript
+
+    // Underline format text
+
+    // Run a batch operation against the Word object model.
+
+    Word.run(function (context) {
+
+        // Create a range proxy object for the current selection.
+        var selection = context.document.getSelection();
+
+        // Queue a commmand to underline the current selection.
+        selection.font.underline = Word.UnderlineType.single;
+
+        // Synchronize the document state by executing the queued commands,
+        // and return a promise to indicate task completion.
+        return context.sync().then(function () {
+            console.log('The selection now has an underline style.');
+        });
+    })
+
+    .catch(function (error) {
+        console.log('Error: ' + JSON.stringify(error));
+        if (error instanceof OfficeExtension.Error) {
+            console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+        }
+    });
+
+    ```
+
+    ```javascript
+
+    // Strike format text
+
+    // Run a batch operation against the Word object model.
+
+    Word.run(function (context) {
+
+        // Create a range proxy object for the current selection.
+        var selection = context.document.getSelection();
+
+        // Queue a commmand to strikethrough the font of the current selection.
+        selection.font.strikeThrough = true;
+
+        // Synchronize the document state by executing the queued commands,
+        // and return a promise to indicate task completion.
+        return context.sync().then(function () {
+            console.log('The selection now has a strikethrough.');
+        });
+    })
+
+    .catch(function (error) {
+        console.log('Error: ' + JSON.stringify(error));
+        if (error instanceof OfficeExtension.Error) {
+            console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+        }
+    });
+
+    ```
+  name: load(option)
+  fullName: word.Word.Font.load
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(option?: string | string[]): Word.Font;'
+    return:
+      type:
+      - word.Word.Font
+      description: ''
+    parameters:
+    - id: option
+      description: Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades de carga.
+      type:
+      - string | string[]
+- uid: word.Word.Font.name
+  summary: >-
+    Obtiene o establece un valor que representa el nombre de la fuente.
+
+
+    \[[Conjunto de API: WordApi 1.1](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: name
+  fullName: word.Word.Font.name
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'name: string;'
+    return:
+      type:
+      - string
+- uid: word.Word.Font.size
+  summary: >-
+    Obtiene o establece un valor que representa el tamaño de la fuente en puntos.
+
+
+    \[[Conjunto de API: WordApi 1.1](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: size
+  fullName: word.Word.Font.size
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'size: number;'
+    return:
+      type:
+      - number
+- uid: word.Word.Font.strikeThrough
+  summary: >-
+    Obtiene o establece un valor que indica si la fuente tiene formato de tachado. Es True si la fuente tiene el formato como texto tachado, de lo contrario, es false.
+
+
+    \[[Conjunto de API: WordApi 1.1](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: strikeThrough
+  fullName: word.Word.Font.strikeThrough
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'strikeThrough: boolean;'
+    return:
+      type:
+      - boolean
+- uid: word.Word.Font.subscript
+  summary: >-
+    Obtiene o establece un valor que indica si la fuente está en subíndice. True si la fuente tiene formato de subíndice; en caso contrario, false.
+
+
+    \[[Conjunto de API: WordApi 1.1](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: subscript
+  fullName: word.Word.Font.subscript
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'subscript: boolean;'
+    return:
+      type:
+      - boolean
+- uid: word.Word.Font.superscript
+  summary: >-
+    Obtiene o establece un valor que indica si la fuente está en superíndice. True si la fuente tiene formato de superíndice; en caso contrario, false.
+
+
+    \[[Conjunto de API: WordApi 1.1](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: superscript
+  fullName: word.Word.Font.superscript
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'superscript: boolean;'
+    return:
+      type:
+      - boolean
+- uid: word.Word.Font.toJSON
+  name: toJSON()
+  fullName: word.Word.Font.toJSON
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'toJSON(): Word.Interfaces.FontData;'
+    return:
+      type:
+      - word.Word.Interfaces.FontData
+      description: ''
+- uid: word.Word.Font.track
+  summary: Realizar un seguimiento del objeto para el ajuste automático en función de que lo rodea los cambios en el documento. Esta llamada es una forma abreviada para context.trackedObjects.add(thisObject). Si va a usar este objeto a través de llamadas "Sync" y fuera de la ejecución secuencial de un lote de "ésta se ejecute" y obtenga un error de "InvalidObjectPath" al establecer una propiedad o invocar un método en el objeto, había que ha agregado el objeto al objeto marca de revisión colección cuando el objeto se crea por primera vez.
+  name: track()
+  fullName: word.Word.Font.track
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'track(): Word.Font;'
+    return:
+      type:
+      - word.Word.Font
+      description: ''
+- uid: word.Word.Font.underline
+  summary: >-
+    Obtiene o establece un valor que indica el tipo de subrayado de la fuente. 'None' Si la fuente no está subrayada.
+
+
+    \[[Conjunto de API: WordApi 1.1](/javascript/office/requirement-sets/word-api-requirement-sets)\]
+  name: underline
+  fullName: word.Word.Font.underline
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'underline: Word.UnderlineType | "Mixed" | "None" | "Hidden" | "DotLine" | "Single" | "Word" | "Double" | "Thick" | "Dotted" | "DottedHeavy" | "DashLine" | "DashLineHeavy" | "DashLineLong" | "DashLineLongHeavy" | "DotDashLine" | "DotDashLineHeavy" | "TwoDotDashLine" | "TwoDotDashLineHeavy" | "Wave" | "WaveHeavy" | "WaveDouble";'
+    return:
+      type:
+      - Word.UnderlineType | "Mixed" | "None" | "Hidden" | "DotLine" | "Single" | "Word" | "Double" | "Thick" | "Dotted" | "DottedHeavy" | "DashLine" | "DashLineHeavy" | "DashLineLong" | "DashLineLongHeavy" | "DotDashLine" | "DotDashLineHeavy" | "TwoDotDashLine" | "TwoDotDashLineHeavy" | "Wave" | "WaveHeavy" | "WaveDouble"
+- uid: word.Word.Font.untrack
+  summary: La memoria asociada con este objeto, si lo se anteriormente hace el seguimiento de la versión. Esta llamada es una abreviatura de context.trackedObjects.remove(thisObject). Tener muchos objetos de marca de revisión reduce la velocidad de la aplicación host, por lo que no olvide libre de cualquier objeto que agregue, una vez que haya terminado con ellos. Debe llamar a "context.sync()" antes de la versión de memoria surta efecto.
+  name: untrack()
+  fullName: word.Word.Font.untrack
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'untrack(): Word.Font;'
+    return:
+      type:
+      - word.Word.Font
+      description: ''

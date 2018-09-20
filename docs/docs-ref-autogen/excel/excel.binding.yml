@@ -1,0 +1,197 @@
+### YamlMime:UniversalReference
+ms.openlocfilehash: d868de0bd4b05b310086bcc6cc0d2f7f3080a55e
+ms.sourcegitcommit: beffe9455dace422e85b92f0105c54ff7b594cbf
+ms.translationtype: MT
+ms.contentlocale: es-ES
+ms.lasthandoff: 09/20/2018
+ms.locfileid: "24053790"
+items:
+- uid: excel.Excel.Binding
+  summary: >-
+    Representa un enlace de Office.js que se define en el libro.
+
+
+    \[[Conjunto de API: ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: Excel.Binding
+  fullName: excel.Excel.Binding
+  langs:
+  - typeScript
+  type: class
+  extends:
+  - OfficeExtension.ClientObject
+  package: excel
+  children:
+  - excel.Excel.Binding.delete
+  - excel.Excel.Binding.getRange
+  - excel.Excel.Binding.getTable
+  - excel.Excel.Binding.getText
+  - excel.Excel.Binding.id
+  - excel.Excel.Binding.load
+  - excel.Excel.Binding.onDataChanged
+  - excel.Excel.Binding.onSelectionChanged
+  - excel.Excel.Binding.toJSON
+  - excel.Excel.Binding.type
+- uid: excel.Excel.Binding.delete
+  summary: >-
+    Elimina el enlace.
+
+
+    \[[Conjunto de API: ExcelApi 1.3](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: delete()
+  fullName: excel.Excel.Binding.delete
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'delete(): void;'
+    return:
+      type:
+      - void
+      description: ''
+- uid: excel.Excel.Binding.getRange
+  summary: >-
+    Devuelve el intervalo representado por el enlace. Se producirá un error si el enlace no es del tipo correcto.
+
+
+    \[[Conjunto de API: ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: getRange()
+  fullName: excel.Excel.Binding.getRange
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getRange(): Excel.Range;'
+    return:
+      type:
+      - excel.Excel.Range
+      description: "\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nExcel.run(function (ctx) { \n    var binding = ctx.workbook.bindings.getItemAt(0);\n    var range = binding.getRange();\n    range.load('cellCount');\n    return ctx.sync().then(function() {\n        console.log(range.cellCount);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- uid: excel.Excel.Binding.getTable
+  summary: >-
+    Devuelve la tabla representada por el enlace. Se producirá un error si el enlace no es del tipo correcto.
+
+
+    \[[Conjunto de API: ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: getTable()
+  fullName: excel.Excel.Binding.getTable
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getTable(): Excel.Table;'
+    return:
+      type:
+      - excel.Excel.Table
+      description: "\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nExcel.run(function (ctx) { \n    var binding = ctx.workbook.bindings.getItemAt(0);\n    var table = binding.getTable();\n    table.load('name');\n    return ctx.sync().then(function() {\n            console.log(table.name);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- uid: excel.Excel.Binding.getText
+  summary: >-
+    Devuelve el texto representado por el enlace. Se producirá un error si el enlace no es del tipo correcto.
+
+
+    \[[Conjunto de API: ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: getText()
+  fullName: excel.Excel.Binding.getText
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getText(): OfficeExtension.ClientResult<string>;'
+    return:
+      type:
+      - OfficeExtension.ClientResult<string>
+      description: "\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nExcel.run(function (ctx) { \n    var binding = ctx.workbook.bindings.getItemAt(0);\n    var text = binding.getText();\n    binding.load('text');\n    return ctx.sync().then(function() {\n        console.log(text);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- uid: excel.Excel.Binding.id
+  summary: >-
+    Representa el identificador de enlace. Solo lectura.
+
+
+    \[[Conjunto de API: ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: id
+  fullName: excel.Excel.Binding.id
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly id: string;'
+    return:
+      type:
+      - string
+- uid: excel.Excel.Binding.load
+  summary: Colas de seguridad de un comando que se va a cargar las propiedades del objeto especificadas. Se debe llamar a "context.sync()" antes de leer las propiedades.
+  remarks: "Además de esta firma, este método no tiene las siguientes firmas:\n\n`load(option?: { select?: string; expand?: string; }): Excel.Binding`-Donde option.select es una cadena delimitada por comas que especifica las propiedades para cargar y options.expand es una cadena delimitada por comas que especifica las propiedades de navegación para cargar.\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Binding`-Sólo está disponible en los tipos de colección. Es similar a la firma precedente. Option.Top especifica el número máximo de elementos de la colección que se puede incluir en el resultado. Option.Skip especifica el número de elementos que se pasan por alto y no se incluyen en el resultado. Si se especifica option.top, se iniciará el conjunto de resultados después de omitir el número especificado de elementos.\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nExcel.run(function (ctx) { \n    var binding = ctx.workbook.bindings.getItemAt(0);\n    binding.load('type');\n    return ctx.sync().then(function() {\n        console.log(binding.type);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  name: load(option)
+  fullName: excel.Excel.Binding.load
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(option?: string | string[]): Excel.Binding;'
+    return:
+      type:
+      - excel.Excel.Binding
+      description: ''
+    parameters:
+    - id: option
+      description: Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades de carga.
+      type:
+      - string | string[]
+- uid: excel.Excel.Binding.onDataChanged
+  summary: >-
+    Se produce al cambiar los datos del enlace o al darles formato.
+
+
+    \[[Conjunto de API: ExcelApi 1.2](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: onDataChanged
+  fullName: excel.Excel.Binding.onDataChanged
+  langs:
+  - typeScript
+  type: event
+  syntax:
+    content: 'readonly onDataChanged: OfficeExtension.EventHandlers<Excel.BindingDataChangedEventArgs>;'
+    return:
+      type:
+      - OfficeExtension.EventHandlers<Excel.BindingDataChangedEventArgs>
+      description: "\n#### <a name=\"examples\"></a>Ejemplos\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");    \n    const salesTable = sheet.tables.getItem(\"SalesTable\");\n    const salesByQuarterBinding = context.workbook.bindings.add(salesTable.getRange(), \"Table\", \"SalesByQuarter\");\n    salesByQuarterBinding.onDataChanged.add(onSalesDataChanged);\n\n    OfficeHelpers.UI.notify(\"The handler is registered.\", \"Change the value in one of the data cells and watch this message banner. (Be sure to complete the edit by pressing Enter or clicking in another cell.)\");\n\n    await context.sync();\n});\n```"
+- uid: excel.Excel.Binding.onSelectionChanged
+  summary: >-
+    Se produce cuando se modifica el contenido seleccionado en el enlace.
+
+
+    \[[Conjunto de API: ExcelApi 1.2](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: onSelectionChanged
+  fullName: excel.Excel.Binding.onSelectionChanged
+  langs:
+  - typeScript
+  type: event
+  syntax:
+    content: 'readonly onSelectionChanged: OfficeExtension.EventHandlers<Excel.BindingSelectionChangedEventArgs>;'
+    return:
+      type:
+      - OfficeExtension.EventHandlers<Excel.BindingSelectionChangedEventArgs>
+- uid: excel.Excel.Binding.toJSON
+  name: toJSON()
+  fullName: excel.Excel.Binding.toJSON
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'toJSON(): Excel.Interfaces.BindingData;'
+    return:
+      type:
+      - excel.Excel.Interfaces.BindingData
+      description: ''
+- uid: excel.Excel.Binding.type
+  summary: >-
+    Devuelve el tipo del enlace. Para obtener información detallada, vea Excel.BindingType. Solo lectura.
+
+
+    \[[Conjunto de API: ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: type
+  fullName: excel.Excel.Binding.type
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly type: Excel.BindingType | "Range" | "Table" | "Text";'
+    return:
+      type:
+      - Excel.BindingType | "Range" | "Table" | "Text"

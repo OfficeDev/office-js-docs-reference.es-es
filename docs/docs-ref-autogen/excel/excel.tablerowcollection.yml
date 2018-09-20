@@ -1,0 +1,163 @@
+### YamlMime:UniversalReference
+ms.openlocfilehash: 585a94b64064bcd631ccafdcf656acedc89d7ad8
+ms.sourcegitcommit: beffe9455dace422e85b92f0105c54ff7b594cbf
+ms.translationtype: MT
+ms.contentlocale: es-ES
+ms.lasthandoff: 09/20/2018
+ms.locfileid: "24054357"
+items:
+- uid: excel.Excel.TableRowCollection
+  summary: >-
+    Representa una colección de todas las filas que forman parte de la tabla.
+
+
+    Tenga en cuenta que, a diferencia de rangos o columnas, que se ajustarán si se agregan nuevas filas o columnas antes de ellos, un objeto TableRow representa la ubicación física de la fila de tabla, pero no los datos. Es decir, si se ordenan los datos o si se agregan nuevas filas, una fila de tabla seguirá al punto en el índice para el que se creó.
+
+
+    \[[Conjunto de API: ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: Excel.TableRowCollection
+  fullName: excel.Excel.TableRowCollection
+  langs:
+  - typeScript
+  type: class
+  extends:
+  - OfficeExtension.ClientObject
+  package: excel
+  children:
+  - excel.Excel.TableRowCollection.add
+  - excel.Excel.TableRowCollection.count
+  - excel.Excel.TableRowCollection.getCount
+  - excel.Excel.TableRowCollection.getItemAt
+  - excel.Excel.TableRowCollection.items
+  - excel.Excel.TableRowCollection.load
+  - excel.Excel.TableRowCollection.toJSON
+- uid: excel.Excel.TableRowCollection.add
+  summary: >-
+    Agrega una o más filas a la tabla. El objeto devuelto será el superior de las filas recién agregadas.
+
+
+    Tenga en cuenta que, a diferencia de rangos o columnas, que se ajustarán si se agregan nuevas filas o columnas antes de ellos, un objeto TableRow representa la ubicación física de la fila de tabla, pero no los datos. Es decir, si se ordenan los datos o si se agregan nuevas filas, una fila de tabla seguirá al punto en el índice para el que se creó.
+
+
+    \[[Conjunto de API: ExcelApi 1.1 para agregar una sola fila; 1.4 permite agregar de varias filas.](/javascript/office/requirement-sets/excel-api-requirement-sets) \]
+  name: add(index, values)
+  fullName: excel.Excel.TableRowCollection.add
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'add(index?: number, values?: Array<Array<boolean | string | number>> | boolean | string | number): Excel.TableRow;'
+    return:
+      type:
+      - excel.Excel.TableRow
+      description: "\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nExcel.run(function (ctx) { \n    var tables = ctx.workbook.tables;\n    var values = [[\"Sample\", \"Values\", \"For\", \"New\", \"Row\"]];\n    var row = tables.getItem(\"Table1\").rows.add(null, values);\n    row.load('index');\n    return ctx.sync().then(function() {\n        console.log(row.index);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+    parameters:
+    - id: index
+      description: Opcional. Especifica la posición relativa de la nueva fila. Si es NULL o -1, se produce la adición al final. Las filas situadas debajo de la fila insertada se desplazan hacia abajo. Indizado con cero.
+      type:
+      - number
+    - id: values
+      description: Opcional. Matriz bidimensional de valores sin formato de la fila de la tabla.
+      type:
+      - Array<Array<boolean | string | number>> | boolean | string | number
+- uid: excel.Excel.TableRowCollection.count
+  summary: >-
+    Devuelve el número de filas de la tabla. Solo lectura.
+
+
+    \[[Conjunto de API: ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: count
+  fullName: excel.Excel.TableRowCollection.count
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly count: number;'
+    return:
+      type:
+      - number
+- uid: excel.Excel.TableRowCollection.getCount
+  summary: >-
+    Obtiene el número de filas de la tabla.
+
+
+    \[[Conjunto de API: ExcelApi 1,4](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: getCount()
+  fullName: excel.Excel.TableRowCollection.getCount
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getCount(): OfficeExtension.ClientResult<number>;'
+    return:
+      type:
+      - OfficeExtension.ClientResult<number>
+      description: ''
+- uid: excel.Excel.TableRowCollection.getItemAt
+  summary: >-
+    Obtiene una fila en función de su posición en la colección.
+
+
+    Tenga en cuenta que, a diferencia de rangos o columnas, que se ajustarán si se agregan nuevas filas o columnas antes de ellos, un objeto TableRow representa la ubicación física de la fila de tabla, pero no los datos. Es decir, si se ordenan los datos o si se agregan nuevas filas, una fila de tabla seguirá al punto en el índice para el que se creó.
+
+
+    \[[Conjunto de API: ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: getItemAt(index)
+  fullName: excel.Excel.TableRowCollection.getItemAt
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getItemAt(index: number): Excel.TableRow;'
+    return:
+      type:
+      - excel.Excel.TableRow
+      description: "\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nExcel.run(function (ctx) { \n    var tablerow = ctx.workbook.tables.getItem('Table1').rows.getItemAt(0);\n    tablerow.load('name');\n    return ctx.sync().then(function() {\n            console.log(tablerow.name);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+    parameters:
+    - id: index
+      description: Valor de índice del objeto que se va a recuperar. Indizado con cero.
+      type:
+      - number
+- uid: excel.Excel.TableRowCollection.items
+  summary: Obtiene al secundario cargado los elementos de esta colección.
+  name: items
+  fullName: excel.Excel.TableRowCollection.items
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly items: Excel.TableRow[];'
+    return:
+      type:
+      - Excel.TableRow[]
+- uid: excel.Excel.TableRowCollection.load
+  summary: Colas de seguridad de un comando que se va a cargar las propiedades del objeto especificadas. Se debe llamar a "context.sync()" antes de leer las propiedades.
+  remarks: "Además de esta firma, este método no tiene las siguientes firmas:\n\n`load(option?: { select?: string; expand?: string; }): Excel.TableRowCollection`-Donde option.select es una cadena delimitada por comas que especifica las propiedades para cargar y options.expand es una cadena delimitada por comas que especifica las propiedades de navegación para cargar.\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.TableRowCollection`-Sólo está disponible en los tipos de colección. Es similar a la firma precedente. Option.Top especifica el número máximo de elementos de la colección que se puede incluir en el resultado. Option.Skip especifica el número de elementos que se pasan por alto y no se incluyen en el resultado. Si se especifica option.top, se iniciará el conjunto de resultados después de omitir el número especificado de elementos.\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nExcel.run(function (ctx) { \n    var tablerows = ctx.workbook.tables.getItem('Table1').rows;\n    tablerows.load('items');\n    return ctx.sync().then(function() {\n        console.log(\"tablerows Count: \" + tablerows.count);\n        for (var i = 0; i < tablerows.items.length; i++)\n        {\n            console.log(tablerows.items[i].index);\n        }\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\n// In the example, we'll select the top 100 rows of the table.\nExcel.run(function (ctx) { \n    var table = ctx.workbook.tables.getItem(\"Table1\");\n    var tableRows = table.rows.load({\"select\" : \"index, values\",\"top\": 100, \"skip\": 0 })\n    return ctx.sync().then(function() {\n        for (var i = 0; i < tableRows.items.length; i++)\n        {\n            console.log(tableRows.items[i].index);\n            console.log(tableRows.items[i].values);\n        }\n    });\n}).catch(function(error) {\n        console.log(\"Error: \" + error);\n        if (error instanceof OfficeExtension.Error) {\n            console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n        }\n});\n```"
+  name: load(option)
+  fullName: excel.Excel.TableRowCollection.load
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(option?: string | string[]): Excel.TableRowCollection;'
+    return:
+      type:
+      - excel.Excel.TableRowCollection
+      description: ''
+    parameters:
+    - id: option
+      description: Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades de carga.
+      type:
+      - string | string[]
+- uid: excel.Excel.TableRowCollection.toJSON
+  name: toJSON()
+  fullName: excel.Excel.TableRowCollection.toJSON
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'toJSON(): Excel.Interfaces.TableRowCollectionData;'
+    return:
+      type:
+      - excel.Excel.Interfaces.TableRowCollectionData
+      description: ''

@@ -1,0 +1,245 @@
+### YamlMime:UniversalReference
+ms.openlocfilehash: 1f1792e25103dce5320c3c9c49400aff038a59f4
+ms.sourcegitcommit: beffe9455dace422e85b92f0105c54ff7b594cbf
+ms.translationtype: MT
+ms.contentlocale: es-ES
+ms.lasthandoff: 09/20/2018
+ms.locfileid: "24053097"
+items:
+- uid: onenote.OneNote.PageContent
+  summary: >-
+    Representa una región de nivel superior en una página que contiene tipos de contenido de nivel superior, como Outline o Image. Un objeto PageContent se puede asignar a una posición XY.
+
+
+    \[[Conjunto de API: OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: OneNote.PageContent
+  fullName: onenote.OneNote.PageContent
+  langs:
+  - typeScript
+  type: class
+  extends:
+  - OfficeExtension.ClientObject
+  package: onenote
+  children:
+  - onenote.OneNote.PageContent.delete
+  - onenote.OneNote.PageContent.id
+  - onenote.OneNote.PageContent.image
+  - onenote.OneNote.PageContent.ink
+  - onenote.OneNote.PageContent.left
+  - onenote.OneNote.PageContent.load
+  - onenote.OneNote.PageContent.outline
+  - onenote.OneNote.PageContent.parentPage
+  - onenote.OneNote.PageContent.toJSON
+  - onenote.OneNote.PageContent.top
+  - onenote.OneNote.PageContent.track
+  - onenote.OneNote.PageContent.type
+  - onenote.OneNote.PageContent.untrack
+- uid: onenote.OneNote.PageContent.delete
+  summary: >-
+    Elimina el objeto PageContent.
+
+
+    \[[Conjunto de API: OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: delete()
+  fullName: onenote.OneNote.PageContent.delete
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'delete(): void;'
+    return:
+      type:
+      - void
+      description: "\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nOneNote.run(function (context) {\n\n    var page = context.application.getActivePage();\n    var pageContents = page.contents;\n\n    var firstPageContent = pageContents.getItemAt(0);\n    firstPageContent.load('type');\n\n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function () {\n            if(firstPageContent.isNull === false) {\n                firstPageContent.delete();\n                return context.sync();\n            }\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- uid: onenote.OneNote.PageContent.id
+  summary: >-
+    Obtiene el id. del objeto PageContent. Solo lectura.
+
+
+    \[[Conjunto de API: OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: id
+  fullName: onenote.OneNote.PageContent.id
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly id: string;'
+    return:
+      type:
+      - string
+- uid: onenote.OneNote.PageContent.image
+  summary: >-
+    Obtiene el elemento Image del objeto PageContent. Produce una excepción si PageContentType no es Image.
+
+
+    \[[Conjunto de API: OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: image
+  fullName: onenote.OneNote.PageContent.image
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly image: OneNote.Image;'
+    return:
+      type:
+      - onenote.OneNote.Image
+- uid: onenote.OneNote.PageContent.ink
+  summary: >-
+    Obtiene la tinta del objeto PageContent. Produce una excepción si PageContentType no es Ink.
+
+
+    \[[Conjunto de API: OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: ink
+  fullName: onenote.OneNote.PageContent.ink
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly ink: OneNote.FloatingInk;'
+    return:
+      type:
+      - onenote.OneNote.FloatingInk
+- uid: onenote.OneNote.PageContent.left
+  summary: >-
+    Obtiene o establece la posición izquierda (eje X) del objeto PageContent.
+
+
+    \[[Conjunto de API: OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: left
+  fullName: onenote.OneNote.PageContent.left
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'left: number;'
+    return:
+      type:
+      - number
+- uid: onenote.OneNote.PageContent.load
+  summary: Colas de seguridad de un comando que se va a cargar las propiedades del objeto especificadas. Se debe llamar a "context.sync()" antes de leer las propiedades.
+  remarks: >-
+    Además de esta firma, este método no tiene las siguientes firmas:
+
+
+    `load(option?: { select?: string; expand?: string; }): OneNote.PageContent`-Donde option.select es una cadena delimitada por comas que especifica las propiedades para cargar y options.expand es una cadena delimitada por comas que especifica las propiedades de navegación para cargar.
+
+
+    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): OneNote.PageContent`-Sólo está disponible en los tipos de colección. Es similar a la firma precedente. Option.Top especifica el número máximo de elementos de la colección que se puede incluir en el resultado. Option.Skip especifica el número de elementos que se pasan por alto y no se incluyen en el resultado. Si se especifica option.top, se iniciará el conjunto de resultados después de omitir el número especificado de elementos.
+  name: load(option)
+  fullName: onenote.OneNote.PageContent.load
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(option?: string | string[]): OneNote.PageContent;'
+    return:
+      type:
+      - onenote.OneNote.PageContent
+      description: ''
+    parameters:
+    - id: option
+      description: Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades de carga.
+      type:
+      - string | string[]
+- uid: onenote.OneNote.PageContent.outline
+  summary: >-
+    Obtiene el elemento Outline del objeto PageContent. Produce una excepción si PageContentType no es Outline.
+
+
+    \[[Conjunto de API: OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: outline
+  fullName: onenote.OneNote.PageContent.outline
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly outline: OneNote.Outline;'
+    return:
+      type:
+      - onenote.OneNote.Outline
+- uid: onenote.OneNote.PageContent.parentPage
+  summary: >-
+    Obtiene la página que contiene el objeto PageContent. Solo lectura.
+
+
+    \[[Conjunto de API: OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: parentPage
+  fullName: onenote.OneNote.PageContent.parentPage
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly parentPage: OneNote.Page;'
+    return:
+      type:
+      - onenote.OneNote.Page
+- uid: onenote.OneNote.PageContent.toJSON
+  name: toJSON()
+  fullName: onenote.OneNote.PageContent.toJSON
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'toJSON(): OneNote.Interfaces.PageContentData;'
+    return:
+      type:
+      - onenote.OneNote.Interfaces.PageContentData
+      description: ''
+- uid: onenote.OneNote.PageContent.top
+  summary: >-
+    Obtiene o establece la posición superior (eje Y) del objeto PageContent.
+
+
+    \[[Conjunto de API: OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: top
+  fullName: onenote.OneNote.PageContent.top
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'top: number;'
+    return:
+      type:
+      - number
+- uid: onenote.OneNote.PageContent.track
+  summary: Realizar un seguimiento del objeto para el ajuste automático en función de que lo rodea los cambios en el documento. Esta llamada es una forma abreviada para context.trackedObjects.add(thisObject). Si va a usar este objeto a través de llamadas "Sync" y fuera de la ejecución secuencial de un lote de "ésta se ejecute" y obtenga un error de "InvalidObjectPath" al establecer una propiedad o invocar un método en el objeto, había que ha agregado el objeto al objeto marca de revisión colección cuando el objeto se crea por primera vez.
+  name: track()
+  fullName: onenote.OneNote.PageContent.track
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'track(): OneNote.PageContent;'
+    return:
+      type:
+      - onenote.OneNote.PageContent
+      description: ''
+- uid: onenote.OneNote.PageContent.type
+  summary: >-
+    Obtiene el tipo del objeto PageContent. Solo lectura.
+
+
+    \[[Conjunto de API: OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: type
+  fullName: onenote.OneNote.PageContent.type
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly type: OneNote.PageContentType | "Outline" | "Image" | "Ink" | "Other";'
+    return:
+      type:
+      - OneNote.PageContentType | "Outline" | "Image" | "Ink" | "Other"
+- uid: onenote.OneNote.PageContent.untrack
+  summary: La memoria asociada con este objeto, si lo se anteriormente hace el seguimiento de la versión. Esta llamada es una abreviatura de context.trackedObjects.remove(thisObject). Tener muchos objetos de marca de revisión reduce la velocidad de la aplicación host, por lo que no olvide libre de cualquier objeto que agregue, una vez que haya terminado con ellos. Debe llamar a "context.sync()" antes de la versión de memoria surta efecto.
+  name: untrack()
+  fullName: onenote.OneNote.PageContent.untrack
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'untrack(): OneNote.PageContent;'
+    return:
+      type:
+      - onenote.OneNote.PageContent
+      description: ''

@@ -1,0 +1,355 @@
+### YamlMime:UniversalReference
+ms.openlocfilehash: d5da1c39163213c97575ff41916e26d685cbaafa
+ms.sourcegitcommit: beffe9455dace422e85b92f0105c54ff7b594cbf
+ms.translationtype: MT
+ms.contentlocale: es-ES
+ms.lasthandoff: 09/20/2018
+ms.locfileid: "24053265"
+items:
+- uid: excel.Excel.Workbook
+  summary: >-
+    Workbook es el objeto de nivel superior que contiene los objetos de libro relacionados, como hojas de cálculo, tablas, intervalos, etc.
+
+
+    \[[Conjunto de API: ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: Excel.Workbook
+  fullName: excel.Excel.Workbook
+  langs:
+  - typeScript
+  type: class
+  extends:
+  - OfficeExtension.ClientObject
+  package: excel
+  children:
+  - excel.Excel.Workbook.application
+  - excel.Excel.Workbook.bindings
+  - excel.Excel.Workbook.customXmlParts
+  - excel.Excel.Workbook.dataConnections
+  - excel.Excel.Workbook.functions
+  - excel.Excel.Workbook.getActiveCell
+  - excel.Excel.Workbook.getSelectedRange
+  - excel.Excel.Workbook.load
+  - excel.Excel.Workbook.name
+  - excel.Excel.Workbook.names
+  - excel.Excel.Workbook.onSelectionChanged
+  - excel.Excel.Workbook.pivotTables
+  - excel.Excel.Workbook.properties
+  - excel.Excel.Workbook.protection
+  - excel.Excel.Workbook.settings
+  - excel.Excel.Workbook.styles
+  - excel.Excel.Workbook.tables
+  - excel.Excel.Workbook.toJSON
+  - excel.Excel.Workbook.worksheets
+- uid: excel.Excel.Workbook.application
+  summary: >-
+    Representa la instancia de aplicación de Excel que contiene este libro. Solo lectura.
+
+
+    \[[Conjunto de API: ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: application
+  fullName: excel.Excel.Workbook.application
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly application: Excel.Application;'
+    return:
+      type:
+      - excel.Excel.Application
+- uid: excel.Excel.Workbook.bindings
+  summary: >-
+    Representa una colección de enlaces que forman parte del libro. Solo lectura.
+
+
+    \[[Conjunto de API: ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: bindings
+  fullName: excel.Excel.Workbook.bindings
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly bindings: Excel.BindingCollection;'
+    return:
+      type:
+      - excel.Excel.BindingCollection
+- uid: excel.Excel.Workbook.customXmlParts
+  summary: >-
+    Representa la colección de elementos XML personalizados incluidos en este libro. Solo lectura.
+
+
+    \[[Conjunto de API: ExcelApi 1,5](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: customXmlParts
+  fullName: excel.Excel.Workbook.customXmlParts
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly customXmlParts: Excel.CustomXmlPartCollection;'
+    return:
+      type:
+      - excel.Excel.CustomXmlPartCollection
+- uid: excel.Excel.Workbook.dataConnections
+  summary: >-
+    Representa todas las conexiones de datos en el libro. Solo lectura.
+
+
+    \[[Conjunto de API: ExcelApi 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: dataConnections
+  fullName: excel.Excel.Workbook.dataConnections
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly dataConnections: Excel.DataConnectionCollection;'
+    return:
+      type:
+      - excel.Excel.DataConnectionCollection
+- uid: excel.Excel.Workbook.functions
+  summary: >-
+    Representa una colección de funciones de hoja de cálculo que se pueden usar para el cálculo. Solo lectura.
+
+
+    \[[Conjunto de API: ExcelApi 1.2](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: functions
+  fullName: excel.Excel.Workbook.functions
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly functions: Excel.Functions;'
+    return:
+      type:
+      - excel.Excel.Functions
+- uid: excel.Excel.Workbook.getActiveCell
+  summary: >-
+    Obtiene la celda actualmente activa del libro.
+
+
+    \[[Conjunto de API: ExcelApi 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: getActiveCell()
+  fullName: excel.Excel.Workbook.getActiveCell
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getActiveCell(): Excel.Range;'
+    return:
+      type:
+      - excel.Excel.Range
+      description: "\n#### <a name=\"examples\"></a>Ejemplos\n\n```typescript\nawait Excel.run(async (context) => {\n\n    let myWorkbook = context.workbook;\n    let activeCell = myWorkbook.getActiveCell();\n    activeCell.load(\"address\");\n\n    await context.sync();\n    \n    console.log(\"The active cell is \" + activeCell.address);\n});\n```"
+- uid: excel.Excel.Workbook.getSelectedRange
+  summary: >-
+    Obtiene el intervalo único seleccionado actualmente del libro. Si hay varios rangos seleccionados, este método producirá un error.
+
+
+    \[[Conjunto de API: ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: getSelectedRange()
+  fullName: excel.Excel.Workbook.getSelectedRange
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getSelectedRange(): Excel.Range;'
+    return:
+      type:
+      - excel.Excel.Range
+      description: "\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nExcel.run(function (ctx) { \n    var selectedRange = ctx.workbook.getSelectedRange();\n    selectedRange.load('address');\n    return ctx.sync().then(function() {\n            console.log(selectedRange.address);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- uid: excel.Excel.Workbook.load
+  summary: Colas de seguridad de un comando que se va a cargar las propiedades del objeto especificadas. Se debe llamar a "context.sync()" antes de leer las propiedades.
+  remarks: >-
+    Además de esta firma, este método no tiene las siguientes firmas:
+
+
+    `load(option?: { select?: string; expand?: string; }): Excel.Workbook`-Donde option.select es una cadena delimitada por comas que especifica las propiedades para cargar y options.expand es una cadena delimitada por comas que especifica las propiedades de navegación para cargar.
+
+
+    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Workbook`-Sólo está disponible en los tipos de colección. Es similar a la firma precedente. Option.Top especifica el número máximo de elementos de la colección que se puede incluir en el resultado. Option.Skip especifica el número de elementos que se pasan por alto y no se incluyen en el resultado. Si se especifica option.top, se iniciará el conjunto de resultados después de omitir el número especificado de elementos.
+  name: load(option)
+  fullName: excel.Excel.Workbook.load
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(option?: string | string[]): Excel.Workbook;'
+    return:
+      type:
+      - excel.Excel.Workbook
+      description: ''
+    parameters:
+    - id: option
+      description: Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades de carga.
+      type:
+      - string | string[]
+- uid: excel.Excel.Workbook.name
+  summary: >-
+    Obtiene el nombre del libro. Solo lectura.
+
+
+    \[[Conjunto de API: ExcelApi 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: name
+  fullName: excel.Excel.Workbook.name
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly name: string;'
+    return:
+      type:
+      - string
+- uid: excel.Excel.Workbook.names
+  summary: >-
+    Representa una colección de elementos con nombre en el ámbito del libro (intervalos y constantes con nombre). Solo lectura.
+
+
+    \[[Conjunto de API: ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: names
+  fullName: excel.Excel.Workbook.names
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly names: Excel.NamedItemCollection;'
+    return:
+      type:
+      - excel.Excel.NamedItemCollection
+- uid: excel.Excel.Workbook.onSelectionChanged
+  summary: >-
+    Se produce al cambiar la selección en el documento.
+
+
+    \[[Conjunto de API: ExcelApi 1.2](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: onSelectionChanged
+  fullName: excel.Excel.Workbook.onSelectionChanged
+  langs:
+  - typeScript
+  type: event
+  syntax:
+    content: 'readonly onSelectionChanged: OfficeExtension.EventHandlers<Excel.SelectionChangedEventArgs>;'
+    return:
+      type:
+      - OfficeExtension.EventHandlers<Excel.SelectionChangedEventArgs>
+- uid: excel.Excel.Workbook.pivotTables
+  summary: >-
+    Representa una colección de tablas dinámicas asociadas con el libro. Solo lectura.
+
+
+    \[[Conjunto de API: ExcelApi 1.3](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: pivotTables
+  fullName: excel.Excel.Workbook.pivotTables
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly pivotTables: Excel.PivotTableCollection;'
+    return:
+      type:
+      - excel.Excel.PivotTableCollection
+- uid: excel.Excel.Workbook.properties
+  summary: >-
+    Obtiene las propiedades de libro. Solo lectura.
+
+
+    \[[Conjunto de API: ExcelApi 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: properties
+  fullName: excel.Excel.Workbook.properties
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly properties: Excel.DocumentProperties;'
+    return:
+      type:
+      - excel.Excel.DocumentProperties
+      description: "\n#### <a name=\"examples\"></a>Ejemplos\n\n```typescript\nawait Excel.run(async (context) => {\n    let titleValue = \"Excel document properties API\";\n    let subjectValue = \"Set and get document properties\";\n    let keywordsValue = \"Set and get operations\";\n    let commentsValue = \"This is an Excel document properties API code sample\";\n    let categoryValue = \"Office Add-ins\";\n    let managerValue = \"John\";\n    let companyValue = \"Microsoft\";\n\n    let docProperties = context.workbook.properties;\n\n    // Set the writeable document properties.\n    docProperties.title = titleValue;\n    docProperties.subject = subjectValue;\n    docProperties.keywords = keywordsValue;\n    docProperties.comments = commentsValue;\n    docProperties.category = categoryValue;\n    docProperties.manager = managerValue;\n    docProperties.company = companyValue;\n\n    await context.sync();\n\n    OfficeHelpers.UI.notify(\"Set the following document properties: title, subject, keywords, comments, category, manager, company.\");\n});\n```"
+- uid: excel.Excel.Workbook.protection
+  summary: >-
+    Devuelve el objeto de la protección de libro de un libro. Solo lectura.
+
+
+    \[[Conjunto de API: ExcelApi 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: protection
+  fullName: excel.Excel.Workbook.protection
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly protection: Excel.WorkbookProtection;'
+    return:
+      type:
+      - excel.Excel.WorkbookProtection
+- uid: excel.Excel.Workbook.settings
+  summary: >-
+    Representa una colección de configuraciones asociadas con el libro. Solo lectura.
+
+
+    \[[Conjunto de API: ExcelApi 1,4](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: settings
+  fullName: excel.Excel.Workbook.settings
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly settings: Excel.SettingCollection;'
+    return:
+      type:
+      - excel.Excel.SettingCollection
+- uid: excel.Excel.Workbook.styles
+  summary: >-
+    Representa una colección de estilos asociada con el libro. Solo lectura.
+
+
+    \[[Conjunto de API: ExcelApi 1.7](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: styles
+  fullName: excel.Excel.Workbook.styles
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly styles: Excel.StyleCollection;'
+    return:
+      type:
+      - excel.Excel.StyleCollection
+- uid: excel.Excel.Workbook.tables
+  summary: >-
+    Representa una colección de tablas asociadas con el libro. Solo lectura.
+
+
+    \[[Conjunto de API: ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: tables
+  fullName: excel.Excel.Workbook.tables
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly tables: Excel.TableCollection;'
+    return:
+      type:
+      - excel.Excel.TableCollection
+- uid: excel.Excel.Workbook.toJSON
+  name: toJSON()
+  fullName: excel.Excel.Workbook.toJSON
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'toJSON(): Excel.Interfaces.WorkbookData;'
+    return:
+      type:
+      - excel.Excel.Interfaces.WorkbookData
+      description: ''
+- uid: excel.Excel.Workbook.worksheets
+  summary: >-
+    Representa una colección de hojas de cálculo asociadas con el libro. Solo lectura.
+
+
+    \[[Conjunto de API: ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: worksheets
+  fullName: excel.Excel.Workbook.worksheets
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly worksheets: Excel.WorksheetCollection;'
+    return:
+      type:
+      - excel.Excel.WorksheetCollection

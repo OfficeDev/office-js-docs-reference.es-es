@@ -1,0 +1,135 @@
+### YamlMime:UniversalReference
+ms.openlocfilehash: 66a2606d661c192da5a0112e231ec3456855bbfe
+ms.sourcegitcommit: beffe9455dace422e85b92f0105c54ff7b594cbf
+ms.translationtype: MT
+ms.contentlocale: es-ES
+ms.lasthandoff: 09/20/2018
+ms.locfileid: "24053713"
+items:
+- uid: onenote.OneNote.InkAnalysisLine
+  summary: >-
+    Representa los datos de análisis de tinta para una línea de texto identificada formada por trazos de tinta.
+
+
+    \[[Conjunto de API: OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: OneNote.InkAnalysisLine
+  fullName: onenote.OneNote.InkAnalysisLine
+  langs:
+  - typeScript
+  type: class
+  extends:
+  - OfficeExtension.ClientObject
+  package: onenote
+  children:
+  - onenote.OneNote.InkAnalysisLine.id
+  - onenote.OneNote.InkAnalysisLine.load
+  - onenote.OneNote.InkAnalysisLine.paragraph
+  - onenote.OneNote.InkAnalysisLine.toJSON
+  - onenote.OneNote.InkAnalysisLine.track
+  - onenote.OneNote.InkAnalysisLine.untrack
+  - onenote.OneNote.InkAnalysisLine.words
+- uid: onenote.OneNote.InkAnalysisLine.id
+  summary: >-
+    Obtiene el identificador del objeto InkAnalysisLine. Solo lectura.
+
+
+    \[[Conjunto de API: OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: id
+  fullName: onenote.OneNote.InkAnalysisLine.id
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly id: string;'
+    return:
+      type:
+      - string
+- uid: onenote.OneNote.InkAnalysisLine.load
+  summary: Colas de seguridad de un comando que se va a cargar las propiedades del objeto especificadas. Se debe llamar a "context.sync()" antes de leer las propiedades.
+  remarks: "Además de esta firma, este método no tiene las siguientes firmas:\n\n`load(option?: { select?: string; expand?: string; }): OneNote.InkAnalysisLine`-Donde option.select es una cadena delimitada por comas que especifica las propiedades para cargar y options.expand es una cadena delimitada por comas que especifica las propiedades de navegación para cargar.\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): OneNote.InkAnalysisLine`-Sólo está disponible en los tipos de colección. Es similar a la firma precedente. Option.Top especifica el número máximo de elementos de la colección que se puede incluir en el resultado. Option.Skip especifica el número de elementos que se pasan por alto y no se incluyen en el resultado. Si se especifica option.top, se iniciará el conjunto de resultados después de omitir el número especificado de elementos.\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nOneNote.run(function (ctx) {        \n    var app = ctx.application;\n    \n    // Gets the active page.\n    var page = app.getActivePage();\n    page.load('inkAnalysisOrNull/paragraphs/lines/words');\n    \n    return ctx.sync()\n        .then(function() {\n            var inkParagraphs = page.inkAnalysisOrNull.paragraphs;\n            $.each(inkParagraphs.items, function(i, inkParagraph) {\n                var inkLines = inkParagraph.lines;\n                $.each(inkLines.items, function(j, inkLine) {\n                    // Word counts in a line.\n                    console.log(inkLine.words.items.length);\n                })\n            })\n        })\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n}); \n```"
+  name: load(option)
+  fullName: onenote.OneNote.InkAnalysisLine.load
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(option?: string | string[]): OneNote.InkAnalysisLine;'
+    return:
+      type:
+      - onenote.OneNote.InkAnalysisLine
+      description: ''
+    parameters:
+    - id: option
+      description: Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades de carga.
+      type:
+      - string | string[]
+- uid: onenote.OneNote.InkAnalysisLine.paragraph
+  summary: >-
+    Referencia al elemento InkAnalysisParagraph principal. Solo lectura.
+
+
+    \[[Conjunto de API: OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: paragraph
+  fullName: onenote.OneNote.InkAnalysisLine.paragraph
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly paragraph: OneNote.InkAnalysisParagraph;'
+    return:
+      type:
+      - onenote.OneNote.InkAnalysisParagraph
+- uid: onenote.OneNote.InkAnalysisLine.toJSON
+  name: toJSON()
+  fullName: onenote.OneNote.InkAnalysisLine.toJSON
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'toJSON(): OneNote.Interfaces.InkAnalysisLineData;'
+    return:
+      type:
+      - onenote.OneNote.Interfaces.InkAnalysisLineData
+      description: ''
+- uid: onenote.OneNote.InkAnalysisLine.track
+  summary: Realizar un seguimiento del objeto para el ajuste automático en función de que lo rodea los cambios en el documento. Esta llamada es una forma abreviada para context.trackedObjects.add(thisObject). Si va a usar este objeto a través de llamadas "Sync" y fuera de la ejecución secuencial de un lote de "ésta se ejecute" y obtenga un error de "InvalidObjectPath" al establecer una propiedad o invocar un método en el objeto, había que ha agregado el objeto al objeto marca de revisión colección cuando el objeto se crea por primera vez.
+  name: track()
+  fullName: onenote.OneNote.InkAnalysisLine.track
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'track(): OneNote.InkAnalysisLine;'
+    return:
+      type:
+      - onenote.OneNote.InkAnalysisLine
+      description: ''
+- uid: onenote.OneNote.InkAnalysisLine.untrack
+  summary: La memoria asociada con este objeto, si lo se anteriormente hace el seguimiento de la versión. Esta llamada es una abreviatura de context.trackedObjects.remove(thisObject). Tener muchos objetos de marca de revisión reduce la velocidad de la aplicación host, por lo que no olvide libre de cualquier objeto que agregue, una vez que haya terminado con ellos. Debe llamar a "context.sync()" antes de la versión de memoria surta efecto.
+  name: untrack()
+  fullName: onenote.OneNote.InkAnalysisLine.untrack
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'untrack(): OneNote.InkAnalysisLine;'
+    return:
+      type:
+      - onenote.OneNote.InkAnalysisLine
+      description: ''
+- uid: onenote.OneNote.InkAnalysisLine.words
+  summary: >-
+    Obtiene las palabras de análisis de tinta de esta línea de análisis de tinta. Solo lectura.
+
+
+    \[[Conjunto de API: OneNoteApi 1.1](/javascript/office/requirement-sets/onenote-api-requirement-sets)\]
+  name: words
+  fullName: onenote.OneNote.InkAnalysisLine.words
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly words: OneNote.InkAnalysisWordCollection;'
+    return:
+      type:
+      - onenote.OneNote.InkAnalysisWordCollection

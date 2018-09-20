@@ -1,0 +1,91 @@
+### YamlMime:UniversalReference
+ms.openlocfilehash: 6ba53ccdd2450ef99228582bf9d30150a2b7715d
+ms.sourcegitcommit: beffe9455dace422e85b92f0105c54ff7b594cbf
+ms.translationtype: MT
+ms.contentlocale: es-ES
+ms.lasthandoff: 09/20/2018
+ms.locfileid: "24052474"
+items:
+- uid: excel.Excel.RangeFill
+  summary: >-
+    Representa el fondo de un objeto de intervalo.
+
+
+    \[[Conjunto de API: ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: Excel.RangeFill
+  fullName: excel.Excel.RangeFill
+  langs:
+  - typeScript
+  type: class
+  extends:
+  - OfficeExtension.ClientObject
+  package: excel
+  children:
+  - excel.Excel.RangeFill.clear
+  - excel.Excel.RangeFill.color
+  - excel.Excel.RangeFill.load
+  - excel.Excel.RangeFill.toJSON
+- uid: excel.Excel.RangeFill.clear
+  summary: >-
+    Restablece el fondo del rango.
+
+
+    \[[Conjunto de API: ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: clear()
+  fullName: excel.Excel.RangeFill.clear
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'clear(): void;'
+    return:
+      type:
+      - void
+      description: "\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nExcel.run(function (ctx) { \n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"F:G\";\n    var worksheet = ctx.workbook.worksheets.getItem(sheetName);\n    var range = worksheet.getRange(rangeAddress);\n    var rangeFill = range.format.fill;\n    rangeFill.clear();\n    return ctx.sync(); \n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- uid: excel.Excel.RangeFill.color
+  summary: >-
+    Código de color HTML que representa el color de la línea de borde del formulario \#RRGGBB (por ejemplo, "FFA500") o como un color HTML con nombre (por ejemplo, "naranja")
+
+
+    \[[Conjunto de API: ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: color
+  fullName: excel.Excel.RangeFill.color
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'color: string;'
+    return:
+      type:
+      - string
+- uid: excel.Excel.RangeFill.load
+  summary: Colas de seguridad de un comando que se va a cargar las propiedades del objeto especificadas. Se debe llamar a "context.sync()" antes de leer las propiedades.
+  remarks: "Además de esta firma, este método no tiene las siguientes firmas:\n\n`load(option?: { select?: string; expand?: string; }): Excel.RangeFill`-Donde option.select es una cadena delimitada por comas que especifica las propiedades para cargar y options.expand es una cadena delimitada por comas que especifica las propiedades de navegación para cargar.\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.RangeFill`-Sólo está disponible en los tipos de colección. Es similar a la firma precedente. Option.Top especifica el número máximo de elementos de la colección que se puede incluir en el resultado. Option.Skip especifica el número de elementos que se pasan por alto y no se incluyen en el resultado. Si se especifica option.top, se iniciará el conjunto de resultados después de omitir el número especificado de elementos.\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nExcel.run(function (ctx) { \n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"F:G\";\n    var worksheet = ctx.workbook.worksheets.getItem(sheetName);\n    var range = worksheet.getRange(rangeAddress);\n    var rangeFill = range.format.fill;\n    rangeFill.load('color');\n    return ctx.sync().then(function() {\n        console.log(rangeFill.color);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\n// The example below sets fill color. \nExcel.run(function (ctx) { \n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"F:G\";\n    var range = ctx.workbook.worksheets.getItem(sheetName).getRange(rangeAddress);\n    range.format.fill.color = '0000FF';\n    return ctx.sync(); \n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  name: load(option)
+  fullName: excel.Excel.RangeFill.load
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(option?: string | string[]): Excel.RangeFill;'
+    return:
+      type:
+      - excel.Excel.RangeFill
+      description: ''
+    parameters:
+    - id: option
+      description: Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades de carga.
+      type:
+      - string | string[]
+- uid: excel.Excel.RangeFill.toJSON
+  name: toJSON()
+  fullName: excel.Excel.RangeFill.toJSON
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'toJSON(): Excel.Interfaces.RangeFillData;'
+    return:
+      type:
+      - excel.Excel.Interfaces.RangeFillData
+      description: ''

@@ -1,0 +1,141 @@
+### YamlMime:UniversalReference
+ms.openlocfilehash: 3052666d71a1e67ac04125e4c3af1f5b43a57142
+ms.sourcegitcommit: beffe9455dace422e85b92f0105c54ff7b594cbf
+ms.translationtype: MT
+ms.contentlocale: es-ES
+ms.lasthandoff: 09/20/2018
+ms.locfileid: "24053455"
+items:
+- uid: excel.Excel.Application
+  summary: >-
+    Representa la aplicación de Excel que administra el libro.
+
+
+    \[[Conjunto de API: ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: Excel.Application
+  fullName: excel.Excel.Application
+  langs:
+  - typeScript
+  type: class
+  extends:
+  - OfficeExtension.ClientObject
+  package: excel
+  children:
+  - excel.Excel.Application.calculate
+  - excel.Excel.Application.calculationMode
+  - excel.Excel.Application.load
+  - excel.Excel.Application.suspendApiCalculationUntilNextSync
+  - excel.Excel.Application.toJSON
+- uid: excel.Excel.Application.calculate
+  summary: >-
+    Recalcula todos los libros abiertos actualmente en Excel.
+
+
+    \[[Conjunto de API: ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: calculate(calculationType)
+  fullName: excel.Excel.Application.calculate
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'calculate(calculationType: Excel.CalculationType): void;'
+    return:
+      type:
+      - void
+      description: "\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nExcel.run(function (ctx) {\n    ctx.workbook.application.calculate('Full');\n    return ctx.sync();\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+    parameters:
+    - id: calculationType
+      description: Especifica el tipo de cálculo que desea utilizar. Para obtener información detallada, vea Excel.CalculationType.
+      type:
+      - excel.Excel.CalculationType
+- uid: excel.Excel.Application.calculationMode
+  summary: >-
+    Devuelve el modo de cálculo que se usa en el libro, tal como se define por las constantes en Excel.CalculationMode. Los valores posibles son: `Automatic`, donde Excel controla la actualización; `AutomaticExceptTables`, donde Excel controla los cálculos pero pasa por alto los cambios en las tablas; `Manual`, donde el cálculo se realiza cuando el usuario lo solicita.
+
+
+    \[[Conjunto de API: ExcelApi 1.1 para get, 1,8 para conjunto de](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: calculationMode
+  fullName: excel.Excel.Application.calculationMode
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'calculationMode: Excel.CalculationMode | "Automatic" | "AutomaticExceptTables" | "Manual";'
+    return:
+      type:
+      - Excel.CalculationMode | "Automatic" | "AutomaticExceptTables" | "Manual"
+- uid: excel.Excel.Application.load
+  summary: Colas de seguridad de un comando que se va a cargar las propiedades del objeto especificadas. Se debe llamar a "context.sync()" antes de leer las propiedades.
+  remarks: >-
+    Además de esta firma, este método no tiene las siguientes firmas:
+
+
+    `load(option?: { select?: string; expand?: string; }): Excel.Application`-Donde option.select es una cadena delimitada por comas que especifica las propiedades para cargar y options.expand es una cadena delimitada por comas que especifica las propiedades de navegación para cargar.
+
+
+    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Application`-Sólo está disponible en los tipos de colección. Es similar a la firma precedente. Option.Top especifica el número máximo de elementos de la colección que se puede incluir en el resultado. Option.Skip especifica el número de elementos que se pasan por alto y no se incluyen en el resultado. Si se especifica option.top, se iniciará el conjunto de resultados después de omitir el número especificado de elementos.
+
+    #### <a name="examples"></a>Ejemplos
+
+
+    ```javascript
+
+    Excel.run(function (ctx) {
+        var application = ctx.workbook.application;
+        application.load('calculationMode');
+        return ctx.sync().then(function() {
+            console.log(application.calculationMode);
+        });
+    }).catch(function(error) {
+        console.log("Error: " + error);
+        if (error instanceof OfficeExtension.Error) {
+            console.log("Debug info: " + JSON.stringify(error.debugInfo));
+        }
+    });
+
+    ```
+  name: load(option)
+  fullName: excel.Excel.Application.load
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(option?: string | string[]): Excel.Application;'
+    return:
+      type:
+      - excel.Excel.Application
+      description: ''
+    parameters:
+    - id: option
+      description: Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades de carga.
+      type:
+      - string | string[]
+- uid: excel.Excel.Application.suspendApiCalculationUntilNextSync
+  summary: >-
+    Suspende el cálculo hasta que se llama al siguiente "context.sync()". Una vez establecido, será responsabilidad del desarrollador actualizar el libro para asegurarse de que se propaguen las dependencias.
+
+
+    \[[Conjunto de API: ExcelApi 1.6](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: suspendApiCalculationUntilNextSync()
+  fullName: excel.Excel.Application.suspendApiCalculationUntilNextSync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'suspendApiCalculationUntilNextSync(): void;'
+    return:
+      type:
+      - void
+      description: ''
+- uid: excel.Excel.Application.toJSON
+  name: toJSON()
+  fullName: excel.Excel.Application.toJSON
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'toJSON(): Excel.Interfaces.ApplicationData;'
+    return:
+      type:
+      - excel.Excel.Interfaces.ApplicationData
+      description: ''

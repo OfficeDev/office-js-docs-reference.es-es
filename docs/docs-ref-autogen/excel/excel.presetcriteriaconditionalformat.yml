@@ -1,0 +1,98 @@
+### YamlMime:UniversalReference
+ms.openlocfilehash: 88c08276117f825b5453c8fcfc88779e51954d3e
+ms.sourcegitcommit: beffe9455dace422e85b92f0105c54ff7b594cbf
+ms.translationtype: MT
+ms.contentlocale: es-ES
+ms.lasthandoff: 09/20/2018
+ms.locfileid: "24052820"
+items:
+- uid: excel.Excel.PresetCriteriaConditionalFormat
+  summary: >-
+    Representa el formato de los criterios preestablecidos condicionales, como por encima del promedio, debajo de los valores de promedio, únicos, contiene en blanco, no vacías, error y noerror.
+
+
+    \[[Conjunto de API: ExcelApi 1.6](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: Excel.PresetCriteriaConditionalFormat
+  fullName: excel.Excel.PresetCriteriaConditionalFormat
+  langs:
+  - typeScript
+  type: class
+  extends:
+  - OfficeExtension.ClientObject
+  package: excel
+  children:
+  - excel.Excel.PresetCriteriaConditionalFormat.format
+  - excel.Excel.PresetCriteriaConditionalFormat.load
+  - excel.Excel.PresetCriteriaConditionalFormat.rule
+  - excel.Excel.PresetCriteriaConditionalFormat.toJSON
+- uid: excel.Excel.PresetCriteriaConditionalFormat.format
+  summary: >-
+    Devuelve un objeto de formato, encapsulación de la fuente de los formatos condicionales, relleno, bordes y otras propiedades.
+
+
+    \[[Conjunto de API: ExcelApi 1.6](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: format
+  fullName: excel.Excel.PresetCriteriaConditionalFormat.format
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly format: Excel.ConditionalRangeFormat;'
+    return:
+      type:
+      - excel.Excel.ConditionalRangeFormat
+- uid: excel.Excel.PresetCriteriaConditionalFormat.load
+  summary: Colas de seguridad de un comando que se va a cargar las propiedades del objeto especificadas. Se debe llamar a "context.sync()" antes de leer las propiedades.
+  remarks: >-
+    Además de esta firma, este método no tiene las siguientes firmas:
+
+
+    `load(option?: { select?: string; expand?: string; }): Excel.PresetCriteriaConditionalFormat`-Donde option.select es una cadena delimitada por comas que especifica las propiedades para cargar y options.expand es una cadena delimitada por comas que especifica las propiedades de navegación para cargar.
+
+
+    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.PresetCriteriaConditionalFormat`-Sólo está disponible en los tipos de colección. Es similar a la firma precedente. Option.Top especifica el número máximo de elementos de la colección que se puede incluir en el resultado. Option.Skip especifica el número de elementos que se pasan por alto y no se incluyen en el resultado. Si se especifica option.top, se iniciará el conjunto de resultados después de omitir el número especificado de elementos.
+  name: load(option)
+  fullName: excel.Excel.PresetCriteriaConditionalFormat.load
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(option?: string | string[]): Excel.PresetCriteriaConditionalFormat;'
+    return:
+      type:
+      - excel.Excel.PresetCriteriaConditionalFormat
+      description: ''
+    parameters:
+    - id: option
+      description: Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades de carga.
+      type:
+      - string | string[]
+- uid: excel.Excel.PresetCriteriaConditionalFormat.rule
+  summary: >-
+    Regla del formato condicional.
+
+
+    \[[Conjunto de API: ExcelApi 1.6](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: rule
+  fullName: excel.Excel.PresetCriteriaConditionalFormat.rule
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'rule: Excel.ConditionalPresetCriteriaRule;'
+    return:
+      type:
+      - excel.Excel.ConditionalPresetCriteriaRule
+      description: "\n#### <a name=\"examples\"></a>Ejemplos\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n    const range = sheet.getRange(\"B2:M5\");\n    const conditionalFormat = range.conditionalFormats\n        .add(Excel.ConditionalFormatType.presetCriteria);\n    conditionalFormat.preset.format.font.color = \"white\";\n    conditionalFormat.preset.rule = { criterion: Excel.ConditionalFormatPresetCriterion.oneStdDevAboveAverage };\n\n    await context.sync();\n});\n```\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n    const range = sheet.getRange(\"B8:E13\");\n    const conditionalFormat = range.conditionalFormats.add(Excel.ConditionalFormatType.custom);\n    conditionalFormat.custom.rule.formula = '=IF(B8>INDIRECT(\"RC[-1]\",0),TRUE)';\n    conditionalFormat.custom.format.font.color = \"green\";\n\n    await context.sync();\n});\n```"
+- uid: excel.Excel.PresetCriteriaConditionalFormat.toJSON
+  name: toJSON()
+  fullName: excel.Excel.PresetCriteriaConditionalFormat.toJSON
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'toJSON(): Excel.Interfaces.PresetCriteriaConditionalFormatData;'
+    return:
+      type:
+      - excel.Excel.Interfaces.PresetCriteriaConditionalFormatData
+      description: ''

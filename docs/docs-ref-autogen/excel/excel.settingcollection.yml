@@ -1,0 +1,185 @@
+### YamlMime:UniversalReference
+ms.openlocfilehash: 5621d142189bc646ab6d9806da0fe6502f740db3
+ms.sourcegitcommit: beffe9455dace422e85b92f0105c54ff7b594cbf
+ms.translationtype: MT
+ms.contentlocale: es-ES
+ms.lasthandoff: 09/20/2018
+ms.locfileid: "24052992"
+items:
+- uid: excel.Excel.SettingCollection
+  summary: >-
+    Representa una colección de pares clave-valor que configurar los objetos que forman parte del libro. El ámbito está limitado a por archivo y agregue en combinación (panel de tareas o contenido).
+
+
+    \[[Conjunto de API: ExcelApi 1,4](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: Excel.SettingCollection
+  fullName: excel.Excel.SettingCollection
+  langs:
+  - typeScript
+  type: class
+  extends:
+  - OfficeExtension.ClientObject
+  package: excel
+  children:
+  - excel.Excel.SettingCollection.add
+  - excel.Excel.SettingCollection.getCount
+  - excel.Excel.SettingCollection.getItem
+  - excel.Excel.SettingCollection.getItemOrNullObject
+  - excel.Excel.SettingCollection.items
+  - excel.Excel.SettingCollection.load
+  - excel.Excel.SettingCollection.onSettingsChanged
+  - excel.Excel.SettingCollection.toJSON
+- uid: excel.Excel.SettingCollection.add
+  summary: >-
+    Establece o agrega la configuración especificada en el libro.
+
+
+    \[[Conjunto de API: ExcelApi 1,4](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: add(key, value)
+  fullName: excel.Excel.SettingCollection.add
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'add(key: string, value: string | number | boolean | Date | Array<any> | any): Excel.Setting;'
+    return:
+      type:
+      - excel.Excel.Setting
+      description: "\n#### <a name=\"examples\"></a>Ejemplos\n\n```typescript\nawait Excel.run(async (context) => {\n    const settings = context.workbook.settings; \n    settings.onSettingsChanged.add(onChangedSetting);\n    OfficeHelpers.UI.notify(\"Handler registered\", \"\");\n\n    await context.sync();\n});\n```"
+    parameters:
+    - id: key
+      description: La clave de la nueva configuración.
+      type:
+      - string
+    - id: value
+      description: Valor de la nueva configuración.
+      type:
+      - string | number | boolean | Date | Array<any> | any
+- uid: excel.Excel.SettingCollection.getCount
+  summary: >-
+    Obtiene el número de configuraciones de una colección.
+
+
+    \[[Conjunto de API: ExcelApi 1,4](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: getCount()
+  fullName: excel.Excel.SettingCollection.getCount
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getCount(): OfficeExtension.ClientResult<number>;'
+    return:
+      type:
+      - OfficeExtension.ClientResult<number>
+      description: ''
+- uid: excel.Excel.SettingCollection.getItem
+  summary: >-
+    Obtiene una entrada de configuración mediante la clave.
+
+
+    \[[Conjunto de API: ExcelApi 1,4](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: getItem(key)
+  fullName: excel.Excel.SettingCollection.getItem
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getItem(key: string): Excel.Setting;'
+    return:
+      type:
+      - excel.Excel.Setting
+      description: ''
+    parameters:
+    - id: key
+      description: Clave de la configuración.
+      type:
+      - string
+- uid: excel.Excel.SettingCollection.getItemOrNullObject
+  summary: >-
+    Obtiene una entrada de configuración mediante la clave. Si el valor no existe, devolverá un objeto NULL.
+
+
+    \[[Conjunto de API: ExcelApi 1,4](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: getItemOrNullObject(key)
+  fullName: excel.Excel.SettingCollection.getItemOrNullObject
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getItemOrNullObject(key: string): Excel.Setting;'
+    return:
+      type:
+      - excel.Excel.Setting
+      description: "\n#### <a name=\"examples\"></a>Ejemplos\n\n```typescript\nawait Excel.run(async (context) => {\n    const settings = context.workbook.settings;\n    let needsReview = settings.getItem(\"NeedsReview\");\n    needsReview.delete();\n    needsReview = settings.getItemOrNullObject(\"NeedsReview\");\n\n    await context.sync();\n\n    if (needsReview.isNullObject) {\n        OfficeHelpers.UI.notify(\"The setting has been deleted\");\n    } else {\n        OfficeHelpers.UI.notify(\"The setting was not deleted\");\n    }\n\n    await context.sync();\n});\n```"
+    parameters:
+    - id: key
+      description: La clave de la configuración.
+      type:
+      - string
+- uid: excel.Excel.SettingCollection.items
+  summary: Obtiene al secundario cargado los elementos de esta colección.
+  name: items
+  fullName: excel.Excel.SettingCollection.items
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly items: Excel.Setting[];'
+    return:
+      type:
+      - Excel.Setting[]
+- uid: excel.Excel.SettingCollection.load
+  summary: Colas de seguridad de un comando que se va a cargar las propiedades del objeto especificadas. Se debe llamar a "context.sync()" antes de leer las propiedades.
+  remarks: >-
+    Además de esta firma, este método no tiene las siguientes firmas:
+
+
+    `load(option?: { select?: string; expand?: string; }): Excel.SettingCollection`-Donde option.select es una cadena delimitada por comas que especifica las propiedades para cargar y options.expand es una cadena delimitada por comas que especifica las propiedades de navegación para cargar.
+
+
+    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.SettingCollection`-Sólo está disponible en los tipos de colección. Es similar a la firma precedente. Option.Top especifica el número máximo de elementos de la colección que se puede incluir en el resultado. Option.Skip especifica el número de elementos que se pasan por alto y no se incluyen en el resultado. Si se especifica option.top, se iniciará el conjunto de resultados después de omitir el número especificado de elementos.
+  name: load(option)
+  fullName: excel.Excel.SettingCollection.load
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(option?: string | string[]): Excel.SettingCollection;'
+    return:
+      type:
+      - excel.Excel.SettingCollection
+      description: ''
+    parameters:
+    - id: option
+      description: Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades de carga.
+      type:
+      - string | string[]
+- uid: excel.Excel.SettingCollection.onSettingsChanged
+  summary: >-
+    Se produce al cambiar la configuración del documento.
+
+
+    \[[Conjunto de API: ExcelApi 1,4](/javascript/office/requirement-sets/excel-api-requirement-sets)\]
+  name: onSettingsChanged
+  fullName: excel.Excel.SettingCollection.onSettingsChanged
+  langs:
+  - typeScript
+  type: event
+  syntax:
+    content: 'readonly onSettingsChanged: OfficeExtension.EventHandlers<Excel.SettingsChangedEventArgs>;'
+    return:
+      type:
+      - OfficeExtension.EventHandlers<Excel.SettingsChangedEventArgs>
+      description: "\n#### <a name=\"examples\"></a>Ejemplos\n\n```typescript\nawait Excel.run(async (context) => {\n    const settings = context.workbook.settings; \n    settings.onSettingsChanged.add(onChangedSetting);\n    OfficeHelpers.UI.notify(\"Handler registered\", \"\");\n\n    await context.sync();\n});\n```"
+- uid: excel.Excel.SettingCollection.toJSON
+  name: toJSON()
+  fullName: excel.Excel.SettingCollection.toJSON
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'toJSON(): Excel.Interfaces.SettingCollectionData;'
+    return:
+      type:
+      - excel.Excel.Interfaces.SettingCollectionData
+      description: ''
