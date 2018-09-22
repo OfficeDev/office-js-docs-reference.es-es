@@ -1,6 +1,6 @@
 # <a name="outlook-add-in-api-requirement-set-16"></a>Requisito de Outlook en API establece 1.6
 
-El subconjunto de la API de complementos de Outlook de la API de JavaScript para Office incluye objetos, métodos, propiedades y eventos que se pueden usar en un complemento de Outlook.
+El Outlook complemento subconjunto de API de la API de JavaScript para Office incluye objetos, métodos, propiedades y eventos que puede usar en un Outlook complemento.
 
 ## <a name="whats-new-in-16"></a>¿Qué es una novedad de 1.6?
 

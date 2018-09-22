@@ -88,11 +88,11 @@ Especifica el evento asociado con un controlador de eventos.
 
 | Nombre | Tipo | Descripción | Conjunto de requisito mínimo |
 |---|---|---|---|
-|`AppointmentTimeChanged`| String | Ha cambiado la cita de fecha u hora de la serie seleccionada. | Preview |
+|`AppointmentTimeChanged`| String | Ha cambiado la fecha o la hora de la serie o la cita seleccionada. | 1.7 |
 |`ItemChanged`| String | El elemento seleccionado ha cambiado. | 1,5 |
 |`OfficeThemeChanged`| String | El elemento seleccionado ha cambiado. | Preview |
-|`RecipientsChanged`| String | Ha cambiado la lista de destinatarios del elemento seleccionado. | Preview |
-|`RecurrencePatternChanged`| String | Ha cambiado el patrón de periodicidad de la serie seleccionada. | Preview |
+|`RecipientsChanged`| String | Ha cambiado la lista de destinatarios de la ubicación del elemento o una cita seleccionada. | 1.7 |
+|`RecurrenceChanged`| String | Ha cambiado el patrón de periodicidad de la serie seleccionada. | 1.7 |
 
 ##### <a name="requirements"></a>Requisitos
 

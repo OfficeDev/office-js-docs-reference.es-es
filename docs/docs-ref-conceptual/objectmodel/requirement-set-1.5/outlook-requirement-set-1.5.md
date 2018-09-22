@@ -1,6 +1,6 @@
 # <a name="outlook-add-in-api-requirement-set-15"></a>Conjunto de requisitos de la API de complementos de Outlook 1.5
 
-El subconjunto de la API de complementos de Outlook de la API de JavaScript para Office incluye objetos, métodos, propiedades y eventos que se pueden usar en un complemento de Outlook.
+El Outlook complemento subconjunto de API de la API de JavaScript para Office incluye objetos, métodos, propiedades y eventos que puede usar en un Outlook complemento.
 
 > [!NOTE]
 > Esta documentación es para un [requisito de establece](/javascript/office/requirement-sets/outlook-api-requirement-sets) que no sea el último conjunto de requisitos.

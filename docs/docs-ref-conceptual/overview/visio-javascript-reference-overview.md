@@ -2,7 +2,7 @@
 
 Puede utilizar las API de JavaScript Visio para incrustar los diagramas de Visio en SharePoint Online. Un diagrama de Visio incrustado es un diagrama que se almacena en una biblioteca de documentos de SharePoint y que se muestra en una página de SharePoint. Para incrustar un diagrama de Visio, mostrarlos en un elemento HTML `<iframe>` elemento. A continuación, puede utilizar las API de JavaScript de Visio para trabajar mediante programación con el diagrama incrustado.
 
-![El diagrama de Visio en iframe en la página de SharePoint junto con el elemento web de editor de scripts](../images/visio-api-block-diagram.png)
+![El diagrama de Visio en iframe en la página de SharePoint junto con el elemento web de editor de scripts](/javascript/api/docs-ref-conceptual/images/visio-api-block-diagram.png)
 
 
 Puede utilizar las API de JavaScript para Visio para:
@@ -20,33 +20,32 @@ El objeto EmbeddedSession inicializa la comunicación entre el marco del desarro
 
 ```js
 var session = new OfficeExtension.EmbeddedSession(url, { id: "embed-iframe",container: document.getElementById("iframeHost") });
-session.init().then(function () {    
+session.init().then(function () {
     window.console.log("Session successfully initialized");
 });
 ```
 
 ## <a name="visiorunsession-functioncontext--batch-"></a>Visio.Run (sesión, function(context) {lote})
 
-**Visio.run()** ejecuta un script por lotes que realiza acciones en el modelo de objetos de Visio. Los comandos por lotes incluyen definiciones de objetos proxy locales de JavaScript y métodos **sync()** que sincronizan el estado entre los objetos locales y de Visio y la resolución de la promesa. La ventaja de procesamiento por lotes de las solicitudes en **Visio.run()** es que, cuando se resuelve la promesa, los objetos de la página de los que se realiza el seguimiento y que se asignaron durante la ejecución se liberarán automáticamente. 
+**Visio.run()** ejecuta un script por lotes que realiza acciones en el modelo de objetos de Visio. Los comandos por lotes incluyen definiciones de objetos proxy locales de JavaScript y métodos **sync()** que sincronizan el estado entre los objetos locales y de Visio y la resolución de la promesa. La ventaja de procesamiento por lotes de las solicitudes en **Visio.run()** es que, cuando se resuelve la promesa, los objetos de la página de los que se realiza el seguimiento y que se asignaron durante la ejecución se liberarán automáticamente.
 
-El método de ejecución toma en la sesión y objeto RequestContext y devuelve una promesa (normalmente, sólo el resultado de **context.sync()**). Es posible ejecutar la operación por lotes fuera de **Visio.run()**. Sin embargo, en este caso, todas las referencias a objetos de página deben seguirse y administrarse manualmente. 
+El método de ejecución toma en la sesión y objeto RequestContext y devuelve una promesa (normalmente, sólo el resultado de **context.sync()**). Es posible ejecutar la operación por lotes fuera de **Visio.run()**. Sin embargo, en este caso, todas las referencias a objetos de página deben seguirse y administrarse manualmente.
 
 ## <a name="requestcontext"></a>RequestContext
 
-El objeto RequestContext facilita las solicitudes a la aplicación de Visio. Debido a que el marco para desarrolladores y la aplicación de Visio en línea se ejecutan en dos IFRAME diferente, el objeto RequestContext (contexto en el ejemplo siguiente) es necesaria para obtener acceso a Visio y objetos relacionados como páginas y formas, desde el marco para desarrolladores. 
+El objeto RequestContext facilita las solicitudes a la aplicación de Visio. Debido a que el marco para desarrolladores y la aplicación de Visio en línea se ejecutan en dos IFRAME diferente, se requiere el objeto RequestContext (contexto en el siguiente ejemplo) para obtener acceso a Visio y objetos relacionados como páginas y formas, desde el marco para desarrolladores.
 
 ```js
 function hideToolbars() {
     Visio.run(session, function(context){
         var app = context.document.application;
-        app.showToolbars = false;            
-        return context.sync().then(function ()
-        {
+        app.showToolbars = false;
+        return context.sync().then(function () {
             window.console.log("Toolbars Hidden");
-        });      
-        }).catch(function(error)
+        });
+    }).catch(function(error)
     {
-        window.console.log("Error: " + error);            
+        window.console.log("Error: " + error);
     });
 };
 ```
@@ -81,27 +80,27 @@ object.load(string: properties); //or object.load(array: properties); //or objec
 
 ## <a name="example-printing-all-shapes-text-in-active-page"></a>Ejemplo: Impresión de todas las formas de texto en la página activa
 
-En el ejemplo siguiente se muestra cómo imprimir el valor de texto de forma de un objeto de formas de matriz. El método **Visio.run()** contiene un lote de instrucciones. Como parte de este lote, se crea un objeto proxy que hace referencia a formas del documento activo.
+En el ejemplo siguiente se muestra cómo imprimir el valor de texto de forma de un objeto de formas de matriz.
+El método **Visio.run()** contiene un lote de instrucciones. Como parte de este lote, se crea un objeto proxy que hace referencia a formas del documento activo.
 
 Todos estos comandos se ponen en cola y se ejecutan cuando se llama a **context.sync()** . El método **sync()** devuelve una promesa que puede usarse para encadenarla con otras operaciones.
 
 ```js
 Visio.run(session, function (context) {
-   var page = context.document.getActivePage();
-   var shapes = page.shapes;
-   shapes.load();
-   return context.sync().then(function () {
-        for(var i=0; i<shapes.items.length;i++)
- {
+    var page = context.document.getActivePage();
+    var shapes = page.shapes;
+    shapes.load();
+    return context.sync().then(function () {
+        for(var i=0; i<shapes.items.length;i++) {
             var shape = shapes.items[i];
-     window.console.log("Shape Text: " + shape.text );
- }
-});
+            window.console.log("Shape Text: " + shape.text );
+        }
+    });
 }).catch(function(error) {
-  window.console.log("Error: " + error);
-  if (error instanceof OfficeExtension.Error) {
-       window.console.log ("Debug info: " + JSON.stringify(error.debugInfo));
-  }
+    window.console.log("Error: " + error);
+    if (error instanceof OfficeExtension.Error) {
+        window.console.log ("Debug info: " + JSON.stringify(error.debugInfo));
+    }
 });
 ```
 
@@ -136,45 +135,43 @@ document.write("<div id='iframeHost' />");
 
 let session; // Global variable to store the session and pass it afterwards in Visio.run()
 var textArea;
-// Loads the Visio application and Initializes communication between devloper frame and Visio online frame
+// Loads the Visio application and Initializes communication between developer frame and Visio online frame
 function initEmbeddedFrame() {
-        textArea = document.getElementById('ResultOutput');
+    textArea = document.getElementById('ResultOutput');
     var url = document.getElementById('fileUrl').value;
     if (!url) {
         window.alert("File URL should not be empty");
     }
-    // APIs are enabled for EmbedView action only.   
+    // APIs are enabled for EmbedView action only.
     url = url.replace("action=view","action=embedview");
     url = url.replace("action=interactivepreview","action=embedview");
     url = url.replace("action=default","action=embedview");
     url = url.replace("action=edit","action=embedview");
   
-       session = new OfficeExtension.EmbeddedSession(url, { id: "embed-iframe",container: document.getElementById("iframeHost") });
-       return session.init().then(function () {
-        // Initilization is successful 
-        textArea.value  = "Initilization is successful";
+    session = new OfficeExtension.EmbeddedSession(url, { id: "embed-iframe",container: document.getElementById("iframeHost") });
+    return session.init().then(function () {
+        // Initialization is successful
+        textArea.value  = "Initialization is successful";
     });
-     }
+}
 
 // Code for getting selected Shape Text using the shapes collection object
 function getSelectedShapeText() {
-    Visio.run(session, function (context) {     
-       var page = context.document.getActivePage();
-       var shapes = page.shapes;
-       shapes.load();
-           return context.sync().then(function () {
-               textArea.value = "Please select a Shape in the Diagram";
-               for(var i=0; i<shapes.items.length;i++)
-            {
-              var shape = shapes.items[i];
-                  if ( shape.select == true)
-               {
-                textArea.value = shape.text;
+    Visio.run(session, function (context) {
+        var page = context.document.getActivePage();
+        var shapes = page.shapes;
+        shapes.load();
+        return context.sync().then(function () {
+            textArea.value = "Please select a Shape in the Diagram";
+            for(var i=0; i<shapes.items.length;i++) {
+                var shape = shapes.items[i];
+                if ( shape.select == true) {
+                    textArea.value = shape.text;
                     return;
-                   }
+                }
             }
-      });
-     }).catch(function(error) {
+        });
+    }).catch(function(error) {
         textArea.value = "Error: ";
         if (error instanceof OfficeExtension.Error) {
             textArea.value += "Debug info: " + JSON.stringify(error.debugInfo);
@@ -186,13 +183,13 @@ function getSelectedShapeText() {
 
 Después de eso, todo lo que necesita es la dirección URL de un diagrama de Visio que se desea trabajar con. Acaba de cargar el diagrama de Visio en SharePoint Online y abrirlo en Visio en línea. Desde allí, abra el cuadro de diálogo Insertar y usar la dirección URL incrustar en el ejemplo anterior.
 
-![Copie la dirección URL del archivo de Visio desde el cuadro de diálogo de insertar](../images/Visio-embed-url.png)
+![Copie la dirección URL del archivo de Visio desde el cuadro de diálogo de insertar](/javascript/api/docs-ref-conceptual/images/Visio-embed-url.png)
 
-Si usa Visio en línea en modo de edición, abra el cuadro de diálogo Insertar eligiendo **archivo** > **Compartir** > **Embed**. Si usa Visio en línea en modo de vista, abra el cuadro de diálogo Insertar eligiendo '...' y, a continuación, **Insertar**. 
+Si usa Visio en línea en modo de edición, abra el cuadro de diálogo Insertar eligiendo **archivo** > **Compartir** > **Embed**. Si usa Visio en línea en modo de vista, abra el cuadro de diálogo Insertar eligiendo '...' y, a continuación, **Insertar**.
 
 ## <a name="open-api-specifications"></a>Especificaciones de la API pública
 
-Cuando diseñemos y desarrollemos nuevas API, estarán disponibles y nos podrá enviar sus comentarios en la página [Especificaciones de la API abierta](../openspec.md). Descubra las nuevas características que están en proceso y envíe sus comentarios sobre nuestras especificaciones de diseño. 
+Cuando diseñemos y desarrollemos nuevas API, estarán disponibles y nos podrá enviar sus comentarios en la página [Especificaciones de la API abierta](../openspec.md). Descubra las nuevas características que están en proceso y envíe sus comentarios sobre nuestras especificaciones de diseño.
 
 ## <a name="visio-javascript-api-reference"></a>Referencia de la API de JavaScript de Visio
 

@@ -1,0 +1,158 @@
+### YamlMime:UniversalReference
+ms.openlocfilehash: 57765d3baf5b6e24b7cf787e958a56d1302a03e4
+ms.sourcegitcommit: 9b0526d43475e18288823139e53c2a70f1a7e7b2
+ms.translationtype: MT
+ms.contentlocale: es-ES
+ms.lasthandoff: 09/22/2018
+ms.locfileid: "24969630"
+items:
+- uid: Outlook_1_7.Office.CustomProperties
+  summary: >-
+    El objeto CustomProperties representa las propiedades personalizadas que son específicas de un elemento determinado y de un complemento de correo de Outlook. Por ejemplo, es posible que un complemento de correo deba guardar algunos datos específicos del mensaje de correo actual que activó el complemento. Si el usuario revisa el mismo mensaje en el futuro y activa de nuevo el complemento de correo, el complemento podrá recuperar los datos que se hayan guardado como propiedades personalizadas.
+
+
+    Debido a que Outlook para Mac no almacenar en caché las propiedades personalizadas, si la red del usuario se desconecta, los complementos de correo no pueden tener acceso a sus propiedades personalizadas.
+
+
+    \[[Conjunto de API: buzón 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redacción o lectura</td></tr></table>
+  name: Office.CustomProperties
+  fullName: Outlook_1_7.Office.CustomProperties
+  langs:
+  - typeScript
+  type: interface
+  package: Outlook_1_7
+  children:
+  - Outlook_1_7.Office.CustomProperties.get
+  - Outlook_1_7.Office.CustomProperties.remove
+  - Outlook_1_7.Office.CustomProperties.saveAsync
+  - Outlook_1_7.Office.CustomProperties.set
+- uid: Outlook_1_7.Office.CustomProperties.get
+  summary: Devuelve el valor de la propiedad personalizada especificada.
+  remarks: >-
+    <table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redacción o lectura</td></tr></table>
+  name: get(name)
+  fullName: Outlook_1_7.Office.CustomProperties.get
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'get(name: string): any;'
+    return:
+      type:
+      - any
+      description: >-
+        Valor de la propiedad personalizada especificada.
+
+
+        \[Conjunto de API: buzón 1.0\]
+    parameters:
+    - id: name
+      description: Nombre de la propiedad personalizada que se devolverá.
+      type:
+      - string
+- uid: Outlook_1_7.Office.CustomProperties.remove
+  summary: >-
+    Elimina la propiedad especificada de la colección de propiedades personalizadas.
+
+
+    Para que la eliminación de la propiedad sea permanente, debe llamar al método saveAsync del objeto CustomProperties.
+  remarks: >-
+    <table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redacción o lectura</td></tr></table>
+  name: remove(name)
+  fullName: Outlook_1_7.Office.CustomProperties.remove
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'remove(name: string): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: name
+      description: 'Nombre de la propiedad que se va a eliminar. \[Conjunto de API: buzón 1.0\]'
+      type:
+      - string
+- uid: Outlook_1_7.Office.CustomProperties.saveAsync
+  summary: >-
+    Guarda propiedades personalizadas específicas del elemento en el servidor.
+
+
+    Debe llamar al método saveAsync para almacenar cualquier cambio realizado con el método set o el método remove del objeto CustomProperties. La acción de guardado es asincrónica.
+
+
+    Es una práctica recomendada para hacer que la función de devolución de llamada comprobar y controlar errores de saveAsync. En particular, un complemento de lectura puede activarse mientras el usuario está en un estado de conexión en un formulario de lectura y, posteriormente, se desconecta al usuario. Si el complemento llama a saveAsync mientras se encuentra en el estado desconectado, saveAsync devolvería un error. El método de devolución de llamada debe controlar este error de forma adecuada.
+  remarks: >-
+    <table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redacción o lectura</td></tr></table>
+  name: saveAsync(callback, asyncContext)
+  fullName: Outlook_1_7.Office.CustomProperties.saveAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'saveAsync(callback?: (result: AsyncResult<void>) => void, asyncContext?: any): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: callback
+      description: Opcional. Cuando finaliza el método, se llama a la función que se pasa en el parámetro de devolución de llamada con un parámetro único de tipo Office.AsyncResult.
+      type:
+      - '(result: AsyncResult<void>) => void'
+    - id: asyncContext
+      description: 'Opcional. Cualquier dato de estado que se pasa al método de devolución de llamada. \[Conjunto de API: buzón 1.0\]'
+      type:
+      - any
+- uid: Outlook_1_7.Office.CustomProperties.set
+  summary: >-
+    Configura la propiedad especificada al valor especificado.
+
+
+    El método set establece la propiedad especificada en el valor especificado. Debe usar el método saveAsync para guardar la propiedad en el servidor.
+
+
+    El método set crea una propiedad nueva si la propiedad especificada aún no existe. De lo contrario, el valor existente se sustituye por el nuevo valor. El parámetro value puede ser de cualquier tipo, pero siempre se pasa al servidor como una cadena.
+
+
+    \[[Conjunto de API: buzón 1.0](/javascript/office/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redacción o lectura</td></tr></table>
+  name: set(name, value)
+  fullName: Outlook_1_7.Office.CustomProperties.set
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'set(name: string, value: string): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: name
+      description: Nombre de la propiedad que se va a configurar.
+      type:
+      - string
+    - id: value
+      description: Valor de la propiedad que se va a configurar.
+      type:
+      - string

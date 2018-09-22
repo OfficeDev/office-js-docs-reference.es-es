@@ -18,9 +18,9 @@ Al establecer una versión de conjunto de requisitos mínimos en el manifiesto s
 
 ## <a name="using-apis-from-later-requirement-sets"></a>Usar las API desde conjuntos de requisitos posteriores
 
-Al establecer un conjunto de requisitos no se limitan las API disponibles que puede usar el complemento. Por ejemplo, si el complemento especifica un conjunto de requisitos de la versión 1.1, pero está ejecutando un cliente de Outlook que admite 1.3, el complemento puede usar las API del conjunto de requisitos de la versión 1.3\.
+Configuración de un conjunto de requisito no limitan las API disponibles que puede usar el complemento. Por ejemplo, si el complemento especifica requisito establece 1.1, pero se está ejecutando en un cliente de Outlook que admiten 1.3, el complemento puede utilizar las API de conjunto de requisitos 1.3.
 
-Para usar las API más recientes, los desarrolladores pueden comprobar su existencia mediante la técnica estándar de JavaScript.
+Para usar las API más reciente, los programadores pueden comprobar sólo para su existencia mediante el uso de la técnica de JavaScript estándar:
 
 ```js
 if (item.somePropertyOrFunction !== undefined) {
@@ -40,7 +40,7 @@ Los siguientes clientes admiten complementos de Outlook.
 
 | Client | Conjuntos admitidos de requisitos de la API |
 | --- | --- |
-| Outlook 2016 (Hacer clic y ejecutar) para Windows | 1.1, 1.2, 1.3, 1.4, 1.5, 1.6 |
+| Outlook 2016 (Hacer clic y ejecutar) para Windows | 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7 |
 | Outlook 2016 (MSI) para Windows | 1.1, 1.2, 1.3, 1.4 |
 | Outlook 2016 para Mac | 1.1, 1.2, 1.3, 1.4, 1.5, 1.6 |
 | Outlook 2013 para Windows | 1.1, 1.2, 1.3, 1.4 |
@@ -50,5 +50,5 @@ Los siguientes clientes admiten complementos de Outlook.
 | Outlook Web App (Exchange 2013 local) | 1.1 |
 | Outlook Web App (Exchange 2016 local) | 1.1, 1.2. 1.3 |
 
-> [!NOTE] 
+> [!NOTE]
 > Se agregó compatibilidad para 1.3 en Outlook 2013 como parte de la [8 de diciembre 2015, actualización para Outlook 2013 (KB3114349)](https://support.microsoft.com/kb/3114349). Se agregó compatibilidad para 1.4 en Outlook 2013 como parte de la [13 de septiembre, 2016, actualización para Outlook 2013 (KB3118280)](https://support.microsoft.com/help/3118280).
