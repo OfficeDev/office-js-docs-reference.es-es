@@ -40,6 +40,8 @@ Los siguientes clientes admiten complementos de Outlook.
 
 | Client | Conjuntos admitidos de requisitos de la API |
 | --- | --- |
+| Outlook 2019 para Windows | 1.1, 1.2, 1.3, 1.4, 1.5, 1.6 |
+| 2019 Outlook para Mac | 1.1, 1.2, 1.3, 1.4, 1.5, 1.6 |
 | Outlook 2016 (Hacer clic y ejecutar) para Windows | 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7 |
 | Outlook 2016 (MSI) para Windows | 1.1, 1.2, 1.3, 1.4 |
 | Outlook 2016 para Mac | 1.1, 1.2, 1.3, 1.4, 1.5, 1.6 |
