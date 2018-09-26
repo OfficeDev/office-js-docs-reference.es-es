@@ -78,7 +78,7 @@ La aplicación debe tener el permiso **ReadItem** especificado en su manifiesto 
 En el modo de redacción debe llamar al método [`saveAsync`](Office.context.mailbox.item.md#saveasyncoptions-callback) antes de poder usar el miembro `restUrl`. Su aplicación debe tener permisos **ReadWriteItem** para llamar al método `saveAsync`.
 
 > [!NOTE]
-> Los clientes de Outlook conectados a instalaciones locales de 2016 de Exchange con una dirección URL de REST personalizada configurado devolverá un valor no válido para `restUrl`.
+> Los clientes de Outlook conectados a instalaciones locales de Exchange 2016 o posteriores con una dirección URL de REST personalizada configurado devolverá un valor no válido para `restUrl`.
 
 ##### <a name="type"></a>Tipo:
 

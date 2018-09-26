@@ -8,9 +8,9 @@ Define la ficha de la cinta en la que aparece el comando del complemento. Puede 
 |:-----|:-----|:-----|
 |  Grupo      | Sí |  Define un grupo de comandos. Solo se puede agregar un grupo por cada complemento a la ficha predeterminada.  |
 
-Los siguientes valores son valores `id` de pestaña válidos por host: Los valores en **negrita** son compatibles en el escritorio y en línea (por ejemplo, Word 2016 para Windows y Word Online). 
+Los siguientes valores son `id` valores de ficha válidos por host: Los valores en **negrita** son compatibles con escritorio y en línea (por ejemplo, Word 2016 o posterior para Windows y Word en línea).
 
-### <a name="outlook"></a>Outlook 
+### <a name="outlook"></a>Outlook
 
 - **TabDefault**
 

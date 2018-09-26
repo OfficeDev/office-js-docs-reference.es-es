@@ -25,7 +25,7 @@
 ####  <a name="accounttype-string"></a>accountType: cadena
 
 > [!NOTE]
-> Este miembro es actualmente sólo admitidos en 2016 de Outlook para Mac, compilación 16.9.1212 y mayor.
+> Este miembro actualmente sólo es compatible en Outlook 2016 o posterior para Mac (compilación 16.9.1212 o posterior).
 
 Obtiene el tipo de cuenta del usuario asociado con el buzón de correo. Los valores posibles se enumeran en la siguiente tabla.
 

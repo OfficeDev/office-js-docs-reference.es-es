@@ -50,7 +50,7 @@ Los siguientes clientes admiten complementos de Outlook.
 | Outlook para Android | 1.1, 1.2, 1.3, 1.4, 1.5 |
 | Outlook en la Web (Office 365 y Outlook.com) | 1.1, 1.2, 1.3, 1.4, 1.5, 1.6 |
 | Outlook Web App (Exchange 2013 local) | 1.1 |
-| Outlook Web App (Exchange 2016 local) | 1.1, 1.2. 1.3 |
+| Outlook Web App (2016 de Exchange local) | 1.1, 1.2. 1.3 |
 
 > [!NOTE]
 > Se agregó compatibilidad para 1.3 en Outlook 2013 como parte de la [8 de diciembre 2015, actualización para Outlook 2013 (KB3114349)](https://support.microsoft.com/kb/3114349). Se agregó compatibilidad para 1.4 en Outlook 2013 como parte de la [13 de septiembre, 2016, actualización para Outlook 2013 (KB3118280)](https://support.microsoft.com/help/3118280).

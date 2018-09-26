@@ -1453,7 +1453,7 @@ Tipo: Array.<(String|[Contact](/javascript/api/outlook/office.contact)|[MeetingS
 Obtiene datos de inicialización que se pasan cuando [un mensaje accionable activa](https://docs.microsoft.com/outlook/actionable-messages/invoke-add-in-from-actionable-message) el complemento.
 
 > [!NOTE]
-> Este método sólo es compatible con Outlook 2016 para Windows (versiones de Click-to-Run mayores 16.0.8413.1000) y Outlook en el sitio web de Office 365.
+> Este método sólo se admite por Outlook 2016 o posterior para Windows (posterior a 16.0.8413.1000 Click-to-Run versiones) y Outlook en la web para Office 365.
 
 ##### <a name="parameters"></a>Parámetros:
 |Nombre|Tipo|Atributos|Descripción|

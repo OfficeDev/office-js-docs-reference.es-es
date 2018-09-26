@@ -26,7 +26,7 @@ Si usa TypeScript y tiene npm, puede obtener las definiciones de TypeScript al e
 
 Para ejecutar el complemento, use un controlador de eventos de Office.initialize. Para más información sobre la inicialización del complemento, vea [Información sobre la API](https://docs.microsoft.com/office/dev/add-ins/develop/understanding-the-javascript-api-for-office).
 
-Los complementos destinados a Word 2016 se ejecutan pasando una función al método **Word.run()**. La función que se pasa al método de **ejecución** debe tener un argumento de contexto. Este [objeto de contexto](/javascript/api/word/word.requestcontext) es diferente del objeto de contexto que se obtiene del objeto de Office, pero también se usa para interactuar con el entorno de runtime de Word. El objeto de contexto proporciona acceso al modelo de objetos de la API de JavaScript de Word. El siguiente ejemplo muestra cómo inicializar y ejecutar un complemento de Word mediante el método **Word.run()**.
+Complementos que Word 2016 de destino o ejecución más adelante, se pasa una función en el método **Word.run()** . La función que se pasan al método **Ejecutar** debe tener un argumento de contexto. Este [objeto de contexto](/javascript/api/word/word.requestcontext) es diferente del objeto de contexto que obtener desde el objeto de Office, pero también se usa para interactuar con el entorno de tiempo de ejecución de Word. El objeto context proporciona acceso al modelo de objetos de Word API de JavaScript. En el ejemplo siguiente se muestra cómo inicializar y ejecutar una palabra complemento mediante el método **Word.run()** .
 
 ```js
 (function () {
