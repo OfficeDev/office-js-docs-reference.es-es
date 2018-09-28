@@ -1,49 +1,49 @@
 
-# <a name="context"></a><span data-ttu-id="e541b-101">contexto</span><span class="sxs-lookup"><span data-stu-id="e541b-101">context</span></span>
+# <a name="context"></a><span data-ttu-id="dae32-101">contexto</span><span class="sxs-lookup"><span data-stu-id="dae32-101">context</span></span>
 
-### <a name="officeofficemdcontext"></a><span data-ttu-id="e541b-102">[Office](Office.md).context</span><span class="sxs-lookup"><span data-stu-id="e541b-102">[Office](Office.md).context</span></span>
+### <a name="officeofficemdcontext"></a><span data-ttu-id="dae32-102">[Office](Office.md).context</span><span class="sxs-lookup"><span data-stu-id="dae32-102">[Office](Office.md).context</span></span>
 
-<span data-ttu-id="e541b-p101">El espacio de nombres de Office .context proporciona interfaces compartidas que los complementos usan en todas las aplicaciones de Office. Este listado documenta solo aquellas interfaces que usan los complementos de Outlook. Para obtener un listado completo del espacio de nombres Office.context, vea [Referencia de Office.context de referencia de la API compartida](/javascript/api/office/office.context).</span><span class="sxs-lookup"><span data-stu-id="e541b-p101">The Office.context namespace provides shared interfaces that are used by add-ins in all of the Office apps. This listing documents only those interfaces that are used by Outlook add-ins. For a full listing of the Office.context namespace, see the [Office.context reference in the Shared API](/javascript/api/office/office.context).</span></span>
+<span data-ttu-id="dae32-p101">El espacio de nombres de Office .context proporciona interfaces compartidas que los complementos usan en todas las aplicaciones de Office. Este listado documenta solo aquellas interfaces que usan los complementos de Outlook. Para obtener un listado completo del espacio de nombres Office.context, vea [Referencia de Office.context de referencia de la API compartida](/javascript/api/office/office.context).</span><span class="sxs-lookup"><span data-stu-id="dae32-p101">The Office.context namespace provides shared interfaces that are used by add-ins in all of the Office apps. This listing documents only those interfaces that are used by Outlook add-ins. For a full listing of the Office.context namespace, see the [Office.context reference in the Shared API](/javascript/api/office/office.context).</span></span>
 
-##### <a name="requirements"></a><span data-ttu-id="e541b-105">Requisitos</span><span class="sxs-lookup"><span data-stu-id="e541b-105">Requirements</span></span>
+##### <a name="requirements"></a><span data-ttu-id="dae32-105">Requisitos</span><span class="sxs-lookup"><span data-stu-id="dae32-105">Requirements</span></span>
 
-|<span data-ttu-id="e541b-106">Requirement</span><span class="sxs-lookup"><span data-stu-id="e541b-106">Requirement</span></span>| <span data-ttu-id="e541b-107">Valor</span><span class="sxs-lookup"><span data-stu-id="e541b-107">Value</span></span>|
+|<span data-ttu-id="dae32-106">Requirement</span><span class="sxs-lookup"><span data-stu-id="dae32-106">Requirement</span></span>| <span data-ttu-id="dae32-107">Valor</span><span class="sxs-lookup"><span data-stu-id="dae32-107">Value</span></span>|
 |---|---|
-|[<span data-ttu-id="e541b-108">Versión del conjunto de requisitos mínimos del buzón</span><span class="sxs-lookup"><span data-stu-id="e541b-108">Minimum mailbox requirement set version</span></span>](/javascript/office/requirement-sets/outlook-api-requirement-sets)| <span data-ttu-id="e541b-109">1.0</span><span class="sxs-lookup"><span data-stu-id="e541b-109">1.0</span></span>|
-|[<span data-ttu-id="e541b-110">Modo de Outlook aplicable</span><span class="sxs-lookup"><span data-stu-id="e541b-110">Applicable Outlook mode</span></span>](https://docs.microsoft.com/outlook/add-ins/#extension-points)| <span data-ttu-id="e541b-111">Redacción o lectura</span><span class="sxs-lookup"><span data-stu-id="e541b-111">Compose or read</span></span>|
+|[<span data-ttu-id="dae32-108">Versión del conjunto de requisitos mínimos del buzón</span><span class="sxs-lookup"><span data-stu-id="dae32-108">Minimum mailbox requirement set version</span></span>](/javascript/office/requirement-sets/outlook-api-requirement-sets)| <span data-ttu-id="dae32-109">1.0</span><span class="sxs-lookup"><span data-stu-id="dae32-109">1.0</span></span>|
+|[<span data-ttu-id="dae32-110">Modo de Outlook aplicable</span><span class="sxs-lookup"><span data-stu-id="dae32-110">Applicable Outlook mode</span></span>](https://docs.microsoft.com/outlook/add-ins/#extension-points)| <span data-ttu-id="dae32-111">Redacción o lectura</span><span class="sxs-lookup"><span data-stu-id="dae32-111">Compose or read</span></span>|
 
-##### <a name="members-and-methods"></a><span data-ttu-id="e541b-112">Miembros y métodos</span><span class="sxs-lookup"><span data-stu-id="e541b-112">Members and methods</span></span>
+##### <a name="members-and-methods"></a><span data-ttu-id="dae32-112">Miembros y métodos</span><span class="sxs-lookup"><span data-stu-id="dae32-112">Members and methods</span></span>
 
-| <span data-ttu-id="e541b-113">Miembro	</span><span class="sxs-lookup"><span data-stu-id="e541b-113">Member</span></span> | <span data-ttu-id="e541b-114">Tipo</span><span class="sxs-lookup"><span data-stu-id="e541b-114">Type</span></span> |
+| <span data-ttu-id="dae32-113">Miembro	</span><span class="sxs-lookup"><span data-stu-id="dae32-113">Member</span></span> | <span data-ttu-id="dae32-114">Tipo</span><span class="sxs-lookup"><span data-stu-id="dae32-114">Type</span></span> |
 |--------|------|
-| [<span data-ttu-id="e541b-115">displayLanguage</span><span class="sxs-lookup"><span data-stu-id="e541b-115">displayLanguage</span></span>](#displaylanguage-string) | <span data-ttu-id="e541b-116">Miembro	</span><span class="sxs-lookup"><span data-stu-id="e541b-116">Member</span></span> |
-| [<span data-ttu-id="e541b-117">officeTheme</span><span class="sxs-lookup"><span data-stu-id="e541b-117">officeTheme</span></span>](#officetheme-object) | <span data-ttu-id="e541b-118">Miembro	</span><span class="sxs-lookup"><span data-stu-id="e541b-118">Member</span></span> |
-| [<span data-ttu-id="e541b-119">roamingSettings</span><span class="sxs-lookup"><span data-stu-id="e541b-119">roamingSettings</span></span>](#roamingsettings-roamingsettingsjavascriptapioutlookofficeroamingsettings) | <span data-ttu-id="e541b-120">Miembro	</span><span class="sxs-lookup"><span data-stu-id="e541b-120">Member</span></span> |
+| [<span data-ttu-id="dae32-115">displayLanguage</span><span class="sxs-lookup"><span data-stu-id="dae32-115">displayLanguage</span></span>](#displaylanguage-string) | <span data-ttu-id="dae32-116">Miembro	</span><span class="sxs-lookup"><span data-stu-id="dae32-116">Member</span></span> |
+| [<span data-ttu-id="dae32-117">officeTheme</span><span class="sxs-lookup"><span data-stu-id="dae32-117">officeTheme</span></span>](#officetheme-object) | <span data-ttu-id="dae32-118">Miembro	</span><span class="sxs-lookup"><span data-stu-id="dae32-118">Member</span></span> |
+| [<span data-ttu-id="dae32-119">roamingSettings</span><span class="sxs-lookup"><span data-stu-id="dae32-119">roamingSettings</span></span>](#roamingsettings-roamingsettingsjavascriptapioutlookofficeroamingsettings) | <span data-ttu-id="dae32-120">Miembro	</span><span class="sxs-lookup"><span data-stu-id="dae32-120">Member</span></span> |
 
-### <a name="namespaces"></a><span data-ttu-id="e541b-121">Espacios de nombres</span><span class="sxs-lookup"><span data-stu-id="e541b-121">Namespaces</span></span>
+### <a name="namespaces"></a><span data-ttu-id="dae32-121">Espacios de nombres</span><span class="sxs-lookup"><span data-stu-id="dae32-121">Namespaces</span></span>
 
-<span data-ttu-id="e541b-122">[buzón de correo](office.context.mailbox.md): proporciona acceso al modelo de objeto de complemento de Outlook para Microsoft Outlook y Microsoft Outlook en el web.</span><span class="sxs-lookup"><span data-stu-id="e541b-122">[mailbox](office.context.mailbox.md): Provides access to the Outlook add-in object model for Microsoft Outlook and Microsoft Outlook on the web.</span></span>
+<span data-ttu-id="dae32-122">[buzón de correo](office.context.mailbox.md): proporciona acceso al modelo de objeto de complemento de Outlook para Microsoft Outlook y Microsoft Outlook en el web.</span><span class="sxs-lookup"><span data-stu-id="dae32-122">[mailbox](office.context.mailbox.md): Provides access to the Outlook add-in object model for Microsoft Outlook and Microsoft Outlook on the web.</span></span>
 
-### <a name="members"></a><span data-ttu-id="e541b-123">Miembros</span><span class="sxs-lookup"><span data-stu-id="e541b-123">Members</span></span>
+### <a name="members"></a><span data-ttu-id="dae32-123">Miembros</span><span class="sxs-lookup"><span data-stu-id="dae32-123">Members</span></span>
 
-####  <a name="displaylanguage-string"></a><span data-ttu-id="e541b-124">displayLanguage :String</span><span class="sxs-lookup"><span data-stu-id="e541b-124">displayLanguage :String</span></span>
+####  <a name="displaylanguage-string"></a><span data-ttu-id="dae32-124">displayLanguage :String</span><span class="sxs-lookup"><span data-stu-id="dae32-124">displayLanguage :String</span></span>
 
-<span data-ttu-id="e541b-125">Obtiene la configuración local (de idioma) en un formato de etiqueta de idioma RFC 1766 especificado por el usuario para la interfaz de usuario de la aplicación host de Office.</span><span class="sxs-lookup"><span data-stu-id="e541b-125">Gets the locale (language) in RFC 1766 Language tag format specified by the user for the UI of the Office host application.</span></span>
+<span data-ttu-id="dae32-125">Obtiene la configuración local (de idioma) en un formato de etiqueta de idioma RFC 1766 especificado por el usuario para la interfaz de usuario de la aplicación host de Office.</span><span class="sxs-lookup"><span data-stu-id="dae32-125">Gets the locale (language) in RFC 1766 Language tag format specified by the user for the UI of the Office host application.</span></span>
 
-<span data-ttu-id="e541b-126">El valor `displayLanguage` refleja la configuración de **Mostrar idioma** actual que se ha especificado desde **Archivo > Opciones > Idioma**, en la aplicación host de Office.</span><span class="sxs-lookup"><span data-stu-id="e541b-126">The `displayLanguage` value reflects the current **Display Language** setting specified with **File > Options > Language** in the Office host application.</span></span>
+<span data-ttu-id="dae32-126">El valor `displayLanguage` refleja la configuración de **Mostrar idioma** actual que se ha especificado desde **Archivo > Opciones > Idioma**, en la aplicación host de Office.</span><span class="sxs-lookup"><span data-stu-id="dae32-126">The `displayLanguage` value reflects the current **Display Language** setting specified with **File > Options > Language** in the Office host application.</span></span>
 
-##### <a name="type"></a><span data-ttu-id="e541b-127">Tipo:</span><span class="sxs-lookup"><span data-stu-id="e541b-127">Type:</span></span>
+##### <a name="type"></a><span data-ttu-id="dae32-127">Tipo:</span><span class="sxs-lookup"><span data-stu-id="dae32-127">Type:</span></span>
 
-*   <span data-ttu-id="e541b-128">String</span><span class="sxs-lookup"><span data-stu-id="e541b-128">String</span></span>
+*   <span data-ttu-id="dae32-128">String</span><span class="sxs-lookup"><span data-stu-id="dae32-128">String</span></span>
 
-##### <a name="requirements"></a><span data-ttu-id="e541b-129">Requisitos</span><span class="sxs-lookup"><span data-stu-id="e541b-129">Requirements</span></span>
+##### <a name="requirements"></a><span data-ttu-id="dae32-129">Requisitos</span><span class="sxs-lookup"><span data-stu-id="dae32-129">Requirements</span></span>
 
-|<span data-ttu-id="e541b-130">Requirement</span><span class="sxs-lookup"><span data-stu-id="e541b-130">Requirement</span></span>| <span data-ttu-id="e541b-131">Valor</span><span class="sxs-lookup"><span data-stu-id="e541b-131">Value</span></span>|
+|<span data-ttu-id="dae32-130">Requirement</span><span class="sxs-lookup"><span data-stu-id="dae32-130">Requirement</span></span>| <span data-ttu-id="dae32-131">Valor</span><span class="sxs-lookup"><span data-stu-id="dae32-131">Value</span></span>|
 |---|---|
-|[<span data-ttu-id="e541b-132">Versión del conjunto de requisitos mínimos del buzón</span><span class="sxs-lookup"><span data-stu-id="e541b-132">Minimum mailbox requirement set version</span></span>](/javascript/office/requirement-sets/outlook-api-requirement-sets)| <span data-ttu-id="e541b-133">1.0</span><span class="sxs-lookup"><span data-stu-id="e541b-133">1.0</span></span>|
-|[<span data-ttu-id="e541b-134">Modo de Outlook aplicable</span><span class="sxs-lookup"><span data-stu-id="e541b-134">Applicable Outlook mode</span></span>](https://docs.microsoft.com/outlook/add-ins/#extension-points)| <span data-ttu-id="e541b-135">Redacción o lectura</span><span class="sxs-lookup"><span data-stu-id="e541b-135">Compose or read</span></span>|
+|[<span data-ttu-id="dae32-132">Versión del conjunto de requisitos mínimos del buzón</span><span class="sxs-lookup"><span data-stu-id="dae32-132">Minimum mailbox requirement set version</span></span>](/javascript/office/requirement-sets/outlook-api-requirement-sets)| <span data-ttu-id="dae32-133">1.0</span><span class="sxs-lookup"><span data-stu-id="dae32-133">1.0</span></span>|
+|[<span data-ttu-id="dae32-134">Modo de Outlook aplicable</span><span class="sxs-lookup"><span data-stu-id="dae32-134">Applicable Outlook mode</span></span>](https://docs.microsoft.com/outlook/add-ins/#extension-points)| <span data-ttu-id="dae32-135">Redacción o lectura</span><span class="sxs-lookup"><span data-stu-id="dae32-135">Compose or read</span></span>|
 
-##### <a name="example"></a><span data-ttu-id="e541b-136">Ejemplo</span><span class="sxs-lookup"><span data-stu-id="e541b-136">Example</span></span>
+##### <a name="example"></a><span data-ttu-id="dae32-136">Ejemplo</span><span class="sxs-lookup"><span data-stu-id="dae32-136">Example</span></span>
 
 ```js
 function sayHelloWithDisplayLanguage() {
@@ -63,36 +63,36 @@ function write(message){
 }
 ```
 
-####  <a name="officetheme-object"></a><span data-ttu-id="e541b-137">officeTheme :Object</span><span class="sxs-lookup"><span data-stu-id="e541b-137">officeTheme :Object</span></span>
+####  <a name="officetheme-object"></a><span data-ttu-id="dae32-137">officeTheme :Object</span><span class="sxs-lookup"><span data-stu-id="dae32-137">officeTheme :Object</span></span>
 
-<span data-ttu-id="e541b-138">Proporciona acceso a las propiedades de los colores del tema de Office.</span><span class="sxs-lookup"><span data-stu-id="e541b-138">Provides access to the properties for Office theme colors.</span></span>
+<span data-ttu-id="dae32-138">Proporciona acceso a las propiedades de los colores del tema de Office.</span><span class="sxs-lookup"><span data-stu-id="dae32-138">Provides access to the properties for Office theme colors.</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="e541b-139">Este miembro no se admite en Outlook para iOS o Outlook para Android.</span><span class="sxs-lookup"><span data-stu-id="e541b-139">This member is not supported in Outlook for iOS or Outlook for Android.</span></span>
+> <span data-ttu-id="dae32-139">Este miembro no se admite en Outlook para iOS o Outlook para Android.</span><span class="sxs-lookup"><span data-stu-id="dae32-139">This member is not supported in Outlook for iOS or Outlook for Android.</span></span>
 
-<span data-ttu-id="e541b-p102">El uso de los colores del tema de Office le permite coordinar la combinación de colores del complemento con el tema actual de Office seleccionado por el usuario mediante **Archivo > Cuenta de Office > Interfaz de usuario Tema de Office**, que se aplica a todas las aplicaciones host de Office. El uso de colores del tema de Office es idóneo para los complementos de correo y panel de tareas.</span><span class="sxs-lookup"><span data-stu-id="e541b-p102">Using Office theme colors let's you coordinate the color scheme of your add-in with the current Office theme selected by the user with **File > Office Account > Office Theme UI**, which is applied across all Office host applications. Using Office theme colors is appropriate for mail and task pane add-ins.</span></span>
+<span data-ttu-id="dae32-p102">El uso de los colores del tema de Office le permite coordinar la combinación de colores del complemento con el tema actual de Office seleccionado por el usuario mediante **Archivo > Cuenta de Office > Interfaz de usuario Tema de Office**, que se aplica a todas las aplicaciones host de Office. El uso de colores del tema de Office es idóneo para los complementos de correo y panel de tareas.</span><span class="sxs-lookup"><span data-stu-id="dae32-p102">Using Office theme colors let's you coordinate the color scheme of your add-in with the current Office theme selected by the user with **File > Office Account > Office Theme UI**, which is applied across all Office host applications. Using Office theme colors is appropriate for mail and task pane add-ins.</span></span>
 
-##### <a name="type"></a><span data-ttu-id="e541b-142">Tipo:</span><span class="sxs-lookup"><span data-stu-id="e541b-142">Type:</span></span>
+##### <a name="type"></a><span data-ttu-id="dae32-142">Tipo:</span><span class="sxs-lookup"><span data-stu-id="dae32-142">Type:</span></span>
 
-*   <span data-ttu-id="e541b-143">Objeto</span><span class="sxs-lookup"><span data-stu-id="e541b-143">Object</span></span>
+*   <span data-ttu-id="dae32-143">Objeto</span><span class="sxs-lookup"><span data-stu-id="dae32-143">Object</span></span>
 
-##### <a name="properties"></a><span data-ttu-id="e541b-144">Propiedades:</span><span class="sxs-lookup"><span data-stu-id="e541b-144">Properties:</span></span>
+##### <a name="properties"></a><span data-ttu-id="dae32-144">Propiedades:</span><span class="sxs-lookup"><span data-stu-id="dae32-144">Properties:</span></span>
 
-|<span data-ttu-id="e541b-145">Nombre</span><span class="sxs-lookup"><span data-stu-id="e541b-145">Name</span></span>| <span data-ttu-id="e541b-146">Tipo</span><span class="sxs-lookup"><span data-stu-id="e541b-146">Type</span></span>| <span data-ttu-id="e541b-147">Descripción</span><span class="sxs-lookup"><span data-stu-id="e541b-147">Description</span></span>|
+|<span data-ttu-id="dae32-145">Nombre</span><span class="sxs-lookup"><span data-stu-id="dae32-145">Name</span></span>| <span data-ttu-id="dae32-146">Tipo</span><span class="sxs-lookup"><span data-stu-id="dae32-146">Type</span></span>| <span data-ttu-id="dae32-147">Descripción</span><span class="sxs-lookup"><span data-stu-id="dae32-147">Description</span></span>|
 |---|---|---|
-|`bodyBackgroundColor`| <span data-ttu-id="e541b-148">String</span><span class="sxs-lookup"><span data-stu-id="e541b-148">String</span></span>|<span data-ttu-id="e541b-149">Obtiene el color de fondo del cuerpo del tema de Office como un tríptico de color hexadecimal.</span><span class="sxs-lookup"><span data-stu-id="e541b-149">Gets the Office theme body background color as a hexadecimal color triplet.</span></span>|
-|`bodyForegroundColor`| <span data-ttu-id="e541b-150">String</span><span class="sxs-lookup"><span data-stu-id="e541b-150">String</span></span>|<span data-ttu-id="e541b-151">Obtiene el color de primer plano del cuerpo del tema de Office como un tríptico de color hexadecimal.</span><span class="sxs-lookup"><span data-stu-id="e541b-151">Gets the Office theme body foreground color as a hexadecimal color triplet.</span></span>|
-|`controlBackgroundColor`| <span data-ttu-id="e541b-152">String</span><span class="sxs-lookup"><span data-stu-id="e541b-152">String</span></span>|<span data-ttu-id="e541b-153">Obtiene el color de fondo del control del tema de Office como un tríptico de color hexadecimal.</span><span class="sxs-lookup"><span data-stu-id="e541b-153">Gets the Office theme control background color as a hexadecimal color triplet.</span></span>|
-|`controlForegroundColor`| <span data-ttu-id="e541b-154">String</span><span class="sxs-lookup"><span data-stu-id="e541b-154">String</span></span>|<span data-ttu-id="e541b-155">Obtiene el color del control del cuerpo del tema de Office como un tríptico de color hexadecimal.</span><span class="sxs-lookup"><span data-stu-id="e541b-155">Gets the Office theme body control color as a hexadecimal color triplet.</span></span>|
+|`bodyBackgroundColor`| <span data-ttu-id="dae32-148">String</span><span class="sxs-lookup"><span data-stu-id="dae32-148">String</span></span>|<span data-ttu-id="dae32-149">Obtiene el color de fondo del cuerpo del tema de Office como un tríptico de color hexadecimal.</span><span class="sxs-lookup"><span data-stu-id="dae32-149">Gets the Office theme body background color as a hexadecimal color triplet.</span></span>|
+|`bodyForegroundColor`| <span data-ttu-id="dae32-150">String</span><span class="sxs-lookup"><span data-stu-id="dae32-150">String</span></span>|<span data-ttu-id="dae32-151">Obtiene el color de primer plano del cuerpo del tema de Office como un tríptico de color hexadecimal.</span><span class="sxs-lookup"><span data-stu-id="dae32-151">Gets the Office theme body foreground color as a hexadecimal color triplet.</span></span>|
+|`controlBackgroundColor`| <span data-ttu-id="dae32-152">String</span><span class="sxs-lookup"><span data-stu-id="dae32-152">String</span></span>|<span data-ttu-id="dae32-153">Obtiene el color de fondo del control del tema de Office como un tríptico de color hexadecimal.</span><span class="sxs-lookup"><span data-stu-id="dae32-153">Gets the Office theme control background color as a hexadecimal color triplet.</span></span>|
+|`controlForegroundColor`| <span data-ttu-id="dae32-154">String</span><span class="sxs-lookup"><span data-stu-id="dae32-154">String</span></span>|<span data-ttu-id="dae32-155">Obtiene el color del control del cuerpo del tema de Office como un tríptico de color hexadecimal.</span><span class="sxs-lookup"><span data-stu-id="dae32-155">Gets the Office theme body control color as a hexadecimal color triplet.</span></span>|
 
-##### <a name="requirements"></a><span data-ttu-id="e541b-156">Requisitos</span><span class="sxs-lookup"><span data-stu-id="e541b-156">Requirements</span></span>
+##### <a name="requirements"></a><span data-ttu-id="dae32-156">Requisitos</span><span class="sxs-lookup"><span data-stu-id="dae32-156">Requirements</span></span>
 
-|<span data-ttu-id="e541b-157">Requirement</span><span class="sxs-lookup"><span data-stu-id="e541b-157">Requirement</span></span>| <span data-ttu-id="e541b-158">Valor</span><span class="sxs-lookup"><span data-stu-id="e541b-158">Value</span></span>|
+|<span data-ttu-id="dae32-157">Requirement</span><span class="sxs-lookup"><span data-stu-id="dae32-157">Requirement</span></span>| <span data-ttu-id="dae32-158">Valor</span><span class="sxs-lookup"><span data-stu-id="dae32-158">Value</span></span>|
 |---|---|
-|[<span data-ttu-id="e541b-159">Versión del conjunto de requisitos mínimos del buzón</span><span class="sxs-lookup"><span data-stu-id="e541b-159">Minimum mailbox requirement set version</span></span>](/javascript/office/requirement-sets/outlook-api-requirement-sets)| <span data-ttu-id="e541b-160">1.3</span><span class="sxs-lookup"><span data-stu-id="e541b-160">1.3</span></span>|
-|[<span data-ttu-id="e541b-161">Modo de Outlook aplicable</span><span class="sxs-lookup"><span data-stu-id="e541b-161">Applicable Outlook mode</span></span>](https://docs.microsoft.com/outlook/add-ins/#extension-points)| <span data-ttu-id="e541b-162">Redacción o lectura</span><span class="sxs-lookup"><span data-stu-id="e541b-162">Compose or read</span></span>|
+|[<span data-ttu-id="dae32-159">Versión del conjunto de requisitos mínimos del buzón</span><span class="sxs-lookup"><span data-stu-id="dae32-159">Minimum mailbox requirement set version</span></span>](/javascript/office/requirement-sets/outlook-api-requirement-sets)| <span data-ttu-id="dae32-160">1.3</span><span class="sxs-lookup"><span data-stu-id="dae32-160">1.3</span></span>|
+|[<span data-ttu-id="dae32-161">Modo de Outlook aplicable</span><span class="sxs-lookup"><span data-stu-id="dae32-161">Applicable Outlook mode</span></span>](https://docs.microsoft.com/outlook/add-ins/#extension-points)| <span data-ttu-id="dae32-162">Redacción o lectura</span><span class="sxs-lookup"><span data-stu-id="dae32-162">Compose or read</span></span>|
 
-##### <a name="example"></a><span data-ttu-id="e541b-163">Ejemplo</span><span class="sxs-lookup"><span data-stu-id="e541b-163">Example</span></span>
+##### <a name="example"></a><span data-ttu-id="dae32-163">Ejemplo</span><span class="sxs-lookup"><span data-stu-id="dae32-163">Example</span></span>
 
 ```js
 function applyOfficeTheme(){
@@ -107,20 +107,20 @@ function applyOfficeTheme(){
 }
 ```
 
-####  <a name="roamingsettings-roamingsettingsjavascriptapioutlookofficeroamingsettings"></a><span data-ttu-id="e541b-164">roamingSettings :[RoamingSettings](/javascript/api/outlook/office.RoamingSettings)</span><span class="sxs-lookup"><span data-stu-id="e541b-164">roamingSettings :[RoamingSettings](/javascript/api/outlook/office.RoamingSettings)</span></span>
+####  <a name="roamingsettings-roamingsettingsjavascriptapioutlookofficeroamingsettings"></a><span data-ttu-id="dae32-164">roamingSettings :[RoamingSettings](/javascript/api/outlook/office.RoamingSettings)</span><span class="sxs-lookup"><span data-stu-id="dae32-164">roamingSettings :[RoamingSettings](/javascript/api/outlook/office.RoamingSettings)</span></span>
 
-<span data-ttu-id="e541b-165">Obtiene un objeto que representa la configuración o el estado personalizado de un complemento de correo que se guardó en el buzón de un usuario.</span><span class="sxs-lookup"><span data-stu-id="e541b-165">Gets an object that represents the custom settings or state of a mail add-in saved to a user's mailbox.</span></span>
+<span data-ttu-id="dae32-165">Obtiene un objeto que representa la configuración o el estado personalizado de un complemento de correo que se guardó en el buzón de un usuario.</span><span class="sxs-lookup"><span data-stu-id="dae32-165">Gets an object that represents the custom settings or state of a mail add-in saved to a user's mailbox.</span></span>
 
-<span data-ttu-id="e541b-166">El objeto `RoamingSettings` le permite almacenar y tener acceso a datos para un complemento de correo almacenado en el buzón de un usuario, de forma que esté disponible para ese complemento cuando se ejecute desde cualquier aplicación de cliente host usada para tener acceso a ese buzón.</span><span class="sxs-lookup"><span data-stu-id="e541b-166">The `RoamingSettings` object lets you store and access data for a mail add-in that is stored in a user's mailbox, so that is available to that add-in when it is running from any host client application used to access that mailbox.</span></span>
+<span data-ttu-id="dae32-166">El objeto `RoamingSettings` le permite almacenar y tener acceso a datos para un complemento de correo almacenado en el buzón de un usuario, de forma que esté disponible para ese complemento cuando se ejecute desde cualquier aplicación de cliente host usada para tener acceso a ese buzón.</span><span class="sxs-lookup"><span data-stu-id="dae32-166">The `RoamingSettings` object lets you store and access data for a mail add-in that is stored in a user's mailbox, so that is available to that add-in when it is running from any host client application used to access that mailbox.</span></span>
 
-##### <a name="type"></a><span data-ttu-id="e541b-167">Tipo:</span><span class="sxs-lookup"><span data-stu-id="e541b-167">Type:</span></span>
+##### <a name="type"></a><span data-ttu-id="dae32-167">Tipo:</span><span class="sxs-lookup"><span data-stu-id="dae32-167">Type:</span></span>
 
-*   [<span data-ttu-id="e541b-168">RoamingSettings</span><span class="sxs-lookup"><span data-stu-id="e541b-168">RoamingSettings</span></span>](/javascript/api/outlook/office.RoamingSettings)
+*   [<span data-ttu-id="dae32-168">RoamingSettings</span><span class="sxs-lookup"><span data-stu-id="dae32-168">RoamingSettings</span></span>](/javascript/api/outlook/office.RoamingSettings)
 
-##### <a name="requirements"></a><span data-ttu-id="e541b-169">Requisitos</span><span class="sxs-lookup"><span data-stu-id="e541b-169">Requirements</span></span>
+##### <a name="requirements"></a><span data-ttu-id="dae32-169">Requisitos</span><span class="sxs-lookup"><span data-stu-id="dae32-169">Requirements</span></span>
 
-|<span data-ttu-id="e541b-170">Requirement</span><span class="sxs-lookup"><span data-stu-id="e541b-170">Requirement</span></span>| <span data-ttu-id="e541b-171">Valor</span><span class="sxs-lookup"><span data-stu-id="e541b-171">Value</span></span>|
+|<span data-ttu-id="dae32-170">Requirement</span><span class="sxs-lookup"><span data-stu-id="dae32-170">Requirement</span></span>| <span data-ttu-id="dae32-171">Valor</span><span class="sxs-lookup"><span data-stu-id="dae32-171">Value</span></span>|
 |---|---|
-|[<span data-ttu-id="e541b-172">Versión del conjunto de requisitos mínimos del buzón</span><span class="sxs-lookup"><span data-stu-id="e541b-172">Minimum mailbox requirement set version</span></span>](/javascript/office/requirement-sets/outlook-api-requirement-sets)| <span data-ttu-id="e541b-173">1.0</span><span class="sxs-lookup"><span data-stu-id="e541b-173">1.0</span></span>|
-|[<span data-ttu-id="e541b-174">Nivel de permisos mínimo</span><span class="sxs-lookup"><span data-stu-id="e541b-174">Minimum permission level</span></span>](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)| <span data-ttu-id="e541b-175">Restringido</span><span class="sxs-lookup"><span data-stu-id="e541b-175">Restricted</span></span>|
-|[<span data-ttu-id="e541b-176">Modo de Outlook aplicable</span><span class="sxs-lookup"><span data-stu-id="e541b-176">Applicable Outlook mode</span></span>](https://docs.microsoft.com/outlook/add-ins/#extension-points)| <span data-ttu-id="e541b-177">Redacción o lectura</span><span class="sxs-lookup"><span data-stu-id="e541b-177">Compose or read</span></span>|
+|[<span data-ttu-id="dae32-172">Versión del conjunto de requisitos mínimos del buzón</span><span class="sxs-lookup"><span data-stu-id="dae32-172">Minimum mailbox requirement set version</span></span>](/javascript/office/requirement-sets/outlook-api-requirement-sets)| <span data-ttu-id="dae32-173">1.0</span><span class="sxs-lookup"><span data-stu-id="dae32-173">1.0</span></span>|
+|[<span data-ttu-id="dae32-174">Nivel de permisos mínimo</span><span class="sxs-lookup"><span data-stu-id="dae32-174">Minimum permission level</span></span>](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)| <span data-ttu-id="dae32-175">Restringido</span><span class="sxs-lookup"><span data-stu-id="dae32-175">Restricted</span></span>|
+|[<span data-ttu-id="dae32-176">Modo de Outlook aplicable</span><span class="sxs-lookup"><span data-stu-id="dae32-176">Applicable Outlook mode</span></span>](https://docs.microsoft.com/outlook/add-ins/#extension-points)| <span data-ttu-id="dae32-177">Redacción o lectura</span><span class="sxs-lookup"><span data-stu-id="dae32-177">Compose or read</span></span>|
