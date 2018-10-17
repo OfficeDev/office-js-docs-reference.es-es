@@ -1,17 +1,17 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: a7c0c486d36061167d60cf520714b1cce33ef801
-ms.sourcegitcommit: 262b7c417245b7b61a57d53eee33a477a722ca6e
+ms.openlocfilehash: de5bb9107ab40ecd653e010c672438408f70d86f
+ms.sourcegitcommit: c1149d24b38f20daf9ce690cd0761ec1ceb7333d
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "24053442"
+ms.lasthandoff: 10/17/2018
+ms.locfileid: "25588477"
 items:
 - uid: excel.Excel.NamedItemCollection
   summary: >-
-    <span data-ttu-id="b5e62-101">Una colección de todos los objetos NamedItem que forman parte del libro o la hoja de cálculo, dependiendo de cómo se ha alcanzado.</span><span class="sxs-lookup"><span data-stu-id="b5e62-101">A collection of all the NamedItem objects that are part of the workbook or worksheet, depending on how it was reached.</span></span>
+    <span data-ttu-id="e64e4-101">Una colección de todos los objetos NamedItem que forman parte del libro o la hoja de cálculo, dependiendo de cómo se ha alcanzado.</span><span class="sxs-lookup"><span data-stu-id="e64e4-101">A collection of all the NamedItem objects that are part of the workbook or worksheet, depending on how it was reached.</span></span>
 
 
-    <span data-ttu-id="b5e62-102">\[[Conjunto de API: ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="b5e62-102">\[ [API set: ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    <span data-ttu-id="e64e4-102">\[[Conjunto de API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="e64e4-102">\[ [API set: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
   name: Excel.NamedItemCollection
   fullName: excel.Excel.NamedItemCollection
   langs:
@@ -31,10 +31,10 @@ items:
   - excel.Excel.NamedItemCollection.toJSON
 - uid: excel.Excel.NamedItemCollection.add
   summary: >-
-    <span data-ttu-id="b5e62-103">Agrega un nuevo nombre a la colección del ámbito especificado.</span><span class="sxs-lookup"><span data-stu-id="b5e62-103">Adds a new name to the collection of the given scope.</span></span>
+    <span data-ttu-id="e64e4-103">Agrega un nuevo nombre a la colección del ámbito especificado.</span><span class="sxs-lookup"><span data-stu-id="e64e4-103">Adds a new name to the collection of the given scope.</span></span>
 
 
-    <span data-ttu-id="b5e62-104">\[[Conjunto de API: ExcelApi 1,4](/javascript/office/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="b5e62-104">\[ [API set: ExcelApi 1.4](/javascript/office/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    <span data-ttu-id="e64e4-104">\[[Conjunto de API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="e64e4-104">\[ [API set: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
   name: add(name, reference, comment)
   fullName: excel.Excel.NamedItemCollection.add
   langs:
@@ -45,26 +45,26 @@ items:
     return:
       type:
       - excel.Excel.NamedItem
-      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"b5e62-105\">Ejemplos</span><span class=\"sxs-lookup\"><span data-stu-id=\"b5e62-105\">Examples</span></span>\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n    const headerRange = sheet.getRange(\"A1:E1\");\n    sheet.names.add(\"ExpensesHeader\", headerRange);\n    const namedItems = sheet.names.load(\"name, type\");\n\n    await context.sync();\n\n    let namedItemsList = `This workbook contains ${namedItems.items.length} named item(s):`;\n    for (let i = 0; i < namedItems.items.length; i++) {\n        namedItemsList += JSON.stringify(namedItems.items[i]);\n    }\n    OfficeHelpers.UI.notify(namedItemsList);\n\n    await context.sync();\n});\n```\n```typescript\ntry {\n    await Excel.run(async (context) => {\n\n        await OfficeHelpers.ExcelUtilities.forceCreateSheet(context.workbook, \"Sample\");\n\n        const sheet = context.workbook.worksheets.getItem(\"Sample\");\n\n        let expensesTable = sheet.tables.add(\"A1:D1\", true);\n        expensesTable.name = \"ExpensesTable\";\n\n        expensesTable.getHeaderRowRange().values = [[\"DATE\", \"MERCHANT\", \"CATEGORY\", \"AMOUNT\"]];\n\n        let newData = transactions.map(item =>\n            [item.DATE, item.MERCHANT, item.CATEGORY, item.AMOUNT]);\n\n        expensesTable.rows.add(null, newData);\n\n        sheet.names.add(\"TotalAmount\", \"=SUM(ExpensesTable[AMOUNT])\");\n\n        sheet.getRange(\"D11\").values = [[\"=TotalAmount\"]];\n\n        if (Office.context.requirements.isSetSupported(\"ExcelApi\", 1.2)) {\n            sheet.getUsedRange().format.autofitColumns();\n            sheet.getUsedRange().format.autofitRows();\n        }\n\n        sheet.activate();\n\n        await context.sync();\n    });\n}\ncatch (error) {\n    OfficeHelpers.UI.notify(error);\n    OfficeHelpers.Utilities.log(error);\n}\n```"
+      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"e64e4-105\">Ejemplos</span><span class=\"sxs-lookup\"><span data-stu-id=\"e64e4-105\">Examples</span></span>\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n    const headerRange = sheet.getRange(\"A1:E1\");\n    sheet.names.add(\"ExpensesHeader\", headerRange);\n    const namedItems = sheet.names.load(\"name, type\");\n\n    await context.sync();\n\n    let namedItemsList = `This workbook contains ${namedItems.items.length} named item(s):`;\n    for (let i = 0; i < namedItems.items.length; i++) {\n        namedItemsList += JSON.stringify(namedItems.items[i]);\n    }\n    OfficeHelpers.UI.notify(namedItemsList);\n\n    await context.sync();\n});\n```\n```typescript\ntry {\n    await Excel.run(async (context) => {\n\n        await OfficeHelpers.ExcelUtilities.forceCreateSheet(context.workbook, \"Sample\");\n\n        const sheet = context.workbook.worksheets.getItem(\"Sample\");\n\n        let expensesTable = sheet.tables.add(\"A1:D1\", true);\n        expensesTable.name = \"ExpensesTable\";\n\n        expensesTable.getHeaderRowRange().values = [[\"DATE\", \"MERCHANT\", \"CATEGORY\", \"AMOUNT\"]];\n\n        let newData = transactions.map(item =>\n            [item.DATE, item.MERCHANT, item.CATEGORY, item.AMOUNT]);\n\n        expensesTable.rows.add(null, newData);\n\n        sheet.names.add(\"TotalAmount\", \"=SUM(ExpensesTable[AMOUNT])\");\n\n        sheet.getRange(\"D11\").values = [[\"=TotalAmount\"]];\n\n        if (Office.context.requirements.isSetSupported(\"ExcelApi\", 1.2)) {\n            sheet.getUsedRange().format.autofitColumns();\n            sheet.getUsedRange().format.autofitRows();\n        }\n\n        sheet.activate();\n\n        await context.sync();\n    });\n}\ncatch (error) {\n    OfficeHelpers.UI.notify(error);\n    OfficeHelpers.Utilities.log(error);\n}\n```"
     parameters:
     - id: name
-      description: <span data-ttu-id="b5e62-106">Nombre del elemento con nombre.</span><span class="sxs-lookup"><span data-stu-id="b5e62-106">The name of the named item.</span></span>
+      description: <span data-ttu-id="e64e4-106">Nombre del elemento con nombre.</span><span class="sxs-lookup"><span data-stu-id="e64e4-106">The name of the named item.</span></span>
       type:
       - string
     - id: reference
-      description: <span data-ttu-id="b5e62-107">Fórmula o rango a los que se refiere el nombre.</span><span class="sxs-lookup"><span data-stu-id="b5e62-107">The formula or the range that the name will refer to.</span></span>
+      description: <span data-ttu-id="e64e4-107">Fórmula o rango a los que se refiere el nombre.</span><span class="sxs-lookup"><span data-stu-id="e64e4-107">The formula or the range that the name will refer to.</span></span>
       type:
       - Range | string
     - id: comment
-      description: <span data-ttu-id="b5e62-108">Opcional.</span><span class="sxs-lookup"><span data-stu-id="b5e62-108">Optional.</span></span> <span data-ttu-id="b5e62-109">El comentario asociado con el elemento con nombre.</span><span class="sxs-lookup"><span data-stu-id="b5e62-109">The comment associated with the named item.</span></span>
+      description: <span data-ttu-id="e64e4-108">Opcional.</span><span class="sxs-lookup"><span data-stu-id="e64e4-108">Optional.</span></span> <span data-ttu-id="e64e4-109">El comentario asociado con el elemento con nombre.</span><span class="sxs-lookup"><span data-stu-id="e64e4-109">The comment associated with the named item.</span></span>
       type:
       - string
 - uid: excel.Excel.NamedItemCollection.addFormulaLocal
   summary: >-
-    <span data-ttu-id="b5e62-110">Agrega un nuevo nombre a la colección del ámbito especificado, empleando la configuración regional del usuario para la fórmula.</span><span class="sxs-lookup"><span data-stu-id="b5e62-110">Adds a new name to the collection of the given scope using the user's locale for the formula.</span></span>
+    <span data-ttu-id="e64e4-110">Agrega un nuevo nombre a la colección del ámbito especificado, empleando la configuración regional del usuario para la fórmula.</span><span class="sxs-lookup"><span data-stu-id="e64e4-110">Adds a new name to the collection of the given scope using the user's locale for the formula.</span></span>
 
 
-    <span data-ttu-id="b5e62-111">\[[Conjunto de API: ExcelApi 1,4](/javascript/office/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="b5e62-111">\[ [API set: ExcelApi 1.4](/javascript/office/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    <span data-ttu-id="e64e4-111">\[[Conjunto de API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="e64e4-111">\[ [API set: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
   name: addFormulaLocal(name, formula, comment)
   fullName: excel.Excel.NamedItemCollection.addFormulaLocal
   langs:
@@ -78,23 +78,23 @@ items:
       description: ''
     parameters:
     - id: name
-      description: <span data-ttu-id="b5e62-112">Elemento "name" del elemento con nombre.</span><span class="sxs-lookup"><span data-stu-id="b5e62-112">The "name" of the named item.</span></span>
+      description: <span data-ttu-id="e64e4-112">Elemento "name" del elemento con nombre.</span><span class="sxs-lookup"><span data-stu-id="e64e4-112">The "name" of the named item.</span></span>
       type:
       - string
     - id: formula
-      description: <span data-ttu-id="b5e62-113">Fórmula de la configuración regional del usuario a la que se refiere el nombre.</span><span class="sxs-lookup"><span data-stu-id="b5e62-113">The formula in the user's locale that the name will refer to.</span></span>
+      description: <span data-ttu-id="e64e4-113">Fórmula de la configuración regional del usuario a la que se refiere el nombre.</span><span class="sxs-lookup"><span data-stu-id="e64e4-113">The formula in the user's locale that the name will refer to.</span></span>
       type:
       - string
     - id: comment
-      description: <span data-ttu-id="b5e62-114">Opcional.</span><span class="sxs-lookup"><span data-stu-id="b5e62-114">Optional.</span></span> <span data-ttu-id="b5e62-115">El comentario asociado con el elemento con nombre.</span><span class="sxs-lookup"><span data-stu-id="b5e62-115">The comment associated with the named item.</span></span>
+      description: <span data-ttu-id="e64e4-114">Opcional.</span><span class="sxs-lookup"><span data-stu-id="e64e4-114">Optional.</span></span> <span data-ttu-id="e64e4-115">El comentario asociado con el elemento con nombre.</span><span class="sxs-lookup"><span data-stu-id="e64e4-115">The comment associated with the named item.</span></span>
       type:
       - string
 - uid: excel.Excel.NamedItemCollection.getCount
   summary: >-
-    <span data-ttu-id="b5e62-116">Obtiene el número de elementos con nombre de la colección.</span><span class="sxs-lookup"><span data-stu-id="b5e62-116">Gets the number of named items in the collection.</span></span>
+    <span data-ttu-id="e64e4-116">Obtiene el número de elementos con nombre de la colección.</span><span class="sxs-lookup"><span data-stu-id="e64e4-116">Gets the number of named items in the collection.</span></span>
 
 
-    <span data-ttu-id="b5e62-117">\[[Conjunto de API: ExcelApi 1,4](/javascript/office/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="b5e62-117">\[ [API set: ExcelApi 1.4](/javascript/office/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    <span data-ttu-id="e64e4-117">\[[Conjunto de API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="e64e4-117">\[ [API set: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
   name: getCount()
   fullName: excel.Excel.NamedItemCollection.getCount
   langs:
@@ -108,10 +108,10 @@ items:
       description: ''
 - uid: excel.Excel.NamedItemCollection.getItem
   summary: >-
-    <span data-ttu-id="b5e62-118">Obtiene un objeto NamedItem utilizando su nombre.</span><span class="sxs-lookup"><span data-stu-id="b5e62-118">Gets a NamedItem object using its name.</span></span>
+    <span data-ttu-id="e64e4-118">Obtiene un objeto NamedItem utilizando su nombre.</span><span class="sxs-lookup"><span data-stu-id="e64e4-118">Gets a NamedItem object using its name.</span></span>
 
 
-    <span data-ttu-id="b5e62-119">\[[Conjunto de API: ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="b5e62-119">\[ [API set: ExcelApi 1.1](/javascript/office/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    <span data-ttu-id="e64e4-119">\[[Conjunto de API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="e64e4-119">\[ [API set: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
   name: getItem(name)
   fullName: excel.Excel.NamedItemCollection.getItem
   langs:
@@ -122,18 +122,18 @@ items:
     return:
       type:
       - excel.Excel.NamedItem
-      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"b5e62-120\">Ejemplos</span><span class=\"sxs-lookup\"><span data-stu-id=\"b5e62-120\">Examples</span></span>\n\n```javascript\nExcel.run(function (ctx) { \n    var sheetName = 'Sheet1';\n    var nameditem = ctx.workbook.names.getItem(sheetName);\n    nameditem.load('type');\n    return ctx.sync().then(function() {\n            console.log(nameditem.type);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"e64e4-120\">Ejemplos</span><span class=\"sxs-lookup\"><span data-stu-id=\"e64e4-120\">Examples</span></span>\n\n```javascript\nExcel.run(function (ctx) { \n    var sheetName = 'Sheet1';\n    var nameditem = ctx.workbook.names.getItem(sheetName);\n    nameditem.load('type');\n    return ctx.sync().then(function() {\n            console.log(nameditem.type);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
     parameters:
     - id: name
-      description: <span data-ttu-id="b5e62-121">Nombre de NamedItem.</span><span class="sxs-lookup"><span data-stu-id="b5e62-121">Nameditem name.</span></span>
+      description: <span data-ttu-id="e64e4-121">Nombre de NamedItem.</span><span class="sxs-lookup"><span data-stu-id="e64e4-121">Nameditem name.</span></span>
       type:
       - string
 - uid: excel.Excel.NamedItemCollection.getItemOrNullObject
   summary: >-
-    <span data-ttu-id="b5e62-122">Obtiene un objeto NamedItem utilizando su nombre.</span><span class="sxs-lookup"><span data-stu-id="b5e62-122">Gets a NamedItem object using its name.</span></span> <span data-ttu-id="b5e62-123">Si no existe el objeto nameditem, devolverá un objeto null.</span><span class="sxs-lookup"><span data-stu-id="b5e62-123">If the nameditem object does not exist, will return a null object.</span></span>
+    <span data-ttu-id="e64e4-122">Obtiene un objeto NamedItem utilizando su nombre.</span><span class="sxs-lookup"><span data-stu-id="e64e4-122">Gets a NamedItem object using its name.</span></span> <span data-ttu-id="e64e4-123">Si no existe el objeto nameditem, devolverá un objeto null.</span><span class="sxs-lookup"><span data-stu-id="e64e4-123">If the nameditem object does not exist, will return a null object.</span></span>
 
 
-    <span data-ttu-id="b5e62-124">\[[Conjunto de API: ExcelApi 1,4](/javascript/office/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="b5e62-124">\[ [API set: ExcelApi 1.4](/javascript/office/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    <span data-ttu-id="e64e4-124">\[[Conjunto de API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="e64e4-124">\[ [API set: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
   name: getItemOrNullObject(name)
   fullName: excel.Excel.NamedItemCollection.getItemOrNullObject
   langs:
@@ -147,11 +147,11 @@ items:
       description: ''
     parameters:
     - id: name
-      description: <span data-ttu-id="b5e62-125">Nombre de NamedItem.</span><span class="sxs-lookup"><span data-stu-id="b5e62-125">Nameditem name.</span></span>
+      description: <span data-ttu-id="e64e4-125">Nombre de NamedItem.</span><span class="sxs-lookup"><span data-stu-id="e64e4-125">Nameditem name.</span></span>
       type:
       - string
 - uid: excel.Excel.NamedItemCollection.items
-  summary: <span data-ttu-id="b5e62-126">Obtiene al secundario cargado los elementos de esta colección.</span><span class="sxs-lookup"><span data-stu-id="b5e62-126">Gets the loaded child items in this collection.</span></span>
+  summary: <span data-ttu-id="e64e4-126">Obtiene al secundario cargado los elementos de esta colección.</span><span class="sxs-lookup"><span data-stu-id="e64e4-126">Gets the loaded child items in this collection.</span></span>
   name: items
   fullName: excel.Excel.NamedItemCollection.items
   langs:
@@ -163,8 +163,8 @@ items:
       type:
       - Excel.NamedItem[]
 - uid: excel.Excel.NamedItemCollection.load
-  summary: <span data-ttu-id="b5e62-127">Colas de seguridad de un comando que se va a cargar las propiedades del objeto especificadas.</span><span class="sxs-lookup"><span data-stu-id="b5e62-127">Queues up a command to load the specified properties of the object.</span></span> <span data-ttu-id="b5e62-128">Se debe llamar a "context.sync()" antes de leer las propiedades.</span><span class="sxs-lookup"><span data-stu-id="b5e62-128">You must call "context.sync()" before reading the properties.</span></span>
-  remarks: "<span data-ttu-id=\"b5e62-129\">Además de esta firma, este método no tiene las siguientes firmas:</span><span class=\"sxs-lookup\"><span data-stu-id=\"b5e62-129\">In addition to this signature, this method has the following signatures:</span></span>\n\n<span data-ttu-id=\"b5e62-130\">`load(option?: { select?: string; expand?: string; }): Excel.NamedItemCollection`-Donde option.select es una cadena delimitada por comas que especifica las propiedades para cargar y options.expand es una cadena delimitada por comas que especifica las propiedades de navegación para cargar.</span><span class=\"sxs-lookup\"><span data-stu-id=\"b5e62-130\">`load(option?: { select?: string; expand?: string; }): Excel.NamedItemCollection` - Where option.select is a comma-delimited string that specifies the properties to load, and options.expand is a comma-delimited string that specifies the navigation properties to load.</span></span>\n\n<span data-ttu-id=\"b5e62-131\">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.NamedItemCollection`-Sólo está disponible en los tipos de colección.</span><span class=\"sxs-lookup\"><span data-stu-id=\"b5e62-131\">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.NamedItemCollection` - Only available on collection types.</span></span> <span data-ttu-id=\"b5e62-132\">Es similar a la firma precedente.</span><span class=\"sxs-lookup\"><span data-stu-id=\"b5e62-132\">It is similar to the preceding signature.</span></span> <span data-ttu-id=\"b5e62-133\">Option.Top especifica el número máximo de elementos de la colección que se puede incluir en el resultado.</span><span class=\"sxs-lookup\"><span data-stu-id=\"b5e62-133\">Option.top specifies the maximum number of collection items that can be included in the result.</span></span> <span data-ttu-id=\"b5e62-134\">Option.Skip especifica el número de elementos que se pasan por alto y no se incluyen en el resultado.</span><span class=\"sxs-lookup\"><span data-stu-id=\"b5e62-134\">Option.skip specifies the number of items that are to be skipped and not included in the result.</span></span> <span data-ttu-id=\"b5e62-135\">Si se especifica option.top, se iniciará el conjunto de resultados después de omitir el número especificado de elementos.</span><span class=\"sxs-lookup\"><span data-stu-id=\"b5e62-135\">If option.top is specified, the result set will start after skipping the specified number of items.</span></span>\n#### <a name=\"examples\"></a><span data-ttu-id=\"b5e62-136\">Ejemplos</span><span class=\"sxs-lookup\"><span data-stu-id=\"b5e62-136\">Examples</span></span>\n\n```javascript\nExcel.run(function (ctx) { \n    var nameditems = ctx.workbook.names;\n    nameditems.load('items');\n    return ctx.sync().then(function() {\n        for (var i = 0; i < nameditems.items.length; i++)\n        {\n            console.log(nameditems.items[i].name);\n            console.log(nameditems.items[i].index);\n        }\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  summary: <span data-ttu-id="e64e4-127">Colas de seguridad de un comando que se va a cargar las propiedades del objeto especificadas.</span><span class="sxs-lookup"><span data-stu-id="e64e4-127">Queues up a command to load the specified properties of the object.</span></span> <span data-ttu-id="e64e4-128">Se debe llamar a "context.sync()" antes de leer las propiedades.</span><span class="sxs-lookup"><span data-stu-id="e64e4-128">You must call "context.sync()" before reading the properties.</span></span>
+  remarks: "<span data-ttu-id=\"e64e4-129\">Además de esta firma, este método no tiene las siguientes firmas:</span><span class=\"sxs-lookup\"><span data-stu-id=\"e64e4-129\">In addition to this signature, this method has the following signatures:</span></span>\n\n<span data-ttu-id=\"e64e4-130\">`load(option?: { select?: string; expand?: string; }): Excel.NamedItemCollection`-Donde option.select es una cadena delimitada por comas que especifica las propiedades para cargar y options.expand es una cadena delimitada por comas que especifica las propiedades de navegación para cargar.</span><span class=\"sxs-lookup\"><span data-stu-id=\"e64e4-130\">`load(option?: { select?: string; expand?: string; }): Excel.NamedItemCollection` - Where option.select is a comma-delimited string that specifies the properties to load, and options.expand is a comma-delimited string that specifies the navigation properties to load.</span></span>\n\n<span data-ttu-id=\"e64e4-131\">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.NamedItemCollection`-Sólo está disponible en los tipos de colección.</span><span class=\"sxs-lookup\"><span data-stu-id=\"e64e4-131\">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.NamedItemCollection` - Only available on collection types.</span></span> <span data-ttu-id=\"e64e4-132\">Es similar a la firma precedente.</span><span class=\"sxs-lookup\"><span data-stu-id=\"e64e4-132\">It is similar to the preceding signature.</span></span> <span data-ttu-id=\"e64e4-133\">Option.Top especifica el número máximo de elementos de la colección que se puede incluir en el resultado.</span><span class=\"sxs-lookup\"><span data-stu-id=\"e64e4-133\">Option.top specifies the maximum number of collection items that can be included in the result.</span></span> <span data-ttu-id=\"e64e4-134\">Option.Skip especifica el número de elementos que se pasan por alto y no se incluyen en el resultado.</span><span class=\"sxs-lookup\"><span data-stu-id=\"e64e4-134\">Option.skip specifies the number of items that are to be skipped and not included in the result.</span></span> <span data-ttu-id=\"e64e4-135\">Si se especifica option.top, se iniciará el conjunto de resultados después de omitir el número especificado de elementos.</span><span class=\"sxs-lookup\"><span data-stu-id=\"e64e4-135\">If option.top is specified, the result set will start after skipping the specified number of items.</span></span>\n#### <a name=\"examples\"></a><span data-ttu-id=\"e64e4-136\">Ejemplos</span><span class=\"sxs-lookup\"><span data-stu-id=\"e64e4-136\">Examples</span></span>\n\n```javascript\nExcel.run(function (ctx) { \n    var nameditems = ctx.workbook.names;\n    nameditems.load('items');\n    return ctx.sync().then(function() {\n        for (var i = 0; i < nameditems.items.length; i++)\n        {\n            console.log(nameditems.items[i].name);\n            console.log(nameditems.items[i].index);\n        }\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
   name: load(option)
   fullName: excel.Excel.NamedItemCollection.load
   langs:
@@ -178,7 +178,7 @@ items:
       description: ''
     parameters:
     - id: option
-      description: <span data-ttu-id="b5e62-137">Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades de carga.</span><span class="sxs-lookup"><span data-stu-id="b5e62-137">A comma-delimited string or an array of strings that specify the properties to load.</span></span>
+      description: <span data-ttu-id="e64e4-137">Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades de carga.</span><span class="sxs-lookup"><span data-stu-id="e64e4-137">A comma-delimited string or an array of strings that specify the properties to load.</span></span>
       type:
       - string | string[]
 - uid: excel.Excel.NamedItemCollection.toJSON
