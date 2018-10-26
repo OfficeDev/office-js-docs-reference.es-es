@@ -1,17 +1,17 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 2811726f2ec6aba4e6c080b1c7d9293d57a06ba9
-ms.sourcegitcommit: c1149d24b38f20daf9ce690cd0761ec1ceb7333d
+ms.openlocfilehash: 3f33e2da9e2254df50cc3801dd7fcc86056d7d22
+ms.sourcegitcommit: 9034a7d2fb2934046178915d4305b0f0cf8f7934
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/17/2018
-ms.locfileid: "25591690"
+ms.lasthandoff: 10/26/2018
+ms.locfileid: "25798183"
 items:
 - uid: excel.Excel.DataValidation
   summary: >-
-    <span data-ttu-id="ae90a-101">Representa la validación de datos que se aplique al rango actual.</span><span class="sxs-lookup"><span data-stu-id="ae90a-101">Represents the data validation applied to the current range.</span></span>
+    <span data-ttu-id="9ce0c-101">Representa la validación de datos que se aplique al rango actual.</span><span class="sxs-lookup"><span data-stu-id="9ce0c-101">Represents the data validation applied to the current range.</span></span>
 
 
-    <span data-ttu-id="ae90a-102">\[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="ae90a-102">\[ [API set: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    <span data-ttu-id="9ce0c-102">\[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="9ce0c-102">\[ [API set: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
   name: Excel.DataValidation
   fullName: excel.Excel.DataValidation
   langs:
@@ -32,10 +32,10 @@ items:
   - excel.Excel.DataValidation.valid
 - uid: excel.Excel.DataValidation.clear
   summary: >-
-    <span data-ttu-id="ae90a-103">Borra la validación de datos desde el intervalo actual.</span><span class="sxs-lookup"><span data-stu-id="ae90a-103">Clears the data validation from the current range.</span></span>
+    <span data-ttu-id="9ce0c-103">Borra la validación de datos desde el intervalo actual.</span><span class="sxs-lookup"><span data-stu-id="9ce0c-103">Clears the data validation from the current range.</span></span>
 
 
-    <span data-ttu-id="ae90a-104">\[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="ae90a-104">\[ [API set: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    <span data-ttu-id="9ce0c-104">\[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="9ce0c-104">\[ [API set: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
   name: clear()
   fullName: excel.Excel.DataValidation.clear
   langs:
@@ -49,10 +49,10 @@ items:
       description: ''
 - uid: excel.Excel.DataValidation.errorAlert
   summary: >-
-    <span data-ttu-id="ae90a-105">Alerta de error cuando el usuario introduce datos no válidos.</span><span class="sxs-lookup"><span data-stu-id="ae90a-105">Error alert when user enters invalid data.</span></span>
+    <span data-ttu-id="9ce0c-105">Alerta de error cuando el usuario introduce datos no válidos.</span><span class="sxs-lookup"><span data-stu-id="9ce0c-105">Error alert when user enters invalid data.</span></span>
 
 
-    <span data-ttu-id="ae90a-106">\[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="ae90a-106">\[ [API set: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    <span data-ttu-id="9ce0c-106">\[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="9ce0c-106">\[ [API set: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
   name: errorAlert
   fullName: excel.Excel.DataValidation.errorAlert
   langs:
@@ -63,12 +63,13 @@ items:
     return:
       type:
       - excel.Excel.DataValidationErrorAlert
+      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"9ce0c-107\">Ejemplos</span><span class=\"sxs-lookup\"><span data-stu-id=\"9ce0c-107\">Examples</span></span>\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Decision\");\n    const commentsRange = \n        sheet.tables.getItem(\"NameOptionsTable\").columns.getItem(\"Comments\").getDataBodyRange();\n\n    // When you are developing, it is a good practice to\n    // clear the dataValidation object with each run of your code.\n    commentsRange.dataValidation.clear();   \n\n    // If the value of A2 is contained in the value of C2, then \n    // SEARCH(A2,C2) returns the number where it begins. Otherwise,\n    // it does not return a number.\n    let redundantStringRule = {\n        custom: {\n            formula: \"=NOT(ISNUMBER(SEARCH(A2,C2)))\"\n        }\n    };\n    commentsRange.dataValidation.rule = redundantStringRule;\n    commentsRange.dataValidation.errorAlert = {\n        message: \"It is redundant to include the baby name in the comment.\",\n        showAlert: true,\n        style: \"Information\",\n        title: \"Baby Name in Comment\"\n    };\n\n    await context.sync();\n});\n```"
 - uid: excel.Excel.DataValidation.ignoreBlanks
   summary: >-
-    <span data-ttu-id="ae90a-107">Omitir espacios en blanco: no se realizará ninguna validación de datos en las celdas en blanco, el valor predeterminado es true.</span><span class="sxs-lookup"><span data-stu-id="ae90a-107">Ignore blanks: no data validation will be performed on blank cells, it defaults to true.</span></span>
+    <span data-ttu-id="9ce0c-108">Omitir espacios en blanco: no se realizará ninguna validación de datos en las celdas en blanco, el valor predeterminado es true.</span><span class="sxs-lookup"><span data-stu-id="9ce0c-108">Ignore blanks: no data validation will be performed on blank cells, it defaults to true.</span></span>
 
 
-    <span data-ttu-id="ae90a-108">\[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="ae90a-108">\[ [API set: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    <span data-ttu-id="9ce0c-109">\[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="9ce0c-109">\[ [API set: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
   name: ignoreBlanks
   fullName: excel.Excel.DataValidation.ignoreBlanks
   langs:
@@ -80,15 +81,15 @@ items:
       type:
       - boolean
 - uid: excel.Excel.DataValidation.load
-  summary: <span data-ttu-id="ae90a-109">Colas de seguridad de un comando que se va a cargar las propiedades del objeto especificadas.</span><span class="sxs-lookup"><span data-stu-id="ae90a-109">Queues up a command to load the specified properties of the object.</span></span> <span data-ttu-id="ae90a-110">Se debe llamar a "context.sync()" antes de leer las propiedades.</span><span class="sxs-lookup"><span data-stu-id="ae90a-110">You must call "context.sync()" before reading the properties.</span></span>
+  summary: <span data-ttu-id="9ce0c-110">Colas de seguridad de un comando que se va a cargar las propiedades del objeto especificadas.</span><span class="sxs-lookup"><span data-stu-id="9ce0c-110">Queues up a command to load the specified properties of the object.</span></span> <span data-ttu-id="9ce0c-111">Se debe llamar a "context.sync()" antes de leer las propiedades.</span><span class="sxs-lookup"><span data-stu-id="9ce0c-111">You must call "context.sync()" before reading the properties.</span></span>
   remarks: >-
-    <span data-ttu-id="ae90a-111">Además de esta firma, este método no tiene las siguientes firmas:</span><span class="sxs-lookup"><span data-stu-id="ae90a-111">In addition to this signature, this method has the following signatures:</span></span>
+    <span data-ttu-id="9ce0c-112">Además de esta firma, este método no tiene las siguientes firmas:</span><span class="sxs-lookup"><span data-stu-id="9ce0c-112">In addition to this signature, this method has the following signatures:</span></span>
 
 
-    <span data-ttu-id="ae90a-112">`load(option?: { select?: string; expand?: string; }): Excel.DataValidation`-Donde option.select es una cadena delimitada por comas que especifica las propiedades para cargar y options.expand es una cadena delimitada por comas que especifica las propiedades de navegación para cargar.</span><span class="sxs-lookup"><span data-stu-id="ae90a-112">`load(option?: { select?: string; expand?: string; }): Excel.DataValidation` - Where option.select is a comma-delimited string that specifies the properties to load, and options.expand is a comma-delimited string that specifies the navigation properties to load.</span></span>
+    <span data-ttu-id="9ce0c-113">`load(option?: { select?: string; expand?: string; }): Excel.DataValidation`-Donde option.select es una cadena delimitada por comas que especifica las propiedades para cargar y options.expand es una cadena delimitada por comas que especifica las propiedades de navegación para cargar.</span><span class="sxs-lookup"><span data-stu-id="9ce0c-113">`load(option?: { select?: string; expand?: string; }): Excel.DataValidation` - Where option.select is a comma-delimited string that specifies the properties to load, and options.expand is a comma-delimited string that specifies the navigation properties to load.</span></span>
 
 
-    <span data-ttu-id="ae90a-113">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.DataValidation`-Sólo está disponible en los tipos de colección.</span><span class="sxs-lookup"><span data-stu-id="ae90a-113">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.DataValidation` - Only available on collection types.</span></span> <span data-ttu-id="ae90a-114">Es similar a la firma precedente.</span><span class="sxs-lookup"><span data-stu-id="ae90a-114">It is similar to the preceding signature.</span></span> <span data-ttu-id="ae90a-115">Option.Top especifica el número máximo de elementos de la colección que se puede incluir en el resultado.</span><span class="sxs-lookup"><span data-stu-id="ae90a-115">Option.top specifies the maximum number of collection items that can be included in the result.</span></span> <span data-ttu-id="ae90a-116">Option.Skip especifica el número de elementos que se pasan por alto y no se incluyen en el resultado.</span><span class="sxs-lookup"><span data-stu-id="ae90a-116">Option.skip specifies the number of items that are to be skipped and not included in the result.</span></span> <span data-ttu-id="ae90a-117">Si se especifica option.top, se iniciará el conjunto de resultados después de omitir el número especificado de elementos.</span><span class="sxs-lookup"><span data-stu-id="ae90a-117">If option.top is specified, the result set will start after skipping the specified number of items.</span></span>
+    <span data-ttu-id="9ce0c-114">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.DataValidation`-Sólo está disponible en los tipos de colección.</span><span class="sxs-lookup"><span data-stu-id="9ce0c-114">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.DataValidation` - Only available on collection types.</span></span> <span data-ttu-id="9ce0c-115">Es similar a la firma precedente.</span><span class="sxs-lookup"><span data-stu-id="9ce0c-115">It is similar to the preceding signature.</span></span> <span data-ttu-id="9ce0c-116">Option.Top especifica el número máximo de elementos de la colección que se puede incluir en el resultado.</span><span class="sxs-lookup"><span data-stu-id="9ce0c-116">Option.top specifies the maximum number of collection items that can be included in the result.</span></span> <span data-ttu-id="9ce0c-117">Option.Skip especifica el número de elementos que se pasan por alto y no se incluyen en el resultado.</span><span class="sxs-lookup"><span data-stu-id="9ce0c-117">Option.skip specifies the number of items that are to be skipped and not included in the result.</span></span> <span data-ttu-id="9ce0c-118">Si se especifica option.top, se iniciará el conjunto de resultados después de omitir el número especificado de elementos.</span><span class="sxs-lookup"><span data-stu-id="9ce0c-118">If option.top is specified, the result set will start after skipping the specified number of items.</span></span>
   name: load(option)
   fullName: excel.Excel.DataValidation.load
   langs:
@@ -102,15 +103,15 @@ items:
       description: ''
     parameters:
     - id: option
-      description: <span data-ttu-id="ae90a-118">Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades de carga.</span><span class="sxs-lookup"><span data-stu-id="ae90a-118">A comma-delimited string or an array of strings that specify the properties to load.</span></span>
+      description: <span data-ttu-id="9ce0c-119">Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades de carga.</span><span class="sxs-lookup"><span data-stu-id="9ce0c-119">A comma-delimited string or an array of strings that specify the properties to load.</span></span>
       type:
       - string | string[]
 - uid: excel.Excel.DataValidation.prompt
   summary: >-
-    <span data-ttu-id="ae90a-119">Símbolo del sistema cuando los usuarios seleccionan una celda.</span><span class="sxs-lookup"><span data-stu-id="ae90a-119">Prompt when users select a cell.</span></span>
+    <span data-ttu-id="9ce0c-120">Símbolo del sistema cuando los usuarios seleccionan una celda.</span><span class="sxs-lookup"><span data-stu-id="9ce0c-120">Prompt when users select a cell.</span></span>
 
 
-    <span data-ttu-id="ae90a-120">\[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="ae90a-120">\[ [API set: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    <span data-ttu-id="9ce0c-121">\[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="9ce0c-121">\[ [API set: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
   name: prompt
   fullName: excel.Excel.DataValidation.prompt
   langs:
@@ -123,10 +124,10 @@ items:
       - excel.Excel.DataValidationPrompt
 - uid: excel.Excel.DataValidation.rule
   summary: >-
-    <span data-ttu-id="ae90a-121">Regla de validación de datos que contiene los diferentes tipos de criterios de validación de datos.</span><span class="sxs-lookup"><span data-stu-id="ae90a-121">Data Validation rule that contains different type of data validation criteria.</span></span>
+    <span data-ttu-id="9ce0c-122">Regla de validación de datos que contiene los diferentes tipos de criterios de validación de datos.</span><span class="sxs-lookup"><span data-stu-id="9ce0c-122">Data Validation rule that contains different type of data validation criteria.</span></span>
 
 
-    <span data-ttu-id="ae90a-122">\[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="ae90a-122">\[ [API set: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    <span data-ttu-id="9ce0c-123">\[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="9ce0c-123">\[ [API set: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
   name: rule
   fullName: excel.Excel.DataValidation.rule
   langs:
@@ -151,10 +152,10 @@ items:
       description: ''
 - uid: excel.Excel.DataValidation.type
   summary: >-
-    <span data-ttu-id="ae90a-123">Tipo de la validación de datos, consulte Excel.DataValidationType para obtener información detallada.</span><span class="sxs-lookup"><span data-stu-id="ae90a-123">Type of the data validation, see Excel.DataValidationType for details.</span></span>
+    <span data-ttu-id="9ce0c-124">Tipo de la validación de datos, consulte Excel.DataValidationType para obtener información detallada.</span><span class="sxs-lookup"><span data-stu-id="9ce0c-124">Type of the data validation, see Excel.DataValidationType for details.</span></span>
 
 
-    <span data-ttu-id="ae90a-124">\[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="ae90a-124">\[ [API set: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    <span data-ttu-id="9ce0c-125">\[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="9ce0c-125">\[ [API set: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
   name: type
   fullName: excel.Excel.DataValidation.type
   langs:
@@ -167,10 +168,10 @@ items:
       - Excel.DataValidationType | "None" | "WholeNumber" | "Decimal" | "List" | "Date" | "Time" | "TextLength" | "Custom" | "Inconsistent" | "MixedCriteria"
 - uid: excel.Excel.DataValidation.valid
   summary: >-
-    <span data-ttu-id="ae90a-125">Representa si todos los valores de celda son válidos de acuerdo con las reglas de validación de datos.</span><span class="sxs-lookup"><span data-stu-id="ae90a-125">Represents if all cell values are valid according to the data validation rules.</span></span> <span data-ttu-id="ae90a-126">Devuelve true si todos los valores de celda son válidos, o false si todos los valores de celda no son válidos.</span><span class="sxs-lookup"><span data-stu-id="ae90a-126">Returns true if all cell values are valid, or false if all cell values are invalid.</span></span> <span data-ttu-id="ae90a-127">Devuelve null si existen los dos valores de celda válidos y no válidos dentro del intervalo.</span><span class="sxs-lookup"><span data-stu-id="ae90a-127">Returns null if there are both valid and invalid cell values within the range.</span></span>
+    <span data-ttu-id="9ce0c-126">Representa si todos los valores de celda son válidos de acuerdo con las reglas de validación de datos.</span><span class="sxs-lookup"><span data-stu-id="9ce0c-126">Represents if all cell values are valid according to the data validation rules.</span></span> <span data-ttu-id="9ce0c-127">Devuelve true si todos los valores de celda son válidos, o false si todos los valores de celda no son válidos.</span><span class="sxs-lookup"><span data-stu-id="9ce0c-127">Returns true if all cell values are valid, or false if all cell values are invalid.</span></span> <span data-ttu-id="9ce0c-128">Devuelve null si existen los dos valores de celda válidos y no válidos dentro del intervalo.</span><span class="sxs-lookup"><span data-stu-id="9ce0c-128">Returns null if there are both valid and invalid cell values within the range.</span></span>
 
 
-    <span data-ttu-id="ae90a-128">\[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="ae90a-128">\[ [API set: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    <span data-ttu-id="9ce0c-129">\[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="9ce0c-129">\[ [API set: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
   name: valid
   fullName: excel.Excel.DataValidation.valid
   langs:
