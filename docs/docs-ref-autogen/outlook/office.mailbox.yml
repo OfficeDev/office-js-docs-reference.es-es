@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: aed02c23f9c6af0d61b1124d36fde84cc7b711c1
-ms.sourcegitcommit: c1149d24b38f20daf9ce690cd0761ec1ceb7333d
+ms.openlocfilehash: 464cf60863dbfdc585f3597bb5abebe5fcf4136a
+ms.sourcegitcommit: 4bbd18c863a4140ad456b859f9c0309e153e10b2
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/17/2018
-ms.locfileid: "25585537"
+ms.lasthandoff: 11/02/2018
+ms.locfileid: "25914352"
 items:
 - uid: outlook.Office.Mailbox
   summary: >-
@@ -51,6 +51,7 @@ items:
   - outlook.Office.Mailbox.getUserIdentityTokenAsync
   - outlook.Office.Mailbox.item
   - outlook.Office.Mailbox.makeEwsRequestAsync
+  - outlook.Office.Mailbox.removeHandlerAsync
   - outlook.Office.Mailbox.restUrl
   - outlook.Office.Mailbox.userProfile
 - uid: outlook.Office.Mailbox.addHandlerAsync
@@ -58,7 +59,7 @@ items:
     Agrega un controlador de eventos para un evento admitido.
 
 
-    Actualmente, los tipos de eventos admitidos son `Office.EventType.ItemChanged` y `Office.EventType.OfficeThemeChanged` <!-- -->.
+    Actualmente, el tipo de evento compatibles sólo es `Office.EventType.ItemChanged` <!-- -->. En la vista previa, `Office.EventType.OfficeThemeChanged` también es compatible.
 
 
     \[[Conjunto de API: buzón 1,5](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -889,6 +890,48 @@ items:
       description: Opcional. Cualquier dato de estado que se pasa al método asincrónico.
       type:
       - any
+- uid: outlook.Office.Mailbox.removeHandlerAsync
+  summary: >-
+    Quita un controlador de eventos para un evento compatible.
+
+
+    Actualmente, el tipo de evento compatibles sólo es `Office.EventType.ItemChanged` <!-- -->. En la vista previa, `Office.EventType.OfficeThemeChanged` también es compatible.
+
+
+    \[[Conjunto de API: buzón 1,5](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Nivel de permiso mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redacción o lectura</td></tr></table>
+  name: removeHandlerAsync(eventType, handler, options, callback)
+  fullName: outlook.Office.Mailbox.removeHandlerAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'removeHandlerAsync(eventType: Office.EventType, handler: (type: EventType) => void, options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<void>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: eventType
+      description: El evento que debe revocar el controlador.
+      type:
+      - Office.EventType
+    - id: handler
+      description: La función para controlar el evento. La función debe aceptar un parámetro único, que es un literal de objeto. La propiedad type en el parámetro coincidirá con el parámetro eventType se pasan a addHandlerAsync.
+      type:
+      - '(type: EventType) => void'
+    - id: options
+      description: Opcional. Proporciona una opción para conservar los datos de contexto de cualquier tipo, sin cambios, para su uso en una devolución de llamada.
+      type:
+      - office.Office.AsyncContextOptions
+    - id: callback
+      description: Opcional. Cuando finaliza el método, se llama a la función que se pasa en el parámetro de devolución de llamada con un parámetro único de tipo Office.AsyncResult.
+      type:
+      - '(result: AsyncResult<void>) => void'
 - uid: outlook.Office.Mailbox.restUrl
   summary: >-
     Obtiene la URL del punto de conexión REST para esta cuenta de correo electrónico.

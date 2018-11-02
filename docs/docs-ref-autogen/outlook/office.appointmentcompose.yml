@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 6c616ec330f09b7d31dc22942a4a25639e73a1d4
-ms.sourcegitcommit: c1149d24b38f20daf9ce690cd0761ec1ceb7333d
+ms.openlocfilehash: 2aac9cd9cd3a0c9ab9b91f311f7637f786170cf7
+ms.sourcegitcommit: 4bbd18c863a4140ad456b859f9c0309e153e10b2
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/17/2018
-ms.locfileid: "25586279"
+ms.lasthandoff: 11/02/2018
+ms.locfileid: "25912889"
 items:
 - uid: outlook.Office.AppointmentCompose
   summary: >-
@@ -30,6 +30,7 @@ items:
   - outlook.Office.AppointmentCompose.dateTimeCreated
   - outlook.Office.AppointmentCompose.dateTimeModifed
   - outlook.Office.AppointmentCompose.end
+  - outlook.Office.AppointmentCompose.getAttachmentsAsync
   - outlook.Office.AppointmentCompose.getInitializationContextAsync
   - outlook.Office.AppointmentCompose.getSelectedDataAsync
   - outlook.Office.AppointmentCompose.itemType
@@ -207,7 +208,7 @@ items:
     Agrega un controlador de eventos para un evento admitido.
 
 
-    Actualmente son los tipos de eventos compatibles `Office.EventType.AppointmentTimeChanged` <!-- -->, `Office.EventType.RecipientsChanged` <!-- -->, y `Office.EventType.RecurrenceChanged` <!-- -->.
+    Actualmente son los tipos de eventos compatibles `Office.EventType.AppointmentTimeChanged` <!-- -->, `Office.EventType.RecipientsChanged` <!-- -->, y `Office.EventType.RecurrenceChanged` <!-- -->. En la vista previa, `Office.EventType.AttachmentsChanged` también es compatible.
 
 
     \[[Conjunto de API: buzón 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -496,6 +497,34 @@ items:
     return:
       type:
       - Time
+- uid: outlook.Office.AppointmentCompose.getAttachmentsAsync
+  summary: >-
+    Obtiene los datos adjuntos del elemento como una matriz.
+
+
+    \[[Conjunto de API: vista previa de buzón de correo](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: "<table><tr><td>[Nivel de permiso mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>\n\n<tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redacción</td></tr></table>\n####Ejemplos\n\n```javascript\nvar item = Office.context.mailbox.item;\nvar outputString = \"\";\nitem.getAttachmentsAsync(callback);  \nfunction callback(result) {\n    if (result.value.length > 0) {\n        for (i = 0 ; i < result.value.length ; i++) {\n            var _att = result.value [i];\n            outputString += \"<BR>\" + i + \". Name: \";\n            outputString += _att.name;\n            outputString += \"<BR>ID: \" + _att.id;\n            outputString += \"<BR>contentType: \" + _att.contentType;\n            outputString += \"<BR>size: \" + _att.size;\n            outputString += \"<BR>attachmentType: \" + _att.attachmentType;\n            outputString += \"<BR>isInline: \" + _att.isInline;\n        }\n    }\n}\n```"
+  isPreview: true
+  name: getAttachmentsAsync(options, callback)
+  fullName: outlook.Office.AppointmentCompose.getAttachmentsAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getAttachmentsAsync(options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<Office.AttachmentDetails[]>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: options
+      description: 'Opcional. Un objeto literal que contiene una o más de las siguientes propiedades. asyncContext: los desarrolladores pueden proporcionar cualquier objeto que desean tener acceso en el método de devolución de llamada.'
+      type:
+      - office.Office.AsyncContextOptions
+    - id: callback
+      description: Opcional. Cuando finaliza el método, se llama a la función que se pasa en el parámetro de devolución de llamada con un parámetro único de tipo Office.AsyncResult. Si se produce un error en la llamada, la propiedad asyncResult.error contendrá y código de error con el motivo del error.
+      type:
+      - '(result: AsyncResult<Office.AttachmentDetails[]>) => void'
 - uid: outlook.Office.AppointmentCompose.getInitializationContextAsync
   summary: "Obtiene datos de inicialización que se pasan cuando un mensaje accionable activa el complemento.\n\nNota: Este método solo es compatible con Outlook 2016 para Windows (versiones Hacer clic y ejecutar a partir de la versión 16.0.8413.1000) y Outlook en la web para Office 365. \n\n\\[[Conjunto de API: vista previa de buzón de correo](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
   remarks: >-
@@ -823,7 +852,7 @@ items:
     Quita los datos adjuntos de un mensaje o cita.
 
 
-    El método removeAttachmentAsync quita los datos adjuntos con el identificador especificado del elemento. Como procedimiento recomendado, use el identificador de datos adjuntos para quitar un archivo adjunto solo si la misma aplicación de correo ha agregado dicho archivo en la misma sesión. En Outlook Web App y OWA para dispositivos, el identificador de datos adjuntos solo es válido dentro de la misma sesión. Una sesión finaliza cuando el usuario cierra la aplicación, o bien cuando el usuario comienza a redactar en un formulario en línea y, después, sale de dicho formulario para continuar en una ventana distinta.
+    El método removeAttachmentAsync quita los datos adjuntos con el identificador especificado del elemento. Como práctica recomendada, debe usar el identificador de datos adjuntos para quitar datos adjuntos solo si la misma aplicación de correo ha agregado los datos adjuntos en la misma sesión. En Outlook Web App y OWA para los dispositivos, el identificador de datos adjuntos es válido solo en la misma sesión. Una sesión es a través de cuando el usuario cierra la aplicación, o si el usuario inicia redactar un formulario en línea, a continuación, posteriormente aparece el formulario para continuar en una ventana independiente.
 
 
     \[[Conjunto de API: buzón 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -894,7 +923,7 @@ items:
     Quita un controlador de eventos para un evento compatible.
 
 
-    Actualmente son los tipos de eventos compatibles `Office.EventType.AppointmentTimeChanged` <!-- -->, `Office.EventType.RecipientsChanged` <!-- -->, y `Office.EventType.RecurrenceChanged` <!-- -->.
+    Actualmente son los tipos de eventos compatibles `Office.EventType.AppointmentTimeChanged` <!-- -->, `Office.EventType.RecipientsChanged` <!-- -->, y `Office.EventType.RecurrenceChanged` <!-- -->. En la vista previa, `Office.EventType.AttachmentsChanged` también es compatible.
 
 
     \[[Conjunto de API: buzón 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -922,7 +951,7 @@ items:
       description: ''
     parameters:
     - id: eventType
-      description: El evento que debe invocar el controlador.
+      description: El evento que debe revocar el controlador.
       type:
       - EventType
     - id: handler
@@ -1019,7 +1048,7 @@ items:
     `saveAsync(options: Office.AsyncContextOptions): void;`
 
 
-    `saveAsync(callback: (result: AsyncResult<void>) => void): void;`
+    `saveAsync(callback: (result: AsyncResult<string>) => void): void;`
 
     #### <a name="examples"></a>Ejemplos
 
@@ -1053,7 +1082,7 @@ items:
   - typeScript
   type: method
   syntax:
-    content: 'saveAsync(options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<void>) => void): void;'
+    content: 'saveAsync(options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<string>) => void): void;'
     return:
       type:
       - void
@@ -1066,7 +1095,7 @@ items:
     - id: callback
       description: Opcional. Cuando finaliza el método, se llama a la función que se pasa en el parámetro de devolución de llamada con un parámetro único de tipo Office.AsyncResult.
       type:
-      - '(result: AsyncResult<void>) => void'
+      - '(result: AsyncResult<string>) => void'
 - uid: outlook.Office.AppointmentCompose.seriesId
   summary: >-
     Obtiene el identificador de la serie a la que pertenece una instancia.

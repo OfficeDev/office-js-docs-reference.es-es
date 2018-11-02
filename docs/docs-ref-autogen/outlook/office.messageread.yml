@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 97c669e9f4fab0a2875518d5bde7bba9ea2126aa
-ms.sourcegitcommit: c1149d24b38f20daf9ce690cd0761ec1ceb7333d
+ms.openlocfilehash: 7da2872b7646eb50e46b53a63dae749b1087ef8a
+ms.sourcegitcommit: 4bbd18c863a4140ad456b859f9c0309e153e10b2
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/17/2018
-ms.locfileid: "25590857"
+ms.lasthandoff: 11/02/2018
+ms.locfileid: "25912574"
 items:
 - uid: outlook.Office.MessageRead
   summary: >-
@@ -39,6 +39,7 @@ items:
   - outlook.Office.MessageRead.getRegExMatchesByName
   - outlook.Office.MessageRead.getSelectedEntities
   - outlook.Office.MessageRead.getSelectedRegExMatches
+  - outlook.Office.MessageRead.internetHeaders
   - outlook.Office.MessageRead.internetMessageId
   - outlook.Office.MessageRead.itemClass
   - outlook.Office.MessageRead.itemId
@@ -57,7 +58,7 @@ items:
     Agrega un controlador de eventos para un evento admitido.
 
 
-    Actualmente son los tipos de eventos compatibles `Office.EventType.AppointmentTimeChanged` <!-- -->, `Office.EventType.RecipientsChanged` <!-- -->, y `Office.EventType.RecurrenceChanged` <!-- -->.
+    Actualmente son los tipos de eventos compatibles `Office.EventType.AppointmentTimeChanged` <!-- -->, `Office.EventType.RecipientsChanged` <!-- -->, y `Office.EventType.RecurrenceChanged` <!-- -->. En la vista previa, `Office.EventType.AttachmentsChanged` también es compatible.
 
 
     \[[Conjunto de API: buzón 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -102,7 +103,7 @@ items:
       - '(result: AsyncResult<void>) => void'
 - uid: outlook.Office.MessageRead.attachments
   summary: >-
-    Obtiene una matriz de datos adjuntos para el elemento.
+    Obtiene los datos adjuntos del elemento como una matriz.
 
 
     \[[Conjunto de API: buzón 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -911,6 +912,31 @@ items:
       type:
       - any
       description: Un objeto que contiene matrices de cadenas que coinciden con las expresiones regulares definidas en el archivo XML de manifiesto. El nombre de cada matriz es igual al valor correspondiente del atributo RegExName de la regla ItemHasRegularExpressionMatch coincidente o al atributo FilterName de la regla ItemHasKnownEntity coincidente.
+- uid: outlook.Office.MessageRead.internetHeaders
+  summary: >-
+    Obtiene los encabezados de internet de un mensaje.
+
+
+    La propiedad internetHeaders devuelve un objeto InternetHeaders que proporciona métodos para administrar los encabezados de internet en el mensaje.
+
+
+    \[[Conjunto de API: vista previa de buzón de correo](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Nivel de permiso mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Leer mensaje</td></tr></table>
+  isPreview: true
+  name: internetHeaders
+  fullName: outlook.Office.MessageRead.internetHeaders
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'internetHeaders: Office.InternetHeaders;'
+    return:
+      type:
+      - outlook.Office.InternetHeaders
 - uid: outlook.Office.MessageRead.internetMessageId
   summary: >-
     Obtiene el identificador de mensaje de Internet de un mensaje de correo.
@@ -1153,7 +1179,7 @@ items:
     Quita un controlador de eventos para un evento compatible.
 
 
-    Actualmente son los tipos de eventos compatibles `Office.EventType.AppointmentTimeChanged` <!-- -->, `Office.EventType.RecipientsChanged` <!-- -->, y `Office.EventType.RecurrenceChanged` <!-- -->.
+    Actualmente son los tipos de eventos compatibles `Office.EventType.AppointmentTimeChanged` <!-- -->, `Office.EventType.RecipientsChanged` <!-- -->, y `Office.EventType.RecurrenceChanged` <!-- -->. En la vista previa, `Office.EventType.AttachmentsChanged` también es compatible.
 
 
     \[[Conjunto de API: buzón 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -1181,7 +1207,7 @@ items:
       description: ''
     parameters:
     - id: eventType
-      description: El evento que debe invocar el controlador.
+      description: El evento que debe revocar el controlador.
       type:
       - EventType
     - id: handler

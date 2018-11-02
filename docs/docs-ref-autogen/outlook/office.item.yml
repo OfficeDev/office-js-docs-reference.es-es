@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 7d538aaaf2b31d96af424f92d5628877c0d8f7da
-ms.sourcegitcommit: c1149d24b38f20daf9ce690cd0761ec1ceb7333d
+ms.openlocfilehash: 9c4796da102c44d50159545a2a297c4a785e3add
+ms.sourcegitcommit: 4bbd18c863a4140ad456b859f9c0309e153e10b2
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/17/2018
-ms.locfileid: "25585957"
+ms.lasthandoff: 11/02/2018
+ms.locfileid: "25914296"
 items:
 - uid: outlook.Office.Item
   summary: >-
@@ -28,6 +28,7 @@ items:
   - outlook.Office.Item.body
   - outlook.Office.Item.dateTimeCreated
   - outlook.Office.Item.dateTimeModifed
+  - outlook.Office.Item.getAttachmentContentAsync
   - outlook.Office.Item.getInitializationContextAsync
   - outlook.Office.Item.getSharedPropertiesAsync
   - outlook.Office.Item.itemType
@@ -41,21 +42,11 @@ items:
     Agrega un controlador de eventos para un evento admitido.
 
 
-    Actualmente son los tipos de eventos compatibles `Office.EventType.AppointmentTimeChanged` <!-- -->, `Office.EventType.RecipientsChanged` <!-- -->, y `Office.EventType.RecurrenceChanged` <!-- -->.
+    Actualmente son los tipos de eventos compatibles `Office.EventType.AppointmentTimeChanged` <!-- -->, `Office.EventType.RecipientsChanged` <!-- -->, y `Office.EventType.RecurrenceChanged` <!-- -->. En la vista previa, `Office.EventType.AttachmentsChanged` también es compatible.
 
 
     \[[Conjunto de API: buzón 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: >-
-    <table><tr><td>[Nivel de permiso mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
-
-
-    <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redacción o lectura</td></tr></table>
-
-
-    Además de esta firma, el método también tiene la siguiente firma:
-
-
-    `addHandlerAsync(eventType: Office.EventType, handler: any, callback?: (result: AsyncResult<void>) => void): void;`
+  remarks: "<table><tr><td>[Nivel de permiso mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>\n\n<tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redacción o lectura</td></tr></table>\n\nAdemás de esta firma, el método también tiene la siguiente firma:\n\n`addHandlerAsync(eventType: Office.EventType, handler: any, callback?: (result: AsyncResult<void>) => void): void;`\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nfunction myHandlerFunction(eventarg) { \n    if (eventarg.attachmentStatus == Office.MailboxEnums.AttachmentStatus.Added) { \n        var _att = eventarg.attachmentDetails; \n        showMessage(\"Event Fired and Attachment Added!\"); \n        getAttachmentContentAsync(_att.id, options, callback); \n    } \n} \nOffice.context.mailbox.item.addHandlerAsync(Office.EventType.AttachmentsChanged, myHandlerFunction, myCallback);\n```"
   name: addHandlerAsync(eventType, handler, options, callback)
   fullName: outlook.Office.Item.addHandlerAsync
   langs:
@@ -150,6 +141,41 @@ items:
     return:
       type:
       - Date
+- uid: outlook.Office.Item.getAttachmentContentAsync
+  summary: >-
+    Obtiene un dato adjunto de un mensaje o cita y lo devuelve como una `Office.AttachmentContent` objeto.
+
+
+    El `getAttachmentContentAsync` método obtiene los datos adjuntos con el identificador especificado del elemento. Como práctica recomendada, debe utilizar el identificador para recuperar un dato adjunto en la misma sesión que se recuperaron el attachmentIds con el `getAttachmentsAsync` o `item.attachments` de llamadas. En Outlook Web App y OWA para los dispositivos, el identificador de datos adjuntos es válido solo en la misma sesión. Una sesión es a través de cuando el usuario cierra la aplicación, o si el usuario inicia redactar un formulario en línea, a continuación, posteriormente aparece el formulario para continuar en una ventana independiente.
+
+
+    \[[Conjunto de API: vista previa de buzón de correo](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: "<table><tr><td>[Nivel de permiso mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>\n\n<tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redacción o lectura</td></tr>\n\n<tr><td>Errores</td><td>InvalidAttachmentId - el identificador de datos adjuntos no existe.</td></tr></table>\n####Ejemplos\n\n```javascript\nvar item = Office.context.mailbox.item;\nvar listOfAttachments = [];\nitem.getAttachmentsAsync(callback);\nfunction callback(result) {\n    if (result.value.length > 0) {\n        for (i = 0 ; i < result.value.length ; i++) {\n            var options = {asyncContext: {type: result.value[i].attachmentType}};\n            getAttachmentContentAsync(result.value[i].id, options, handleAttachmentsCallback);  \n        }\n    }\n}\n\nfunction handleAttachmentsCallback(result) {\n    //parse string to be a url, an .eml file, or a base64 encoded string\n    if (result.format == Office.MailboxEnums.AttachmentContentFormat.Base64) {\n        //handle file attachment\n    }\n    else if (result.format == Office.MailboxEnums.AttachmentContentFormat.Eml) {\n        //handle item attachment\n    }\n    else {\n        //handle cloud attachment  \n    }\n}\n```"
+  isPreview: true
+  name: getAttachmentContentAsync(attachmentId, options, callback)
+  fullName: outlook.Office.Item.getAttachmentContentAsync
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getAttachmentContentAsync(attachmentId: string, options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<Office.AttachmentContent>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: attachmentId
+      description: El identificador de los datos adjuntos que desea obtener. La longitud máxima de la cadena es de 100 caracteres.
+      type:
+      - string
+    - id: options
+      description: 'Opcional. Un objeto literal que contiene una o más de las siguientes propiedades. asyncContext: los desarrolladores pueden proporcionar cualquier objeto que desean tener acceso en el método de devolución de llamada.'
+      type:
+      - office.Office.AsyncContextOptions
+    - id: callback
+      description: Opcional. Cuando finaliza el método, se llama a la función que se pasa en el parámetro de devolución de llamada con un parámetro único, asyncResult, que es un objeto Office.AsyncResult. Si se produce un error en la llamada, la propiedad asyncResult.error contendrá y código de error con el motivo del error.
+      type:
+      - '(result: AsyncResult<Office.AttachmentContent>) => void'
 - uid: outlook.Office.Item.getInitializationContextAsync
   summary: "Obtiene los datos de inicialización se pasan cuando el complemento está [activado por un mensaje que se pueden procesar](https://docs.microsoft.com/outlook/actionable-messages/invoke-add-in-from-actionable-message)<!-- -->.\n\nNota: Este método solo es compatible con Outlook 2016 para Windows (versiones Hacer clic y ejecutar a partir de la versión 16.0.8413.1000) y Outlook en la web para Office 365. \n\n\\[[Conjunto de API: vista previa de buzón de correo](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
   remarks: >-
@@ -437,7 +463,7 @@ items:
     Quita un controlador de eventos para un evento compatible.
 
 
-    Actualmente son los tipos de eventos compatibles `Office.EventType.AppointmentTimeChanged` <!-- -->, `Office.EventType.RecipientsChanged` <!-- -->, y `Office.EventType.RecurrenceChanged` <!-- -->.
+    Actualmente son los tipos de eventos compatibles `Office.EventType.AppointmentTimeChanged` <!-- -->, `Office.EventType.RecipientsChanged` <!-- -->, y `Office.EventType.RecurrenceChanged` <!-- -->. En la vista previa, `Office.EventType.AttachmentsChanged` también es compatible.
 
 
     \[[Conjunto de API: buzón 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -465,7 +491,7 @@ items:
       description: ''
     parameters:
     - id: eventType
-      description: El evento que debe invocar el controlador.
+      description: El evento que debe revocar el controlador.
       type:
       - Office.EventType
     - id: handler
