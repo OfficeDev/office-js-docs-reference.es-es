@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: d0781da0477529a8d003d1e32678ee9206d8c1f7
-ms.sourcegitcommit: c1149d24b38f20daf9ce690cd0761ec1ceb7333d
+ms.openlocfilehash: 58e9c3d346583ad0b13e2fbdb6dfa288cc4901ca
+ms.sourcegitcommit: 016e17422cf62dc9f1de1809666e9244e41cc1a9
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/17/2018
-ms.locfileid: "25581162"
+ms.lasthandoff: 11/09/2018
+ms.locfileid: "26224191"
 items:
 - uid: onenote.OneNote.Section
   summary: >-
@@ -13,7 +13,7 @@ items:
 
     \[[Conjunto de API: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
   name: OneNote.Section
-  fullName: onenote.OneNote.Section
+  fullName: OneNote.Section
   langs:
   - typeScript
   type: class
@@ -47,7 +47,7 @@ items:
 
     \[[Conjunto de API: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
   name: addPage(title)
-  fullName: onenote.OneNote.Section.addPage
+  fullName: addPage
   langs:
   - typeScript
   type: method
@@ -69,7 +69,7 @@ items:
 
     \[[Conjunto de API: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
   name: clientUrl
-  fullName: onenote.OneNote.Section.clientUrl
+  fullName: clientUrl
   langs:
   - typeScript
   type: property
@@ -85,7 +85,7 @@ items:
 
     \[[Conjunto de API: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
   name: copyToNotebook(destinationNotebook)
-  fullName: onenote.OneNote.Section.copyToNotebook
+  fullName: copyToNotebook
   langs:
   - typeScript
   type: method
@@ -107,7 +107,7 @@ items:
 
     \[[Conjunto de API: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
   name: copyToSectionGroup(destinationSectionGroup)
-  fullName: onenote.OneNote.Section.copyToSectionGroup
+  fullName: copyToSectionGroup
   langs:
   - typeScript
   type: method
@@ -129,7 +129,7 @@ items:
 
     \[[Conjunto de API: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
   name: getRestApiId()
-  fullName: onenote.OneNote.Section.getRestApiId
+  fullName: getRestApiId
   langs:
   - typeScript
   type: method
@@ -146,7 +146,7 @@ items:
 
     \[[Conjunto de API: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
   name: id
-  fullName: onenote.OneNote.Section.id
+  fullName: id
   langs:
   - typeScript
   type: property
@@ -162,7 +162,7 @@ items:
 
     \[[Conjunto de API: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
   name: insertSectionAsSibling(location, title)
-  fullName: onenote.OneNote.Section.insertSectionAsSibling
+  fullName: insertSectionAsSibling
   langs:
   - typeScript
   type: method
@@ -188,7 +188,7 @@ items:
 
     \[[Conjunto de API: OneNoteApi 1.2](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
   name: isEncrypted
-  fullName: onenote.OneNote.Section.isEncrypted
+  fullName: isEncrypted
   langs:
   - typeScript
   type: property
@@ -204,7 +204,7 @@ items:
 
     \[[Conjunto de API: OneNoteApi 1.2](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
   name: isLocked
-  fullName: onenote.OneNote.Section.isLocked
+  fullName: isLocked
   langs:
   - typeScript
   type: property
@@ -217,7 +217,7 @@ items:
   summary: Colas de seguridad de un comando que se va a cargar las propiedades del objeto especificadas. Se debe llamar a "context.sync()" antes de leer las propiedades.
   remarks: "Además de esta firma, este método no tiene las siguientes firmas:\n\n`load(option?: { select?: string; expand?: string; }): OneNote.Section`-Donde option.select es una cadena delimitada por comas que especifica las propiedades para cargar y options.expand es una cadena delimitada por comas que especifica las propiedades de navegación para cargar.\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): OneNote.Section`-Sólo está disponible en los tipos de colección. Es similar a la firma precedente. Option.Top especifica el número máximo de elementos de la colección que se puede incluir en el resultado. Option.Skip especifica el número de elementos que se pasan por alto y no se incluyen en el resultado. Si se especifica option.top, se iniciará el conjunto de resultados después de omitir el número especificado de elementos.\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nOneNote.run(function (context) {\n        \n    // Get the current section.\n    var section = context.application.getActiveSection();\n            \n    // Queue a command to load the section. \n    // For best performance, request specific properties.           \n    section.load(\"id\");\n            \n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function () {\n            console.log(\"Section ID: \" + section.id);\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\nOneNote.run(function (context) {\n        \n    // Get the current section.\n    var section = context.application.getActiveSection();\n            \n    // Queue a command to load the section with the specified properties. \n    section.load(\"name,notebook/name\");\n            \n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function () {\n            console.log(\"Section name: \" + section.name);\n            console.log(\"Parent notebook name: \" + section.notebook.name);\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\nOneNote.run(function (context) {\n    // Queue a command to add a page to the current section.\n    var section = context.application.getActiveSection();\n    section.load('clientUrl,notebook');\n    var sectionGroup = section.parentSectionGroupOrNull;\n    \n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function () {\n            if(sectionGroup.isNull === false)\n            {\n                // If a parent section group exists, queue a command to add a section in it!\n                sectionGroup.addSection(\"NewSectionInSectionGroup\");\n            }\n            return context.sync();\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
   name: load(option)
-  fullName: onenote.OneNote.Section.load
+  fullName: load
   langs:
   - typeScript
   type: method
@@ -239,7 +239,7 @@ items:
 
     \[[Conjunto de API: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
   name: name
-  fullName: onenote.OneNote.Section.name
+  fullName: name
   langs:
   - typeScript
   type: property
@@ -255,7 +255,7 @@ items:
 
     \[[Conjunto de API: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
   name: notebook
-  fullName: onenote.OneNote.Section.notebook
+  fullName: notebook
   langs:
   - typeScript
   type: property
@@ -271,7 +271,7 @@ items:
 
     \[[Conjunto de API: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
   name: pages
-  fullName: onenote.OneNote.Section.pages
+  fullName: pages
   langs:
   - typeScript
   type: property
@@ -287,7 +287,7 @@ items:
 
     \[[Conjunto de API: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
   name: parentSectionGroup
-  fullName: onenote.OneNote.Section.parentSectionGroup
+  fullName: parentSectionGroup
   langs:
   - typeScript
   type: property
@@ -303,7 +303,7 @@ items:
 
     \[[Conjunto de API: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
   name: parentSectionGroupOrNull
-  fullName: onenote.OneNote.Section.parentSectionGroupOrNull
+  fullName: parentSectionGroupOrNull
   langs:
   - typeScript
   type: property
@@ -314,7 +314,7 @@ items:
       - onenote.OneNote.SectionGroup
 - uid: onenote.OneNote.Section.toJSON
   name: toJSON()
-  fullName: onenote.OneNote.Section.toJSON
+  fullName: toJSON
   langs:
   - typeScript
   type: method
@@ -327,7 +327,7 @@ items:
 - uid: onenote.OneNote.Section.track
   summary: Realizar un seguimiento del objeto para el ajuste automático en función de que lo rodea los cambios en el documento. Esta llamada es una forma abreviada para context.trackedObjects.add(thisObject). Si va a usar este objeto a través de llamadas "Sync" y fuera de la ejecución secuencial de un lote de "ésta se ejecute" y obtenga un error de "InvalidObjectPath" al establecer una propiedad o invocar un método en el objeto, había que ha agregado el objeto al objeto marca de revisión colección cuando el objeto se crea por primera vez.
   name: track()
-  fullName: onenote.OneNote.Section.track
+  fullName: track
   langs:
   - typeScript
   type: method
@@ -340,7 +340,7 @@ items:
 - uid: onenote.OneNote.Section.untrack
   summary: La memoria asociada con este objeto, si lo se anteriormente hace el seguimiento de la versión. Esta llamada es una abreviatura de context.trackedObjects.remove(thisObject). Tener muchos objetos de marca de revisión reduce la velocidad de la aplicación host, por lo que no olvide libre de cualquier objeto que agregue, una vez que haya terminado con ellos. Debe llamar a "context.sync()" antes de la versión de memoria surta efecto.
   name: untrack()
-  fullName: onenote.OneNote.Section.untrack
+  fullName: untrack
   langs:
   - typeScript
   type: method
@@ -357,7 +357,7 @@ items:
 
     \[[Conjunto de API: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
   name: webUrl
-  fullName: onenote.OneNote.Section.webUrl
+  fullName: webUrl
   langs:
   - typeScript
   type: property
