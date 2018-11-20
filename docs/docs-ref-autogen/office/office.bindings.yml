@@ -1,15 +1,15 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 8b5408f56699889b51861dbd89fdbe572e1ac13b
-ms.sourcegitcommit: a36161c2113d94680dc68150d024e68bdf0390fa
+ms.openlocfilehash: dd51ca3fe79579a094ccd1b9b4fad252afc4e7db
+ms.sourcegitcommit: 31847d2ea6be78b8f473dfbfb0a575fdecd877be
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/10/2018
-ms.locfileid: "25458890"
+ms.lasthandoff: 11/13/2018
+ms.locfileid: "26298235"
 items:
 - uid: office.Office.Bindings
   summary: Representa los enlaces que tiene el complemento en el documento.
   name: Office.Bindings
-  fullName: office.Office.Bindings
+  fullName: Office.Bindings
   langs:
   - typeScript
   type: interface
@@ -26,7 +26,7 @@ items:
   summary: Crea un enlace con un objeto con nombre en el documento.
   remarks: "<table><tr><td>Conjuntos de requisitos</td><td>MatrixBindings, TableBindings, TextBindings</td></tr></table>\n\nPara Excel, el parámetro itemName puede hacer referencia a un rango con nombre o una tabla.\n\nDe forma predeterminada, agregar una tabla en Excel asigna el nombre \"Tabla1\" a la primera tabla que se agrega, \"Tabla2\" a la segunda, y así sucesivamente. Para asignar un nombre descriptivo para una tabla en la interfaz de usuario de Excel, utilice la propiedad de nombre de tabla en las herramientas de tabla \\| la ficha Diseño de la cinta de opciones.\n\nNota: En Excel, cuando se especifica una tabla como un elemento con nombre, debe usar el nombre completo para incluir el nombre de la hoja de cálculo en el nombre de la tabla en este formato: \"¡Sheet1! Table1 \"\n\nPara Word, el parámetro itemName hace referencia a la propiedad de título de un control de contenido de texto de Rich. (No se puede enlazar a controles de contenido que no sea el control de contenido de texto Rich).\n\nDe forma predeterminada, un control de contenido no tiene asignado ningún valor de título. Para asignar un nombre significativo en la interfaz de usuario de Word, después de insertar un control de contenido Texto enriquecido desde el grupo Controles de la pestaña Desarrollador de la cinta, use el comando Propiedades del grupo Controles para mostrar el cuadro de diálogo Propiedades del control de contenido. Después, establezca la propiedad Title del control de contenido con el nombre al que quiera hacer referencia desde su código.\n\nNota: En Word, si hay varios controles de contenido de texto Rich con el mismo valor de propiedad de título (nombre), y se intenta enlazar a uno de estos contenido controles con este método (especificando su nombre como el parámetro itemName), se producirá un error en la operación.\n\n**Detalles de compatibilidad**\n\nUna Y mayúscula en la siguiente matriz indica que este método es compatible con la aplicación host de Office correspondiente. Una celda vacía indica que la aplicación host no admite este método.\n\nPara obtener más información acerca de los requisitos de aplicación y servidor de host de Office, vea [requisitos para ejecutar Office Add-ins](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.\n\n*Hosts compatibles, por plataforma* <table> <tr><th> </th><th> Office para escritorio de Windows </th><th> Office Online (en el explorador) </th><th> Office para iPad </th></tr> <tr><td><strong>Access</strong></td><td> </td><td> v </td><td> </td></tr> <tr><td><strong>Excel</strong></td><td> v </td><td> v </td><td> v </td></tr> <tr><td><strong>Word</strong></td><td> v </td><td> v </td><td> v </td></tr> </table>\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\n// The following example adds a binding to the myRange named item in Excel as a \"matrix\" binding,\n// and assigns the binding's id as myMatrix.\nfunction bindNamedItem() {\n    Office.context.document.bindings.addFromNamedItemAsync(\n        \"myRange\", \"matrix\", {id:'myMatrix'}, function (result) {\n        if (result.status == 'succeeded'){\n            write('Added new binding with type: ' + result.value.type + ' and id: ' + result.value.id);\n            }\n        else\n            write('Error: ' + result.error.message);\n    });\n}\n\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n\n// The following example adds a binding to the Table1 named item in Excel as a \"table\" binding,\n// and assigns the binding's id as myTable.\nfunction bindNamedItem() {\n    Office.context.document.bindings.addFromNamedItemAsync(\n        \"Table1\", \"table\", {id:'myTable'}, function (result) {\n        if (result.status == 'succeeded'){\n            write('Added new binding with type: ' + result.value.type + ' and id: ' + result.value.id);\n            }\n        else\n            write('Error: ' + result.error.message);\n    });\n}\n\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n\n// The following example creates a text binding in Word to a rich text content control named \"FirstName\",\n// assigns the id \"firstName\", and then displays that information.\nfunction bindContentControl() {\n    Office.context.document.bindings.addFromNamedItemAsync('FirstName', \n        Office.BindingType.Text, {id:'firstName'},\n        function (result) {\n            if (result.status === Office.AsyncResultStatus.Succeeded) {\n                write('Control bound. Binding.id: '\n                    + result.value.id + ' Binding.type: ' + result.value.type);\n            } else {\n                write('Error:', result.error.message);\n            }\n    });\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
   name: addFromNamedItemAsync(itemName, bindingType, options, callback)
-  fullName: office.Office.Bindings.addFromNamedItemAsync
+  fullName: addFromNamedItemAsync
   langs:
   - typeScript
   type: method
@@ -57,7 +57,7 @@ items:
   summary: Crear un enlace solicitando al usuario que realice una selección en el documento.
   remarks: "<table><tr><td>Conjuntos de requisitos</td><td>No en un conjunto</td></tr></table>\n\nAgrega un objeto de enlace del tipo especificado a la colección Bindings, que se identificará con el id proporcionado. Si no se puede enlazar la selección especificada, el método falla.\n\n**Detalles de compatibilidad**\n\nUna Y mayúscula en la siguiente matriz indica que este método es compatible con la aplicación host de Office correspondiente. Una celda vacía indica que la aplicación host no admite este método.\n\nPara obtener más información acerca de los requisitos de aplicación y servidor de host de Office, vea [requisitos para ejecutar Office Add-ins](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.\n\n*Hosts compatibles, por plataforma* <table> <tr><th> </th><th> Office para escritorio de Windows </th><th> Office Online (en el explorador) </th><th> Office para iPad </th></tr> <tr><td><strong>Access</strong></td><td> </td><td> v </td><td> </td></tr> <tr><td><strong>Excel</strong></td><td> v </td><td> v </td><td> v </td></tr> </table>\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nfunction addBindingFromPrompt() {\n    Office.context.document.bindings.addFromPromptAsync(\n        Office.BindingType.Text, \n        { id: 'MyBinding', promptText: 'Select text to bind to.' },\n        function (asyncResult) {\n            write('Added new binding with type: ' + asyncResult.value.type + ' and id: ' + asyncResult.value.id);\n    });\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
   name: addFromPromptAsync(bindingType, options, callback)
-  fullName: office.Office.Bindings.addFromPromptAsync
+  fullName: addFromPromptAsync
   langs:
   - typeScript
   type: method
@@ -84,7 +84,7 @@ items:
   summary: Crear un enlace basado en la selección del usuario actual.
   remarks: "<table><tr><td>Conjuntos de requisitos</td><td>MatrixBindings, TableBindings, TextBindings</td></tr></table>\n\nAgrega el tipo de objeto de enlace especificado a la colección de enlaces, que se identifica con el id proporcionado.\n\nNota en Excel, si se llama al método addFromSelectionAsync, pasando el Binding.id de un enlace existente, se utiliza la Binding.type de ese enlace y su tipo no se puede cambiar mediante la especificación de un valor diferente para el parámetro bindingType. Si necesita usar un id existente y cambiar el bindingType, llame primero al método Bindings.releaseByIdAsync para liberar en enlace y, a continuación, llame al método addFromSelectionAsync para reestablecer el vínculo con otro tipo.\n\n**Detalles de compatibilidad**\n\nUna Y mayúscula en la siguiente matriz indica que este método es compatible con la aplicación host de Office correspondiente. Una celda vacía indica que la aplicación host no admite este método.\n\nPara obtener más información acerca de los requisitos de aplicación y servidor de host de Office, vea [requisitos para ejecutar Office Add-ins](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.\n\n*Hosts compatibles, por plataforma* <table> <tr><th> </th><th> Office para escritorio de Windows </th><th> Office Online (en el explorador) </th><th> Office para iPad </th></tr> <tr><td><strong>Access</strong></td><td> </td><td> v </td><td> </td></tr> <tr><td><strong>Excel</strong></td><td> v </td><td> v </td><td> v </td></tr> <tr><td><strong>Word</strong></td><td> v </td><td> v </td><td> v </td></tr> </table>\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nfunction addBindingFromSelection() {\n    Office.context.document.bindings.addFromSelectionAsync(Office.BindingType.Text, { id: 'MyBinding' }, \n        function (asyncResult) {\n        write('Added new binding with type: ' + asyncResult.value.type + ' and id: ' + asyncResult.value.id);\n        }\n    );\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
   name: addFromSelectionAsync(bindingType, options, callback)
-  fullName: office.Office.Bindings.addFromSelectionAsync
+  fullName: addFromSelectionAsync
   langs:
   - typeScript
   type: method
@@ -121,7 +121,7 @@ items:
 
     *Hosts compatibles, por plataforma* <table> <tr><th> </th><th> Office para escritorio de Windows </th><th> Office Online (en el explorador) </th><th> Office para iPad </th></tr> <tr><td><strong>Access</strong></td><td> </td><td> v </td><td> </td></tr> <tr><td><strong>Excel</strong></td><td> v </td><td> v </td><td> v </td></tr> <tr><td><strong>Word</strong></td><td> v </td><td> v </td><td> v </td></tr> </table>
   name: document
-  fullName: office.Office.Bindings.document
+  fullName: document
   langs:
   - typeScript
   type: property
@@ -134,7 +134,7 @@ items:
   summary: Obtiene todos los enlaces que se crearon previamente.
   remarks: "<table><tr><td>Conjuntos de requisitos</td><td>MatrixBindings, TableBindings, TextBindings</td></tr></table>\n\n**Detalles de compatibilidad**\n\nUna Y mayúscula en la siguiente matriz indica que este método es compatible con la aplicación host de Office correspondiente. Una celda vacía indica que la aplicación host no admite este método.\n\nPara obtener más información acerca de los requisitos de aplicación y servidor de host de Office, vea [requisitos para ejecutar Office Add-ins](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.\n\n*Hosts compatibles, por plataforma* <table> <tr><th> </th><th> Office para escritorio de Windows </th><th> Office Online (en el explorador) </th><th> Office para iPad </th></tr> <tr><td><strong>Access</strong></td><td> </td><td> v </td><td> </td></tr> <tr><td><strong>Excel</strong></td><td> v </td><td> v </td><td> v </td></tr> <tr><td><strong>Word</strong></td><td> v </td><td> v </td><td> v </td></tr> </table>\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nfunction displayAllBindingNames() {\n    Office.context.document.bindings.getAllAsync(function (asyncResult) {\n        var bindingString = '';\n        for (var i in asyncResult.value) {\n            bindingString += asyncResult.value[i].id + '\\n';\n        }\n        write('Existing bindings: ' + bindingString);\n    });\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
   name: getAllAsync(options, callback)
-  fullName: office.Office.Bindings.getAllAsync
+  fullName: getAllAsync
   langs:
   - typeScript
   type: method
@@ -157,7 +157,7 @@ items:
   summary: Recupera un enlace basado en su nombre
   remarks: "<table><tr><td>Conjuntos de requisitos</td><td>CustomXmlParts, MatrixBindings, TableBindings, TextBindings</td></tr></table>\n\nSe produce un error si el identificador especificado no existe.\n\n**Detalles de compatibilidad**\n\nUna Y mayúscula en la siguiente matriz indica que este método es compatible con la aplicación host de Office correspondiente. Una celda vacía indica que la aplicación host no admite este método.\n\nPara obtener más información acerca de los requisitos de aplicación y servidor de host de Office, vea [requisitos para ejecutar Office Add-ins](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.\n\n*Hosts compatibles, por plataforma* <table> <tr><th> </th><th> Office para escritorio de Windows </th><th> Office Online (en el explorador) </th><th> Office para iPad </th></tr> <tr><td><strong>Access</strong></td><td> </td><td> v </td><td> </td></tr> <tr><td><strong>Excel</strong></td><td> v </td><td> v </td><td> v </td></tr> <tr><td><strong>Word</strong></td><td> v </td><td> v </td><td> v </td></tr> </table>\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nfunction displayBindingType() {\n    Office.context.document.bindings.getByIdAsync('MyBinding', function (asyncResult) {\n        write('Retrieved binding with type: ' + asyncResult.value.type + ' and id: ' + asyncResult.value.id);\n    });\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
   name: getByIdAsync(id, options, callback)
-  fullName: office.Office.Bindings.getByIdAsync
+  fullName: getByIdAsync
   langs:
   - typeScript
   type: method
@@ -184,7 +184,7 @@ items:
   summary: Quita el enlace del documento
   remarks: "<table><tr><td>Conjuntos de requisitos</td><td>MatrixBindings, TableBindings, TextBindings</td></tr></table>\n\nSe produce un error si el identificador especificado no existe.\n\n**Detalles de compatibilidad**\n\nUna Y mayúscula en la siguiente matriz indica que este método es compatible con la aplicación host de Office correspondiente. Una celda vacía indica que la aplicación host no admite este método.\n\nPara obtener más información acerca de los requisitos de aplicación y servidor de host de Office, vea [requisitos para ejecutar Office Add-ins](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.\n\n*Hosts compatibles, por plataforma* <table> <tr><th> </th><th> Office para escritorio de Windows </th><th> Office Online (en el explorador) </th><th> Office para iPad </th></tr> <tr><td><strong>Access</strong></td><td> </td><td> v </td><td> </td></tr> <tr><td><strong>Excel</strong></td><td> v </td><td> v </td><td> v </td></tr> <tr><td><strong>Word</strong></td><td> v </td><td> v </td><td> v </td></tr> </table>\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nOffice.context.document.bindings.releaseByIdAsync(\"MyBinding\", function (asyncResult) { \n    write(\"Released MyBinding!\"); \n}); \n// Function that writes to a div with id='message' on the page. \nfunction write(message){ \n    document.getElementById('message').innerText += message;  \n}\n```"
   name: releaseByIdAsync(id, options, callback)
-  fullName: office.Office.Bindings.releaseByIdAsync
+  fullName: releaseByIdAsync
   langs:
   - typeScript
   type: method

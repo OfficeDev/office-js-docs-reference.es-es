@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 046c1cb9091921a73265756ffbdfec2ab0e96e6d
-ms.sourcegitcommit: c1149d24b38f20daf9ce690cd0761ec1ceb7333d
+ms.openlocfilehash: f4cda7166b71b01ed7ebd2bdc41ae1766217890c
+ms.sourcegitcommit: 016e17422cf62dc9f1de1809666e9244e41cc1a9
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/17/2018
-ms.locfileid: "25586727"
+ms.lasthandoff: 11/09/2018
+ms.locfileid: "26235167"
 items:
 - uid: onenote.OneNote.SectionGroup
   summary: >-
@@ -13,7 +13,7 @@ items:
 
     \[[Conjunto de API: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
   name: OneNote.SectionGroup
-  fullName: onenote.OneNote.SectionGroup
+  fullName: OneNote.SectionGroup
   langs:
   - typeScript
   type: class
@@ -43,7 +43,7 @@ items:
 
     \[[Conjunto de API: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
   name: addSection(title)
-  fullName: onenote.OneNote.SectionGroup.addSection
+  fullName: addSection
   langs:
   - typeScript
   type: method
@@ -65,7 +65,7 @@ items:
 
     \[[Conjunto de API: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
   name: addSectionGroup(name)
-  fullName: onenote.OneNote.SectionGroup.addSectionGroup
+  fullName: addSectionGroup
   langs:
   - typeScript
   type: method
@@ -87,7 +87,7 @@ items:
 
     \[[Conjunto de API: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
   name: clientUrl
-  fullName: onenote.OneNote.SectionGroup.clientUrl
+  fullName: clientUrl
   langs:
   - typeScript
   type: property
@@ -103,7 +103,7 @@ items:
 
     \[[Conjunto de API: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
   name: getRestApiId()
-  fullName: onenote.OneNote.SectionGroup.getRestApiId
+  fullName: getRestApiId
   langs:
   - typeScript
   type: method
@@ -120,7 +120,7 @@ items:
 
     \[[Conjunto de API: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
   name: id
-  fullName: onenote.OneNote.SectionGroup.id
+  fullName: id
   langs:
   - typeScript
   type: property
@@ -133,7 +133,7 @@ items:
   summary: Colas de seguridad de un comando que se va a cargar las propiedades del objeto especificadas. Se debe llamar a "context.sync()" antes de leer las propiedades.
   remarks: "Además de esta firma, este método no tiene las siguientes firmas:\n\n`load(option?: { select?: string; expand?: string; }): OneNote.SectionGroup`-Donde option.select es una cadena delimitada por comas que especifica las propiedades para cargar y options.expand es una cadena delimitada por comas que especifica las propiedades de navegación para cargar.\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): OneNote.SectionGroup`-Sólo está disponible en los tipos de colección. Es similar a la firma precedente. Option.Top especifica el número máximo de elementos de la colección que se puede incluir en el resultado. Option.Skip especifica el número de elementos que se pasan por alto y no se incluyen en el resultado. Si se especifica option.top, se iniciará el conjunto de resultados después de omitir el número especificado de elementos.\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nOneNote.run(function (context) {\n        \n    // Get the parent section group that contains the current section.\n    var sectionGroup = context.application.getActiveSection().parentSectionGroup;\n            \n    // Queue a command to load the section group. \n    // For best performance, request specific properties.           \n    sectionGroup.load(\"id,name\");\n            \n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function () {\n            \n            // Write the properties.\n            console.log(\"Section group name: \" + sectionGroup.name);\n            console.log(\"Section group ID: \" + sectionGroup.id);\n            \n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\nOneNote.run(function (context) {\n        \n    // Get the parent section group that contains the current section.\n    var sectionGroup = context.application.getActiveSection().parentSectionGroup;\n            \n    // Queue a command to load the section group with the specified properties.           \n    sectionGroup.load(\"name,notebook/name\"); \n            \n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function () {\n\n            // Write the properties.\n            console.log(\"Section group name: \" + sectionGroup.name);\n            console.log(\"Parent notebook name: \" + sectionGroup.notebook.name);\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\nOneNote.run(function (context) {\n\n    // Get the section groups that are direct children of the current notebook.\n    var sectionGroups = context.application.getActiveNotebook().sectionGroups;\n\n    // Queue a command to load the section groups.\n    // For best performance, request specific properties.\n    sectionGroups.load(\"name\");\n    \n    // Get the child section groups of the first section group in the notebook.\n    var nestedSectionGroups = sectionGroups._GetItem(0).sectionGroups;\n    \n    // Queue a command to load the ID and name properties of the child section groups.\n    nestedSectionGroups.load(\"id,name\");\n    \n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function() {\n            \n            // Write the properties for each child section group.\n            $.each(nestedSectionGroups.items, function(index, sectionGroup) {\n                console.log(\"Section group name: \" + sectionGroup.name);  \n                console.log(\"Section group ID: \" + sectionGroup.id);  \n            });\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\nOneNote.run(function (context) {\n\n    // Get the sections that are siblings of the current section.\n    var sections = context.application.getActiveSection().parentSectionGroup.sections;\n\n    // Queue a command to load the section groups.\n    // For best performance, request specific properties.\n    sections.load(\"id,name\");\n    \n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function() {\n            \n            // Write the properties for each section.\n            $.each(sections.items, function(index, section) {\n                console.log(\"Section name: \" + section.name);  \n                console.log(\"Section ID: \" + section.id);  \n            });\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
   name: load(option)
-  fullName: onenote.OneNote.SectionGroup.load
+  fullName: load
   langs:
   - typeScript
   type: method
@@ -155,7 +155,7 @@ items:
 
     \[[Conjunto de API: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
   name: name
-  fullName: onenote.OneNote.SectionGroup.name
+  fullName: name
   langs:
   - typeScript
   type: property
@@ -171,7 +171,7 @@ items:
 
     \[[Conjunto de API: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
   name: notebook
-  fullName: onenote.OneNote.SectionGroup.notebook
+  fullName: notebook
   langs:
   - typeScript
   type: property
@@ -187,7 +187,7 @@ items:
 
     \[[Conjunto de API: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
   name: parentSectionGroup
-  fullName: onenote.OneNote.SectionGroup.parentSectionGroup
+  fullName: parentSectionGroup
   langs:
   - typeScript
   type: property
@@ -203,7 +203,7 @@ items:
 
     \[[Conjunto de API: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
   name: parentSectionGroupOrNull
-  fullName: onenote.OneNote.SectionGroup.parentSectionGroupOrNull
+  fullName: parentSectionGroupOrNull
   langs:
   - typeScript
   type: property
@@ -219,7 +219,7 @@ items:
 
     \[[Conjunto de API: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
   name: sectionGroups
-  fullName: onenote.OneNote.SectionGroup.sectionGroups
+  fullName: sectionGroups
   langs:
   - typeScript
   type: property
@@ -235,7 +235,7 @@ items:
 
     \[[Conjunto de API: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
   name: sections
-  fullName: onenote.OneNote.SectionGroup.sections
+  fullName: sections
   langs:
   - typeScript
   type: property
@@ -246,7 +246,7 @@ items:
       - onenote.OneNote.SectionCollection
 - uid: onenote.OneNote.SectionGroup.toJSON
   name: toJSON()
-  fullName: onenote.OneNote.SectionGroup.toJSON
+  fullName: toJSON
   langs:
   - typeScript
   type: method
@@ -259,7 +259,7 @@ items:
 - uid: onenote.OneNote.SectionGroup.track
   summary: Realizar un seguimiento del objeto para el ajuste automático en función de que lo rodea los cambios en el documento. Esta llamada es una forma abreviada para context.trackedObjects.add(thisObject). Si va a usar este objeto a través de llamadas "Sync" y fuera de la ejecución secuencial de un lote de "ésta se ejecute" y obtenga un error de "InvalidObjectPath" al establecer una propiedad o invocar un método en el objeto, había que ha agregado el objeto al objeto marca de revisión colección cuando el objeto se crea por primera vez.
   name: track()
-  fullName: onenote.OneNote.SectionGroup.track
+  fullName: track
   langs:
   - typeScript
   type: method
@@ -272,7 +272,7 @@ items:
 - uid: onenote.OneNote.SectionGroup.untrack
   summary: La memoria asociada con este objeto, si lo se anteriormente hace el seguimiento de la versión. Esta llamada es una abreviatura de context.trackedObjects.remove(thisObject). Tener muchos objetos de marca de revisión reduce la velocidad de la aplicación host, por lo que no olvide libre de cualquier objeto que agregue, una vez que haya terminado con ellos. Debe llamar a "context.sync()" antes de la versión de memoria surta efecto.
   name: untrack()
-  fullName: onenote.OneNote.SectionGroup.untrack
+  fullName: untrack
   langs:
   - typeScript
   type: method
