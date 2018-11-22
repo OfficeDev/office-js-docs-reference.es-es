@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 8651db1ad807e40e9af4c926b9699eb5adb47607
-ms.sourcegitcommit: 31847d2ea6be78b8f473dfbfb0a575fdecd877be
+ms.openlocfilehash: 5fe31f8406e5ea7b628c70602fe4942239a904d4
+ms.sourcegitcommit: b05ee546d9dfbc914c8d1c594d9b206b04780bbc
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 11/13/2018
-ms.locfileid: "26297969"
+ms.lasthandoff: 11/22/2018
+ms.locfileid: "26647157"
 items:
 - uid: office.Office.AsyncResult
   summary: Un objeto que encapsula el resultado de una solicitud asincrónica, incluida la información de estado y error si la solicitud falla.
@@ -17,6 +17,7 @@ items:
   package: office
   children:
   - office.Office.AsyncResult.asyncContext
+  - office.Office.AsyncResult.diagnostics
   - office.Office.AsyncResult.error
   - office.Office.AsyncResult.status
   - office.Office.AsyncResult.value
@@ -30,6 +31,38 @@ items:
   type: property
   syntax:
     content: 'asyncContext: any;'
+    return:
+      type:
+      - any
+- uid: office.Office.AsyncResult.diagnostics
+  summary: Obtiene un objeto que puede proporcionar información adicional, si se produjo un error.
+  remarks: >-
+    **Detalles de compatibilidad**
+
+
+    Una letra mayúscula Y en la siguiente matriz indica que esta propiedad se admite en la aplicación host de Office correspondiente. Una celda vacía indica que la aplicación host de Office no admite esta enumeración.
+
+
+    Para obtener más información acerca de los requisitos de aplicación y servidor de host de Office, vea [requisitos para ejecutar Office Add-ins](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.
+
+
+    *Hosts compatibles, por plataforma* <table> <tr><th> </th><th> Office para escritorio de Windows </th><th> Office Online (en el explorador) </th><th> Office para iPad </th><th> OWA para dispositivos </th><th> Office para Mac </th></tr> <tr><td><strong>Outlook</strong></td><td> Y (vista previa de buzón de correo) </td><td> </td><td> </td><td> </td><td> </td></tr> </table>
+
+
+    *API admitidas*
+
+
+    `Office.context.mailbox.item.getCallbackTokenAsync`<!-- -->, `Office.context.mailbox.item.getUserIdentityTokenAsync`
+
+
+    *Errores compatibles* <table> <tr><th>`AsyncResult.error.name` </th><th>`AsyncResult.error.message` </th><th>Descripción del objeto de diagnóstico devuelto </th></tr> <tr><td><strong>HTTPRequestFailure</strong> </td><td>Error en la solicitud. Por favor, examine el objeto de diagnóstico para el código de error HTTP. </td><td>El código de error HTTP en un JSON objeto por ejemplo,`{"HTTPCode":"401"}` </td></tr> <tr><td><strong>InternalServerError</strong></td><td>El servidor de Exchange devolvió un error. Por favor, examine el objeto diagnostics para obtener más información.</td><td>El mensaje de error desde el servidor de Exchange en un JSON de objetos por ejemplo,`{"ErrorText": "The mailbox database is temporarily unavailable"}`</td></tr> </table>
+  name: diagnostics
+  fullName: diagnostics
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'diagnostics: any;'
     return:
       type:
       - any
