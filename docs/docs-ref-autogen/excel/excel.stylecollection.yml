@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: a2a33fce536c47bf5efa0de2147b6f5dd4df6325
-ms.sourcegitcommit: c12dfe8b909dec25d284f5254d97bd6478823b8f
+ms.openlocfilehash: 772c5560ce09199152087836ca8022b36272e3f9
+ms.sourcegitcommit: c756c5499da5aad3736cc71573ac35f9ca3d6738
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 12/12/2018
-ms.locfileid: "27243425"
+ms.lasthandoff: 12/19/2018
+ms.locfileid: "27378200"
 items:
 - uid: excel.Excel.StyleCollection
   summary: >-
@@ -23,6 +23,9 @@ items:
   children:
   - excel.Excel.StyleCollection.add
   - excel.Excel.StyleCollection.getItem
+  - excel.Excel.StyleCollection.items
+  - excel.Excel.StyleCollection.load
+  - excel.Excel.StyleCollection.toJSON
 - uid: excel.Excel.StyleCollection.add
   summary: >-
     Agrega un nuevo estilo a la colección.
@@ -47,7 +50,7 @@ items:
       - string
 - uid: excel.Excel.StyleCollection.getItem
   summary: >-
-    Obtiene un estilo por su nombre.
+    Obtiene un estilo por nombre.
 
 
     \[[Conjunto de API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -67,3 +70,53 @@ items:
       description: Nombre del estilo que se va a recuperar.
       type:
       - string
+- uid: excel.Excel.StyleCollection.items
+  summary: Obtiene al secundario cargado los elementos de esta colección.
+  name: items
+  fullName: items
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly items: Excel.Style[];'
+    return:
+      type:
+      - Excel.Style[]
+- uid: excel.Excel.StyleCollection.load
+  summary: Colas de seguridad de un comando que se va a cargar las propiedades del objeto especificadas. Se debe llamar a "context.sync()" antes de leer las propiedades.
+  remarks: >-
+    Además de esta firma, este método no tiene las siguientes firmas:
+
+
+    `load(option?: { select?: string; expand?: string; }): Excel.StyleCollection`-Donde option.select es una cadena delimitada por comas que especifica las propiedades para cargar y options.expand es una cadena delimitada por comas que especifica las propiedades de navegación para cargar.
+
+
+    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.StyleCollection`-Sólo está disponible en los tipos de colección. Es similar a la firma precedente. Option.Top especifica el número máximo de elementos de la colección que se puede incluir en el resultado. Option.Skip especifica el número de elementos que se pasan por alto y no se incluyen en el resultado. Si se especifica option.top, se iniciará el conjunto de resultados después de omitir el número especificado de elementos.
+  name: load(option)
+  fullName: load
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(option?: string | string[]): Excel.StyleCollection;'
+    return:
+      type:
+      - excel.Excel.StyleCollection
+      description: ''
+    parameters:
+    - id: option
+      description: Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades de carga.
+      type:
+      - string | string[]
+- uid: excel.Excel.StyleCollection.toJSON
+  name: toJSON()
+  fullName: toJSON
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'toJSON(): Excel.Interfaces.StyleCollectionData;'
+    return:
+      type:
+      - excel.Excel.Interfaces.StyleCollectionData
+      description: ''
