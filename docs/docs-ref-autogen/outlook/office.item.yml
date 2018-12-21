@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: b3f6be80d14059816525e8168b2fc331fbb0f732
-ms.sourcegitcommit: 31847d2ea6be78b8f473dfbfb0a575fdecd877be
+ms.openlocfilehash: 154fb33d6cb9b57a3b11330c5ff3030fcc277757
+ms.sourcegitcommit: 1665198bc1913e60caf12b3d1342844b57a3453a
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 11/13/2018
-ms.locfileid: "26298200"
+ms.lasthandoff: 12/21/2018
+ms.locfileid: "27384239"
 items:
 - uid: outlook.Office.Item
   summary: >-
@@ -106,7 +106,7 @@ items:
     <table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
 
 
-    <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Read</td></tr></table>
+    <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Lectura</td></tr></table>
   name: dateTimeCreated
   fullName: dateTimeCreated
   langs:
@@ -127,7 +127,7 @@ items:
     <table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
 
 
-    <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Read</td></tr></table>
+    <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Lectura</td></tr></table>
 
 
     Nota: Este miembro no se admite en Outlook para iOS ni en Outlook para Android.
@@ -146,11 +146,11 @@ items:
     Obtiene un dato adjunto de un mensaje o cita y lo devuelve como una `Office.AttachmentContent` objeto.
 
 
-    El `getAttachmentContentAsync` método obtiene los datos adjuntos con el identificador especificado del elemento. Como práctica recomendada, debe utilizar el identificador para recuperar un dato adjunto en la misma sesión que se recuperaron el attachmentIds con el `getAttachmentsAsync` o `item.attachments` de llamadas. En Outlook Web App y OWA para los dispositivos, el identificador de datos adjuntos es válido solo en la misma sesión. Una sesión es a través de cuando el usuario cierra la aplicación, o si el usuario inicia redactar un formulario en línea, a continuación, posteriormente aparece el formulario para continuar en una ventana independiente.
+    El método `getAttachmentContentAsync` quita del elemento los datos adjuntos con el identificador especificado. Como procedimiento recomendado, use el identificador para recuperar los datos adjuntos en la misma sesión que los identificadores de datos adjuntos recuperados con la llamada `getAttachmentsAsync` o `item.attachments`. En Outlook Web App y Outlook Web App para dispositivos, el identificador de datos adjuntos solo es válido en la misma sesión. Una sesión finaliza cuando el usuario cierra la aplicación, o bien si el usuario empieza a redactar en un formulario insertado y, después, se extrae el formulario en línea para continuar en una ventana independiente.
 
 
     \[[Conjunto de API: vista previa de buzón de correo](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: "<table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>\n\n<tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redacción o lectura</td></tr>\n\n<tr><td>Errors</td><td>InvalidAttachmentId - el identificador de datos adjuntos no existe.</td></tr></table>\n####Ejemplos\n\n```javascript\nvar item = Office.context.mailbox.item;\nvar listOfAttachments = [];\nitem.getAttachmentsAsync(callback);\nfunction callback(result) {\n    if (result.value.length > 0) {\n        for (i = 0 ; i < result.value.length ; i++) {\n            var options = {asyncContext: {type: result.value[i].attachmentType}};\n            getAttachmentContentAsync(result.value[i].id, options, handleAttachmentsCallback);  \n        }\n    }\n}\n\nfunction handleAttachmentsCallback(result) {\n    // parse string to be a url, an .eml file, a base64-encoded string, or an .icalendar file\n    if (result.format == Office.MailboxEnums.AttachmentContentFormat.Base64) {\n        // handle file attachment\n    }\n    else if (result.format == Office.MailboxEnums.AttachmentContentFormat.Eml) {\n        // handle item attachment\n    }\n    else if (result.format == Office.MailboxEnums.AttachmentContentFormat.ICalendar) {\n        // handle .icalender attachment\n    }\n    else {\n        // handle cloud attachment  \n    }\n}\n```"
+  remarks: "<table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>\n\n<tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redacción o lectura</td></tr>\n\n<tr><td>Errores</td><td>InvalidAttachmentId - el identificador de datos adjuntos no existe.</td></tr></table>\n####Ejemplos\n\n```javascript\nvar item = Office.context.mailbox.item;\nvar listOfAttachments = [];\nitem.getAttachmentsAsync(callback);\nfunction callback(result) {\n    if (result.value.length > 0) {\n        for (i = 0 ; i < result.value.length ; i++) {\n            var options = {asyncContext: {type: result.value[i].attachmentType}};\n            getAttachmentContentAsync(result.value[i].id, options, handleAttachmentsCallback);  \n        }\n    }\n}\n\nfunction handleAttachmentsCallback(result) {\n    // parse string to be a url, an .eml file, a base64-encoded string, or an .icalendar file\n    if (result.format == Office.MailboxEnums.AttachmentContentFormat.Base64) {\n        // handle file attachment\n    }\n    else if (result.format == Office.MailboxEnums.AttachmentContentFormat.Eml) {\n        // handle item attachment\n    }\n    else if (result.format == Office.MailboxEnums.AttachmentContentFormat.ICalendar) {\n        // handle .icalender attachment\n    }\n    else {\n        // handle cloud attachment  \n    }\n}\n```"
   isPreview: true
   name: getAttachmentContentAsync(attachmentId, options, callback)
   fullName: getAttachmentContentAsync
@@ -165,7 +165,7 @@ items:
       description: ''
     parameters:
     - id: attachmentId
-      description: El identificador de los datos adjuntos que desea obtener. La longitud máxima de la cadena es de 100 caracteres.
+      description: El identificador de los datos adjuntos que quiera obtener.
       type:
       - string
     - id: options
@@ -404,7 +404,7 @@ items:
       type:
       - '(result: AsyncResult<Office.CustomProperties>) => void'
     - id: userContext
-      description: Opcional. Los desarrolladores pueden proporcionar cualquier objeto que desean tener acceso en la función de devolución de llamada. La propiedad asyncResult.asyncContext en la función de devolución de llamada puede tener acceso a este objeto.
+      description: Opcional. Los desarrolladores pueden proporcionar cualquier objeto al que quieran tener acceso en la función de devolución de llamada. La propiedad asyncResult.asyncContext en la función de devolución de llamada puede tener acceso a este objeto.
       type:
       - any
 - uid: outlook.Office.Item.notificationMessages
@@ -430,10 +430,10 @@ items:
       - outlook.Office.NotificationMessages
 - uid: outlook.Office.Item.recurrence
   summary: >-
-    Obtiene o establece el patrón de periodicidad de una cita. Obtiene el patrón de periodicidad de una convocatoria de reunión. Lectura y redacción modos para elementos de cita. Modo de lectura para los elementos de solicitud de reunión.
+    Obtiene o establece el patrón de periodicidad de una cita. Obtiene el patrón de periodicidad de una convocatoria de reunión. Lea y redacte modos de elementos de la cita. Lea más sobre los elementos de solicitud de reunión.
 
 
-    La propiedad de periodicidad devuelve un objeto de periodicidad para solicitudes de reuniones o citas periódicas si un elemento es una serie o una instancia de una serie. `null`se devuelve solo citas y convocatorias de reunión de citas únicas. `undefined`se devuelve para los mensajes que no son las convocatorias de reunión.
+    La propiedad de periodicidad devuelve un objeto de periodicidad para solicitudes de reuniones o citas periódicas si un elemento es una serie o una instancia de una serie. `null` se devuelve para citas únicas y convocatorias de reunión de citas únicas. `undefined` se devuelve para mensajes que no son convocatorias de reunión.
 
 
     Nota: Las convocatorias de reunión tienen un valor itemClass IPM. Schedule.Meeting.Request.
@@ -460,7 +460,7 @@ items:
       - outlook.Office.Recurrence
 - uid: outlook.Office.Item.removeHandlerAsync
   summary: >-
-    Quita un controlador de eventos para un evento compatible.
+    Elimina un controlador de eventos para un evento admitido.
 
 
     Actualmente son los tipos de eventos compatibles `Office.EventType.AppointmentTimeChanged` <!-- -->, `Office.EventType.RecipientsChanged` <!-- -->, y `Office.EventType.RecurrenceChanged` <!-- -->. En la vista previa, `Office.EventType.AttachmentsChanged` también es compatible.
@@ -514,7 +514,7 @@ items:
     En OWA y Outlook, el seriesId devuelve el identificador de Exchange Web Services (EWS) del elemento primario (serie) al que pertenece este producto. Sin embargo, en iOS y Android, el seriesId devuelve el identificador del resto del elemento primario.
 
 
-    Nota: El identificador devuelto por la propiedad seriesId es el mismo que el identificador de elemento de servicios Web de Exchange. La propiedad seriesId no es idéntica a los identificadores de Outlook utilizadas por la API de REST de Outlook. Antes de realizar llamadas a la API de REST con este valor, se debe convertir mediante Office.context.mailbox.convertToRestId. Para obtener más información, vea [usar las API de REST de Outlook desde un complemento de Outlook](https://docs.microsoft.com/outlook/add-ins/use-rest-api)<!-- -->.
+    Nota: El identificador devuelto por la propiedad seriesId es el mismo que el identificador de elemento de servicios Web de Exchange. La propiedad seriesId no es idéntica a los identificadores de Outlook utilizadas por la API de REST de Outlook. Para realizar llamadas a la API de REST con este valor, hay que convertirlo con Office.context.mailbox.convertToRestId. Para obtener más información, vea [usar las API de REST de Outlook desde un complemento de Outlook](https://docs.microsoft.com/outlook/add-ins/use-rest-api)<!-- -->.
 
 
     La propiedad seriesId devuelve null para los elementos que no tienen elementos primarios, como citas únicas, elementos de serie, o solicitudes de reunión y devuelve el valor undefined para todos los elementos que no son las convocatorias de reunión.
