@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: aa60539a74eb853496d919ad1aff9569a11b243f
-ms.sourcegitcommit: 1665198bc1913e60caf12b3d1342844b57a3453a
+ms.openlocfilehash: 0fa4fe0a847e831c0031308bfc2c10b4fbeff85d
+ms.sourcegitcommit: 4e15262bb3005b2f4ebb2756484e6a1b4e2379bd
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 12/21/2018
-ms.locfileid: "27384274"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "27770521"
 items:
 - uid: outlook.Office.MessageCompose
   summary: >-
@@ -60,7 +60,7 @@ items:
 
 
     \[[Conjunto de API: buzón 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: "<table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr>\n\n<tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redactar mensaje</td></tr>\n\n<tr><td>Errores</td><td>AttachmentSizeExceeded - los datos adjuntos son mayor que el permitido.</td></tr><tr><td></td><td>FileTypeNotSupported - el archivo adjunto tiene una extensión que no está permitida.</td></tr><tr><td></td><td>NumberOfAttachmentsExceeded - el mensaje o cita contiene demasiados datos adjuntos.</td></tr></table>\n\nAdemás de esta firma, el método también tiene las siguientes firmas:\n\n`addFileAttachmentAsync(uri: string, attachmentName: string): void;`\n\n`addFileAttachmentAsync(uri: string, attachmentName: string, options: AsyncContextOptions): void;`\n\n`addFileAttachmentAsync(uri: string, attachmentName: string, callback: (result: AsyncResult<string>) => void): void;`\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nfunction callback(result) {\n    if (result.error) {\n        showMessage(result.error);\n    } else {\n        showMessage(\"Attachment added\");\n    }\n}\n\nfunction addAttachment() {\n    // The values in asyncContext can be accessed in the callback\n    var options = { 'asyncContext': { var1: 1, var2: 2 } };\n\n    var attachmentURL = \"https://contoso.com/rtm/icon.png\";\n    Office.context.mailbox.item.addFileAttachmentAsync(attachmentURL, attachmentURL, options, callback);\n}\n```\n```javascript\n// The following example adds an image file as an inline attachment and\n// references the attachment in the message body.\nOffice.context.mailbox.item.addFileAttachmentAsync\n(\n    \"http://i.imgur.com/WJXklif.png\",\n    \"cute_bird.png\",\n    {\n        isInline: true\n    },\n    function (asyncResult) {\n        Office.context.mailbox.item.body.setAsync(\n            \"<p>Here's a cute bird!</p><img src='cid:cute_bird.png'>\",\n            {\n                \"coercionType\": \"html\"\n            },\n            function (asyncResult) {\n                \n            });\n    });\n```"
+  remarks: "<table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr>\n\n<tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redactar mensaje</td></tr>\n\n<tr><td>Errores</td><td>AttachmentSizeExceeded - los datos adjuntos son mayor que el permitido.</td></tr><tr><td></td><td>FileTypeNotSupported - el archivo adjunto tiene una extensión que no está permitida.</td></tr><tr><td></td><td>NumberOfAttachmentsExceeded - el mensaje o cita contiene demasiados datos adjuntos.</td></tr></table>\n\nAdemás de esta firma, el método también tiene las siguientes firmas:\n\n`addFileAttachmentAsync(uri: string, attachmentName: string): void;`\n\n`addFileAttachmentAsync(uri: string, attachmentName: string, options: AsyncContextOptions): void;`\n\n`addFileAttachmentAsync(uri: string, attachmentName: string, callback: (result: AsyncResult<string>) => void): void;`\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nfunction callback(result) {\n    if (result.error) {\n        showMessage(result.error);\n    } else {\n        showMessage(\"Attachment added\");\n    }\n}\n\nfunction addAttachment() {\n    // The values in asyncContext can be accessed in the callback\n    var options = { 'asyncContext': { var1: 1, var2: 2 } };\n\n    var attachmentURL = \"https://contoso.com/rtm/icon.png\";\n    Office.context.mailbox.item.addFileAttachmentAsync(attachmentURL, attachmentURL, options, callback);\n}\n```\n```javascript\n// The following example adds an image file as an inline attachment and\n// references the attachment in the message body.\nOffice.context.mailbox.item.addFileAttachmentAsync\n(\n    \"http://i.imgur.com/WJXklif.png\",\n    \"cute_bird.png\",\n    {\n        isInline: true\n    },\n    function (asyncResult) {\n        Office.context.mailbox.item.body.setAsync(\n            \"<p>Here's a cute bird!</p><img src='cid:cute_bird.png'>\",\n            {\n                \"coercionType\": \"html\"\n            },\n            function (asyncResult) {\n                \n            });\n    });\n```"
   name: addFileAttachmentAsync(uri, attachmentName, options, callback)
   fullName: addFileAttachmentAsync
   langs:
@@ -105,7 +105,7 @@ items:
     <table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr>
 
 
-    <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Organizador de la cita</td></tr>
+    <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Organizador de la cita</td></tr>
 
 
     <tr><td>Errores</td><td>AttachmentSizeExceeded - los datos adjuntos son mayor que el permitido.</td></tr><tr><td></td><td>FileTypeNotSupported - el archivo adjunto tiene una extensión que no está permitida.</td></tr><tr><td></td><td>NumberOfAttachmentsExceeded - el mensaje o cita contiene demasiados datos adjuntos.</td></tr></table>
@@ -173,7 +173,7 @@ items:
     <table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
 
 
-    <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redactar mensaje</td></tr></table>
+    <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redactar mensaje</td></tr></table>
 
 
     Además de esta firma, el método también tiene la siguiente firma:
@@ -227,7 +227,7 @@ items:
     <table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr>
 
 
-    <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redactar mensaje</td></tr>
+    <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redactar mensaje</td></tr>
 
 
     <tr><td>Errores</td><td>NumberOfAttachmentsExceeded - el mensaje o cita contiene demasiados datos adjuntos.</td></tr></table>
@@ -312,7 +312,7 @@ items:
     <table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
 
 
-    <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redactar mensaje</td></tr></table>
+    <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redactar mensaje</td></tr></table>
 
     ####Ejemplos
 
@@ -351,7 +351,7 @@ items:
     <table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
 
 
-    <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redactar mensaje</td></tr></table>
+    <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redactar mensaje</td></tr></table>
   name: body
   fullName: body
   langs:
@@ -375,7 +375,7 @@ items:
     <table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
 
 
-    <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redactar mensaje</td></tr></table>
+    <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redactar mensaje</td></tr></table>
 
     ####Ejemplos
 
@@ -423,7 +423,7 @@ items:
     <table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>Restringido</td></tr>
 
 
-    <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redactar mensaje</td></tr></table>
+    <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redactar mensaje</td></tr></table>
   name: close()
   fullName: close
   langs:
@@ -451,7 +451,7 @@ items:
     <table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
 
 
-    <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redactar mensaje</td></tr></table>
+    <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redactar mensaje</td></tr></table>
   name: conversationId
   fullName: conversationId
   langs:
@@ -472,7 +472,7 @@ items:
     <table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
 
 
-    <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redactar mensaje</td></tr></table>
+    <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redactar mensaje</td></tr></table>
   name: dateTimeCreated
   fullName: dateTimeCreated
   langs:
@@ -493,7 +493,7 @@ items:
     <table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
 
 
-    <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redactar mensaje</td></tr></table>
+    <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redactar mensaje</td></tr></table>
 
 
     Nota: Este miembro no se admite en Outlook para iOS ni en Outlook para Android.
@@ -523,7 +523,7 @@ items:
     <table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
 
 
-    <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redactar mensaje</td></tr></table>
+    <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redactar mensaje</td></tr></table>
 
     ####Ejemplos
 
@@ -554,7 +554,7 @@ items:
 
 
     \[[Conjunto de API: vista previa de buzón de correo](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: "<table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>\n\n<tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redacción</td></tr></table>\n####Ejemplos\n\n```javascript\nvar item = Office.context.mailbox.item;\nvar outputString = \"\";\nitem.getAttachmentsAsync(callback);  \nfunction callback(result) {\n    if (result.value.length > 0) {\n        for (i = 0 ; i < result.value.length ; i++) {\n            var _att = result.value [i];\n            outputString += \"<BR>\" + i + \". Name: \";\n            outputString += _att.name;\n            outputString += \"<BR>ID: \" + _att.id;\n            outputString += \"<BR>contentType: \" + _att.contentType;\n            outputString += \"<BR>size: \" + _att.size;\n            outputString += \"<BR>attachmentType: \" + _att.attachmentType;\n            outputString += \"<BR>isInline: \" + _att.isInline;\n        }\n    }\n}\n```"
+  remarks: "<table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>\n\n<tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redacción</td></tr></table>\n####Ejemplos\n\n```javascript\nvar item = Office.context.mailbox.item;\nvar outputString = \"\";\nitem.getAttachmentsAsync(callback);  \nfunction callback(result) {\n    if (result.value.length > 0) {\n        for (i = 0 ; i < result.value.length ; i++) {\n            var _att = result.value [i];\n            outputString += \"<BR>\" + i + \". Name: \";\n            outputString += _att.name;\n            outputString += \"<BR>ID: \" + _att.id;\n            outputString += \"<BR>contentType: \" + _att.contentType;\n            outputString += \"<BR>size: \" + _att.size;\n            outputString += \"<BR>attachmentType: \" + _att.attachmentType;\n            outputString += \"<BR>isInline: \" + _att.isInline;\n        }\n    }\n}\n```"
   isPreview: true
   name: getAttachmentsAsync(options, callback)
   fullName: getAttachmentsAsync
@@ -582,7 +582,7 @@ items:
     <table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
 
 
-    <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redactar mensaje</td></tr></table>
+    <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redactar mensaje</td></tr></table>
 
 
     Para obtener más información sobre los [mensajes que se pueden procesar](https://docs.microsoft.com/outlook/actionable-messages/invoke-add-in-from-actionable-message)<!-- -->.
@@ -623,7 +623,7 @@ items:
     <table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr>
 
 
-    <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redactar mensaje</td></tr></table>
+    <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redactar mensaje</td></tr></table>
 
     ####Ejemplos
 
@@ -650,20 +650,20 @@ items:
     }
 
     ```
-  name: getSelectedDataAsync(coerciontype, callback)
+  name: getSelectedDataAsync(coercionType, callback)
   fullName: getSelectedDataAsync
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'getSelectedDataAsync(coerciontype: Office.CoercionType, callback: (result: AsyncResult<any>) => void): void;'
+    content: 'getSelectedDataAsync(coercionType: Office.CoercionType, callback: (result: AsyncResult<any>) => void): void;'
     return:
       type:
       - void
       description: Los datos seleccionados como cadena con formato determinado por coercionType.
     parameters:
-    - id: coerciontype
-      description: ''
+    - id: coercionType
+      description: Solicita un formato para los datos. Si el texto, el método devuelve el texto sin formato como una cadena, quitar todo el código HTML de etiquetas está presente. Si el código HTML, el método devuelve el texto seleccionado, ya sea texto sin formato o HTML.
       type:
       - office.Office.CoercionType
     - id: callback
@@ -683,7 +683,7 @@ items:
     <table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
 
 
-    <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redactar mensaje</td></tr></table>
+    <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redactar mensaje</td></tr></table>
   isPreview: true
   name: internetHeaders
   fullName: internetHeaders
@@ -708,7 +708,7 @@ items:
     <table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
 
 
-    <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redactar mensaje</td></tr></table>
+    <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redactar mensaje</td></tr></table>
   name: itemType
   fullName: itemType
   langs:
@@ -735,7 +735,7 @@ items:
     <table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
 
 
-    <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redactar mensaje</td></tr></table>
+    <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redactar mensaje</td></tr></table>
   name: loadCustomPropertiesAsync(callback, userContext)
   fullName: loadCustomPropertiesAsync
   langs:
@@ -766,7 +766,7 @@ items:
     <table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
 
 
-    <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redactar mensaje</td></tr></table>
+    <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redactar mensaje</td></tr></table>
   name: notificationMessages
   fullName: notificationMessages
   langs:
@@ -796,7 +796,7 @@ items:
     <table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
 
 
-    <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redactar mensaje</td></tr></table>
+    <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redactar mensaje</td></tr></table>
   name: recurrence
   fullName: recurrence
   langs:
@@ -820,7 +820,7 @@ items:
     <table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr>
 
 
-    <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redactar mensaje</td></tr>
+    <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redactar mensaje</td></tr>
 
 
     <tr><td>Errores</td><td>InvalidAttachmentId - el identificador de datos adjuntos no existe.</td></tr></table>
@@ -880,7 +880,7 @@ items:
       - '(result: AsyncResult<void>) => void'
 - uid: outlook.Office.MessageCompose.removeHandlerAsync
   summary: >-
-    Elimina un controlador de eventos para un evento admitido.
+    Elimina un controlador de eventos de un evento admitido.
 
 
     Actualmente son los tipos de eventos compatibles `Office.EventType.AppointmentTimeChanged` <!-- -->, `Office.EventType.RecipientsChanged` <!-- -->, y `Office.EventType.RecurrenceChanged` <!-- -->. En la vista previa, `Office.EventType.AttachmentsChanged` también es compatible.
@@ -891,7 +891,7 @@ items:
     <table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
 
 
-    <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redactar mensaje</td></tr></table>
+    <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redactar mensaje</td></tr></table>
 
 
     Además de esta firma, el método también tiene la siguiente firma:
@@ -911,7 +911,7 @@ items:
       description: ''
     parameters:
     - id: eventType
-      description: El evento que debe revocar el controlador.
+      description: El evento que tiene que revocar el controlador.
       type:
       - EventType
     - id: handler
@@ -954,7 +954,7 @@ items:
     <table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr>
 
 
-    <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redactar mensaje</td></tr>
+    <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redactar mensaje</td></tr>
 
 
     <tr><td>Errores</td><td>InvalidAttachmentId - el identificador de datos adjuntos no existe.</td></tr></table>
@@ -1036,7 +1036,7 @@ items:
     <table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
 
 
-    <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redactar mensaje</td></tr></table>
+    <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redactar mensaje</td></tr></table>
   name: seriesId
   fullName: seriesId
   langs:
@@ -1060,7 +1060,7 @@ items:
     <table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadWriteItem</td></tr>
 
 
-    <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redactar mensaje</td></tr>
+    <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redactar mensaje</td></tr>
 
 
     <tr><td>Errores</td><td>InvalidAttachmentId - el identificador de datos adjuntos no existe.</td></tr></table>
@@ -1127,7 +1127,7 @@ items:
     <table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
 
 
-    <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redactar mensaje</td></tr></table>
+    <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redactar mensaje</td></tr></table>
 
     ####Ejemplos
 
@@ -1165,7 +1165,7 @@ items:
     <table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
 
 
-    <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redactar mensaje</td></tr></table>
+    <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redactar mensaje</td></tr></table>
 
     ####Ejemplos
 
