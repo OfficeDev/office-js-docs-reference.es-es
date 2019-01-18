@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 86a143d5d3ce8e4486010f43d8a54de4b09f7980
-ms.sourcegitcommit: 3771b97cffd6e0510fd4e9c6288db696cd0c0ca9
+ms.openlocfilehash: f774b8bb9a5ccdddae6de035b5eff44a8c9314bd
+ms.sourcegitcommit: 06eebee5e68d349f78e6bc3bb0ef099fe063cf04
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 11/30/2018
-ms.locfileid: "26996077"
+ms.lasthandoff: 01/17/2019
+ms.locfileid: "28725413"
 items:
 - uid: excel.Excel.PivotTable
   summary: >-
@@ -23,6 +23,7 @@ items:
   package: excel
   children:
   - excel.Excel.PivotTable.columnHierarchies
+  - excel.Excel.PivotTable.context
   - excel.Excel.PivotTable.dataHierarchies
   - excel.Excel.PivotTable.delete
   - excel.Excel.PivotTable.filterHierarchies
@@ -37,7 +38,7 @@ items:
   - excel.Excel.PivotTable.worksheet
 - uid: excel.Excel.PivotTable.columnHierarchies
   summary: >-
-    Las jerarquías de tablas dinámicas de columna de la tabla dinámica.
+    Las jerarquías dinámicas de columna de la tabla dinámica.
 
 
     \[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -52,9 +53,21 @@ items:
       type:
       - excel.Excel.RowColumnPivotHierarchyCollection
       description: "\n#### <a name=\"examples\"></a>Ejemplos\n\n```typescript\nawait Excel.run(async (context) => {\n    const pivotTable = context.workbook.worksheets.getActiveWorksheet().pivotTables.getItem(\"Farm Sales\");       \n\n    // check if the PivotTable already has a column\n    const column = pivotTable.columnHierarchies.getItemOrNullObject(\"Farm\");\n    column.load(\"id\");\n    await context.sync();\n\n    if (column.isNullObject) {\n        // ading the farm column to the column hierarchy automatically removes it from the row hierarchy\n        pivotTable.columnHierarchies.add(pivotTable.hierarchies.getItem(\"Farm\"));\n    } else {\n        pivotTable.columnHierarchies.remove(column);\n    }\n\n    await context.sync();\n});\n```"
+- uid: excel.Excel.PivotTable.context
+  summary: El contexto de solicitud asociado con el objeto. Este comando conecta proceso del complemento al proceso de la aplicación host de Office.
+  name: context
+  fullName: context
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type:
+      - RequestContext
 - uid: excel.Excel.PivotTable.dataHierarchies
   summary: >-
-    Las jerarquías de tablas dinámicas de datos de la tabla dinámica.
+    Las jerarquías dinámicas de datos de la tabla dinámica.
 
 
     \[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -88,7 +101,7 @@ items:
       description: "\n#### <a name=\"examples\"></a>Ejemplos\n\n```typescript\nawait Excel.run(async (context) => {\n    context.workbook.worksheets.getItem(\"Pivot\").pivotTables.getItem(\"Farm Sales\").delete();\n\n    await context.sync();\n});\n```"
 - uid: excel.Excel.PivotTable.filterHierarchies
   summary: >-
-    Las jerarquías de tablas dinámicas de filtro de la tabla dinámica.
+    Las jerarquías dinámicas de filtro de la tabla dinámica.
 
 
     \[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -105,7 +118,7 @@ items:
       description: "\n#### <a name=\"examples\"></a>Ejemplos\n\n```typescript\nasync function filter(functionType: Excel.AggregationFunction) {\n    await Excel.run(async (context) => {\n        const pivotTable = context.workbook.worksheets.getActiveWorksheet().pivotTables.getItem(\"Farm Sales\");\n        const filters = pivotTable.filterHierarchies;\n        const filter = filters.getItemOrNullObject(\"Classification\");\n        filter.load();\n        await context.sync();\n\n        // add the Classification hierarchy to the filter, if it's not already there\n        if (filter.isNullObject) {\n            filters.add(pivotTable.hierarchies.getItem(\"Classification\"));\n            await context.sync();\n        }\n    });\n}\n```"
 - uid: excel.Excel.PivotTable.hierarchies
   summary: >-
-    Las jerarquías de tablas dinámicas de la tabla dinámica.
+    Las jerarquías dinámicas de la tabla dinámica.
 
 
     \[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -213,7 +226,7 @@ items:
       description: ''
 - uid: excel.Excel.PivotTable.rowHierarchies
   summary: >-
-    Las jerarquías de tablas dinámicas de fila de la tabla dinámica.
+    Las jerarquías dinámicas de fila de la tabla dinámica.
 
 
     \[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -228,6 +241,7 @@ items:
       type:
       - excel.Excel.RowColumnPivotHierarchyCollection
 - uid: excel.Excel.PivotTable.toJSON
+  summary: Invalida el JavaScript `toJSON()` método con el fin de proporcionar resultados más útiles cuando se pasa un objeto de la API a `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama a la `toJSON` método del objeto que se pasa a ella.) Mientras que el objeto original de Excel.PivotTable es un objeto de la API, el `toJSON` método devuelve un objeto de JavaScript sin formato (escrito como `Excel.Interfaces.PivotTableData` <!-- -->) que contiene copias superficiales de todas las propiedades del objeto original secundario cargado.
   name: toJSON()
   fullName: toJSON
   langs:

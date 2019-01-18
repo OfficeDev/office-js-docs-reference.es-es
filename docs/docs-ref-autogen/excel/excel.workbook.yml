@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: e28789800e3c2104c303da210cc49dc5438093d7
-ms.sourcegitcommit: 3771b97cffd6e0510fd4e9c6288db696cd0c0ca9
+ms.openlocfilehash: c35d258e429129a43943d53e26b3daaab4653edd
+ms.sourcegitcommit: 06eebee5e68d349f78e6bc3bb0ef099fe063cf04
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 11/30/2018
-ms.locfileid: "26995279"
+ms.lasthandoff: 01/17/2019
+ms.locfileid: "28724958"
 items:
 - uid: excel.Excel.Workbook
   summary: >-
@@ -23,6 +23,7 @@ items:
   children:
   - excel.Excel.Workbook.application
   - excel.Excel.Workbook.bindings
+  - excel.Excel.Workbook.context
   - excel.Excel.Workbook.customXmlParts
   - excel.Excel.Workbook.dataConnections
   - excel.Excel.Workbook.functions
@@ -73,6 +74,18 @@ items:
     return:
       type:
       - excel.Excel.BindingCollection
+- uid: excel.Excel.Workbook.context
+  summary: El contexto de solicitud asociado con el objeto. Este comando conecta proceso del complemento al proceso de la aplicación host de Office.
+  name: context
+  fullName: context
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type:
+      - RequestContext
 - uid: excel.Excel.Workbook.customXmlParts
   summary: >-
     Representa la colección de elementos XML personalizados incluidos en este libro. Solo lectura.
@@ -123,7 +136,7 @@ items:
       - excel.Excel.Functions
 - uid: excel.Excel.Workbook.getActiveCell
   summary: >-
-    Obtiene la celda actualmente activa del libro.
+    Obtiene la celda activa del libro.
 
 
     \[[Conjunto de API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -247,7 +260,7 @@ items:
       - excel.Excel.PivotTableCollection
 - uid: excel.Excel.Workbook.properties
   summary: >-
-    Obtiene las propiedades de libro. Solo lectura.
+    Obtiene las propiedades del libro. Solo lectura.
 
 
     \[[Conjunto de API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -264,7 +277,7 @@ items:
       description: "\n#### <a name=\"examples\"></a>Ejemplos\n\n```typescript\nawait Excel.run(async (context) => {\n    let titleValue = \"Excel document properties API\";\n    let subjectValue = \"Set and get document properties\";\n    let keywordsValue = \"Set and get operations\";\n    let commentsValue = \"This is an Excel document properties API code sample\";\n    let categoryValue = \"Office Add-ins\";\n    let managerValue = \"John\";\n    let companyValue = \"Microsoft\";\n\n    let docProperties = context.workbook.properties;\n\n    // Set the writeable document properties.\n    docProperties.title = titleValue;\n    docProperties.subject = subjectValue;\n    docProperties.keywords = keywordsValue;\n    docProperties.comments = commentsValue;\n    docProperties.category = categoryValue;\n    docProperties.manager = managerValue;\n    docProperties.company = companyValue;\n\n    await context.sync();\n\n    console.log(\"Set the following document properties: title, subject, keywords, comments, category, manager, company.\");\n});\n```"
 - uid: excel.Excel.Workbook.protection
   summary: >-
-    Devuelve el objeto de la protección de libro de un libro. Solo lectura.
+    Devuelve el objeto de protección de un libro. Solo lectura.
 
 
     \[[Conjunto de API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -280,7 +293,7 @@ items:
       - excel.Excel.WorkbookProtection
 - uid: excel.Excel.Workbook.readOnly
   summary: >-
-    Es True si el libro está abierto en modo de sólo lectura. Solo lectura.
+    True si el libro está abierto en modo de solo lectura. Solo lectura.
 
 
     \[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -343,6 +356,7 @@ items:
       type:
       - excel.Excel.TableCollection
 - uid: excel.Excel.Workbook.toJSON
+  summary: Invalida el JavaScript `toJSON()` método con el fin de proporcionar resultados más útiles cuando se pasa un objeto de la API a `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama a la `toJSON` método del objeto que se pasa a ella.) Mientras que el objeto Excel.Workbook original es un objeto de la API, el `toJSON` método devuelve un objeto de JavaScript sin formato (escrito como `Excel.Interfaces.WorkbookData` <!-- -->) que contiene copias superficiales de todas las propiedades del objeto original secundario cargado.
   name: toJSON()
   fullName: toJSON
   langs:

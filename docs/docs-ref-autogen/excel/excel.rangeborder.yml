@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 794c81e73e6336ea2f889ac7fb6102a7b2641dde
-ms.sourcegitcommit: 3771b97cffd6e0510fd4e9c6288db696cd0c0ca9
+ms.openlocfilehash: 1fb962b43e347932d6d3358d877ffbcd924dad61
+ms.sourcegitcommit: 06eebee5e68d349f78e6bc3bb0ef099fe063cf04
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 11/30/2018
-ms.locfileid: "26994724"
+ms.lasthandoff: 01/17/2019
+ms.locfileid: "28724545"
 items:
 - uid: excel.Excel.RangeBorder
   summary: >-
@@ -22,6 +22,7 @@ items:
   package: excel
   children:
   - excel.Excel.RangeBorder.color
+  - excel.Excel.RangeBorder.context
   - excel.Excel.RangeBorder.load
   - excel.Excel.RangeBorder.sideIndex
   - excel.Excel.RangeBorder.style
@@ -43,6 +44,18 @@ items:
     return:
       type:
       - string
+- uid: excel.Excel.RangeBorder.context
+  summary: El contexto de solicitud asociado con el objeto. Este comando conecta proceso del complemento al proceso de la aplicación host de Office.
+  name: context
+  fullName: context
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type:
+      - RequestContext
 - uid: excel.Excel.RangeBorder.load
   summary: Colas de seguridad de un comando que se va a cargar las propiedades del objeto especificadas. Se debe llamar a "context.sync()" antes de leer las propiedades.
   remarks: "Además de esta firma, este método no tiene las siguientes firmas:\n\n`load(option?: { select?: string; expand?: string; }): Excel.RangeBorder`-Donde option.select es una cadena delimitada por comas que especifica las propiedades para cargar y options.expand es una cadena delimitada por comas que especifica las propiedades de navegación para cargar.\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.RangeBorder`-Sólo está disponible en los tipos de colección. Es similar a la firma precedente. Option.Top especifica el número máximo de elementos de la colección que se puede incluir en el resultado. Option.Skip especifica el número de elementos que se pasan por alto y no se incluyen en el resultado. Si se especifica option.top, se iniciará el conjunto de resultados después de omitir el número especificado de elementos.\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nExcel.run(function (ctx) { \n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"A1:F8\";\n    var worksheet = ctx.workbook.worksheets.getItem(sheetName);\n    var range = worksheet.getRange(rangeAddress);\n    var borders = range.format.borders;\n    borders.load('items');\n    return ctx.sync().then(function() {\n        console.log(borders.count);\n        for (var i = 0; i < borders.items.length; i++)\n        {\n            console.log(borders.items[i].sideIndex);\n        }\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\n// The example below adds grid border around the range.\nExcel.run(function (ctx) { \n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"A1:F8\";\n    var range = ctx.workbook.worksheets.getItem(sheetName).getRange(rangeAddress);\n    range.format.borders.getItem('InsideHorizontal').style = 'Continuous';\n    range.format.borders.getItem('InsideVertical').style = 'Continuous';\n    range.format.borders.getItem('EdgeBottom').style = 'Continuous';\n    range.format.borders.getItem('EdgeLeft').style = 'Continuous';\n    range.format.borders.getItem('EdgeRight').style = 'Continuous';\n    range.format.borders.getItem('EdgeTop').style = 'Continuous';\n    return ctx.sync(); \n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
@@ -95,6 +108,7 @@ items:
       type:
       - Excel.BorderLineStyle | "None" | "Continuous" | "Dash" | "DashDot" | "DashDotDot" | "Dot" | "Double" | "SlantDashDot"
 - uid: excel.Excel.RangeBorder.toJSON
+  summary: Invalida el JavaScript `toJSON()` método con el fin de proporcionar resultados más útiles cuando se pasa un objeto de la API a `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama a la `toJSON` método del objeto que se pasa a ella.) Mientras que el objeto original de Excel.RangeBorder es un objeto de la API, el `toJSON` método devuelve un objeto de JavaScript sin formato (escrito como `Excel.Interfaces.RangeBorderData` <!-- -->) que contiene copias superficiales de todas las propiedades del objeto original secundario cargado.
   name: toJSON()
   fullName: toJSON
   langs:

@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 2ab6816398b76df763a4803a12b6aa2417894b4d
-ms.sourcegitcommit: 3771b97cffd6e0510fd4e9c6288db696cd0c0ca9
+ms.openlocfilehash: cc4fcfd114add0f06f08cd80d8ba4ca8bcfc7152
+ms.sourcegitcommit: 06eebee5e68d349f78e6bc3bb0ef099fe063cf04
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 11/30/2018
-ms.locfileid: "26995496"
+ms.lasthandoff: 01/17/2019
+ms.locfileid: "28725007"
 items:
 - uid: excel.Excel.Worksheet
   summary: >-
@@ -25,6 +25,7 @@ items:
   - excel.Excel.Worksheet.activate
   - excel.Excel.Worksheet.calculate
   - excel.Excel.Worksheet.charts
+  - excel.Excel.Worksheet.context
   - excel.Excel.Worksheet.copy
   - excel.Excel.Worksheet.delete
   - excel.Excel.Worksheet.freezePanes
@@ -112,9 +113,21 @@ items:
     return:
       type:
       - excel.Excel.ChartCollection
+- uid: excel.Excel.Worksheet.context
+  summary: El contexto de solicitud asociado con el objeto. Este comando conecta proceso del complemento al proceso de la aplicación host de Office.
+  name: context
+  fullName: context
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type:
+      - RequestContext
 - uid: excel.Excel.Worksheet.copy
   summary: >-
-    Copiar una hoja de cálculo y colocarlo en la posición especificada. Devolver la hoja de cálculo copiada.
+    Copia una hoja de cálculo y la coloca en la posición especificada. Devuelve la hoja de cálculo copiada.
 
 
     \[[Conjunto de API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -221,7 +234,7 @@ items:
       - boolean
 - uid: excel.Excel.Worksheet.getNextOrNullObject
   summary: >-
-    Obtiene la siguiente hoja de cálculo. Si no hay ninguna hoja de cálculo que siga a esta, este método devolverá un objeto null.
+    Obtiene la siguiente hoja de cálculo. Si no hay ninguna hoja de cálculo que siga a esta, este método devolverá un objeto NULL.
 
 
     \[[Conjunto de API: ExcelApi 1,5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -265,7 +278,7 @@ items:
       - boolean
 - uid: excel.Excel.Worksheet.getPreviousOrNullObject
   summary: >-
-    Obtiene la hoja de cálculo anterior. Si no hay ninguna hoja de cálculo anterior, este método devolverá un objeto null.
+    Obtiene la hoja de cálculo anterior. Si no hay ninguna hoja de cálculo anterior, este método devolverá un objeto NULL.
 
 
     \[[Conjunto de API: ExcelApi 1,5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -308,7 +321,11 @@ items:
       type:
       - string
 - uid: excel.Excel.Worksheet.getRangeByIndexes
-  summary: " Obtiene el objeto de intervalo comenzando en un índice de columna y fila determinado, y que abarca un determinado número de filas y columnas.\n\n\\[[Conjunto de API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
+  summary: >-
+    Obtiene el objeto de intervalo comenzando en un índice de columna y fila determinado, y que abarca un determinado número de filas y columnas.
+
+
+    \[[Conjunto de API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getRangeByIndexes(startRow, startColumn, rowCount, columnCount)
   fullName: getRangeByIndexes
   langs:
@@ -596,7 +613,7 @@ items:
       description: "\n#### <a name=\"examples\"></a>Ejemplos\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getActiveWorksheet();\n    sheet.showGridlines = true;\n\n    await context.sync();\n});\n```"
 - uid: excel.Excel.Worksheet.showHeadings
   summary: >-
-    Obtiene o establece la marca de los títulos de la hoja de cálculo. Este indicador determina si los encabezados están visibles para el usuario.
+    Obtiene o establece la marca de títulos de la hoja de cálculo. Este indicador determina si los encabezados están visibles para el usuario.
 
 
     \[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -612,7 +629,7 @@ items:
       - boolean
 - uid: excel.Excel.Worksheet.standardHeight
   summary: >-
-    Devuelve el alto estándar (valor predeterminado) de todas las filas de la hoja de cálculo, en puntos. Solo lectura.
+    Devuelve el ancho estándar (predeterminado) de todas las filas de la hoja de cálculo, en puntos. Solo lectura.
 
 
     \[[Conjunto de API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -628,7 +645,7 @@ items:
       - number
 - uid: excel.Excel.Worksheet.standardWidth
   summary: >-
-    Devuelve o establece el ancho estándar (valor predeterminado) de todas las columnas de la hoja de cálculo. Una unidad de anchura de columna es igual a la anchura de un carácter en el estilo Normal. Para fuentes proporcionales, se utiliza el ancho del carácter 0 (cero).
+    Devuelve o establece el ancho estándar (predeterminado) de todas las columnas en la hoja de cálculo. Una unidad de ancho de columna es igual al ancho de un carácter en el estilo Normal. En el caso de las fuentes proporcionales, se usa el ancho del carácter 0 (cero).
 
 
     \[[Conjunto de API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -644,7 +661,7 @@ items:
       - number
 - uid: excel.Excel.Worksheet.tabColor
   summary: >-
-    Obtiene o establece el color de la ficha de hoja de cálculo. Al recuperar el color de la ficha, si la hoja de cálculo es invisible, el valor será null. Si la hoja de cálculo está visible, pero se establece el color de la ficha en automático, se devolverá una cadena vacía. De lo contrario, se establecerá la propiedad a un color, con el formato "\#123456" al establecer el color, use una cadena vacía para establecer un color de "auto", o un color real de lo contrario.
+    Obtiene o establece el color de pestaña de hoja de cálculo. Al recuperar el color de la ficha, si la hoja de cálculo es invisible, el valor será null. Si la hoja de cálculo está visible, pero se establece el color de la ficha en automático, se devolverá una cadena vacía. De lo contrario, se establecerá la propiedad a un color, con el formato "\#123456" al establecer el color, use una cadena vacía para establecer un color de "auto", o un color real de lo contrario.
 
 
     \[[Conjunto de API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -676,6 +693,7 @@ items:
       type:
       - excel.Excel.TableCollection
 - uid: excel.Excel.Worksheet.toJSON
+  summary: Invalida el JavaScript `toJSON()` método con el fin de proporcionar resultados más útiles cuando se pasa un objeto de la API a `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama a la `toJSON` método del objeto que se pasa a ella.) Mientras que el objeto Excel.Worksheet original es un objeto de la API, el `toJSON` método devuelve un objeto de JavaScript sin formato (escrito como `Excel.Interfaces.WorksheetData` <!-- -->) que contiene copias superficiales de todas las propiedades del objeto original secundario cargado.
   name: toJSON()
   fullName: toJSON
   langs:

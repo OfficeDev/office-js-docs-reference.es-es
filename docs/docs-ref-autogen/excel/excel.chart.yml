@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: cd72c139f7469e928cb3ca4335f0290f88a28a42
-ms.sourcegitcommit: 3771b97cffd6e0510fd4e9c6288db696cd0c0ca9
+ms.openlocfilehash: 02932b12b4db9ee5fabfdfbf8274375508d4ca5f
+ms.sourcegitcommit: 06eebee5e68d349f78e6bc3bb0ef099fe063cf04
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 11/30/2018
-ms.locfileid: "26996526"
+ms.lasthandoff: 01/17/2019
+ms.locfileid: "28725357"
 items:
 - uid: excel.Excel.Chart
   summary: >-
@@ -25,6 +25,7 @@ items:
   - excel.Excel.Chart.axes
   - excel.Excel.Chart.categoryLabelLevel
   - excel.Excel.Chart.chartType
+  - excel.Excel.Chart.context
   - excel.Excel.Chart.dataLabels
   - excel.Excel.Chart.delete
   - excel.Excel.Chart.displayBlanksAs
@@ -71,7 +72,7 @@ items:
       - excel.Excel.ChartAxes
 - uid: excel.Excel.Chart.categoryLabelLevel
   summary: >-
-    Devuelve o establece una constante de la enumeración ChartCategoryLabelLevel hace referencia al nivel de donde se proceden de los rótulos de categorías. Lectura y escritura.
+    Devuelve o establece una constante de la enumeración ChartCategoryLabelLevel que hace referencia al nivel de donde proceden las etiquetas de categoría. Lectura y escritura.
 
 
     \[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -87,7 +88,7 @@ items:
       - number
 - uid: excel.Excel.Chart.chartType
   summary: >-
-    Representa el tipo del gráfico. Para obtener información detallada, vea Excel.ChartType.
+    Representa el tipo de un gráfico. Para obtener información detallada, vea Excel.ChartType.
 
 
     \[[Conjunto de API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -101,6 +102,18 @@ items:
     return:
       type:
       - Excel.ChartType | "Invalid" | "ColumnClustered" | "ColumnStacked" | "ColumnStacked100" | "3DColumnClustered" | "3DColumnStacked" | "3DColumnStacked100" | "BarClustered" | "BarStacked" | "BarStacked100" | "3DBarClustered" | "3DBarStacked" | "3DBarStacked100" | "LineStacked" | "LineStacked100" | "LineMarkers" | "LineMarkersStacked" | "LineMarkersStacked100" | "PieOfPie" | "PieExploded" | "3DPieExploded" | "BarOfPie" | "XYScatterSmooth" | "XYScatterSmoothNoMarkers" | "XYScatterLines" | "XYScatterLinesNoMarkers" | "AreaStacked" | "AreaStacked100" | "3DAreaStacked" | "3DAreaStacked100" | "DoughnutExploded" | "RadarMarkers" | "RadarFilled" | "Surface" | "SurfaceWireframe" | "SurfaceTopView" | "SurfaceTopViewWireframe" | "Bubble" | "Bubble3DEffect" | "StockHLC" | "StockOHLC" | "StockVHLC" | "StockVOHLC" | "CylinderColClustered" | "CylinderColStacked" | "CylinderColStacked100" | "CylinderBarClustered" | "CylinderBarStacked" | "CylinderBarStacked100" | "CylinderCol" | "ConeColClustered" | "ConeColStacked" | "ConeColStacked100" | "ConeBarClustered" | "ConeBarStacked" | "ConeBarStacked100" | "ConeCol" | "PyramidColClustered" | "PyramidColStacked" | "PyramidColStacked100" | "PyramidBarClustered" | "PyramidBarStacked" | "PyramidBarStacked100" | "PyramidCol" | "3DColumn" | "Line" | "3DLine" | "3DPie" | "Pie" | "XYScatter" | "3DArea" | "Area" | "Doughnut" | "Radar" | "Histogram" | "Boxwhisker" | "Pareto" | "RegionMap" | "Treemap" | "Waterfall" | "Sunburst" | "Funnel"
+- uid: excel.Excel.Chart.context
+  summary: El contexto de solicitud asociado con el objeto. Este comando conecta proceso del complemento al proceso de la aplicación host de Office.
+  name: context
+  fullName: context
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type:
+      - RequestContext
 - uid: excel.Excel.Chart.dataLabels
   summary: >-
     Representa la clase DataLabels del gráfico. Solo lectura.
@@ -136,7 +149,7 @@ items:
       description: "\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nExcel.run(function (ctx) { \n    var chart = ctx.workbook.worksheets.getItem(\"Sheet1\").charts.getItem(\"Chart1\");    \n    chart.delete();\n    return ctx.sync(); \n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
 - uid: excel.Excel.Chart.displayBlanksAs
   summary: >-
-    Devuelve o establece la forma en que se trazan las celdas en blanco en un gráfico. Lectura y escritura.
+    Devuelve o establece la manera en que las celdas en blanco se trazan en un gráfico. Lectura y escritura.
 
 
     \[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -330,7 +343,7 @@ items:
       - OfficeExtension.EventHandlers<Excel.ChartDeactivatedEventArgs>
 - uid: excel.Excel.Chart.plotArea
   summary: >-
-    Representa el plotArea para el gráfico.
+    Representa el plotArea del gráfico.
 
 
     \[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -362,7 +375,7 @@ items:
       - Excel.ChartPlotBy | "Rows" | "Columns"
 - uid: excel.Excel.Chart.plotVisibleOnly
   summary: >-
-    True si sólo se trazan las celdas visibles. False si se trazan las celdas visibles como ocultas. Lectura y escritura.
+    True si solo se trazan las celdas visibles. False si se trazan tanto las celdas visibles como las ocultas. Lectura y escritura.
 
 
     \[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -394,7 +407,7 @@ items:
       - excel.Excel.ChartSeriesCollection
 - uid: excel.Excel.Chart.seriesNameLevel
   summary: >-
-    Devuelve o establece una constante de la enumeración ChartSeriesNameLevel hace referencia al nivel de donde se proceden de los nombres de serie. Lectura y escritura.
+    Devuelve o establece una constante de la enumeración ChartSeriesNameLevel que hace referencia al nivel de donde proceden los nombres de la serie. Lectura y escritura.
 
 
     \[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -462,7 +475,7 @@ items:
       - Range | string
 - uid: excel.Excel.Chart.showAllFieldButtons
   summary: >-
-    Representa si se debe mostrar todos los botones de campo de un gráfico dinámico.
+    Indica si se mostrarán todos los botones de campo en un gráfico dinámico.
 
 
     \[[Conjunto de API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -494,7 +507,7 @@ items:
       - boolean
 - uid: excel.Excel.Chart.style
   summary: >-
-    Devuelve o establece el estilo de gráfico para el gráfico. Lectura y escritura.
+    Devuelve o establece el estilo del gráfico. Lectura y escritura.
 
 
     \[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -525,6 +538,7 @@ items:
       type:
       - excel.Excel.ChartTitle
 - uid: excel.Excel.Chart.toJSON
+  summary: Invalida el JavaScript `toJSON()` método con el fin de proporcionar resultados más útiles cuando se pasa un objeto de la API a `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama a la `toJSON` método del objeto que se pasa a ella.) Mientras que el objeto Excel.Chart original es un objeto de la API, el `toJSON` método devuelve un objeto de JavaScript sin formato (escrito como `Excel.Interfaces.ChartData` <!-- -->) que contiene copias superficiales de todas las propiedades del objeto original secundario cargado.
   name: toJSON()
   fullName: toJSON
   langs:

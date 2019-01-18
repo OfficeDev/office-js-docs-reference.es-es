@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 0113e19fe75f6a676740174afd9f8d42681f847a
-ms.sourcegitcommit: c12dfe8b909dec25d284f5254d97bd6478823b8f
+ms.openlocfilehash: 8538878d7c5ae5deb7dd090b3760f6eaf146efed
+ms.sourcegitcommit: 06eebee5e68d349f78e6bc3bb0ef099fe063cf04
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 12/12/2018
-ms.locfileid: "27243467"
+ms.lasthandoff: 01/17/2019
+ms.locfileid: "28724965"
 items:
 - uid: excel.Excel.Range
   summary: >-
@@ -31,6 +31,7 @@ items:
   - excel.Excel.Range.columnHidden
   - excel.Excel.Range.columnIndex
   - excel.Excel.Range.conditionalFormats
+  - excel.Excel.Range.context
   - excel.Excel.Range.dataValidation
   - excel.Excel.Range.delete
   - excel.Excel.Range.format
@@ -189,7 +190,7 @@ items:
       - number
 - uid: excel.Excel.Range.columnHidden
   summary: >-
-    Representa si todas las columnas del rango actual están ocultas.
+    Representa si todas las columnas del intervalo actual están ocultas.
 
 
     \[[Conjunto de API: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -235,6 +236,18 @@ items:
     return:
       type:
       - excel.Excel.ConditionalFormatCollection
+- uid: excel.Excel.Range.context
+  summary: El contexto de solicitud asociado con el objeto. Este comando conecta proceso del complemento al proceso de la aplicación host de Office.
+  name: context
+  fullName: context
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type:
+      - RequestContext
 - uid: excel.Excel.Range.dataValidation
   summary: >-
     Devuelve un objeto de validación de datos.
@@ -339,7 +352,7 @@ items:
       - any[][]
 - uid: excel.Excel.Range.getAbsoluteResizedRange
   summary: >-
-    Obtiene un objeto Range con la misma celda superior izquierda como el objeto Range actual, pero con los números de filas y columnas especificados.
+    Obtiene un objeto Range con la misma celda superior izquierda que el objeto Range actual, pero con los números de filas y columnas especificados.
 
 
     \[[Conjunto de API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -743,7 +756,7 @@ items:
       - number
 - uid: excel.Excel.Range.getSurroundingRegion
   summary: >-
-    Devuelve un objeto Range que representa la región que lo rodea de la celda superior izquierda de este intervalo. Una región que lo rodea es un rango limitado por cualquier combinación de filas en blanco y columnas en blanco con respecto a este intervalo.
+    Devuelve un objeto Range que representa la región circundante para la celda superior izquierda de este intervalo. Una región circundante es un intervalo limitado por cualquier combinación de filas y columnas en blanco en relación a este intervalo.
 
 
     \[[Conjunto de API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -965,7 +978,7 @@ items:
       - any[][]
 - uid: excel.Excel.Range.numberFormatLocal
   summary: >-
-    Representa el código de formato numérico de Excel para el rango determinado como una cadena en el idioma del usuario. Cuando se establece el formato de número local a un intervalo, el argumento de valor puede ser un valor único (string) o una matriz bidimensional. Si el argumento es un valor único, se aplicará a todas las celdas del rango.
+    Representa el código de formato numérico de Excel para el intervalo determinado como una cadena en el idioma del usuario. Cuando se establece el formato de número local a un intervalo, el argumento de valor puede ser un valor único (string) o una matriz bidimensional. Si el argumento es un valor único, se aplicará a todas las celdas del rango.
 
 
     \[[Conjunto de API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -997,7 +1010,7 @@ items:
       - number
 - uid: excel.Excel.Range.rowHidden
   summary: >-
-    Representa si todas las filas del rango actual están ocultas.
+    Representa si todas las filas del intervalo actual están ocultas.
 
 
     \[[Conjunto de API: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1046,7 +1059,7 @@ items:
       description: "\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nExcel.run(function (ctx) {\n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"F5:F10\"; \n    var range = ctx.workbook.worksheets.getItem(sheetName).getRange(rangeAddress);\n    range.select();\n    return ctx.sync(); \n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
 - uid: excel.Excel.Range.showCard
   summary: >-
-    Muestra la tarjeta de una celda activa si tiene contenido enriquecido valor.
+    Muestra la tarjeta de una celda activa si tiene contenido de valor enriquecido.
 
 
     \[[Conjunto de API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1111,6 +1124,7 @@ items:
       type:
       - string[][]
 - uid: excel.Excel.Range.toJSON
+  summary: Invalida el JavaScript `toJSON()` método con el fin de proporcionar resultados más útiles cuando se pasa un objeto de la API a `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama a la `toJSON` método del objeto que se pasa a ella.) Mientras que el objeto Excel.Range original es un objeto de la API, el `toJSON` método devuelve un objeto de JavaScript sin formato (escrito como `Excel.Interfaces.RangeData` <!-- -->) que contiene copias superficiales de todas las propiedades del objeto original secundario cargado.
   name: toJSON()
   fullName: toJSON
   langs:
