@@ -1,17 +1,17 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 1c960d432b41db3652e6458cce0c6a93370a7748
-ms.sourcegitcommit: 3771b97cffd6e0510fd4e9c6288db696cd0c0ca9
+ms.openlocfilehash: 0deb3498939c1fe8484d36cfc4ed64eeffee79ad
+ms.sourcegitcommit: 06eebee5e68d349f78e6bc3bb0ef099fe063cf04
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 11/30/2018
-ms.locfileid: "26995930"
+ms.lasthandoff: 01/17/2019
+ms.locfileid: "28725322"
 items:
 - uid: excel.Excel.ConditionalFormatCollection
   summary: >-
-    <span data-ttu-id="f0181-101">Representa una colección de todos los formatos condicionales que se superponen en el intervalo.</span><span class="sxs-lookup"><span data-stu-id="f0181-101">Represents a collection of all the conditional formats that are overlap the range.</span></span>
+    <span data-ttu-id="e78bc-101">Representa una colección de todos los formatos condicionales que se superponen en el intervalo.</span><span class="sxs-lookup"><span data-stu-id="e78bc-101">Represents a collection of all the conditional formats that are overlap the range.</span></span>
 
 
-    <span data-ttu-id="f0181-102">\[[Conjunto de API: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="f0181-102">\[ [API set: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    <span data-ttu-id="e78bc-102">\[[Conjunto de API: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="e78bc-102">\[ [API set: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
   name: Excel.ConditionalFormatCollection
   fullName: Excel.ConditionalFormatCollection
   langs:
@@ -23,6 +23,7 @@ items:
   children:
   - excel.Excel.ConditionalFormatCollection.add
   - excel.Excel.ConditionalFormatCollection.clearAll
+  - excel.Excel.ConditionalFormatCollection.context
   - excel.Excel.ConditionalFormatCollection.getCount
   - excel.Excel.ConditionalFormatCollection.getItem
   - excel.Excel.ConditionalFormatCollection.getItemAt
@@ -31,10 +32,10 @@ items:
   - excel.Excel.ConditionalFormatCollection.toJSON
 - uid: excel.Excel.ConditionalFormatCollection.add
   summary: >-
-    <span data-ttu-id="f0181-103">Agrega un nuevo formato condicional a la colección con la prioridad de la primera y la parte superior.</span><span class="sxs-lookup"><span data-stu-id="f0181-103">Adds a new conditional format to the collection at the first/top priority.</span></span>
+    <span data-ttu-id="e78bc-103">Agrega un nuevo formato condicional a la colección con la prioridad de la primera y la parte superior.</span><span class="sxs-lookup"><span data-stu-id="e78bc-103">Adds a new conditional format to the collection at the first/top priority.</span></span>
 
 
-    <span data-ttu-id="f0181-104">\[[Conjunto de API: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="f0181-104">\[ [API set: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    <span data-ttu-id="e78bc-104">\[[Conjunto de API: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="e78bc-104">\[ [API set: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
   name: add(type)
   fullName: add
   langs:
@@ -45,18 +46,18 @@ items:
     return:
       type:
       - excel.Excel.ConditionalFormat
-      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"f0181-105\">Ejemplos</span><span class=\"sxs-lookup\"><span data-stu-id=\"f0181-105\">Examples</span></span>\n\n```javascript\nExcel.run(function (ctx) {\n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"A1:C3\";\n    var range = ctx.workbook.worksheets.getItem(sheetName).getRange(rangeAddress);\n    var conditionalFormat = range.conditionalFormats.add(Excel.ConditionalFormatType.iconSet);\n    conditionalFormat.iconOrNull.style = \"YellowThreeArrows\";\n    return ctx.sync().then(function () {\n        console.log(\"Added new yellow three arrow icon set.\");\n    });\n}).catch(function (error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n    const range = sheet.getRange(\"B2:M5\");\n    const conditionalFormat = range.conditionalFormats\n        .add(Excel.ConditionalFormatType.colorScale);\n    const criteria = {\n        minimum: { formula: null, type: Excel.ConditionalFormatColorCriterionType.lowestValue, color: \"blue\" },\n        midpoint: { formula: \"50\", type: Excel.ConditionalFormatColorCriterionType.percent, color: \"yellow\" },\n        maximum: { formula: null, type: Excel.ConditionalFormatColorCriterionType.highestValue, color: \"red\" }\n    };\n    conditionalFormat.colorScale.criteria = criteria;\n\n    await context.sync();\n});\n```"
+      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"e78bc-105\">Ejemplos</span><span class=\"sxs-lookup\"><span data-stu-id=\"e78bc-105\">Examples</span></span>\n\n```javascript\nExcel.run(function (ctx) {\n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"A1:C3\";\n    var range = ctx.workbook.worksheets.getItem(sheetName).getRange(rangeAddress);\n    var conditionalFormat = range.conditionalFormats.add(Excel.ConditionalFormatType.iconSet);\n    conditionalFormat.iconOrNull.style = \"YellowThreeArrows\";\n    return ctx.sync().then(function () {\n        console.log(\"Added new yellow three arrow icon set.\");\n    });\n}).catch(function (error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n    const range = sheet.getRange(\"B2:M5\");\n    const conditionalFormat = range.conditionalFormats\n        .add(Excel.ConditionalFormatType.colorScale);\n    const criteria = {\n        minimum: { formula: null, type: Excel.ConditionalFormatColorCriterionType.lowestValue, color: \"blue\" },\n        midpoint: { formula: \"50\", type: Excel.ConditionalFormatColorCriterionType.percent, color: \"yellow\" },\n        maximum: { formula: null, type: Excel.ConditionalFormatColorCriterionType.highestValue, color: \"red\" }\n    };\n    conditionalFormat.colorScale.criteria = criteria;\n\n    await context.sync();\n});\n```"
     parameters:
     - id: type
-      description: <span data-ttu-id="f0181-106">El tipo de formato condicional que se va a agregar.</span><span class="sxs-lookup"><span data-stu-id="f0181-106">The type of conditional format being added.</span></span> <span data-ttu-id="f0181-107">Para obtener información detallada, vea Excel.ConditionalFormatType.</span><span class="sxs-lookup"><span data-stu-id="f0181-107">See Excel.ConditionalFormatType for details.</span></span>
+      description: <span data-ttu-id="e78bc-106">El tipo de formato condicional que se va a agregar.</span><span class="sxs-lookup"><span data-stu-id="e78bc-106">The type of conditional format being added.</span></span> <span data-ttu-id="e78bc-107">Para obtener información detallada, vea Excel.ConditionalFormatType.</span><span class="sxs-lookup"><span data-stu-id="e78bc-107">See Excel.ConditionalFormatType for details.</span></span>
       type:
       - excel.Excel.ConditionalFormatType
 - uid: excel.Excel.ConditionalFormatCollection.clearAll
   summary: >-
-    <span data-ttu-id="f0181-108">Borra todos los formatos condicionales activos en el intervalo actual especificado.</span><span class="sxs-lookup"><span data-stu-id="f0181-108">Clears all conditional formats active on the current specified range.</span></span>
+    <span data-ttu-id="e78bc-108">Borra todos los formatos condicionales activos en el intervalo actual especificado.</span><span class="sxs-lookup"><span data-stu-id="e78bc-108">Clears all conditional formats active on the current specified range.</span></span>
 
 
-    <span data-ttu-id="f0181-109">\[[Conjunto de API: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="f0181-109">\[ [API set: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    <span data-ttu-id="e78bc-109">\[[Conjunto de API: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="e78bc-109">\[ [API set: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
   name: clearAll()
   fullName: clearAll
   langs:
@@ -67,13 +68,25 @@ items:
     return:
       type:
       - void
-      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"f0181-110\">Ejemplos</span><span class=\"sxs-lookup\"><span data-stu-id=\"f0181-110\">Examples</span></span>\n\n```javascript\nExcel.run(function (ctx) {\n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"A1:C3\";\n    var range = ctx.workbook.worksheets.getItem(sheetName).getRange(rangeAddress);\n    var conditionalFormats = range.conditionalFormats;\n    var conditionalFormat = conditionalFormats.clearAll();\n    return ctx.sync().then(function () {\n        console.log(\"Cleared all conditional formats from this range.\");\n    });\n}).catch(function (error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n    const range = sheet.getRange();\n    range.conditionalFormats.clearAll();\n\n    await context.sync();\n\n    $(\".conditional-formats\").hide();\n});\n```"
+      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"e78bc-110\">Ejemplos</span><span class=\"sxs-lookup\"><span data-stu-id=\"e78bc-110\">Examples</span></span>\n\n```javascript\nExcel.run(function (ctx) {\n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"A1:C3\";\n    var range = ctx.workbook.worksheets.getItem(sheetName).getRange(rangeAddress);\n    var conditionalFormats = range.conditionalFormats;\n    var conditionalFormat = conditionalFormats.clearAll();\n    return ctx.sync().then(function () {\n        console.log(\"Cleared all conditional formats from this range.\");\n    });\n}).catch(function (error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n    const range = sheet.getRange();\n    range.conditionalFormats.clearAll();\n\n    await context.sync();\n\n    $(\".conditional-formats\").hide();\n});\n```"
+- uid: excel.Excel.ConditionalFormatCollection.context
+  summary: <span data-ttu-id="e78bc-111">El contexto de solicitud asociado con el objeto.</span><span class="sxs-lookup"><span data-stu-id="e78bc-111">The request context associated with the object.</span></span> <span data-ttu-id="e78bc-112">Este comando conecta proceso del complemento al proceso de la aplicación host de Office.</span><span class="sxs-lookup"><span data-stu-id="e78bc-112">This connects the add-in's process to the Office host application's process.</span></span>
+  name: context
+  fullName: context
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type:
+      - RequestContext
 - uid: excel.Excel.ConditionalFormatCollection.getCount
   summary: >-
-    <span data-ttu-id="f0181-p102">Devuelve el número de formatos condicionales del libro. Solo lectura.</span><span class="sxs-lookup"><span data-stu-id="f0181-p102">Returns the number of conditional formats in the workbook. Read-only.</span></span>
+    <span data-ttu-id="e78bc-p103">Devuelve el número de formatos condicionales del libro. Solo lectura.</span><span class="sxs-lookup"><span data-stu-id="e78bc-p103">Returns the number of conditional formats in the workbook. Read-only.</span></span>
 
 
-    <span data-ttu-id="f0181-113">\[[Conjunto de API: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="f0181-113">\[ [API set: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    <span data-ttu-id="e78bc-115">\[[Conjunto de API: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="e78bc-115">\[ [API set: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
   name: getCount()
   fullName: getCount
   langs:
@@ -84,13 +97,13 @@ items:
     return:
       type:
       - OfficeExtension.ClientResult<number>
-      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"f0181-114\">Ejemplos</span><span class=\"sxs-lookup\"><span data-stu-id=\"f0181-114\">Examples</span></span>\n\n```javascript\nExcel.run(function (ctx) {\n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"A1:C3\";\n    var range = ctx.workbook.worksheets.getItem(sheetName).getRange(rangeAddress);\n    var conditionalFormat = range.conditionalFormats.add(Excel.ConditionalFormatType.iconSet);\n    conditionalFormat.iconOrNull.style = Excel.IconSet.fourTrafficLights;\n    var cfCount = range.conditionalFormats.getCount(); \n\n    return ctx.sync().then(function () {\n        console.log(\"Count: \" + cfCount.value);\n    });\n}).catch(function (error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"e78bc-116\">Ejemplos</span><span class=\"sxs-lookup\"><span data-stu-id=\"e78bc-116\">Examples</span></span>\n\n```javascript\nExcel.run(function (ctx) {\n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"A1:C3\";\n    var range = ctx.workbook.worksheets.getItem(sheetName).getRange(rangeAddress);\n    var conditionalFormat = range.conditionalFormats.add(Excel.ConditionalFormatType.iconSet);\n    conditionalFormat.iconOrNull.style = Excel.IconSet.fourTrafficLights;\n    var cfCount = range.conditionalFormats.getCount(); \n\n    return ctx.sync().then(function () {\n        console.log(\"Count: \" + cfCount.value);\n    });\n}).catch(function (error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
 - uid: excel.Excel.ConditionalFormatCollection.getItem
   summary: >-
-    <span data-ttu-id="f0181-115">Devuelve un formato condicional para el identificador determinado.</span><span class="sxs-lookup"><span data-stu-id="f0181-115">Returns a conditional format for the given ID.</span></span>
+    <span data-ttu-id="e78bc-117">Devuelve un formato condicional para el identificador especificado.</span><span class="sxs-lookup"><span data-stu-id="e78bc-117">Returns a conditional format for the given ID.</span></span>
 
 
-    <span data-ttu-id="f0181-116">\[[Conjunto de API: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="f0181-116">\[ [API set: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    <span data-ttu-id="e78bc-118">\[[Conjunto de API: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="e78bc-118">\[ [API set: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
   name: getItem(id)
   fullName: getItem
   langs:
@@ -102,9 +115,9 @@ items:
       type:
       - excel.Excel.ConditionalFormat
       description: >-
-        <span data-ttu-id="f0181-117">Objeto de formato condicional.</span><span class="sxs-lookup"><span data-stu-id="f0181-117">Conditional Format object.</span></span>
+        <span data-ttu-id="e78bc-119">Objeto de formato condicional.</span><span class="sxs-lookup"><span data-stu-id="e78bc-119">Conditional Format object.</span></span>
 
-        #### <a name="examples"></a><span data-ttu-id="f0181-118">Ejemplos</span><span class="sxs-lookup"><span data-stu-id="f0181-118">Examples</span></span>
+        #### <a name="examples"></a><span data-ttu-id="e78bc-120">Ejemplos</span><span class="sxs-lookup"><span data-stu-id="e78bc-120">Examples</span></span>
 
 
         ```javascript
@@ -128,15 +141,15 @@ items:
         ```
     parameters:
     - id: id
-      description: <span data-ttu-id="f0181-119">El identificador del formato condicional.</span><span class="sxs-lookup"><span data-stu-id="f0181-119">The id of the conditional format.</span></span>
+      description: <span data-ttu-id="e78bc-121">El identificador del formato condicional.</span><span class="sxs-lookup"><span data-stu-id="e78bc-121">The id of the conditional format.</span></span>
       type:
       - string
 - uid: excel.Excel.ConditionalFormatCollection.getItemAt
   summary: >-
-    <span data-ttu-id="f0181-120">Devuelve un formato condicional en el índice especificado.</span><span class="sxs-lookup"><span data-stu-id="f0181-120">Returns a conditional format at the given index.</span></span>
+    <span data-ttu-id="e78bc-122">Devuelve un formato condicional en el índice especificado.</span><span class="sxs-lookup"><span data-stu-id="e78bc-122">Returns a conditional format at the given index.</span></span>
 
 
-    <span data-ttu-id="f0181-121">\[[Conjunto de API: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="f0181-121">\[ [API set: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    <span data-ttu-id="e78bc-123">\[[Conjunto de API: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="e78bc-123">\[ [API set: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
   name: getItemAt(index)
   fullName: getItemAt
   langs:
@@ -147,14 +160,14 @@ items:
     return:
       type:
       - excel.Excel.ConditionalFormat
-      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"f0181-122\">Ejemplos</span><span class=\"sxs-lookup\"><span data-stu-id=\"f0181-122\">Examples</span></span>\n\n```javascript\nExcel.run(function (ctx) {\n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"A1:C3\";\n    var range = ctx.workbook.worksheets.getItem(sheetName).getRange(rangeAddress);\n    var conditionalFormats = range.conditionalFormats;\n    var conditionalFormat = conditionalFormats.getItemAt(3);\n    return ctx.sync().then(function () {\n        console.log(\"Conditional Format at Item 3 Loaded\");\n    });\n}).catch(function (error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n    const worksheetRange = sheet.getRange();\n    worksheetRange.conditionalFormats.load(\"type\");\n\n    await context.sync();\n\n    let cfRangePairs: { cf: Excel.ConditionalFormat, range: Excel.Range }[] = [];\n    worksheetRange.conditionalFormats.items.forEach(item => {\n        cfRangePairs.push({\n            cf: item,\n            range: item.getRange().load(\"address\")\n        });\n    });\n\n    await context.sync();\n\n    if (cfRangePairs.length > 0) {\n        cfRangePairs.forEach(item => {\n            console.log(item.cf.type);\n        });\n    } else {\n        console.log(\"No conditional formats applied.\");\n    }\n});\n```"
+      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"e78bc-124\">Ejemplos</span><span class=\"sxs-lookup\"><span data-stu-id=\"e78bc-124\">Examples</span></span>\n\n```javascript\nExcel.run(function (ctx) {\n    var sheetName = \"Sheet1\";\n    var rangeAddress = \"A1:C3\";\n    var range = ctx.workbook.worksheets.getItem(sheetName).getRange(rangeAddress);\n    var conditionalFormats = range.conditionalFormats;\n    var conditionalFormat = conditionalFormats.getItemAt(3);\n    return ctx.sync().then(function () {\n        console.log(\"Conditional Format at Item 3 Loaded\");\n    });\n}).catch(function (error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n    const worksheetRange = sheet.getRange();\n    worksheetRange.conditionalFormats.load(\"type\");\n\n    await context.sync();\n\n    let cfRangePairs: { cf: Excel.ConditionalFormat, range: Excel.Range }[] = [];\n    worksheetRange.conditionalFormats.items.forEach(item => {\n        cfRangePairs.push({\n            cf: item,\n            range: item.getRange().load(\"address\")\n        });\n    });\n\n    await context.sync();\n\n    if (cfRangePairs.length > 0) {\n        cfRangePairs.forEach(item => {\n            console.log(item.cf.type);\n        });\n    } else {\n        console.log(\"No conditional formats applied.\");\n    }\n});\n```"
     parameters:
     - id: index
-      description: <span data-ttu-id="f0181-123">Índice de los formatos condicionales que se recuperarán.</span><span class="sxs-lookup"><span data-stu-id="f0181-123">Index of the conditional formats to be retrieved.</span></span>
+      description: <span data-ttu-id="e78bc-125">Índice de los formatos condicionales que se recuperarán.</span><span class="sxs-lookup"><span data-stu-id="e78bc-125">Index of the conditional formats to be retrieved.</span></span>
       type:
       - number
 - uid: excel.Excel.ConditionalFormatCollection.items
-  summary: <span data-ttu-id="f0181-124">Obtiene al secundario cargado los elementos de esta colección.</span><span class="sxs-lookup"><span data-stu-id="f0181-124">Gets the loaded child items in this collection.</span></span>
+  summary: <span data-ttu-id="e78bc-126">Obtiene al secundario cargado los elementos de esta colección.</span><span class="sxs-lookup"><span data-stu-id="e78bc-126">Gets the loaded child items in this collection.</span></span>
   name: items
   fullName: items
   langs:
@@ -166,15 +179,15 @@ items:
       type:
       - Excel.ConditionalFormat[]
 - uid: excel.Excel.ConditionalFormatCollection.load
-  summary: <span data-ttu-id="f0181-125">Colas de seguridad de un comando que se va a cargar las propiedades del objeto especificadas.</span><span class="sxs-lookup"><span data-stu-id="f0181-125">Queues up a command to load the specified properties of the object.</span></span> <span data-ttu-id="f0181-126">Se debe llamar a "context.sync()" antes de leer las propiedades.</span><span class="sxs-lookup"><span data-stu-id="f0181-126">You must call "context.sync()" before reading the properties.</span></span>
+  summary: <span data-ttu-id="e78bc-127">Colas de seguridad de un comando que se va a cargar las propiedades del objeto especificadas.</span><span class="sxs-lookup"><span data-stu-id="e78bc-127">Queues up a command to load the specified properties of the object.</span></span> <span data-ttu-id="e78bc-128">Se debe llamar a "context.sync()" antes de leer las propiedades.</span><span class="sxs-lookup"><span data-stu-id="e78bc-128">You must call "context.sync()" before reading the properties.</span></span>
   remarks: >-
-    <span data-ttu-id="f0181-127">Además de esta firma, este método no tiene las siguientes firmas:</span><span class="sxs-lookup"><span data-stu-id="f0181-127">In addition to this signature, this method has the following signatures:</span></span>
+    <span data-ttu-id="e78bc-129">Además de esta firma, este método no tiene las siguientes firmas:</span><span class="sxs-lookup"><span data-stu-id="e78bc-129">In addition to this signature, this method has the following signatures:</span></span>
 
 
-    <span data-ttu-id="f0181-128">`load(option?: { select?: string; expand?: string; }): Excel.ConditionalFormatCollection`-Donde option.select es una cadena delimitada por comas que especifica las propiedades para cargar y options.expand es una cadena delimitada por comas que especifica las propiedades de navegación para cargar.</span><span class="sxs-lookup"><span data-stu-id="f0181-128">`load(option?: { select?: string; expand?: string; }): Excel.ConditionalFormatCollection` - Where option.select is a comma-delimited string that specifies the properties to load, and options.expand is a comma-delimited string that specifies the navigation properties to load.</span></span>
+    <span data-ttu-id="e78bc-130">`load(option?: { select?: string; expand?: string; }): Excel.ConditionalFormatCollection`-Donde option.select es una cadena delimitada por comas que especifica las propiedades para cargar y options.expand es una cadena delimitada por comas que especifica las propiedades de navegación para cargar.</span><span class="sxs-lookup"><span data-stu-id="e78bc-130">`load(option?: { select?: string; expand?: string; }): Excel.ConditionalFormatCollection` - Where option.select is a comma-delimited string that specifies the properties to load, and options.expand is a comma-delimited string that specifies the navigation properties to load.</span></span>
 
 
-    <span data-ttu-id="f0181-129">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.ConditionalFormatCollection`-Sólo está disponible en los tipos de colección.</span><span class="sxs-lookup"><span data-stu-id="f0181-129">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.ConditionalFormatCollection` - Only available on collection types.</span></span> <span data-ttu-id="f0181-130">Es similar a la firma precedente.</span><span class="sxs-lookup"><span data-stu-id="f0181-130">It is similar to the preceding signature.</span></span> <span data-ttu-id="f0181-131">Option.Top especifica el número máximo de elementos de la colección que se puede incluir en el resultado.</span><span class="sxs-lookup"><span data-stu-id="f0181-131">Option.top specifies the maximum number of collection items that can be included in the result.</span></span> <span data-ttu-id="f0181-132">Option.Skip especifica el número de elementos que se pasan por alto y no se incluyen en el resultado.</span><span class="sxs-lookup"><span data-stu-id="f0181-132">Option.skip specifies the number of items that are to be skipped and not included in the result.</span></span> <span data-ttu-id="f0181-133">Si se especifica option.top, se iniciará el conjunto de resultados después de omitir el número especificado de elementos.</span><span class="sxs-lookup"><span data-stu-id="f0181-133">If option.top is specified, the result set will start after skipping the specified number of items.</span></span>
+    <span data-ttu-id="e78bc-131">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.ConditionalFormatCollection`-Sólo está disponible en los tipos de colección.</span><span class="sxs-lookup"><span data-stu-id="e78bc-131">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.ConditionalFormatCollection` - Only available on collection types.</span></span> <span data-ttu-id="e78bc-132">Es similar a la firma precedente.</span><span class="sxs-lookup"><span data-stu-id="e78bc-132">It is similar to the preceding signature.</span></span> <span data-ttu-id="e78bc-133">Option.Top especifica el número máximo de elementos de la colección que se puede incluir en el resultado.</span><span class="sxs-lookup"><span data-stu-id="e78bc-133">Option.top specifies the maximum number of collection items that can be included in the result.</span></span> <span data-ttu-id="e78bc-134">Option.Skip especifica el número de elementos que se pasan por alto y no se incluyen en el resultado.</span><span class="sxs-lookup"><span data-stu-id="e78bc-134">Option.skip specifies the number of items that are to be skipped and not included in the result.</span></span> <span data-ttu-id="e78bc-135">Si se especifica option.top, se iniciará el conjunto de resultados después de omitir el número especificado de elementos.</span><span class="sxs-lookup"><span data-stu-id="e78bc-135">If option.top is specified, the result set will start after skipping the specified number of items.</span></span>
   name: load(option)
   fullName: load
   langs:
@@ -188,10 +201,11 @@ items:
       description: ''
     parameters:
     - id: option
-      description: <span data-ttu-id="f0181-134">Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades de carga.</span><span class="sxs-lookup"><span data-stu-id="f0181-134">A comma-delimited string or an array of strings that specify the properties to load.</span></span>
+      description: <span data-ttu-id="e78bc-136">Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades de carga.</span><span class="sxs-lookup"><span data-stu-id="e78bc-136">A comma-delimited string or an array of strings that specify the properties to load.</span></span>
       type:
       - string | string[]
 - uid: excel.Excel.ConditionalFormatCollection.toJSON
+  summary: <span data-ttu-id="e78bc-137">Invalida el JavaScript `toJSON()` método con el fin de proporcionar resultados más útiles cuando se pasa un objeto de la API a `JSON.stringify()` <!-- -->.</span><span class="sxs-lookup"><span data-stu-id="e78bc-137">Overrides the JavaScript `toJSON()` method in order to provide more useful output when an API object is passed to `JSON.stringify()`<!-- -->.</span></span> <span data-ttu-id="e78bc-138">(`JSON.stringify`<!-- -->, a su vez, llama a la `toJSON` método del objeto que se pasa a ella.) Mientras que el original `Excel.ConditionalFormatCollection` es un objeto de la API, el `toJSON` método devuelve un objeto de JavaScript sin formato (escrito como `Excel.Interfaces.ConditionalFormatCollectionData` <!-- -->) que contiene una matriz de "elementos" con copias superficiales de las propiedades de elementos de la colección cargadas.</span><span class="sxs-lookup"><span data-stu-id="e78bc-138">(`JSON.stringify`<!-- -->, in turn, calls the `toJSON` method of the object that is passed to it.) Whereas the original `Excel.ConditionalFormatCollection` object is an API object, the `toJSON` method returns a plain JavaScript object (typed as `Excel.Interfaces.ConditionalFormatCollectionData`<!-- -->) that contains an "items" array with shallow copies of any loaded properties from the collection's items.</span></span>
   name: toJSON()
   fullName: toJSON
   langs:
