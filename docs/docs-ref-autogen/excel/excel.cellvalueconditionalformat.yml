@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: af2917352805d0212f53ddccb4d9072d5276a6c4
-ms.sourcegitcommit: 06eebee5e68d349f78e6bc3bb0ef099fe063cf04
+ms.openlocfilehash: b8c00be14a2f096490abcb0afdb13f24c60fac65
+ms.sourcegitcommit: 3f4a320fa860d05d348c8bdec2295e046a45a34f
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 01/17/2019
-ms.locfileid: "28725266"
+ms.lasthandoff: 02/07/2019
+ms.locfileid: "29769991"
 items:
 - uid: excel.Excel.CellValueConditionalFormat
   summary: >-
@@ -25,6 +25,7 @@ items:
   - excel.Excel.CellValueConditionalFormat.format
   - excel.Excel.CellValueConditionalFormat.load
   - excel.Excel.CellValueConditionalFormat.rule
+  - excel.Excel.CellValueConditionalFormat.set
   - excel.Excel.CellValueConditionalFormat.toJSON
 - uid: excel.Excel.CellValueConditionalFormat.context
   summary: El contexto de solicitud asociado con el objeto. Este comando conecta proceso del complemento al proceso de la aplicación host de Office.
@@ -98,6 +99,33 @@ items:
       type:
       - excel.Excel.ConditionalCellValueRule
       description: "\n#### <a name=\"examples\"></a>Ejemplos\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n    const range = sheet.getRange(\"B21:E23\");\n    const conditionalFormat = range.conditionalFormats\n        .add(Excel.ConditionalFormatType.cellValue);\n    conditionalFormat.cellValue.format.font.color = \"red\";\n    conditionalFormat.cellValue.rule = { formula1: \"=0\", operator: \"LessThan\" };\n\n    await context.sync();\n});\n```"
+- uid: excel.Excel.CellValueConditionalFormat.set
+  summary: Establece varias propiedades de un objeto al mismo tiempo. Puede pasar un objeto sin formato con las propiedades adecuadas, o bien otro objeto de la API del mismo tipo.
+  remarks: >-
+    Este método no tiene la siguiente firma adicional:
+
+
+    `set(properties: Excel.CellValueConditionalFormat): void`
+  name: set(properties, options)
+  fullName: set
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'set(properties: Interfaces.CellValueConditionalFormatUpdateData, options?: OfficeExtension.UpdateOptions): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: properties
+      description: Un objeto de JavaScript con propiedades estructuradas isomorphically a las propiedades del objeto en el que se llama al método.
+      type:
+      - Interfaces.CellValueConditionalFormatUpdateData
+    - id: options
+      description: Proporciona una opción para suprimir los errores si intenta usar el objeto de propiedades establecer las propiedades de sólo lectura.
+      type:
+      - office.OfficeExtension.UpdateOptions
 - uid: excel.Excel.CellValueConditionalFormat.toJSON
   summary: Invalida el JavaScript `toJSON()` método con el fin de proporcionar resultados más útiles cuando se pasa un objeto de la API a `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama a la `toJSON` método del objeto que se pasa a ella.) Mientras que el objeto original de Excel.CellValueConditionalFormat es un objeto de la API, el `toJSON` método devuelve un objeto de JavaScript sin formato (escrito como `Excel.Interfaces.CellValueConditionalFormatData` <!-- -->) que contiene copias superficiales de todas las propiedades del objeto original secundario cargado.
   name: toJSON()
