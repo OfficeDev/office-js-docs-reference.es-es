@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 6ee32694f520b1c3c78b0946823331d65deca536
-ms.sourcegitcommit: 3f4a320fa860d05d348c8bdec2295e046a45a34f
+ms.openlocfilehash: 4eaf88574524ad44b5432f746afe09404b9019a7
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 02/07/2019
-ms.locfileid: "29769676"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29973299"
 items:
 - uid: excel.Excel.Workbook
   summary: >-
@@ -30,6 +30,8 @@ items:
   - excel.Excel.Workbook.getActiveCell
   - excel.Excel.Workbook.getSelectedRange
   - excel.Excel.Workbook.load
+  - excel.Excel.Workbook.load_1
+  - excel.Excel.Workbook.load_2
   - excel.Excel.Workbook.name
   - excel.Excel.Workbook.names
   - excel.Excel.Workbook.onSelectionChanged
@@ -38,6 +40,7 @@ items:
   - excel.Excel.Workbook.protection
   - excel.Excel.Workbook.readOnly
   - excel.Excel.Workbook.set
+  - excel.Excel.Workbook.set_1
   - excel.Excel.Workbook.settings
   - excel.Excel.Workbook.styles
   - excel.Excel.Workbook.tables
@@ -142,7 +145,7 @@ items:
 
     \[[Conjunto de API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getActiveCell()
-  fullName: getActiveCell
+  fullName: getActiveCell()
   langs:
   - typeScript
   type: method
@@ -159,7 +162,7 @@ items:
 
     \[[Conjunto de API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getSelectedRange()
-  fullName: getSelectedRange
+  fullName: getSelectedRange()
   langs:
   - typeScript
   type: method
@@ -175,26 +178,65 @@ items:
     Además de esta firma, este método no tiene las siguientes firmas:
 
 
+    `load(option?: string | string[]): Excel.Workbook`-Donde opción es una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades de carga.
+
+
     `load(option?: { select?: string; expand?: string; }): Excel.Workbook`-Donde option.select es una cadena delimitada por comas que especifica las propiedades para cargar y options.expand es una cadena delimitada por comas que especifica las propiedades de navegación para cargar.
 
 
     `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Workbook`-Sólo está disponible en los tipos de colección. Es similar a la firma precedente. Option.Top especifica el número máximo de elementos de la colección que se puede incluir en el resultado. Option.Skip especifica el número de elementos que se pasan por alto y no se incluyen en el resultado. Si se especifica option.top, se iniciará el conjunto de resultados después de omitir el número especificado de elementos.
   name: load(option)
-  fullName: load
+  fullName: load(option)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'load(option?: string | string[]): Excel.Workbook;'
+    content: 'load(option?: Excel.Interfaces.WorkbookLoadOptions): Excel.Workbook;'
     return:
       type:
       - excel.Excel.Workbook
       description: ''
     parameters:
     - id: option
+      description: ''
+      type:
+      - excel.Excel.Interfaces.WorkbookLoadOptions
+- uid: excel.Excel.Workbook.load_1
+  summary: Colas de seguridad de un comando que se va a cargar las propiedades del objeto especificadas. Se debe llamar a `context.sync()` antes de leer las propiedades.
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.Workbook;'
+    return:
+      type:
+      - excel.Excel.Workbook
+      description: ''
+    parameters:
+    - id: propertyNames
       description: Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades de carga.
       type:
       - string | string[]
+- uid: excel.Excel.Workbook.load_2
+  summary: Colas de seguridad de un comando que se va a cargar las propiedades del objeto especificadas. Se debe llamar a `context.sync()` antes de leer las propiedades.
+  name: load(propertyNamesAndPaths)
+  fullName: load(propertyNamesAndPaths)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.Workbook;'
+    return:
+      type:
+      - excel.Excel.Workbook
+      description: ''
+    parameters:
+    - id: propertyNamesAndPaths
+      description: Donde propertyNamesAndPaths.select es una cadena delimitada por comas que especifica las propiedades para cargar y propertyNamesAndPaths.expand es una cadena delimitada por comas que especifica las propiedades de navegación para cargar.
+      type:
+      - '{ select?: string; expand?: string; }'
 - uid: excel.Excel.Workbook.name
   summary: >-
     Obtiene el nombre del libro. Solo lectura.
@@ -316,7 +358,7 @@ items:
 
     `set(properties: Excel.Workbook): void`
   name: set(properties, options)
-  fullName: set
+  fullName: set(properties, options)
   langs:
   - typeScript
   type: method
@@ -335,6 +377,24 @@ items:
       description: Proporciona una opción para suprimir los errores si intenta usar el objeto de propiedades establecer las propiedades de sólo lectura.
       type:
       - office.OfficeExtension.UpdateOptions
+- uid: excel.Excel.Workbook.set_1
+  summary: Establece varias propiedades en el objeto al mismo tiempo, en función de un objeto cargado existente.
+  name: set(properties)
+  fullName: set(properties)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'set(properties: Excel.Workbook): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: properties
+      description: ''
+      type:
+      - excel.Excel.Workbook
 - uid: excel.Excel.Workbook.settings
   summary: >-
     Representa una colección de configuraciones asociadas con el libro. Solo lectura.
@@ -386,7 +446,7 @@ items:
 - uid: excel.Excel.Workbook.toJSON
   summary: Invalida el JavaScript `toJSON()` método con el fin de proporcionar resultados más útiles cuando se pasa un objeto de la API a `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama a la `toJSON` método del objeto que se pasa a ella.) Mientras que el objeto Excel.Workbook original es un objeto de la API, el `toJSON` método devuelve un objeto de JavaScript sin formato (escrito como `Excel.Interfaces.WorkbookData` <!-- -->) que contiene copias superficiales de todas las propiedades del objeto original secundario cargado.
   name: toJSON()
-  fullName: toJSON
+  fullName: toJSON()
   langs:
   - typeScript
   type: method
