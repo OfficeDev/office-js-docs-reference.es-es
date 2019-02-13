@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 8179639bf91eb03769575799c9a3f71d1d65c8fa
-ms.sourcegitcommit: b05ee546d9dfbc914c8d1c594d9b206b04780bbc
+ms.openlocfilehash: 3d803c452211317817c7c0670cae3361ab8c3101
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 11/22/2018
-ms.locfileid: "26647479"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29979200"
 items:
 - uid: office.Office.UI
   summary: >-
@@ -21,6 +21,7 @@ items:
   children:
   - office.Office.UI.closeContainer
   - office.Office.UI.displayDialogAsync
+  - office.Office.UI.displayDialogAsync_1
   - office.Office.UI.messageParent
 - uid: office.Office.UI.closeContainer
   summary: Cierra el contenedor de la interfaz de usuario donde se ejecuta JavaScript.
@@ -39,7 +40,7 @@ items:
 
     - Llamar desde una extensión de módulo: ningún efecto.
   name: closeContainer()
-  fullName: closeContainer
+  fullName: closeContainer()
   langs:
   - typeScript
   type: method
@@ -114,7 +115,7 @@ items:
 
     <table> <tr> <th>Propiedad</th> <th>Usar para</th> </tr> <tr> <td>AsyncResult.value</td> <td>Acceso al objeto Dialog.</td> </tr> <tr> <td>AsyncResult.status</td> <td>Determinar si la operación se ha completado correctamente o no.</td> </tr> <tr> <td>AsyncResult.error</td> <td>Tener acceso a un objeto Error que proporcione información sobre el error si la operación no se ha llevado a cabo correctamente.</td> </tr> <tr> <td>AsyncResult.asyncContext</td> <td>Acceda al valor o al objeto definidos por el usuario si ha remitido uno como parámetro asyncContext.</td> </tr> </table>
   name: displayDialogAsync(startAddress, options, callback)
-  fullName: displayDialogAsync
+  fullName: displayDialogAsync(startAddress, options, callback)
   langs:
   - typeScript
   type: method
@@ -137,10 +138,94 @@ items:
       description: Opcional. Acepta un método de devolución de llamada para controlar el intento de creación de cuadro de diálogo. Si se realiza correctamente, el AsyncResult.value es un objeto Dialog.
       type:
       - '(result: AsyncResult<Dialog>) => void'
+- uid: office.Office.UI.displayDialogAsync_1
+  summary: Muestra un cuadro de diálogo para mostrar o recopilar información del usuario o para facilitar la navegación Web.
+  remarks: >-
+    <table><tr><td>Hosts</td><td>Word, Excel, Outlook, PowerPoint</td></tr>
+
+
+    <tr><td>Conjuntos de requisitos</td><td>DialogAPI, buzón de correo 1.4</td></tr></table>
+
+
+    Este método está disponible en el requisito de DialogApi establecer para complementos de Word, Excel o PowerPoint y, en el buzón de requisito establece 1.4 para Outlook. Para obtener más información acerca de cómo especificar un requisito establecido en el manifiesto, vea [Office especificar requisitos de hosts y API](https://docs.microsoft.com/office/dev/add-ins/develop/specify-office-hosts-and-api-requirements)<!-- -->.
+
+
+    La página inicial debe estar en el mismo dominio que la página principal (el parámetro startAddress). Después de cargar la página inicial, puede ir a otros dominios.
+
+
+    Cualquier llamada página `office.context.ui.messageParent` también debe estar en el mismo dominio que la página principal.
+
+
+    **Consideraciones de diseño**:
+
+
+    Se aplican las siguientes consideraciones de diseño a cuadros de diálogo:
+
+
+    - Un panel de tareas Agregar de Office puede tener solo un cuadro de diálogo Abrir en cualquier momento. Varios cuadros de diálogo pueden estar abiertos al mismo tiempo desde el complemento comandos (botones de la cinta de opciones personalizada o elementos de menú).
+
+
+    - El usuario puede mover y cambiar de tamaño cada cuadro de diálogo.
+
+
+    - Cada cuadro de diálogo se centra en la pantalla cuando se abre.
+
+
+    - Los cuadros de diálogo aparecen encima de la aplicación host y en el orden en que se crearon.
+
+
+    Use un cuadro de diálogo para:
+
+
+    - Mostrar páginas de autenticación para recopilar las credenciales de usuario.
+
+
+    - Mostrar una pantalla de progreso de error o entrada de un comando ShowTaskpane o ExecuteAction.
+
+
+    - Aumentar temporalmente el área de superficie que un usuario tiene disponible para completar una tarea.
+
+
+    No use un cuadro de diálogo para interactuar con un documento. En su lugar, use un panel de tareas.
+
+
+    Para obtener un modelo de diseño que pueda usar para crear un cuadro de diálogo, consulte [Client Dialog](https://github.com/OfficeDev/Office-Add-in-UX-Design-Patterns/blob/master/Patterns/Client_Dialog.md) en el repositorio de modelos de diseño de experiencia de usuario de complementos de Office en GitHub.
+
+
+    **displayDialogAsync errores**:
+
+
+    <table> <tr> <th>Número de código</th> <th>Significado</th> </tr> <tr> <td>12004</td> <td>El dominio de la dirección URL que se pasan a displayDialogAsync no es de confianza. El dominio debe ser el mismo dominio que la página host (incluido el número de puerto y protocolo), o se debe registrar en el <AppDomains> sección del manifiesto en Agregar.</td> </tr> <tr> <td>12005</td> <td>La dirección URL que se pasan a displayDialogAsync utiliza el protocolo HTTP. Se necesita HTTPS. (En algunas versiones de Office, el mensaje de error devuelto con 12005 es el mismo devuelto para 12004).</td> </tr> <tr> <td>12007</td> <td>Ya hay un cuadro de diálogo abierto en el panel de tareas. Un complemento de panel de tareas solo puede tener abierto un cuadro de diálogo al mismo tiempo.</td> </tr> <tr> <td>12009</td> <td>El usuario ha decidido ignorar el cuadro de diálogo. Este error puede ocurrir en las versiones en línea de Office, donde los usuarios pueden elegir no permitir que un complemento presente un cuadro de diálogo.</td> </tr> </table>
+
+
+    En la función de devolución de llamada que se pasa al método displayDialogAsync, puede usar las propiedades del objeto AsyncResult para devolver la siguiente información.
+
+
+    <table> <tr> <th>Propiedad</th> <th>Usar para</th> </tr> <tr> <td>AsyncResult.value</td> <td>Acceso al objeto Dialog.</td> </tr> <tr> <td>AsyncResult.status</td> <td>Determinar si la operación se ha completado correctamente o no.</td> </tr> <tr> <td>AsyncResult.error</td> <td>Tener acceso a un objeto Error que proporcione información sobre el error si la operación no se ha llevado a cabo correctamente.</td> </tr> <tr> <td>AsyncResult.asyncContext</td> <td>Acceda al valor o al objeto definidos por el usuario si ha remitido uno como parámetro asyncContext.</td> </tr> </table>
+  name: displayDialogAsync(startAddress, callback)
+  fullName: displayDialogAsync(startAddress, callback)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'displayDialogAsync(startAddress: string, callback?: (result: AsyncResult<Dialog>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: startAddress
+      description: Acepta la dirección URL HTTPS inicial que se abre en el cuadro de diálogo.
+      type:
+      - string
+    - id: callback
+      description: Opcional. Acepta un método de devolución de llamada para controlar el intento de creación de cuadro de diálogo. Si se realiza correctamente, el AsyncResult.value es un objeto Dialog.
+      type:
+      - '(result: AsyncResult<Dialog>) => void'
 - uid: office.Office.UI.messageParent
   summary: Entrega un mensaje desde el cuadro de diálogo a su pagina primaria o de apertura. La página que llama a esta API debe estar en el mismo dominio que la página primaria.
   name: messageParent(message)
-  fullName: messageParent
+  fullName: messageParent(message)
   langs:
   - typeScript
   type: method
