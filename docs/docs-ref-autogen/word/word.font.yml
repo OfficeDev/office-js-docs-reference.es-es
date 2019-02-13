@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: dfc39fb50e8995e3f3cc3264217f9c941bf69792
-ms.sourcegitcommit: 3f4a320fa860d05d348c8bdec2295e046a45a34f
+ms.openlocfilehash: 05df45105511d3a919adbd23bd14a6a1c0b5fb3b
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 02/07/2019
-ms.locfileid: "29769781"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29973258"
 items:
 - uid: word.Word.Font
   summary: >-
@@ -28,8 +28,11 @@ items:
   - word.Word.Font.highlightColor
   - word.Word.Font.italic
   - word.Word.Font.load
+  - word.Word.Font.load_1
+  - word.Word.Font.load_2
   - word.Word.Font.name
   - word.Word.Font.set
+  - word.Word.Font.set_1
   - word.Word.Font.size
   - word.Word.Font.strikeThrough
   - word.Word.Font.subscript
@@ -134,6 +137,9 @@ items:
   summary: Colas de seguridad de un comando que se va a cargar las propiedades del objeto especificadas. Se debe llamar a "context.sync()" antes de leer las propiedades.
   remarks: >-
     Además de esta firma, este método no tiene las siguientes firmas:
+
+
+    `load(option?: string | string[]): Word.Font`-Donde opción es una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades de carga.
 
 
     `load(option?: { select?: string; expand?: string; }): Word.Font`-Donde option.select es una cadena delimitada por comas que especifica las propiedades para cargar y options.expand es una cadena delimitada por comas que especifica las propiedades de navegación para cargar.
@@ -354,21 +360,57 @@ items:
 
     ```
   name: load(option)
-  fullName: load
+  fullName: load(option)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'load(option?: string | string[]): Word.Font;'
+    content: 'load(option?: Word.Interfaces.FontLoadOptions): Word.Font;'
     return:
       type:
       - word.Word.Font
       description: ''
     parameters:
     - id: option
+      description: ''
+      type:
+      - word.Word.Interfaces.FontLoadOptions
+- uid: word.Word.Font.load_1
+  summary: Colas de seguridad de un comando que se va a cargar las propiedades del objeto especificadas. Se debe llamar a `context.sync()` antes de leer las propiedades.
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Word.Font;'
+    return:
+      type:
+      - word.Word.Font
+      description: ''
+    parameters:
+    - id: propertyNames
       description: Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades de carga.
       type:
       - string | string[]
+- uid: word.Word.Font.load_2
+  summary: Colas de seguridad de un comando que se va a cargar las propiedades del objeto especificadas. Se debe llamar a `context.sync()` antes de leer las propiedades.
+  name: load(propertyNamesAndPaths)
+  fullName: load(propertyNamesAndPaths)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Word.Font;'
+    return:
+      type:
+      - word.Word.Font
+      description: ''
+    parameters:
+    - id: propertyNamesAndPaths
+      description: Donde propertyNamesAndPaths.select es una cadena delimitada por comas que especifica las propiedades para cargar y propertyNamesAndPaths.expand es una cadena delimitada por comas que especifica las propiedades de navegación para cargar.
+      type:
+      - '{ select?: string; expand?: string; }'
 - uid: word.Word.Font.name
   summary: >-
     Obtiene o establece un valor que representa el nombre de la fuente.
@@ -393,7 +435,7 @@ items:
 
     `set(properties: Word.Font): void`
   name: set(properties, options)
-  fullName: set
+  fullName: set(properties, options)
   langs:
   - typeScript
   type: method
@@ -412,6 +454,24 @@ items:
       description: Proporciona una opción para suprimir los errores si intenta usar el objeto de propiedades establecer las propiedades de sólo lectura.
       type:
       - office.OfficeExtension.UpdateOptions
+- uid: word.Word.Font.set_1
+  summary: Establece varias propiedades en el objeto al mismo tiempo, en función de un objeto cargado existente.
+  name: set(properties)
+  fullName: set(properties)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'set(properties: Word.Font): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: properties
+      description: ''
+      type:
+      - word.Word.Font
 - uid: word.Word.Font.size
   summary: >-
     Obtiene o establece un valor que representa el tamaño de la fuente en puntos.
@@ -478,7 +538,7 @@ items:
       - boolean
 - uid: word.Word.Font.toJSON
   name: toJSON()
-  fullName: toJSON
+  fullName: toJSON()
   langs:
   - typeScript
   type: method
@@ -491,7 +551,7 @@ items:
 - uid: word.Word.Font.track
   summary: Realizar un seguimiento del objeto para el ajuste automático en función de que lo rodea los cambios en el documento. Esta llamada es una forma abreviada para context.trackedObjects.add(thisObject). Si va a usar este objeto a través de llamadas "Sync" y fuera de la ejecución secuencial de un lote de "ésta se ejecute" y obtenga un error de "InvalidObjectPath" al establecer una propiedad o invocar un método en el objeto, había que ha agregado el objeto al objeto marca de revisión colección cuando el objeto se crea por primera vez.
   name: track()
-  fullName: track
+  fullName: track()
   langs:
   - typeScript
   type: method
@@ -520,7 +580,7 @@ items:
 - uid: word.Word.Font.untrack
   summary: La memoria asociada con este objeto, si lo se anteriormente hace el seguimiento de la versión. Esta llamada es una abreviatura de context.trackedObjects.remove(thisObject). Tener muchos objetos de marca de revisión reduce la velocidad de la aplicación host, por lo que no olvide libre de cualquier objeto que agregue, una vez que haya terminado con ellos. Debe llamar a "context.sync()" antes de la versión de memoria surta efecto.
   name: untrack()
-  fullName: untrack
+  fullName: untrack()
   langs:
   - typeScript
   type: method

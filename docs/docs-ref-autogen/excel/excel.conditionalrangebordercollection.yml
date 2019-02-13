@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 004d0f2214d881b51077e410f3ecf13a5daef74c
-ms.sourcegitcommit: 06eebee5e68d349f78e6bc3bb0ef099fe063cf04
+ms.openlocfilehash: d826a74c5c6c5f223090980e9bbfbce34124df8c
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 01/17/2019
-ms.locfileid: "28724692"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29974818"
 items:
 - uid: excel.Excel.ConditionalRangeBorderCollection
   summary: >-
@@ -25,10 +25,13 @@ items:
   - excel.Excel.ConditionalRangeBorderCollection.context
   - excel.Excel.ConditionalRangeBorderCollection.count
   - excel.Excel.ConditionalRangeBorderCollection.getItem
+  - excel.Excel.ConditionalRangeBorderCollection.getItem_1
   - excel.Excel.ConditionalRangeBorderCollection.getItemAt
   - excel.Excel.ConditionalRangeBorderCollection.items
   - excel.Excel.ConditionalRangeBorderCollection.left
   - excel.Excel.ConditionalRangeBorderCollection.load
+  - excel.Excel.ConditionalRangeBorderCollection.load_1
+  - excel.Excel.ConditionalRangeBorderCollection.load_2
   - excel.Excel.ConditionalRangeBorderCollection.right
   - excel.Excel.ConditionalRangeBorderCollection.toJSON
   - excel.Excel.ConditionalRangeBorderCollection.top
@@ -83,7 +86,7 @@ items:
 
     \[[Conjunto de API: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getItem(index)
-  fullName: getItem
+  fullName: getItem(index)
   langs:
   - typeScript
   type: method
@@ -98,6 +101,28 @@ items:
       description: Valor de índice del objeto de borde que se va a recuperar. Para obtener información detallada, vea Excel.ConditionalRangeBorderIndex.
       type:
       - excel.Excel.ConditionalRangeBorderIndex
+- uid: excel.Excel.ConditionalRangeBorderCollection.getItem_1
+  summary: >-
+    Obtiene un objeto de borde mediante su nombre.
+
+
+    \[[Conjunto de API: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  name: getItem(indexString)
+  fullName: getItem(indexString)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getItem(indexString: "EdgeTop" | "EdgeBottom" | "EdgeLeft" | "EdgeRight"): Excel.ConditionalRangeBorder;'
+    return:
+      type:
+      - excel.Excel.ConditionalRangeBorder
+      description: ''
+    parameters:
+    - id: indexString
+      description: Valor de índice del objeto de borde que se va a recuperar. Para obtener información detallada, vea Excel.ConditionalRangeBorderIndex.
+      type:
+      - "\"EdgeTop\" | \"EdgeBottom\" | \"EdgeLeft\" | \"EdgeRight\""
 - uid: excel.Excel.ConditionalRangeBorderCollection.getItemAt
   summary: >-
     Obtiene un objeto de borde mediante su índice.
@@ -105,7 +130,7 @@ items:
 
     \[[Conjunto de API: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getItemAt(index)
-  fullName: getItemAt
+  fullName: getItemAt(index)
   langs:
   - typeScript
   type: method
@@ -154,26 +179,64 @@ items:
     Además de esta firma, este método no tiene las siguientes firmas:
 
 
+    `load(option?: string | string[]): Excel.ConditionalRangeBorderCollection`-Donde opción es una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades de carga.
+
+
     `load(option?: { select?: string; expand?: string; }): Excel.ConditionalRangeBorderCollection`-Donde option.select es una cadena delimitada por comas que especifica las propiedades para cargar y options.expand es una cadena delimitada por comas que especifica las propiedades de navegación para cargar.
 
 
     `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.ConditionalRangeBorderCollection`-Sólo está disponible en los tipos de colección. Es similar a la firma precedente. Option.Top especifica el número máximo de elementos de la colección que se puede incluir en el resultado. Option.Skip especifica el número de elementos que se pasan por alto y no se incluyen en el resultado. Si se especifica option.top, se iniciará el conjunto de resultados después de omitir el número especificado de elementos.
   name: load(option)
-  fullName: load
+  fullName: load(option)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'load(option?: string | string[]): Excel.ConditionalRangeBorderCollection;'
+    content: 'load(option?: Excel.Interfaces.ConditionalRangeBorderCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.ConditionalRangeBorderCollection;'
     return:
       type:
       - excel.Excel.ConditionalRangeBorderCollection
       description: ''
     parameters:
     - id: option
+      description: ''
+      type:
+      - Excel.Interfaces.ConditionalRangeBorderCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions
+- uid: excel.Excel.ConditionalRangeBorderCollection.load_1
+  summary: Colas de seguridad de un comando que se va a cargar las propiedades del objeto especificadas. Se debe llamar a `context.sync()` antes de leer las propiedades.
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.ConditionalRangeBorderCollection;'
+    return:
+      type:
+      - excel.Excel.ConditionalRangeBorderCollection
+      description: ''
+    parameters:
+    - id: propertyNames
       description: Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades de carga.
       type:
       - string | string[]
+- uid: excel.Excel.ConditionalRangeBorderCollection.load_2
+  name: load(option)
+  fullName: load(option)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(option?: OfficeExtension.LoadOption): Excel.ConditionalRangeBorderCollection;'
+    return:
+      type:
+      - excel.Excel.ConditionalRangeBorderCollection
+      description: ''
+    parameters:
+    - id: option
+      description: ''
+      type:
+      - office.OfficeExtension.LoadOption
 - uid: excel.Excel.ConditionalRangeBorderCollection.right
   summary: >-
     Obtiene el borde derecho. Solo lectura.
@@ -193,7 +256,7 @@ items:
 - uid: excel.Excel.ConditionalRangeBorderCollection.toJSON
   summary: Invalida el JavaScript `toJSON()` método con el fin de proporcionar resultados más útiles cuando se pasa un objeto de la API a `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama a la `toJSON` método del objeto que se pasa a ella.) Mientras que el original `Excel.ConditionalRangeBorderCollection` es un objeto de la API, el `toJSON` método devuelve un objeto de JavaScript sin formato (escrito como `Excel.Interfaces.ConditionalRangeBorderCollectionData` <!-- -->) que contiene una matriz de "elementos" con copias superficiales de las propiedades de elementos de la colección cargadas.
   name: toJSON()
-  fullName: toJSON
+  fullName: toJSON()
   langs:
   - typeScript
   type: method

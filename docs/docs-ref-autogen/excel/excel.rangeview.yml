@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 1aa0996f47fe4dba944c3eb34690677c91583bda
-ms.sourcegitcommit: 3f4a320fa860d05d348c8bdec2295e046a45a34f
+ms.openlocfilehash: e9b7cc4aa797624d7c1f2983478ca12f070bf602
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 02/07/2019
-ms.locfileid: "29769823"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29975434"
 items:
 - uid: excel.Excel.RangeView
   summary: >-
@@ -30,10 +30,13 @@ items:
   - excel.Excel.RangeView.getRange
   - excel.Excel.RangeView.index
   - excel.Excel.RangeView.load
+  - excel.Excel.RangeView.load_1
+  - excel.Excel.RangeView.load_2
   - excel.Excel.RangeView.numberFormat
   - excel.Excel.RangeView.rowCount
   - excel.Excel.RangeView.rows
   - excel.Excel.RangeView.set
+  - excel.Excel.RangeView.set_1
   - excel.Excel.RangeView.text
   - excel.Excel.RangeView.toJSON
   - excel.Excel.RangeView.values
@@ -137,7 +140,7 @@ items:
 
     \[[Conjunto de API: ExcelApi 1.3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getRange()
-  fullName: getRange
+  fullName: getRange()
   langs:
   - typeScript
   type: method
@@ -169,26 +172,65 @@ items:
     Además de esta firma, este método no tiene las siguientes firmas:
 
 
+    `load(option?: string | string[]): Excel.RangeView`-Donde opción es una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades de carga.
+
+
     `load(option?: { select?: string; expand?: string; }): Excel.RangeView`-Donde option.select es una cadena delimitada por comas que especifica las propiedades para cargar y options.expand es una cadena delimitada por comas que especifica las propiedades de navegación para cargar.
 
 
     `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.RangeView`-Sólo está disponible en los tipos de colección. Es similar a la firma precedente. Option.Top especifica el número máximo de elementos de la colección que se puede incluir en el resultado. Option.Skip especifica el número de elementos que se pasan por alto y no se incluyen en el resultado. Si se especifica option.top, se iniciará el conjunto de resultados después de omitir el número especificado de elementos.
   name: load(option)
-  fullName: load
+  fullName: load(option)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'load(option?: string | string[]): Excel.RangeView;'
+    content: 'load(option?: Excel.Interfaces.RangeViewLoadOptions): Excel.RangeView;'
     return:
       type:
       - excel.Excel.RangeView
       description: ''
     parameters:
     - id: option
+      description: ''
+      type:
+      - excel.Excel.Interfaces.RangeViewLoadOptions
+- uid: excel.Excel.RangeView.load_1
+  summary: Colas de seguridad de un comando que se va a cargar las propiedades del objeto especificadas. Se debe llamar a `context.sync()` antes de leer las propiedades.
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.RangeView;'
+    return:
+      type:
+      - excel.Excel.RangeView
+      description: ''
+    parameters:
+    - id: propertyNames
       description: Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades de carga.
       type:
       - string | string[]
+- uid: excel.Excel.RangeView.load_2
+  summary: Colas de seguridad de un comando que se va a cargar las propiedades del objeto especificadas. Se debe llamar a `context.sync()` antes de leer las propiedades.
+  name: load(propertyNamesAndPaths)
+  fullName: load(propertyNamesAndPaths)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.RangeView;'
+    return:
+      type:
+      - excel.Excel.RangeView
+      description: ''
+    parameters:
+    - id: propertyNamesAndPaths
+      description: Donde propertyNamesAndPaths.select es una cadena delimitada por comas que especifica las propiedades para cargar y propertyNamesAndPaths.expand es una cadena delimitada por comas que especifica las propiedades de navegación para cargar.
+      type:
+      - '{ select?: string; expand?: string; }'
 - uid: excel.Excel.RangeView.numberFormat
   summary: >-
     Representa el código de formato numérico de Excel para la celda especificada.
@@ -245,7 +287,7 @@ items:
 
     `set(properties: Excel.RangeView): void`
   name: set(properties, options)
-  fullName: set
+  fullName: set(properties, options)
   langs:
   - typeScript
   type: method
@@ -264,6 +306,24 @@ items:
       description: Proporciona una opción para suprimir los errores si intenta usar el objeto de propiedades establecer las propiedades de sólo lectura.
       type:
       - office.OfficeExtension.UpdateOptions
+- uid: excel.Excel.RangeView.set_1
+  summary: Establece varias propiedades en el objeto al mismo tiempo, en función de un objeto cargado existente.
+  name: set(properties)
+  fullName: set(properties)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'set(properties: Excel.RangeView): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: properties
+      description: ''
+      type:
+      - excel.Excel.RangeView
 - uid: excel.Excel.RangeView.text
   summary: >-
     Valores de texto del rango especificado. El valor de texto no dependerá del ancho de la celda. El \# sustitución que sucede en la interfaz de usuario de Excel no afectará el valor de texto devuelto por la API de inicio de sesión. Solo lectura.
@@ -283,7 +343,7 @@ items:
 - uid: excel.Excel.RangeView.toJSON
   summary: Invalida el JavaScript `toJSON()` método con el fin de proporcionar resultados más útiles cuando se pasa un objeto de la API a `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama a la `toJSON` método del objeto que se pasa a ella.) Mientras que el objeto original de Excel.RangeView es un objeto de la API, el `toJSON` método devuelve un objeto de JavaScript sin formato (escrito como `Excel.Interfaces.RangeViewData` <!-- -->) que contiene copias superficiales de todas las propiedades del objeto original secundario cargado.
   name: toJSON()
-  fullName: toJSON
+  fullName: toJSON()
   langs:
   - typeScript
   type: method

@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: e94e25e046846530a5efdcdc0df8de90c9267a14
-ms.sourcegitcommit: 06eebee5e68d349f78e6bc3bb0ef099fe063cf04
+ms.openlocfilehash: 3be1ba4a748eaefb81a8ef876f5186790dddeb4b
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 01/17/2019
-ms.locfileid: "28725462"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29975966"
 items:
 - uid: excel.Excel.PivotFieldCollection
   summary: >-
@@ -27,6 +27,8 @@ items:
   - excel.Excel.PivotFieldCollection.getItemOrNullObject
   - excel.Excel.PivotFieldCollection.items
   - excel.Excel.PivotFieldCollection.load
+  - excel.Excel.PivotFieldCollection.load_1
+  - excel.Excel.PivotFieldCollection.load_2
   - excel.Excel.PivotFieldCollection.toJSON
 - uid: excel.Excel.PivotFieldCollection.context
   summary: El contexto de solicitud asociado con el objeto. Este comando conecta proceso del complemento al proceso de la aplicación host de Office.
@@ -47,7 +49,7 @@ items:
 
     \[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getCount()
-  fullName: getCount
+  fullName: getCount()
   langs:
   - typeScript
   type: method
@@ -64,7 +66,7 @@ items:
 
     \[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getItem(name)
-  fullName: getItem
+  fullName: getItem(name)
   langs:
   - typeScript
   type: method
@@ -86,7 +88,7 @@ items:
 
     \[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getItemOrNullObject(name)
-  fullName: getItemOrNullObject
+  fullName: getItemOrNullObject(name)
   langs:
   - typeScript
   type: method
@@ -119,30 +121,68 @@ items:
     Además de esta firma, este método no tiene las siguientes firmas:
 
 
+    `load(option?: string | string[]): Excel.PivotFieldCollection`-Donde opción es una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades de carga.
+
+
     `load(option?: { select?: string; expand?: string; }): Excel.PivotFieldCollection`-Donde option.select es una cadena delimitada por comas que especifica las propiedades para cargar y options.expand es una cadena delimitada por comas que especifica las propiedades de navegación para cargar.
 
 
     `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.PivotFieldCollection`-Sólo está disponible en los tipos de colección. Es similar a la firma precedente. Option.Top especifica el número máximo de elementos de la colección que se puede incluir en el resultado. Option.Skip especifica el número de elementos que se pasan por alto y no se incluyen en el resultado. Si se especifica option.top, se iniciará el conjunto de resultados después de omitir el número especificado de elementos.
   name: load(option)
-  fullName: load
+  fullName: load(option)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'load(option?: string | string[]): Excel.PivotFieldCollection;'
+    content: 'load(option?: Excel.Interfaces.PivotFieldCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.PivotFieldCollection;'
     return:
       type:
       - excel.Excel.PivotFieldCollection
       description: ''
     parameters:
     - id: option
+      description: ''
+      type:
+      - Excel.Interfaces.PivotFieldCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions
+- uid: excel.Excel.PivotFieldCollection.load_1
+  summary: Colas de seguridad de un comando que se va a cargar las propiedades del objeto especificadas. Se debe llamar a `context.sync()` antes de leer las propiedades.
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.PivotFieldCollection;'
+    return:
+      type:
+      - excel.Excel.PivotFieldCollection
+      description: ''
+    parameters:
+    - id: propertyNames
       description: Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades de carga.
       type:
       - string | string[]
+- uid: excel.Excel.PivotFieldCollection.load_2
+  name: load(option)
+  fullName: load(option)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(option?: OfficeExtension.LoadOption): Excel.PivotFieldCollection;'
+    return:
+      type:
+      - excel.Excel.PivotFieldCollection
+      description: ''
+    parameters:
+    - id: option
+      description: ''
+      type:
+      - office.OfficeExtension.LoadOption
 - uid: excel.Excel.PivotFieldCollection.toJSON
   summary: Invalida el JavaScript `toJSON()` método con el fin de proporcionar resultados más útiles cuando se pasa un objeto de la API a `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama a la `toJSON` método del objeto que se pasa a ella.) Mientras que el original `Excel.PivotFieldCollection` es un objeto de la API, el `toJSON` método devuelve un objeto de JavaScript sin formato (escrito como `Excel.Interfaces.PivotFieldCollectionData` <!-- -->) que contiene una matriz de "elementos" con copias superficiales de las propiedades de elementos de la colección cargadas.
   name: toJSON()
-  fullName: toJSON
+  fullName: toJSON()
   langs:
   - typeScript
   type: method

@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 04681124b110ab8841caf1b79aa5e43e76d3442f
-ms.sourcegitcommit: 2dcedf6deec4167dca476a42dad411e28cc92a97
+ms.openlocfilehash: fe098e1e08ef28f706384a7a46656a0146ad7d70
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "29384891"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29975077"
 items:
 - uid: word.Word.TableCellCollection
   summary: >-
@@ -26,6 +26,8 @@ items:
   - word.Word.TableCellCollection.getFirstOrNullObject
   - word.Word.TableCellCollection.items
   - word.Word.TableCellCollection.load
+  - word.Word.TableCellCollection.load_1
+  - word.Word.TableCellCollection.load_2
   - word.Word.TableCellCollection.toJSON
   - word.Word.TableCellCollection.track
   - word.Word.TableCellCollection.untrack
@@ -48,7 +50,7 @@ items:
 
     \[[Conjunto de API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
   name: getFirst()
-  fullName: getFirst
+  fullName: getFirst()
   langs:
   - typeScript
   type: method
@@ -65,7 +67,7 @@ items:
 
     \[[Conjunto de API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
   name: getFirstOrNullObject()
-  fullName: getFirstOrNullObject
+  fullName: getFirstOrNullObject()
   langs:
   - typeScript
   type: method
@@ -93,29 +95,67 @@ items:
     Además de esta firma, este método no tiene las siguientes firmas:
 
 
+    `load(option?: string | string[]): Word.TableCellCollection`-Donde opción es una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades de carga.
+
+
     `load(option?: { select?: string; expand?: string; }): Word.TableCellCollection`-Donde option.select es una cadena delimitada por comas que especifica las propiedades para cargar y options.expand es una cadena delimitada por comas que especifica las propiedades de navegación para cargar.
 
 
     `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Word.TableCellCollection`-Sólo está disponible en los tipos de colección. Es similar a la firma precedente. Option.Top especifica el número máximo de elementos de la colección que se puede incluir en el resultado. Option.Skip especifica el número de elementos que se pasan por alto y no se incluyen en el resultado. Si se especifica option.top, se iniciará el conjunto de resultados después de omitir el número especificado de elementos.
   name: load(option)
-  fullName: load
+  fullName: load(option)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'load(option?: string | string[]): Word.TableCellCollection;'
+    content: 'load(option?: Word.Interfaces.TableCellCollectionLoadOptions & Word.Interfaces.CollectionLoadOptions): Word.TableCellCollection;'
     return:
       type:
       - Word.TableCellCollection
       description: ''
     parameters:
     - id: option
+      description: ''
+      type:
+      - Word.Interfaces.TableCellCollectionLoadOptions & Word.Interfaces.CollectionLoadOptions
+- uid: word.Word.TableCellCollection.load_1
+  summary: Colas de seguridad de un comando que se va a cargar las propiedades del objeto especificadas. Se debe llamar a `context.sync()` antes de leer las propiedades.
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Word.TableCellCollection;'
+    return:
+      type:
+      - Word.TableCellCollection
+      description: ''
+    parameters:
+    - id: propertyNames
       description: Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades de carga.
       type:
       - string | string[]
+- uid: word.Word.TableCellCollection.load_2
+  name: load(option)
+  fullName: load(option)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(option?: OfficeExtension.LoadOption): Word.TableCellCollection;'
+    return:
+      type:
+      - Word.TableCellCollection
+      description: ''
+    parameters:
+    - id: option
+      description: ''
+      type:
+      - office.OfficeExtension.LoadOption
 - uid: word.Word.TableCellCollection.toJSON
   name: toJSON()
-  fullName: toJSON
+  fullName: toJSON()
   langs:
   - typeScript
   type: method
@@ -128,7 +168,7 @@ items:
 - uid: word.Word.TableCellCollection.track
   summary: Realizar un seguimiento del objeto para el ajuste automático en función de que lo rodea los cambios en el documento. Esta llamada es una forma abreviada para context.trackedObjects.add(thisObject). Si va a usar este objeto a través de llamadas "Sync" y fuera de la ejecución secuencial de un lote de "ésta se ejecute" y obtenga un error de "InvalidObjectPath" al establecer una propiedad o invocar un método en el objeto, había que ha agregado el objeto al objeto marca de revisión colección cuando el objeto se crea por primera vez.
   name: track()
-  fullName: track
+  fullName: track()
   langs:
   - typeScript
   type: method
@@ -141,7 +181,7 @@ items:
 - uid: word.Word.TableCellCollection.untrack
   summary: La memoria asociada con este objeto, si lo se anteriormente hace el seguimiento de la versión. Esta llamada es una abreviatura de context.trackedObjects.remove(thisObject). Tener muchos objetos de marca de revisión reduce la velocidad de la aplicación host, por lo que no olvide libre de cualquier objeto que agregue, una vez que haya terminado con ellos. Debe llamar a "context.sync()" antes de la versión de memoria surta efecto.
   name: untrack()
-  fullName: untrack
+  fullName: untrack()
   langs:
   - typeScript
   type: method

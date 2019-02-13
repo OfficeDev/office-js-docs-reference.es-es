@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 4e64a71585b6ef6d6a6386accce768af54c06221
-ms.sourcegitcommit: 3f4a320fa860d05d348c8bdec2295e046a45a34f
+ms.openlocfilehash: ccbdcb17c336de846eb03a2ca9cf7d9211b63039
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 02/07/2019
-ms.locfileid: "29769718"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29974951"
 items:
 - uid: excel.Excel.ChartAxis
   summary: >-
@@ -33,6 +33,8 @@ items:
   - excel.Excel.ChartAxis.isBetweenCategories
   - excel.Excel.ChartAxis.left
   - excel.Excel.ChartAxis.load
+  - excel.Excel.ChartAxis.load_1
+  - excel.Excel.ChartAxis.load_2
   - excel.Excel.ChartAxis.logBase
   - excel.Excel.ChartAxis.majorGridlines
   - excel.Excel.ChartAxis.majorTickMark
@@ -52,6 +54,7 @@ items:
   - excel.Excel.ChartAxis.reversePlotOrder
   - excel.Excel.ChartAxis.scaleType
   - excel.Excel.ChartAxis.set
+  - excel.Excel.ChartAxis.set_1
   - excel.Excel.ChartAxis.setCategoryNames
   - excel.Excel.ChartAxis.setCustomDisplayUnit
   - excel.Excel.ChartAxis.setPositionAt
@@ -241,23 +244,69 @@ items:
       - number
 - uid: excel.Excel.ChartAxis.load
   summary: Colas de seguridad de un comando que se va a cargar las propiedades del objeto especificadas. Se debe llamar a "context.sync()" antes de leer las propiedades.
-  remarks: "Además de esta firma, este método no tiene las siguientes firmas:\n\n`load(option?: { select?: string; expand?: string; }): Excel.ChartAxis`-Donde option.select es una cadena delimitada por comas que especifica las propiedades para cargar y options.expand es una cadena delimitada por comas que especifica las propiedades de navegación para cargar.\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.ChartAxis`-Sólo está disponible en los tipos de colección. Es similar a la firma precedente. Option.Top especifica el número máximo de elementos de la colección que se puede incluir en el resultado. Option.Skip especifica el número de elementos que se pasan por alto y no se incluyen en el resultado. Si se especifica option.top, se iniciará el conjunto de resultados después de omitir el número especificado de elementos.\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\n// Get the maximum of Chart Axis from Chart1\nExcel.run(function (ctx) { \n    var chart = ctx.workbook.worksheets.getItem(\"Sheet1\").charts.getItem(\"Chart1\");    \n    var axis = chart.axes.valueAxis;\n    axis.load('maximum');\n    return ctx.sync().then(function() {\n            console.log(axis.maximum);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\n// Set the maximum, minimum, majorunit, minorunit of valueaxis. \nExcel.run(function (ctx) { \n    var chart = ctx.workbook.worksheets.getItem(\"Sheet1\").charts.getItem(\"Chart1\");    \n    chart.axes.valueAxis.maximum = 5;\n    chart.axes.valueAxis.minimum = 0;\n    chart.axes.valueAxis.majorUnit = 1;\n    chart.axes.valueAxis.minorUnit = 0.2;\n    return ctx.sync().then(function() {\n            console.log(\"Axis Settings Changed\");\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  remarks: >-
+    Además de esta firma, este método no tiene las siguientes firmas:
+
+
+    `load(option?: string | string[]): Excel.ChartAxis`-Donde opción es una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades de carga.
+
+
+    `load(option?: { select?: string; expand?: string; }): Excel.ChartAxis`-Donde option.select es una cadena delimitada por comas que especifica las propiedades para cargar y options.expand es una cadena delimitada por comas que especifica las propiedades de navegación para cargar.
+
+
+    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.ChartAxis`-Sólo está disponible en los tipos de colección. Es similar a la firma precedente. Option.Top especifica el número máximo de elementos de la colección que se puede incluir en el resultado. Option.Skip especifica el número de elementos que se pasan por alto y no se incluyen en el resultado. Si se especifica option.top, se iniciará el conjunto de resultados después de omitir el número especificado de elementos.
   name: load(option)
-  fullName: load
+  fullName: load(option)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'load(option?: string | string[]): Excel.ChartAxis;'
+    content: 'load(option?: Excel.Interfaces.ChartAxisLoadOptions): Excel.ChartAxis;'
     return:
       type:
       - excel.Excel.ChartAxis
       description: ''
     parameters:
     - id: option
+      description: ''
+      type:
+      - excel.Excel.Interfaces.ChartAxisLoadOptions
+- uid: excel.Excel.ChartAxis.load_1
+  summary: Colas de seguridad de un comando que se va a cargar las propiedades del objeto especificadas. Se debe llamar a `context.sync()` antes de leer las propiedades.
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.ChartAxis;'
+    return:
+      type:
+      - excel.Excel.ChartAxis
+      description: "\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\n// Get the maximum of Chart Axis from Chart1\nExcel.run(function (ctx) { \n    var chart = ctx.workbook.worksheets.getItem(\"Sheet1\").charts.getItem(\"Chart1\");    \n    var axis = chart.axes.valueAxis;\n    axis.load('maximum');\n    return ctx.sync().then(function() {\n            console.log(axis.maximum);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\n// Set the maximum, minimum, majorunit, minorunit of valueaxis. \nExcel.run(function (ctx) { \n    var chart = ctx.workbook.worksheets.getItem(\"Sheet1\").charts.getItem(\"Chart1\");    \n    chart.axes.valueAxis.maximum = 5;\n    chart.axes.valueAxis.minimum = 0;\n    chart.axes.valueAxis.majorUnit = 1;\n    chart.axes.valueAxis.minorUnit = 0.2;\n    return ctx.sync().then(function() {\n            console.log(\"Axis Settings Changed\");\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+    parameters:
+    - id: propertyNames
       description: Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades de carga.
       type:
       - string | string[]
+- uid: excel.Excel.ChartAxis.load_2
+  summary: Colas de seguridad de un comando que se va a cargar las propiedades del objeto especificadas. Se debe llamar a `context.sync()` antes de leer las propiedades.
+  name: load(propertyNamesAndPaths)
+  fullName: load(propertyNamesAndPaths)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.ChartAxis;'
+    return:
+      type:
+      - excel.Excel.ChartAxis
+      description: ''
+    parameters:
+    - id: propertyNamesAndPaths
+      description: Donde propertyNamesAndPaths.select es una cadena delimitada por comas que especifica las propiedades para cargar y propertyNamesAndPaths.expand es una cadena delimitada por comas que especifica las propiedades de navegación para cargar.
+      type:
+      - '{ select?: string; expand?: string; }'
 - uid: excel.Excel.ChartAxis.logBase
   summary: >-
     Representa la base del logaritmo al usar una escala logarítmica.
@@ -554,7 +603,7 @@ items:
 
     `set(properties: Excel.ChartAxis): void`
   name: set(properties, options)
-  fullName: set
+  fullName: set(properties, options)
   langs:
   - typeScript
   type: method
@@ -573,6 +622,24 @@ items:
       description: Proporciona una opción para suprimir los errores si intenta usar el objeto de propiedades establecer las propiedades de sólo lectura.
       type:
       - office.OfficeExtension.UpdateOptions
+- uid: excel.Excel.ChartAxis.set_1
+  summary: Establece varias propiedades en el objeto al mismo tiempo, en función de un objeto cargado existente.
+  name: set(properties)
+  fullName: set(properties)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'set(properties: Excel.ChartAxis): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: properties
+      description: ''
+      type:
+      - excel.Excel.ChartAxis
 - uid: excel.Excel.ChartAxis.setCategoryNames
   summary: >-
     Establece todos los nombres de categoría del eje especificado.
@@ -580,7 +647,7 @@ items:
 
     \[[Conjunto de API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: setCategoryNames(sourceData)
-  fullName: setCategoryNames
+  fullName: setCategoryNames(sourceData)
   langs:
   - typeScript
   type: method
@@ -602,7 +669,7 @@ items:
 
     \[[Conjunto de API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: setCustomDisplayUnit(value)
-  fullName: setCustomDisplayUnit
+  fullName: setCustomDisplayUnit(value)
   langs:
   - typeScript
   type: method
@@ -624,7 +691,7 @@ items:
 
     \[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: setPositionAt(value)
-  fullName: setPositionAt
+  fullName: setPositionAt(value)
   langs:
   - typeScript
   type: method
@@ -739,7 +806,7 @@ items:
 - uid: excel.Excel.ChartAxis.toJSON
   summary: Invalida el JavaScript `toJSON()` método con el fin de proporcionar resultados más útiles cuando se pasa un objeto de la API a `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama a la `toJSON` método del objeto que se pasa a ella.) Mientras que el objeto original de Excel.ChartAxis es un objeto de la API, el `toJSON` método devuelve un objeto de JavaScript sin formato (escrito como `Excel.Interfaces.ChartAxisData` <!-- -->) que contiene copias superficiales de todas las propiedades del objeto original secundario cargado.
   name: toJSON()
-  fullName: toJSON
+  fullName: toJSON()
   langs:
   - typeScript
   type: method

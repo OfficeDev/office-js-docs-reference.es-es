@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: ce7beafa8cc45451065485e031fa1f91100f7307
-ms.sourcegitcommit: 2dcedf6deec4167dca476a42dad411e28cc92a97
+ms.openlocfilehash: f34b697a24062068b10fa266d99ceaa356934e85
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "29384758"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29979907"
 items:
 - uid: onenote.OneNote.Outline
   summary: >-
@@ -29,6 +29,8 @@ items:
   - onenote.OneNote.Outline.id
   - onenote.OneNote.Outline.isTitle
   - onenote.OneNote.Outline.load
+  - onenote.OneNote.Outline.load_1
+  - onenote.OneNote.Outline.load_2
   - onenote.OneNote.Outline.pageContent
   - onenote.OneNote.Outline.paragraphs
   - onenote.OneNote.Outline.toJSON
@@ -41,7 +43,7 @@ items:
 
     \[[Conjunto de API: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
   name: appendHtml(html)
-  fullName: appendHtml
+  fullName: appendHtml(html)
   langs:
   - typeScript
   type: method
@@ -63,7 +65,7 @@ items:
 
     \[[Conjunto de API: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
   name: appendImage(base64EncodedImage, width, height)
-  fullName: appendImage
+  fullName: appendImage(base64EncodedImage, width, height)
   langs:
   - typeScript
   type: method
@@ -93,7 +95,7 @@ items:
 
     \[[Conjunto de API: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
   name: appendRichText(paragraphText)
-  fullName: appendRichText
+  fullName: appendRichText(paragraphText)
   langs:
   - typeScript
   type: method
@@ -115,7 +117,7 @@ items:
 
     \[[Conjunto de API: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
   name: appendTable(rowCount, columnCount, values)
-  fullName: appendTable
+  fullName: appendTable(rowCount, columnCount, values)
   langs:
   - typeScript
   type: method
@@ -173,7 +175,7 @@ items:
 
     \[[Conjunto de API: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
   name: isTitle()
-  fullName: isTitle
+  fullName: isTitle()
   langs:
   - typeScript
   type: method
@@ -189,26 +191,65 @@ items:
     Además de esta firma, este método no tiene las siguientes firmas:
 
 
+    `load(option?: string | string[]): OneNote.Outline`-Donde opción es una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades de carga.
+
+
     `load(option?: { select?: string; expand?: string; }): OneNote.Outline`-Donde option.select es una cadena delimitada por comas que especifica las propiedades para cargar y options.expand es una cadena delimitada por comas que especifica las propiedades de navegación para cargar.
 
 
     `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): OneNote.Outline`-Sólo está disponible en los tipos de colección. Es similar a la firma precedente. Option.Top especifica el número máximo de elementos de la colección que se puede incluir en el resultado. Option.Skip especifica el número de elementos que se pasan por alto y no se incluyen en el resultado. Si se especifica option.top, se iniciará el conjunto de resultados después de omitir el número especificado de elementos.
   name: load(option)
-  fullName: load
+  fullName: load(option)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'load(option?: string | string[]): OneNote.Outline;'
+    content: 'load(option?: OneNote.Interfaces.OutlineLoadOptions): OneNote.Outline;'
     return:
       type:
       - onenote.OneNote.Outline
       description: ''
     parameters:
     - id: option
+      description: ''
+      type:
+      - onenote.OneNote.Interfaces.OutlineLoadOptions
+- uid: onenote.OneNote.Outline.load_1
+  summary: Colas de seguridad de un comando que se va a cargar las propiedades del objeto especificadas. Se debe llamar a `context.sync()` antes de leer las propiedades.
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): OneNote.Outline;'
+    return:
+      type:
+      - onenote.OneNote.Outline
+      description: ''
+    parameters:
+    - id: propertyNames
       description: Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades de carga.
       type:
       - string | string[]
+- uid: onenote.OneNote.Outline.load_2
+  summary: Colas de seguridad de un comando que se va a cargar las propiedades del objeto especificadas. Se debe llamar a `context.sync()` antes de leer las propiedades.
+  name: load(propertyNamesAndPaths)
+  fullName: load(propertyNamesAndPaths)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): OneNote.Outline;'
+    return:
+      type:
+      - onenote.OneNote.Outline
+      description: ''
+    parameters:
+    - id: propertyNamesAndPaths
+      description: Donde propertyNamesAndPaths.select es una cadena delimitada por comas que especifica las propiedades para cargar y propertyNamesAndPaths.expand es una cadena delimitada por comas que especifica las propiedades de navegación para cargar.
+      type:
+      - '{ select?: string; expand?: string; }'
 - uid: onenote.OneNote.Outline.pageContent
   summary: >-
     Obtiene el objeto PageContent que contiene el objeto Outline. El objeto define la posición del Outline en la página. Solo lectura.
@@ -244,7 +285,7 @@ items:
 - uid: onenote.OneNote.Outline.toJSON
   summary: Invalida el JavaScript `toJSON()` método con el fin de proporcionar resultados más útiles cuando se pasa un objeto de la API a `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama a la `toJSON` método del objeto que se pasa a ella.) Mientras que el objeto original de OneNote.Outline es un objeto de la API, el `toJSON` método devuelve un objeto de JavaScript sin formato (escrito como `OneNote.Interfaces.OutlineData` <!-- -->) que contiene copias superficiales de todas las propiedades del objeto original secundario cargado.
   name: toJSON()
-  fullName: toJSON
+  fullName: toJSON()
   langs:
   - typeScript
   type: method
@@ -257,7 +298,7 @@ items:
 - uid: onenote.OneNote.Outline.track
   summary: Realizar un seguimiento del objeto para el ajuste automático en función de que lo rodea los cambios en el documento. Esta llamada es una forma abreviada para context.trackedObjects.add(thisObject). Si va a usar este objeto a través de llamadas "Sync" y fuera de la ejecución secuencial de un lote de "ésta se ejecute" y obtenga un error de "InvalidObjectPath" al establecer una propiedad o invocar un método en el objeto, había que ha agregado el objeto al objeto marca de revisión colección cuando el objeto se crea por primera vez.
   name: track()
-  fullName: track
+  fullName: track()
   langs:
   - typeScript
   type: method
@@ -270,7 +311,7 @@ items:
 - uid: onenote.OneNote.Outline.untrack
   summary: La memoria asociada con este objeto, si lo se anteriormente hace el seguimiento de la versión. Esta llamada es una abreviatura de context.trackedObjects.remove(thisObject). Tener muchos objetos de marca de revisión reduce la velocidad de la aplicación host, por lo que no olvide libre de cualquier objeto que agregue, una vez que haya terminado con ellos. Debe llamar a "context.sync()" antes de la versión de memoria surta efecto.
   name: untrack()
-  fullName: untrack
+  fullName: untrack()
   langs:
   - typeScript
   type: method

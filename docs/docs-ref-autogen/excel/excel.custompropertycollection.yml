@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 4e58ba1dd90a696e41d8c635e27a87d565a0bdf9
-ms.sourcegitcommit: 06eebee5e68d349f78e6bc3bb0ef099fe063cf04
+ms.openlocfilehash: fce68579b42ba54d8d7c60c560b3cd3211e5ca08
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 01/17/2019
-ms.locfileid: "28724433"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29977601"
 items:
 - uid: excel.Excel.CustomPropertyCollection
   summary: >-
@@ -29,6 +29,8 @@ items:
   - excel.Excel.CustomPropertyCollection.getItemOrNullObject
   - excel.Excel.CustomPropertyCollection.items
   - excel.Excel.CustomPropertyCollection.load
+  - excel.Excel.CustomPropertyCollection.load_1
+  - excel.Excel.CustomPropertyCollection.load_2
   - excel.Excel.CustomPropertyCollection.toJSON
 - uid: excel.Excel.CustomPropertyCollection.add
   summary: >-
@@ -37,7 +39,7 @@ items:
 
     \[[Conjunto de API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: add(key, value)
-  fullName: add
+  fullName: add(key, value)
   langs:
   - typeScript
   type: method
@@ -75,7 +77,7 @@ items:
 
     \[[Conjunto de API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: deleteAll()
-  fullName: deleteAll
+  fullName: deleteAll()
   langs:
   - typeScript
   type: method
@@ -92,7 +94,7 @@ items:
 
     \[[Conjunto de API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getCount()
-  fullName: getCount
+  fullName: getCount()
   langs:
   - typeScript
   type: method
@@ -109,7 +111,7 @@ items:
 
     \[[Conjunto de API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getItem(key)
-  fullName: getItem
+  fullName: getItem(key)
   langs:
   - typeScript
   type: method
@@ -131,7 +133,7 @@ items:
 
     \[[Conjunto de API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getItemOrNullObject(key)
-  fullName: getItemOrNullObject
+  fullName: getItemOrNullObject(key)
   langs:
   - typeScript
   type: method
@@ -164,30 +166,68 @@ items:
     Además de esta firma, este método no tiene las siguientes firmas:
 
 
+    `load(option?: string | string[]): Excel.CustomPropertyCollection`-Donde opción es una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades de carga.
+
+
     `load(option?: { select?: string; expand?: string; }): Excel.CustomPropertyCollection`-Donde option.select es una cadena delimitada por comas que especifica las propiedades para cargar y options.expand es una cadena delimitada por comas que especifica las propiedades de navegación para cargar.
 
 
     `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.CustomPropertyCollection`-Sólo está disponible en los tipos de colección. Es similar a la firma precedente. Option.Top especifica el número máximo de elementos de la colección que se puede incluir en el resultado. Option.Skip especifica el número de elementos que se pasan por alto y no se incluyen en el resultado. Si se especifica option.top, se iniciará el conjunto de resultados después de omitir el número especificado de elementos.
   name: load(option)
-  fullName: load
+  fullName: load(option)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'load(option?: string | string[]): Excel.CustomPropertyCollection;'
+    content: 'load(option?: Excel.Interfaces.CustomPropertyCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.CustomPropertyCollection;'
     return:
       type:
       - excel.Excel.CustomPropertyCollection
       description: ''
     parameters:
     - id: option
+      description: ''
+      type:
+      - Excel.Interfaces.CustomPropertyCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions
+- uid: excel.Excel.CustomPropertyCollection.load_1
+  summary: Colas de seguridad de un comando que se va a cargar las propiedades del objeto especificadas. Se debe llamar a `context.sync()` antes de leer las propiedades.
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.CustomPropertyCollection;'
+    return:
+      type:
+      - excel.Excel.CustomPropertyCollection
+      description: ''
+    parameters:
+    - id: propertyNames
       description: Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades de carga.
       type:
       - string | string[]
+- uid: excel.Excel.CustomPropertyCollection.load_2
+  name: load(option)
+  fullName: load(option)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(option?: OfficeExtension.LoadOption): Excel.CustomPropertyCollection;'
+    return:
+      type:
+      - excel.Excel.CustomPropertyCollection
+      description: ''
+    parameters:
+    - id: option
+      description: ''
+      type:
+      - office.OfficeExtension.LoadOption
 - uid: excel.Excel.CustomPropertyCollection.toJSON
   summary: Invalida el JavaScript `toJSON()` método con el fin de proporcionar resultados más útiles cuando se pasa un objeto de la API a `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama a la `toJSON` método del objeto que se pasa a ella.) Mientras que el original `Excel.CustomPropertyCollection` es un objeto de la API, el `toJSON` método devuelve un objeto de JavaScript sin formato (escrito como `Excel.Interfaces.CustomPropertyCollectionData` <!-- -->) que contiene una matriz de "elementos" con copias superficiales de las propiedades de elementos de la colección cargadas.
   name: toJSON()
-  fullName: toJSON
+  fullName: toJSON()
   langs:
   - typeScript
   type: method

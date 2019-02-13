@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 5d5a0097f02af603c3c93469b79430170fdde031
-ms.sourcegitcommit: a68606173477c7fb4069880eea941766c7d8c50d
+ms.openlocfilehash: 757acd2742808c2e3de8269a0e44914bbd5d2101
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 02/01/2019
-ms.locfileid: "29703727"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29979844"
 items:
 - uid: Outlook_1_5.Office.Subject
   summary: >-
@@ -25,7 +25,11 @@ items:
   package: Outlook_1_5
   children:
   - Outlook_1_5.Office.Subject.getAsync
+  - Outlook_1_5.Office.Subject.getAsync_1
   - Outlook_1_5.Office.Subject.setAsync
+  - Outlook_1_5.Office.Subject.setAsync_1
+  - Outlook_1_5.Office.Subject.setAsync_2
+  - Outlook_1_5.Office.Subject.setAsync_3
 - uid: Outlook_1_5.Office.Subject.getAsync
   summary: >-
     Obtiene el asunto de una cita o un mensaje.
@@ -47,7 +51,7 @@ items:
 
     `getAsync(callback: (result: Office.AsyncResult<string>) => void): void;`
   name: getAsync(options, callback)
-  fullName: getAsync
+  fullName: getAsync(options, callback)
   langs:
   - typeScript
   type: method
@@ -61,7 +65,51 @@ items:
     - id: options
       description: 'Un objeto literal que contiene una o más de las siguientes propiedades. asyncContext: los desarrolladores pueden proporcionar cualquier objeto que desean tener acceso en el método de devolución de llamada.'
       type:
-      - office.Office.AsyncContextOptions
+      - Office.AsyncContextOptions
+    - id: callback
+      description: Cuando finaliza el método, se llama a la función que se pasa en el parámetro de devolución de llamada con un parámetro único de tipo Office.AsyncResult. El `value` propiedad del resultado es el asunto del elemento.
+      type:
+      - '(result: Office.AsyncResult<string>) => void'
+- uid: Outlook_1_5.Office.Subject.getAsync_1
+  summary: >-
+    Obtiene el asunto de una cita o un mensaje.
+
+
+    El método getAsync inicia una llamada asincrónica al servidor de Exchange para obtener el asunto de una cita o de un mensaje.
+
+
+    \[[Conjunto de API: buzón 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redacción</td></tr></table>
+
+    ####Ejemplos
+
+
+    ```javascript
+
+    Office.context.mailbox.item.subject.getAsync(callback);
+
+
+    function callback(asyncResult) {
+        var subject = asyncResult.value;
+    }
+
+    ```
+  name: getAsync(callback)
+  fullName: getAsync(callback)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getAsync(callback: (result: Office.AsyncResult<string>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
     - id: callback
       description: Cuando finaliza el método, se llama a la función que se pasa en el parámetro de devolución de llamada con un parámetro único de tipo Office.AsyncResult. El `value` propiedad del resultado es el asunto del elemento.
       type:
@@ -96,7 +144,7 @@ items:
 
     `setAsync(subject: string, callback: (result: Office.AsyncResult<void>) => void): void;`
   name: setAsync(subject, options, callback)
-  fullName: setAsync
+  fullName: setAsync(subject, options, callback)
   langs:
   - typeScript
   type: method
@@ -114,7 +162,127 @@ items:
     - id: options
       description: 'Un objeto literal que contiene una o más de las siguientes propiedades. asyncContext: los desarrolladores pueden proporcionar cualquier objeto que desean tener acceso en el método de devolución de llamada.'
       type:
-      - office.Office.AsyncContextOptions
+      - Office.AsyncContextOptions
+    - id: callback
+      description: Cuando finaliza el método, se llama a la función que se pasa en el parámetro de devolución de llamada con un parámetro único de tipo Office.AsyncResult. Si se establece el asunto, genera un error, la propiedad asyncResult.error contendrá un código de error.
+      type:
+      - '(result: Office.AsyncResult<void>) => void'
+- uid: Outlook_1_5.Office.Subject.setAsync_1
+  summary: >-
+    Establece el asunto de una cita o un mensaje.
+
+
+    El método setAsync inicia una llamada asincrónica al servidor de Exchange para establecer el asunto de un mensaje o una cita. Cuando se establece este asunto, se sobrescribe el asunto actual, aunque se conservan los prefijos como "Rv:" y "Re:".
+
+
+    \[[Conjunto de API: buzón 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redacción</td></tr>
+
+
+    <tr><td>Errores</td><td>DataExceedsMaximumSize - el parámetro subject es más de 255 caracteres.</td></tr></table>
+  name: setAsync(data)
+  fullName: setAsync(data)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'setAsync(data: string): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: data
+      description: ''
+      type:
+      - string
+- uid: Outlook_1_5.Office.Subject.setAsync_2
+  summary: >-
+    Establece el asunto de una cita o un mensaje.
+
+
+    El método setAsync inicia una llamada asincrónica al servidor de Exchange para establecer el asunto de un mensaje o una cita. Cuando se establece este asunto, se sobrescribe el asunto actual, aunque se conservan los prefijos como "Rv:" y "Re:".
+
+
+    \[[Conjunto de API: buzón 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redacción</td></tr>
+
+
+    <tr><td>Errores</td><td>DataExceedsMaximumSize - el parámetro subject es más de 255 caracteres.</td></tr></table>
+  name: setAsync(data, options)
+  fullName: setAsync(data, options)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'setAsync(data: string, options: Office.AsyncContextOptions): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: data
+      description: ''
+      type:
+      - string
+    - id: options
+      description: 'Un objeto literal que contiene una o más de las siguientes propiedades. asyncContext: los desarrolladores pueden proporcionar cualquier objeto que desean tener acceso en el método de devolución de llamada.'
+      type:
+      - Office.AsyncContextOptions
+- uid: Outlook_1_5.Office.Subject.setAsync_3
+  summary: >-
+    Establece el asunto de una cita o un mensaje.
+
+
+    El método setAsync inicia una llamada asincrónica al servidor de Exchange para establecer el asunto de un mensaje o una cita. Cuando se establece este asunto, se sobrescribe el asunto actual, aunque se conservan los prefijos como "Rv:" y "Re:".
+
+
+    \[[Conjunto de API: buzón 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    <table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr>
+
+
+    <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redacción</td></tr>
+
+
+    <tr><td>Errores</td><td>DataExceedsMaximumSize - el parámetro subject es más de 255 caracteres.</td></tr></table>
+
+    ####Ejemplos
+
+
+    ```javascript
+
+    Office.context.mailbox.item.subject.setAsync("New subject!", function (asyncResult) {
+        if (asyncResult.status === "failed") {
+            console.log("Action failed with error: " + asyncResult.error.message);
+        }
+    });
+
+    ```
+  name: setAsync(data, callback)
+  fullName: setAsync(data, callback)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'setAsync(data: string, callback: (result: Office.AsyncResult<void>) => void): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: data
+      description: ''
+      type:
+      - string
     - id: callback
       description: Cuando finaliza el método, se llama a la función que se pasa en el parámetro de devolución de llamada con un parámetro único de tipo Office.AsyncResult. Si se establece el asunto, genera un error, la propiedad asyncResult.error contendrá un código de error.
       type:

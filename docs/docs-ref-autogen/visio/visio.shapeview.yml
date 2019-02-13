@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: b5b16ee420f36eb6db0a8a2ec5cd1de4c6ad0f18
-ms.sourcegitcommit: 3f4a320fa860d05d348c8bdec2295e046a45a34f
+ms.openlocfilehash: bb8bc41158ff7209e50cbc9405570ab8bd3c28fb
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 02/07/2019
-ms.locfileid: "29769459"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29975021"
 items:
 - uid: visio.Visio.ShapeView
   summary: >-
@@ -22,10 +22,14 @@ items:
   package: visio
   children:
   - visio.Visio.ShapeView.addOverlay
+  - visio.Visio.ShapeView.addOverlay_1
   - visio.Visio.ShapeView.highlight
   - visio.Visio.ShapeView.load
+  - visio.Visio.ShapeView.load_1
+  - visio.Visio.ShapeView.load_2
   - visio.Visio.ShapeView.removeOverlay
   - visio.Visio.ShapeView.set
+  - visio.Visio.ShapeView.set_1
   - visio.Visio.ShapeView.toJSON
 - uid: visio.Visio.ShapeView.addOverlay
   summary: >-
@@ -34,7 +38,7 @@ items:
 
     \[[Conjunto de API: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
   name: addOverlay(OverlayType, Content, OverlayHorizontalAlignment, OverlayVerticalAlignment, Width, Height)
-  fullName: addOverlay
+  fullName: addOverlay(OverlayType, Content, OverlayHorizontalAlignment, OverlayVerticalAlignment, Width, Height)
   langs:
   - typeScript
   type: method
@@ -43,7 +47,7 @@ items:
     return:
       type:
       - OfficeExtension.ClientResult<number>
-      description: ''
+      description: "\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nVisio.run(session, function (ctx) {\n    var activePage = ctx.document.getActivePage();\n    var shape = activePage.shapes.getItem(0);\n    var overlayId=shape.view.addOverlay(\"Image\", \"Visio Online\", \"Center\", \"Center\", 50, 50);\n    return ctx.sync();\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
     parameters:
     - id: OverlayType
       description: Un tipo de superposición. Puede ser 'Texto' o 'Imagen'.
@@ -69,6 +73,48 @@ items:
       description: Alto de superposición.
       type:
       - number
+- uid: visio.Visio.ShapeView.addOverlay_1
+  summary: >-
+    Agrega una superposición encima de la forma.
+
+
+    \[[Conjunto de API: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
+  name: addOverlay(OverlayTypeString, Content, OverlayHorizontalAlignment, OverlayVerticalAlignment, Width, Height)
+  fullName: addOverlay(OverlayTypeString, Content, OverlayHorizontalAlignment, OverlayVerticalAlignment, Width, Height)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'addOverlay(OverlayTypeString: "Text" | "Image", Content: string, OverlayHorizontalAlignment: "Left" | "Center" | "Right", OverlayVerticalAlignment: "Top" | "Middle" | "Bottom", Width: number, Height: number): OfficeExtension.ClientResult<number>;'
+    return:
+      type:
+      - OfficeExtension.ClientResult<number>
+      description: ''
+    parameters:
+    - id: OverlayTypeString
+      description: Un tipo de superposición. Puede ser 'Texto' o 'Imagen'.
+      type:
+      - "\"Text\" | \"Image\""
+    - id: Content
+      description: Contenido de superposición.
+      type:
+      - string
+    - id: OverlayHorizontalAlignment
+      description: Alineación horizontal de la superposición. Puede ser 'Izquierda', 'Centro' o 'Right'.
+      type:
+      - "\"Left\" | \"Center\" | \"Right\""
+    - id: OverlayVerticalAlignment
+      description: Alineación vertical de superposición. Puede ser 'Superior', 'En el medio', 'Inferior'.
+      type:
+      - "\"Top\" | \"Middle\" | \"Bottom\""
+    - id: Width
+      description: Ancho de superposición.
+      type:
+      - number
+    - id: Height
+      description: Alto de superposición.
+      type:
+      - number
 - uid: visio.Visio.ShapeView.highlight
   summary: >-
     Representa el resaltado alrededor de la forma.
@@ -85,83 +131,72 @@ items:
     return:
       type:
       - visio.Visio.Highlight
+      description: "\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nVisio.run(session, function (ctx) {\n    var activePage = ctx.document.getActivePage();\n    var shape = activePage.shapes.getItem(0);\n    shape.view.highlight = { color: \"#E7E7E7\", width: 100 };\n    return ctx.sync();\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
 - uid: visio.Visio.ShapeView.load
   summary: Colas de seguridad de un comando que se va a cargar las propiedades del objeto especificadas. Se debe llamar a "context.sync()" antes de leer las propiedades.
   remarks: >-
     Además de esta firma, este método no tiene las siguientes firmas:
 
 
+    `load(option?: string | string[]): Visio.ShapeView`-Donde opción es una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades de carga.
+
+
     `load(option?: { select?: string; expand?: string; }): Visio.ShapeView`-Donde option.select es una cadena delimitada por comas que especifica las propiedades para cargar y options.expand es una cadena delimitada por comas que especifica las propiedades de navegación para cargar.
 
 
     `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Visio.ShapeView`-Sólo está disponible en los tipos de colección. Es similar a la firma precedente. Option.Top especifica el número máximo de elementos de la colección que se puede incluir en el resultado. Option.Skip especifica el número de elementos que se pasan por alto y no se incluyen en el resultado. Si se especifica option.top, se iniciará el conjunto de resultados después de omitir el número especificado de elementos.
-
-    #### <a name="examples"></a>Ejemplos
-
-
-    ```javascript
-
-    Visio.run(session, function (ctx) {
-        var activePage = ctx.document.getActivePage();
-        var shape = activePage.shapes.getItem(0);
-        shape.view.highlight = { color: "#E7E7E7", width: 100 };
-        return ctx.sync();
-    }).catch(function(error) {
-        console.log("Error: " + error);
-        if (error instanceof OfficeExtension.Error) {
-            console.log("Debug info: " + JSON.stringify(error.debugInfo));
-        }
-    });
-
-    ```
-
-    ```javascript
-
-    Visio.run(session, function (ctx) {
-        var activePage = ctx.document.getActivePage();
-        var shape = activePage.shapes.getItem(0);
-        var overlayId=shape.view.addOverlay(1, "Visio Online", 2, 2, 50, 50);
-        return ctx.sync();
-    }).catch(function(error) {
-        console.log("Error: " + error);
-        if (error instanceof OfficeExtension.Error) {
-            console.log("Debug info: " + JSON.stringify(error.debugInfo));
-        }
-    });
-
-    ```
-
-    ```javascript
-
-    Visio.run(session, function (ctx) {
-        var activePage = ctx.document.getActivePage();
-        var shape = activePage.shapes.getItem(0);
-        shape.view.removeOverlay(1);
-        return ctx.sync();
-    }).catch(function(error) {
-        console.log("Error: " + error);
-        if (error instanceof OfficeExtension.Error) {
-            console.log("Debug info: " + JSON.stringify(error.debugInfo));
-        }
-    });
-
-    ```
   name: load(option)
-  fullName: load
+  fullName: load(option)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'load(option?: string | string[]): Visio.ShapeView;'
+    content: 'load(option?: Visio.Interfaces.ShapeViewLoadOptions): Visio.ShapeView;'
     return:
       type:
       - visio.Visio.ShapeView
       description: ''
     parameters:
     - id: option
+      description: ''
+      type:
+      - visio.Visio.Interfaces.ShapeViewLoadOptions
+- uid: visio.Visio.ShapeView.load_1
+  summary: Colas de seguridad de un comando que se va a cargar las propiedades del objeto especificadas. Se debe llamar a `context.sync()` antes de leer las propiedades.
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Visio.ShapeView;'
+    return:
+      type:
+      - visio.Visio.ShapeView
+      description: ''
+    parameters:
+    - id: propertyNames
       description: Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades de carga.
       type:
       - string | string[]
+- uid: visio.Visio.ShapeView.load_2
+  summary: Colas de seguridad de un comando que se va a cargar las propiedades del objeto especificadas. Se debe llamar a `context.sync()` antes de leer las propiedades.
+  name: load(propertyNamesAndPaths)
+  fullName: load(propertyNamesAndPaths)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Visio.ShapeView;'
+    return:
+      type:
+      - visio.Visio.ShapeView
+      description: ''
+    parameters:
+    - id: propertyNamesAndPaths
+      description: Donde propertyNamesAndPaths.select es una cadena delimitada por comas que especifica las propiedades para cargar y propertyNamesAndPaths.expand es una cadena delimitada por comas que especifica las propiedades de navegación para cargar.
+      type:
+      - '{ select?: string; expand?: string; }'
 - uid: visio.Visio.ShapeView.removeOverlay
   summary: >-
     Quita una superposición específica o todas las superposiciones de la forma.
@@ -169,7 +204,7 @@ items:
 
     \[[Conjunto de API: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
   name: removeOverlay(OverlayId)
-  fullName: removeOverlay
+  fullName: removeOverlay(OverlayId)
   langs:
   - typeScript
   type: method
@@ -178,7 +213,7 @@ items:
     return:
       type:
       - void
-      description: ''
+      description: "\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nVisio.run(session, function (ctx) {\n    var activePage = ctx.document.getActivePage();\n    var shape = activePage.shapes.getItem(0);\n    shape.view.removeOverlay(1);\n    return ctx.sync();\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
     parameters:
     - id: OverlayId
       description: Un identificador de superposición. Elimina el identificador específico de superposición de la forma.
@@ -192,7 +227,7 @@ items:
 
     `set(properties: Visio.ShapeView): void`
   name: set(properties, options)
-  fullName: set
+  fullName: set(properties, options)
   langs:
   - typeScript
   type: method
@@ -211,9 +246,27 @@ items:
       description: Proporciona una opción para suprimir los errores si intenta usar el objeto de propiedades establecer las propiedades de sólo lectura.
       type:
       - office.OfficeExtension.UpdateOptions
+- uid: visio.Visio.ShapeView.set_1
+  summary: Establece varias propiedades en el objeto al mismo tiempo, en función de un objeto cargado existente.
+  name: set(properties)
+  fullName: set(properties)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'set(properties: Visio.ShapeView): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: properties
+      description: ''
+      type:
+      - visio.Visio.ShapeView
 - uid: visio.Visio.ShapeView.toJSON
   name: toJSON()
-  fullName: toJSON
+  fullName: toJSON()
   langs:
   - typeScript
   type: method

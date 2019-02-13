@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 785d5848eb390d36b23d5ba13636e8396f249c07
-ms.sourcegitcommit: 06eebee5e68d349f78e6bc3bb0ef099fe063cf04
+ms.openlocfilehash: e92807018095723e0cd23d5612cfd484cb01cb6a
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 01/17/2019
-ms.locfileid: "28724335"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29977226"
 items:
 - uid: excel.Excel.ChartLegendEntryCollection
   summary: >-
@@ -26,6 +26,8 @@ items:
   - excel.Excel.ChartLegendEntryCollection.getItemAt
   - excel.Excel.ChartLegendEntryCollection.items
   - excel.Excel.ChartLegendEntryCollection.load
+  - excel.Excel.ChartLegendEntryCollection.load_1
+  - excel.Excel.ChartLegendEntryCollection.load_2
   - excel.Excel.ChartLegendEntryCollection.toJSON
 - uid: excel.Excel.ChartLegendEntryCollection.context
   summary: El contexto de solicitud asociado con el objeto. Este comando conecta proceso del complemento al proceso de la aplicación host de Office.
@@ -46,7 +48,7 @@ items:
 
     \[[Conjunto de API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getCount()
-  fullName: getCount
+  fullName: getCount()
   langs:
   - typeScript
   type: method
@@ -63,7 +65,7 @@ items:
 
     \[[Conjunto de API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getItemAt(index)
-  fullName: getItemAt
+  fullName: getItemAt(index)
   langs:
   - typeScript
   type: method
@@ -96,30 +98,68 @@ items:
     Además de esta firma, este método no tiene las siguientes firmas:
 
 
+    `load(option?: string | string[]): Excel.ChartLegendEntryCollection`-Donde opción es una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades de carga.
+
+
     `load(option?: { select?: string; expand?: string; }): Excel.ChartLegendEntryCollection`-Donde option.select es una cadena delimitada por comas que especifica las propiedades para cargar y options.expand es una cadena delimitada por comas que especifica las propiedades de navegación para cargar.
 
 
     `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.ChartLegendEntryCollection`-Sólo está disponible en los tipos de colección. Es similar a la firma precedente. Option.Top especifica el número máximo de elementos de la colección que se puede incluir en el resultado. Option.Skip especifica el número de elementos que se pasan por alto y no se incluyen en el resultado. Si se especifica option.top, se iniciará el conjunto de resultados después de omitir el número especificado de elementos.
   name: load(option)
-  fullName: load
+  fullName: load(option)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'load(option?: string | string[]): Excel.ChartLegendEntryCollection;'
+    content: 'load(option?: Excel.Interfaces.ChartLegendEntryCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.ChartLegendEntryCollection;'
     return:
       type:
       - excel.Excel.ChartLegendEntryCollection
       description: ''
     parameters:
     - id: option
+      description: ''
+      type:
+      - Excel.Interfaces.ChartLegendEntryCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions
+- uid: excel.Excel.ChartLegendEntryCollection.load_1
+  summary: Colas de seguridad de un comando que se va a cargar las propiedades del objeto especificadas. Se debe llamar a `context.sync()` antes de leer las propiedades.
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.ChartLegendEntryCollection;'
+    return:
+      type:
+      - excel.Excel.ChartLegendEntryCollection
+      description: ''
+    parameters:
+    - id: propertyNames
       description: Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades de carga.
       type:
       - string | string[]
+- uid: excel.Excel.ChartLegendEntryCollection.load_2
+  name: load(option)
+  fullName: load(option)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(option?: OfficeExtension.LoadOption): Excel.ChartLegendEntryCollection;'
+    return:
+      type:
+      - excel.Excel.ChartLegendEntryCollection
+      description: ''
+    parameters:
+    - id: option
+      description: ''
+      type:
+      - office.OfficeExtension.LoadOption
 - uid: excel.Excel.ChartLegendEntryCollection.toJSON
   summary: Invalida el JavaScript `toJSON()` método con el fin de proporcionar resultados más útiles cuando se pasa un objeto de la API a `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama a la `toJSON` método del objeto que se pasa a ella.) Mientras que el original `Excel.ChartLegendEntryCollection` es un objeto de la API, el `toJSON` método devuelve un objeto de JavaScript sin formato (escrito como `Excel.Interfaces.ChartLegendEntryCollectionData` <!-- -->) que contiene una matriz de "elementos" con copias superficiales de las propiedades de elementos de la colección cargadas.
   name: toJSON()
-  fullName: toJSON
+  fullName: toJSON()
   langs:
   - typeScript
   type: method

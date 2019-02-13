@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: b7893b73ff1c8407ebab996b75bb603659372515
-ms.sourcegitcommit: 2dcedf6deec4167dca476a42dad411e28cc92a97
+ms.openlocfilehash: 6ec2e73ea0c106ed383a6d8ca823dea7d3c5a4bd
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "29384590"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29977222"
 items:
 - uid: word.Word.ParagraphCollection
   summary: >-
@@ -28,6 +28,8 @@ items:
   - word.Word.ParagraphCollection.getLastOrNullObject
   - word.Word.ParagraphCollection.items
   - word.Word.ParagraphCollection.load
+  - word.Word.ParagraphCollection.load_1
+  - word.Word.ParagraphCollection.load_2
   - word.Word.ParagraphCollection.toJSON
   - word.Word.ParagraphCollection.track
   - word.Word.ParagraphCollection.untrack
@@ -50,7 +52,7 @@ items:
 
     \[[Conjunto de API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
   name: getFirst()
-  fullName: getFirst
+  fullName: getFirst()
   langs:
   - typeScript
   type: method
@@ -67,7 +69,7 @@ items:
 
     \[[Conjunto de API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
   name: getFirstOrNullObject()
-  fullName: getFirstOrNullObject
+  fullName: getFirstOrNullObject()
   langs:
   - typeScript
   type: method
@@ -84,7 +86,7 @@ items:
 
     \[[Conjunto de API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
   name: getLast()
-  fullName: getLast
+  fullName: getLast()
   langs:
   - typeScript
   type: method
@@ -101,7 +103,7 @@ items:
 
     \[[Conjunto de API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
   name: getLastOrNullObject()
-  fullName: getLastOrNullObject
+  fullName: getLastOrNullObject()
   langs:
   - typeScript
   type: method
@@ -125,26 +127,61 @@ items:
       - Word.Paragraph[]
 - uid: word.Word.ParagraphCollection.load
   summary: Colas de seguridad de un comando que se va a cargar las propiedades del objeto especificadas. Se debe llamar a "context.sync()" antes de leer las propiedades.
-  remarks: "Además de esta firma, este método no tiene las siguientes firmas:\n\n`load(option?: { select?: string; expand?: string; }): Word.ParagraphCollection`-Donde option.select es una cadena delimitada por comas que especifica las propiedades para cargar y options.expand es una cadena delimitada por comas que especifica las propiedades de navegación para cargar.\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Word.ParagraphCollection`-Sólo está disponible en los tipos de colección. Es similar a la firma precedente. Option.Top especifica el número máximo de elementos de la colección que se puede incluir en el resultado. Option.Skip especifica el número de elementos que se pasan por alto y no se incluyen en el resultado. Si se especifica option.top, se iniciará el conjunto de resultados después de omitir el número especificado de elementos.\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\n// This example shows how to get the paragraphs in the Word document\n// along with their text and font size properties.\n// \n// Run a batch operation against the Word object model.\nWord.run(function (context) {\n\n    // Create a proxy object for the paragraphs collection.\n    var paragraphs = context.document.body.paragraphs;\n\n    // Queue a commmand to load the text and font properties.\n    // It is best practice to always specify the property set. Otherwise, all properties are\n    // returned in on the object.\n    context.load(paragraphs, 'text, font/size');\n\n    // Synchronize the document state by executing the queued commands,\n    // and return a promise to indicate task completion.\n    return context.sync().then(function () {\n\n    // Insert code that works with the paragraphs loaded by context.load().\n    })\n})\n.catch(function (error) {\n    console.log('Error: ' + JSON.stringify(error));\n    if (error instanceof OfficeExtension.Error) {\n        console.log('Debug info: ' + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  remarks: "Además de esta firma, este método no tiene las siguientes firmas:\n\n`load(option?: string | string[]): Word.ParagraphCollection`-Donde opción es una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades de carga.\n\n`load(option?: { select?: string; expand?: string; }): Word.ParagraphCollection`-Donde option.select es una cadena delimitada por comas que especifica las propiedades para cargar y options.expand es una cadena delimitada por comas que especifica las propiedades de navegación para cargar.\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Word.ParagraphCollection`-Sólo está disponible en los tipos de colección. Es similar a la firma precedente. Option.Top especifica el número máximo de elementos de la colección que se puede incluir en el resultado. Option.Skip especifica el número de elementos que se pasan por alto y no se incluyen en el resultado. Si se especifica option.top, se iniciará el conjunto de resultados después de omitir el número especificado de elementos.\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\n// This example shows how to get the paragraphs in the Word document\n// along with their text and font size properties.\n// \n// Run a batch operation against the Word object model.\nWord.run(function (context) {\n\n    // Create a proxy object for the paragraphs collection.\n    var paragraphs = context.document.body.paragraphs;\n\n    // Queue a commmand to load the text and font properties.\n    // It is best practice to always specify the property set. Otherwise, all properties are\n    // returned in on the object.\n    context.load(paragraphs, 'text, font/size');\n\n    // Synchronize the document state by executing the queued commands,\n    // and return a promise to indicate task completion.\n    return context.sync().then(function () {\n\n    // Insert code that works with the paragraphs loaded by context.load().\n    })\n})\n.catch(function (error) {\n    console.log('Error: ' + JSON.stringify(error));\n    if (error instanceof OfficeExtension.Error) {\n        console.log('Debug info: ' + JSON.stringify(error.debugInfo));\n    }\n});\n```"
   name: load(option)
-  fullName: load
+  fullName: load(option)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'load(option?: string | string[]): Word.ParagraphCollection;'
+    content: 'load(option?: Word.Interfaces.ParagraphCollectionLoadOptions & Word.Interfaces.CollectionLoadOptions): Word.ParagraphCollection;'
     return:
       type:
       - Word.ParagraphCollection
       description: ''
     parameters:
     - id: option
+      description: ''
+      type:
+      - Word.Interfaces.ParagraphCollectionLoadOptions & Word.Interfaces.CollectionLoadOptions
+- uid: word.Word.ParagraphCollection.load_1
+  summary: Colas de seguridad de un comando que se va a cargar las propiedades del objeto especificadas. Se debe llamar a `context.sync()` antes de leer las propiedades.
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Word.ParagraphCollection;'
+    return:
+      type:
+      - Word.ParagraphCollection
+      description: ''
+    parameters:
+    - id: propertyNames
       description: Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades de carga.
       type:
       - string | string[]
+- uid: word.Word.ParagraphCollection.load_2
+  name: load(option)
+  fullName: load(option)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(option?: OfficeExtension.LoadOption): Word.ParagraphCollection;'
+    return:
+      type:
+      - Word.ParagraphCollection
+      description: ''
+    parameters:
+    - id: option
+      description: ''
+      type:
+      - office.OfficeExtension.LoadOption
 - uid: word.Word.ParagraphCollection.toJSON
   name: toJSON()
-  fullName: toJSON
+  fullName: toJSON()
   langs:
   - typeScript
   type: method
@@ -157,7 +194,7 @@ items:
 - uid: word.Word.ParagraphCollection.track
   summary: Realizar un seguimiento del objeto para el ajuste automático en función de que lo rodea los cambios en el documento. Esta llamada es una forma abreviada para context.trackedObjects.add(thisObject). Si va a usar este objeto a través de llamadas "Sync" y fuera de la ejecución secuencial de un lote de "ésta se ejecute" y obtenga un error de "InvalidObjectPath" al establecer una propiedad o invocar un método en el objeto, había que ha agregado el objeto al objeto marca de revisión colección cuando el objeto se crea por primera vez.
   name: track()
-  fullName: track
+  fullName: track()
   langs:
   - typeScript
   type: method
@@ -170,7 +207,7 @@ items:
 - uid: word.Word.ParagraphCollection.untrack
   summary: La memoria asociada con este objeto, si lo se anteriormente hace el seguimiento de la versión. Esta llamada es una abreviatura de context.trackedObjects.remove(thisObject). Tener muchos objetos de marca de revisión reduce la velocidad de la aplicación host, por lo que no olvide libre de cualquier objeto que agregue, una vez que haya terminado con ellos. Debe llamar a "context.sync()" antes de la versión de memoria surta efecto.
   name: untrack()
-  fullName: untrack
+  fullName: untrack()
   langs:
   - typeScript
   type: method

@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 76b1a31c920babfd2c2fd2bf8b69a5de07144824
-ms.sourcegitcommit: 06eebee5e68d349f78e6bc3bb0ef099fe063cf04
+ms.openlocfilehash: c7da02361497bb7690e090e954d050a6da862d66
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 01/17/2019
-ms.locfileid: "28724993"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29974237"
 items:
 - uid: excel.Excel.CustomXmlPart
   summary: >-
@@ -26,6 +26,8 @@ items:
   - excel.Excel.CustomXmlPart.getXml
   - excel.Excel.CustomXmlPart.id
   - excel.Excel.CustomXmlPart.load
+  - excel.Excel.CustomXmlPart.load_1
+  - excel.Excel.CustomXmlPart.load_2
   - excel.Excel.CustomXmlPart.namespaceUri
   - excel.Excel.CustomXmlPart.setXml
   - excel.Excel.CustomXmlPart.toJSON
@@ -48,7 +50,7 @@ items:
 
     \[[Conjunto de API: ExcelApi 1,5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: delete()
-  fullName: delete
+  fullName: delete()
   langs:
   - typeScript
   type: method
@@ -65,7 +67,7 @@ items:
 
     \[[Conjunto de API: ExcelApi 1,5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getXml()
-  fullName: getXml
+  fullName: getXml()
   langs:
   - typeScript
   type: method
@@ -98,26 +100,65 @@ items:
     Además de esta firma, este método no tiene las siguientes firmas:
 
 
+    `load(option?: string | string[]): Excel.CustomXmlPart`-Donde opción es una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades de carga.
+
+
     `load(option?: { select?: string; expand?: string; }): Excel.CustomXmlPart`-Donde option.select es una cadena delimitada por comas que especifica las propiedades para cargar y options.expand es una cadena delimitada por comas que especifica las propiedades de navegación para cargar.
 
 
     `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.CustomXmlPart`-Sólo está disponible en los tipos de colección. Es similar a la firma precedente. Option.Top especifica el número máximo de elementos de la colección que se puede incluir en el resultado. Option.Skip especifica el número de elementos que se pasan por alto y no se incluyen en el resultado. Si se especifica option.top, se iniciará el conjunto de resultados después de omitir el número especificado de elementos.
   name: load(option)
-  fullName: load
+  fullName: load(option)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'load(option?: string | string[]): Excel.CustomXmlPart;'
+    content: 'load(option?: Excel.Interfaces.CustomXmlPartLoadOptions): Excel.CustomXmlPart;'
     return:
       type:
       - excel.Excel.CustomXmlPart
       description: ''
     parameters:
     - id: option
+      description: ''
+      type:
+      - excel.Excel.Interfaces.CustomXmlPartLoadOptions
+- uid: excel.Excel.CustomXmlPart.load_1
+  summary: Colas de seguridad de un comando que se va a cargar las propiedades del objeto especificadas. Se debe llamar a `context.sync()` antes de leer las propiedades.
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.CustomXmlPart;'
+    return:
+      type:
+      - excel.Excel.CustomXmlPart
+      description: ''
+    parameters:
+    - id: propertyNames
       description: Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades de carga.
       type:
       - string | string[]
+- uid: excel.Excel.CustomXmlPart.load_2
+  summary: Colas de seguridad de un comando que se va a cargar las propiedades del objeto especificadas. Se debe llamar a `context.sync()` antes de leer las propiedades.
+  name: load(propertyNamesAndPaths)
+  fullName: load(propertyNamesAndPaths)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.CustomXmlPart;'
+    return:
+      type:
+      - excel.Excel.CustomXmlPart
+      description: ''
+    parameters:
+    - id: propertyNamesAndPaths
+      description: Donde propertyNamesAndPaths.select es una cadena delimitada por comas que especifica las propiedades para cargar y propertyNamesAndPaths.expand es una cadena delimitada por comas que especifica las propiedades de navegación para cargar.
+      type:
+      - '{ select?: string; expand?: string; }'
 - uid: excel.Excel.CustomXmlPart.namespaceUri
   summary: >-
     URI de espacio de nombres del elemento XML personalizado. Solo lectura.
@@ -141,7 +182,7 @@ items:
 
     \[[Conjunto de API: ExcelApi 1,5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: setXml(xml)
-  fullName: setXml
+  fullName: setXml(xml)
   langs:
   - typeScript
   type: method
@@ -159,7 +200,7 @@ items:
 - uid: excel.Excel.CustomXmlPart.toJSON
   summary: Invalida el JavaScript `toJSON()` método con el fin de proporcionar resultados más útiles cuando se pasa un objeto de la API a `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama a la `toJSON` método del objeto que se pasa a ella.) Mientras que el objeto original de Excel.CustomXmlPart es un objeto de la API, el `toJSON` método devuelve un objeto de JavaScript sin formato (escrito como `Excel.Interfaces.CustomXmlPartData` <!-- -->) que contiene copias superficiales de todas las propiedades del objeto original secundario cargado.
   name: toJSON()
-  fullName: toJSON
+  fullName: toJSON()
   langs:
   - typeScript
   type: method

@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: dcb1d7a8a8793c9d1e2c4fc6648309b0796660ae
-ms.sourcegitcommit: 3f4a320fa860d05d348c8bdec2295e046a45a34f
+ms.openlocfilehash: 4d30b17694b88916e7a36360f3e631d96242d255
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 02/07/2019
-ms.locfileid: "29769872"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29974601"
 items:
 - uid: excel.Excel.Chart
   summary: >-
@@ -30,11 +30,14 @@ items:
   - excel.Excel.Chart.displayBlanksAs
   - excel.Excel.Chart.format
   - excel.Excel.Chart.getImage
+  - excel.Excel.Chart.getImage_1
   - excel.Excel.Chart.height
   - excel.Excel.Chart.id
   - excel.Excel.Chart.left
   - excel.Excel.Chart.legend
   - excel.Excel.Chart.load
+  - excel.Excel.Chart.load_1
+  - excel.Excel.Chart.load_2
   - excel.Excel.Chart.name
   - excel.Excel.Chart.onActivated
   - excel.Excel.Chart.onDeactivated
@@ -44,7 +47,9 @@ items:
   - excel.Excel.Chart.series
   - excel.Excel.Chart.seriesNameLevel
   - excel.Excel.Chart.set
+  - excel.Excel.Chart.set_1
   - excel.Excel.Chart.setData
+  - excel.Excel.Chart.setData_1
   - excel.Excel.Chart.setPosition
   - excel.Excel.Chart.showAllFieldButtons
   - excel.Excel.Chart.showDataLabelsOverMaximum
@@ -137,7 +142,7 @@ items:
 
     \[[Conjunto de API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: delete()
-  fullName: delete
+  fullName: delete()
   langs:
   - typeScript
   type: method
@@ -186,7 +191,7 @@ items:
 
     \[[Conjunto de API: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getImage(width, height, fittingMode)
-  fullName: getImage
+  fullName: getImage(width, height, fittingMode)
   langs:
   - typeScript
   type: method
@@ -209,6 +214,36 @@ items:
       description: (Opcional) El método utilizado para escalar del gráfico especificado a las dimensiones especificadas (si se establecen el alto y ancho).
       type:
       - excel.Excel.ImageFittingMode
+- uid: excel.Excel.Chart.getImage_1
+  summary: >-
+    Representa el gráfico como una imagen con codificación Base64 al escalar el gráfico a las dimensiones especificadas. La relación de aspecto se conserva como parte del cambio de tamaño.
+
+
+    \[[Conjunto de API: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  name: getImage(width, height, fittingModeString)
+  fullName: getImage(width, height, fittingModeString)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'getImage(width?: number, height?: number, fittingModeString?: "Fit" | "FitAndCenter" | "Fill"): OfficeExtension.ClientResult<string>;'
+    return:
+      type:
+      - OfficeExtension.ClientResult<string>
+      description: ''
+    parameters:
+    - id: width
+      description: (Opcional) El ancho deseado de la imagen resultante.
+      type:
+      - number
+    - id: height
+      description: (Opcional) La altura deseada de la imagen resultante.
+      type:
+      - number
+    - id: fittingModeString
+      description: (Opcional) El método utilizado para escalar del gráfico especificado a las dimensiones especificadas (si se establecen el alto y ancho).
+      type:
+      - "\"Fit\" | \"FitAndCenter\" | \"Fill\""
 - uid: excel.Excel.Chart.height
   summary: >-
     Representa el alto, en puntos, del objeto de gráfico.
@@ -275,23 +310,69 @@ items:
       - excel.Excel.ChartLegend
 - uid: excel.Excel.Chart.load
   summary: Colas de seguridad de un comando que se va a cargar las propiedades del objeto especificadas. Se debe llamar a "context.sync()" antes de leer las propiedades.
-  remarks: "Además de esta firma, este método no tiene las siguientes firmas:\n\n`load(option?: { select?: string; expand?: string; }): Excel.Chart`-Donde option.select es una cadena delimitada por comas que especifica las propiedades para cargar y options.expand es una cadena delimitada por comas que especifica las propiedades de navegación para cargar.\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Chart`-Sólo está disponible en los tipos de colección. Es similar a la firma precedente. Option.Top especifica el número máximo de elementos de la colección que se puede incluir en el resultado. Option.Skip especifica el número de elementos que se pasan por alto y no se incluyen en el resultado. Si se especifica option.top, se iniciará el conjunto de resultados después de omitir el número especificado de elementos.\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\n// Get a chart named \"Chart1\"\nExcel.run(function (ctx) { \n    var chart = ctx.workbook.worksheets.getItem(\"Sheet1\").charts.getItem(\"Chart1\");    \n    chart.load('name');\n    return ctx.sync().then(function() {\n            console.log(chart.name);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  remarks: >-
+    Además de esta firma, este método no tiene las siguientes firmas:
+
+
+    `load(option?: string | string[]): Excel.Chart`-Donde opción es una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades de carga.
+
+
+    `load(option?: { select?: string; expand?: string; }): Excel.Chart`-Donde option.select es una cadena delimitada por comas que especifica las propiedades para cargar y options.expand es una cadena delimitada por comas que especifica las propiedades de navegación para cargar.
+
+
+    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Chart`-Sólo está disponible en los tipos de colección. Es similar a la firma precedente. Option.Top especifica el número máximo de elementos de la colección que se puede incluir en el resultado. Option.Skip especifica el número de elementos que se pasan por alto y no se incluyen en el resultado. Si se especifica option.top, se iniciará el conjunto de resultados después de omitir el número especificado de elementos.
   name: load(option)
-  fullName: load
+  fullName: load(option)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'load(option?: string | string[]): Excel.Chart;'
+    content: 'load(option?: Excel.Interfaces.ChartLoadOptions): Excel.Chart;'
     return:
       type:
       - excel.Excel.Chart
       description: ''
     parameters:
     - id: option
+      description: ''
+      type:
+      - excel.Excel.Interfaces.ChartLoadOptions
+- uid: excel.Excel.Chart.load_1
+  summary: Colas de seguridad de un comando que se va a cargar las propiedades del objeto especificadas. Se debe llamar a `context.sync()` antes de leer las propiedades.
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.Chart;'
+    return:
+      type:
+      - excel.Excel.Chart
+      description: "\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\n// Get a chart named \"Chart1\"\nExcel.run(function (ctx) { \n    var chart = ctx.workbook.worksheets.getItem(\"Sheet1\").charts.getItem(\"Chart1\");    \n    chart.load('name');\n    return ctx.sync().then(function() {\n            console.log(chart.name);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+    parameters:
+    - id: propertyNames
       description: Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades de carga.
       type:
       - string | string[]
+- uid: excel.Excel.Chart.load_2
+  summary: Colas de seguridad de un comando que se va a cargar las propiedades del objeto especificadas. Se debe llamar a `context.sync()` antes de leer las propiedades.
+  name: load(propertyNamesAndPaths)
+  fullName: load(propertyNamesAndPaths)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.Chart;'
+    return:
+      type:
+      - excel.Excel.Chart
+      description: ''
+    parameters:
+    - id: propertyNamesAndPaths
+      description: Donde propertyNamesAndPaths.select es una cadena delimitada por comas que especifica las propiedades para cargar y propertyNamesAndPaths.expand es una cadena delimitada por comas que especifica las propiedades de navegación para cargar.
+      type:
+      - '{ select?: string; expand?: string; }'
 - uid: excel.Excel.Chart.name
   summary: >-
     Representa el nombre de un objeto de gráfico.
@@ -431,7 +512,7 @@ items:
 
     `set(properties: Excel.Chart): void`
   name: set(properties, options)
-  fullName: set
+  fullName: set(properties, options)
   langs:
   - typeScript
   type: method
@@ -450,6 +531,24 @@ items:
       description: Proporciona una opción para suprimir los errores si intenta usar el objeto de propiedades establecer las propiedades de sólo lectura.
       type:
       - office.OfficeExtension.UpdateOptions
+- uid: excel.Excel.Chart.set_1
+  summary: Establece varias propiedades en el objeto al mismo tiempo, en función de un objeto cargado existente.
+  name: set(properties)
+  fullName: set(properties)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'set(properties: Excel.Chart): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: properties
+      description: ''
+      type:
+      - excel.Excel.Chart
 - uid: excel.Excel.Chart.setData
   summary: >-
     Restablece los datos de origen del gráfico.
@@ -457,7 +556,7 @@ items:
 
     \[[Conjunto de API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: setData(sourceData, seriesBy)
-  fullName: setData
+  fullName: setData(sourceData, seriesBy)
   langs:
   - typeScript
   type: method
@@ -466,7 +565,7 @@ items:
     return:
       type:
       - void
-      description: "\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\n// Set the sourceData to be \"A1:B4\" and seriesBy to be \"Columns\"\nExcel.run(function (ctx) { \n    var chart = ctx.workbook.worksheets.getItem(\"Sheet1\").charts.getItem(\"Chart1\");    \n    var sourceData = \"A1:B4\";\n    chart.setData(sourceData, \"Columns\");\n    return ctx.sync(); \n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+      description: ''
     parameters:
     - id: sourceData
       description: El objeto range correspondiente en el origen de datos.
@@ -476,6 +575,32 @@ items:
       description: 'Especifica las filas o columnas de forma que se usan como series de datos en el gráfico. Puede ser una de las siguientes opciones: automático (valor predeterminado), las filas y columnas. Para obtener información detallada, vea Excel.ChartSeriesBy.'
       type:
       - excel.Excel.ChartSeriesBy
+- uid: excel.Excel.Chart.setData_1
+  summary: >-
+    Restablece los datos de origen del gráfico.
+
+
+    \[[Conjunto de API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  name: setData(sourceData, seriesByString)
+  fullName: setData(sourceData, seriesByString)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'setData(sourceData: Range, seriesByString?: "Auto" | "Columns" | "Rows"): void;'
+    return:
+      type:
+      - void
+      description: "\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\n// Set the sourceData to be \"A1:B4\" and seriesBy to be \"Columns\"\nExcel.run(function (ctx) { \n    var chart = ctx.workbook.worksheets.getItem(\"Sheet1\").charts.getItem(\"Chart1\");    \n    var sourceData = \"A1:B4\";\n    chart.setData(sourceData, \"Columns\");\n    return ctx.sync(); \n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+    parameters:
+    - id: sourceData
+      description: El objeto range correspondiente en el origen de datos.
+      type:
+      - Range
+    - id: seriesByString
+      description: 'Especifica las filas o columnas de forma que se usan como series de datos en el gráfico. Puede ser una de las siguientes opciones: automático (valor predeterminado), las filas y columnas. Para obtener información detallada, vea Excel.ChartSeriesBy.'
+      type:
+      - "\"Auto\" | \"Columns\" | \"Rows\""
 - uid: excel.Excel.Chart.setPosition
   summary: >-
     Coloca el gráfico con respecto a las celdas de la hoja de cálculo.
@@ -483,7 +608,7 @@ items:
 
     \[[Conjunto de API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: setPosition(startCell, endCell)
-  fullName: setPosition
+  fullName: setPosition(startCell, endCell)
   langs:
   - typeScript
   type: method
@@ -569,7 +694,7 @@ items:
 - uid: excel.Excel.Chart.toJSON
   summary: Invalida el JavaScript `toJSON()` método con el fin de proporcionar resultados más útiles cuando se pasa un objeto de la API a `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama a la `toJSON` método del objeto que se pasa a ella.) Mientras que el objeto Excel.Chart original es un objeto de la API, el `toJSON` método devuelve un objeto de JavaScript sin formato (escrito como `Excel.Interfaces.ChartData` <!-- -->) que contiene copias superficiales de todas las propiedades del objeto original secundario cargado.
   name: toJSON()
-  fullName: toJSON
+  fullName: toJSON()
   langs:
   - typeScript
   type: method

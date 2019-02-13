@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: b83bb9648d9fd43d05078539c4368a8b1495bab7
-ms.sourcegitcommit: 2dcedf6deec4167dca476a42dad411e28cc92a97
+ms.openlocfilehash: da73d45ceb0b9a6e8425aa2896021d0c10aa48e0
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "29384835"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29978396"
 items:
 - uid: word.Word.List
   summary: >-
@@ -26,14 +26,20 @@ items:
   - word.Word.List.getLevelString
   - word.Word.List.id
   - word.Word.List.insertParagraph
+  - word.Word.List.insertParagraph_1
   - word.Word.List.levelExistences
   - word.Word.List.levelTypes
   - word.Word.List.load
+  - word.Word.List.load_1
+  - word.Word.List.load_2
   - word.Word.List.paragraphs
   - word.Word.List.setLevelAlignment
+  - word.Word.List.setLevelAlignment_1
   - word.Word.List.setLevelBullet
+  - word.Word.List.setLevelBullet_1
   - word.Word.List.setLevelIndents
   - word.Word.List.setLevelNumbering
+  - word.Word.List.setLevelNumbering_1
   - word.Word.List.setLevelStartingNumber
   - word.Word.List.toJSON
   - word.Word.List.track
@@ -57,7 +63,7 @@ items:
 
     \[[Conjunto de API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
   name: getLevelParagraphs(level)
-  fullName: getLevelParagraphs
+  fullName: getLevelParagraphs(level)
   langs:
   - typeScript
   type: method
@@ -79,7 +85,7 @@ items:
 
     \[[Conjunto de API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
   name: getLevelString(level)
-  fullName: getLevelString
+  fullName: getLevelString(level)
   langs:
   - typeScript
   type: method
@@ -117,7 +123,7 @@ items:
 
     \[[Conjunto de API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
   name: insertParagraph(paragraphText, insertLocation)
-  fullName: insertParagraph
+  fullName: insertParagraph(paragraphText, insertLocation)
   langs:
   - typeScript
   type: method
@@ -136,6 +142,32 @@ items:
       description: Obligatorio. El valor puede ser 'Iniciar,' 'Finalizar', 'Antes de' o 'Después de'.
       type:
       - Word.InsertLocation
+- uid: word.Word.List.insertParagraph_1
+  summary: >-
+    Inserta un párrafo en la ubicación especificada. El valor de insertLocation puede ser 'Iniciar,' 'Finalizar', 'Antes de' o 'Después de'.
+
+
+    \[[Conjunto de API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+  name: insertParagraph(paragraphText, insertLocationString)
+  fullName: insertParagraph(paragraphText, insertLocationString)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'insertParagraph(paragraphText: string, insertLocationString: "Before" | "After" | "Start" | "End" | "Replace"): Word.Paragraph;'
+    return:
+      type:
+      - Word.Paragraph
+      description: ''
+    parameters:
+    - id: paragraphText
+      description: Necesario. Texto de párrafo que se va a insertar.
+      type:
+      - string
+    - id: insertLocationString
+      description: Obligatorio. El valor puede ser 'Iniciar,' 'Finalizar', 'Antes de' o 'Después de'.
+      type:
+      - "\"Before\" | \"After\" | \"Start\" | \"End\" | \"Replace\""
 - uid: word.Word.List.levelExistences
   summary: >-
     Comprueba si cada uno de los 9 niveles existe en la lista. Un valor True indica que el nivel existe, lo que significa que existe al menos un elemento de lista en ese nivel. Solo lectura.
@@ -174,26 +206,65 @@ items:
     Además de esta firma, este método no tiene las siguientes firmas:
 
 
+    `load(option?: string | string[]): Word.List`-Donde opción es una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades de carga.
+
+
     `load(option?: { select?: string; expand?: string; }): Word.List`-Donde option.select es una cadena delimitada por comas que especifica las propiedades para cargar y options.expand es una cadena delimitada por comas que especifica las propiedades de navegación para cargar.
 
 
     `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Word.List`-Sólo está disponible en los tipos de colección. Es similar a la firma precedente. Option.Top especifica el número máximo de elementos de la colección que se puede incluir en el resultado. Option.Skip especifica el número de elementos que se pasan por alto y no se incluyen en el resultado. Si se especifica option.top, se iniciará el conjunto de resultados después de omitir el número especificado de elementos.
   name: load(option)
-  fullName: load
+  fullName: load(option)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'load(option?: string | string[]): Word.List;'
+    content: 'load(option?: Word.Interfaces.ListLoadOptions): Word.List;'
     return:
       type:
       - word.Word.List
       description: ''
     parameters:
     - id: option
+      description: ''
+      type:
+      - word.Word.Interfaces.ListLoadOptions
+- uid: word.Word.List.load_1
+  summary: Colas de seguridad de un comando que se va a cargar las propiedades del objeto especificadas. Se debe llamar a `context.sync()` antes de leer las propiedades.
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Word.List;'
+    return:
+      type:
+      - word.Word.List
+      description: ''
+    parameters:
+    - id: propertyNames
       description: Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades de carga.
       type:
       - string | string[]
+- uid: word.Word.List.load_2
+  summary: Colas de seguridad de un comando que se va a cargar las propiedades del objeto especificadas. Se debe llamar a `context.sync()` antes de leer las propiedades.
+  name: load(propertyNamesAndPaths)
+  fullName: load(propertyNamesAndPaths)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Word.List;'
+    return:
+      type:
+      - word.Word.List
+      description: ''
+    parameters:
+    - id: propertyNamesAndPaths
+      description: Donde propertyNamesAndPaths.select es una cadena delimitada por comas que especifica las propiedades para cargar y propertyNamesAndPaths.expand es una cadena delimitada por comas que especifica las propiedades de navegación para cargar.
+      type:
+      - '{ select?: string; expand?: string; }'
 - uid: word.Word.List.paragraphs
   summary: >-
     Obtiene los párrafos de la lista. Solo lectura.
@@ -217,7 +288,7 @@ items:
 
     \[[Conjunto de API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
   name: setLevelAlignment(level, alignment)
-  fullName: setLevelAlignment
+  fullName: setLevelAlignment(level, alignment)
   langs:
   - typeScript
   type: method
@@ -236,6 +307,32 @@ items:
       description: Obligatorio. La alineación de nivel que puede ser 'Izquierda', 'Centrado' o 'Right'.
       type:
       - word.Word.Alignment
+- uid: word.Word.List.setLevelAlignment_1
+  summary: >-
+    Obtiene la alineación de la viñeta, el número o la imagen en el nivel especificado de la lista.
+
+
+    \[[Conjunto de API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+  name: setLevelAlignment(level, alignmentString)
+  fullName: setLevelAlignment(level, alignmentString)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'setLevelAlignment(level: number, alignmentString: "Mixed" | "Unknown" | "Left" | "Centered" | "Right" | "Justified"): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: level
+      description: Necesario. Nivel de la lista.
+      type:
+      - number
+    - id: alignmentString
+      description: Obligatorio. La alineación de nivel que puede ser 'Izquierda', 'Centrado' o 'Right'.
+      type:
+      - "\"Mixed\" | \"Unknown\" | \"Left\" | \"Centered\" | \"Right\" | \"Justified\""
 - uid: word.Word.List.setLevelBullet
   summary: >-
     Establece el formato de viñeta en el nivel especificado de la lista. Si la viñeta es 'Custom', se requiere charCode.
@@ -243,7 +340,7 @@ items:
 
     \[[Conjunto de API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
   name: setLevelBullet(level, listBullet, charCode, fontName)
-  fullName: setLevelBullet
+  fullName: setLevelBullet(level, listBullet, charCode, fontName)
   langs:
   - typeScript
   type: method
@@ -270,6 +367,40 @@ items:
       description: Opcional. Nombre de la fuente de la viñeta. Se usa sólo si la viñeta es 'Custom'.
       type:
       - string
+- uid: word.Word.List.setLevelBullet_1
+  summary: >-
+    Establece el formato de viñeta en el nivel especificado de la lista. Si la viñeta es 'Custom', se requiere charCode.
+
+
+    \[[Conjunto de API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+  name: setLevelBullet(level, listBulletString, charCode, fontName)
+  fullName: setLevelBullet(level, listBulletString, charCode, fontName)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'setLevelBullet(level: number, listBulletString: "Custom" | "Solid" | "Hollow" | "Square" | "Diamonds" | "Arrow" | "Checkmark", charCode?: number, fontName?: string): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: level
+      description: Necesario. Nivel de la lista.
+      type:
+      - number
+    - id: listBulletString
+      description: Obligatorio. La viñeta.
+      type:
+      - "\"Custom\" | \"Solid\" | \"Hollow\" | \"Square\" | \"Diamonds\" | \"Arrow\" | \"Checkmark\""
+    - id: charCode
+      description: Opcional. Valor de código de carácter de viñeta. Se usa sólo si la viñeta es 'Custom'.
+      type:
+      - number
+    - id: fontName
+      description: Opcional. Nombre de la fuente de la viñeta. Se usa sólo si la viñeta es 'Custom'.
+      type:
+      - string
 - uid: word.Word.List.setLevelIndents
   summary: >-
     Establece las dos sangrías del nivel especificado de la lista.
@@ -277,7 +408,7 @@ items:
 
     \[[Conjunto de API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
   name: setLevelIndents(level, textIndent, bulletNumberPictureIndent)
-  fullName: setLevelIndents
+  fullName: setLevelIndents(level, textIndent, bulletNumberPictureIndent)
   langs:
   - typeScript
   type: method
@@ -307,7 +438,7 @@ items:
 
     \[[Conjunto de API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
   name: setLevelNumbering(level, listNumbering, formatString)
-  fullName: setLevelNumbering
+  fullName: setLevelNumbering(level, listNumbering, formatString)
   langs:
   - typeScript
   type: method
@@ -330,6 +461,36 @@ items:
       description: Opcional. El formato de cadena numeración definido como una matriz de cadenas o números enteros. Cada entero es un nivel de tipo de número es mayor o igual a este nivel. Por ejemplo, una matriz de \["(", nivel - 1, ".", nivel, "")""\] puede definir el formato de "(2.c)", donde 2 es número de elemento del elemento primario y c es el número de elementos de este nivel.
       type:
       - any[]
+- uid: word.Word.List.setLevelNumbering_1
+  summary: >-
+    Establece el formato de numeración en el nivel especificado de la lista.
+
+
+    \[[Conjunto de API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+  name: setLevelNumbering(level, listNumberingString, formatString)
+  fullName: setLevelNumbering(level, listNumberingString, formatString)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'setLevelNumbering(level: number, listNumberingString: "None" | "Arabic" | "UpperRoman" | "LowerRoman" | "UpperLetter" | "LowerLetter", formatString?: any[]): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: level
+      description: Necesario. Nivel de la lista.
+      type:
+      - number
+    - id: listNumberingString
+      description: Obligatorio. El formato ordinal.
+      type:
+      - "\"None\" | \"Arabic\" | \"UpperRoman\" | \"LowerRoman\" | \"UpperLetter\" | \"LowerLetter\""
+    - id: formatString
+      description: Opcional. El formato de cadena numeración definido como una matriz de cadenas o números enteros. Cada entero es un nivel de tipo de número es mayor o igual a este nivel. Por ejemplo, una matriz de \["(", nivel - 1, ".", nivel, "")""\] puede definir el formato de "(2.c)", donde 2 es número de elemento del elemento primario y c es el número de elementos de este nivel.
+      type:
+      - any[]
 - uid: word.Word.List.setLevelStartingNumber
   summary: >-
     Establece el número de inicio en el nivel especificado de la lista. El valor predeterminado es 1.
@@ -337,7 +498,7 @@ items:
 
     \[[Conjunto de API: WordApi 1.3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
   name: setLevelStartingNumber(level, startingNumber)
-  fullName: setLevelStartingNumber
+  fullName: setLevelStartingNumber(level, startingNumber)
   langs:
   - typeScript
   type: method
@@ -358,7 +519,7 @@ items:
       - number
 - uid: word.Word.List.toJSON
   name: toJSON()
-  fullName: toJSON
+  fullName: toJSON()
   langs:
   - typeScript
   type: method
@@ -371,7 +532,7 @@ items:
 - uid: word.Word.List.track
   summary: Realizar un seguimiento del objeto para el ajuste automático en función de que lo rodea los cambios en el documento. Esta llamada es una forma abreviada para context.trackedObjects.add(thisObject). Si va a usar este objeto a través de llamadas "Sync" y fuera de la ejecución secuencial de un lote de "ésta se ejecute" y obtenga un error de "InvalidObjectPath" al establecer una propiedad o invocar un método en el objeto, había que ha agregado el objeto al objeto marca de revisión colección cuando el objeto se crea por primera vez.
   name: track()
-  fullName: track
+  fullName: track()
   langs:
   - typeScript
   type: method
@@ -384,7 +545,7 @@ items:
 - uid: word.Word.List.untrack
   summary: La memoria asociada con este objeto, si lo se anteriormente hace el seguimiento de la versión. Esta llamada es una abreviatura de context.trackedObjects.remove(thisObject). Tener muchos objetos de marca de revisión reduce la velocidad de la aplicación host, por lo que no olvide libre de cualquier objeto que agregue, una vez que haya terminado con ellos. Debe llamar a "context.sync()" antes de la versión de memoria surta efecto.
   name: untrack()
-  fullName: untrack
+  fullName: untrack()
   langs:
   - typeScript
   type: method

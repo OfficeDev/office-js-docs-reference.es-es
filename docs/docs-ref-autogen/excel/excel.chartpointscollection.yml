@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: b9b5a92b5becde95489a9e7233c772216903f6a8
-ms.sourcegitcommit: 06eebee5e68d349f78e6bc3bb0ef099fe063cf04
+ms.openlocfilehash: 9c54dfd6c76216f940c1f8cc2744b248614c7a98
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 01/17/2019
-ms.locfileid: "28724153"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29977737"
 items:
 - uid: excel.Excel.ChartPointsCollection
   summary: >-
@@ -27,6 +27,8 @@ items:
   - excel.Excel.ChartPointsCollection.getItemAt
   - excel.Excel.ChartPointsCollection.items
   - excel.Excel.ChartPointsCollection.load
+  - excel.Excel.ChartPointsCollection.load_1
+  - excel.Excel.ChartPointsCollection.load_2
   - excel.Excel.ChartPointsCollection.toJSON
 - uid: excel.Excel.ChartPointsCollection.context
   summary: El contexto de solicitud asociado con el objeto. Este comando conecta proceso del complemento al proceso de la aplicación host de Office.
@@ -63,7 +65,7 @@ items:
 
     \[[Conjunto de API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getCount()
-  fullName: getCount
+  fullName: getCount()
   langs:
   - typeScript
   type: method
@@ -80,7 +82,7 @@ items:
 
     \[[Conjunto de API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getItemAt(index)
-  fullName: getItemAt
+  fullName: getItemAt(index)
   langs:
   - typeScript
   type: method
@@ -109,27 +111,72 @@ items:
       - Excel.ChartPoint[]
 - uid: excel.Excel.ChartPointsCollection.load
   summary: Colas de seguridad de un comando que se va a cargar las propiedades del objeto especificadas. Se debe llamar a "context.sync()" antes de leer las propiedades.
-  remarks: "Además de esta firma, este método no tiene las siguientes firmas:\n\n`load(option?: { select?: string; expand?: string; }): Excel.ChartPointsCollection`-Donde option.select es una cadena delimitada por comas que especifica las propiedades para cargar y options.expand es una cadena delimitada por comas que especifica las propiedades de navegación para cargar.\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.ChartPointsCollection`-Sólo está disponible en los tipos de colección. Es similar a la firma precedente. Option.Top especifica el número máximo de elementos de la colección que se puede incluir en el resultado. Option.Skip especifica el número de elementos que se pasan por alto y no se incluyen en el resultado. Si se especifica option.top, se iniciará el conjunto de resultados después de omitir el número especificado de elementos.\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\n// Get the names of points in the points collection\nExcel.run(function (ctx) { \n    var pointsCollection = \n        ctx.workbook.worksheets.getItem(\"Sheet1\").charts.getItem(\"Chart1\").series.getItemAt(0).points;\n    pointsCollection.load('items');\n    return ctx.sync().then(function() {\n        console.log(\"Points Collection loaded\");\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\n// Get the number of points\nExcel.run(function (ctx) { \n    var pointsCollection = \n        ctx.workbook.worksheets.getItem(\"Sheet1\").charts.getItem(\"Chart1\").series.getItemAt(0).points;\n    pointsCollection.load('count');\n    return ctx.sync().then(function() {\n        console.log(\"points: Count= \" + pointsCollection.count);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  remarks: >-
+    Además de esta firma, este método no tiene las siguientes firmas:
+
+
+    `load(option?: string | string[]): Excel.ChartPointsCollection`-Donde opción es una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades de carga.
+
+
+    `load(option?: { select?: string; expand?: string; }): Excel.ChartPointsCollection`-Donde option.select es una cadena delimitada por comas que especifica las propiedades para cargar y options.expand es una cadena delimitada por comas que especifica las propiedades de navegación para cargar.
+
+
+    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.ChartPointsCollection`-Sólo está disponible en los tipos de colección. Es similar a la firma precedente. Option.Top especifica el número máximo de elementos de la colección que se puede incluir en el resultado. Option.Skip especifica el número de elementos que se pasan por alto y no se incluyen en el resultado. Si se especifica option.top, se iniciará el conjunto de resultados después de omitir el número especificado de elementos.
   name: load(option)
-  fullName: load
+  fullName: load(option)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'load(option?: string | string[]): Excel.ChartPointsCollection;'
+    content: 'load(option?: Excel.Interfaces.ChartPointsCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.ChartPointsCollection;'
     return:
       type:
       - excel.Excel.ChartPointsCollection
       description: ''
     parameters:
     - id: option
+      description: ''
+      type:
+      - Excel.Interfaces.ChartPointsCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions
+- uid: excel.Excel.ChartPointsCollection.load_1
+  summary: Colas de seguridad de un comando que se va a cargar las propiedades del objeto especificadas. Se debe llamar a `context.sync()` antes de leer las propiedades.
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.ChartPointsCollection;'
+    return:
+      type:
+      - excel.Excel.ChartPointsCollection
+      description: "\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\n// Get the names of points in the points collection\nExcel.run(function (ctx) { \n    var pointsCollection = \n        ctx.workbook.worksheets.getItem(\"Sheet1\").charts.getItem(\"Chart1\").series.getItemAt(0).points;\n    pointsCollection.load('items');\n    return ctx.sync().then(function() {\n        console.log(\"Points Collection loaded\");\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\n// Get the number of points\nExcel.run(function (ctx) { \n    var pointsCollection = \n        ctx.workbook.worksheets.getItem(\"Sheet1\").charts.getItem(\"Chart1\").series.getItemAt(0).points;\n    pointsCollection.load('count');\n    return ctx.sync().then(function() {\n        console.log(\"points: Count= \" + pointsCollection.count);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+    parameters:
+    - id: propertyNames
       description: Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades de carga.
       type:
       - string | string[]
+- uid: excel.Excel.ChartPointsCollection.load_2
+  name: load(option)
+  fullName: load(option)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(option?: OfficeExtension.LoadOption): Excel.ChartPointsCollection;'
+    return:
+      type:
+      - excel.Excel.ChartPointsCollection
+      description: ''
+    parameters:
+    - id: option
+      description: ''
+      type:
+      - office.OfficeExtension.LoadOption
 - uid: excel.Excel.ChartPointsCollection.toJSON
   summary: Invalida el JavaScript `toJSON()` método con el fin de proporcionar resultados más útiles cuando se pasa un objeto de la API a `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama a la `toJSON` método del objeto que se pasa a ella.) Mientras que el original `Excel.ChartPointsCollection` es un objeto de la API, el `toJSON` método devuelve un objeto de JavaScript sin formato (escrito como `Excel.Interfaces.ChartPointsCollectionData` <!-- -->) que contiene una matriz de "elementos" con copias superficiales de las propiedades de elementos de la colección cargadas.
   name: toJSON()
-  fullName: toJSON
+  fullName: toJSON()
   langs:
   - typeScript
   type: method

@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: f6d9d717d5cb06c7c84b73789db8673b53a7cfda
-ms.sourcegitcommit: 2dcedf6deec4167dca476a42dad411e28cc92a97
+ms.openlocfilehash: 82deccf235a13f8e12a2f4be725fd6c746267120
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "29384646"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29977744"
 items:
 - uid: onenote.OneNote.Section
   summary: >-
@@ -29,9 +29,12 @@ items:
   - onenote.OneNote.Section.getRestApiId
   - onenote.OneNote.Section.id
   - onenote.OneNote.Section.insertSectionAsSibling
+  - onenote.OneNote.Section.insertSectionAsSibling_1
   - onenote.OneNote.Section.isEncrypted
   - onenote.OneNote.Section.isLocked
   - onenote.OneNote.Section.load
+  - onenote.OneNote.Section.load_1
+  - onenote.OneNote.Section.load_2
   - onenote.OneNote.Section.name
   - onenote.OneNote.Section.notebook
   - onenote.OneNote.Section.pages
@@ -48,7 +51,7 @@ items:
 
     \[[Conjunto de API: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
   name: addPage(title)
-  fullName: addPage
+  fullName: addPage(title)
   langs:
   - typeScript
   type: method
@@ -98,7 +101,7 @@ items:
 
     \[[Conjunto de API: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
   name: copyToNotebook(destinationNotebook)
-  fullName: copyToNotebook
+  fullName: copyToNotebook(destinationNotebook)
   langs:
   - typeScript
   type: method
@@ -120,7 +123,7 @@ items:
 
     \[[Conjunto de API: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
   name: copyToSectionGroup(destinationSectionGroup)
-  fullName: copyToSectionGroup
+  fullName: copyToSectionGroup(destinationSectionGroup)
   langs:
   - typeScript
   type: method
@@ -142,7 +145,7 @@ items:
 
     \[[Conjunto de API: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
   name: getRestApiId()
-  fullName: getRestApiId
+  fullName: getRestApiId()
   langs:
   - typeScript
   type: method
@@ -175,7 +178,7 @@ items:
 
     \[[Conjunto de API: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
   name: insertSectionAsSibling(location, title)
-  fullName: insertSectionAsSibling
+  fullName: insertSectionAsSibling(location, title)
   langs:
   - typeScript
   type: method
@@ -184,12 +187,38 @@ items:
     return:
       type:
       - onenote.OneNote.Section
-      description: "\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nOneNote.run(function (context) {\n            \n    // Queue a command to insert a section after the current section.\n    var section = context.application.getActiveSection().insertSectionAsSibling(\"After\", \"New section\");\n            \n    // Queue a command to load the id and name of the new section. \n    // This example loads the new section so it can read its properties later.           \n    section.load('id,name');\n            \n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function () {\n             \n            // Display the properties.       \n            console.log(\"Section name: \" + section.name);\n            console.log(\"Section ID: \" + section.id);\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+      description: ''
     parameters:
     - id: location
       description: La ubicación de la nueva sección relativa a la sección actual.
       type:
       - onenote.OneNote.InsertLocation
+    - id: title
+      description: Nombre de la nueva sección.
+      type:
+      - string
+- uid: onenote.OneNote.Section.insertSectionAsSibling_1
+  summary: >-
+    Inserta una nueva sección antes o después de la sección actual.
+
+
+    \[[Conjunto de API: OneNoteApi 1.1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  name: insertSectionAsSibling(locationString, title)
+  fullName: insertSectionAsSibling(locationString, title)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'insertSectionAsSibling(locationString: "Before" | "After", title: string): OneNote.Section;'
+    return:
+      type:
+      - onenote.OneNote.Section
+      description: "\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nOneNote.run(function (context) {\n            \n    // Queue a command to insert a section after the current section.\n    var section = context.application.getActiveSection().insertSectionAsSibling(\"After\", \"New section\");\n            \n    // Queue a command to load the id and name of the new section. \n    // This example loads the new section so it can read its properties later.           \n    section.load('id,name');\n            \n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function () {\n             \n            // Display the properties.       \n            console.log(\"Section name: \" + section.name);\n            console.log(\"Section ID: \" + section.id);\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+    parameters:
+    - id: locationString
+      description: La ubicación de la nueva sección relativa a la sección actual.
+      type:
+      - "\"Before\" | \"After\""
     - id: title
       description: Nombre de la nueva sección.
       type:
@@ -228,23 +257,69 @@ items:
       - boolean
 - uid: onenote.OneNote.Section.load
   summary: Colas de seguridad de un comando que se va a cargar las propiedades del objeto especificadas. Se debe llamar a "context.sync()" antes de leer las propiedades.
-  remarks: "Además de esta firma, este método no tiene las siguientes firmas:\n\n`load(option?: { select?: string; expand?: string; }): OneNote.Section`-Donde option.select es una cadena delimitada por comas que especifica las propiedades para cargar y options.expand es una cadena delimitada por comas que especifica las propiedades de navegación para cargar.\n\n`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): OneNote.Section`-Sólo está disponible en los tipos de colección. Es similar a la firma precedente. Option.Top especifica el número máximo de elementos de la colección que se puede incluir en el resultado. Option.Skip especifica el número de elementos que se pasan por alto y no se incluyen en el resultado. Si se especifica option.top, se iniciará el conjunto de resultados después de omitir el número especificado de elementos.\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nOneNote.run(function (context) {\n        \n    // Get the current section.\n    var section = context.application.getActiveSection();\n            \n    // Queue a command to load the section. \n    // For best performance, request specific properties.           \n    section.load(\"id\");\n            \n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function () {\n            console.log(\"Section ID: \" + section.id);\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\nOneNote.run(function (context) {\n        \n    // Get the current section.\n    var section = context.application.getActiveSection();\n            \n    // Queue a command to load the section with the specified properties. \n    section.load(\"name,notebook/name\");\n            \n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function () {\n            console.log(\"Section name: \" + section.name);\n            console.log(\"Parent notebook name: \" + section.notebook.name);\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\nOneNote.run(function (context) {\n    // Queue a command to add a page to the current section.\n    var section = context.application.getActiveSection();\n    section.load('clientUrl,notebook');\n    var sectionGroup = section.parentSectionGroupOrNull;\n    \n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function () {\n            if(sectionGroup.isNull === false)\n            {\n                // If a parent section group exists, queue a command to add a section in it!\n                sectionGroup.addSection(\"NewSectionInSectionGroup\");\n            }\n            return context.sync();\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+  remarks: >-
+    Además de esta firma, este método no tiene las siguientes firmas:
+
+
+    `load(option?: string | string[]): OneNote.Section`-Donde opción es una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades de carga.
+
+
+    `load(option?: { select?: string; expand?: string; }): OneNote.Section`-Donde option.select es una cadena delimitada por comas que especifica las propiedades para cargar y options.expand es una cadena delimitada por comas que especifica las propiedades de navegación para cargar.
+
+
+    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): OneNote.Section`-Sólo está disponible en los tipos de colección. Es similar a la firma precedente. Option.Top especifica el número máximo de elementos de la colección que se puede incluir en el resultado. Option.Skip especifica el número de elementos que se pasan por alto y no se incluyen en el resultado. Si se especifica option.top, se iniciará el conjunto de resultados después de omitir el número especificado de elementos.
   name: load(option)
-  fullName: load
+  fullName: load(option)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'load(option?: string | string[]): OneNote.Section;'
+    content: 'load(option?: OneNote.Interfaces.SectionLoadOptions): OneNote.Section;'
     return:
       type:
       - onenote.OneNote.Section
       description: ''
     parameters:
     - id: option
+      description: ''
+      type:
+      - onenote.OneNote.Interfaces.SectionLoadOptions
+- uid: onenote.OneNote.Section.load_1
+  summary: Colas de seguridad de un comando que se va a cargar las propiedades del objeto especificadas. Se debe llamar a `context.sync()` antes de leer las propiedades.
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): OneNote.Section;'
+    return:
+      type:
+      - onenote.OneNote.Section
+      description: "\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nOneNote.run(function (context) {\n        \n    // Get the current section.\n    var section = context.application.getActiveSection();\n            \n    // Queue a command to load the section. \n    // For best performance, request specific properties.           \n    section.load(\"id\");\n            \n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function () {\n            console.log(\"Section ID: \" + section.id);\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\nOneNote.run(function (context) {\n        \n    // Get the current section.\n    var section = context.application.getActiveSection();\n            \n    // Queue a command to load the section with the specified properties. \n    section.load(\"name,notebook/name\");\n            \n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function () {\n            console.log(\"Section name: \" + section.name);\n            console.log(\"Parent notebook name: \" + section.notebook.name);\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\nOneNote.run(function (context) {\n    // Queue a command to add a page to the current section.\n    var section = context.application.getActiveSection();\n    section.load('clientUrl,notebook');\n    var sectionGroup = section.parentSectionGroupOrNull;\n    \n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function () {\n            if(sectionGroup.isNull === false)\n            {\n                // If a parent section group exists, queue a command to add a section in it!\n                sectionGroup.addSection(\"NewSectionInSectionGroup\");\n            }\n            return context.sync();\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+    parameters:
+    - id: propertyNames
       description: Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades de carga.
       type:
       - string | string[]
+- uid: onenote.OneNote.Section.load_2
+  summary: Colas de seguridad de un comando que se va a cargar las propiedades del objeto especificadas. Se debe llamar a `context.sync()` antes de leer las propiedades.
+  name: load(propertyNamesAndPaths)
+  fullName: load(propertyNamesAndPaths)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): OneNote.Section;'
+    return:
+      type:
+      - onenote.OneNote.Section
+      description: ''
+    parameters:
+    - id: propertyNamesAndPaths
+      description: Donde propertyNamesAndPaths.select es una cadena delimitada por comas que especifica las propiedades para cargar y propertyNamesAndPaths.expand es una cadena delimitada por comas que especifica las propiedades de navegación para cargar.
+      type:
+      - '{ select?: string; expand?: string; }'
 - uid: onenote.OneNote.Section.name
   summary: >-
     Obtiene el nombre de la sección. Solo lectura.
@@ -328,7 +403,7 @@ items:
 - uid: onenote.OneNote.Section.toJSON
   summary: Invalida el JavaScript `toJSON()` método con el fin de proporcionar resultados más útiles cuando se pasa un objeto de la API a `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama a la `toJSON` método del objeto que se pasa a ella.) Mientras que el objeto original de OneNote.Section es un objeto de la API, el `toJSON` método devuelve un objeto de JavaScript sin formato (escrito como `OneNote.Interfaces.SectionData` <!-- -->) que contiene copias superficiales de todas las propiedades del objeto original secundario cargado.
   name: toJSON()
-  fullName: toJSON
+  fullName: toJSON()
   langs:
   - typeScript
   type: method
@@ -341,7 +416,7 @@ items:
 - uid: onenote.OneNote.Section.track
   summary: Realizar un seguimiento del objeto para el ajuste automático en función de que lo rodea los cambios en el documento. Esta llamada es una forma abreviada para context.trackedObjects.add(thisObject). Si va a usar este objeto a través de llamadas "Sync" y fuera de la ejecución secuencial de un lote de "ésta se ejecute" y obtenga un error de "InvalidObjectPath" al establecer una propiedad o invocar un método en el objeto, había que ha agregado el objeto al objeto marca de revisión colección cuando el objeto se crea por primera vez.
   name: track()
-  fullName: track
+  fullName: track()
   langs:
   - typeScript
   type: method
@@ -354,7 +429,7 @@ items:
 - uid: onenote.OneNote.Section.untrack
   summary: La memoria asociada con este objeto, si lo se anteriormente hace el seguimiento de la versión. Esta llamada es una abreviatura de context.trackedObjects.remove(thisObject). Tener muchos objetos de marca de revisión reduce la velocidad de la aplicación host, por lo que no olvide libre de cualquier objeto que agregue, una vez que haya terminado con ellos. Debe llamar a "context.sync()" antes de la versión de memoria surta efecto.
   name: untrack()
-  fullName: untrack
+  fullName: untrack()
   langs:
   - typeScript
   type: method

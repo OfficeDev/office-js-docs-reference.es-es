@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: e4e9e017641e2720a3b047505d2abb8f5514694d
-ms.sourcegitcommit: 3f4a320fa860d05d348c8bdec2295e046a45a34f
+ms.openlocfilehash: 870447aa1cd308fcdc0372d1a79277e3a0e306cd
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 02/07/2019
-ms.locfileid: "29769620"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29978633"
 items:
 - uid: visio.Visio.Page
   summary: >-
@@ -28,8 +28,11 @@ items:
   - visio.Visio.Page.index
   - visio.Visio.Page.isBackground
   - visio.Visio.Page.load
+  - visio.Visio.Page.load_1
+  - visio.Visio.Page.load_2
   - visio.Visio.Page.name
   - visio.Visio.Page.set
+  - visio.Visio.Page.set_1
   - visio.Visio.Page.shapes
   - visio.Visio.Page.toJSON
   - visio.Visio.Page.view
@@ -41,7 +44,7 @@ items:
 
     \[[Conjunto de API: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
   name: activate()
-  fullName: activate
+  fullName: activate()
   langs:
   - typeScript
   type: method
@@ -137,26 +140,65 @@ items:
     Además de esta firma, este método no tiene las siguientes firmas:
 
 
+    `load(option?: string | string[]): Visio.Page`-Donde opción es una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades de carga.
+
+
     `load(option?: { select?: string; expand?: string; }): Visio.Page`-Donde option.select es una cadena delimitada por comas que especifica las propiedades para cargar y options.expand es una cadena delimitada por comas que especifica las propiedades de navegación para cargar.
 
 
     `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Visio.Page`-Sólo está disponible en los tipos de colección. Es similar a la firma precedente. Option.Top especifica el número máximo de elementos de la colección que se puede incluir en el resultado. Option.Skip especifica el número de elementos que se pasan por alto y no se incluyen en el resultado. Si se especifica option.top, se iniciará el conjunto de resultados después de omitir el número especificado de elementos.
   name: load(option)
-  fullName: load
+  fullName: load(option)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'load(option?: string | string[]): Visio.Page;'
+    content: 'load(option?: Visio.Interfaces.PageLoadOptions): Visio.Page;'
     return:
       type:
       - Visio.Page
       description: ''
     parameters:
     - id: option
+      description: ''
+      type:
+      - Visio.Interfaces.PageLoadOptions
+- uid: visio.Visio.Page.load_1
+  summary: Colas de seguridad de un comando que se va a cargar las propiedades del objeto especificadas. Se debe llamar a `context.sync()` antes de leer las propiedades.
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Visio.Page;'
+    return:
+      type:
+      - Visio.Page
+      description: ''
+    parameters:
+    - id: propertyNames
       description: Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades de carga.
       type:
       - string | string[]
+- uid: visio.Visio.Page.load_2
+  summary: Colas de seguridad de un comando que se va a cargar las propiedades del objeto especificadas. Se debe llamar a `context.sync()` antes de leer las propiedades.
+  name: load(propertyNamesAndPaths)
+  fullName: load(propertyNamesAndPaths)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Visio.Page;'
+    return:
+      type:
+      - Visio.Page
+      description: ''
+    parameters:
+    - id: propertyNamesAndPaths
+      description: Donde propertyNamesAndPaths.select es una cadena delimitada por comas que especifica las propiedades para cargar y propertyNamesAndPaths.expand es una cadena delimitada por comas que especifica las propiedades de navegación para cargar.
+      type:
+      - '{ select?: string; expand?: string; }'
 - uid: visio.Visio.Page.name
   summary: >-
     Nombre de la página. Solo lectura.
@@ -181,7 +223,7 @@ items:
 
     `set(properties: Visio.Page): void`
   name: set(properties, options)
-  fullName: set
+  fullName: set(properties, options)
   langs:
   - typeScript
   type: method
@@ -200,6 +242,24 @@ items:
       description: Proporciona una opción para suprimir los errores si intenta usar el objeto de propiedades establecer las propiedades de sólo lectura.
       type:
       - office.OfficeExtension.UpdateOptions
+- uid: visio.Visio.Page.set_1
+  summary: Establece varias propiedades en el objeto al mismo tiempo, en función de un objeto cargado existente.
+  name: set(properties)
+  fullName: set(properties)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'set(properties: Visio.Page): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: properties
+      description: ''
+      type:
+      - Visio.Page
 - uid: visio.Visio.Page.shapes
   summary: >-
     Todas las formas de nivel superior en sólo Page.Read.
@@ -218,7 +278,7 @@ items:
       - visio.Visio.ShapeCollection
 - uid: visio.Visio.Page.toJSON
   name: toJSON()
-  fullName: toJSON
+  fullName: toJSON()
   langs:
   - typeScript
   type: method
