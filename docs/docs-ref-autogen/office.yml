@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: d56fc4d1d4d535d359105207a4b462b601bd57a5
-ms.sourcegitcommit: 31847d2ea6be78b8f473dfbfb0a575fdecd877be
+ms.openlocfilehash: 166355af8df97c6673b2ac19a6e25bf242dac126
+ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 11/13/2018
-ms.locfileid: "26298137"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "29982548"
 items:
 - uid: office
   name: office
@@ -119,7 +119,7 @@ items:
 
     *Nota*: el parámetro de motivo del agente de escucha de evento initialize función sólo devuelve un `InitializationReason` valor de la enumeración tarea contenido y panel para complementos de. No devuelve un valor para los complementos de Outlook.
   remarks: "**Detalles de compatibilidad**\n\nUna Y mayúscula en la siguiente matriz indica que este método es compatible con la aplicación host de Office correspondiente. Una celda vacía indica que la aplicación host no admite este método.\n\nPara obtener más información acerca de los requisitos de aplicación y servidor de host de Office, vea [requisitos para ejecutar Office Add-ins](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.\n\n*Hosts compatibles, por plataforma* <table> <tr><th> </th><th> Office para escritorio de Windows </th><th> Office Online (en el explorador) </th><th> Office para iPad </th><th> OWA para dispositivos </th><th> Office para Mac </th></tr> <tr><td><strong>Access</strong></td><td> </td><td> v </td><td> </td><td> </td><td> </td></tr> <tr><td><strong>Excel</strong></td><td> v </td><td> v </td><td> v </td><td> </td><td> </td></tr> <tr><td><strong>Outlook</strong></td><td> v </td><td> v </td><td> </td><td> v </td><td> v </td></tr> <tr><td><strong>PowerPoint</strong></td><td> v </td><td> v </td><td> v </td><td> </td><td> </td></tr> <tr><td><strong>Proyecto</strong></td><td> v </td><td> </td><td> </td><td> </td><td> </td></tr> <tr><td><strong>Word</strong></td><td> v </td><td> v </td><td> v </td><td> </td><td> </td></tr> </table>\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\n// You can use the value of the InitializationEnumeration to implement different logic for\n// when the add-in is first inserted versus when it is already part of the document.\n// The following example shows some simple logic that uses the value of the reason parameter\n// to display how the task pane or content add-in was initialized.\nOffice.initialize = function (reason) {\n    // Checks for the DOM to load using the jQuery ready function.\n    $(document).ready(function () {\n    // After the DOM is loaded, code specific to the add-in can run.\n    // Display initialization reason.\n    if (reason == \"inserted\")\n    write(\"The add-in was just inserted.\");\n\n    if (reason == \"documentOpened\")\n    write(\"The add-in is already part of the document.\");\n    });\n}\n\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
-  name: initialize(reason)
+  name: Office.initialize
   fullName: Office.initialize
   langs:
   - typeScript
@@ -137,7 +137,7 @@ items:
       - office.Office.InitializationReason
 - uid: office.Office.onReady
   summary: Se asegura de que el APIs de JavaScript de Office está listo para ser llamado por el complemento. Si aún no ha inicializado el marco de trabajo, la devolución de llamada o promesa esperará hasta que el host de Office está listo para aceptar llamadas a la API. Tenga en cuenta que aunque esta API está destinada a ser utilizado dentro de un complemento de Office, también se puede usar fuera el complemento. En ese caso, una vez Office.js determina que se está ejecutando fuera de una aplicación host de Office, la devolución de llamada y resolver la promesa con "null" para el host y la plataforma.
-  name: onReady(callback)
+  name: Office.onReady
   fullName: Office.onReady
   langs:
   - typeScript
@@ -186,7 +186,7 @@ items:
     }
 
     ```
-  name: select(expression, callback)
+  name: Office.select
   fullName: Office.select
   langs:
   - typeScript
@@ -209,7 +209,7 @@ items:
 - uid: office.Office.useShortNamespace
   summary: Activa y desactiva el `Office` alias para el completo `Microsoft.Office.WebExtension` espacio de nombres.
   remarks: "**Detalles de compatibilidad**\n\nUna Y mayúscula en la siguiente matriz indica que este método es compatible con la aplicación host de Office correspondiente. Una celda vacía indica que la aplicación host no admite este método.\n\nPara obtener más información acerca de los requisitos de aplicación y servidor de host de Office, vea [requisitos para ejecutar Office Add-ins](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.\n\n*Hosts compatibles, por plataforma* <table> <tr><th> </th><th> Office para escritorio de Windows </th><th> Office Online (en el explorador) </th><th> Office para iPad </th><th> OWA para dispositivos </th><th> Office para Mac </th></tr> <tr><td><strong>Access</strong></td><td> </td><td> v </td><td> </td><td> </td><td> </td></tr> <tr><td><strong>Excel</strong></td><td> v </td><td> v </td><td> v </td><td> </td><td> </td></tr> <tr><td><strong>Outlook</strong></td><td> v </td><td> v </td><td> </td><td> v </td><td> v </td></tr> <tr><td><strong>PowerPoint</strong></td><td> v </td><td> v </td><td> v </td><td> </td><td> </td></tr> <tr><td><strong>Proyecto</strong></td><td> v </td><td> </td><td> </td><td> </td><td> </td></tr> <tr><td><strong>Word</strong></td><td> v </td><td> v </td><td> v </td><td> </td><td> </td></tr> </table>\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nfunction startUsingShortNamespace() {\n    if (typeof Office === 'undefined') {\n        Microsoft.Office.WebExtension.useShortNamespace(true);\n    }\n    else {\n        Office.useShortNamespace(true);\n    }\n    write('Office alias is now ' + typeof Office);\n}\n\nfunction stopUsingShortNamespace() {\n    if (typeof Office === 'undefined') {\n        Microsoft.Office.WebExtension.useShortNamespace(false);\n    }\n    else {\n        Office.useShortNamespace(false);\n    }\n    write('Office alias is now ' + typeof Office);\n}\n\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
-  name: useShortNamespace(useShortNamespace)
+  name: Office.useShortNamespace
   fullName: Office.useShortNamespace
   langs:
   - typeScript
