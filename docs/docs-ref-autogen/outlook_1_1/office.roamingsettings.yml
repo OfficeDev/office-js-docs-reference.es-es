@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: a8c215da1a94d96631254e3bee531c562c1e70b3
-ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
+ms.openlocfilehash: 463850d5262b80c4873aefc5dd8002e2f1fbbb72
+ms.sourcegitcommit: b0b614f5315ab2e5c1e0ea51c687498f87684a07
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 02/13/2019
-ms.locfileid: "29982604"
+ms.lasthandoff: 02/15/2019
+ms.locfileid: "30055181"
 items:
 - uid: Outlook_1_1.Office.RoamingSettings
   summary: >-
@@ -20,30 +20,30 @@ items:
     Se puede tener acceso al objeto RoamingSettings mediante la propiedad roamingSettings del espacio de nombres Office.context.
 
 
-    **Importante**: RoamingSettings el objeto se inicializa desde el almacenamiento persistente sólo cuando el complemento se carga por primera vez. Paneles de tareas, esto significa que sólo se inicializa cuando se abre el panel de tareas por primera vez. Si el panel de tareas se desplaza a otra página o vuelve a cargar la página actual, se restablece el objeto en memoria en sus valores iniciales, incluso si el complemento conserva los cambios. Los cambios persistentes no estará disponibles hasta que se cierra y se vuelve a abrir el panel de tareas.
+    **Importante**: el objeto RoamingSettings se inicializa desde el almacenamiento persistente solo cuando se carga el complemento por primera vez. Para los paneles de tareas, esto significa que solo se inicializa cuando se abre el panel de tareas por primera vez. Si el panel de tareas se desplaza a otra página o vuelve a cargar la página actual, el objeto en memoria se restablece a sus valores iniciales, incluso si el complemento ha conservado los cambios. Los cambios guardados no estarán disponibles hasta que el panel de tareas se cierre y se vuelva a abrir.
 
 
-    \[[Conjunto de API: buzón 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
     <table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>Restringido</td></tr>
 
 
     <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redacción o lectura</td></tr></table>
 
-    ####Ejemplos
+    ####Incluyen
 
 
     ```javascript
 
-    // Get the current value of the 'myKey' setting
+    // Get the current value of the 'myKey' setting.
 
     var value = Office.context.roamingSettings.get('myKey');
 
-    // Update the value of the 'myKey' setting
+    // Update the value of the 'myKey' setting.
 
     Office.context.roamingSettings.set('myKey', 'Hello World!');
 
-    // Persist the change
+    // Persist the change.
 
     Office.context.roamingSettings.saveAsync();
 
@@ -64,7 +64,7 @@ items:
     Recupera la configuración especificada.
 
 
-    \[[Conjunto de API: buzón 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
     <table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>Restringido</td></tr>
 
@@ -80,7 +80,7 @@ items:
     return:
       type:
       - any
-      description: 'Tipo: String \| número \| booleano \| objeto \| matriz'
+      description: 'Tipo: número \| \| de cadena \| matriz \| de objetos booleanos'
     parameters:
     - id: name
       description: El nombre con distinción de mayúsculas y minúsculas de la configuración que se debe recuperar.
@@ -88,10 +88,10 @@ items:
       - string
 - uid: Outlook_1_1.Office.RoamingSettings.remove
   summary: >-
-    Quita la configuración especificada
+    Quita la configuración especificada.
 
 
-    \[[Conjunto de API: buzón 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
     <table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>Restringido</td></tr>
 
@@ -121,7 +121,7 @@ items:
     Al inicializar un complemento, se cargarán todas las configuraciones que haya guardado. Esto significa que, durante la sesión, solo podrá usar los métodos set y get para trabajar con la copia en memoria del contenedor de propiedades de configuración. Si quiere guardar la configuración para que esté disponible la próxima vez que use el complemento, use el método saveAsync.
 
 
-    \[[Conjunto de API: buzón 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
     <table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>Restringido</td></tr>
 
@@ -140,7 +140,7 @@ items:
       description: ''
     parameters:
     - id: callback
-      description: Opcional. Cuando finaliza el método, se llama a la función que se pasa en el parámetro de devolución de llamada con un parámetro único de tipo Office.AsyncResult.
+      description: Opcional. Cuando el método finaliza, la función que se pasa en el parámetro callback se llama con un único parámetro de tipo Office. AsyncResult.
       type:
       - '(result: Office.AsyncResult<void>) => void'
 - uid: Outlook_1_1.Office.RoamingSettings.set
@@ -151,13 +151,13 @@ items:
     El método set crea una nueva configuración del nombre especificado si no existe todavía o establece para él mismo una configuración ya existente. El valor se almacena en el documento como la representación JSON serializada del tipo de datos correspondiente.
 
 
-    Un máximo de 32KB está disponible para la configuración de cada complemento.
+    Hay un máximo de 32 KB disponibles para la configuración de cada complemento.
 
 
     Los cambios realizados a la configuración mediante la función set no se guardarán en el servidor hasta que se llame a la función saveAsync.
 
 
-    \[[Conjunto de API: buzón 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
     <table><tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>Restringido</td></tr>
 
