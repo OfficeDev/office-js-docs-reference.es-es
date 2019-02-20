@@ -1,17 +1,17 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 09ae4be877fcadf8d226394758f6569dff40a618
-ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
+ms.openlocfilehash: 0cc0db56f3778fc9cef827cc4541bed17a5f34c2
+ms.sourcegitcommit: e9bfba6ec767e9d34fd1cf7b38c30f689617900a
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 02/13/2019
-ms.locfileid: "29980292"
+ms.lasthandoff: 02/20/2019
+ms.locfileid: "30096118"
 items:
 - uid: excel.Excel.WorksheetCollection
   summary: >-
     Representa una colección de objetos de hoja de cálculo que forman parte del libro.
 
 
-    \[[Conjunto de API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Conjunto de API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: Excel.WorksheetCollection
   fullName: Excel.WorksheetCollection
   langs:
@@ -22,6 +22,8 @@ items:
   package: excel
   children:
   - excel.Excel.WorksheetCollection.add
+  - excel.Excel.WorksheetCollection.addFromBase64
+  - excel.Excel.WorksheetCollection.addFromBase64_1
   - excel.Excel.WorksheetCollection.context
   - excel.Excel.WorksheetCollection.getActiveWorksheet
   - excel.Excel.WorksheetCollection.getCount
@@ -36,15 +38,19 @@ items:
   - excel.Excel.WorksheetCollection.onActivated
   - excel.Excel.WorksheetCollection.onAdded
   - excel.Excel.WorksheetCollection.onCalculated
+  - excel.Excel.WorksheetCollection.onChanged
   - excel.Excel.WorksheetCollection.onDeactivated
   - excel.Excel.WorksheetCollection.onDeleted
+  - excel.Excel.WorksheetCollection.onFiltered
+  - excel.Excel.WorksheetCollection.onFormatChanged
+  - excel.Excel.WorksheetCollection.onSelectionChanged
   - excel.Excel.WorksheetCollection.toJSON
 - uid: excel.Excel.WorksheetCollection.add
   summary: >-
     Agrega una nueva hoja al libro. La hoja de cálculo se agregará al final de las hojas de cálculo existentes. Si desea activar la hoja de cálculo recién agregada, llame en ella a ".activate().
 
 
-    \[[Conjunto de API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Conjunto de API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: add(name)
   fullName: add(name)
   langs:
@@ -61,8 +67,78 @@ items:
       description: Opcional. Nombre de la hoja de cálculo que se va a agregar. Si se especifica, el nombre debe ser único. Si no se especifica, Excel determina el nombre de la nueva hoja de cálculo.
       type:
       - string
+- uid: excel.Excel.WorksheetCollection.addFromBase64
+  summary: >-
+    Inserta las hojas de cálculo especificadas de un libro en el libro actual.
+
+
+    \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: addFromBase64(base64File, sheetNamesToInsert, positionType, relativeTo)
+  fullName: addFromBase64(base64File, sheetNamesToInsert, positionType, relativeTo)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'addFromBase64(base64File: string, sheetNamesToInsert?: string[], positionType?: Excel.WorksheetPositionType, relativeTo?: Worksheet | string): OfficeExtension.ClientResult<string[]>;'
+    return:
+      type:
+      - OfficeExtension.ClientResult<string[]>
+      description: Una matriz donde cada elemento representa el identificador de la nueva hoja de cálculo insertada.
+    parameters:
+    - id: base64File
+      description: Obligatorio. Cadena Base64 que representa el libro de origen.
+      type:
+      - string
+    - id: sheetNamesToInsert
+      description: Opcional. Nombre de la hoja de cálculo de speified que se va a insertar. De forma predeterminada, se insertarán todas las hojas de cálculo del libro de origen.
+      type:
+      - string[]
+    - id: positionType
+      description: Opcional. Insertar tipo de posición, consulte Excel. WorksheetPositionType para obtener información detallada. El valor predeterminado es "Start".
+      type:
+      - excel.Excel.WorksheetPositionType
+    - id: relativeTo
+      description: Opcional. El objeto o el nombre de la hoja de cálculo de referencia en el libro actual. El valor predeterminado es NULL y se basa en el parámetro postionType insertará las hojas de cálculo al principio o al final del libro actual.
+      type:
+      - Worksheet | string
+- uid: excel.Excel.WorksheetCollection.addFromBase64_1
+  summary: >-
+    Inserta las hojas de cálculo especificadas de un libro en el libro actual.
+
+
+    \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: addFromBase64(base64File, sheetNamesToInsert, positionTypeString, relativeTo)
+  fullName: addFromBase64(base64File, sheetNamesToInsert, positionTypeString, relativeTo)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'addFromBase64(base64File: string, sheetNamesToInsert?: string[], positionTypeString?: "None" | "Before" | "After" | "Beginning" | "End", relativeTo?: Worksheet | string): OfficeExtension.ClientResult<string[]>;'
+    return:
+      type:
+      - OfficeExtension.ClientResult<string[]>
+      description: Una matriz donde cada elemento representa el identificador de la nueva hoja de cálculo insertada.
+    parameters:
+    - id: base64File
+      description: Obligatorio. Cadena Base64 que representa el libro de origen.
+      type:
+      - string
+    - id: sheetNamesToInsert
+      description: Opcional. Nombre de la hoja de cálculo de speified que se va a insertar. De forma predeterminada, se insertarán todas las hojas de cálculo del libro de origen.
+      type:
+      - string[]
+    - id: positionTypeString
+      description: Opcional. Insertar tipo de posición, consulte Excel. WorksheetPositionType para obtener información detallada. El valor predeterminado es "Start".
+      type:
+      - "\"None\" | \"Before\" | \"After\" | \"Beginning\" | \"End\""
+    - id: relativeTo
+      description: Opcional. El objeto o el nombre de la hoja de cálculo de referencia en el libro actual. El valor predeterminado es NULL y se basa en el parámetro postionType insertará las hojas de cálculo al principio o al final del libro actual.
+      type:
+      - Worksheet | string
 - uid: excel.Excel.WorksheetCollection.context
-  summary: El contexto de solicitud asociado con el objeto. Este comando conecta proceso del complemento al proceso de la aplicación host de Office.
+  summary: Contexto de la solicitud asociado al objeto. Esto conecta el proceso del complemento con el proceso de la aplicación host de Office.
   name: context
   fullName: context
   langs:
@@ -78,7 +154,7 @@ items:
     Obtiene la hoja de cálculo activa del libro.
 
 
-    \[[Conjunto de API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Conjunto de API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getActiveWorksheet()
   fullName: getActiveWorksheet()
   langs:
@@ -139,7 +215,7 @@ items:
     Obtiene un objeto de hoja de cálculo mediante su nombre o identificador.
 
 
-    \[[Conjunto de API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Conjunto de API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: getItem(key)
   fullName: getItem(key)
   langs:
@@ -201,7 +277,7 @@ items:
       type:
       - boolean
 - uid: excel.Excel.WorksheetCollection.items
-  summary: Obtiene al secundario cargado los elementos de esta colección.
+  summary: Obtiene los elementos secundarios cargados de esta colección.
   name: items
   fullName: items
   langs:
@@ -213,18 +289,18 @@ items:
       type:
       - Excel.Worksheet[]
 - uid: excel.Excel.WorksheetCollection.load
-  summary: Colas de seguridad de un comando que se va a cargar las propiedades del objeto especificadas. Se debe llamar a "context.sync()" antes de leer las propiedades.
+  summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar a "context. Sync ()" antes de leer las propiedades.
   remarks: >-
-    Además de esta firma, este método no tiene las siguientes firmas:
+    Además de esta firma, este método tiene las siguientes firmas:
 
 
-    `load(option?: string | string[]): Excel.WorksheetCollection`-Donde opción es una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades de carga.
+    `load(option?: string | string[]): Excel.WorksheetCollection`-Donde opción es una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades que se van a cargar.
 
 
-    `load(option?: { select?: string; expand?: string; }): Excel.WorksheetCollection`-Donde option.select es una cadena delimitada por comas que especifica las propiedades para cargar y options.expand es una cadena delimitada por comas que especifica las propiedades de navegación para cargar.
+    `load(option?: { select?: string; expand?: string; }): Excel.WorksheetCollection`-Where opción. Select es una cadena delimitada por comas que especifica las propiedades que se van a cargar y Options. Expand es una cadena delimitada por comas que especifica las propiedades de navegación que se deben cargar.
 
 
-    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.WorksheetCollection`-Sólo está disponible en los tipos de colección. Es similar a la firma precedente. Option.Top especifica el número máximo de elementos de la colección que se puede incluir en el resultado. Option.Skip especifica el número de elementos que se pasan por alto y no se incluyen en el resultado. Si se especifica option.top, se iniciará el conjunto de resultados después de omitir el número especificado de elementos.
+    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.WorksheetCollection`-Solo disponible en tipos de colección. Es similar a la firma anterior. Option. Top especifica el número máximo de elementos de colección que se pueden incluir en el resultado. La opción. SKIP especifica el número de elementos que se deben omitir y que no se incluyen en el resultado. Si se especifica Option. Top, el conjunto de resultados se iniciará después de omitir el número especificado de elementos.
   name: load(option)
   fullName: load(option)
   langs:
@@ -242,7 +318,7 @@ items:
       type:
       - Excel.Interfaces.WorksheetCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions
 - uid: excel.Excel.WorksheetCollection.load_1
-  summary: Colas de seguridad de un comando que se va a cargar las propiedades del objeto especificadas. Se debe llamar a `context.sync()` antes de leer las propiedades.
+  summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar `context.sync()` antes de leer las propiedades.
   name: load(propertyNames)
   fullName: load(propertyNames)
   langs:
@@ -256,7 +332,7 @@ items:
       description: "\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nExcel.run(function (ctx) { \n    var worksheets = ctx.workbook.worksheets;\n    worksheets.load('items');\n    return ctx.sync().then(function() {\n        for (var i = 0; i < worksheets.items.length; i++)\n        {\n            console.log(worksheets.items[i].name);\n            console.log(worksheets.items[i].index);\n        }\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
     parameters:
     - id: propertyNames
-      description: Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades de carga.
+      description: Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades que se van a cargar.
       type:
       - string | string[]
 - uid: excel.Excel.WorksheetCollection.load_2
@@ -278,10 +354,10 @@ items:
       - office.OfficeExtension.LoadOption
 - uid: excel.Excel.WorksheetCollection.onActivated
   summary: >-
-    Se produce cuando se activa cualquier hoja de cálculo del libro.
+    Este evento se produce cuando se activa cualquier hoja de cálculo del libro.
 
 
-    \[[Conjunto de API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Conjunto de API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: onActivated
   fullName: onActivated
   langs:
@@ -295,10 +371,10 @@ items:
       description: "\n#### <a name=\"examples\"></a>Ejemplos\n\n```typescript\nawait Excel.run(async (context) => {\n    let sheets = context.workbook.worksheets;\n    sheets.onActivated.add(onActivate);\n\n    await context.sync();\n    console.log(\"A handler has been registered for the OnActivate event.\");\n});\n```"
 - uid: excel.Excel.WorksheetCollection.onAdded
   summary: >-
-    Se produce cuando se agrega una nueva hoja de cálculo del libro.
+    Este evento se produce cuando se agrega una nueva hoja de cálculo al libro.
 
 
-    \[[Conjunto de API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Conjunto de API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: onAdded
   fullName: onAdded
   langs:
@@ -312,7 +388,7 @@ items:
       description: "\n#### <a name=\"examples\"></a>Ejemplos\n\n```typescript\nawait Excel.run(async (context) => {\n    let sheet = context.workbook.worksheets;\n    sheet.onAdded.add(onWorksheetAdd);\n\n    await context.sync();\n    console.log(\"A handler has been registered for the OnAdded event.\");\n});\n```"
 - uid: excel.Excel.WorksheetCollection.onCalculated
   summary: >-
-    Se produce cuando se calcula cualquier hoja de cálculo del libro.
+    Este evento se produce cuando se calcula cualquier hoja de cálculo del libro.
 
 
     \[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -326,12 +402,29 @@ items:
     return:
       type:
       - OfficeExtension.EventHandlers<Excel.WorksheetCalculatedEventArgs>
+- uid: excel.Excel.WorksheetCollection.onChanged
+  summary: >-
+    Este evento se produce cuando se modifica cualquier hoja de cálculo del libro.
+
+
+    \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: onChanged
+  fullName: onChanged
+  langs:
+  - typeScript
+  type: event
+  syntax:
+    content: 'readonly onChanged: OfficeExtension.EventHandlers<Excel.WorksheetChangedEventArgs>;'
+    return:
+      type:
+      - OfficeExtension.EventHandlers<Excel.WorksheetChangedEventArgs>
 - uid: excel.Excel.WorksheetCollection.onDeactivated
   summary: >-
-    Se produce cuando se desactiva cualquier hoja de cálculo del libro.
+    Este evento se produce cuando se desactiva cualquier hoja de cálculo del libro.
 
 
-    \[[Conjunto de API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Conjunto de API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: onDeactivated
   fullName: onDeactivated
   langs:
@@ -345,10 +438,10 @@ items:
       description: "\n#### <a name=\"examples\"></a>Ejemplos\n\n```typescript\nawait Excel.run(async (context) => {\n    let sheets = context.workbook.worksheets;\n    sheets.onDeactivated.add(onDeactivate);\n\n    await context.sync();\n    console.log(\"A handler has been registered for the OnDeactivate event.\");\n});\n```"
 - uid: excel.Excel.WorksheetCollection.onDeleted
   summary: >-
-    Se produce cuando se elimina una hoja de cálculo del libro.
+    Este evento se produce cuando se elimina una hoja de cálculo del libro.
 
 
-    \[[Conjunto de API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Conjunto de API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   name: onDeleted
   fullName: onDeleted
   langs:
@@ -359,8 +452,59 @@ items:
     return:
       type:
       - OfficeExtension.EventHandlers<Excel.WorksheetDeletedEventArgs>
+- uid: excel.Excel.WorksheetCollection.onFiltered
+  summary: >-
+    Este evento se produce cuando se aplica cualquier filtro de hoja de cálculo en el libro.
+
+
+    \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: onFiltered
+  fullName: onFiltered
+  langs:
+  - typeScript
+  type: event
+  syntax:
+    content: 'readonly onFiltered: OfficeExtension.EventHandlers<Excel.WorksheetFilteredEventArgs>;'
+    return:
+      type:
+      - OfficeExtension.EventHandlers<Excel.WorksheetFilteredEventArgs>
+- uid: excel.Excel.WorksheetCollection.onFormatChanged
+  summary: >-
+    Se produce cuando se cambia el formato de cualquier hoja de cálculo del libro.
+
+
+    \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: onFormatChanged
+  fullName: onFormatChanged
+  langs:
+  - typeScript
+  type: event
+  syntax:
+    content: 'readonly onFormatChanged: OfficeExtension.EventHandlers<Excel.WorksheetFormatChangedEventArgs>;'
+    return:
+      type:
+      - OfficeExtension.EventHandlers<Excel.WorksheetFormatChangedEventArgs>
+- uid: excel.Excel.WorksheetCollection.onSelectionChanged
+  summary: >-
+    Se produce cuando la selección cambia en una hoja de cálculo.
+
+
+    \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: onSelectionChanged
+  fullName: onSelectionChanged
+  langs:
+  - typeScript
+  type: event
+  syntax:
+    content: 'readonly onSelectionChanged: OfficeExtension.EventHandlers<Excel.WorksheetSelectionChangedEventArgs>;'
+    return:
+      type:
+      - OfficeExtension.EventHandlers<Excel.WorksheetSelectionChangedEventArgs>
 - uid: excel.Excel.WorksheetCollection.toJSON
-  summary: Invalida el JavaScript `toJSON()` método con el fin de proporcionar resultados más útiles cuando se pasa un objeto de la API a `JSON.stringify()` <!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama a la `toJSON` método del objeto que se pasa a ella.) Mientras que el original `Excel.WorksheetCollection` es un objeto de la API, el `toJSON` método devuelve un objeto de JavaScript sin formato (escrito como `Excel.Interfaces.WorksheetCollectionData` <!-- -->) que contiene una matriz de "elementos" con copias superficiales de las propiedades de elementos de la colección cargadas.
+  summary: Reemplaza el método de JavaScript `toJSON()` para proporcionar un resultado más útil cuando se pasa un objeto de `JSON.stringify()` <!-- -->la API. (`JSON.stringify`<!-- -->a su vez, llama al `toJSON` método del objeto que se le pasa). Mientras que el `Excel.WorksheetCollection` objeto original es un objeto API, `toJSON` el método devuelve un objeto JavaScript sin formato (escrito `Excel.Interfaces.WorksheetCollectionData` <!-- -->como) que contiene una matriz "items" con copias rasas de las propiedades cargadas de los elementos de la colección.
   name: toJSON()
   fullName: toJSON()
   langs:
