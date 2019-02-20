@@ -1,0 +1,217 @@
+### YamlMime:UniversalReference
+ms.openlocfilehash: 80408fb196e30bbfa3f98f7fc7afc5d935721a01
+ms.sourcegitcommit: e9bfba6ec767e9d34fd1cf7b38c30f689617900a
+ms.translationtype: MT
+ms.contentlocale: es-ES
+ms.lasthandoff: 02/20/2019
+ms.locfileid: "30111764"
+items:
+- uid: excel_release.Excel.Setting
+  summary: >-
+    Setting representa un par clave-valor de una configuración que se conserva en el documento (por archivo y por complemento). Se pueden usar estos pares clave-valor personalizados para almacenar la información de estado o ciclo de vida que necesita el complemento de panel de tareas o de contenido. Tenga en cuenta que la configuración persiste en el documento y, por lo tanto, no es un lugar donde almacenar información confidencial o protegida, como la información del usuario y la contraseña.
+
+
+    \[[Conjunto de API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  name: Excel.Setting
+  fullName: Excel.Setting
+  langs:
+  - typeScript
+  type: class
+  extends:
+  - office.OfficeExtension.ClientObject
+  package: excel_release
+  children:
+  - excel_release.Excel.Setting.context
+  - excel_release.Excel.Setting.delete
+  - excel_release.Excel.Setting.key
+  - excel_release.Excel.Setting.load
+  - excel_release.Excel.Setting.load_1
+  - excel_release.Excel.Setting.load_2
+  - excel_release.Excel.Setting.set
+  - excel_release.Excel.Setting.set_1
+  - excel_release.Excel.Setting.toJSON
+  - excel_release.Excel.Setting.value
+- uid: excel_release.Excel.Setting.context
+  summary: Contexto de la solicitud asociado al objeto. Esto conecta el proceso del complemento con el proceso de la aplicación host de Office.
+  name: context
+  fullName: context
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type:
+      - RequestContext
+- uid: excel_release.Excel.Setting.delete
+  summary: >-
+    Elimina la configuración.
+
+
+    \[[Conjunto de API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  name: delete()
+  fullName: delete()
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'delete(): void;'
+    return:
+      type:
+      - void
+      description: "\n#### <a name=\"examples\"></a>Ejemplos\n\n```typescript\nawait Excel.run(async (context) => {\n    const settings = context.workbook.settings;\n    let needsReview = settings.getItem(\"NeedsReview\");\n    needsReview.delete();\n    needsReview = settings.getItemOrNullObject(\"NeedsReview\");\n\n    await context.sync();\n\n    if (needsReview.isNullObject) {\n        console.log(\"The setting has been deleted\");\n    } else {\n        console.log(\"The setting was not deleted\");\n    }\n\n    await context.sync();\n});\n```"
+- uid: excel_release.Excel.Setting.key
+  summary: >-
+    Devuelve una clave que representa el identificador de la configuración. Solo lectura.
+
+
+    \[[Conjunto de API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  name: key
+  fullName: key
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly key: string;'
+    return:
+      type:
+      - string
+- uid: excel_release.Excel.Setting.load
+  summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar a "context. Sync ()" antes de leer las propiedades.
+  remarks: >-
+    Además de esta firma, este método tiene las siguientes firmas:
+
+
+    `load(option?: string | string[]): Excel.Setting`-Donde opción es una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades que se van a cargar.
+
+
+    `load(option?: { select?: string; expand?: string; }): Excel.Setting`-Where opción. Select es una cadena delimitada por comas que especifica las propiedades que se van a cargar y Options. Expand es una cadena delimitada por comas que especifica las propiedades de navegación que se deben cargar.
+
+
+    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Setting`-Solo disponible en tipos de colección. Es similar a la firma anterior. Option. Top especifica el número máximo de elementos de colección que se pueden incluir en el resultado. La opción. SKIP especifica el número de elementos que se deben omitir y que no se incluyen en el resultado. Si se especifica Option. Top, el conjunto de resultados se iniciará después de omitir el número especificado de elementos.
+  name: load(option)
+  fullName: load(option)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(option?: Excel.Interfaces.SettingLoadOptions): Excel.Setting;'
+    return:
+      type:
+      - excel.Excel.Setting
+      description: ''
+    parameters:
+    - id: option
+      description: ''
+      type:
+      - excel.Excel.Interfaces.SettingLoadOptions
+- uid: excel_release.Excel.Setting.load_1
+  summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar `context.sync()` antes de leer las propiedades.
+  name: load(propertyNames)
+  fullName: load(propertyNames)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.Setting;'
+    return:
+      type:
+      - excel.Excel.Setting
+      description: ''
+    parameters:
+    - id: propertyNames
+      description: Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades que se van a cargar.
+      type:
+      - string | string[]
+- uid: excel_release.Excel.Setting.load_2
+  summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar `context.sync()` antes de leer las propiedades.
+  name: load(propertyNamesAndPaths)
+  fullName: load(propertyNamesAndPaths)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.Setting;'
+    return:
+      type:
+      - excel.Excel.Setting
+      description: ''
+    parameters:
+    - id: propertyNamesAndPaths
+      description: Donde propertyNamesAndPaths. Select es una cadena delimitada por comas que especifica las propiedades que se van a cargar y propertyNamesAndPaths. Expand es una cadena delimitada por comas que especifica las propiedades de navegación que se deben cargar.
+      type:
+      - '{ select?: string; expand?: string; }'
+- uid: excel_release.Excel.Setting.set
+  summary: Establece varias propiedades de un objeto al mismo tiempo. Puede pasar un objeto sin formato con las propiedades apropiadas o cualquier otro objeto de la API del mismo tipo.
+  remarks: >-
+    Este método tiene la siguiente firma adicional:
+
+
+    `set(properties: Excel.Setting): void`
+  name: set(properties, options)
+  fullName: set(properties, options)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'set(properties: Interfaces.SettingUpdateData, options?: OfficeExtension.UpdateOptions): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: properties
+      description: Objeto de JavaScript con propiedades que se estructuran de forma isomórfico a las propiedades del objeto en el que se llama al método.
+      type:
+      - Interfaces.SettingUpdateData
+    - id: options
+      description: Proporciona una opción para suprimir errores si el objeto Properties intenta establecer propiedades de solo lectura.
+      type:
+      - office.OfficeExtension.UpdateOptions
+- uid: excel_release.Excel.Setting.set_1
+  summary: Establece varias propiedades en el objeto al mismo tiempo, basándose en un objeto cargado existente.
+  name: set(properties)
+  fullName: set(properties)
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'set(properties: Excel.Setting): void;'
+    return:
+      type:
+      - void
+      description: ''
+    parameters:
+    - id: properties
+      description: ''
+      type:
+      - excel.Excel.Setting
+- uid: excel_release.Excel.Setting.toJSON
+  summary: Reemplaza el método de JavaScript `toJSON()` para proporcionar un resultado más útil cuando se pasa un objeto de `JSON.stringify()` <!-- -->la API. (`JSON.stringify`<!-- -->a su vez, llama al `toJSON` método del objeto que se le pasa). Mientras que el objeto Excel. Setting original es un objeto API, `toJSON` el método devuelve un objeto JavaScript sin formato (escrito `Excel.Interfaces.SettingData` <!-- -->como) que contiene copias rasas de las propiedades secundarias cargadas del objeto original.
+  name: toJSON()
+  fullName: toJSON()
+  langs:
+  - typeScript
+  type: method
+  syntax:
+    content: 'toJSON(): Excel.Interfaces.SettingData;'
+    return:
+      type:
+      - excel.Excel.Interfaces.SettingData
+      description: ''
+- uid: excel_release.Excel.Setting.value
+  summary: >-
+    Representa el valor almacenado para esta configuración.
+
+
+    \[[Conjunto de API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  name: value
+  fullName: value
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'value: any;'
+    return:
+      type:
+      - any
