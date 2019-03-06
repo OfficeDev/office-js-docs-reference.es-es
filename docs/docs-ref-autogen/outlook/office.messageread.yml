@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: b95bc4e0e282265e30621374508614eda89b7a7f
-ms.sourcegitcommit: 5c1011d5e46e007fd1f7f620d4dff74356dcd029
+ms.openlocfilehash: 41749b406bdeb77a0f546e414b54df07bd4780ff
+ms.sourcegitcommit: 788ab9c595c9143f8b8f4822a170e8b90d72ee1d
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 03/01/2019
-ms.locfileid: "30359075"
+ms.lasthandoff: 03/06/2019
+ms.locfileid: "30413906"
 items:
 - uid: outlook.Office.MessageRead
   summary: >-
@@ -66,14 +66,14 @@ items:
 
 
     \[[Conjunto de API: buzón de correo 1,7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Leer mensaje</td></tr> </table>
+  remarks: <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Lectura de mensaje</td></tr> </table>
   name: addHandlerAsync(eventType, handler, options, callback)
   fullName: addHandlerAsync(eventType, handler, options, callback)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'addHandlerAsync(eventType: Office.EventType, handler: any, options?: any, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    content: 'addHandlerAsync(eventType: Office.EventType, handler: any, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     return:
       type:
       - void
@@ -84,13 +84,13 @@ items:
       type:
       - Office.EventType
     - id: handler
-      description: La función para controlar el evento. La función debe aceptar un solo parámetro, que es un literal de objeto. La propiedad Type en el parámetro coincidirá con el parámetro eventType que se pasa a addHandlerAsync.
+      description: La función que va a controlar el evento. La función debe aceptar un único parámetro, que es un literal de objeto. La propiedad Type en el parámetro coincidirá con el parámetro eventType que se pasa a addHandlerAsync.
       type:
       - any
     - id: options
       description: 'Opcional. Un objeto literal que contiene una o más de las siguientes propiedades. asyncContext: los desarrolladores pueden proporcionar cualquier objeto al que quieran tener acceso en el método de devolución de llamada.'
       type:
-      - any
+      - Office.AsyncContextOptions
     - id: callback
       description: Opcional. Cuando el método finaliza, la función que se pasa en el parámetro callback se llama con un único parámetro, asyncResult, que es un objeto Office. AsyncResult.
       type:
@@ -104,7 +104,7 @@ items:
 
 
     \[[Conjunto de API: buzón de correo 1,7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Leer mensaje</td></tr> </table>
+  remarks: <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Lectura de mensaje</td></tr> </table>
   name: addHandlerAsync(eventType, handler, callback)
   fullName: addHandlerAsync(eventType, handler, callback)
   langs:
@@ -122,7 +122,7 @@ items:
       type:
       - Office.EventType
     - id: handler
-      description: La función para controlar el evento. La función debe aceptar un solo parámetro, que es un literal de objeto. La propiedad Type en el parámetro coincidirá con el parámetro eventType que se pasa a addHandlerAsync.
+      description: La función que va a controlar el evento. La función debe aceptar un único parámetro, que es un literal de objeto. La propiedad Type en el parámetro coincidirá con el parámetro eventType que se pasa a addHandlerAsync.
       type:
       - any
     - id: callback
@@ -137,10 +137,10 @@ items:
     En Outlook Web App, el formulario de respuestas aparece como formulario emergente en la vista de tres columnas y en la vista de una o de dos columnas.
 
 
-    Si cualquiera de los parámetros de cadena supera sus límites, displayReplyAllForm produce una excepción.
+    Si alguno de los parámetros de cadena supera sus límites, displayReplyAllForm inicia una excepción.
 
 
-    Cuando los datos adjuntos se especifican en el parámetro formData.attachments, Outlook y Outlook Web App intentan descargar todos los datos adjuntos y adjuntarlos al formulario de respuesta. Si no se pudo agregar algún dato adjunto, se muestra un error en la interfaz de usuario del formulario. Si esto no es posible, no se produce ningún mensaje de error.
+    Cuando los datos adjuntos se especifican en el parámetro Formulariomodo. Attachments, Outlook y Outlook Web App intentan descargar todos los datos adjuntos y adjuntarlos al formulario de respuesta. Si se produce un error al agregar los datos adjuntos, se muestra un error en la interfaz de usuario del formulario. Si esto no es posible, no se produce ningún mensaje de error.
 
 
     **Nota**: este método no se admite en Outlook para iOS ni en Outlook para Android.
@@ -148,7 +148,7 @@ items:
 
     \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Leer mensaje</td></tr> </table>
+    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Lectura de mensaje</td></tr> </table>
 
     ####Incluyen
 
@@ -266,10 +266,10 @@ items:
     En Outlook Web App, el formulario de respuestas aparece como formulario emergente en la vista de tres columnas y en la vista de una o de dos columnas.
 
 
-    Si cualquiera de los parámetros de cadena supera sus límites, displayReplyForm produce una excepción.
+    Si alguno de los parámetros de cadena supera sus límites, displayReplyForm inicia una excepción.
 
 
-    Cuando los datos adjuntos se especifican en el parámetro formData.attachments, Outlook y Outlook Web App intentan descargar todos los datos adjuntos y adjuntarlos al formulario de respuesta. Si no se pudo agregar algún dato adjunto, se muestra un error en la interfaz de usuario del formulario. Si esto no es posible, no se produce ningún mensaje de error.
+    Cuando los datos adjuntos se especifican en el parámetro Formulariomodo. Attachments, Outlook y Outlook Web App intentan descargar todos los datos adjuntos y adjuntarlos al formulario de respuesta. Si se produce un error al agregar los datos adjuntos, se muestra un error en la interfaz de usuario del formulario. Si esto no es posible, no se produce ningún mensaje de error.
 
 
     **Nota**: este método no se admite en Outlook para iOS ni en Outlook para Android.
@@ -277,7 +277,7 @@ items:
 
     \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Leer mensaje</td></tr> </table>
+    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Lectura de mensaje</td></tr> </table>
 
     ####Incluyen
 
@@ -395,7 +395,7 @@ items:
 
     \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Leer mensaje</td></tr> </table>
+    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Lectura de mensaje</td></tr> </table>
 
     ####Incluyen
 
@@ -429,13 +429,13 @@ items:
 
     \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>Restringido</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Leer mensaje</td></tr> </table>
+    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>Restringido</td></tr> <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Lectura de mensaje</td></tr> </table>
 
 
     Aunque el nivel de permiso mínimo para usar este método es Restricted, algunos tipos de entidad requieren ReadItem para tener acceso, como se especifica en la tabla siguiente.
 
 
-    <table> <tr> <th>Valor de entityType</th> <th>Tipo de objetos de la matriz devuelta</th> <th>Nivel de permiso requerido</th> </tr> <tr> <td>Address</td> <td>String</td> <td>Restringido</td> </tr> <tr> <td>Contact</td> <td>Contact</td> <td>ReadItem</td> </tr> <tr> <td>EmailAddress</td> <td>String</td> <td>ReadItem</td> </tr> <tr> <td>MeetingSuggestion</td> <td>MeetingSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>PhoneNumber</td> <td>PhoneNumber</td> <td>Restringido</td> </tr> <tr> <td>TaskSuggestion</td> <td>TaskSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>URL</td> <td>String</td> <td>Restringido</td> </tr> </table>
+    <table> <tr> <th>Valor de entityType</th> <th>Tipo de objetos de la matriz devuelta</th> <th>Nivel de permiso requerido</th> </tr> <tr> <td>Dirección</td> <td>String</td> <td>Restricted</td> </tr> <tr> <td>Contacto</td> <td>Contacto</td> <td>ReadItem</td> </tr> <tr> <td>EmailAddress</td> <td>String</td> <td>ReadItem</td> </tr> <tr> <td>MeetingSuggestion</td> <td>MeetingSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>PhoneNumber</td> <td>PhoneNumber</td> <td>Restricted</td> </tr> <tr> <td>TaskSuggestion</td> <td>TaskSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>URL</td> <td>String</td> <td>Restricted</td> </tr> </table>
 
     #### Ejemplos
 
@@ -489,7 +489,7 @@ items:
 
 
     \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Leer mensaje</td></tr> </table>
+  remarks: <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Lectura de mensaje</td></tr> </table>
   name: getFilteredEntitiesByName(name)
   fullName: getFilteredEntitiesByName(name)
   langs:
@@ -500,10 +500,10 @@ items:
     return:
       type:
       - (string | Contact | MeetingSuggestion | PhoneNumber | TaskSuggestion)[]
-      description: Si no existe ningún elemento ItemHasKnownEntity en el manifiesto con un valor de elemento FilterName que coincida con el parámetro name, el método devuelve null. Si el parámetro name no coincide con un elemento ItemHasKnownEntity del manifiesto, pero no existen entidades en el elemento actual que coincidan, el método devuelve una matriz vacía.
+      description: Si no hay ningún elemento ItemHasKnownEntity en el manifiesto con un valor de elemento FilterName que coincida con el parámetro name, el método devuelve NULL. Si el parámetro name coincide con un elemento ItemHasKnownEntity en el manifiesto, pero no hay entidades en el elemento actual que coinciden, el método devuelve una matriz vacía.
     parameters:
     - id: name
-      description: El nombre del elemento de regla ItemHasKnownEntity que define el filtro para que coincidan.
+      description: El nombre del elemento de regla ItemHasKnownEntity que define el filtro para que sea coincidente.
       type:
       - string
 - uid: outlook.Office.MessageRead.getInitializationContextAsync
@@ -515,7 +515,7 @@ items:
 
 
     \[[Conjunto de API: vista previa de buzón](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Leer mensaje</td></tr> </table>
+  remarks: <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Lectura de mensaje</td></tr> </table>
   isPreview: true
   name: getInitializationContextAsync(options, callback)
   fullName: getInitializationContextAsync(options, callback)
@@ -546,7 +546,7 @@ items:
 
 
     \[[Conjunto de API: vista previa de buzón](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Leer mensaje</td></tr> </table>
+  remarks: <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Lectura de mensaje</td></tr> </table>
   isPreview: true
   name: getInitializationContextAsync(callback)
   fullName: getInitializationContextAsync(callback)
@@ -572,7 +572,7 @@ items:
     El método getRegExMatches devuelve las cadenas que coinciden con la expresión regular definida en cada elemento de regla ItemHasRegularExpressionMatch o ItemHasKnownEntity del archivo XML de manifiesto. Para una regla ItemHasRegularExpressionMatch, debe haber una cadena coincidente en la propiedad del elemento especificado por esa regla. El tipo simple PropertyName define las propiedades admitidas.
 
 
-    Si especifica una regla ItemHasRegularExpressionMatch en la propiedad de cuerpo de un elemento, la expresión regular debe filtrar aún más el cuerpo y no intentar devolver todo el cuerpo del elemento. El uso de una expresión regular como .* para obtener todo el cuerpo de un elemento no siempre devuelve los resultados esperados. En su lugar, use el método Body.getAsync para recuperar el cuerpo completo.
+    Si especifica una regla ItemHasRegularExpressionMatch en la propiedad de cuerpo de un elemento, la expresión regular debe filtrar aún más el cuerpo y no intentar devolver todo el cuerpo del elemento. El uso de una expresión regular como .* para obtener todo el cuerpo de un elemento no siempre devuelve los resultados esperados. En su lugar, use el método Body. getAsync para recuperar todo el cuerpo.
 
 
     **Nota**: este método no se admite en Outlook para iOS ni en Outlook para Android.
@@ -580,7 +580,7 @@ items:
 
     \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Leer mensaje</td></tr> </table>
+    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Lectura de mensaje</td></tr> </table>
 
     ####Incluyen
 
@@ -638,7 +638,7 @@ items:
     return:
       type:
       - any
-      description: Un objeto que contiene matrices de cadenas que coinciden con las expresiones regulares definidas en el archivo XML de manifiesto. El nombre de cada matriz es igual al valor correspondiente del atributo RegExName de la regla ItemHasRegularExpressionMatch coincidente o al atributo FilterName de la regla ItemHasKnownEntity coincidente.
+      description: Un objeto que contiene matrices de cadenas que coinciden con las expresiones regulares definidas en el archivo XML de manifiesto. El nombre de cada matriz es igual al valor correspondiente del atributo RegExName de la regla ItemHasRegularExpressionMatch correspondiente o al atributo FilterName de la regla ItemHasKnownEntity correspondiente.
 - uid: outlook.Office.MessageRead.getRegExMatchesByName
   summary: >-
     Devuelve valores de cadena en el elemento seleccionado que coinciden con la expresión regular de nombre definida en el archivo XML de manifiesto.
@@ -655,7 +655,7 @@ items:
 
     \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Leer mensaje</td></tr> </table>
+    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Lectura de mensaje</td></tr> </table>
 
     ####Incluyen
 
@@ -708,7 +708,7 @@ items:
       description: Una matriz que contiene las cadenas que coinciden con la expresión regular definida en el archivo XML de manifiesto.
     parameters:
     - id: name
-      description: El nombre del elemento de regla ItemHasRegularExpressionMatch que define el filtro para que coincidan.
+      description: Nombre del elemento de regla ItemHasRegularExpressionMatch que define el filtro que debe coincidir.
       type:
       - string
 - uid: outlook.Office.MessageRead.getSelectedEntities
@@ -721,7 +721,7 @@ items:
 
     \[[Conjunto de API: buzón de correo 1,6](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Leer mensaje</td></tr> </table>
+    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Lectura de mensaje</td></tr> </table>
 
     ####Incluyen
 
@@ -751,10 +751,10 @@ items:
     Devuelve valores de cadena en una coincidencia resaltada que coinciden con las expresiones regulares definidas en el archivo XML de manifiesto. Las coincidencias resaltadas se aplican a complementos contextuales.
 
 
-    El método getSelectedRegExMatches devuelve las cadenas que coinciden con la expresión regular definida en cada elemento de regla ItemHasRegularExpressionMatch o ItemHasKnownEntity del archivo XML de manifiesto. Para una regla ItemHasRegularExpressionMatch, debe producirse una cadena que coincida en la propiedad del elemento especificado por esa regla. El tipo simple PropertyName define las propiedades admitidas.
+    El método getSelectedRegExMatches devuelve las cadenas que coinciden con la expresión regular definida en cada elemento de regla ItemHasRegularExpressionMatch o ItemHasKnownEntity del archivo XML de manifiesto. Para una regla ItemHasRegularExpressionMatch, debe haber una cadena coincidente en la propiedad del elemento especificado por esa regla. El tipo simple PropertyName define las propiedades admitidas.
 
 
-    Si especifica una regla ItemHasRegularExpressionMatch en la propiedad de cuerpo de un elemento, la expresión regular debe filtrar aún más el cuerpo y no intentar devolver todo el cuerpo del elemento. El uso de una expresión regular como .* para obtener todo el cuerpo de un elemento no siempre devuelve los resultados esperados. En su lugar, use el método Body.getAsync para recuperar el cuerpo completo.
+    Si especifica una regla ItemHasRegularExpressionMatch en la propiedad de cuerpo de un elemento, la expresión regular debe filtrar aún más el cuerpo y no intentar devolver todo el cuerpo del elemento. El uso de una expresión regular como .* para obtener todo el cuerpo de un elemento no siempre devuelve los resultados esperados. En su lugar, use el método Body. getAsync para recuperar todo el cuerpo.
 
 
     **Nota**: este método no se admite en Outlook para iOS ni en Outlook para Android.
@@ -762,7 +762,7 @@ items:
 
     \[[Conjunto de API: buzón de correo 1,6](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Leer mensaje</td></tr> </table>
+    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Lectura de mensaje</td></tr> </table>
 
     ####Incluyen
 
@@ -820,20 +820,20 @@ items:
     return:
       type:
       - any
-      description: Un objeto que contiene matrices de cadenas que coinciden con las expresiones regulares definidas en el archivo XML de manifiesto. El nombre de cada matriz es igual al valor correspondiente del atributo RegExName de la regla ItemHasRegularExpressionMatch coincidente o al atributo FilterName de la regla ItemHasKnownEntity coincidente.
+      description: Un objeto que contiene matrices de cadenas que coinciden con las expresiones regulares definidas en el archivo XML de manifiesto. El nombre de cada matriz es igual al valor correspondiente del atributo RegExName de la regla ItemHasRegularExpressionMatch correspondiente o al atributo FilterName de la regla ItemHasKnownEntity correspondiente.
 - uid: outlook.Office.MessageRead.loadCustomPropertiesAsync
   summary: >-
     Carga de forma asincrónica las propiedades personalizadas de este complemento en el elemento seleccionado.
 
 
-    Las propiedades personalizadas se almacenan como pares de clave/valor según la aplicación y el elemento. Este método devuelve un objeto CustomProperties en la devolución de llamada, que proporciona métodos para tener acceso a las propiedades personalizadas específicas del elemento y el complemento actual. Las propiedades personalizadas no están cifradas en el elemento, por lo que no debería usarse como almacenamiento seguro.
+    Las propiedades personalizadas se almacenan como pares de clave/valor según la aplicación y el elemento. Este método devuelve un objeto CustomProperties en la devolución de llamada, que proporciona métodos para tener acceso a las propiedades personalizadas específicas del elemento actual y del complemento actual. Las propiedades personalizadas no están cifradas en el elemento, por lo que no debería usarse como almacenamiento seguro.
 
 
-    Las propiedades personalizadas se proporcionan como un objeto CustomProperties en la propiedad asyncResult.value. Este objeto puede usarse para obtener, establecer y quitar las propiedades personalizadas del elemento, y guardar los cambios en la propiedad personalizada que se vuelve a establecer en el servidor.
+    Las propiedades personalizadas se proporcionan como un objeto CustomProperties en la propiedad asyncResult. Value. Este objeto puede usarse para obtener, establecer y quitar las propiedades personalizadas del elemento, así como para guardar los cambios en la propiedad personalizada que se vuelve a establecer en el servidor.
 
 
     \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Leer mensaje</td></tr> </table>
+  remarks: <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Lectura de mensaje</td></tr> </table>
   name: loadCustomPropertiesAsync(callback, userContext)
   fullName: loadCustomPropertiesAsync(callback, userContext)
   langs:
@@ -863,14 +863,14 @@ items:
 
 
     \[[Conjunto de API: buzón de correo 1,7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Leer mensaje</td></tr> </table>
+  remarks: <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Lectura de mensaje</td></tr> </table>
   name: removeHandlerAsync(eventType, options, callback)
   fullName: removeHandlerAsync(eventType, options, callback)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'removeHandlerAsync(eventType: Office.EventType, options?: any, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    content: 'removeHandlerAsync(eventType: Office.EventType, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     return:
       type:
       - void
@@ -883,7 +883,7 @@ items:
     - id: options
       description: 'Opcional. Un objeto literal que contiene una o más de las siguientes propiedades. asyncContext: los desarrolladores pueden proporcionar cualquier objeto al que quieran tener acceso en el método de devolución de llamada.'
       type:
-      - any
+      - Office.AsyncContextOptions
     - id: callback
       description: Opcional. Cuando el método finaliza, la función que se pasa en el parámetro callback se llama con un único parámetro, asyncResult, que es un objeto Office. AsyncResult.
       type:
@@ -897,7 +897,7 @@ items:
 
 
     \[[Conjunto de API: buzón de correo 1,7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Leer mensaje</td></tr> </table>
+  remarks: <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Lectura de mensaje</td></tr> </table>
   name: removeHandlerAsync(eventType, callback)
   fullName: removeHandlerAsync(eventType, callback)
   langs:
@@ -925,7 +925,7 @@ items:
 
     \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Leer mensaje</td></tr> </table>
+    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Lectura de mensaje</td></tr> </table>
 
 
     **Nota**: ciertos tipos de archivos están bloqueados por Outlook debido a posibles problemas de seguridad y, por lo tanto, no se devuelven. Para obtener más información, consulte [datos adjuntos bloqueados en Outlook](https://support.office.com/article/Blocked-attachments-in-Outlook-434752E1-02D3-4E90-9124-8B81E49A8519)<!-- -->.
@@ -976,7 +976,7 @@ items:
 
     \[[Conjunto de API: buzón de correo 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Leer mensaje</td></tr> </table>
+    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Lectura de mensaje</td></tr> </table>
 
     ####Incluyen
 
@@ -1016,12 +1016,12 @@ items:
     Proporciona acceso a los destinatarios CC (en copia) de un mensaje. El tipo de objeto y el nivel de acceso dependen del modo del elemento actual.
 
 
-    La propiedad cc devuelve una matriz que contiene un objeto EmailAddressDetails para cada uno de los destinatarios que aparecen en la línea CC del mensaje. La colección está limitada a un máximo de 100 miembros.
+    La propiedad CC devuelve una matriz que contiene un objeto EmailAddressDetails para cada uno de los destinatarios que aparecen en la línea CC del mensaje. La colección está limitada a un máximo de 100 miembros.
 
 
     \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Leer mensaje</td></tr> </table>
+    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Lectura de mensaje</td></tr> </table>
 
     ####Incluyen
 
@@ -1054,7 +1054,7 @@ items:
 
     \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Leer mensaje</td></tr> </table>
+    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Lectura de mensaje</td></tr> </table>
 
     ####Incluyen
 
@@ -1083,7 +1083,7 @@ items:
 
     \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Leer mensaje</td></tr> </table>
+    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Lectura de mensaje</td></tr> </table>
 
     ####Incluyen
 
@@ -1112,7 +1112,7 @@ items:
 
     \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Leer mensaje</td></tr> </table>
+    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Lectura de mensaje</td></tr> </table>
 
 
     **Nota**: este miembro no se admite en Outlook para iOS ni en Outlook para Android.
@@ -1142,7 +1142,7 @@ items:
     Obtiene la dirección de correo electrónico del remitente de un mensaje.
 
 
-    Las propiedades from y sender representan el mismo usuario, a menos que sea un delegado quien envíe el mensaje. En ese caso, la propiedad from representa el delegador y la propiedad sender representa el delegado.
+    Las propiedades from y Sender representan a la misma persona, a menos que un delegado envíe el mensaje. En ese caso, la propiedad From representa al usuario que delega y la propiedad Sender representa el delegado.
 
 
     **Nota**: la propiedad recipientType del objeto EmailAddressDetails de la propiedad From no está definida.
@@ -1153,7 +1153,7 @@ items:
 
     \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Leer mensaje</td></tr> </table>
+    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Lectura de mensaje</td></tr> </table>
 
     ####Incluyen
 
@@ -1185,7 +1185,7 @@ items:
 
     \[[Conjunto de API: vista previa de buzón](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Leer mensaje</td></tr> </table>
+    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Lectura de mensaje</td></tr> </table>
 
     ####Incluyen
 
@@ -1214,12 +1214,12 @@ items:
       - outlook.Office.InternetHeaders
 - uid: outlook.Office.MessageRead.internetMessageId
   summary: >-
-    Obtiene el identificador de mensaje de Internet de un mensaje de correo.
+    Obtiene el identificador de mensaje de Internet de un mensaje de correo electrónico.
 
 
     \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Leer mensaje</td></tr> </table>
+    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Lectura de mensaje</td></tr> </table>
 
     ####Incluyen
 
@@ -1251,10 +1251,10 @@ items:
 
     \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Leer mensaje</td></tr> </table>
+    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Lectura de mensaje</td></tr> </table>
 
 
-    La propiedad itemClass especifica la clase de mensaje del elemento seleccionado. A continuación, se enumeran las clases de mensaje predeterminadas para el elemento de cita o mensaje.
+    La propiedad itemClass especifica la clase de mensaje del elemento seleccionado. Las siguientes son las clases de mensaje predeterminadas para el elemento de mensaje o cita.
 
 
     <table> <tr> <th>Tipo</th> <th>Descripción</th> <th>Clase Item</th> </tr> <tr> <td>Elementos de cita</td> <td>Estos son los elementos de calendario de la clase de elemento IPM. Appointment o IPM. Appointment. rePeticiones.</td> <td>IPM. Cita, IPM. Appointment. rePeticiones</td> </tr> <tr> <td>Elementos de mensaje</td> <td>Entre estos se encuentran los correos electrónicos que tienen la clase de mensaje predeterminada IPM.Note y las convocatorias de reunión, respuestas y cancelaciones que usan IPM.Schedule.Meeting como clase de mensaje base.</td> <td>IPM. Nota: IPM. Program. Meeting. request, IPM. Program. Meeting. NEG, IPM. Program. Meeting. POS, IPM. Program. Meeting. carpa, IPM. Schedule. Meeting. Canceled</td> </tr> </table>
@@ -1292,7 +1292,7 @@ items:
 
     \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Leer mensaje</td></tr> </table>
+    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Lectura de mensaje</td></tr> </table>
 
     ####Incluyen
 
@@ -1331,12 +1331,12 @@ items:
     Obtiene el tipo de elemento que representa una instancia.
 
 
-    La propiedad itemType devuelve uno de los valores de enumeración de ItemType, lo que indica si la instancia del objeto item es un mensaje o una cita.
+    La propiedad itemType devuelve uno de los valores de enumeración de ItemType, lo que indica si la instancia de objeto de elemento es un mensaje o una cita.
 
 
     \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Leer mensaje</td></tr> </table>
+    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Lectura de mensaje</td></tr> </table>
 
     ####Incluyen
 
@@ -1365,12 +1365,12 @@ items:
     Obtiene el asunto de un elemento, con todos los prefijos quitados (incluidos RE: y FWD:).
 
 
-    La propiedad normalizedSubject obtiene el asunto del elemento, con los prefijos estándar (como RE: y FW:) agregados por los programas de correo electrónico. Para obtener el asunto del elemento con los prefijos intactos, use la propiedad subject.
+    La propiedad normalizedSubject obtiene el asunto del elemento, con todos los prefijos estándar (como RE: y FW:). agregados por los programas de correo electrónico. Para obtener el asunto del elemento con los prefijos intactos, use la propiedad Subject.
 
 
     \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Leer mensaje</td></tr> </table>
+    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Lectura de mensaje</td></tr> </table>
 
     ####Incluyen
 
@@ -1399,7 +1399,7 @@ items:
 
     \[[Conjunto de API: buzón de correo 1,3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Leer mensaje</td></tr> </table>
+    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Lectura de mensaje</td></tr> </table>
 
     ####Incluyen
 
@@ -1427,10 +1427,10 @@ items:
       - NotificationMessages
 - uid: outlook.Office.MessageRead.recurrence
   summary: >-
-    Obtiene el patrón de periodicidad de una cita. Obtiene el patrón de periodicidad de una convocatoria de reunión. Lea y redacte modos de elementos de la cita. Lea más sobre los elementos de solicitud de reunión.
+    Obtiene el patrón de periodicidad de una cita. Obtiene el patrón de periodicidad de una convocatoria de reunión. Modos de lectura y redacción para elementos de cita. Modo de lectura para los elementos de convocatoria de reunión.
 
 
-    La propiedad recurrence devuelve un objeto recurrence para las solicitudes de citas o reuniones periódicas si un elemento es una serie o una instancia de una serie. `null` se devuelve para citas únicas y convocatorias de reunión de citas únicas. `undefined` se devuelve para mensajes que no son convocatorias de reunión.
+    La propiedad recurrence devuelve un objeto recurrence para las solicitudes de citas o reuniones periódicas si un elemento es una serie o una instancia de una serie. `null`se devuelve para citas únicas y convocatorias de reunión de citas únicas. `undefined`se devuelve para los mensajes que no son convocatorias de reunión.
 
 
     **Nota**: las convocatorias de reunión tienen un valor ITEMCLASS de IPM. Schedule. Meeting. request.
@@ -1441,7 +1441,7 @@ items:
 
     \[[Conjunto de API: buzón de correo 1,7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Leer mensaje</td></tr> </table>
+    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Lectura de mensaje</td></tr> </table>
 
     ####Incluyen
 
@@ -1465,10 +1465,10 @@ items:
       - Recurrence
 - uid: outlook.Office.MessageRead.sender
   summary: >-
-    Obtiene la dirección de correo electrónico del remitente de un mensaje de correo.
+    Obtiene la dirección de correo electrónico del remitente de un mensaje de correo electrónico.
 
 
-    Las propiedades from y sender representan el mismo usuario, a menos que sea un delegado quien envíe el mensaje. En ese caso, la propiedad from representa el delegador y la propiedad sender representa el delegado.
+    Las propiedades from y Sender representan a la misma persona, a menos que un delegado envíe el mensaje. En ese caso, la propiedad From representa al usuario que delega y la propiedad Sender representa el delegado.
 
 
     **Nota**: la propiedad recipientType del objeto EmailAddressDetails de la propiedad Sender está sin definir.
@@ -1476,7 +1476,7 @@ items:
 
     \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Leer mensaje</td></tr> </table>
+    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Lectura de mensaje</td></tr> </table>
 
     ####Incluyen
 
@@ -1515,7 +1515,7 @@ items:
 
 
     \[[Conjunto de API: buzón de correo 1,7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: "<table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Leer mensaje</td></tr> </table>\n####Incluyen\n\n```javascript\nvar seriesId = Office.context.mailbox.item.seriesId;\n\n// The seriesId property returns null for items that do\n// not have parent items (such as single appointments,\n// series items, or meeting requests) and returns\n// undefined for messages that are not meeting requests.\nvar isSeriesInstance = (seriesId != null);\nconsole.log(\"SeriesId is \" + seriesId \n    + \" and isSeriesInstance is \" + isSeriesInstance);\n```"
+  remarks: "<table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Lectura de mensaje</td></tr> </table>\n####Incluyen\n\n```javascript\nvar seriesId = Office.context.mailbox.item.seriesId;\n\n// The seriesId property returns null for items that do\n// not have parent items (such as single appointments,\n// series items, or meeting requests) and returns\n// undefined for messages that are not meeting requests.\nvar isSeriesInstance = (seriesId != null);\nconsole.log(\"SeriesId is \" + seriesId \n    + \" and isSeriesInstance is \" + isSeriesInstance);\n```"
   name: seriesId
   fullName: seriesId
   langs:
@@ -1531,15 +1531,15 @@ items:
     Obtiene la descripción que aparece en el campo de asunto de un elemento.
 
 
-    La propiedad subject obtiene o establece el asunto completo del elemento, como lo envió el servidor de correo electrónico.
+    La propiedad Subject obtiene o establece el asunto completo del elemento, como lo ha enviado el servidor de correo electrónico.
 
 
-    La propiedad subject devuelve una cadena. Use la propiedad normalizedSubject para obtener el asunto menos cualquier prefijo inicial como RE: y FW:.
+    La propiedad Subject devuelve una cadena. Use la propiedad normalizedSubject para obtener el asunto menos los prefijos iniciales como RE: y RV:.
 
 
     \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Leer mensaje</td></tr> </table>
+    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Lectura de mensaje</td></tr> </table>
 
     ####Incluyen
 
@@ -1580,12 +1580,12 @@ items:
     Proporciona acceso a los destinatarios en la línea Para de un mensaje. El tipo de objeto y el nivel de acceso dependen del modo del elemento actual.
 
 
-    La propiedad to devuelve una matriz que contiene un objeto EmailAddressDetails para cada uno de los destinatarios que aparecen en la línea Para del mensaje. La colección está limitada a un máximo de 100 miembros.
+    La propiedad to devuelve una matriz que contiene un objeto EmailAddressDetails para cada uno de los destinatarios que aparecen en la línea para del mensaje. La colección está limitada a un máximo de 100 miembros.
 
 
     \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Leer mensaje</td></tr> </table>
+    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Lectura de mensaje</td></tr> </table>
 
     ####Incluyen
 

@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: cf53d2f1b4be020686b4df6de8468a6c9bda276a
-ms.sourcegitcommit: e9bfba6ec767e9d34fd1cf7b38c30f689617900a
+ms.openlocfilehash: 5f9aebbab6f3c0ec1756cf2a6c5419d6db6ca08a
+ms.sourcegitcommit: 788ab9c595c9143f8b8f4822a170e8b90d72ee1d
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 02/20/2019
-ms.locfileid: "30107683"
+ms.lasthandoff: 03/06/2019
+ms.locfileid: "30413850"
 items:
 - uid: excel.Excel.RemoveDuplicatesResult
   summary: >-
@@ -43,7 +43,7 @@ items:
       type:
       - RequestContext
 - uid: excel.Excel.RemoveDuplicatesResult.load
-  summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar a "context. Sync ()" antes de leer las propiedades.
+  summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Antes de leer las propiedades, debe llamar a "context.sync()".
   remarks: >-
     Además de esta firma, este método tiene las siguientes firmas:
 
@@ -112,7 +112,7 @@ items:
       - '{ select?: string; expand?: string; }'
 - uid: excel.Excel.RemoveDuplicatesResult.removed
   summary: >-
-    Número de filas duplicadas que quitó la operación.
+    Número de filas duplicadas quitadas por la operación.
 
 
     \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -158,3 +158,4 @@ items:
     return:
       type:
       - number
+      description: "\n#### <a name=\"examples\"></a>Ejemplos\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n    const range = sheet.getRange(\"B2:D11\");\n\n    const deleteResult = range.removeDuplicates([0],true);    \n    deleteResult.load();    \n    await context.sync();\n\n    console.log(deleteResult.removed + \" entries with duplicate names removed.\");\n    console.log(deleteResult.uniqueRemaining + \" entries with unique names remain in the range.\");\n});\n```"
