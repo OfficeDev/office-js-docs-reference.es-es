@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 19589fbf628ba186c869ea07f86f96dcf947863e
-ms.sourcegitcommit: e9bfba6ec767e9d34fd1cf7b38c30f689617900a
+ms.openlocfilehash: 3f61834aa019e9ce24e42200c4ae4a6ddf757ce1
+ms.sourcegitcommit: 6c48441b8be51d3a9d7dc836e386230a155feceb
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 02/20/2019
-ms.locfileid: "30093990"
+ms.lasthandoff: 02/22/2019
+ms.locfileid: "30198645"
 items:
 - uid: Outlook_1_4.Office.AppointmentRead
   summary: >-
@@ -23,16 +23,13 @@ items:
   package: Outlook_1_4
   children:
   - Outlook_1_4.Office.AppointmentRead.displayReplyAllForm
-  - Outlook_1_4.Office.AppointmentRead.displayReplyAllForm_1
   - Outlook_1_4.Office.AppointmentRead.displayReplyForm
-  - Outlook_1_4.Office.AppointmentRead.displayReplyForm_1
   - Outlook_1_4.Office.AppointmentRead.getEntities
   - Outlook_1_4.Office.AppointmentRead.getEntitiesByType
   - Outlook_1_4.Office.AppointmentRead.getFilteredEntitiesByName
   - Outlook_1_4.Office.AppointmentRead.getRegExMatches
   - Outlook_1_4.Office.AppointmentRead.getRegExMatchesByName
   - Outlook_1_4.Office.AppointmentRead.loadCustomPropertiesAsync
-  - Outlook_1_4.Office.AppointmentRead.loadCustomPropertiesAsync_1
   - Outlook_1_4.Office.AppointmentRead.attachments
   - Outlook_1_4.Office.AppointmentRead.body
   - Outlook_1_4.Office.AppointmentRead.dateTimeCreated
@@ -57,82 +54,10 @@ items:
     En Outlook Web App, el formulario de respuestas aparece como formulario emergente en la vista de tres columnas y en la vista de una o de dos columnas.
 
 
-    Si cualquiera de los parámetros de cadena supera sus límites, displayReplyAllForm produce una excepción.
+    Si alguno de los parámetros de cadena supera sus límites, displayReplyAllForm inicia una excepción.
 
 
-    Cuando los datos adjuntos se especifican en el parámetro formData.attachments, Outlook y Outlook Web App intentan descargar todos los datos adjuntos y adjuntarlos al formulario de respuesta. Si no se pudo agregar algún dato adjunto, se muestra un error en la interfaz de usuario del formulario. Si esto no es posible, no se produce ningún mensaje de error.
-
-
-    **Nota**: este método no se admite en Outlook para iOS ni en Outlook para Android.
-
-
-    \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: >-
-    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Asistente de cita</td></tr> </table>
-
-    ####Incluyen
-
-
-    ```javascript
-
-    // Reply with a body, file attachment, item attachment, and a callback.
-
-    Office.context.mailbox.item.displayReplyAllForm(
-
-    {
-        'htmlBody' : 'hi',
-        'attachments' :
-        [
-            {
-                'type' : Office.MailboxEnums.AttachmentType.File,
-                'name' : 'squirrel.png',
-                'url' : 'http://i.imgur.com/sRgTlGR.jpg'
-            },
-            {
-                'type' : 'item',
-                'name' : 'rand',
-                'itemId' : Office.context.mailbox.item.itemId
-            }
-        ],
-        'callback' : function(asyncResult)
-        {
-            console.log(asyncResult.value);
-        }
-    });
-
-    ```
-  name: displayReplyAllForm(formData, callback)
-  fullName: displayReplyAllForm(formData, callback)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'displayReplyAllForm(formData: string | ReplyFormData, callback?: (result: Office.AsyncResult<void>) => void): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: formData
-      description: Una cadena que contiene texto y HTML y que representa el cuerpo del formulario de respuestas. La cadena está limitada a 32 KB o un objeto [Office. ReplyFormData](xref:Outlook_1_4.Office.ReplyFormData) que contiene datos de cuerpo o datos adjuntos y una función de devolución de llamada.
-      type:
-      - string | ReplyFormData
-    - id: callback
-      description: Opcional. Cuando el método finaliza, la función que se pasa en el parámetro callback se llama con un único parámetro, asyncResult, que es un objeto Office. AsyncResult.
-      type:
-      - '(result: Office.AsyncResult<void>) => void'
-- uid: Outlook_1_4.Office.AppointmentRead.displayReplyAllForm_1
-  summary: >-
-    Muestra un formulario de respuesta que incluye el remitente y todos los destinatarios del mensaje seleccionado o el organizador y todos los asistentes de la cita seleccionada.
-
-
-    En Outlook Web App, el formulario de respuestas aparece como formulario emergente en la vista de tres columnas y en la vista de una o de dos columnas.
-
-
-    Si cualquiera de los parámetros de cadena supera sus límites, displayReplyAllForm produce una excepción.
-
-
-    Cuando los datos adjuntos se especifican en el parámetro formData.attachments, Outlook y Outlook Web App intentan descargar todos los datos adjuntos y adjuntarlos al formulario de respuesta. Si no se pudo agregar algún dato adjunto, se muestra un error en la interfaz de usuario del formulario. Si esto no es posible, no se produce ningún mensaje de error.
+    Cuando los datos adjuntos se especifican en el parámetro Formulariomodo. Attachments, Outlook y Outlook Web App intentan descargar todos los datos adjuntos y adjuntarlos al formulario de respuesta. Si se produce un error al agregar los datos adjuntos, se muestra un error en la interfaz de usuario del formulario. Si esto no es posible, no se produce ningún mensaje de error.
 
 
     **Nota**: este método no se admite en Outlook para iOS ni en Outlook para Android.
@@ -203,52 +128,10 @@ items:
         ]
     });
 
-    ```
-  name: displayReplyAllForm(formData)
-  fullName: displayReplyAllForm(formData)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'displayReplyAllForm(formData: string | ReplyFormData): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: formData
-      description: Una cadena que contiene texto y HTML y que representa el cuerpo del formulario de respuestas. La cadena está limitada a 32 KB o un objeto [Office. ReplyFormData](xref:Outlook_1_4.Office.ReplyFormData) que contiene datos de cuerpo o datos adjuntos y una función de devolución de llamada.
-      type:
-      - string | ReplyFormData
-- uid: Outlook_1_4.Office.AppointmentRead.displayReplyForm
-  summary: >-
-    Muestra un formulario de respuesta que incluye solo el remitente del mensaje seleccionado o el organizador de la cita seleccionada.
-
-
-    En Outlook Web App, el formulario de respuestas aparece como formulario emergente en la vista de tres columnas y en la vista de una o de dos columnas.
-
-
-    Si cualquiera de los parámetros de cadena supera sus límites, displayReplyForm produce una excepción.
-
-
-    Cuando los datos adjuntos se especifican en el parámetro formData.attachments, Outlook y Outlook Web App intentan descargar todos los datos adjuntos y adjuntarlos al formulario de respuesta. Si no se pudo agregar algún dato adjunto, se muestra un error en la interfaz de usuario del formulario. Si esto no es posible, no se produce ningún mensaje de error.
-
-
-    **Nota**: este método no se admite en Outlook para iOS ni en Outlook para Android.
-
-
-    \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: >-
-    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Asistente de cita</td></tr> </table>
-
-    ####Incluyen
-
-
-    ```javascript
 
     // Reply with a body, file attachment, item attachment, and a callback.
 
-    Office.context.mailbox.item.displayReplyForm(
+    Office.context.mailbox.item.displayReplyAllForm(
 
     {
         'htmlBody' : 'hi',
@@ -272,13 +155,13 @@ items:
     });
 
     ```
-  name: displayReplyForm(formData, callback)
-  fullName: displayReplyForm(formData, callback)
+  name: displayReplyAllForm(formData, callback)
+  fullName: displayReplyAllForm(formData, callback)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'displayReplyForm(formData: string | ReplyFormData, callback?: (result: Office.AsyncResult<void>) => void): void;'
+    content: 'displayReplyAllForm(formData: string | ReplyFormData, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     return:
       type:
       - void
@@ -291,8 +174,8 @@ items:
     - id: callback
       description: Opcional. Cuando el método finaliza, la función que se pasa en el parámetro callback se llama con un único parámetro, asyncResult, que es un objeto Office. AsyncResult.
       type:
-      - '(result: Office.AsyncResult<void>) => void'
-- uid: Outlook_1_4.Office.AppointmentRead.displayReplyForm_1
+      - '(asyncResult: Office.AsyncResult<void>) => void'
+- uid: Outlook_1_4.Office.AppointmentRead.displayReplyForm
   summary: >-
     Muestra un formulario de respuesta que incluye solo el remitente del mensaje seleccionado o el organizador de la cita seleccionada.
 
@@ -300,10 +183,10 @@ items:
     En Outlook Web App, el formulario de respuestas aparece como formulario emergente en la vista de tres columnas y en la vista de una o de dos columnas.
 
 
-    Si cualquiera de los parámetros de cadena supera sus límites, displayReplyForm produce una excepción.
+    Si alguno de los parámetros de cadena supera sus límites, displayReplyForm inicia una excepción.
 
 
-    Cuando los datos adjuntos se especifican en el parámetro formData.attachments, Outlook y Outlook Web App intentan descargar todos los datos adjuntos y adjuntarlos al formulario de respuesta. Si no se pudo agregar algún dato adjunto, se muestra un error en la interfaz de usuario del formulario. Si esto no es posible, no se produce ningún mensaje de error.
+    Cuando los datos adjuntos se especifican en el parámetro Formulariomodo. Attachments, Outlook y Outlook Web App intentan descargar todos los datos adjuntos y adjuntarlos al formulario de respuesta. Si se produce un error al agregar los datos adjuntos, se muestra un error en la interfaz de usuario del formulario. Si esto no es posible, no se produce ningún mensaje de error.
 
 
     **Nota**: este método no se admite en Outlook para iOS ni en Outlook para Android.
@@ -372,14 +255,40 @@ items:
         ]
     });
 
+
+    // Reply with a body, file attachment, item attachment, and a callback.
+
+    Office.context.mailbox.item.displayReplyForm(
+
+    {
+        'htmlBody' : 'hi',
+        'attachments' :
+        [
+            {
+                'type' : Office.MailboxEnums.AttachmentType.File,
+                'name' : 'squirrel.png',
+                'url' : 'http://i.imgur.com/sRgTlGR.jpg'
+            },
+            {
+                'type' : 'item',
+                'name' : 'rand',
+                'itemId' : Office.context.mailbox.item.itemId
+            }
+        ],
+        'callback' : function(asyncResult)
+        {
+            console.log(asyncResult.value);
+        }
+    });
+
     ```
-  name: displayReplyForm(formData)
-  fullName: displayReplyForm(formData)
+  name: displayReplyForm(formData, callback)
+  fullName: displayReplyForm(formData, callback)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'displayReplyForm(formData: string | ReplyFormData): void;'
+    content: 'displayReplyForm(formData: string | ReplyFormData, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     return:
       type:
       - void
@@ -389,6 +298,10 @@ items:
       description: Una cadena que contiene texto y HTML y que representa el cuerpo del formulario de respuestas. La cadena está limitada a 32 KB o un objeto [Office. ReplyFormData](xref:Outlook_1_4.Office.ReplyFormData) que contiene datos de cuerpo o datos adjuntos y una función de devolución de llamada.
       type:
       - string | ReplyFormData
+    - id: callback
+      description: Opcional. Cuando el método finaliza, la función que se pasa en el parámetro callback se llama con un único parámetro, asyncResult, que es un objeto Office. AsyncResult.
+      type:
+      - '(asyncResult: Office.AsyncResult<void>) => void'
 - uid: Outlook_1_4.Office.AppointmentRead.getEntities
   summary: >-
     Obtiene las entidades que obtenidas en el cuerpo del elemento seleccionado.
@@ -433,13 +346,13 @@ items:
 
     \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>Restringido</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Asistente de cita</td></tr> </table>
+    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>Restringido</td></tr> <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Asistente de cita</td></tr> </table>
 
 
     Aunque el nivel de permiso mínimo para usar este método es Restricted, algunos tipos de entidad requieren ReadItem para tener acceso, como se especifica en la tabla siguiente.
 
 
-    <table> <tr> <th>Valor de entityType</th> <th>Tipo de objetos de la matriz devuelta</th> <th>Nivel de permiso requerido</th> </tr> <tr> <td>Address</td> <td>Cadena</td> <td>Restringido</td> </tr> <tr> <td>Contact</td> <td>Contact</td> <td>ReadItem</td> </tr> <tr> <td>EmailAddress</td> <td>String</td> <td>ReadItem</td> </tr> <tr> <td>MeetingSuggestion</td> <td>MeetingSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>PhoneNumber</td> <td>PhoneNumber</td> <td>Restringido</td> </tr> <tr> <td>TaskSuggestion</td> <td>TaskSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>URL</td> <td>Cadena</td> <td>Restringido</td> </tr> </table>
+    <table> <tr> <th>Valor de entityType</th> <th>Tipo de objetos de la matriz devuelta</th> <th>Nivel de permiso requerido</th> </tr> <tr> <td>Dirección</td> <td>String</td> <td>Restricted</td> </tr> <tr> <td>Contacto</td> <td>Contacto</td> <td>ReadItem</td> </tr> <tr> <td>EmailAddress</td> <td>String</td> <td>ReadItem</td> </tr> <tr> <td>MeetingSuggestion</td> <td>MeetingSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>PhoneNumber</td> <td>PhoneNumber</td> <td>Restricted</td> </tr> <tr> <td>TaskSuggestion</td> <td>TaskSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>URL</td> <td>String</td> <td>Restricted</td> </tr> </table>
 
     #### Ejemplos
 
@@ -504,10 +417,10 @@ items:
     return:
       type:
       - (string | Contact | MeetingSuggestion | PhoneNumber | TaskSuggestion)[]
-      description: Si no existe ningún elemento ItemHasKnownEntity en el manifiesto con un valor de elemento FilterName que coincida con el parámetro name, el método devuelve null. Si el parámetro name no coincide con un elemento ItemHasKnownEntity del manifiesto, pero no existen entidades en el elemento actual que coincidan, el método devuelve una matriz vacía.
+      description: Si no hay ningún elemento ItemHasKnownEntity en el manifiesto con un valor de elemento FilterName que coincida con el parámetro name, el método devuelve NULL. Si el parámetro name coincide con un elemento ItemHasKnownEntity en el manifiesto, pero no hay entidades en el elemento actual que coinciden, el método devuelve una matriz vacía.
     parameters:
     - id: name
-      description: El nombre del elemento de regla ItemHasKnownEntity que define el filtro para que coincidan.
+      description: El nombre del elemento de regla ItemHasKnownEntity que define el filtro para que sea coincidente.
       type:
       - string
 - uid: Outlook_1_4.Office.AppointmentRead.getRegExMatches
@@ -518,7 +431,7 @@ items:
     El método getRegExMatches devuelve las cadenas que coinciden con la expresión regular definida en cada elemento de regla ItemHasRegularExpressionMatch o ItemHasKnownEntity del archivo XML de manifiesto. Para una regla ItemHasRegularExpressionMatch, debe haber una cadena coincidente en la propiedad del elemento especificado por esa regla. El tipo simple PropertyName define las propiedades admitidas.
 
 
-    Si especifica una regla ItemHasRegularExpressionMatch en la propiedad de cuerpo de un elemento, la expresión regular debe filtrar aún más el cuerpo y no intentar devolver todo el cuerpo del elemento. El uso de una expresión regular como .* para obtener todo el cuerpo de un elemento no siempre devuelve los resultados esperados. En su lugar, use el método Body.getAsync para recuperar el cuerpo completo.
+    Si especifica una regla ItemHasRegularExpressionMatch en la propiedad de cuerpo de un elemento, la expresión regular debe filtrar aún más el cuerpo y no intentar devolver todo el cuerpo del elemento. El uso de una expresión regular como .* para obtener todo el cuerpo de un elemento no siempre devuelve los resultados esperados. En su lugar, use el método Body. getAsync para recuperar todo el cuerpo.
 
 
     **Nota**: este método no se admite en Outlook para iOS ni en Outlook para Android.
@@ -526,7 +439,7 @@ items:
 
     \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Asistente de cita</td></tr> </table>
+    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Asistente de cita</td></tr> </table>
 
     ####Incluyen
 
@@ -584,7 +497,7 @@ items:
     return:
       type:
       - any
-      description: Un objeto que contiene matrices de cadenas que coinciden con las expresiones regulares definidas en el archivo XML de manifiesto. El nombre de cada matriz es igual al valor correspondiente del atributo RegExName de la regla ItemHasRegularExpressionMatch coincidente o al atributo FilterName de la regla ItemHasKnownEntity coincidente.
+      description: Un objeto que contiene matrices de cadenas que coinciden con las expresiones regulares definidas en el archivo XML de manifiesto. El nombre de cada matriz es igual al valor correspondiente del atributo RegExName de la regla ItemHasRegularExpressionMatch correspondiente o al atributo FilterName de la regla ItemHasKnownEntity correspondiente.
 - uid: Outlook_1_4.Office.AppointmentRead.getRegExMatchesByName
   summary: >-
     Devuelve valores de cadena en el elemento seleccionado que coinciden con la expresión regular de nombre definida en el archivo XML de manifiesto.
@@ -601,7 +514,7 @@ items:
 
     \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Asistente de cita</td></tr> </table>
+    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Asistente de cita</td></tr> </table>
 
     ####Incluyen
 
@@ -654,7 +567,7 @@ items:
       description: Una matriz que contiene las cadenas que coinciden con la expresión regular definida en el archivo XML de manifiesto.
     parameters:
     - id: name
-      description: El nombre del elemento de regla ItemHasRegularExpressionMatch que define el filtro para que coincidan.
+      description: Nombre del elemento de regla ItemHasRegularExpressionMatch que define el filtro que debe coincidir.
       type:
       - string
 - uid: Outlook_1_4.Office.AppointmentRead.loadCustomPropertiesAsync
@@ -662,21 +575,21 @@ items:
     Carga de forma asincrónica las propiedades personalizadas de este complemento en el elemento seleccionado.
 
 
-    Las propiedades personalizadas se almacenan como pares de clave/valor según la aplicación y el elemento. Este método devuelve un objeto CustomProperties en la devolución de llamada, que proporciona métodos para tener acceso a las propiedades personalizadas específicas del elemento y el complemento actual. Las propiedades personalizadas no están cifradas en el elemento, por lo que no debería usarse como almacenamiento seguro.
+    Las propiedades personalizadas se almacenan como pares de clave/valor según la aplicación y el elemento. Este método devuelve un objeto CustomProperties en la devolución de llamada, que proporciona métodos para tener acceso a las propiedades personalizadas específicas del elemento actual y del complemento actual. Las propiedades personalizadas no están cifradas en el elemento, por lo que no debería usarse como almacenamiento seguro.
 
 
-    Las propiedades personalizadas se proporcionan como un objeto CustomProperties en la propiedad asyncResult.value. Este objeto puede usarse para obtener, establecer y quitar las propiedades personalizadas del elemento, y guardar los cambios en la propiedad personalizada que se vuelve a establecer en el servidor.
+    Las propiedades personalizadas se proporcionan como un objeto CustomProperties en la propiedad asyncResult. Value. Este objeto puede usarse para obtener, establecer y quitar las propiedades personalizadas del elemento, así como para guardar los cambios en la propiedad personalizada que se vuelve a establecer en el servidor.
 
 
     \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Asistente de cita</td></tr> </table>
+  remarks: <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Asistente de cita</td></tr> </table>
   name: loadCustomPropertiesAsync(callback, userContext)
   fullName: loadCustomPropertiesAsync(callback, userContext)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'loadCustomPropertiesAsync(callback: (result: Office.AsyncResult<CustomProperties>) => void, userContext?: any): void;'
+    content: 'loadCustomPropertiesAsync(callback: (asyncResult: Office.AsyncResult<CustomProperties>) => void, userContext?: any): void;'
     return:
       type:
       - void
@@ -685,40 +598,11 @@ items:
     - id: callback
       description: Cuando el método finaliza, la función que se pasa en el parámetro callback se llama con un único parámetro de tipo Office. AsyncResult.
       type:
-      - '(result: Office.AsyncResult<CustomProperties>) => void'
+      - '(asyncResult: Office.AsyncResult<CustomProperties>) => void'
     - id: userContext
       description: Opcional. Los desarrolladores pueden proporcionar cualquier objeto al que quieran obtener acceso en la función de devolución de llamada. Se puede obtener acceso a este objeto mediante la propiedad asyncResult. asyncContext en la función de devolución de llamada.
       type:
       - any
-- uid: Outlook_1_4.Office.AppointmentRead.loadCustomPropertiesAsync_1
-  summary: >-
-    Carga de forma asincrónica las propiedades personalizadas de este complemento en el elemento seleccionado.
-
-
-    Las propiedades personalizadas se almacenan como pares de clave/valor según la aplicación y el elemento. Este método devuelve un objeto CustomProperties en la devolución de llamada, que proporciona métodos para tener acceso a las propiedades personalizadas específicas del elemento y el complemento actual. Las propiedades personalizadas no están cifradas en el elemento, por lo que no debería usarse como almacenamiento seguro.
-
-
-    Las propiedades personalizadas se proporcionan como un objeto CustomProperties en la propiedad asyncResult.value. Este objeto puede usarse para obtener, establecer y quitar las propiedades personalizadas del elemento, y guardar los cambios en la propiedad personalizada que se vuelve a establecer en el servidor.
-
-
-    \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Asistente de cita</td></tr> </table>
-  name: loadCustomPropertiesAsync(callback)
-  fullName: loadCustomPropertiesAsync(callback)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'loadCustomPropertiesAsync(callback: (result: Office.AsyncResult<CustomProperties>) => void): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: callback
-      description: Cuando el método finaliza, la función que se pasa en el parámetro callback se llama con un único parámetro de tipo Office. AsyncResult.
-      type:
-      - '(result: Office.AsyncResult<CustomProperties>) => void'
 - uid: Outlook_1_4.Office.AppointmentRead.attachments
   summary: >-
     Obtiene los datos adjuntos del elemento como una matriz.
@@ -726,7 +610,7 @@ items:
 
     \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Asistente de cita</td></tr> </table>
+    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Asistente de cita</td></tr> </table>
 
 
     **Nota**: ciertos tipos de archivos están bloqueados por Outlook debido a posibles problemas de seguridad y, por lo tanto, no se devuelven. Para obtener más información, consulte [datos adjuntos bloqueados en Outlook](https://support.office.com/article/Blocked-attachments-in-Outlook-434752E1-02D3-4E90-9124-8B81E49A8519)<!-- -->.
@@ -777,7 +661,7 @@ items:
 
     \[[Conjunto de API: buzón de correo 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Asistente de cita</td></tr> </table>
+    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Asistente de cita</td></tr> </table>
 
     ####Incluyen
 
@@ -819,7 +703,7 @@ items:
 
     \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Asistente de cita</td></tr> </table>
+    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Asistente de cita</td></tr> </table>
 
     ####Incluyen
 
@@ -848,7 +732,7 @@ items:
 
     \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Asistente de cita</td></tr> </table>
+    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Asistente de cita</td></tr> </table>
 
 
     **Nota**: este miembro no se admite en Outlook para iOS ni en Outlook para Android.
@@ -881,12 +765,12 @@ items:
     La propiedad end es un objeto Date expresado como un valor de fecha y hora de la hora universal coordinada (UTC). Puede usar el método convertToLocalClientTime para convertir el valor de la propiedad end en la fecha y hora local del cliente.
 
 
-    Si usa el método Time.setAsync para establecer la hora de finalización, use el método convertToUtcClientTime para convertir la hora local del cliente en un valor UTC para el servidor.
+    Cuando use el método Time. setAsync para establecer la hora de finalización, debe usar el método convertToUtcClientTime para convertir la hora local del cliente en un valor UTC para el servidor.
 
 
     \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Asistente de cita</td></tr> </table>
+    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Asistente de cita</td></tr> </table>
 
     ####Incluyen
 
@@ -918,10 +802,10 @@ items:
 
     \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Asistente de cita</td></tr> </table>
+    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Asistente de cita</td></tr> </table>
 
 
-    La propiedad itemClass especifica la clase de mensaje del elemento seleccionado. A continuación, se enumeran las clases de mensaje predeterminadas para el elemento de cita o mensaje.
+    La propiedad itemClass especifica la clase de mensaje del elemento seleccionado. Las siguientes son las clases de mensaje predeterminadas para el elemento de mensaje o cita.
 
 
     <table> <tr> <th>Tipo</th> <th>Descripción</th> <th>Clase Item</th> </tr> <tr> <td>Elementos de cita</td> <td>Estos son los elementos de calendario de la clase de elemento IPM. Appointment o IPM. Appointment. rePeticiones.</td> <td>IPM. Cita, IPM. Appointment. rePeticiones</td> </tr> <tr> <td>Elementos de mensaje</td> <td>Entre estos se encuentran los correos electrónicos que tienen la clase de mensaje predeterminada IPM.Note y las convocatorias de reunión, respuestas y cancelaciones que usan IPM.Schedule.Meeting como clase de mensaje base.</td> <td>IPM. Nota: IPM. Program. Meeting. request, IPM. Program. Meeting. NEG, IPM. Program. Meeting. POS, IPM. Program. Meeting. carpa, IPM. Schedule. Meeting. Canceled</td> </tr> </table>
@@ -959,7 +843,7 @@ items:
 
     \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Asistente de cita</td></tr> </table>
+    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Asistente de cita</td></tr> </table>
 
     ####Incluyen
 
@@ -998,12 +882,12 @@ items:
     Obtiene el tipo de elemento que representa una instancia.
 
 
-    La propiedad itemType devuelve uno de los valores de enumeración de ItemType, lo que indica si la instancia del objeto item es un mensaje o una cita.
+    La propiedad itemType devuelve uno de los valores de enumeración de ItemType, lo que indica si la instancia de objeto de elemento es un mensaje o una cita.
 
 
     \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Asistente de cita</td></tr> </table>
+    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Asistente de cita</td></tr> </table>
 
     ####Incluyen
 
@@ -1032,12 +916,12 @@ items:
     Obtiene la ubicación de una cita.
 
 
-    La propiedad location devuelve una cadena que contiene la ubicación de la cita.
+    La propiedad Location devuelve una cadena que contiene la ubicación de la cita.
 
 
     \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Asistente de cita</td></tr> </table>
+    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Asistente de cita</td></tr> </table>
 
     ####Incluyen
 
@@ -1064,12 +948,12 @@ items:
     Obtiene el asunto de un elemento, con todos los prefijos quitados (incluidos RE: y FWD:).
 
 
-    La propiedad normalizedSubject obtiene el asunto del elemento, con los prefijos estándar (como RE: y FW:) agregados por los programas de correo electrónico. Para obtener el asunto del elemento con los prefijos intactos, use la propiedad subject.
+    La propiedad normalizedSubject obtiene el asunto del elemento, con todos los prefijos estándar (como RE: y FW:). agregados por los programas de correo electrónico. Para obtener el asunto del elemento con los prefijos intactos, use la propiedad Subject.
 
 
     \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Asistente de cita</td></tr> </table>
+    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Asistente de cita</td></tr> </table>
 
     ####Incluyen
 
@@ -1098,7 +982,7 @@ items:
 
     \[[Conjunto de API: buzón de correo 1,3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Asistente de cita</td></tr> </table>
+    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Asistente de cita</td></tr> </table>
 
     ####Incluyen
 
@@ -1134,7 +1018,7 @@ items:
 
     \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Asistente de cita</td></tr> </table>
+    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Asistente de cita</td></tr> </table>
 
     ####Incluyen
 
@@ -1163,7 +1047,7 @@ items:
 
     \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Asistente de cita</td></tr> </table>
+    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Asistente de cita</td></tr> </table>
 
     ####Incluyen
 
@@ -1197,7 +1081,7 @@ items:
 
     \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Asistente de cita</td></tr> </table>
+    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Asistente de cita</td></tr> </table>
 
     ####Incluyen
 
@@ -1229,7 +1113,7 @@ items:
 
     \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Asistente de cita</td></tr> </table>
+    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Asistente de cita</td></tr> </table>
 
     ####Incluyen
 
@@ -1256,15 +1140,15 @@ items:
     Obtiene la descripción que aparece en el campo de asunto de un elemento.
 
 
-    La propiedad subject obtiene o establece el asunto completo del elemento, como lo envió el servidor de correo electrónico.
+    La propiedad Subject obtiene o establece el asunto completo del elemento, como lo ha enviado el servidor de correo electrónico.
 
 
-    La propiedad subject devuelve una cadena. Use la propiedad normalizedSubject para obtener el asunto menos cualquier prefijo inicial como RE: y FW:.
+    La propiedad Subject devuelve una cadena. Use la propiedad normalizedSubject para obtener el asunto menos los prefijos iniciales como RE: y RV:.
 
 
     \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Asistente de cita</td></tr> </table>
+    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Asistente de cita</td></tr> </table>
 
     ####Incluyen
 

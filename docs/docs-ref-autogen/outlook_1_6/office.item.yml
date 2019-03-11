@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 1a738bedccc06a4c60c2ce2692a8b4c3dbdc5735
-ms.sourcegitcommit: e9bfba6ec767e9d34fd1cf7b38c30f689617900a
+ms.openlocfilehash: 9f6f36ad49d91f9f059a7b0bf5003919da2d3e5a
+ms.sourcegitcommit: 6c48441b8be51d3a9d7dc836e386230a155feceb
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 02/20/2019
-ms.locfileid: "30094522"
+ms.lasthandoff: 02/22/2019
+ms.locfileid: "30199197"
 items:
 - uid: Outlook_1_6.Office.Item
   summary: >-
@@ -21,7 +21,6 @@ items:
   package: Outlook_1_6
   children:
   - Outlook_1_6.Office.Item.loadCustomPropertiesAsync
-  - Outlook_1_6.Office.Item.loadCustomPropertiesAsync_1
   - Outlook_1_6.Office.Item.body
   - Outlook_1_6.Office.Item.itemType
   - Outlook_1_6.Office.Item.notificationMessages
@@ -30,43 +29,10 @@ items:
     Carga de forma asincrónica las propiedades personalizadas de este complemento en el elemento seleccionado.
 
 
-    Las propiedades personalizadas se almacenan como pares de clave/valor según la aplicación y el elemento. Este método devuelve un objeto CustomProperties en la devolución de llamada, que proporciona métodos para tener acceso a las propiedades personalizadas específicas del elemento y el complemento actual. Las propiedades personalizadas no están cifradas en el elemento, por lo que no debería usarse como almacenamiento seguro.
+    Las propiedades personalizadas se almacenan como pares de clave/valor según la aplicación y el elemento. Este método devuelve un objeto CustomProperties en la devolución de llamada, que proporciona métodos para tener acceso a las propiedades personalizadas específicas del elemento actual y del complemento actual. Las propiedades personalizadas no están cifradas en el elemento, por lo que no debería usarse como almacenamiento seguro.
 
 
-    Las propiedades personalizadas se proporcionan como un objeto CustomProperties en la propiedad asyncResult.value. Este objeto puede usarse para obtener, establecer y quitar las propiedades personalizadas del elemento, y guardar los cambios en la propiedad personalizada que se vuelve a establecer en el servidor.
-
-
-    \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redacción o lectura</td></tr> </table>
-  name: loadCustomPropertiesAsync(callback, userContext)
-  fullName: loadCustomPropertiesAsync(callback, userContext)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'loadCustomPropertiesAsync(callback: (result: Office.AsyncResult<CustomProperties>) => void, userContext?: any): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: callback
-      description: Cuando el método finaliza, la función que se pasa en el parámetro callback se llama con un único parámetro de tipo Office. AsyncResult.
-      type:
-      - '(result: Office.AsyncResult<CustomProperties>) => void'
-    - id: userContext
-      description: Opcional. Los desarrolladores pueden proporcionar cualquier objeto al que quieran obtener acceso en la función de devolución de llamada. Se puede obtener acceso a este objeto mediante la propiedad asyncResult. asyncContext en la función de devolución de llamada.
-      type:
-      - any
-- uid: Outlook_1_6.Office.Item.loadCustomPropertiesAsync_1
-  summary: >-
-    Carga de forma asincrónica las propiedades personalizadas de este complemento en el elemento seleccionado.
-
-
-    Las propiedades personalizadas se almacenan como pares de clave/valor según la aplicación y el elemento. Este método devuelve un objeto CustomProperties en la devolución de llamada, que proporciona métodos para tener acceso a las propiedades personalizadas específicas del elemento y el complemento actual. Las propiedades personalizadas no están cifradas en el elemento, por lo que no debería usarse como almacenamiento seguro.
-
-
-    Las propiedades personalizadas se proporcionan como un objeto CustomProperties en la propiedad asyncResult.value. Este objeto puede usarse para obtener, establecer y quitar las propiedades personalizadas del elemento, y guardar los cambios en la propiedad personalizada que se vuelve a establecer en el servidor.
+    Las propiedades personalizadas se proporcionan como un objeto CustomProperties en la propiedad asyncResult. Value. Este objeto puede usarse para obtener, establecer y quitar las propiedades personalizadas del elemento, así como para guardar los cambios en la propiedad personalizada que se vuelve a establecer en el servidor.
 
 
     \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -116,13 +82,13 @@ items:
     }
 
     ```
-  name: loadCustomPropertiesAsync(callback)
-  fullName: loadCustomPropertiesAsync(callback)
+  name: loadCustomPropertiesAsync(callback, userContext)
+  fullName: loadCustomPropertiesAsync(callback, userContext)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'loadCustomPropertiesAsync(callback: (result: Office.AsyncResult<CustomProperties>) => void): void;'
+    content: 'loadCustomPropertiesAsync(callback: (asyncResult: Office.AsyncResult<CustomProperties>) => void, userContext?: any): void;'
     return:
       type:
       - void
@@ -131,7 +97,11 @@ items:
     - id: callback
       description: Cuando el método finaliza, la función que se pasa en el parámetro callback se llama con un único parámetro de tipo Office. AsyncResult.
       type:
-      - '(result: Office.AsyncResult<CustomProperties>) => void'
+      - '(asyncResult: Office.AsyncResult<CustomProperties>) => void'
+    - id: userContext
+      description: Opcional. Los desarrolladores pueden proporcionar cualquier objeto al que quieran obtener acceso en la función de devolución de llamada. Se puede obtener acceso a este objeto mediante la propiedad asyncResult. asyncContext en la función de devolución de llamada.
+      type:
+      - any
 - uid: Outlook_1_6.Office.Item.body
   summary: >-
     Obtiene un objeto que proporciona métodos para manipular el cuerpo de un elemento.
@@ -179,7 +149,7 @@ items:
     Obtiene el tipo de elemento que representa una instancia.
 
 
-    La propiedad itemType devuelve uno de los valores de enumeración de ItemType, lo que indica si la instancia del objeto item es un mensaje o una cita.
+    La propiedad itemType devuelve uno de los valores de enumeración de ItemType, lo que indica si la instancia de objeto de elemento es un mensaje o una cita.
 
 
     \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
