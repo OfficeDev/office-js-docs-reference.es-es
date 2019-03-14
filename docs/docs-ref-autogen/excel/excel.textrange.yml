@@ -1,13 +1,17 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 8a4669fc1d872fd67cced0c9423ab0abf6c4ae66
-ms.sourcegitcommit: e9bfba6ec767e9d34fd1cf7b38c30f689617900a
+ms.openlocfilehash: f8cf30790ef3a9d2a990843eb8425fc8bdd2a60a
+ms.sourcegitcommit: 5e31602ed9cbddfcff2768b7ed69dd4821440b90
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 02/20/2019
-ms.locfileid: "30108306"
+ms.lasthandoff: 03/14/2019
+ms.locfileid: "30575658"
 items:
 - uid: excel.Excel.TextRange
-  summary: '\[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]'
+  summary: >-
+    Contiene el texto que hay unido a una forma, además de las propiedades y los métodos de manipulación del texto.
+
+
+    \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   isPreview: true
   name: Excel.TextRange
   fullName: Excel.TextRange
@@ -20,7 +24,7 @@ items:
   children:
   - excel.Excel.TextRange.context
   - excel.Excel.TextRange.font
-  - excel.Excel.TextRange.getCharacters
+  - excel.Excel.TextRange.getSubstring
   - excel.Excel.TextRange.load
   - excel.Excel.TextRange.load_1
   - excel.Excel.TextRange.load_2
@@ -43,7 +47,7 @@ items:
       - RequestContext
 - uid: excel.Excel.TextRange.font
   summary: >-
-    Devuelve un objeto ShapeFont que representa los atributos de fuente del intervalo de texto. Solo lectura.
+    Devuelve un objeto ShapeFont que representa los atributos de fuente para el intervalo de texto. Solo lectura.
 
 
     \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -58,35 +62,35 @@ items:
     return:
       type:
       - excel.Excel.ShapeFont
-- uid: excel.Excel.TextRange.getCharacters
+- uid: excel.Excel.TextRange.getSubstring
   summary: >-
-    Devuelve un objeto TextRange para los caracteres del intervalo especificado.
+    Devuelve un objeto TextRange para la subcadena del intervalo especificado.
 
 
     \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   isPreview: true
-  name: getCharacters(start, length)
-  fullName: getCharacters(start, length)
+  name: getSubstring(start, length)
+  fullName: getSubstring(start, length)
   langs:
   - typeScript
   type: method
   syntax:
-    content: 'getCharacters(start: number, length?: number): Excel.TextRange;'
+    content: 'getSubstring(start: number, length?: number): Excel.TextRange;'
     return:
       type:
       - excel.Excel.TextRange
       description: ''
     parameters:
     - id: start
-      description: Posición del primer carácter del intervalo devuelto.
+      description: Índice de base cero del primer carácter que se va a obtener del intervalo de texto.
       type:
       - number
     - id: length
-      description: Opcional. Número de caracteres que se devolverá. Si se omite, representa el número de caracteres que hay desde "comienzo" hasta el final del último párrafo de TextRange.
+      description: Opcional. Número de caracteres que se devolverán en el nuevo intervalo de texto. Si se omite length, se devolverán todos los caracteres desde el principio hasta el final del último párrafo del intervalo de texto.
       type:
       - number
 - uid: excel.Excel.TextRange.load
-  summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar a "context. Sync ()" antes de leer las propiedades.
+  summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Antes de leer las propiedades, debe llamar a "context.sync()".
   remarks: >-
     Además de esta firma, este método tiene las siguientes firmas:
 
@@ -202,7 +206,7 @@ items:
       - excel.Excel.TextRange
 - uid: excel.Excel.TextRange.text
   summary: >-
-    Representa el contenido de texto sin formato del intervalo de texto.
+    Indica el contenido de texto sin formato del intervalo de texto.
 
 
     \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -218,7 +222,7 @@ items:
       type:
       - string
 - uid: excel.Excel.TextRange.toJSON
-  summary: Reemplaza el método de JavaScript `toJSON()` para proporcionar un resultado más útil cuando se pasa un objeto de `JSON.stringify()` <!-- -->la API. (`JSON.stringify`<!-- -->a su vez, llama al `toJSON` método del objeto que se le pasa). Mientras que el objeto Excel. TextRange original es un objeto API, `toJSON` el método devuelve un objeto JavaScript sin formato (escrito `Excel.Interfaces.TextRangeData` <!-- -->como) que contiene las copias rasas de las propiedades secundarias cargadas del objeto original.
+  summary: Reemplaza el método JavaScript `toJSON()` para proporcionar un resultado más útil cuando se pasa un objeto API a`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama `toJSON` al método del objeto que se le pasa.) Mientras que el objeto Excel. TextRange original es un objeto API, `toJSON` el método devuelve un objeto JavaScript sin formato (escrito como`Excel.Interfaces.TextRangeData`<!-- -->) que contiene copias rasas de las propiedades secundarias cargadas del objeto original.
   isPreview: true
   name: toJSON()
   fullName: toJSON()

@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 98f99dd2efda12602852a9d0bd923512b4e9c640
-ms.sourcegitcommit: 788ab9c595c9143f8b8f4822a170e8b90d72ee1d
+ms.openlocfilehash: 0fda11e4df94b0f72ab6747ce0a617854d24bc69
+ms.sourcegitcommit: 5e31602ed9cbddfcff2768b7ed69dd4821440b90
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 03/06/2019
-ms.locfileid: "30413829"
+ms.lasthandoff: 03/14/2019
+ms.locfileid: "30575644"
 items:
 - uid: excel.Excel.TextFrame
   summary: >-
@@ -22,7 +22,7 @@ items:
   - office.OfficeExtension.ClientObject
   package: excel
   children:
-  - excel.Excel.TextFrame.autoSize
+  - excel.Excel.TextFrame.autoSizeSetting
   - excel.Excel.TextFrame.bottomMargin
   - excel.Excel.TextFrame.context
   - excel.Excel.TextFrame.deleteText
@@ -43,20 +43,20 @@ items:
   - excel.Excel.TextFrame.topMargin
   - excel.Excel.TextFrame.verticalAlignment
   - excel.Excel.TextFrame.verticalOverflow
-- uid: excel.Excel.TextFrame.autoSize
+- uid: excel.Excel.TextFrame.autoSizeSetting
   summary: >-
-    Obtiene o establece la configuración de tamaño automática para el marco de texto. Un marco de texto puede establecerse para ajustar automáticamente el tamaño del texto para ajustarse al marco de texto, para cambiar automáticamente el tamaño del marco de texto para ajustarse al texto o sin cambio de tamaño automático.
+    Obtiene o establece la configuración de tamaño automático del marco de texto. Se puede establecer un marco de texto para ajustar automáticamente el texto al marco de texto, para ajustar automáticamente el marco de texto al texto o no realizar ningún ajuste de tamaño automático.
 
 
     \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   isPreview: true
-  name: autoSize
-  fullName: autoSize
+  name: autoSizeSetting
+  fullName: autoSizeSetting
   langs:
   - typeScript
   type: property
   syntax:
-    content: 'autoSize: Excel.ShapeAutoSize | "AutoSizeNone" | "AutoSizeTextToFitShape" | "AutoSizeShapeToFitText" | "AutoSizeMixed";'
+    content: 'autoSizeSetting: Excel.ShapeAutoSize | "AutoSizeNone" | "AutoSizeTextToFitShape" | "AutoSizeShapeToFitText" | "AutoSizeMixed";'
     return:
       type:
       - Excel.ShapeAutoSize | "AutoSizeNone" | "AutoSizeTextToFitShape" | "AutoSizeShapeToFitText" | "AutoSizeMixed"
@@ -92,7 +92,7 @@ items:
       - RequestContext
 - uid: excel.Excel.TextFrame.deleteText
   summary: >-
-    Elimina todo el texto en el TextFrame.
+    Elimina todo el texto del marco de texto.
 
 
     \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -110,7 +110,7 @@ items:
       description: "\n#### <a name=\"examples\"></a>Ejemplos\n\n```typescript\nawait Excel.run(async (context) => {\n    const shapes = context.workbook.worksheets.getItem(\"Shapes\").shapes;\n    const textbox = shapes.getItem(\"Textbox\");\n    textbox.textFrame.deleteText();\n    await context.sync();\n});\n```"
 - uid: excel.Excel.TextFrame.hasText
   summary: >-
-    Especifica si el TextFrame contiene texto.
+    Especifica si el marco de texto contiene texto.
 
 
     \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -127,7 +127,7 @@ items:
       - boolean
 - uid: excel.Excel.TextFrame.horizontalAlignment
   summary: >-
-    Indica la alineación horizontal del marco de texto.
+    Indica la alineación horizontal del marco de texto. Consulte Excel. ShapeTextHorizontalAlignment para obtener información detallada.
 
 
     \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -138,13 +138,13 @@ items:
   - typeScript
   type: property
   syntax:
-    content: 'horizontalAlignment: Excel.ShapeTextHorizontalAlignType | "Left" | "Center" | "Right" | "Justify" | "JustifyLow" | "Distributed" | "ThaiDistributed" | "ShapeTextHorizontalAlignType_MaxEnumIDs";'
+    content: 'horizontalAlignment: Excel.ShapeTextHorizontalAlignment | "Left" | "Center" | "Right" | "Justify" | "JustifyLow" | "Distributed" | "ThaiDistributed";'
     return:
       type:
-      - Excel.ShapeTextHorizontalAlignType | "Left" | "Center" | "Right" | "Justify" | "JustifyLow" | "Distributed" | "ThaiDistributed" | "ShapeTextHorizontalAlignType_MaxEnumIDs"
+      - Excel.ShapeTextHorizontalAlignment | "Left" | "Center" | "Right" | "Justify" | "JustifyLow" | "Distributed" | "ThaiDistributed"
 - uid: excel.Excel.TextFrame.horizontalOverflow
   summary: >-
-    Indica el tipo de desbordamiento horizontal del marco de texto.
+    Representa el comportamiento de desbordamiento horizontal del marco de texto. Consulte Excel. ShapeTextHorizontalOverflow para obtener información detallada.
 
 
     \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -155,10 +155,10 @@ items:
   - typeScript
   type: property
   syntax:
-    content: 'horizontalOverflow: Excel.ShapeTextHorzOverflowType | "Overflow" | "Clip" | "ShapeTextHorzOverflowType_MaxEnumIDs";'
+    content: 'horizontalOverflow: Excel.ShapeTextHorizontalOverflow | "Overflow" | "Clip";'
     return:
       type:
-      - Excel.ShapeTextHorzOverflowType | "Overflow" | "Clip" | "ShapeTextHorzOverflowType_MaxEnumIDs"
+      - Excel.ShapeTextHorizontalOverflow | "Overflow" | "Clip"
 - uid: excel.Excel.TextFrame.leftMargin
   summary: >-
     Indica el margen izquierdo, en puntos, del marco de texto.
@@ -246,7 +246,7 @@ items:
       - '{ select?: string; expand?: string; }'
 - uid: excel.Excel.TextFrame.orientation
   summary: >-
-    Indica la orientación del texto del marco de texto.
+    Indica la orientación del texto del marco de texto. Consulte Excel. ShapeTextOrientation para obtener información detallada.
 
 
     \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -257,13 +257,13 @@ items:
   - typeScript
   type: property
   syntax:
-    content: 'orientation: Excel.ShapeTextOrientationType | "Horizontal" | "Vertical" | "Vertical270" | "WordArtVertical" | "EastAsianVertical" | "MongolianVertical" | "WordArtVerticalRTL" | "ShapeTextOrientationType_MaxEnumIDs";'
+    content: 'orientation: Excel.ShapeTextOrientation | "Horizontal" | "Vertical" | "Vertical270" | "WordArtVertical" | "EastAsianVertical" | "MongolianVertical" | "WordArtVerticalRTL";'
     return:
       type:
-      - Excel.ShapeTextOrientationType | "Horizontal" | "Vertical" | "Vertical270" | "WordArtVertical" | "EastAsianVertical" | "MongolianVertical" | "WordArtVerticalRTL" | "ShapeTextOrientationType_MaxEnumIDs"
+      - Excel.ShapeTextOrientation | "Horizontal" | "Vertical" | "Vertical270" | "WordArtVertical" | "EastAsianVertical" | "MongolianVertical" | "WordArtVerticalRTL"
 - uid: excel.Excel.TextFrame.readingOrder
   summary: >-
-    Indica el orden de lectura del marco de texto, de izquierda a derecha o de derecha a izquierda.
+    Representa el orden de lectura del marco de texto, ya sea de izquierda a derecha o de derecha a izquierda. Consulte Excel. ShapeTextReadingOrder para obtener información detallada.
 
 
     \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -274,10 +274,10 @@ items:
   - typeScript
   type: property
   syntax:
-    content: 'readingOrder: Excel.ShapeTextReadingOrder | "LTR" | "RTL";'
+    content: 'readingOrder: Excel.ShapeTextReadingOrder | "LeftToRight" | "RightToLeft";'
     return:
       type:
-      - Excel.ShapeTextReadingOrder | "LTR" | "RTL"
+      - Excel.ShapeTextReadingOrder | "LeftToRight" | "RightToLeft"
 - uid: excel.Excel.TextFrame.rightMargin
   summary: >-
     Indica el margen derecho, en puntos, del marco de texto.
@@ -344,7 +344,7 @@ items:
       - excel.Excel.TextFrame
 - uid: excel.Excel.TextFrame.textRange
   summary: >-
-    Representa el intervalo de texto en el marco de texto.
+    Representa el texto que está unido a una forma en el marco de texto, así como las propiedades y los métodos de manipulación del texto. Consulte Excel. TextRange para obtener información detallada.
 
 
     \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -360,7 +360,7 @@ items:
       type:
       - excel.Excel.TextRange
 - uid: excel.Excel.TextFrame.toJSON
-  summary: Reemplaza el método de JavaScript `toJSON()` para proporcionar un resultado más útil cuando se pasa un objeto de `JSON.stringify()` <!-- -->la API. (`JSON.stringify`<!-- -->a su vez, llama al `toJSON` método del objeto que se le pasa). Mientras que el objeto Excel. TextFrame original es un objeto API, `toJSON` el método devuelve un objeto JavaScript sin formato (escrito `Excel.Interfaces.TextFrameData` <!-- -->como) que contiene las copias rasas de las propiedades secundarias cargadas del objeto original.
+  summary: Reemplaza el método JavaScript `toJSON()` para proporcionar un resultado más útil cuando se pasa un objeto API a`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama `toJSON` al método del objeto que se le pasa.) Mientras que el objeto Excel. TextFrame original es un objeto API, `toJSON` el método devuelve un objeto JavaScript sin formato (escrito como`Excel.Interfaces.TextFrameData`<!-- -->) que contiene copias rasas de las propiedades secundarias cargadas del objeto original.
   isPreview: true
   name: toJSON()
   fullName: toJSON()
@@ -392,7 +392,7 @@ items:
       - number
 - uid: excel.Excel.TextFrame.verticalAlignment
   summary: >-
-    Indica la alineación vertical del marco de texto.
+    Indica la alineación vertical del marco de texto. Consulte Excel. ShapeTextVerticalAlignment para obtener información detallada.
 
 
     \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -403,13 +403,13 @@ items:
   - typeScript
   type: property
   syntax:
-    content: 'verticalAlignment: Excel.ShapeTextVerticalAlignType | "Top" | "Middle" | "Bottom" | "Justified" | "Distributed" | "ShapeTextVerticalAlignType_MaxEnumIDs";'
+    content: 'verticalAlignment: Excel.ShapeTextVerticalAlignment | "Top" | "Middle" | "Bottom" | "Justified" | "Distributed";'
     return:
       type:
-      - Excel.ShapeTextVerticalAlignType | "Top" | "Middle" | "Bottom" | "Justified" | "Distributed" | "ShapeTextVerticalAlignType_MaxEnumIDs"
+      - Excel.ShapeTextVerticalAlignment | "Top" | "Middle" | "Bottom" | "Justified" | "Distributed"
 - uid: excel.Excel.TextFrame.verticalOverflow
   summary: >-
-    Indica el tipo de desbordamiento vertical del marco de texto.
+    Representa el comportamiento de desbordamiento vertical del marco de texto. Consulte Excel. ShapeTextVerticalOverflow para obtener información detallada.
 
 
     \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -420,7 +420,7 @@ items:
   - typeScript
   type: property
   syntax:
-    content: 'verticalOverflow: Excel.ShapeTextVertOverflowType | "Overflow" | "Ellipsis" | "Clip" | "ShapeTextVertOverflowType_MaxEnumIDs";'
+    content: 'verticalOverflow: Excel.ShapeTextVerticalOverflow | "Overflow" | "Ellipsis" | "Clip";'
     return:
       type:
-      - Excel.ShapeTextVertOverflowType | "Overflow" | "Ellipsis" | "Clip" | "ShapeTextVertOverflowType_MaxEnumIDs"
+      - Excel.ShapeTextVerticalOverflow | "Overflow" | "Ellipsis" | "Clip"

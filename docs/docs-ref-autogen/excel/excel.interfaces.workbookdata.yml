@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 5ab8351bbca643b04d52fe69555af6d164be1f98
-ms.sourcegitcommit: e9bfba6ec767e9d34fd1cf7b38c30f689617900a
+ms.openlocfilehash: ec75f13d0fd303b3ae1c90b6a9ea4aa661d4df97
+ms.sourcegitcommit: 5e31602ed9cbddfcff2768b7ed69dd4821440b90
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 02/20/2019
-ms.locfileid: "30094970"
+ms.lasthandoff: 03/14/2019
+ms.locfileid: "30575924"
 items:
 - uid: excel.Excel.Interfaces.WorkbookData
   summary: Una interfaz que describe los datos devueltos por la llamada a "Workbook. toJSON ()".
@@ -25,20 +25,24 @@ items:
   - excel.Excel.Interfaces.WorkbookData.name
   - excel.Excel.Interfaces.WorkbookData.names
   - excel.Excel.Interfaces.WorkbookData.pivotTables
+  - excel.Excel.Interfaces.WorkbookData.pivotTableStyles
   - excel.Excel.Interfaces.WorkbookData.previouslySaved
   - excel.Excel.Interfaces.WorkbookData.properties
   - excel.Excel.Interfaces.WorkbookData.protection
   - excel.Excel.Interfaces.WorkbookData.readOnly
   - excel.Excel.Interfaces.WorkbookData.settings
   - excel.Excel.Interfaces.WorkbookData.slicers
+  - excel.Excel.Interfaces.WorkbookData.slicerStyles
   - excel.Excel.Interfaces.WorkbookData.styles
   - excel.Excel.Interfaces.WorkbookData.tables
+  - excel.Excel.Interfaces.WorkbookData.tableStyles
+  - excel.Excel.Interfaces.WorkbookData.timelineStyles
   - excel.Excel.Interfaces.WorkbookData.use1904DateSystem
   - excel.Excel.Interfaces.WorkbookData.usePrecisionAsDisplayed
   - excel.Excel.Interfaces.WorkbookData.worksheets
 - uid: excel.Excel.Interfaces.WorkbookData.autoSave
   summary: >-
-    True si el libro está en modo de guardado automático.
+    Especifica si el libro está o no en modo autoguardado. Solo lectura.
 
 
     \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -71,7 +75,7 @@ items:
       - Excel.Interfaces.BindingData[]
 - uid: excel.Excel.Interfaces.WorkbookData.calculationEngineVersion
   summary: >-
-    Devuelve un número sobre la versión del motor de cálculo de Excel. Solo lectura.
+    Devuelve un número acerca de la versión del motor de cálculo de Excel. Solo lectura.
 
 
     \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -88,7 +92,7 @@ items:
       - number
 - uid: excel.Excel.Interfaces.WorkbookData.chartDataPointTrack
   summary: >-
-    True si todos los gráficos del libro están realizando un seguimiento de los puntos de datos reales a los que están asociados. False si los gráficos realizan un seguimiento del índice de los puntos de datos.
+    True si todos los gráficos en el libro están siguiendo los puntos de datos reales a los que están conectados. False si los gráficos realizan un seguimiento del índice de los puntos de datos.
 
 
     \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -105,7 +109,7 @@ items:
       - boolean
 - uid: excel.Excel.Interfaces.WorkbookData.comments
   summary: >-
-    Representa una colección de comentarios asociados con el libro. Solo lectura.
+    Indica una colección de comentarios asociada con el libro. Solo lectura.
 
 
     \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -122,7 +126,7 @@ items:
       - Excel.Interfaces.CommentData[]
 - uid: excel.Excel.Interfaces.WorkbookData.customXmlParts
   summary: >-
-    Representa la colección de elementos XML personalizados incluidos en este libro. Solo lectura.
+    Representa la colección de elementos XML personalizados contenidos en este libro. Solo lectura.
 
 
     \[[Conjunto de API: ExcelApi 1,5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -138,7 +142,7 @@ items:
       - Excel.Interfaces.CustomXmlPartData[]
 - uid: excel.Excel.Interfaces.WorkbookData.isDirty
   summary: >-
-    True si no se han realizado cambios en el libro especificado desde la última vez que se guardó. Esta propiedad se puede establecer en True para cerrar un libro modificado sin guardarlo o sin que se pregunte si desea guardarlo.
+    Especifica si se han efectuado los cambios desde la última vez que se guardó el libro. Puede establecer esta propiedad en true si desea cerrar un libro modificado sin guardarlo o sin que se le pida que lo guarde.
 
 
     \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -201,9 +205,26 @@ items:
     return:
       type:
       - Excel.Interfaces.PivotTableData[]
+- uid: excel.Excel.Interfaces.WorkbookData.pivotTableStyles
+  summary: >-
+    Representa una colección de PivotTableStyles asociada con el libro. Solo lectura.
+
+
+    \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: pivotTableStyles
+  fullName: pivotTableStyles
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'pivotTableStyles?: Excel.Interfaces.PivotTableStyleData[];'
+    return:
+      type:
+      - Excel.Interfaces.PivotTableStyleData[]
 - uid: excel.Excel.Interfaces.WorkbookData.previouslySaved
   summary: >-
-    True si el libro se ha guardado alguna vez localmente o en línea.
+    Especifica si el libro se ha guardado alguna vez de forma local o en línea. Solo lectura.
 
 
     \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -284,7 +305,7 @@ items:
       - Excel.Interfaces.SettingData[]
 - uid: excel.Excel.Interfaces.WorkbookData.slicers
   summary: >-
-    Representa una colección de segmentaciones de cálculo asociadas con el libro. Solo lectura.
+    Representa una colección de segmentaciones asociada con el libro. Solo lectura.
 
 
     \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -299,6 +320,23 @@ items:
     return:
       type:
       - Excel.Interfaces.SlicerData[]
+- uid: excel.Excel.Interfaces.WorkbookData.slicerStyles
+  summary: >-
+    Representa una colección de SlicerStyles asociada con el libro. Solo lectura.
+
+
+    \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: slicerStyles
+  fullName: slicerStyles
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'slicerStyles?: Excel.Interfaces.SlicerStyleData[];'
+    return:
+      type:
+      - Excel.Interfaces.SlicerStyleData[]
 - uid: excel.Excel.Interfaces.WorkbookData.styles
   summary: >-
     Representa una colección de estilos asociada con el libro. Solo lectura.
@@ -331,9 +369,43 @@ items:
     return:
       type:
       - Excel.Interfaces.TableData[]
+- uid: excel.Excel.Interfaces.WorkbookData.tableStyles
+  summary: >-
+    Representa una colección de TableStyles asociada con el libro. Solo lectura.
+
+
+    \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: tableStyles
+  fullName: tableStyles
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'tableStyles?: Excel.Interfaces.TableStyleData[];'
+    return:
+      type:
+      - Excel.Interfaces.TableStyleData[]
+- uid: excel.Excel.Interfaces.WorkbookData.timelineStyles
+  summary: >-
+    Representa una colección de TimelineStyles asociada con el libro. Solo lectura.
+
+
+    \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: timelineStyles
+  fullName: timelineStyles
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'timelineStyles?: Excel.Interfaces.TimelineStyleData[];'
+    return:
+      type:
+      - Excel.Interfaces.TimelineStyleData[]
 - uid: excel.Excel.Interfaces.WorkbookData.use1904DateSystem
   summary: >-
-    True si el libro usa el sistema de fecha 1904.
+    True si el libro usa el sistema de fechas 1904.
 
 
     \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -350,7 +422,7 @@ items:
       - boolean
 - uid: excel.Excel.Interfaces.WorkbookData.usePrecisionAsDisplayed
   summary: >-
-    True si los cálculos de este libro se realizarán usando sólo la precisión de los números tal y como se muestran. Los datos perderán la precisión cuando se cambie esta propiedad de false a true.
+    True si los cálculos de este libro se llevan a cabo con la misma precisión con que se muestran los números. Los datos perderán la precisión cuando se cambie esta propiedad de false a true.
 
 
     \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]

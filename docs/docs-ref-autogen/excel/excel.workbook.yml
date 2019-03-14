@@ -1,10 +1,10 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 81eb4cb2aeddc0bd92ad7e7900eb9482b0f2a02c
-ms.sourcegitcommit: fd03ef72d6a546b0e4dbe0cc9e75d2a7cf9341a1
+ms.openlocfilehash: af5d97057c890eaa798f45a16035191eda41ae14
+ms.sourcegitcommit: 5e31602ed9cbddfcff2768b7ed69dd4821440b90
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 02/27/2019
-ms.locfileid: "30303252"
+ms.lasthandoff: 03/14/2019
+ms.locfileid: "30575812"
 items:
 - uid: excel.Excel.Workbook
   summary: >-
@@ -50,6 +50,7 @@ items:
   - excel.Excel.Workbook.onAutoSaveSettingChanged
   - excel.Excel.Workbook.onSelectionChanged
   - excel.Excel.Workbook.pivotTables
+  - excel.Excel.Workbook.pivotTableStyles
   - excel.Excel.Workbook.previouslySaved
   - excel.Excel.Workbook.properties
   - excel.Excel.Workbook.protection
@@ -60,8 +61,11 @@ items:
   - excel.Excel.Workbook.set_1
   - excel.Excel.Workbook.settings
   - excel.Excel.Workbook.slicers
+  - excel.Excel.Workbook.slicerStyles
   - excel.Excel.Workbook.styles
   - excel.Excel.Workbook.tables
+  - excel.Excel.Workbook.tableStyles
+  - excel.Excel.Workbook.timelineStyles
   - excel.Excel.Workbook.toJSON
   - excel.Excel.Workbook.use1904DateSystem
   - excel.Excel.Workbook.usePrecisionAsDisplayed
@@ -84,7 +88,7 @@ items:
       - excel.Excel.Application
 - uid: excel.Excel.Workbook.autoSave
   summary: >-
-    True si el libro está en modo de guardado automático.
+    Especifica si el libro está o no en modo autoguardado. Solo lectura.
 
 
     \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -117,7 +121,7 @@ items:
       - excel.Excel.BindingCollection
 - uid: excel.Excel.Workbook.calculationEngineVersion
   summary: >-
-    Devuelve un número sobre la versión del motor de cálculo de Excel. Solo lectura.
+    Devuelve un número acerca de la versión del motor de cálculo de Excel. Solo lectura.
 
 
     \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -134,7 +138,7 @@ items:
       - number
 - uid: excel.Excel.Workbook.chartDataPointTrack
   summary: >-
-    True si todos los gráficos del libro están realizando un seguimiento de los puntos de datos reales a los que están asociados. False si los gráficos realizan un seguimiento del índice de los puntos de datos.
+    True si todos los gráficos en el libro están siguiendo los puntos de datos reales a los que están conectados. False si los gráficos realizan un seguimiento del índice de los puntos de datos.
 
 
     \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -151,7 +155,7 @@ items:
       - boolean
 - uid: excel.Excel.Workbook.close
   summary: >-
-    Cerrar libro actual.
+    Cierra el libro actual.
 
 
     \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -174,7 +178,7 @@ items:
       - excel.Excel.CloseBehavior
 - uid: excel.Excel.Workbook.close_1
   summary: >-
-    Cerrar libro actual.
+    Cierra el libro actual.
 
 
     \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -197,7 +201,7 @@ items:
       - "\"Save\" | \"SkipSave\""
 - uid: excel.Excel.Workbook.comments
   summary: >-
-    Representa una colección de comentarios asociados con el libro. Solo lectura.
+    Indica una colección de comentarios asociada con el libro. Solo lectura.
 
 
     \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -226,7 +230,7 @@ items:
       - RequestContext
 - uid: excel.Excel.Workbook.customXmlParts
   summary: >-
-    Representa la colección de elementos XML personalizados incluidos en este libro. Solo lectura.
+    Representa la colección de elementos XML personalizados contenidos en este libro. Solo lectura.
 
 
     \[[Conjunto de API: ExcelApi 1,5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -291,7 +295,7 @@ items:
       description: "\n#### <a name=\"examples\"></a>Ejemplos\n\n```typescript\nawait Excel.run(async (context) => {\n\n    let myWorkbook = context.workbook;\n    let activeCell = myWorkbook.getActiveCell();\n    activeCell.load(\"address\");\n\n    await context.sync();\n    \n    console.log(\"The active cell is \" + activeCell.address);\n});\n```"
 - uid: excel.Excel.Workbook.getActiveChart
   summary: >-
-    Obtiene el gráfico actualmente activo en el libro. Si no hay ningún gráfico activo, se producirá una excepción al invocar esta instrucción.
+    Obtiene el gráfico activo del libro. Si no hay ningún gráfico activo, mostrará una excepción al invocar esta instrucción
 
 
     \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -309,7 +313,7 @@ items:
       description: ''
 - uid: excel.Excel.Workbook.getActiveChartOrNullObject
   summary: >-
-    Obtiene el gráfico actualmente activo en el libro. Si no hay ningún gráfico activo, se devolverá un objeto null.
+    Obtiene el gráfico activo del libro. Si no hay ningún gráfico activo, devolverá un objeto null
 
 
     \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -327,7 +331,7 @@ items:
       description: ''
 - uid: excel.Excel.Workbook.getActiveSlicer
   summary: >-
-    Obtiene la segmentación de sesión actualmente activa en el libro. Si no hay ningún segmentador activo, producirá una excepción al invocar esta instrucción.
+    Obtiene la segmentación activa del libro. Si no hay ninguna segmentación activa, mostrará una excepción al invocar esta declaración.
 
 
     \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -345,7 +349,7 @@ items:
       description: ''
 - uid: excel.Excel.Workbook.getActiveSlicerOrNullObject
   summary: >-
-    Obtiene la segmentación de sesión actualmente activa en el libro. Si no hay ningún segmentador activo, devolverá un objeto null.
+    Obtiene la segmentación activa del libro. Si no hay ninguna segmentación activa, devolverá un objeto null
 
 
     \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -363,7 +367,7 @@ items:
       description: ''
 - uid: excel.Excel.Workbook.getIsActiveCollabSession
   summary: >-
-    True si varios usuarios están editando el libro (co-autoría). Tenga en cuenta que puede haber algún retraso entre el momento en que cambia el estado del libro y el momento en que los cambios se reflejan en el resultado del método.
+    True si varios usuarios están editando el libro (coautoría). Tenga en cuenta que puede haber algún retraso entre el momento en que cambia el estado del libro y el momento en que los cambios se reflejan en el resultado del método.
 
 
     \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -398,7 +402,7 @@ items:
       description: "\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nExcel.run(function (ctx) { \n    var selectedRange = ctx.workbook.getSelectedRange();\n    selectedRange.load('address');\n    return ctx.sync().then(function() {\n            console.log(selectedRange.address);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
 - uid: excel.Excel.Workbook.getSelectedRanges
   summary: >-
-    Obtiene el intervalo uno o más seleccionado actualmente del libro. A diferencia de getSelectedRange (), este método devuelve un objeto RangeAreas que representa todos los intervalos seleccionados.
+    Obtiene los intervalos seleccionados actualmente en el libro. A diferencia de getSelectedRange(), este método devuelve un objeto RangeAreas que representa todos los intervalos seleccionados.
 
 
     \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -416,7 +420,7 @@ items:
       description: "\n#### <a name=\"examples\"></a>Ejemplos\n\n```typescript\nawait Excel.run(async (context) => {\n\n    const selectedRanges = context.workbook.getSelectedRanges();\n    selectedRanges.format.fill.color = \"lightblue\";\n\n    await context.sync();\n})\n```"
 - uid: excel.Excel.Workbook.isDirty
   summary: >-
-    True si no se han realizado cambios en el libro especificado desde la última vez que se guardó. Esta propiedad se puede establecer en True para cerrar un libro modificado sin guardarlo o sin que se pregunte si desea guardarlo.
+    Especifica si se han efectuado los cambios desde la última vez que se guardó el libro. Puede establecer esta propiedad en true si desea cerrar un libro modificado sin guardarlo o sin que se le pida que lo guarde.
 
 
     \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -432,7 +436,7 @@ items:
       type:
       - boolean
 - uid: excel.Excel.Workbook.load
-  summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar a "context. Sync ()" antes de leer las propiedades.
+  summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Antes de leer las propiedades, debe llamar a "context.sync()".
   remarks: >-
     Además de esta firma, este método tiene las siguientes firmas:
 
@@ -530,7 +534,7 @@ items:
       - excel.Excel.NamedItemCollection
 - uid: excel.Excel.Workbook.onAutoSaveSettingChanged
   summary: >-
-    Se produce cuando se cambia la configuración de autoGuardado en el libro.
+    Se produce cuando se cambia la configuración de autoGuardar en el libro.
 
 
     \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -547,7 +551,7 @@ items:
       - OfficeExtension.EventHandlers<Excel.WorkbookAutoSaveSettingChangedEventArgs>
 - uid: excel.Excel.Workbook.onSelectionChanged
   summary: >-
-    Se produce al cambiar la selección en el documento.
+    Se genera al cambiar la selección en el documento.
 
 
     \[[Conjunto de API: ExcelApi 1,2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -577,9 +581,26 @@ items:
     return:
       type:
       - excel.Excel.PivotTableCollection
+- uid: excel.Excel.Workbook.pivotTableStyles
+  summary: >-
+    Representa una colección de PivotTableStyles asociada con el libro. Solo lectura.
+
+
+    \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: pivotTableStyles
+  fullName: pivotTableStyles
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly pivotTableStyles: Excel.PivotTableStyleCollection;'
+    return:
+      type:
+      - excel.Excel.PivotTableStyleCollection
 - uid: excel.Excel.Workbook.previouslySaved
   summary: >-
-    True si el libro se ha guardado alguna vez localmente o en línea.
+    Especifica si el libro se ha guardado alguna vez de forma local o en línea. Solo lectura.
 
 
     \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -752,7 +773,7 @@ items:
       - excel.Excel.SettingCollection
 - uid: excel.Excel.Workbook.slicers
   summary: >-
-    Representa una colección de segmentaciones de cálculo asociadas con el libro. Solo lectura.
+    Representa una colección de segmentaciones asociada con el libro. Solo lectura.
 
 
     \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -767,6 +788,23 @@ items:
     return:
       type:
       - excel.Excel.SlicerCollection
+- uid: excel.Excel.Workbook.slicerStyles
+  summary: >-
+    Representa una colección de SlicerStyles asociada con el libro. Solo lectura.
+
+
+    \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: slicerStyles
+  fullName: slicerStyles
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly slicerStyles: Excel.SlicerStyleCollection;'
+    return:
+      type:
+      - excel.Excel.SlicerStyleCollection
 - uid: excel.Excel.Workbook.styles
   summary: >-
     Representa una colección de estilos asociada con el libro. Solo lectura.
@@ -799,8 +837,42 @@ items:
     return:
       type:
       - excel.Excel.TableCollection
+- uid: excel.Excel.Workbook.tableStyles
+  summary: >-
+    Representa una colección de TableStyles asociada con el libro. Solo lectura.
+
+
+    \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: tableStyles
+  fullName: tableStyles
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly tableStyles: Excel.TableStyleCollection;'
+    return:
+      type:
+      - excel.Excel.TableStyleCollection
+- uid: excel.Excel.Workbook.timelineStyles
+  summary: >-
+    Representa una colección de TimelineStyles asociada con el libro. Solo lectura.
+
+
+    \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  isPreview: true
+  name: timelineStyles
+  fullName: timelineStyles
+  langs:
+  - typeScript
+  type: property
+  syntax:
+    content: 'readonly timelineStyles: Excel.TimelineStyleCollection;'
+    return:
+      type:
+      - excel.Excel.TimelineStyleCollection
 - uid: excel.Excel.Workbook.toJSON
-  summary: Reemplaza el método de JavaScript `toJSON()` para proporcionar un resultado más útil cuando se pasa un objeto de `JSON.stringify()` <!-- -->la API. (`JSON.stringify`<!-- -->a su vez, llama al `toJSON` método del objeto que se le pasa). Mientras que el objeto Excel. Workbook original es un objeto API, `toJSON` el método devuelve un objeto JavaScript sin formato (escrito `Excel.Interfaces.WorkbookData` <!-- -->como) que contiene las copias rasas de las propiedades secundarias cargadas del objeto original.
+  summary: Reemplaza el método JavaScript `toJSON()` para proporcionar un resultado más útil cuando se pasa un objeto API a`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama `toJSON` al método del objeto que se le pasa.) Mientras que el objeto Excel. Workbook original es un objeto API, `toJSON` el método devuelve un objeto JavaScript sin formato (escrito como`Excel.Interfaces.WorkbookData`<!-- -->) que contiene copias rasas de las propiedades secundarias cargadas del objeto original.
   name: toJSON()
   fullName: toJSON()
   langs:
@@ -814,7 +886,7 @@ items:
       description: ''
 - uid: excel.Excel.Workbook.use1904DateSystem
   summary: >-
-    True si el libro usa el sistema de fecha 1904.
+    True si el libro usa el sistema de fechas 1904.
 
 
     \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -831,7 +903,7 @@ items:
       - boolean
 - uid: excel.Excel.Workbook.usePrecisionAsDisplayed
   summary: >-
-    True si los cálculos de este libro se realizarán usando sólo la precisión de los números tal y como se muestran. Los datos perderán la precisión cuando se cambie esta propiedad de false a true.
+    True si los cálculos de este libro se llevan a cabo con la misma precisión con que se muestran los números. Los datos perderán la precisión cuando se cambie esta propiedad de false a true.
 
 
     \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
