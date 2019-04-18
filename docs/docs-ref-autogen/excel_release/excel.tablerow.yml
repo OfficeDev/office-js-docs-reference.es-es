@@ -1,238 +1,296 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: bae0d1e276c8115821cf7acdf9ae312035b82f1b
-ms.sourcegitcommit: e9bfba6ec767e9d34fd1cf7b38c30f689617900a
-ms.translationtype: MT
-ms.contentlocale: es-ES
-ms.lasthandoff: 02/20/2019
-ms.locfileid: "30105352"
 items:
-- uid: excel_release.Excel.TableRow
-  summary: >-
-    <span data-ttu-id="6d9cd-101">Representa una fila de una tabla.</span><span class="sxs-lookup"><span data-stu-id="6d9cd-101">Represents a row in a table.</span></span>
+  - uid: excel_release.Excel.TableRow
+    summary: |-
+      <span data-ttu-id="5c7cc-101">Representa una fila de una tabla.</span><span class="sxs-lookup"><span data-stu-id="5c7cc-101">Represents a row in a table.</span></span>
+
+      <span data-ttu-id="5c7cc-102">Tenga en cuenta que, a diferencia de los rangos o columnas, que se ajustarán si se agregan nuevas filas o columnas antes que los mismos, un objeto TableRow representa la ubicación física de la fila de la tabla, pero no los datos.</span><span class="sxs-lookup"><span data-stu-id="5c7cc-102">Note that unlike Ranges or Columns, which will adjust if new rows/columns are added before them, a TableRow object represent the physical location of the table row, but not the data.</span></span> <span data-ttu-id="5c7cc-103">Es decir, si los datos están ordenados o si se agregan nuevas filas, una fila de tabla seguirá señalando al índice para el que se creó.</span><span class="sxs-lookup"><span data-stu-id="5c7cc-103">That is, if the data is sorted or if new rows are added, a table row will continue to point at the index for which it was created.</span></span>
+
+      <span data-ttu-id="5c7cc-104">\[[Conjunto de API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="5c7cc-104">\[ [API set: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: Excel.TableRow
+    fullName: Excel.TableRow
+    langs:
+      - typeScript
+    type: class
+    extends:
+      - office.OfficeExtension.ClientObject
+    package: excel_release
+    children:
+      - excel_release.Excel.TableRow.context
+      - excel_release.Excel.TableRow.delete
+      - excel_release.Excel.TableRow.getRange
+      - excel_release.Excel.TableRow.index
+      - excel_release.Excel.TableRow.load
+      - excel_release.Excel.TableRow.load_1
+      - excel_release.Excel.TableRow.load_2
+      - excel_release.Excel.TableRow.set
+      - excel_release.Excel.TableRow.set_1
+      - excel_release.Excel.TableRow.toJSON
+      - excel_release.Excel.TableRow.values
+  - uid: excel_release.Excel.TableRow.context
+    summary: <span data-ttu-id="5c7cc-105">Contexto de la solicitud asociado al objeto.</span><span class="sxs-lookup"><span data-stu-id="5c7cc-105">The request context associated with the object.</span></span> <span data-ttu-id="5c7cc-106">Esto conecta el proceso del complemento con el proceso de la aplicación host de Office.</span><span class="sxs-lookup"><span data-stu-id="5c7cc-106">This connects the add-in's process to the Office host application's process.</span></span>
+    name: context
+    fullName: context
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'context: RequestContext;'
+      return:
+        type:
+          - RequestContext
+  - uid: excel_release.Excel.TableRow.delete
+    summary: |-
+      <span data-ttu-id="5c7cc-107">Elimina la fila de la tabla.</span><span class="sxs-lookup"><span data-stu-id="5c7cc-107">Deletes the row from the table.</span></span>
+
+      <span data-ttu-id="5c7cc-108">\[[Conjunto de API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="5c7cc-108">\[ [API set: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: delete()
+    fullName: delete()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'delete(): void;'
+      return:
+        type:
+          - void
+        description: |-
 
 
-    <span data-ttu-id="6d9cd-102">Tenga en cuenta que, a diferencia de los rangos o columnas, que se ajustarán si se agregan nuevas filas o columnas antes que los mismos, un objeto TableRow representa la ubicación física de la fila de la tabla, pero no los datos.</span><span class="sxs-lookup"><span data-stu-id="6d9cd-102">Note that unlike Ranges or Columns, which will adjust if new rows/columns are added before them, a TableRow object represent the physical location of the table row, but not the data.</span></span> <span data-ttu-id="6d9cd-103">Es decir, si los datos están ordenados o si se agregan nuevas filas, una fila de tabla seguirá señalando al índice para el que se creó.</span><span class="sxs-lookup"><span data-stu-id="6d9cd-103">That is, if the data is sorted or if new rows are added, a table row will continue to point at the index for which it was created.</span></span>
+          #### <a name="examples"></a><span data-ttu-id="5c7cc-109">Ejemplos</span><span class="sxs-lookup"><span data-stu-id="5c7cc-109">Examples</span></span>
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var tableName = 'Table1';
+              var row = ctx.workbook.tables.getItem(tableName).rows.getItemAt(2);
+              row.delete();
+              return ctx.sync(); 
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+  - uid: excel_release.Excel.TableRow.getRange
+    summary: |-
+      <span data-ttu-id="5c7cc-110">Devuelve el objeto de rango asociado a toda la fila.</span><span class="sxs-lookup"><span data-stu-id="5c7cc-110">Returns the range object associated with the entire row.</span></span>
+
+      <span data-ttu-id="5c7cc-111">\[[Conjunto de API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="5c7cc-111">\[ [API set: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: getRange()
+    fullName: getRange()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getRange(): Excel.Range;'
+      return:
+        type:
+          - excel.Excel.Range
+        description: |-
 
 
-    <span data-ttu-id="6d9cd-104">\[[Conjunto de API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="6d9cd-104">\[ [API set: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
-  name: Excel.TableRow
-  fullName: Excel.TableRow
-  langs:
-  - typeScript
-  type: class
-  extends:
-  - office.OfficeExtension.ClientObject
-  package: excel_release
-  children:
-  - excel_release.Excel.TableRow.context
-  - excel_release.Excel.TableRow.delete
-  - excel_release.Excel.TableRow.getRange
-  - excel_release.Excel.TableRow.index
-  - excel_release.Excel.TableRow.load
-  - excel_release.Excel.TableRow.load_1
-  - excel_release.Excel.TableRow.load_2
-  - excel_release.Excel.TableRow.set
-  - excel_release.Excel.TableRow.set_1
-  - excel_release.Excel.TableRow.toJSON
-  - excel_release.Excel.TableRow.values
-- uid: excel_release.Excel.TableRow.context
-  summary: <span data-ttu-id="6d9cd-105">Contexto de la solicitud asociado al objeto.</span><span class="sxs-lookup"><span data-stu-id="6d9cd-105">The request context associated with the object.</span></span> <span data-ttu-id="6d9cd-106">Esto conecta el proceso del complemento con el proceso de la aplicación host de Office.</span><span class="sxs-lookup"><span data-stu-id="6d9cd-106">This connects the add-in's process to the Office host application's process.</span></span>
-  name: context
-  fullName: context
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'context: RequestContext;'
-    return:
-      type:
-      - RequestContext
-- uid: excel_release.Excel.TableRow.delete
-  summary: >-
-    <span data-ttu-id="6d9cd-107">Elimina la fila de la tabla.</span><span class="sxs-lookup"><span data-stu-id="6d9cd-107">Deletes the row from the table.</span></span>
+          #### <a name="examples"></a><span data-ttu-id="5c7cc-112">Ejemplos</span><span class="sxs-lookup"><span data-stu-id="5c7cc-112">Examples</span></span>
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var tableName = 'Table1';
+              var row = ctx.workbook.tables.getItem(tableName).rows.getItemAt(0);
+              var rowRange = row.getRange();
+              rowRange.load('address');
+              return ctx.sync().then(function() {
+                  console.log(rowRange.address);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+  - uid: excel_release.Excel.TableRow.index
+    summary: |-
+      <span data-ttu-id="5c7cc-113">Devuelve el número de índice de la fila dentro de la colección de filas de la tabla.</span><span class="sxs-lookup"><span data-stu-id="5c7cc-113">Returns the index number of the row within the rows collection of the table.</span></span> <span data-ttu-id="5c7cc-114">Indizado con cero.</span><span class="sxs-lookup"><span data-stu-id="5c7cc-114">Zero-indexed.</span></span> <span data-ttu-id="5c7cc-115">Solo lectura.</span><span class="sxs-lookup"><span data-stu-id="5c7cc-115">Read-only.</span></span>
+
+      <span data-ttu-id="5c7cc-116">\[[Conjunto de API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="5c7cc-116">\[ [API set: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: index
+    fullName: index
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly index: number;'
+      return:
+        type:
+          - number
+  - uid: excel_release.Excel.TableRow.load
+    summary: '<span data-ttu-id="5c7cc-117">Pone en cola un comando para cargar las propiedades especificadas del objeto.</span><span class="sxs-lookup"><span data-stu-id="5c7cc-117">Queues up a command to load the specified properties of the object.</span></span> <span data-ttu-id="5c7cc-118">Antes de leer las propiedades, debe llamar a "context.sync()".</span><span class="sxs-lookup"><span data-stu-id="5c7cc-118">You must call "context.sync()" before reading the properties.</span></span>'
+    remarks: |-
+      <span data-ttu-id="5c7cc-119">Además de esta firma, este método tiene las siguientes firmas:</span><span class="sxs-lookup"><span data-stu-id="5c7cc-119">In addition to this signature, this method has the following signatures:</span></span>
+
+      <span data-ttu-id="5c7cc-120">`load(option?: string | string[]): Excel.TableRow`-Donde opción es una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades que se van a cargar.</span><span class="sxs-lookup"><span data-stu-id="5c7cc-120">`load(option?: string | string[]): Excel.TableRow` - Where option is a comma-delimited string or an array of strings that specify the properties to load.</span></span>
+
+      <span data-ttu-id="5c7cc-121">`load(option?: { select?: string; expand?: string; }): Excel.TableRow`-Where opción. Select es una cadena delimitada por comas que especifica las propiedades que se van a cargar y Options. Expand es una cadena delimitada por comas que especifica las propiedades de navegación que se deben cargar.</span><span class="sxs-lookup"><span data-stu-id="5c7cc-121">`load(option?: { select?: string; expand?: string; }): Excel.TableRow` - Where option.select is a comma-delimited string that specifies the properties to load, and options.expand is a comma-delimited string that specifies the navigation properties to load.</span></span>
+
+      <span data-ttu-id="5c7cc-122">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.TableRow`-Solo disponible en tipos de colección.</span><span class="sxs-lookup"><span data-stu-id="5c7cc-122">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.TableRow` - Only available on collection types.</span></span> <span data-ttu-id="5c7cc-123">Es similar a la firma anterior.</span><span class="sxs-lookup"><span data-stu-id="5c7cc-123">It is similar to the preceding signature.</span></span> <span data-ttu-id="5c7cc-124">Option. Top especifica el número máximo de elementos de colección que se pueden incluir en el resultado.</span><span class="sxs-lookup"><span data-stu-id="5c7cc-124">Option.top specifies the maximum number of collection items that can be included in the result.</span></span> <span data-ttu-id="5c7cc-125">La opción. SKIP especifica el número de elementos que se deben omitir y que no se incluyen en el resultado.</span><span class="sxs-lookup"><span data-stu-id="5c7cc-125">Option.skip specifies the number of items that are to be skipped and not included in the result.</span></span> <span data-ttu-id="5c7cc-126">Si se especifica Option. Top, el conjunto de resultados se iniciará después de omitir el número especificado de elementos.</span><span class="sxs-lookup"><span data-stu-id="5c7cc-126">If option.top is specified, the result set will start after skipping the specified number of items.</span></span>
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: Excel.Interfaces.TableRowLoadOptions): Excel.TableRow;'
+      return:
+        type:
+          - excel.Excel.TableRow
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - excel.Excel.Interfaces.TableRowLoadOptions
+  - uid: excel_release.Excel.TableRow.load_1
+    summary: <span data-ttu-id="5c7cc-127">Pone en cola un comando para cargar las propiedades especificadas del objeto.</span><span class="sxs-lookup"><span data-stu-id="5c7cc-127">Queues up a command to load the specified properties of the object.</span></span> <span data-ttu-id="5c7cc-128">Debe llamar `context.sync()` antes de leer las propiedades.</span><span class="sxs-lookup"><span data-stu-id="5c7cc-128">You must call `context.sync()` before reading the properties.</span></span>
+    name: load(propertyNames)
+    fullName: load(propertyNames)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNames?: string | string[]): Excel.TableRow;'
+      return:
+        type:
+          - excel.Excel.TableRow
+        description: |-
 
 
-    <span data-ttu-id="6d9cd-108">\[[Conjunto de API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="6d9cd-108">\[ [API set: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
-  name: delete()
-  fullName: delete()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'delete(): void;'
-    return:
-      type:
-      - void
-      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"6d9cd-109\">Ejemplos</span><span class=\"sxs-lookup\"><span data-stu-id=\"6d9cd-109\">Examples</span></span>\n\n```javascript\nExcel.run(function (ctx) { \n    var tableName = 'Table1';\n    var row = ctx.workbook.tables.getItem(tableName).rows.getItemAt(2);\n    row.delete();\n    return ctx.sync(); \n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
-- uid: excel_release.Excel.TableRow.getRange
-  summary: >-
-    <span data-ttu-id="6d9cd-110">Devuelve el objeto de rango asociado a toda la fila.</span><span class="sxs-lookup"><span data-stu-id="6d9cd-110">Returns the range object associated with the entire row.</span></span>
+          #### <a name="examples"></a><span data-ttu-id="5c7cc-129">Ejemplos</span><span class="sxs-lookup"><span data-stu-id="5c7cc-129">Examples</span></span>
 
+          ```javascript
+          Excel.run(function (ctx) { 
+              var tableName = 'Table1';
+              var row = ctx.workbook.tables.getItem(tableName).rows.getItem(0);
+              row.load('index');
+              return ctx.sync().then(function() {
+                  console.log(row.index);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+          ```javascript
+          Excel.run(function (ctx) { 
+              var tables = ctx.workbook.tables;
+              var newValues = [["New", "Values", "For", "New", "Row"]];
+              var tableName = 'Table1';
+              var row = ctx.workbook.tables.getItem(tableName).rows.getItemAt(2);
+              row.values = newValues;
+              row.load('values');
+              return ctx.sync().then(function() {
+                  console.log(row.values);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: propertyNames
+          description: <span data-ttu-id="5c7cc-130">Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades que se van a cargar.</span><span class="sxs-lookup"><span data-stu-id="5c7cc-130">A comma-delimited string or an array of strings that specify the properties to load.</span></span>
+          type:
+            - 'string | string[]'
+  - uid: excel_release.Excel.TableRow.load_2
+    summary: <span data-ttu-id="5c7cc-131">Pone en cola un comando para cargar las propiedades especificadas del objeto.</span><span class="sxs-lookup"><span data-stu-id="5c7cc-131">Queues up a command to load the specified properties of the object.</span></span> <span data-ttu-id="5c7cc-132">Debe llamar `context.sync()` antes de leer las propiedades.</span><span class="sxs-lookup"><span data-stu-id="5c7cc-132">You must call `context.sync()` before reading the properties.</span></span>
+    name: load(propertyNamesAndPaths)
+    fullName: load(propertyNamesAndPaths)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.TableRow;'
+      return:
+        type:
+          - excel.Excel.TableRow
+        description: ''
+      parameters:
+        - id: propertyNamesAndPaths
+          description: '<span data-ttu-id="5c7cc-133">Donde propertyNamesAndPaths. Select es una cadena delimitada por comas que especifica las propiedades que se van a cargar y propertyNamesAndPaths. Expand es una cadena delimitada por comas que especifica las propiedades de navegación que se deben cargar.</span><span class="sxs-lookup"><span data-stu-id="5c7cc-133">Where propertyNamesAndPaths.select is a comma-delimited string that specifies the properties to load, and propertyNamesAndPaths.expand is a comma-delimited string that specifies the navigation properties to load.</span></span>'
+          type:
+            - '{ select?: string; expand?: string; }'
+  - uid: excel_release.Excel.TableRow.set
+    summary: '<span data-ttu-id="5c7cc-134">Establece varias propiedades de un objeto al mismo tiempo.</span><span class="sxs-lookup"><span data-stu-id="5c7cc-134">Sets multiple properties of an object at the same time.</span></span> <span data-ttu-id="5c7cc-135">Puede pasar un objeto sin formato con las propiedades apropiadas o cualquier otro objeto de la API del mismo tipo.</span><span class="sxs-lookup"><span data-stu-id="5c7cc-135">You can pass either a plain object with the appropriate properties, or another API object of the same type.</span></span>'
+    remarks: |-
+      <span data-ttu-id="5c7cc-136">Este método tiene la siguiente firma adicional:</span><span class="sxs-lookup"><span data-stu-id="5c7cc-136">This method has the following additional signature:</span></span>
 
-    <span data-ttu-id="6d9cd-111">\[[Conjunto de API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="6d9cd-111">\[ [API set: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
-  name: getRange()
-  fullName: getRange()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getRange(): Excel.Range;'
-    return:
-      type:
-      - excel.Excel.Range
-      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"6d9cd-112\">Ejemplos</span><span class=\"sxs-lookup\"><span data-stu-id=\"6d9cd-112\">Examples</span></span>\n\n```javascript\nExcel.run(function (ctx) { \n    var tableName = 'Table1';\n    var row = ctx.workbook.tables.getItem(tableName).rows.getItemAt(0);\n    var rowRange = row.getRange();\n    rowRange.load('address');\n    return ctx.sync().then(function() {\n        console.log(rowRange.address);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
-- uid: excel_release.Excel.TableRow.index
-  summary: >-
-    <span data-ttu-id="6d9cd-p103">Devuelve el número de índice de la fila dentro de la colección de filas de la tabla. Indizado con cero. Solo lectura.</span><span class="sxs-lookup"><span data-stu-id="6d9cd-p103">Returns the index number of the row within the rows collection of the table. Zero-indexed. Read-only.</span></span>
+      `set(properties: Excel.TableRow): void`
+    name: 'set(properties, options)'
+    fullName: 'set(properties, options)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(properties: Interfaces.TableRowUpdateData, options?: OfficeExtension.UpdateOptions): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: properties
+          description: <span data-ttu-id="5c7cc-137">Objeto de JavaScript con propiedades que se estructuran de forma isomórfico a las propiedades del objeto en el que se llama al método.</span><span class="sxs-lookup"><span data-stu-id="5c7cc-137">A JavaScript object with properties that are structured isomorphically to the properties of the object on which the method is called.</span></span>
+          type:
+            - Interfaces.TableRowUpdateData
+        - id: options
+          description: <span data-ttu-id="5c7cc-138">Proporciona una opción para suprimir errores si el objeto Properties intenta establecer propiedades de solo lectura.</span><span class="sxs-lookup"><span data-stu-id="5c7cc-138">Provides an option to suppress errors if the properties object tries to set any read-only properties.</span></span>
+          type:
+            - office.OfficeExtension.UpdateOptions
+  - uid: excel_release.Excel.TableRow.set_1
+    summary: '<span data-ttu-id="5c7cc-139">Establece varias propiedades en el objeto al mismo tiempo, basándose en un objeto cargado existente.</span><span class="sxs-lookup"><span data-stu-id="5c7cc-139">Sets multiple properties on the object at the same time, based on an existing loaded object.</span></span>'
+    name: set(properties)
+    fullName: set(properties)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(properties: Excel.TableRow): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: properties
+          description: ''
+          type:
+            - excel.Excel.TableRow
+  - uid: excel_release.Excel.TableRow.toJSON
+    summary: '<span data-ttu-id="5c7cc-140">Reemplaza el método JavaScript `toJSON()` para proporcionar un resultado más útil cuando se pasa un objeto API a`JSON.stringify()`</span><span class="sxs-lookup"><span data-stu-id="5c7cc-140">Overrides the JavaScript `toJSON()` method in order to provide more useful output when an API object is passed to `JSON.stringify()`</span></span><!-- --><span data-ttu-id="5c7cc-141">.</span><span class="sxs-lookup"><span data-stu-id="5c7cc-141"></span></span> <span data-ttu-id="5c7cc-142">(`JSON.stringify`</span><span class="sxs-lookup"><span data-stu-id="5c7cc-142"></span></span><!-- --><span data-ttu-id="5c7cc-143">, a su vez, llama `toJSON` al método del objeto que se le pasa.) Mientras que el objeto Excel. TableRow original es un objeto API, `toJSON` el método devuelve un objeto JavaScript sin formato (escrito como`Excel.Interfaces.TableRowData`</span><span class="sxs-lookup"><span data-stu-id="5c7cc-143">, in turn, calls the `toJSON` method of the object that is passed to it.) Whereas the original Excel.TableRow object is an API object, the `toJSON` method returns a plain JavaScript object (typed as `Excel.Interfaces.TableRowData`</span></span><!-- --><span data-ttu-id="5c7cc-144">) que contiene copias rasas de las propiedades secundarias cargadas del objeto original.</span><span class="sxs-lookup"><span data-stu-id="5c7cc-144">) that contains shallow copies of any loaded child properties from the original object.</span></span>'
+    name: toJSON()
+    fullName: toJSON()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'toJSON(): Excel.Interfaces.TableRowData;'
+      return:
+        type:
+          - excel.Excel.Interfaces.TableRowData
+        description: ''
+  - uid: excel_release.Excel.TableRow.values
+    summary: |-
+      <span data-ttu-id="5c7cc-145">Representa los valores sin formato del rango especificado.</span><span class="sxs-lookup"><span data-stu-id="5c7cc-145">Represents the raw values of the specified range.</span></span> <span data-ttu-id="5c7cc-146">Los datos devueltos pueden ser de tipo cadena, número o booleano.</span><span class="sxs-lookup"><span data-stu-id="5c7cc-146">The data returned could be of type string, number, or a boolean.</span></span> <span data-ttu-id="5c7cc-147">Las celdas que contienen un error devolverán la cadena de error.</span><span class="sxs-lookup"><span data-stu-id="5c7cc-147">Cells that contain an error will return the error string.</span></span>
 
-
-    <span data-ttu-id="6d9cd-116">\[[Conjunto de API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="6d9cd-116">\[ [API set: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
-  name: index
-  fullName: index
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'readonly index: number;'
-    return:
-      type:
-      - number
-- uid: excel_release.Excel.TableRow.load
-  summary: <span data-ttu-id="6d9cd-117">Pone en cola un comando para cargar las propiedades especificadas del objeto.</span><span class="sxs-lookup"><span data-stu-id="6d9cd-117">Queues up a command to load the specified properties of the object.</span></span> <span data-ttu-id="6d9cd-118">Debe llamar a "context. Sync ()" antes de leer las propiedades.</span><span class="sxs-lookup"><span data-stu-id="6d9cd-118">You must call "context.sync()" before reading the properties.</span></span>
-  remarks: >-
-    <span data-ttu-id="6d9cd-119">Además de esta firma, este método tiene las siguientes firmas:</span><span class="sxs-lookup"><span data-stu-id="6d9cd-119">In addition to this signature, this method has the following signatures:</span></span>
-
-
-    <span data-ttu-id="6d9cd-120">`load(option?: string | string[]): Excel.TableRow`-Donde opción es una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades que se van a cargar.</span><span class="sxs-lookup"><span data-stu-id="6d9cd-120">`load(option?: string | string[]): Excel.TableRow` - Where option is a comma-delimited string or an array of strings that specify the properties to load.</span></span>
-
-
-    <span data-ttu-id="6d9cd-121">`load(option?: { select?: string; expand?: string; }): Excel.TableRow`-Where opción. Select es una cadena delimitada por comas que especifica las propiedades que se van a cargar y Options. Expand es una cadena delimitada por comas que especifica las propiedades de navegación que se deben cargar.</span><span class="sxs-lookup"><span data-stu-id="6d9cd-121">`load(option?: { select?: string; expand?: string; }): Excel.TableRow` - Where option.select is a comma-delimited string that specifies the properties to load, and options.expand is a comma-delimited string that specifies the navigation properties to load.</span></span>
-
-
-    <span data-ttu-id="6d9cd-122">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.TableRow`-Solo disponible en tipos de colección.</span><span class="sxs-lookup"><span data-stu-id="6d9cd-122">`load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.TableRow` - Only available on collection types.</span></span> <span data-ttu-id="6d9cd-123">Es similar a la firma anterior.</span><span class="sxs-lookup"><span data-stu-id="6d9cd-123">It is similar to the preceding signature.</span></span> <span data-ttu-id="6d9cd-124">Option. Top especifica el número máximo de elementos de colección que se pueden incluir en el resultado.</span><span class="sxs-lookup"><span data-stu-id="6d9cd-124">Option.top specifies the maximum number of collection items that can be included in the result.</span></span> <span data-ttu-id="6d9cd-125">La opción. SKIP especifica el número de elementos que se deben omitir y que no se incluyen en el resultado.</span><span class="sxs-lookup"><span data-stu-id="6d9cd-125">Option.skip specifies the number of items that are to be skipped and not included in the result.</span></span> <span data-ttu-id="6d9cd-126">Si se especifica Option. Top, el conjunto de resultados se iniciará después de omitir el número especificado de elementos.</span><span class="sxs-lookup"><span data-stu-id="6d9cd-126">If option.top is specified, the result set will start after skipping the specified number of items.</span></span>
-  name: load(option)
-  fullName: load(option)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(option?: Excel.Interfaces.TableRowLoadOptions): Excel.TableRow;'
-    return:
-      type:
-      - excel.Excel.TableRow
-      description: ''
-    parameters:
-    - id: option
-      description: ''
-      type:
-      - excel.Excel.Interfaces.TableRowLoadOptions
-- uid: excel_release.Excel.TableRow.load_1
-  summary: <span data-ttu-id="6d9cd-127">Pone en cola un comando para cargar las propiedades especificadas del objeto.</span><span class="sxs-lookup"><span data-stu-id="6d9cd-127">Queues up a command to load the specified properties of the object.</span></span> <span data-ttu-id="6d9cd-128">Debe llamar `context.sync()` antes de leer las propiedades.</span><span class="sxs-lookup"><span data-stu-id="6d9cd-128">You must call `context.sync()` before reading the properties.</span></span>
-  name: load(propertyNames)
-  fullName: load(propertyNames)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(propertyNames?: string | string[]): Excel.TableRow;'
-    return:
-      type:
-      - excel.Excel.TableRow
-      description: "\n#### <a name=\"examples\"></a><span data-ttu-id=\"6d9cd-129\">Ejemplos</span><span class=\"sxs-lookup\"><span data-stu-id=\"6d9cd-129\">Examples</span></span>\n\n```javascript\nExcel.run(function (ctx) { \n    var tableName = 'Table1';\n    var row = ctx.workbook.tables.getItem(tableName).rows.getItem(0);\n    row.load('index');\n    return ctx.sync().then(function() {\n        console.log(row.index);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\nExcel.run(function (ctx) { \n    var tables = ctx.workbook.tables;\n    var newValues = [[\"New\", \"Values\", \"For\", \"New\", \"Row\"]];\n    var tableName = 'Table1';\n    var row = ctx.workbook.tables.getItem(tableName).rows.getItemAt(2);\n    row.values = newValues;\n    row.load('values');\n    return ctx.sync().then(function() {\n        console.log(row.values);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
-    parameters:
-    - id: propertyNames
-      description: <span data-ttu-id="6d9cd-130">Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades que se van a cargar.</span><span class="sxs-lookup"><span data-stu-id="6d9cd-130">A comma-delimited string or an array of strings that specify the properties to load.</span></span>
-      type:
-      - string | string[]
-- uid: excel_release.Excel.TableRow.load_2
-  summary: <span data-ttu-id="6d9cd-131">Pone en cola un comando para cargar las propiedades especificadas del objeto.</span><span class="sxs-lookup"><span data-stu-id="6d9cd-131">Queues up a command to load the specified properties of the object.</span></span> <span data-ttu-id="6d9cd-132">Debe llamar `context.sync()` antes de leer las propiedades.</span><span class="sxs-lookup"><span data-stu-id="6d9cd-132">You must call `context.sync()` before reading the properties.</span></span>
-  name: load(propertyNamesAndPaths)
-  fullName: load(propertyNamesAndPaths)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.TableRow;'
-    return:
-      type:
-      - excel.Excel.TableRow
-      description: ''
-    parameters:
-    - id: propertyNamesAndPaths
-      description: <span data-ttu-id="6d9cd-133">Donde propertyNamesAndPaths. Select es una cadena delimitada por comas que especifica las propiedades que se van a cargar y propertyNamesAndPaths. Expand es una cadena delimitada por comas que especifica las propiedades de navegación que se deben cargar.</span><span class="sxs-lookup"><span data-stu-id="6d9cd-133">Where propertyNamesAndPaths.select is a comma-delimited string that specifies the properties to load, and propertyNamesAndPaths.expand is a comma-delimited string that specifies the navigation properties to load.</span></span>
-      type:
-      - '{ select?: string; expand?: string; }'
-- uid: excel_release.Excel.TableRow.set
-  summary: <span data-ttu-id="6d9cd-134">Establece varias propiedades de un objeto al mismo tiempo.</span><span class="sxs-lookup"><span data-stu-id="6d9cd-134">Sets multiple properties of an object at the same time.</span></span> <span data-ttu-id="6d9cd-135">Puede pasar un objeto sin formato con las propiedades apropiadas o cualquier otro objeto de la API del mismo tipo.</span><span class="sxs-lookup"><span data-stu-id="6d9cd-135">You can pass either a plain object with the appropriate properties, or another API object of the same type.</span></span>
-  remarks: >-
-    <span data-ttu-id="6d9cd-136">Este método tiene la siguiente firma adicional:</span><span class="sxs-lookup"><span data-stu-id="6d9cd-136">This method has the following additional signature:</span></span>
-
-
-    `set(properties: Excel.TableRow): void`
-  name: set(properties, options)
-  fullName: set(properties, options)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'set(properties: Interfaces.TableRowUpdateData, options?: OfficeExtension.UpdateOptions): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: properties
-      description: <span data-ttu-id="6d9cd-137">Objeto de JavaScript con propiedades que se estructuran de forma isomórfico a las propiedades del objeto en el que se llama al método.</span><span class="sxs-lookup"><span data-stu-id="6d9cd-137">A JavaScript object with properties that are structured isomorphically to the properties of the object on which the method is called.</span></span>
-      type:
-      - Interfaces.TableRowUpdateData
-    - id: options
-      description: <span data-ttu-id="6d9cd-138">Proporciona una opción para suprimir errores si el objeto Properties intenta establecer propiedades de solo lectura.</span><span class="sxs-lookup"><span data-stu-id="6d9cd-138">Provides an option to suppress errors if the properties object tries to set any read-only properties.</span></span>
-      type:
-      - office.OfficeExtension.UpdateOptions
-- uid: excel_release.Excel.TableRow.set_1
-  summary: <span data-ttu-id="6d9cd-139">Establece varias propiedades en el objeto al mismo tiempo, basándose en un objeto cargado existente.</span><span class="sxs-lookup"><span data-stu-id="6d9cd-139">Sets multiple properties on the object at the same time, based on an existing loaded object.</span></span>
-  name: set(properties)
-  fullName: set(properties)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'set(properties: Excel.TableRow): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: properties
-      description: ''
-      type:
-      - excel.Excel.TableRow
-- uid: excel_release.Excel.TableRow.toJSON
-  summary: <span data-ttu-id="6d9cd-140">Reemplaza el método de JavaScript `toJSON()` para proporcionar un resultado más útil cuando se pasa un objeto de `JSON.stringify()` <!-- -->la API.</span><span class="sxs-lookup"><span data-stu-id="6d9cd-140">Overrides the JavaScript `toJSON()` method in order to provide more useful output when an API object is passed to `JSON.stringify()`<!-- -->.</span></span> <span data-ttu-id="6d9cd-141">(`JSON.stringify`<!-- -->a su vez, llama al `toJSON` método del objeto que se le pasa). Mientras que el objeto Excel. TableRow original es un objeto API, `toJSON` el método devuelve un objeto JavaScript sin formato (escrito `Excel.Interfaces.TableRowData` <!-- -->como) que contiene las copias rasas de las propiedades secundarias cargadas del objeto original.</span><span class="sxs-lookup"><span data-stu-id="6d9cd-141">(`JSON.stringify`<!-- -->, in turn, calls the `toJSON` method of the object that is passed to it.) Whereas the original Excel.TableRow object is an API object, the `toJSON` method returns a plain JavaScript object (typed as `Excel.Interfaces.TableRowData`<!-- -->) that contains shallow copies of any loaded child properties from the original object.</span></span>
-  name: toJSON()
-  fullName: toJSON()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'toJSON(): Excel.Interfaces.TableRowData;'
-    return:
-      type:
-      - excel.Excel.Interfaces.TableRowData
-      description: ''
-- uid: excel_release.Excel.TableRow.values
-  summary: >-
-    <span data-ttu-id="6d9cd-142">Representa los valores sin formato del intervalo especificado.</span><span class="sxs-lookup"><span data-stu-id="6d9cd-142">Represents the raw values of the specified range.</span></span> <span data-ttu-id="6d9cd-143">Los datos devueltos pueden ser de tipo String, Number o Boolean.</span><span class="sxs-lookup"><span data-stu-id="6d9cd-143">The data returned could be of type string, number, or a boolean.</span></span> <span data-ttu-id="6d9cd-144">Las celdas que contienen un error devolverán la cadena de error.</span><span class="sxs-lookup"><span data-stu-id="6d9cd-144">Cells that contain an error will return the error string.</span></span>
-
-
-    <span data-ttu-id="6d9cd-145">\[[Conjunto de API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="6d9cd-145">\[ [API set: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
-  name: values
-  fullName: values
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'values: any[][];'
-    return:
-      type:
-      - any[][]
+      <span data-ttu-id="5c7cc-148">\[[Conjunto de API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="5c7cc-148">\[ [API set: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]</span></span>
+    name: values
+    fullName: values
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'values: any[][];'
+      return:
+        type:
+          - 'any[][]'
