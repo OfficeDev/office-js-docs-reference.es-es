@@ -1,86 +1,73 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 55557a223c4a01d52bdfe312443b9a44bac57af3
-ms.sourcegitcommit: b0b614f5315ab2e5c1e0ea51c687498f87684a07
-ms.translationtype: MT
-ms.contentlocale: es-ES
-ms.lasthandoff: 02/15/2019
-ms.locfileid: "30055230"
 items:
-- uid: outlook.Office.PhoneNumber
-  summary: >-
-    Representa un número de teléfono identificado en un elemento. Solo modo Lectura.
+  - uid: outlook.Office.PhoneNumber
+    summary: |-
+      Representa un número de teléfono identificado en un elemento. Solo modo Lectura.
 
+      Se devuelve una matriz de PhoneNumber que contiene los números de teléfono encontrados en un mensaje de correo electrónico en la propiedad phoneNumbers del objeto enTities que se devuelve al llamar al método getEntities en el elemento seleccionado.
 
-    Una matriz de objetos PhoneNumber que contiene los números de teléfono presentes en un mensaje de correo electrónico se devuelve en la propiedad phoneNumbers del objeto Entities que se devuelve al llamar al método getEntities en el elemento seleccionado.
+      \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
 
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: lectura
 
-    \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: >-
-    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Leer</td></tr> </table>
+      #### <a name="examples"></a>Ejemplos
 
-    ####Incluyen
-
-
-    ```javascript
-
-    var item = Office.context.mailbox.item;
-
-    // Get an array of strings that represent phone numbers in the current item's body.
-
-    var phoneNumbers = item.getEntitiesByType(Office.MailboxEnums.EntityType.PhoneNumber);
-
-    console.log("There are " + phoneNumbers.length + " phone numbers.")
-
-    phoneNumbers.forEach(function (phoneNumber) {
-        console.log("Phone number: " + JSON.stringify(phoneNumber.phoneString));
-        console.log("Type: " + JSON.stringify(phoneNumber.type));
-        console.log("Source text: " + JSON.stringify(phoneNumber.originalPhoneString));
-    });
-
-    ```
-  name: Office.PhoneNumber
-  fullName: Office.PhoneNumber
-  langs:
-  - typeScript
-  type: interface
-  package: outlook
-  children:
-  - outlook.Office.PhoneNumber.originalPhoneString
-  - outlook.Office.PhoneNumber.phoneString
-  - outlook.Office.PhoneNumber.type
-- uid: outlook.Office.PhoneNumber.originalPhoneString
-  summary: Obtiene el texto que se identificó en un elemento como número de teléfono.
-  name: originalPhoneString
-  fullName: originalPhoneString
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'originalPhoneString: string;'
-    return:
-      type:
-      - string
-- uid: outlook.Office.PhoneNumber.phoneString
-  summary: Obtiene una cadena que contiene un número de teléfono. Esta cadena contiene solo los dígitos del número de teléfono y excluye caracteres como paréntesis y guiones si estos aparecen en el elemento original.
-  name: phoneString
-  fullName: phoneString
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'phoneString: string;'
-    return:
-      type:
-      - string
-- uid: outlook.Office.PhoneNumber.type
-  summary: 'Obtiene una cadena que identifica el tipo de número de teléfono: Home, Work, Mobile, Unspecified.'
-  name: type
-  fullName: type
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'type: string;'
-    return:
-      type:
-      - string
+      ```javascript
+      var item = Office.context.mailbox.item;
+      // Get an array of strings that represent phone numbers in the current item's body.
+      var phoneNumbers = item.getEntitiesByType(Office.MailboxEnums.EntityType.PhoneNumber);
+      console.log("There are " + phoneNumbers.length + " phone numbers.")
+      phoneNumbers.forEach(function (phoneNumber) {
+          console.log("Phone number: " + JSON.stringify(phoneNumber.phoneString));
+          console.log("Type: " + JSON.stringify(phoneNumber.type));
+          console.log("Source text: " + JSON.stringify(phoneNumber.originalPhoneString));
+      });
+      ```
+    name: Office.PhoneNumber
+    fullName: Office.PhoneNumber
+    langs:
+      - typeScript
+    type: interface
+    package: outlook
+    children:
+      - outlook.Office.PhoneNumber.originalPhoneString
+      - outlook.Office.PhoneNumber.phoneString
+      - outlook.Office.PhoneNumber.type
+  - uid: outlook.Office.PhoneNumber.originalPhoneString
+    summary: Obtiene el texto que se identificó en un elemento como número de teléfono.
+    name: originalPhoneString
+    fullName: originalPhoneString
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'originalPhoneString: string;'
+      return:
+        type:
+          - string
+  - uid: outlook.Office.PhoneNumber.phoneString
+    summary: Obtiene una cadena que contiene un número de teléfono. Esta cadena contiene solo los dígitos del número de teléfono y excluye caracteres como paréntesis y guiones si estos aparecen en el elemento original.
+    name: phoneString
+    fullName: phoneString
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'phoneString: string;'
+      return:
+        type:
+          - string
+  - uid: outlook.Office.PhoneNumber.type
+    summary: 'Obtiene una cadena que identifica el tipo de número de teléfono: particular, trabajo, móvil, sin especificar.'
+    name: type
+    fullName: type
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'type: string;'
+      return:
+        type:
+          - string

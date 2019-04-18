@@ -1,128 +1,213 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 3aab01849dd521cba119e1580f8a180d58ac575e
-ms.sourcegitcommit: 016e17422cf62dc9f1de1809666e9244e41cc1a9
-ms.translationtype: MT
-ms.contentlocale: es-ES
-ms.lasthandoff: 11/09/2018
-ms.locfileid: "26236525"
 items:
-- uid: office.Office.BindingSelectionChangedEventArgs
-  summary: Proporciona información sobre el enlace que ha generado el evento SelectionChanged.
-  remarks: <table><tr><td>Hosts</td><td>Access, Excel y Word</td></tr></table>
-  name: Office.BindingSelectionChangedEventArgs
-  fullName: Office.BindingSelectionChangedEventArgs
-  langs:
-  - typeScript
-  type: interface
-  package: office
-  children:
-  - office.Office.BindingSelectionChangedEventArgs.binding
-  - office.Office.BindingSelectionChangedEventArgs.columnCount
-  - office.Office.BindingSelectionChangedEventArgs.rowCount
-  - office.Office.BindingSelectionChangedEventArgs.startColumn
-  - office.Office.BindingSelectionChangedEventArgs.startRow
-  - office.Office.BindingSelectionChangedEventArgs.type
-- uid: office.Office.BindingSelectionChangedEventArgs.binding
-  summary: Obtiene un objeto [Office.Binding](xref:office.Office.Binding) que representa el enlace que generó el evento SelectionChanged.
-  name: binding
-  fullName: binding
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'binding: Binding;'
-    return:
-      type:
-      - Binding
-- uid: office.Office.BindingSelectionChangedEventArgs.columnCount
-  summary: >-
-    Obtiene la cantidad de columnas seleccionadas. Si se selecciona una sola celda devuelve 1.
+  - uid: office.Office.BindingSelectionChangedEventArgs
+    summary: Proporciona información sobre el enlace que ha generado el evento SelectionChanged.
+    name: Office.BindingSelectionChangedEventArgs
+    fullName: Office.BindingSelectionChangedEventArgs
+    langs:
+      - typeScript
+    type: interface
+    package: office
+    children:
+      - office.Office.BindingSelectionChangedEventArgs.binding
+      - office.Office.BindingSelectionChangedEventArgs.columnCount
+      - office.Office.BindingSelectionChangedEventArgs.rowCount
+      - office.Office.BindingSelectionChangedEventArgs.startColumn
+      - office.Office.BindingSelectionChangedEventArgs.startRow
+      - office.Office.BindingSelectionChangedEventArgs.type
+  - uid: office.Office.BindingSelectionChangedEventArgs.binding
+    summary: 'Obtiene un objeto [Office. Binding](xref:office.Office.Binding) que representa el enlace que ha generado el evento SelectionChanged.'
+    name: binding
+    fullName: binding
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'binding: Binding;'
+      return:
+        type:
+          - Binding
+  - uid: office.Office.BindingSelectionChangedEventArgs.columnCount
+    summary: |-
+      Obtiene la cantidad de columnas seleccionadas. Si se selecciona una sola celda, devolverá 1.
+
+      Si el usuario selecciona elementos que no son contiguos, devolverá el recuento del último grupo de elementos contiguos que haya seleccionado dentro del enlace.
+
+      Para Word, esta propiedad sólo funcionará para enlaces de la tabla [Office. BindingType](xref:office.Office.BindingType) . Si el enlace es de tipo "matrix", devolverá null. También se producirá un error en la llamada si la tabla contiene celdas combinadas, porque la estructura de la tabla debe ser uniforme para que esta propiedad funcione correctamente.
+    name: columnCount
+    fullName: columnCount
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'columnCount: number;'
+      return:
+        type:
+          - number
+        description: |-
 
 
-    Si el usuario selecciona elementos que no son contiguos, devolverá el recuento del último grupo de elementos contiguos que haya seleccionado dentro del enlace.
+          #### <a name="examples"></a>Ejemplos
+
+          ```javascript
+          // The following example adds an event handler for the SelectionChanged event to the binding with an id of myTable.
+          // When the user changes the selection, the handler displays the coordinates of the first cell in the selection,
+          // and the number of row and columns selected.
+          function addSelectionHandler() {
+              Office.context.document.bindings.getByIdAsync("myTable", function (result) {
+                  result.value.addHandlerAsync("bindingSelectionChanged", myHandler);
+              });
+          }
+
+          // Display selection start coordinates and row/column count.
+          function myHandler(bArgs) {
+              write("Selection start row/col: " + bArgs.startRow + "," + bArgs.startColumn);
+              write("Selection row count: " + bArgs.rowCount);
+              write("Selection col count: " + bArgs.columnCount);
+          }
+          // Function that writes to a div with id='message' on the page.
+          function write(message){
+              document.getElementById('message').innerText += message; 
+          }
+          ```
+  - uid: office.Office.BindingSelectionChangedEventArgs.rowCount
+    summary: |-
+      Obtiene la cantidad de filas seleccionadas. Si se selecciona una sola celda, devolverá 1.
+
+      Si el usuario selecciona elementos que no son contiguos, devolverá el recuento del último grupo de elementos contiguos que haya seleccionado dentro del enlace.
+
+      Para Word, esta propiedad sólo funcionará para enlaces de la tabla [Office. BindingType](xref:office.Office.BindingType) . Si el enlace es de tipo "matrix", devolverá null. También se producirá un error en la llamada si la tabla contiene celdas combinadas, porque la estructura de la tabla debe ser uniforme para que esta propiedad funcione correctamente.
+    name: rowCount
+    fullName: rowCount
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'rowCount: number;'
+      return:
+        type:
+          - number
+        description: |-
 
 
-    Para Word, esta propiedad funciona sólo para los enlaces de [Office.BindingType](xref:office.Office.BindingType) "table". Si el enlace es del tipo "matrix", se devuelve null. Además, la llamada se producirá un error si la tabla contiene celdas combinadas, debido a que la estructura de la tabla debe ser uniforme para esta propiedad para que funcione correctamente.
-  name: columnCount
-  fullName: columnCount
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'columnCount: number;'
-    return:
-      type:
-      - number
-      description: "\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\n// The following example adds an event handler for the SelectionChanged event to the binding with an id of myTable.\n// When the user changes the selection, the handler displays the coordinates of the first cell in the selection,\n// and the number of row and columns selected.\nfunction addSelectionHandler() {\n    Office.context.document.bindings.getByIdAsync(\"myTable\", function (result) {\n        result.value.addHandlerAsync(\"bindingSelectionChanged\", myHandler);\n    });\n}\n\n// Display selection start coordinates and row/column count.\nfunction myHandler(bArgs) {\n    write(\"Selection start row/col: \" + bArgs.startRow + \",\" + bArgs.startColumn);\n    write(\"Selection row count: \" + bArgs.rowCount);\n    write(\"Selection col count: \" + bArgs.columnCount);\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
-- uid: office.Office.BindingSelectionChangedEventArgs.rowCount
-  summary: >-
-    Obtiene la cantidad de filas seleccionadas. Si se selecciona una sola celda devuelve 1.
+          #### <a name="examples"></a>Ejemplos
+
+          ```javascript
+          // The following example adds an event handler for the SelectionChanged event to the binding with an id of myTable.
+          // When the user changes the selection, the handler displays the coordinates of the first cell in the selection,
+          // and the number of row and columns selected.
+          function addSelectionHandler() {
+              Office.context.document.bindings.getByIdAsync("myTable", function (result) {
+                  result.value.addHandlerAsync("bindingSelectionChanged", myHandler);
+              });
+          }
+
+          // Display selection start coordinates and row/column count.
+          function myHandler(bArgs) {
+              write("Selection start row/col: " + bArgs.startRow + "," + bArgs.startColumn);
+              write("Selection row count: " + bArgs.rowCount);
+              write("Selection col count: " + bArgs.columnCount);
+          }
+          // Function that writes to a div with id='message' on the page.
+          function write(message){
+              document.getElementById('message').innerText += message; 
+          }
+          ```
+  - uid: office.Office.BindingSelectionChangedEventArgs.startColumn
+    summary: |-
+      El índice de base cero de la primera columna de la selección empezando desde la columna más a la izquierda del enlace.
+
+      Si el usuario hace una selección no contigua, se devuelven las coordenadas de la última selección contigua que hay en el enlace.
+
+      Para Word, esta propiedad sólo funcionará para enlaces de la tabla [Office. BindingType](xref:office.Office.BindingType) . Si el enlace es de tipo "matrix", devolverá null. También se producirá un error en la llamada si la tabla contiene celdas combinadas, porque la estructura de la tabla debe ser uniforme para que esta propiedad funcione correctamente.
+    name: startColumn
+    fullName: startColumn
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'startColumn: number;'
+      return:
+        type:
+          - number
+        description: |-
 
 
-    Si el usuario selecciona elementos que no son contiguos, devolverá el recuento del último grupo de elementos contiguos que haya seleccionado dentro del enlace.
+          #### <a name="examples"></a>Ejemplos
+
+          ```javascript
+          // The following example adds an event handler for the SelectionChanged event to the binding with an id of myTable.
+          // When the user changes the selection, the handler displays the coordinates of the first cell in the selection,
+          // and the number of row and columns selected.
+          function addSelectionHandler() {
+              Office.context.document.bindings.getByIdAsync("myTable", function (result) {
+                  result.value.addHandlerAsync("bindingSelectionChanged", myHandler);
+              });
+          }
+
+          // Display selection start coordinates and row/column count.
+          function myHandler(bArgs) {
+              write("Selection start row/col: " + bArgs.startRow + "," + bArgs.startColumn);
+              write("Selection row count: " + bArgs.rowCount);
+              write("Selection col count: " + bArgs.columnCount);
+          }
+          // Function that writes to a div with id='message' on the page.
+          function write(message){
+              document.getElementById('message').innerText += message; 
+          }
+          ```
+  - uid: office.Office.BindingSelectionChangedEventArgs.startRow
+    summary: |-
+      El índice de base cero de la primera fila de la selección, a partir de la primera fila del enlace.
+
+      Si el usuario selecciona elementos que no son contiguos, devolverá las coordenadas del último grupo de elementos contiguos que haya seleccionado dentro del enlace.
+
+      Para Word, esta propiedad sólo funcionará para enlaces de la tabla [Office. BindingType](xref:office.Office.BindingType) . Si el enlace es de tipo "matrix", devolverá null. También se producirá un error en la llamada si la tabla contiene celdas combinadas, porque la estructura de la tabla debe ser uniforme para que esta propiedad funcione correctamente.
+    name: startRow
+    fullName: startRow
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'startRow: number;'
+      return:
+        type:
+          - number
+        description: |-
 
 
-    Para Word, esta propiedad funciona sólo para los enlaces de [Office.BindingType](xref:office.Office.BindingType) "table". Si el enlace es del tipo "matrix", se devuelve null. Además, la llamada se producirá un error si la tabla contiene celdas combinadas, debido a que la estructura de la tabla debe ser uniforme para esta propiedad para que funcione correctamente.
-  name: rowCount
-  fullName: rowCount
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'rowCount: number;'
-    return:
-      type:
-      - number
-      description: "\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\n// The following example adds an event handler for the SelectionChanged event to the binding with an id of myTable.\n// When the user changes the selection, the handler displays the coordinates of the first cell in the selection,\n// and the number of row and columns selected.\nfunction addSelectionHandler() {\n    Office.context.document.bindings.getByIdAsync(\"myTable\", function (result) {\n        result.value.addHandlerAsync(\"bindingSelectionChanged\", myHandler);\n    });\n}\n\n// Display selection start coordinates and row/column count.\nfunction myHandler(bArgs) {\n    write(\"Selection start row/col: \" + bArgs.startRow + \",\" + bArgs.startColumn);\n    write(\"Selection row count: \" + bArgs.rowCount);\n    write(\"Selection col count: \" + bArgs.columnCount);\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
-- uid: office.Office.BindingSelectionChangedEventArgs.startColumn
-  summary: >-
-    El índice de base cero de la primera columna de la selección empezando desde la columna más a la izquierda del enlace.
+          #### <a name="examples"></a>Ejemplos
 
+          ```javascript
+          // The following example adds an event handler for the SelectionChanged event to the binding with an id of myTable.
+          // When the user changes the selection, the handler displays the coordinates of the first cell in the selection,
+          // and the number of row and columns selected.
+          function addSelectionHandler() {
+              Office.context.document.bindings.getByIdAsync("myTable", function (result) {
+                  result.value.addHandlerAsync("bindingSelectionChanged", myHandler);
+              });
+          }
 
-    Si el usuario hace una selección no contigua, se devuelven las coordenadas de la última selección contigua que hay en el enlace.
-
-
-    Para Word, esta propiedad funciona sólo para los enlaces de [Office.BindingType](xref:office.Office.BindingType) "table". Si el enlace es del tipo "matrix", se devuelve null. Además, la llamada se producirá un error si la tabla contiene celdas combinadas, debido a que la estructura de la tabla debe ser uniforme para esta propiedad para que funcione correctamente.
-  name: startColumn
-  fullName: startColumn
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'startColumn: number;'
-    return:
-      type:
-      - number
-      description: "\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\n// The following example adds an event handler for the SelectionChanged event to the binding with an id of myTable.\n// When the user changes the selection, the handler displays the coordinates of the first cell in the selection,\n// and the number of row and columns selected.\nfunction addSelectionHandler() {\n    Office.context.document.bindings.getByIdAsync(\"myTable\", function (result) {\n        result.value.addHandlerAsync(\"bindingSelectionChanged\", myHandler);\n    });\n}\n\n// Display selection start coordinates and row/column count.\nfunction myHandler(bArgs) {\n    write(\"Selection start row/col: \" + bArgs.startRow + \",\" + bArgs.startColumn);\n    write(\"Selection row count: \" + bArgs.rowCount);\n    write(\"Selection col count: \" + bArgs.columnCount);\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
-- uid: office.Office.BindingSelectionChangedEventArgs.startRow
-  summary: >-
-    El índice de base cero de la primera fila de la selección, a partir de la primera fila del enlace.
-
-
-    Si el usuario selecciona elementos que no son contiguos, devolverá las coordenadas del último grupo de elementos contiguos que haya seleccionado dentro del enlace.
-
-
-    Para Word, esta propiedad funciona sólo para los enlaces de [Office.BindingType](xref:office.Office.BindingType) "table". Si el enlace es del tipo "matrix", se devuelve null. Además, la llamada se producirá un error si la tabla contiene celdas combinadas, debido a que la estructura de la tabla debe ser uniforme para esta propiedad para que funcione correctamente.
-  name: startRow
-  fullName: startRow
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'startRow: number;'
-    return:
-      type:
-      - number
-      description: "\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\n// The following example adds an event handler for the SelectionChanged event to the binding with an id of myTable.\n// When the user changes the selection, the handler displays the coordinates of the first cell in the selection,\n// and the number of row and columns selected.\nfunction addSelectionHandler() {\n    Office.context.document.bindings.getByIdAsync(\"myTable\", function (result) {\n        result.value.addHandlerAsync(\"bindingSelectionChanged\", myHandler);\n    });\n}\n\n// Display selection start coordinates and row/column count.\nfunction myHandler(bArgs) {\n    write(\"Selection start row/col: \" + bArgs.startRow + \",\" + bArgs.startColumn);\n    write(\"Selection row count: \" + bArgs.rowCount);\n    write(\"Selection col count: \" + bArgs.columnCount);\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
-- uid: office.Office.BindingSelectionChangedEventArgs.type
-  summary: Obtiene un valor de enumeración [Office.EventType](xref:office.Office.EventType) que identifica el tipo de evento que se ha generado.
-  name: type
-  fullName: type
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'type: EventType;'
-    return:
-      type:
-      - EventType
+          // Display selection start coordinates and row/column count.
+          function myHandler(bArgs) {
+              write("Selection start row/col: " + bArgs.startRow + "," + bArgs.startColumn);
+              write("Selection row count: " + bArgs.rowCount);
+              write("Selection col count: " + bArgs.columnCount);
+          }
+          // Function that writes to a div with id='message' on the page.
+          function write(message){
+              document.getElementById('message').innerText += message; 
+          }
+          ```
+  - uid: office.Office.BindingSelectionChangedEventArgs.type
+    summary: 'Obtiene un valor de enumeración [Office. EventType](xref:office.Office.EventType) que identifica el tipo de evento que se ha generado.'
+    name: type
+    fullName: type
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'type: EventType;'
+      return:
+        type:
+          - EventType

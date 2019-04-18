@@ -1,390 +1,455 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 55b2e4a7959fda4d96ce6d67e844dd187fd50348
-ms.sourcegitcommit: e9bfba6ec767e9d34fd1cf7b38c30f689617900a
-ms.translationtype: MT
-ms.contentlocale: es-ES
-ms.lasthandoff: 02/20/2019
-ms.locfileid: "30095117"
 items:
-- uid: excel.Excel.NamedItem
-  summary: >-
-    Representa un nombre definido para un rango de celdas o un valor. Los nombres pueden ser objetos con nombre primitivo (como se ve en el tipo siguiente), un objeto de intervalo o una referencia a un rango. Este objeto puede usarse para obtener el objeto de intervalo asociado a los nombres.
+  - uid: excel.Excel.NamedItem
+    summary: |-
+      Representa un nombre definido para un rango de celdas o un valor. Los nombres pueden ser objetos con nombre primitivo (como se ve en el tipo siguiente), un objeto de intervalo o una referencia a un rango. Este objeto puede usarse para obtener un objeto de rango asociado a nombres.
+
+      \[[Conjunto de API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: Excel.NamedItem
+    fullName: Excel.NamedItem
+    langs:
+      - typeScript
+    type: class
+    extends:
+      - office.OfficeExtension.ClientObject
+    package: excel
+    children:
+      - excel.Excel.NamedItem.arrayValues
+      - excel.Excel.NamedItem.comment
+      - excel.Excel.NamedItem.context
+      - excel.Excel.NamedItem.delete
+      - excel.Excel.NamedItem.formula
+      - excel.Excel.NamedItem.getRange
+      - excel.Excel.NamedItem.getRangeOrNullObject
+      - excel.Excel.NamedItem.load
+      - excel.Excel.NamedItem.load_1
+      - excel.Excel.NamedItem.load_2
+      - excel.Excel.NamedItem.name
+      - excel.Excel.NamedItem.scope
+      - excel.Excel.NamedItem.set
+      - excel.Excel.NamedItem.set_1
+      - excel.Excel.NamedItem.toJSON
+      - excel.Excel.NamedItem.type
+      - excel.Excel.NamedItem.value
+      - excel.Excel.NamedItem.visible
+      - excel.Excel.NamedItem.worksheet
+      - excel.Excel.NamedItem.worksheetOrNullObject
+  - uid: excel.Excel.NamedItem.arrayValues
+    summary: |-
+      Devuelve un objeto que contiene los valores y tipos del elemento con nombre. Solo lectura.
+
+      \[[Conjunto de API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: arrayValues
+    fullName: arrayValues
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly arrayValues: Excel.NamedItemArrayValues;'
+      return:
+        type:
+          - excel.Excel.NamedItemArrayValues
+  - uid: excel.Excel.NamedItem.comment
+    summary: |-
+      Representa el comentario asociado a este nombre.
+
+      \[[Conjunto de API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: comment
+    fullName: comment
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'comment: string;'
+      return:
+        type:
+          - string
+  - uid: excel.Excel.NamedItem.context
+    summary: Contexto de la solicitud asociado al objeto. Esto conecta el proceso del complemento con el proceso de la aplicación host de Office.
+    name: context
+    fullName: context
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'context: RequestContext;'
+      return:
+        type:
+          - RequestContext
+  - uid: excel.Excel.NamedItem.delete
+    summary: |-
+      Elimina el nombre especificado.
+
+      \[[Conjunto de API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: delete()
+    fullName: delete()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'delete(): void;'
+      return:
+        type:
+          - void
+        description: |-
 
 
-    \[[Conjunto de API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: Excel.NamedItem
-  fullName: Excel.NamedItem
-  langs:
-  - typeScript
-  type: class
-  extends:
-  - office.OfficeExtension.ClientObject
-  package: excel
-  children:
-  - excel.Excel.NamedItem.arrayValues
-  - excel.Excel.NamedItem.comment
-  - excel.Excel.NamedItem.context
-  - excel.Excel.NamedItem.delete
-  - excel.Excel.NamedItem.formula
-  - excel.Excel.NamedItem.getRange
-  - excel.Excel.NamedItem.getRangeOrNullObject
-  - excel.Excel.NamedItem.load
-  - excel.Excel.NamedItem.load_1
-  - excel.Excel.NamedItem.load_2
-  - excel.Excel.NamedItem.name
-  - excel.Excel.NamedItem.scope
-  - excel.Excel.NamedItem.set
-  - excel.Excel.NamedItem.set_1
-  - excel.Excel.NamedItem.toJSON
-  - excel.Excel.NamedItem.type
-  - excel.Excel.NamedItem.value
-  - excel.Excel.NamedItem.visible
-  - excel.Excel.NamedItem.worksheet
-  - excel.Excel.NamedItem.worksheetOrNullObject
-- uid: excel.Excel.NamedItem.arrayValues
-  summary: >-
-    Devuelve un objeto que contiene los valores y tipos del elemento con nombre. Solo lectura.
+          #### <a name="examples"></a>Ejemplos
+
+          ```typescript
+          await Excel.run(async (context) => {
+              const sheet = context.workbook.worksheets.getItem("Sample");
+              const totalName = sheet.names.getItemOrNullObject("TotalAmount");
+              totalName.load();
+              await context.sync();
+
+              if (totalName.value) {
+                  totalName.delete();
+
+                  // Replace the named item (TotalAmount) with the actual formula for TotalAmount to avoid displaying #NAME in the cell.
+                  sheet.getRange("D11").values = [["=SUM(ExpensesTable[AMOUNT])"]];
+              } else {
+                  console.log("No named item created for the formula.");
+              }
+
+              await context.sync();
+          });
+          ```
+  - uid: excel.Excel.NamedItem.formula
+    summary: |-
+      Obtiene o establece la fórmula del elemento con nombre. La fórmula siempre comienza con el signo "=".
+
+      \[[Conjunto de API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: formula
+    fullName: formula
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'formula: any;'
+      return:
+        type:
+          - any
+        description: |-
 
 
-    \[[Conjunto de API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: arrayValues
-  fullName: arrayValues
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'readonly arrayValues: Excel.NamedItemArrayValues;'
-    return:
-      type:
-      - excel.Excel.NamedItemArrayValues
-- uid: excel.Excel.NamedItem.comment
-  summary: >-
-    Representa el comentario asociado a este nombre.
+          #### <a name="examples"></a>Ejemplos
+
+          ```typescript
+          await Excel.run(async (context) => {
+              const sheet = context.workbook.worksheets.getItem("Sample");
+
+              // Get the named item
+              const myNamedItem = sheet.names.getItemOrNullObject("MyRange");
+              myNamedItem.load("name, formula");
+              await context.sync();
+
+              if (myNamedItem.isNullObject) {
+                  console.log(`There is no named item. Create it with "Add named item for a range" first.`);
+              } else {                    
+                  // Update named item to point to the second range
+                  myNamedItem.formula = "=Sample!$B$10:$D$14";
+                  sheet.getRange("B10:D14").select();
+                  await context.sync();
+
+                  console.log(`Just updated the named item "${myNamedItem.name}" -- it's now located here: ${myNamedItem.formula}`);
+              }
+          });
+          ```
+  - uid: excel.Excel.NamedItem.getRange
+    summary: |-
+      Devuelve el objeto de rango asociado al nombre. Se produce un error si el tipo del elemento con nombre no es un rango.
+
+      \[[Conjunto de API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getRange()
+    fullName: getRange()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getRange(): Excel.Range;'
+      return:
+        type:
+          - excel.Excel.Range
+        description: |-
 
 
-    \[[Conjunto de API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: comment
-  fullName: comment
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'comment: string;'
-    return:
-      type:
-      - string
-- uid: excel.Excel.NamedItem.context
-  summary: Contexto de la solicitud asociado al objeto. Esto conecta el proceso del complemento con el proceso de la aplicación host de Office.
-  name: context
-  fullName: context
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'context: RequestContext;'
-    return:
-      type:
-      - RequestContext
-- uid: excel.Excel.NamedItem.delete
-  summary: >-
-    Elimina el nombre especificado.
+          #### <a name="examples"></a>Ejemplos
+
+          ```javascript
+          // Returns the Range object that is associated with the name. 
+          // null if the name is not of the type Range.
+          // Note: This API currently supports only the Workbook scoped items.
+          Excel.run(function (ctx) { 
+              var names = ctx.workbook.names;
+              var range = names.getItem('MyRange').getRange();
+              range.load('address');
+              return ctx.sync().then(function() {
+                  console.log(range.address);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+  - uid: excel.Excel.NamedItem.getRangeOrNullObject
+    summary: |-
+      Devuelve el objeto de rango asociado al nombre. Devuelve un objeto NULL si el tipo de elemento con nombre no es un rango.
+
+      \[[Conjunto de API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getRangeOrNullObject()
+    fullName: getRangeOrNullObject()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getRangeOrNullObject(): Excel.Range;'
+      return:
+        type:
+          - excel.Excel.Range
+        description: ''
+  - uid: excel.Excel.NamedItem.load
+    summary: 'Pone en cola un comando para cargar las propiedades especificadas del objeto. Antes de leer las propiedades, debe llamar a "context.sync()".'
+    remarks: |-
+      Además de esta firma, este método tiene las siguientes firmas:
+
+      `load(option?: string | string[]): Excel.NamedItem`-Donde opción es una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades que se van a cargar.
+
+      `load(option?: { select?: string; expand?: string; }): Excel.NamedItem`-Where opción. Select es una cadena delimitada por comas que especifica las propiedades que se van a cargar y Options. Expand es una cadena delimitada por comas que especifica las propiedades de navegación que se deben cargar.
+
+      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.NamedItem`-Solo disponible en tipos de colección. Es similar a la firma anterior. Option. Top especifica el número máximo de elementos de colección que se pueden incluir en el resultado. La opción. SKIP especifica el número de elementos que se deben omitir y que no se incluyen en el resultado. Si se especifica Option. Top, el conjunto de resultados se iniciará después de omitir el número especificado de elementos.
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: Excel.Interfaces.NamedItemLoadOptions): Excel.NamedItem;'
+      return:
+        type:
+          - excel.Excel.NamedItem
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - excel.Excel.Interfaces.NamedItemLoadOptions
+  - uid: excel.Excel.NamedItem.load_1
+    summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar `context.sync()` antes de leer las propiedades.
+    name: load(propertyNames)
+    fullName: load(propertyNames)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNames?: string | string[]): Excel.NamedItem;'
+      return:
+        type:
+          - excel.Excel.NamedItem
+        description: |-
 
 
-    \[[Conjunto de API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: delete()
-  fullName: delete()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'delete(): void;'
-    return:
-      type:
-      - void
-      description: "\n#### <a name=\"examples\"></a>Ejemplos\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n    const totalName = sheet.names.getItemOrNullObject(\"TotalAmount\");\n    totalName.load();\n    await context.sync();\n\n    if (totalName.value) {\n        totalName.delete();\n\n        // Replace the named item (TotalAmount) with the actual formula for TotalAmount to avoid displaying #NAME in the cell.\n        sheet.getRange(\"D11\").values = [[\"=SUM(ExpensesTable[AMOUNT])\"]];\n    } else {\n        console.log(\"No named item created for the formula.\");\n    }\n\n    await context.sync();\n});\n```"
-- uid: excel.Excel.NamedItem.formula
-  summary: >-
-    Obtiene o establece la fórmula del elemento con nombre. La fórmula siempre comienza con el signo "=".
+          #### <a name="examples"></a>Ejemplos
 
+          ```javascript
+          Excel.run(function (ctx) { 
+              var names = ctx.workbook.names;
+              var namedItem = names.getItem('MyRange');
+              namedItem.load('type');
+              return ctx.sync().then(function() {
+                      console.log(namedItem.type);
+              });
+          }).catch(function(error) {
+                  console.log("Error: " + error);
+                  if (error instanceof OfficeExtension.Error) {
+                      console.log("Debug info: " + JSON.stringify(error.debugInfo));
+                  }
+          });
+          ```
+      parameters:
+        - id: propertyNames
+          description: Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades que se van a cargar.
+          type:
+            - 'string | string[]'
+  - uid: excel.Excel.NamedItem.load_2
+    summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar `context.sync()` antes de leer las propiedades.
+    name: load(propertyNamesAndPaths)
+    fullName: load(propertyNamesAndPaths)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.NamedItem;'
+      return:
+        type:
+          - excel.Excel.NamedItem
+        description: ''
+      parameters:
+        - id: propertyNamesAndPaths
+          description: Donde propertyNamesAndPaths. Select es una cadena delimitada por comas que especifica las propiedades que se van a cargar y propertyNamesAndPaths. Expand es una cadena delimitada por comas que especifica las propiedades de navegación que se deben cargar.
+          type:
+            - '{ select?: string; expand?: string; }'
+  - uid: excel.Excel.NamedItem.name
+    summary: |-
+      Nombre del objeto. Solo lectura.
 
-    \[[Conjunto de API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: formula
-  fullName: formula
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'formula: any;'
-    return:
-      type:
-      - any
-      description: "\n#### <a name=\"examples\"></a>Ejemplos\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n\n    // Get the named item\n    const myNamedItem = sheet.names.getItemOrNullObject(\"MyRange\");\n    myNamedItem.load(\"name, formula\");\n    await context.sync();\n\n    if (myNamedItem.isNullObject) {\n        console.log(`There is no named item. Create it with \"Add named item for a range\" first.`);\n    } else {                    \n        // Update named item to point to the second range\n        myNamedItem.formula = \"=Sample!$B$10:$D$14\";\n        sheet.getRange(\"B10:D14\").select();\n        await context.sync();\n\n        console.log(`Just updated the named item \"${myNamedItem.name}\" -- it's now located here: ${myNamedItem.formula}`);\n    }\n});\n```"
-- uid: excel.Excel.NamedItem.getRange
-  summary: >-
-    Devuelve el objeto de rango asociado al nombre. Se produce un error si el tipo del elemento con nombre no es un rango.
+      \[[Conjunto de API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: name
+    fullName: name
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly name: string;'
+      return:
+        type:
+          - string
+  - uid: excel.Excel.NamedItem.scope
+    summary: |-
+      Indica si el nombre está en el ámbito del libro o de una hoja de cálculo específica. Los valores posibles son: Worksheet, Workbook. Solo lectura.
 
+      \[[Conjunto de API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: scope
+    fullName: scope
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly scope: Excel.NamedItemScope | "Worksheet" | "Workbook";'
+      return:
+        type:
+          - Excel.NamedItemScope | "Worksheet" | "Workbook"
+  - uid: excel.Excel.NamedItem.set
+    summary: Establece varias propiedades de un objeto al mismo tiempo. Puede pasar un objeto sin formato con las propiedades apropiadas o cualquier otro objeto de la API del mismo tipo.
+    remarks: |-
+      Este método tiene la siguiente firma adicional:
 
-    \[[Conjunto de API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: getRange()
-  fullName: getRange()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getRange(): Excel.Range;'
-    return:
-      type:
-      - excel.Excel.Range
-      description: "\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\n// Returns the Range object that is associated with the name. \n// null if the name is not of the type Range.\n// Note: This API currently supports only the Workbook scoped items.\nExcel.run(function (ctx) { \n    var names = ctx.workbook.names;\n    var range = names.getItem('MyRange').getRange();\n    range.load('address');\n    return ctx.sync().then(function() {\n        console.log(range.address);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
-- uid: excel.Excel.NamedItem.getRangeOrNullObject
-  summary: >-
-    Devuelve el objeto de rango asociado al nombre. Devuelve un objeto NULL si el tipo de elemento con nombre no es un rango.
+      `set(properties: Excel.NamedItem): void`
+    name: 'set(properties, options)'
+    fullName: 'set(properties, options)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(properties: Interfaces.NamedItemUpdateData, options?: OfficeExtension.UpdateOptions): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: properties
+          description: Objeto de JavaScript con propiedades que se estructuran de forma isomórfico a las propiedades del objeto en el que se llama al método.
+          type:
+            - Interfaces.NamedItemUpdateData
+        - id: options
+          description: Proporciona una opción para suprimir errores si el objeto Properties intenta establecer propiedades de solo lectura.
+          type:
+            - office.OfficeExtension.UpdateOptions
+  - uid: excel.Excel.NamedItem.set_1
+    summary: 'Establece varias propiedades en el objeto al mismo tiempo, basándose en un objeto cargado existente.'
+    name: set(properties)
+    fullName: set(properties)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(properties: Excel.NamedItem): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: properties
+          description: ''
+          type:
+            - excel.Excel.NamedItem
+  - uid: excel.Excel.NamedItem.toJSON
+    summary: 'Reemplaza el método JavaScript `toJSON()` para proporcionar un resultado más útil cuando se pasa un objeto API a`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama `toJSON` al método del objeto que se le pasa.) Mientras que el objeto Excel. NamedItem original es un objeto API, `toJSON` el método devuelve un objeto JavaScript sin formato (escrito como`Excel.Interfaces.NamedItemData`<!-- -->) que contiene copias rasas de las propiedades secundarias cargadas del objeto original.'
+    name: toJSON()
+    fullName: toJSON()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'toJSON(): Excel.Interfaces.NamedItemData;'
+      return:
+        type:
+          - excel.Excel.Interfaces.NamedItemData
+        description: ''
+  - uid: excel.Excel.NamedItem.type
+    summary: |-
+      Indica el tipo del valor que devuelve la fórmula del nombre. Consulte Excel. NamedItemType para obtener información detallada. Solo lectura.
 
+      \[[Conjunto de API: ExcelApi 1,1 para String, integer, Double, Boolean, Range, error; 1,7 para array](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: type
+    fullName: type
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly type: Excel.NamedItemType | "String" | "Integer" | "Double" | "Boolean" | "Range" | "Error" | "Array";'
+      return:
+        type:
+          - Excel.NamedItemType | "String" | "Integer" | "Double" | "Boolean" | "Range" | "Error" | "Array"
+  - uid: excel.Excel.NamedItem.value
+    summary: |-
+      Representa el valor calculado por la fórmula del nombre. Para un rango con nombre, devolverá la dirección del rango. Solo lectura.
 
-    \[[Conjunto de API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: getRangeOrNullObject()
-  fullName: getRangeOrNullObject()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getRangeOrNullObject(): Excel.Range;'
-    return:
-      type:
-      - excel.Excel.Range
-      description: ''
-- uid: excel.Excel.NamedItem.load
-  summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar a "context. Sync ()" antes de leer las propiedades.
-  remarks: >-
-    Además de esta firma, este método tiene las siguientes firmas:
+      \[[Conjunto de API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: value
+    fullName: value
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly value: any;'
+      return:
+        type:
+          - any
+  - uid: excel.Excel.NamedItem.visible
+    summary: |-
+      Especifica si el objeto es visible o no.
 
+      \[[Conjunto de API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: visible
+    fullName: visible
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'visible: boolean;'
+      return:
+        type:
+          - boolean
+  - uid: excel.Excel.NamedItem.worksheet
+    summary: |-
+      Devuelve la hoja de cálculo que tiene como ámbito el elemento con nombre. Produce un error si el elemento se encuentra en su lugar en el ámbito del libro.
 
-    `load(option?: string | string[]): Excel.NamedItem`-Donde opción es una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades que se van a cargar.
+      \[[Conjunto de API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: worksheet
+    fullName: worksheet
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly worksheet: Excel.Worksheet;'
+      return:
+        type:
+          - excel.Excel.Worksheet
+  - uid: excel.Excel.NamedItem.worksheetOrNullObject
+    summary: |-
+      Devuelve la hoja de cálculo que tiene como ámbito el elemento con nombre. Devuelve un objeto NULL si el ámbito del elemento es el libro.
 
-
-    `load(option?: { select?: string; expand?: string; }): Excel.NamedItem`-Where opción. Select es una cadena delimitada por comas que especifica las propiedades que se van a cargar y Options. Expand es una cadena delimitada por comas que especifica las propiedades de navegación que se deben cargar.
-
-
-    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.NamedItem`-Solo disponible en tipos de colección. Es similar a la firma anterior. Option. Top especifica el número máximo de elementos de colección que se pueden incluir en el resultado. La opción. SKIP especifica el número de elementos que se deben omitir y que no se incluyen en el resultado. Si se especifica Option. Top, el conjunto de resultados se iniciará después de omitir el número especificado de elementos.
-  name: load(option)
-  fullName: load(option)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(option?: Excel.Interfaces.NamedItemLoadOptions): Excel.NamedItem;'
-    return:
-      type:
-      - excel.Excel.NamedItem
-      description: ''
-    parameters:
-    - id: option
-      description: ''
-      type:
-      - excel.Excel.Interfaces.NamedItemLoadOptions
-- uid: excel.Excel.NamedItem.load_1
-  summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar `context.sync()` antes de leer las propiedades.
-  name: load(propertyNames)
-  fullName: load(propertyNames)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(propertyNames?: string | string[]): Excel.NamedItem;'
-    return:
-      type:
-      - excel.Excel.NamedItem
-      description: "\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nExcel.run(function (ctx) { \n    var names = ctx.workbook.names;\n    var namedItem = names.getItem('MyRange');\n    namedItem.load('type');\n    return ctx.sync().then(function() {\n            console.log(namedItem.type);\n    });\n}).catch(function(error) {\n        console.log(\"Error: \" + error);\n        if (error instanceof OfficeExtension.Error) {\n            console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n        }\n});\n```"
-    parameters:
-    - id: propertyNames
-      description: Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades que se van a cargar.
-      type:
-      - string | string[]
-- uid: excel.Excel.NamedItem.load_2
-  summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar `context.sync()` antes de leer las propiedades.
-  name: load(propertyNamesAndPaths)
-  fullName: load(propertyNamesAndPaths)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.NamedItem;'
-    return:
-      type:
-      - excel.Excel.NamedItem
-      description: ''
-    parameters:
-    - id: propertyNamesAndPaths
-      description: Donde propertyNamesAndPaths. Select es una cadena delimitada por comas que especifica las propiedades que se van a cargar y propertyNamesAndPaths. Expand es una cadena delimitada por comas que especifica las propiedades de navegación que se deben cargar.
-      type:
-      - '{ select?: string; expand?: string; }'
-- uid: excel.Excel.NamedItem.name
-  summary: >-
-    Nombre del objeto. Solo lectura.
-
-
-    \[[Conjunto de API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: name
-  fullName: name
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'readonly name: string;'
-    return:
-      type:
-      - string
-- uid: excel.Excel.NamedItem.scope
-  summary: >-
-    Indica si el nombre está en el ámbito del libro o en una hoja de cálculo específica. Los valores posibles son: Worksheet, Workbook. Solo lectura.
-
-
-    \[[Conjunto de API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: scope
-  fullName: scope
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'readonly scope: Excel.NamedItemScope | "Worksheet" | "Workbook";'
-    return:
-      type:
-      - Excel.NamedItemScope | "Worksheet" | "Workbook"
-- uid: excel.Excel.NamedItem.set
-  summary: Establece varias propiedades de un objeto al mismo tiempo. Puede pasar un objeto sin formato con las propiedades apropiadas o cualquier otro objeto de la API del mismo tipo.
-  remarks: >-
-    Este método tiene la siguiente firma adicional:
-
-
-    `set(properties: Excel.NamedItem): void`
-  name: set(properties, options)
-  fullName: set(properties, options)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'set(properties: Interfaces.NamedItemUpdateData, options?: OfficeExtension.UpdateOptions): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: properties
-      description: Objeto de JavaScript con propiedades que se estructuran de forma isomórfico a las propiedades del objeto en el que se llama al método.
-      type:
-      - Interfaces.NamedItemUpdateData
-    - id: options
-      description: Proporciona una opción para suprimir errores si el objeto Properties intenta establecer propiedades de solo lectura.
-      type:
-      - office.OfficeExtension.UpdateOptions
-- uid: excel.Excel.NamedItem.set_1
-  summary: Establece varias propiedades en el objeto al mismo tiempo, basándose en un objeto cargado existente.
-  name: set(properties)
-  fullName: set(properties)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'set(properties: Excel.NamedItem): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: properties
-      description: ''
-      type:
-      - excel.Excel.NamedItem
-- uid: excel.Excel.NamedItem.toJSON
-  summary: Reemplaza el método de JavaScript `toJSON()` para proporcionar un resultado más útil cuando se pasa un objeto de `JSON.stringify()` <!-- -->la API. (`JSON.stringify`<!-- -->a su vez, llama al `toJSON` método del objeto que se le pasa). Mientras que el objeto Excel. NamedItem original es un objeto API, `toJSON` el método devuelve un objeto JavaScript sin formato (escrito `Excel.Interfaces.NamedItemData` <!-- -->como) que contiene las copias rasas de las propiedades secundarias cargadas del objeto original.
-  name: toJSON()
-  fullName: toJSON()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'toJSON(): Excel.Interfaces.NamedItemData;'
-    return:
-      type:
-      - excel.Excel.Interfaces.NamedItemData
-      description: ''
-- uid: excel.Excel.NamedItem.type
-  summary: >-
-    Indica el tipo de valor devuelto por la fórmula del nombre. Consulte Excel. NamedItemType para obtener información detallada. Solo lectura.
-
-
-    \[[Conjunto de API: ExcelApi 1,1 para String, integer, Double, Boolean, Range, error; 1,7 para array](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: type
-  fullName: type
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'readonly type: Excel.NamedItemType | "String" | "Integer" | "Double" | "Boolean" | "Range" | "Error" | "Array";'
-    return:
-      type:
-      - Excel.NamedItemType | "String" | "Integer" | "Double" | "Boolean" | "Range" | "Error" | "Array"
-- uid: excel.Excel.NamedItem.value
-  summary: >-
-    Representa el valor calculado por la fórmula del nombre. Para un rango con nombre, devolverá la dirección del rango. Solo lectura.
-
-
-    \[[Conjunto de API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: value
-  fullName: value
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'readonly value: any;'
-    return:
-      type:
-      - any
-- uid: excel.Excel.NamedItem.visible
-  summary: >-
-    Especifica si el objeto está visible o no.
-
-
-    \[[Conjunto de API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: visible
-  fullName: visible
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'visible: boolean;'
-    return:
-      type:
-      - boolean
-- uid: excel.Excel.NamedItem.worksheet
-  summary: >-
-    Devuelve la hoja de cálculo a la que está ámbito el elemento con nombre. Produce un error si el elemento se encuentra en su lugar en el ámbito del libro.
-
-
-    \[[Conjunto de API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: worksheet
-  fullName: worksheet
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'readonly worksheet: Excel.Worksheet;'
-    return:
-      type:
-      - excel.Excel.Worksheet
-- uid: excel.Excel.NamedItem.worksheetOrNullObject
-  summary: >-
-    Devuelve la hoja de cálculo a la que está ámbito el elemento con nombre. Devuelve un objeto nulo si el elemento se encuentra en el ámbito del libro en su lugar.
-
-
-    \[[Conjunto de API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: worksheetOrNullObject
-  fullName: worksheetOrNullObject
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'readonly worksheetOrNullObject: Excel.Worksheet;'
-    return:
-      type:
-      - excel.Excel.Worksheet
+      \[[Conjunto de API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: worksheetOrNullObject
+    fullName: worksheetOrNullObject
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly worksheetOrNullObject: Excel.Worksheet;'
+      return:
+        type:
+          - excel.Excel.Worksheet
