@@ -1,72 +1,57 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: afaaddbadcf442fe36a7d19f0b8b2a47a2ad1bae
-ms.sourcegitcommit: e9bfba6ec767e9d34fd1cf7b38c30f689617900a
-ms.translationtype: MT
-ms.contentlocale: es-ES
-ms.lasthandoff: 02/20/2019
-ms.locfileid: "30096643"
 items:
-- uid: Outlook_1_7.Office.TaskSuggestion
-  summary: >-
-    Representa una tarea sugerida identificada en un elemento. Solo modo Lectura.
+  - uid: Outlook_1_7.Office.TaskSuggestion
+    summary: |-
+      Representa una tarea sugerida identificada en un elemento. Solo modo Lectura.
 
+      La lista de tareas sugeridas en un mensaje de correo electrónico se devuelve en la propiedad [](xref:Outlook_1_7.Office.Entities) taskSuggestions del objeto Entities que se devuelve cuando se llama al método GetEntities o getEntitiesByType en el elemento activo.
 
-    La lista de tareas sugeridas en un mensaje de correo electrónico se devuelve en la propiedad [](xref:Outlook_1_7.Office.Entities) taskSuggestions del objeto Entities que se devuelve cuando se llama al método GetEntities o getEntitiesByType en el elemento activo.
+      \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Leer</td></tr> </table>
 
+      #### <a name="examples"></a>Ejemplos
 
-    \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: >-
-    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Leer</td></tr> </table>
-
-    ####Incluyen
-
-
-    ```javascript
-
-    var item = Office.context.mailbox.item;
-
-    // Get an array of strings that represent task suggestions in the current item's body.
-
-    var taskSuggestions = item.getEntitiesByType(Office.MailboxEnums.EntityType.TaskSuggestion);
-
-    console.log("There are " + taskSuggestions.length + " task suggestions.")
-
-    taskSuggestions.forEach(function (taskSuggestion) {
-        console.log("Assignees: " + JSON.stringify(taskSuggestion.assignees));
-        console.log("Task: " + JSON.stringify(taskSuggestion.taskString));
-    });
-
-    ```
-  name: Office.TaskSuggestion
-  fullName: Office.TaskSuggestion
-  langs:
-  - typeScript
-  type: interface
-  package: Outlook_1_7
-  children:
-  - Outlook_1_7.Office.TaskSuggestion.assignees
-  - Outlook_1_7.Office.TaskSuggestion.taskString
-- uid: Outlook_1_7.Office.TaskSuggestion.assignees
-  summary: Obtiene los usuarios a los que se debe asignar una tarea sugerida.
-  name: assignees
-  fullName: assignees
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'assignees: EmailUser[];'
-    return:
-      type:
-      - EmailUser[]
-- uid: Outlook_1_7.Office.TaskSuggestion.taskString
-  summary: Obtiene el texto de un elemento identificado como sugerencia de tarea.
-  name: taskString
-  fullName: taskString
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'taskString: string;'
-    return:
-      type:
-      - string
+      ```javascript
+      var item = Office.context.mailbox.item;
+      // Get an array of strings that represent task suggestions in the current item's body.
+      var taskSuggestions = item.getEntitiesByType(Office.MailboxEnums.EntityType.TaskSuggestion);
+      console.log("There are " + taskSuggestions.length + " task suggestions.")
+      taskSuggestions.forEach(function (taskSuggestion) {
+          console.log("Assignees: " + JSON.stringify(taskSuggestion.assignees));
+          console.log("Task: " + JSON.stringify(taskSuggestion.taskString));
+      });
+      ```
+    name: Office.TaskSuggestion
+    fullName: Office.TaskSuggestion
+    langs:
+      - typeScript
+    type: interface
+    package: Outlook_1_7
+    children:
+      - Outlook_1_7.Office.TaskSuggestion.assignees
+      - Outlook_1_7.Office.TaskSuggestion.taskString
+  - uid: Outlook_1_7.Office.TaskSuggestion.assignees
+    summary: Obtiene los usuarios a los que se debe asignar una tarea sugerida.
+    name: assignees
+    fullName: assignees
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'assignees: EmailUser[];'
+      return:
+        type:
+          - 'EmailUser[]'
+  - uid: Outlook_1_7.Office.TaskSuggestion.taskString
+    summary: Obtiene el texto de un elemento identificado como sugerencia de tarea.
+    name: taskString
+    fullName: taskString
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'taskString: string;'
+      return:
+        type:
+          - string

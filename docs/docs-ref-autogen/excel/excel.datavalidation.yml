@@ -1,324 +1,337 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: a7364f74de108934b520064f974324f6fd9eadaf
-ms.sourcegitcommit: e9bfba6ec767e9d34fd1cf7b38c30f689617900a
-ms.translationtype: MT
-ms.contentlocale: es-ES
-ms.lasthandoff: 02/20/2019
-ms.locfileid: "30097973"
 items:
-- uid: excel.Excel.DataValidation
-  summary: >-
-    Representa la validación de datos que se aplica al intervalo actual.
+  - uid: excel.Excel.DataValidation
+    summary: |-
+      Representa la validación de datos que se aplica al intervalo actual.
+
+      \[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: Excel.DataValidation
+    fullName: Excel.DataValidation
+    langs:
+      - typeScript
+    type: class
+    extends:
+      - office.OfficeExtension.ClientObject
+    package: excel
+    children:
+      - excel.Excel.DataValidation.clear
+      - excel.Excel.DataValidation.context
+      - excel.Excel.DataValidation.errorAlert
+      - excel.Excel.DataValidation.getInvalidCells
+      - excel.Excel.DataValidation.getInvalidCellsOrNullObject
+      - excel.Excel.DataValidation.ignoreBlanks
+      - excel.Excel.DataValidation.load
+      - excel.Excel.DataValidation.load_1
+      - excel.Excel.DataValidation.load_2
+      - excel.Excel.DataValidation.prompt
+      - excel.Excel.DataValidation.rule
+      - excel.Excel.DataValidation.set
+      - excel.Excel.DataValidation.set_1
+      - excel.Excel.DataValidation.toJSON
+      - excel.Excel.DataValidation.type
+      - excel.Excel.DataValidation.valid
+  - uid: excel.Excel.DataValidation.clear
+    summary: |-
+      Borra la validación de datos del rango actual.
+
+      \[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: clear()
+    fullName: clear()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'clear(): void;'
+      return:
+        type:
+          - void
+        description: ''
+  - uid: excel.Excel.DataValidation.context
+    summary: Contexto de la solicitud asociado al objeto. Esto conecta el proceso del complemento con el proceso de la aplicación host de Office.
+    name: context
+    fullName: context
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'context: RequestContext;'
+      return:
+        type:
+          - RequestContext
+  - uid: excel.Excel.DataValidation.errorAlert
+    summary: |-
+      Mensaje de error cuando el usuario escribe datos no válidos.
+
+      \[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: errorAlert
+    fullName: errorAlert
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'errorAlert: Excel.DataValidationErrorAlert;'
+      return:
+        type:
+          - excel.Excel.DataValidationErrorAlert
+        description: |-
 
 
-    \[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: Excel.DataValidation
-  fullName: Excel.DataValidation
-  langs:
-  - typeScript
-  type: class
-  extends:
-  - office.OfficeExtension.ClientObject
-  package: excel
-  children:
-  - excel.Excel.DataValidation.clear
-  - excel.Excel.DataValidation.context
-  - excel.Excel.DataValidation.errorAlert
-  - excel.Excel.DataValidation.getInvalidCells
-  - excel.Excel.DataValidation.getInvalidCellsOrNullObject
-  - excel.Excel.DataValidation.ignoreBlanks
-  - excel.Excel.DataValidation.load
-  - excel.Excel.DataValidation.load_1
-  - excel.Excel.DataValidation.load_2
-  - excel.Excel.DataValidation.prompt
-  - excel.Excel.DataValidation.rule
-  - excel.Excel.DataValidation.set
-  - excel.Excel.DataValidation.set_1
-  - excel.Excel.DataValidation.toJSON
-  - excel.Excel.DataValidation.type
-  - excel.Excel.DataValidation.valid
-- uid: excel.Excel.DataValidation.clear
-  summary: >-
-    Borra la validación de datos del rango actual.
+          #### <a name="examples"></a>Ejemplos
 
+          ```typescript
+          await Excel.run(async (context) => {
+              const sheet = context.workbook.worksheets.getItem("Decision");
+              const commentsRange = 
+                  sheet.tables.getItem("NameOptionsTable").columns.getItem("Comments").getDataBodyRange();
 
-    \[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: clear()
-  fullName: clear()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'clear(): void;'
-    return:
-      type:
-      - void
-      description: ''
-- uid: excel.Excel.DataValidation.context
-  summary: Contexto de la solicitud asociado al objeto. Esto conecta el proceso del complemento con el proceso de la aplicación host de Office.
-  name: context
-  fullName: context
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'context: RequestContext;'
-    return:
-      type:
-      - RequestContext
-- uid: excel.Excel.DataValidation.errorAlert
-  summary: >-
-    Mensaje de error cuando el usuario escribe datos no válidos.
+              // When you are developing, it is a good practice to
+              // clear the dataValidation object with each run of your code.
+              commentsRange.dataValidation.clear();   
 
+              // If the value of A2 is contained in the value of C2, then 
+              // SEARCH(A2,C2) returns the number where it begins. Otherwise,
+              // it does not return a number.
+              let redundantStringRule = {
+                  custom: {
+                      formula: "=NOT(ISNUMBER(SEARCH(A2,C2)))"
+                  }
+              };
+              commentsRange.dataValidation.rule = redundantStringRule;
+              commentsRange.dataValidation.errorAlert = {
+                  message: "It is redundant to include the baby name in the comment.",
+                  showAlert: true,
+                  style: "Information",
+                  title: "Baby Name in Comment"
+              };
 
-    \[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: errorAlert
-  fullName: errorAlert
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'errorAlert: Excel.DataValidationErrorAlert;'
-    return:
-      type:
-      - excel.Excel.DataValidationErrorAlert
-      description: "\n#### <a name=\"examples\"></a>Ejemplos\n\n```typescript\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Decision\");\n    const commentsRange = \n        sheet.tables.getItem(\"NameOptionsTable\").columns.getItem(\"Comments\").getDataBodyRange();\n\n    // When you are developing, it is a good practice to\n    // clear the dataValidation object with each run of your code.\n    commentsRange.dataValidation.clear();   \n\n    // If the value of A2 is contained in the value of C2, then \n    // SEARCH(A2,C2) returns the number where it begins. Otherwise,\n    // it does not return a number.\n    let redundantStringRule = {\n        custom: {\n            formula: \"=NOT(ISNUMBER(SEARCH(A2,C2)))\"\n        }\n    };\n    commentsRange.dataValidation.rule = redundantStringRule;\n    commentsRange.dataValidation.errorAlert = {\n        message: \"It is redundant to include the baby name in the comment.\",\n        showAlert: true,\n        style: \"Information\",\n        title: \"Baby Name in Comment\"\n    };\n\n    await context.sync();\n});\n```"
-- uid: excel.Excel.DataValidation.getInvalidCells
-  summary: >-
-    Devuelve un RangeAreas compuesto por uno o más rangos rectangulares, con valores de celda no válidos. Si todos los valores de celda son válidos, esta función generará un error ItemNotFound.
+              await context.sync();
+          });
+          ```
+  - uid: excel.Excel.DataValidation.getInvalidCells
+    summary: |-
+      Devuelve un objeto RangeAreas, que incluye uno o más intervalos rectangulares, con valores de celda no válidos. Si todos los valores de celda son válidos, esta función mostrará un error ItemNotFound.
 
+      \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    isPreview: true
+    name: getInvalidCells()
+    fullName: getInvalidCells()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getInvalidCells(): Excel.RangeAreas;'
+      return:
+        type:
+          - excel.Excel.RangeAreas
+        description: ''
+  - uid: excel.Excel.DataValidation.getInvalidCellsOrNullObject
+    summary: |-
+      Devuelve un objeto RangeAreas, que incluye uno o más intervalos rectangulares, con valores de celda no válidos. Si todos los valores de celda son válidos, esta función devuelve null.
 
-    \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  isPreview: true
-  name: getInvalidCells()
-  fullName: getInvalidCells()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getInvalidCells(): Excel.RangeAreas;'
-    return:
-      type:
-      - excel.Excel.RangeAreas
-      description: ''
-- uid: excel.Excel.DataValidation.getInvalidCellsOrNullObject
-  summary: >-
-    Devuelve un RangeAreas compuesto por uno o más rangos rectangulares, con valores de celda no válidos. Si todos los valores de celda son válidos, esta función devolverá null.
+      \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    isPreview: true
+    name: getInvalidCellsOrNullObject()
+    fullName: getInvalidCellsOrNullObject()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getInvalidCellsOrNullObject(): Excel.RangeAreas;'
+      return:
+        type:
+          - excel.Excel.RangeAreas
+        description: ''
+  - uid: excel.Excel.DataValidation.ignoreBlanks
+    summary: |-
+      Omitir espacios en blanco: no se realizará ninguna validación de datos en las celdas en blanco, el valor predeterminado es true.
 
+      \[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: ignoreBlanks
+    fullName: ignoreBlanks
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'ignoreBlanks: boolean;'
+      return:
+        type:
+          - boolean
+  - uid: excel.Excel.DataValidation.load
+    summary: 'Pone en cola un comando para cargar las propiedades especificadas del objeto. Antes de leer las propiedades, debe llamar a "context.sync()".'
+    remarks: |-
+      Además de esta firma, este método tiene las siguientes firmas:
 
-    \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  isPreview: true
-  name: getInvalidCellsOrNullObject()
-  fullName: getInvalidCellsOrNullObject()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getInvalidCellsOrNullObject(): Excel.RangeAreas;'
-    return:
-      type:
-      - excel.Excel.RangeAreas
-      description: ''
-- uid: excel.Excel.DataValidation.ignoreBlanks
-  summary: >-
-    Omitir espacios en blanco: no se realizará ninguna validación de datos en las celdas en blanco, el valor predeterminado es true.
+      `load(option?: string | string[]): Excel.DataValidation`-Donde opción es una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades que se van a cargar.
 
+      `load(option?: { select?: string; expand?: string; }): Excel.DataValidation`-Where opción. Select es una cadena delimitada por comas que especifica las propiedades que se van a cargar y Options. Expand es una cadena delimitada por comas que especifica las propiedades de navegación que se deben cargar.
 
-    \[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: ignoreBlanks
-  fullName: ignoreBlanks
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'ignoreBlanks: boolean;'
-    return:
-      type:
-      - boolean
-- uid: excel.Excel.DataValidation.load
-  summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar a "context. Sync ()" antes de leer las propiedades.
-  remarks: >-
-    Además de esta firma, este método tiene las siguientes firmas:
+      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.DataValidation`-Solo disponible en tipos de colección. Es similar a la firma anterior. Option. Top especifica el número máximo de elementos de colección que se pueden incluir en el resultado. La opción. SKIP especifica el número de elementos que se deben omitir y que no se incluyen en el resultado. Si se especifica Option. Top, el conjunto de resultados se iniciará después de omitir el número especificado de elementos.
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: Excel.Interfaces.DataValidationLoadOptions): Excel.DataValidation;'
+      return:
+        type:
+          - excel.Excel.DataValidation
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - excel.Excel.Interfaces.DataValidationLoadOptions
+  - uid: excel.Excel.DataValidation.load_1
+    summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar `context.sync()` antes de leer las propiedades.
+    name: load(propertyNames)
+    fullName: load(propertyNames)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNames?: string | string[]): Excel.DataValidation;'
+      return:
+        type:
+          - excel.Excel.DataValidation
+        description: ''
+      parameters:
+        - id: propertyNames
+          description: Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades que se van a cargar.
+          type:
+            - 'string | string[]'
+  - uid: excel.Excel.DataValidation.load_2
+    summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar `context.sync()` antes de leer las propiedades.
+    name: load(propertyNamesAndPaths)
+    fullName: load(propertyNamesAndPaths)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.DataValidation;'
+      return:
+        type:
+          - excel.Excel.DataValidation
+        description: ''
+      parameters:
+        - id: propertyNamesAndPaths
+          description: Donde propertyNamesAndPaths. Select es una cadena delimitada por comas que especifica las propiedades que se van a cargar y propertyNamesAndPaths. Expand es una cadena delimitada por comas que especifica las propiedades de navegación que se deben cargar.
+          type:
+            - '{ select?: string; expand?: string; }'
+  - uid: excel.Excel.DataValidation.prompt
+    summary: |-
+      Pregunta cuando los usuarios seleccionan una celda.
 
+      \[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: prompt
+    fullName: prompt
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'prompt: Excel.DataValidationPrompt;'
+      return:
+        type:
+          - excel.Excel.DataValidationPrompt
+  - uid: excel.Excel.DataValidation.rule
+    summary: |-
+      Regla de validación de datos que contiene distintos tipos de criterios de validación de datos.
 
-    `load(option?: string | string[]): Excel.DataValidation`-Donde opción es una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades que se van a cargar.
+      \[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: rule
+    fullName: rule
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'rule: Excel.DataValidationRule;'
+      return:
+        type:
+          - excel.Excel.DataValidationRule
+  - uid: excel.Excel.DataValidation.set
+    summary: Establece varias propiedades de un objeto al mismo tiempo. Puede pasar un objeto sin formato con las propiedades apropiadas o cualquier otro objeto de la API del mismo tipo.
+    remarks: |-
+      Este método tiene la siguiente firma adicional:
 
+      `set(properties: Excel.DataValidation): void`
+    name: 'set(properties, options)'
+    fullName: 'set(properties, options)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(properties: Interfaces.DataValidationUpdateData, options?: OfficeExtension.UpdateOptions): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: properties
+          description: Objeto de JavaScript con propiedades que se estructuran de forma isomórfico a las propiedades del objeto en el que se llama al método.
+          type:
+            - Interfaces.DataValidationUpdateData
+        - id: options
+          description: Proporciona una opción para suprimir errores si el objeto Properties intenta establecer propiedades de solo lectura.
+          type:
+            - office.OfficeExtension.UpdateOptions
+  - uid: excel.Excel.DataValidation.set_1
+    summary: 'Establece varias propiedades en el objeto al mismo tiempo, basándose en un objeto cargado existente.'
+    name: set(properties)
+    fullName: set(properties)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(properties: Excel.DataValidation): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: properties
+          description: ''
+          type:
+            - excel.Excel.DataValidation
+  - uid: excel.Excel.DataValidation.toJSON
+    summary: 'Reemplaza el método JavaScript `toJSON()` para proporcionar un resultado más útil cuando se pasa un objeto API a`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama `toJSON` al método del objeto que se le pasa.) Mientras que el objeto Excel. inValidation original es un objeto API, `toJSON` el método devuelve un objeto JavaScript sin formato (escrito como`Excel.Interfaces.DataValidationData`<!-- -->) que contiene copias rasas de las propiedades secundarias cargadas del objeto original.'
+    name: toJSON()
+    fullName: toJSON()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'toJSON(): Excel.Interfaces.DataValidationData;'
+      return:
+        type:
+          - excel.Excel.Interfaces.DataValidationData
+        description: ''
+  - uid: excel.Excel.DataValidation.type
+    summary: |-
+      Tipo de la validación de datos, vea Excel.DataValidationType para obtener más información.
 
-    `load(option?: { select?: string; expand?: string; }): Excel.DataValidation`-Where opción. Select es una cadena delimitada por comas que especifica las propiedades que se van a cargar y Options. Expand es una cadena delimitada por comas que especifica las propiedades de navegación que se deben cargar.
+      \[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: type
+    fullName: type
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly type: Excel.DataValidationType | "None" | "WholeNumber" | "Decimal" | "List" | "Date" | "Time" | "TextLength" | "Custom" | "Inconsistent" | "MixedCriteria";'
+      return:
+        type:
+          - Excel.DataValidationType | "None" | "WholeNumber" | "Decimal" | "List" | "Date" | "Time" | "TextLength" | "Custom" | "Inconsistent" | "MixedCriteria"
+  - uid: excel.Excel.DataValidation.valid
+    summary: |-
+      Representa si todos los valores de celda son válidos de acuerdo con las reglas de validación de datos. Devuelve true si todos los valores de celda son válidos o false si todos los valores de celda no son válidos. Devuelve NULL si hay valores de celda válidos y no válidos dentro del rango.
 
-
-    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.DataValidation`-Solo disponible en tipos de colección. Es similar a la firma anterior. Option. Top especifica el número máximo de elementos de colección que se pueden incluir en el resultado. La opción. SKIP especifica el número de elementos que se deben omitir y que no se incluyen en el resultado. Si se especifica Option. Top, el conjunto de resultados se iniciará después de omitir el número especificado de elementos.
-  name: load(option)
-  fullName: load(option)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(option?: Excel.Interfaces.DataValidationLoadOptions): Excel.DataValidation;'
-    return:
-      type:
-      - excel.Excel.DataValidation
-      description: ''
-    parameters:
-    - id: option
-      description: ''
-      type:
-      - excel.Excel.Interfaces.DataValidationLoadOptions
-- uid: excel.Excel.DataValidation.load_1
-  summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar `context.sync()` antes de leer las propiedades.
-  name: load(propertyNames)
-  fullName: load(propertyNames)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(propertyNames?: string | string[]): Excel.DataValidation;'
-    return:
-      type:
-      - excel.Excel.DataValidation
-      description: ''
-    parameters:
-    - id: propertyNames
-      description: Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades que se van a cargar.
-      type:
-      - string | string[]
-- uid: excel.Excel.DataValidation.load_2
-  summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar `context.sync()` antes de leer las propiedades.
-  name: load(propertyNamesAndPaths)
-  fullName: load(propertyNamesAndPaths)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.DataValidation;'
-    return:
-      type:
-      - excel.Excel.DataValidation
-      description: ''
-    parameters:
-    - id: propertyNamesAndPaths
-      description: Donde propertyNamesAndPaths. Select es una cadena delimitada por comas que especifica las propiedades que se van a cargar y propertyNamesAndPaths. Expand es una cadena delimitada por comas que especifica las propiedades de navegación que se deben cargar.
-      type:
-      - '{ select?: string; expand?: string; }'
-- uid: excel.Excel.DataValidation.prompt
-  summary: >-
-    Pregunta cuando los usuarios seleccionan una celda.
-
-
-    \[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: prompt
-  fullName: prompt
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'prompt: Excel.DataValidationPrompt;'
-    return:
-      type:
-      - excel.Excel.DataValidationPrompt
-- uid: excel.Excel.DataValidation.rule
-  summary: >-
-    Regla de validación de datos que contiene distintos tipos de criterios de validación de datos.
-
-
-    \[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: rule
-  fullName: rule
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'rule: Excel.DataValidationRule;'
-    return:
-      type:
-      - excel.Excel.DataValidationRule
-- uid: excel.Excel.DataValidation.set
-  summary: Establece varias propiedades de un objeto al mismo tiempo. Puede pasar un objeto sin formato con las propiedades apropiadas o cualquier otro objeto de la API del mismo tipo.
-  remarks: >-
-    Este método tiene la siguiente firma adicional:
-
-
-    `set(properties: Excel.DataValidation): void`
-  name: set(properties, options)
-  fullName: set(properties, options)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'set(properties: Interfaces.DataValidationUpdateData, options?: OfficeExtension.UpdateOptions): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: properties
-      description: Objeto de JavaScript con propiedades que se estructuran de forma isomórfico a las propiedades del objeto en el que se llama al método.
-      type:
-      - Interfaces.DataValidationUpdateData
-    - id: options
-      description: Proporciona una opción para suprimir errores si el objeto Properties intenta establecer propiedades de solo lectura.
-      type:
-      - office.OfficeExtension.UpdateOptions
-- uid: excel.Excel.DataValidation.set_1
-  summary: Establece varias propiedades en el objeto al mismo tiempo, basándose en un objeto cargado existente.
-  name: set(properties)
-  fullName: set(properties)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'set(properties: Excel.DataValidation): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: properties
-      description: ''
-      type:
-      - excel.Excel.DataValidation
-- uid: excel.Excel.DataValidation.toJSON
-  summary: Reemplaza el método de JavaScript `toJSON()` para proporcionar un resultado más útil cuando se pasa un objeto de `JSON.stringify()` <!-- -->la API. (`JSON.stringify`<!-- -->a su vez, llama al `toJSON` método del objeto que se le pasa). Mientras que el objeto Excel. invalidation original es un objeto API, `toJSON` el método devuelve un objeto JavaScript sin formato (escrito `Excel.Interfaces.DataValidationData` <!-- -->como) que contiene copias rasas de las propiedades secundarias cargadas del objeto original.
-  name: toJSON()
-  fullName: toJSON()
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'toJSON(): Excel.Interfaces.DataValidationData;'
-    return:
-      type:
-      - excel.Excel.Interfaces.DataValidationData
-      description: ''
-- uid: excel.Excel.DataValidation.type
-  summary: >-
-    Tipo de la validación de datos, vea Excel.DataValidationType para obtener más información.
-
-
-    \[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: type
-  fullName: type
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'readonly type: Excel.DataValidationType | "None" | "WholeNumber" | "Decimal" | "List" | "Date" | "Time" | "TextLength" | "Custom" | "Inconsistent" | "MixedCriteria";'
-    return:
-      type:
-      - Excel.DataValidationType | "None" | "WholeNumber" | "Decimal" | "List" | "Date" | "Time" | "TextLength" | "Custom" | "Inconsistent" | "MixedCriteria"
-- uid: excel.Excel.DataValidation.valid
-  summary: >-
-    Representa si todos los valores de celda son válidos de acuerdo con las reglas de validación de datos. Devuelve true si todos los valores de celda son válidos o false si todos los valores de celda no son válidos. Devuelve NULL si hay valores de celda válidos y no válidos dentro del rango.
-
-
-    \[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  name: valid
-  fullName: valid
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'readonly valid: boolean;'
-    return:
-      type:
-      - boolean
+      \[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: valid
+    fullName: valid
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly valid: boolean;'
+      return:
+        type:
+          - boolean

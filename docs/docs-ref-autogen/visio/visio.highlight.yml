@@ -1,56 +1,65 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: e30b43cbb58af9bcf990ca19190e4537935d03ed
-ms.sourcegitcommit: 016e17422cf62dc9f1de1809666e9244e41cc1a9
-ms.translationtype: MT
-ms.contentlocale: es-ES
-ms.lasthandoff: 11/09/2018
-ms.locfileid: "26222861"
 items:
-- uid: visio.Visio.Highlight
-  summary: >-
-    Representa los datos resaltados añadidos a la forma.
+  - uid: visio.Visio.Highlight
+    summary: |-
+      Representa los datos resaltados añadidos a la forma.
+
+      \[[Conjunto de API: 1,1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
+    name: Visio.Highlight
+    fullName: Visio.Highlight
+    langs:
+      - typeScript
+    type: interface
+    package: visio
+    children:
+      - visio.Visio.Highlight.color
+      - visio.Visio.Highlight.width
+  - uid: visio.Visio.Highlight.color
+    summary: |-
+      Una cadena que especifica el color del resaltado. Debe tener el formato "\#RRGGBB", donde cada letra representa un dígito hexadecimal entre 0 y F, y donde RR es el valor rojo entre 0 y 0xff (255), GG el valor verde entre 0 y 0xff (255), y BB es el valor azul entre 0 y 0xff (255).
+
+      \[[Conjunto de API: 1,1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
+    name: color
+    fullName: color
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'color: string;'
+      return:
+        type:
+          - string
+        description: |-
 
 
-    \[[Conjunto de API: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
-  name: Visio.Highlight
-  fullName: Visio.Highlight
-  langs:
-  - typeScript
-  type: interface
-  package: visio
-  children:
-  - visio.Visio.Highlight.color
-  - visio.Visio.Highlight.width
-- uid: visio.Visio.Highlight.color
-  summary: >-
-    Una cadena que especifica el color del resaltado. Debe tener el formato "\#RRGGBB", donde cada letra representa un dígito hexadecimal comprendido entre 0 y F y donde RR es el valor de color rojo entre 0 y 0xFF (255), VV el verde valor comprendido entre 0 y 0xFF (255), y AA es el valor azul, comprendido entre 0 y 0xFF (255).
+          #### <a name="examples"></a>Ejemplos
 
+          ```javascript
+          Visio.run(session, function (ctx) {
+              var activePage = ctx.document.getActivePage();
+              var shape = activePage.shapes.getItem(0);
+              shape.view.highlight.color = "#E7E7E7";
+              shape.view.highlight.width = 100;
+              return ctx.sync();
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+  - uid: visio.Visio.Highlight.width
+    summary: |-
+      Entero positivo que especifica el ancho del trazo de resaltado en píxeles.
 
-    \[[Conjunto de API: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
-  name: color
-  fullName: color
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'color: string;'
-    return:
-      type:
-      - string
-      description: "\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nVisio.run(session, function (ctx) {\n    var activePage = ctx.document.getActivePage();\n    var shape = activePage.shapes.getItem(0);\n    shape.view.highlight.color = \"#E7E7E7\";\n    shape.view.highlight.width = 100;\n    return ctx.sync();\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
-- uid: visio.Visio.Highlight.width
-  summary: >-
-    Entero positivo que especifica el ancho del trazo de resaltado en píxeles.
-
-
-    \[[Conjunto de API: 1.1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
-  name: width
-  fullName: width
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'width: number;'
-    return:
-      type:
-      - number
+      \[[Conjunto de API: 1,1](/office/dev/add-ins/reference/overview/visio-javascript-reference-overview)\]
+    name: width
+    fullName: width
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'width: number;'
+      return:
+        type:
+          - number

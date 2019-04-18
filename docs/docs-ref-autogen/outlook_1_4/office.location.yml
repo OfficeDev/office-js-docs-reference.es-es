@@ -1,185 +1,162 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 46fa961c0c7208f3a356f08a9d7ed39b288354e2
-ms.sourcegitcommit: 6c48441b8be51d3a9d7dc836e386230a155feceb
-ms.translationtype: MT
-ms.contentlocale: es-ES
-ms.lasthandoff: 02/22/2019
-ms.locfileid: "30197846"
 items:
-- uid: Outlook_1_4.Office.Location
-  summary: >-
-    Proporciona métodos para obtener y establecer la ubicación de una cita en un complemento de Outlook.
+  - uid: Outlook_1_4.Office.Location
+    summary: |-
+      Proporciona métodos para obtener y establecer la ubicación de una cita en un complemento de Outlook.
 
+      \[[Conjunto de API: buzón de correo 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: '<table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redacción</td></tr> </table>'
+    name: Office.Location
+    fullName: Office.Location
+    langs:
+      - typeScript
+    type: interface
+    package: Outlook_1_4
+    children:
+      - Outlook_1_4.Office.Location.getAsync
+      - Outlook_1_4.Office.Location.getAsync_1
+      - Outlook_1_4.Office.Location.setAsync
+      - Outlook_1_4.Office.Location.setAsync_1
+  - uid: Outlook_1_4.Office.Location.getAsync
+    summary: |-
+      Obtiene la ubicación de una cita.
 
-    \[[Conjunto de API: buzón de correo 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redacción</td></tr> </table>
-  name: Office.Location
-  fullName: Office.Location
-  langs:
-  - typeScript
-  type: interface
-  package: Outlook_1_4
-  children:
-  - Outlook_1_4.Office.Location.getAsync
-  - Outlook_1_4.Office.Location.getAsync_1
-  - Outlook_1_4.Office.Location.setAsync
-  - Outlook_1_4.Office.Location.setAsync_1
-- uid: Outlook_1_4.Office.Location.getAsync
-  summary: >-
-    Obtiene la ubicación de una cita.
+      El método getAsync inicia una llamada asincrónica al servidor de Exchange para obtener la ubicación de una cita. La ubicación de la cita se proporciona como una cadena en la propiedad asyncResult. Value.
+    remarks: |-
+      <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redacción</td></tr> </table>
 
+      #### <a name="examples"></a>Ejemplos
 
-    El método getAsync inicia una llamada asincrónica al servidor de Exchange para obtener la ubicación de una cita. La ubicación de la cita se proporciona como una cadena en la propiedad asyncResult.value.
-  remarks: >-
-    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redacción</td></tr> </table>
+      ```javascript
+      var userContext = { value : 1 };
+      Office.context.mailbox.item.location.getAsync( { context: userContext}, callback);
 
-    ####Incluyen
+      function callback(asyncResult) {
+          var context = asyncResult.context;
+          var location = asyncResult.value;
+      }
+      ```
+    name: 'getAsync(options, callback)'
+    fullName: 'getAsync(options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getAsync(options: Office.AsyncContextOptions, callback: (asyncResult: Office.AsyncResult<string>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: options
+          description: 'Un objeto literal que contiene una o más de las siguientes propiedades. asyncContext: los desarrolladores pueden proporcionar cualquier objeto al que quieran tener acceso en el método de devolución de llamada.'
+          type:
+            - Office.AsyncContextOptions
+        - id: callback
+          description: |-
+            Cuando el método finaliza, la función que se pasa en el parámetro callback se llama con un único parámetro de tipo Office. AsyncResult.
 
+            \[Conjunto de API: buzón de correo 1,1\]
+          type:
+            - '(asyncResult: Office.AsyncResult<string>) => void'
+  - uid: Outlook_1_4.Office.Location.getAsync_1
+    summary: |-
+      Obtiene la ubicación de una cita.
 
-    ```javascript
+      El método getAsync inicia una llamada asincrónica al servidor de Exchange para obtener la ubicación de una cita. La ubicación de la cita se proporciona como una cadena en la propiedad asyncResult. Value.
+    remarks: '<table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redacción</td></tr> </table>'
+    name: getAsync(callback)
+    fullName: getAsync(callback)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getAsync(callback: (asyncResult: Office.AsyncResult<string>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: callback
+          description: |-
+            Cuando el método finaliza, la función que se pasa en el parámetro callback se llama con un único parámetro de tipo Office. AsyncResult.
 
-    var userContext = { value : 1 };
+            \[Conjunto de API: buzón de correo 1,1\]
+          type:
+            - '(asyncResult: Office.AsyncResult<string>) => void'
+  - uid: Outlook_1_4.Office.Location.setAsync
+    summary: |-
+      Establece la ubicación de una cita.
 
-    Office.context.mailbox.item.location.getAsync( { context: userContext}, callback);
+      El método setAsync inicia una llamada asincrónica al servidor de Exchange para establecer la ubicación de una cita. Cuando se establezca, se sobrescribirá la ubicación actual.
+    remarks: '<table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redacción</td></tr> <tr><td>Errores</td><td>DataExceedsMaximumSize: el parámetro Location tiene más de 255 caracteres.</td></tr> </table>'
+    name: 'setAsync(location, options, callback)'
+    fullName: 'setAsync(location, options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'setAsync(location: string, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: location
+          description: "La ubicación de la cita. La cadena está limitada a 255\_caracteres."
+          type:
+            - string
+        - id: options
+          description: 'Opcional. Un objeto literal que contiene una o más de las siguientes propiedades. asyncContext: los desarrolladores pueden proporcionar cualquier objeto al que quieran tener acceso en el método de devolución de llamada.'
+          type:
+            - Office.AsyncContextOptions
+        - id: callback
+          description: |-
+            Opcional. Cuando el método finaliza, la función que se pasa en el parámetro callback se llama con un único parámetro de tipo Office. AsyncResult. Si se produce un error en la configuración de la ubicación, la propiedad asyncResult. error contendrá un código de error.
 
+            \[Conjunto de API: buzón de correo 1,1\]
+          type:
+            - '(asyncResult: Office.AsyncResult<void>) => void'
+  - uid: Outlook_1_4.Office.Location.setAsync_1
+    summary: |-
+      Establece la ubicación de una cita.
 
-    function callback(asyncResult) {
-        var context = asyncResult.context;
-        var location = asyncResult.value;
-    }
+      El método setAsync inicia una llamada asincrónica al servidor de Exchange para establecer la ubicación de una cita. Cuando se establezca, se sobrescribirá la ubicación actual.
+    remarks: |-
+      <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redacción</td></tr> <tr><td>Errores</td><td>DataExceedsMaximumSize: el parámetro Location tiene más de 255 caracteres.</td></tr> </table>
 
-    ```
-  name: getAsync(options, callback)
-  fullName: getAsync(options, callback)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getAsync(options: Office.AsyncContextOptions, callback: (asyncResult: Office.AsyncResult<string>) => void): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: options
-      description: 'Un objeto literal que contiene una o más de las siguientes propiedades. asyncContext: los desarrolladores pueden proporcionar cualquier objeto al que quieran tener acceso en el método de devolución de llamada.'
-      type:
-      - Office.AsyncContextOptions
-    - id: callback
-      description: >-
-        Cuando el método finaliza, la función que se pasa en el parámetro callback se llama con un único parámetro de tipo Office. AsyncResult.
+      #### <a name="examples"></a>Ejemplos
 
+      ```javascript
+      Office.context.mailbox.item.location.setAsync(
+          "Room 1",
+          function (asyncResult) {
+              if (asyncResult.status === "failed") {
+                  console.log("Action failed with error: " + asyncResult.error.message);
+              }
+          }
+      );
+      ```
+    name: 'setAsync(location, callback)'
+    fullName: 'setAsync(location, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'setAsync(location: string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: location
+          description: "La ubicación de la cita. La cadena está limitada a 255\_caracteres."
+          type:
+            - string
+        - id: callback
+          description: |-
+            Opcional. Cuando el método finaliza, la función que se pasa en el parámetro callback se llama con un único parámetro de tipo Office. AsyncResult. Si se produce un error en la configuración de la ubicación, la propiedad asyncResult. error contendrá un código de error.
 
-        \[Conjunto de API: buzón de correo 1,1\]
-      type:
-      - '(asyncResult: Office.AsyncResult<string>) => void'
-- uid: Outlook_1_4.Office.Location.getAsync_1
-  summary: >-
-    Obtiene la ubicación de una cita.
-
-
-    El método getAsync inicia una llamada asincrónica al servidor de Exchange para obtener la ubicación de una cita. La ubicación de la cita se proporciona como una cadena en la propiedad asyncResult.value.
-  remarks: <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redacción</td></tr> </table>
-  name: getAsync(callback)
-  fullName: getAsync(callback)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'getAsync(callback: (asyncResult: Office.AsyncResult<string>) => void): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: callback
-      description: >-
-        Cuando el método finaliza, la función que se pasa en el parámetro callback se llama con un único parámetro de tipo Office. AsyncResult.
-
-
-        \[Conjunto de API: buzón de correo 1,1\]
-      type:
-      - '(asyncResult: Office.AsyncResult<string>) => void'
-- uid: Outlook_1_4.Office.Location.setAsync
-  summary: >-
-    Establece la ubicación de una cita.
-
-
-    El método setAsync inicia una llamada asincrónica al servidor de Exchange para establecer la ubicación de una cita. Cuando se establezca, se sobrescribirá la ubicación actual.
-  remarks: '<table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redacción</td></tr> <tr><td>Errores</td><td>DataExceedsMaximumSize: el parámetro Location tiene más de 255 caracteres.</td></tr> </table>'
-  name: setAsync(location, options, callback)
-  fullName: setAsync(location, options, callback)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'setAsync(location: string, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: location
-      description: La ubicación de la cita. La cadena está limitada a 255 caracteres.
-      type:
-      - string
-    - id: options
-      description: 'Opcional. Un objeto literal que contiene una o más de las siguientes propiedades. asyncContext: los desarrolladores pueden proporcionar cualquier objeto al que quieran tener acceso en el método de devolución de llamada.'
-      type:
-      - Office.AsyncContextOptions
-    - id: callback
-      description: >-
-        Opcional. Cuando el método finaliza, la función que se pasa en el parámetro callback se llama con un único parámetro de tipo Office. AsyncResult. Si se produce un error en la configuración de la ubicación, la propiedad asyncResult. error contendrá un código de error.
-
-
-        \[Conjunto de API: buzón de correo 1,1\]
-      type:
-      - '(asyncResult: Office.AsyncResult<void>) => void'
-- uid: Outlook_1_4.Office.Location.setAsync_1
-  summary: >-
-    Establece la ubicación de una cita.
-
-
-    El método setAsync inicia una llamada asincrónica al servidor de Exchange para establecer la ubicación de una cita. Cuando se establezca, se sobrescribirá la ubicación actual.
-  remarks: >-
-    <table> <tr><td>[Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)</td><td>ReadItem</td></tr> <tr><td>[Modo de Outlook válido](https://docs.microsoft.com/outlook/add-ins/#extension-points)</td><td>Redacción</td></tr> <tr><td>Errores</td><td>DataExceedsMaximumSize: el parámetro Location tiene más de 255 caracteres.</td></tr> </table>
-
-    ####Incluyen
-
-
-    ```javascript
-
-    Office.context.mailbox.item.location.setAsync(
-        "Room 1",
-        function (asyncResult) {
-            if (asyncResult.status === "failed") {
-                console.log("Action failed with error: " + asyncResult.error.message);
-            }
-        }
-    );
-
-    ```
-  name: setAsync(location, callback)
-  fullName: setAsync(location, callback)
-  langs:
-  - typeScript
-  type: method
-  syntax:
-    content: 'setAsync(location: string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
-    return:
-      type:
-      - void
-      description: ''
-    parameters:
-    - id: location
-      description: La ubicación de la cita. La cadena está limitada a 255 caracteres.
-      type:
-      - string
-    - id: callback
-      description: >-
-        Opcional. Cuando el método finaliza, la función que se pasa en el parámetro callback se llama con un único parámetro de tipo Office. AsyncResult. Si se produce un error en la configuración de la ubicación, la propiedad asyncResult. error contendrá un código de error.
-
-
-        \[Conjunto de API: buzón de correo 1,1\]
-      type:
-      - '(asyncResult: Office.AsyncResult<void>) => void'
+            \[Conjunto de API: buzón de correo 1,1\]
+          type:
+            - '(asyncResult: Office.AsyncResult<void>) => void'
