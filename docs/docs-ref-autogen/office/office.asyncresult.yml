@@ -1,107 +1,202 @@
 ### YamlMime:UniversalReference
-ms.openlocfilehash: 39fdd8b8e52890a772525d768c2a5af756339bf9
-ms.sourcegitcommit: d356f1545c328d4b59ce814fcab8191e4231f1dc
-ms.translationtype: MT
-ms.contentlocale: es-ES
-ms.lasthandoff: 02/13/2019
-ms.locfileid: "29974573"
 items:
-- uid: office.Office.AsyncResult
-  summary: <span data-ttu-id="e787e-101">Un objeto que encapsula el resultado de una solicitud asincrónica, incluida la información de estado y error si la solicitud falla.</span><span class="sxs-lookup"><span data-stu-id="e787e-101">An object which encapsulates the result of an asynchronous request, including status and error information if the request failed.</span></span>
-  remarks: "<table><tr><td><span data-ttu-id=\"e787e-102\">Hosts</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-102\">Hosts</span></span></td><td><span data-ttu-id=\"e787e-103\">Access, Excel, Outlook, PowerPoint, Project y Word</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-103\">Access, Excel, Outlook, PowerPoint, Project, Word</span></span></td></tr></table>\n\n<span data-ttu-id=\"e787e-104\">Cuando la función se pasa a la `callback` ejecuta el parámetro de un método \"Async\", que recibe un objeto AsyncResult al que se puede acceder desde el `callback` único parámetro de la función.</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-104\">When the function you pass to the `callback` parameter of an \"Async\" method executes, it receives an AsyncResult object that you can access from the `callback` function's only parameter.</span></span>\n#### <a name=\"examples\"></a><span data-ttu-id=\"e787e-105\">Ejemplos</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-105\">Examples</span></span>\n\n```javascript\n// The following is an example applicable to content and task pane add-ins.\n// The example shows a call to the getSelectedDataAsync method of the Document object.\nOffice.context.document.getSelectedDataAsync(\"text\", {\n        valueFormat: \"unformatted\",\n        filterType: \"all\"\n    },\n    function (result) {\n        if (result.status === \"success\") {\n            var dataValue = result.value; // Get selected data.\n            console.log('Selected data is ' + dataValue);\n        } else {\n            var err = result.error;\n            console.log(err.name + \": \" + err.message);\n        }\n    });\n// The anonymous function passed as the callback argument ( function (result){...}) has a single \n// parameter named result that provides access to an AsyncResult object when the function executes.\n// When the call to the getSelectedDataAsync method completes, the callback function executes, \n// and the following line of code accesses the value property of the AsyncResult object to \n// return the data selected in the document:\nvar dataValue = result.value;\n// Note that other lines of code in the function use the result parameter of the callback function \n// to access the status and error properties of the AsyncResult object.\n```"
-  name: Office.AsyncResult
-  fullName: Office.AsyncResult
-  langs:
-  - typeScript
-  type: interface
-  package: office
-  children:
-  - office.Office.AsyncResult.asyncContext
-  - office.Office.AsyncResult.diagnostics
-  - office.Office.AsyncResult.error
-  - office.Office.AsyncResult.status
-  - office.Office.AsyncResult.value
-- uid: office.Office.AsyncResult.asyncContext
-  summary: "<span data-ttu-id=\"e787e-106\">Obtiene el elemento definido por el usuario se pasa a la opcional `asyncContext` parámetro del método invocado, en el mismo estado tal como se ha remitido.</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-106\">Gets the user-defined item passed to the optional `asyncContext` parameter of the invoked method in the same state as it was passed in.</span></span> <span data-ttu-id=\"e787e-107\">Esto devuelve el elemento definido por el usuario (que puede ser de cualquier tipo de JavaScript: cadena, número, Boolean, Object, matriz, Null o Undefined) se pasan a la opcional `asyncContext` parámetro del método invocado.</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-107\">This returns the user-defined item (which can be of any JavaScript type: String, Number, Boolean, Object, Array, Null, or Undefined) passed to the optional `asyncContext` parameter of the invoked method.</span></span> <span data-ttu-id=\"e787e-108\">Devuelve Undefined, si no pasa nada al parámetro asyncContext.</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-108\">Returns Undefined, if you didn't pass anything to the asyncContext parameter.</span></span>"
-  remarks: "<span data-ttu-id=\"e787e-109\">**Detalles de compatibilidad**</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-109\">**Support details**</span></span>\n\n<span data-ttu-id=\"e787e-110\">Una letra mayúscula Y en la siguiente matriz indica que esta propiedad se admite en la aplicación host de Office correspondiente.</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-110\">A capital Y in the following matrix indicates that this property is supported in the corresponding Office host application.</span></span> <span data-ttu-id=\"e787e-111\">Una celda vacía indica que la aplicación host de Office no admite esta enumeración.</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-111\">An empty cell indicates that the Office host application doesn't support this enumeration.</span></span>\n\n<span data-ttu-id=\"e787e-112\">Para obtener más información acerca de los requisitos de aplicación y servidor de host de Office, vea [requisitos para ejecutar Office Add-ins](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-112\">For more information about Office host application and server requirements, see [Requirements for running Office Add-ins](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span></span>\n\n<span data-ttu-id=\"e787e-113\">*Hosts compatibles, por plataforma*</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-113\">*Supported hosts, by platform*</span></span> <table> <tr><th> </th><th> <span data-ttu-id=\"e787e-114\">Office para escritorio de Windows</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-114\">Office for Windows desktop</span></span> </th><th> <span data-ttu-id=\"e787e-115\">Office Online (en el explorador)</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-115\">Office Online (in browser)</span></span> </th><th> <span data-ttu-id=\"e787e-116\">Office para iPad</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-116\">Office for iPad</span></span> </th><th> <span data-ttu-id=\"e787e-117\">OWA para dispositivos</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-117\">OWA for Devices</span></span> </th><th> <span data-ttu-id=\"e787e-118\">Office para Mac</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-118\">Office for Mac</span></span> </th></tr> <tr><td><span data-ttu-id=\"e787e-119\"><strong>Access</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-119\"><strong> Access </strong></span></span></td><td> <span data-ttu-id=\"e787e-120\">v</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-120\">Y</span></span> </td><td> </td><td> </td><td> </td><td> </td></tr> <tr><td><span data-ttu-id=\"e787e-121\"><strong>Excel</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-121\"><strong> Excel </strong></span></span></td><td> <span data-ttu-id=\"e787e-122\">v</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-122\">Y</span></span> </td><td> <span data-ttu-id=\"e787e-123\">v</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-123\">Y</span></span> </td><td> <span data-ttu-id=\"e787e-124\">v</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-124\">Y</span></span> </td><td> </td><td> </td></tr> <tr><td><span data-ttu-id=\"e787e-125\"><strong>Outlook</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-125\"><strong> Outlook </strong></span></span></td><td> <span data-ttu-id=\"e787e-126\">v</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-126\">Y</span></span> </td><td> <span data-ttu-id=\"e787e-127\">v</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-127\">Y</span></span> </td><td> </td><td> <span data-ttu-id=\"e787e-128\">v</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-128\">Y</span></span> </td><td> <span data-ttu-id=\"e787e-129\">v</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-129\">Y</span></span> </td></tr> <tr><td><span data-ttu-id=\"e787e-130\"><strong>PowerPoint</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-130\"><strong> PowerPoint </strong></span></span></td><td> <span data-ttu-id=\"e787e-131\">v</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-131\">Y</span></span> </td><td> <span data-ttu-id=\"e787e-132\">v</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-132\">Y</span></span> </td><td> <span data-ttu-id=\"e787e-133\">v</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-133\">Y</span></span> </td><td> </td><td> </td></tr> <tr><td><span data-ttu-id=\"e787e-134\"><strong>Proyecto</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-134\"><strong> Project </strong></span></span></td><td> </td><td> </td><td> </td><td> </td><td> </td></tr> <tr><td><span data-ttu-id=\"e787e-135\"><strong>Word</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-135\"><strong> Word </strong></span></span></td><td> <span data-ttu-id=\"e787e-136\">v</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-136\">Y</span></span> </td><td> <span data-ttu-id=\"e787e-137\">v</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-137\">Y</span></span> </td><td> <span data-ttu-id=\"e787e-138\">v</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-138\">Y</span></span> </td><td> </td><td> </td></tr> </table>\n#### <a name=\"examples\"></a><span data-ttu-id=\"e787e-139\">Ejemplos</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-139\">Examples</span></span>\n\n```javascript\nfunction getDataWithContext() {\n    var format = \"Your data: \";\n    Office.context.document.getSelectedDataAsync(\n        Office.CoercionType.Text, \n        { asyncContext: format }, \n        showDataWithContext);\n}\n\nfunction showDataWithContext(asyncResult) {\n    write(asyncResult.asyncContext + asyncResult.value);\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
-  name: asyncContext
-  fullName: asyncContext
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'asyncContext: any;'
-    return:
-      type:
-      - any
-- uid: office.Office.AsyncResult.diagnostics
-  summary: <span data-ttu-id="e787e-140">Obtiene un objeto que puede proporcionar información adicional, si se produjo un error.</span><span class="sxs-lookup"><span data-stu-id="e787e-140">Gets an object that may provide additional information if an error occurred.</span></span>
-  remarks: >-
-    <span data-ttu-id="e787e-141">**Detalles de compatibilidad**</span><span class="sxs-lookup"><span data-stu-id="e787e-141">**Support details**</span></span>
+  - uid: office.Office.AsyncResult
+    summary: |-
+      <span data-ttu-id="61295-101">Un objeto que encapsula el resultado de una solicitud asincrónica, incluida la información de estado y error si la solicitud falla.</span><span class="sxs-lookup"><span data-stu-id="61295-101">An object which encapsulates the result of an asynchronous request, including status and error information if the request failed.</span></span>
+
+      <span data-ttu-id="61295-102">Cuando la función que se pasa al `callback` parámetro de un método "Async" se ejecute, recibirá un objeto asyncResult al que puede obtener acceso desde `callback` el único parámetro de la función.</span><span class="sxs-lookup"><span data-stu-id="61295-102">When the function you pass to the `callback` parameter of an "Async" method executes, it receives an AsyncResult object that you can access from the `callback` function's only parameter.</span></span>
+    name: Office.AsyncResult
+    fullName: Office.AsyncResult
+    langs:
+      - typeScript
+    type: interface
+    package: office
+    remarks: |-
 
 
-    <span data-ttu-id="e787e-142">Una letra mayúscula Y en la siguiente matriz indica que esta propiedad se admite en la aplicación host de Office correspondiente.</span><span class="sxs-lookup"><span data-stu-id="e787e-142">A capital Y in the following matrix indicates that this property is supported in the corresponding Office host application.</span></span> <span data-ttu-id="e787e-143">Una celda vacía indica que la aplicación host de Office no admite esta enumeración.</span><span class="sxs-lookup"><span data-stu-id="e787e-143">An empty cell indicates that the Office host application doesn't support this enumeration.</span></span>
+      #### <a name="examples"></a><span data-ttu-id="61295-103">Ejemplos</span><span class="sxs-lookup"><span data-stu-id="61295-103">Examples</span></span>
+
+      ```javascript
+      // The following is an example applicable to content and task pane add-ins.
+      // The example shows a call to the getSelectedDataAsync method of the Document object.
+      Office.context.document.getSelectedDataAsync("text", {
+              valueFormat: "unformatted",
+              filterType: "all"
+          },
+          function (result) {
+              if (result.status === "success") {
+                  var dataValue = result.value; // Get selected data.
+                  console.log('Selected data is ' + dataValue);
+              } else {
+                  var err = result.error;
+                  console.log(err.name + ": " + err.message);
+              }
+          });
+      // The anonymous function passed as the callback argument ( function (result){...}) has a single 
+      // parameter named result that provides access to an AsyncResult object when the function executes.
+      // When the call to the getSelectedDataAsync method completes, the callback function executes, 
+      // and the following line of code accesses the value property of the AsyncResult object to 
+      // return the data selected in the document:
+      var dataValue = result.value;
+      // Note that other lines of code in the function use the result parameter of the callback function 
+      // to access the status and error properties of the AsyncResult object.
+      ```
+    children:
+      - office.Office.AsyncResult.asyncContext
+      - office.Office.AsyncResult.diagnostics
+      - office.Office.AsyncResult.error
+      - office.Office.AsyncResult.status
+      - office.Office.AsyncResult.value
+  - uid: office.Office.AsyncResult.asyncContext
+    summary: '<span data-ttu-id="61295-104">Obtiene el elemento definido por el usuario que se ha `asyncContext` pasado al parámetro opcional del método invocado, en el mismo estado en el que se pasó.</span><span class="sxs-lookup"><span data-stu-id="61295-104">Gets the user-defined item passed to the optional `asyncContext` parameter of the invoked method in the same state as it was passed in.</span></span> <span data-ttu-id="61295-105">Esto devuelve el elemento definido por el usuario (que puede ser de cualquier tipo JavaScript: String, Number, Boolean, Object, array, null o undefined) que se pasa `asyncContext` al parámetro opcional del método invocado.</span><span class="sxs-lookup"><span data-stu-id="61295-105">This returns the user-defined item (which can be of any JavaScript type: String, Number, Boolean, Object, Array, Null, or Undefined) passed to the optional `asyncContext` parameter of the invoked method.</span></span> <span data-ttu-id="61295-106">Si no se envió ningún elemento al parámetro asyncContext, devuelve Undefined.</span><span class="sxs-lookup"><span data-stu-id="61295-106">Returns Undefined, if you didn''t pass anything to the asyncContext parameter.</span></span>'
+    name: asyncContext
+    fullName: asyncContext
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'asyncContext: any;'
+      return:
+        type:
+          - any
+        description: |-
 
 
-    <span data-ttu-id="e787e-144">Para obtener más información acerca de los requisitos de aplicación y servidor de host de Office, vea [requisitos para ejecutar Office Add-ins](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span><span class="sxs-lookup"><span data-stu-id="e787e-144">For more information about Office host application and server requirements, see [Requirements for running Office Add-ins](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span></span>
+          #### <a name="examples"></a><span data-ttu-id="61295-107">Ejemplos</span><span class="sxs-lookup"><span data-stu-id="61295-107">Examples</span></span>
+
+          ```javascript
+          function getDataWithContext() {
+              var format = "Your data: ";
+              Office.context.document.getSelectedDataAsync(
+                  Office.CoercionType.Text, 
+                  { asyncContext: format }, 
+                  showDataWithContext);
+          }
+
+          function showDataWithContext(asyncResult) {
+              write(asyncResult.asyncContext + asyncResult.value);
+          }
+          // Function that writes to a div with id='message' on the page.
+          function write(message){
+              document.getElementById('message').innerText += message; 
+          }
+          ```
+  - uid: office.Office.AsyncResult.diagnostics
+    summary: <span data-ttu-id="61295-108">Obtiene un objeto que puede proporcionar información adicional si se produce un error.</span><span class="sxs-lookup"><span data-stu-id="61295-108">Gets an object that may provide additional information if an error occurred.</span></span>
+    remarks: |-
+      <span data-ttu-id="61295-109">*API admitidas*</span><span class="sxs-lookup"><span data-stu-id="61295-109">*Supported APIs*</span></span>
+
+      `Office.context.mailbox.item.getCallbackTokenAsync`<!-- --><span data-ttu-id="61295-110">, `Office.context.mailbox.item.getUserIdentityTokenAsync`</span><span class="sxs-lookup"><span data-stu-id="61295-110"></span></span>
+
+      <span data-ttu-id="61295-111">*Errores admitidos*</span><span class="sxs-lookup"><span data-stu-id="61295-111">*Supported errors*</span></span> <table> <tr><th>`AsyncResult.error.name` </th><th>`AsyncResult.error.message` </th><th><span data-ttu-id="61295-112">Descripción del objeto Diagnostics devuelto</span><span class="sxs-lookup"><span data-stu-id="61295-112">Description of diagnostics object returned</span></span> </th></tr> <tr><td><span data-ttu-id="61295-113"><strong>HTTPRequestFailure</strong></span><span class="sxs-lookup"><span data-stu-id="61295-113"><strong>HTTPRequestFailure</strong></span></span> </td><td><span data-ttu-id="61295-114">Error en la solicitud.</span><span class="sxs-lookup"><span data-stu-id="61295-114">The request has failed.</span></span> <span data-ttu-id="61295-115">Consulte el objeto Diagnostics para ver el código de error HTTP.</span><span class="sxs-lookup"><span data-stu-id="61295-115">Please look at the diagnostics object for the HTTP error code.</span></span> </td><td><span data-ttu-id="61295-116">El código de error HTTP en un objeto JSON por ejemplo,`{"HTTPCode":"401"}`</span><span class="sxs-lookup"><span data-stu-id="61295-116">The HTTP error code in a JSON object e.g., `{"HTTPCode":"401"}`</span></span> </td></tr> <tr><td><span data-ttu-id="61295-117"><strong>InternalServerError</strong></span><span class="sxs-lookup"><span data-stu-id="61295-117"><strong>InternalServerError</strong></span></span></td><td><span data-ttu-id="61295-118">El servidor de Exchange devolvió un error.</span><span class="sxs-lookup"><span data-stu-id="61295-118">The Exchange server returned an error.</span></span> <span data-ttu-id="61295-119">Consulte el objeto Diagnostics para obtener más información.</span><span class="sxs-lookup"><span data-stu-id="61295-119">Please look at the diagnostics object for more information.</span></span></td><td><span data-ttu-id="61295-120">Mensaje de error del servidor Exchange en un objeto JSON por ejemplo,`{"ErrorText": "The mailbox database is temporarily unavailable"}`</span><span class="sxs-lookup"><span data-stu-id="61295-120">The error message from the Exchange server in a JSON object e.g., `{"ErrorText": "The mailbox database is temporarily unavailable"}`</span></span></td></tr> </table>
+    name: diagnostics
+    fullName: diagnostics
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'diagnostics: any;'
+      return:
+        type:
+          - any
+  - uid: office.Office.AsyncResult.error
+    summary: '<span data-ttu-id="61295-121">Obtiene un objeto [Office. error](xref:office.Office.Error) que proporciona una descripción del error, en caso de que se produzca un error.</span><span class="sxs-lookup"><span data-stu-id="61295-121">Gets an [Office.Error](xref:office.Office.Error) object that provides a description of the error, if any error occurred.</span></span>'
+    name: error
+    fullName: error
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'error: Office.Error;'
+      return:
+        type:
+          - office.Office.Error
+        description: |-
 
 
-    <span data-ttu-id="e787e-145">*Hosts compatibles, por plataforma*</span><span class="sxs-lookup"><span data-stu-id="e787e-145">*Supported hosts, by platform*</span></span> <table> <tr><th> </th><th> <span data-ttu-id="e787e-146">Office para escritorio de Windows</span><span class="sxs-lookup"><span data-stu-id="e787e-146">Office for Windows desktop</span></span> </th><th> <span data-ttu-id="e787e-147">Office Online (en el explorador)</span><span class="sxs-lookup"><span data-stu-id="e787e-147">Office Online (in browser)</span></span> </th><th> <span data-ttu-id="e787e-148">Office para iPad</span><span class="sxs-lookup"><span data-stu-id="e787e-148">Office for iPad</span></span> </th><th> <span data-ttu-id="e787e-149">OWA para dispositivos</span><span class="sxs-lookup"><span data-stu-id="e787e-149">OWA for Devices</span></span> </th><th> <span data-ttu-id="e787e-150">Office para Mac</span><span class="sxs-lookup"><span data-stu-id="e787e-150">Office for Mac</span></span> </th></tr> <tr><td><span data-ttu-id="e787e-151"><strong>Outlook</strong></span><span class="sxs-lookup"><span data-stu-id="e787e-151"><strong>Outlook</strong></span></span></td><td> <span data-ttu-id="e787e-152">Y (vista previa de buzón de correo)</span><span class="sxs-lookup"><span data-stu-id="e787e-152">Y (Mailbox Preview)</span></span> </td><td> </td><td> </td><td> </td><td> </td></tr> </table>
+          #### <a name="examples"></a><span data-ttu-id="61295-122">Ejemplos</span><span class="sxs-lookup"><span data-stu-id="61295-122">Examples</span></span>
+
+          ```javascript
+          function getData() {
+              Office.context.document.getSelectedDataAsync(Office.CoercionType.Table, function(asyncResult) {
+                  if (asyncResult.status == Office.AsyncResultStatus.Failed) {
+                      write(asyncResult.error.message);
+                  }
+                  else {
+                      write(asyncResult.value);
+                  }
+              });
+          }
+          // Function that writes to a div with id='message' on the page.
+          function write(message){
+              document.getElementById('message').innerText += message; 
+          }
+          ```
+  - uid: office.Office.AsyncResult.status
+    summary: '<span data-ttu-id="61295-123">Obtiene el [Office. AsyncResultStatus](xref:office.Office.AsyncResultStatus) de la operación asincrónica.</span><span class="sxs-lookup"><span data-stu-id="61295-123">Gets the [Office.AsyncResultStatus](xref:office.Office.AsyncResultStatus) of the asynchronous operation.</span></span>'
+    name: status
+    fullName: status
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'status: AsyncResultStatus;'
+      return:
+        type:
+          - office.Office.AsyncResultStatus
+        description: |-
 
 
-    <span data-ttu-id="e787e-153">*API admitidas*</span><span class="sxs-lookup"><span data-stu-id="e787e-153">*Supported APIs*</span></span>
+          #### <a name="examples"></a><span data-ttu-id="61295-124">Ejemplos</span><span class="sxs-lookup"><span data-stu-id="61295-124">Examples</span></span>
 
+          ```javascript
+          function getData() {
+              Office.context.document.getSelectedDataAsync(Office.CoercionType.Table, function(asyncResult) {
+                  if (asyncResult.status == Office.AsyncResultStatus.Failed) {
+                      write(asyncResult.error.message);
+                  }
+                  else {
+                      write(asyncResult.value);
+                  }
+              });
+          }
+          // Function that writes to a div with id='message' on the page.
+          function write(message){
+              document.getElementById('message').innerText += message; 
+          }
+          ```
+  - uid: office.Office.AsyncResult.value
+    summary: '<span data-ttu-id="61295-125">Obtiene la carga o el contenido de una operación asincrónica, si la hay.</span><span class="sxs-lookup"><span data-stu-id="61295-125">Gets the payload or content of this asynchronous operation, if any.</span></span>'
+    remarks: |-
+      <span data-ttu-id="61295-126">Se obtiene acceso al objeto AsyncResult en la función que se ha remitido como argumento al parámetro callback de un método "Async" `getSelectedDataAsync` , `setSelectedDataAsync` como los métodos y del objeto [Document](xref:office.Office.Document) .</span><span class="sxs-lookup"><span data-stu-id="61295-126">You access the AsyncResult object in the function passed as the argument to the callback parameter of an "Async" method, such as the `getSelectedDataAsync` and `setSelectedDataAsync` methods of the [Document](xref:office.Office.Document) object.</span></span>
 
-    <span data-ttu-id="e787e-154">`Office.context.mailbox.item.getCallbackTokenAsync`<!-- -->, `Office.context.mailbox.item.getUserIdentityTokenAsync`</span><span class="sxs-lookup"><span data-stu-id="e787e-154"></span></span>
+      <span data-ttu-id="61295-127">**Nota**: el valor que devuelve la propiedad Value para un método "Async" determinado varía en función de la finalidad y el contexto del método.</span><span class="sxs-lookup"><span data-stu-id="61295-127">**Note**: What the value property returns for a particular "Async" method varies depending on the purpose and context of that method.</span></span> <span data-ttu-id="61295-128">To determine what is returned by the value property for an "Async" method, refer to the "Callback value" section of the method's topic.</span><span class="sxs-lookup"><span data-stu-id="61295-128">To determine what is returned by the value property for an "Async" method, refer to the "Callback value" section of the method's topic.</span></span>
 
+      #### <a name="examples"></a><span data-ttu-id="61295-129">Ejemplos</span><span class="sxs-lookup"><span data-stu-id="61295-129">Examples</span></span>
 
-    <span data-ttu-id="e787e-155">*Errores compatibles*</span><span class="sxs-lookup"><span data-stu-id="e787e-155">*Supported errors*</span></span> <table> <tr><th>`AsyncResult.error.name` </th><th>`AsyncResult.error.message` </th><th><span data-ttu-id="e787e-156">Descripción del objeto de diagnóstico devuelto</span><span class="sxs-lookup"><span data-stu-id="e787e-156">Description of diagnostics object returned</span></span> </th></tr> <tr><td><span data-ttu-id="e787e-157"><strong>HTTPRequestFailure</strong></span><span class="sxs-lookup"><span data-stu-id="e787e-157"><strong>HTTPRequestFailure</strong></span></span> </td><td><span data-ttu-id="e787e-158">Error en la solicitud.</span><span class="sxs-lookup"><span data-stu-id="e787e-158">The request has failed.</span></span> <span data-ttu-id="e787e-159">Por favor, examine el objeto de diagnóstico para el código de error HTTP.</span><span class="sxs-lookup"><span data-stu-id="e787e-159">Please look at the diagnostics object for the HTTP error code.</span></span> </td><td><span data-ttu-id="e787e-160">El código de error HTTP en un JSON objeto por ejemplo,`{"HTTPCode":"401"}`</span><span class="sxs-lookup"><span data-stu-id="e787e-160">The HTTP error code in a JSON object e.g., `{"HTTPCode":"401"}`</span></span> </td></tr> <tr><td><span data-ttu-id="e787e-161"><strong>InternalServerError</strong></span><span class="sxs-lookup"><span data-stu-id="e787e-161"><strong>InternalServerError</strong></span></span></td><td><span data-ttu-id="e787e-162">El servidor de Exchange devolvió un error.</span><span class="sxs-lookup"><span data-stu-id="e787e-162">The Exchange server returned an error.</span></span> <span data-ttu-id="e787e-163">Por favor, examine el objeto diagnostics para obtener más información.</span><span class="sxs-lookup"><span data-stu-id="e787e-163">Please look at the diagnostics object for more information.</span></span></td><td><span data-ttu-id="e787e-164">El mensaje de error desde el servidor de Exchange en un JSON de objetos por ejemplo,`{"ErrorText": "The mailbox database is temporarily unavailable"}`</span><span class="sxs-lookup"><span data-stu-id="e787e-164">The error message from the Exchange server in a JSON object e.g., `{"ErrorText": "The mailbox database is temporarily unavailable"}`</span></span></td></tr> </table>
-  name: diagnostics
-  fullName: diagnostics
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'diagnostics: any;'
-    return:
-      type:
-      - any
-- uid: office.Office.AsyncResult.error
-  summary: <span data-ttu-id="e787e-165">Obtiene un objeto [Office.Error](xref:office.Office.Error) que proporciona una descripción del error, si se ha producido ningún error.</span><span class="sxs-lookup"><span data-stu-id="e787e-165">Gets an [Office.Error](xref:office.Office.Error) object that provides a description of the error, if any error occurred.</span></span>
-  remarks: "<span data-ttu-id=\"e787e-166\">**Detalles de compatibilidad**</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-166\">**Support details**</span></span>\n\n<span data-ttu-id=\"e787e-167\">Una letra mayúscula Y en la siguiente matriz indica que esta propiedad se admite en la aplicación host de Office correspondiente.</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-167\">A capital Y in the following matrix indicates that this property is supported in the corresponding Office host application.</span></span> <span data-ttu-id=\"e787e-168\">Una celda vacía indica que la aplicación host de Office no admite esta enumeración.</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-168\">An empty cell indicates that the Office host application doesn't support this enumeration.</span></span>\n\n<span data-ttu-id=\"e787e-169\">Para obtener más información acerca de los requisitos de aplicación y servidor de host de Office, vea [requisitos para ejecutar Office Add-ins](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-169\">For more information about Office host application and server requirements, see [Requirements for running Office Add-ins](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span></span>\n\n<span data-ttu-id=\"e787e-170\">*Hosts compatibles, por plataforma*</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-170\">*Supported hosts, by platform*</span></span> <table> <tr><th> </th><th> <span data-ttu-id=\"e787e-171\">Office para escritorio de Windows</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-171\">Office for Windows desktop</span></span> </th><th> <span data-ttu-id=\"e787e-172\">Office Online (en el explorador)</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-172\">Office Online (in browser)</span></span> </th><th> <span data-ttu-id=\"e787e-173\">Office para iPad</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-173\">Office for iPad</span></span> </th><th> <span data-ttu-id=\"e787e-174\">OWA para dispositivos</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-174\">OWA for Devices</span></span> </th><th> <span data-ttu-id=\"e787e-175\">Office para Mac</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-175\">Office for Mac</span></span> </th></tr> <tr><td><span data-ttu-id=\"e787e-176\"><strong>Access</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-176\"><strong> Access </strong></span></span></td><td> </td><td> <span data-ttu-id=\"e787e-177\">v</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-177\">Y</span></span> </td><td> </td><td> </td><td> </td></tr> <tr><td><span data-ttu-id=\"e787e-178\"><strong>Excel</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-178\"><strong> Excel </strong></span></span></td><td> <span data-ttu-id=\"e787e-179\">v</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-179\">Y</span></span> </td><td> <span data-ttu-id=\"e787e-180\">v</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-180\">Y</span></span> </td><td> <span data-ttu-id=\"e787e-181\">v</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-181\">Y</span></span> </td><td> </td><td> </td></tr> <tr><td><span data-ttu-id=\"e787e-182\"><strong>Outlook</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-182\"><strong> Outlook </strong></span></span></td><td> <span data-ttu-id=\"e787e-183\">v</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-183\">Y</span></span> </td><td> <span data-ttu-id=\"e787e-184\">v</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-184\">Y</span></span> </td><td> </td><td> <span data-ttu-id=\"e787e-185\">v</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-185\">Y</span></span> </td><td> <span data-ttu-id=\"e787e-186\">v</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-186\">Y</span></span> </td></tr> <tr><td><span data-ttu-id=\"e787e-187\"><strong>PowerPoint</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-187\"><strong> PowerPoint </strong></span></span></td><td> <span data-ttu-id=\"e787e-188\">v</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-188\">Y</span></span> </td><td> <span data-ttu-id=\"e787e-189\">v</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-189\">Y</span></span> </td><td> <span data-ttu-id=\"e787e-190\">v</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-190\">Y</span></span> </td><td> </td><td> </td></tr> <tr><td><span data-ttu-id=\"e787e-191\"><strong>Proyecto</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-191\"><strong> Project </strong></span></span></td><td> <span data-ttu-id=\"e787e-192\">v</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-192\">Y</span></span> </td><td> </td><td> </td><td> </td><td> </td></tr> <tr><td><span data-ttu-id=\"e787e-193\"><strong>Word</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-193\"><strong> Word </strong></span></span></td><td> <span data-ttu-id=\"e787e-194\">v</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-194\">Y</span></span> </td><td> <span data-ttu-id=\"e787e-195\">v</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-195\">Y</span></span> </td><td> <span data-ttu-id=\"e787e-196\">v</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-196\">Y</span></span> </td><td> </td><td> </td></tr> </table>\n#### <a name=\"examples\"></a><span data-ttu-id=\"e787e-197\">Ejemplos</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-197\">Examples</span></span>\n\n```javascript\nfunction getData() {\n    Office.context.document.getSelectedDataAsync(Office.CoercionType.Table, function(asyncResult) {\n        if (asyncResult.status == Office.AsyncResultStatus.Failed) {\n            write(asyncResult.error.message);\n        }\n        else {\n            write(asyncResult.value);\n        }\n    });\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
-  name: error
-  fullName: error
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'error: Office.Error;'
-    return:
-      type:
-      - office.Office.Error
-- uid: office.Office.AsyncResult.status
-  summary: <span data-ttu-id="e787e-198">Obtiene el [Office.AsyncResultStatus](xref:office.Office.AsyncResultStatus) de la operación asincrónica.</span><span class="sxs-lookup"><span data-stu-id="e787e-198">Gets the [Office.AsyncResultStatus](xref:office.Office.AsyncResultStatus) of the asynchronous operation.</span></span>
-  remarks: "<span data-ttu-id=\"e787e-199\">**Detalles de compatibilidad**</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-199\">**Support details**</span></span>\n\n<span data-ttu-id=\"e787e-200\">Una letra mayúscula Y en la siguiente matriz indica que esta propiedad se admite en la aplicación host de Office correspondiente.</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-200\">A capital Y in the following matrix indicates that this property is supported in the corresponding Office host application.</span></span> <span data-ttu-id=\"e787e-201\">Una celda vacía indica que la aplicación host de Office no admite esta enumeración.</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-201\">An empty cell indicates that the Office host application doesn't support this enumeration.</span></span>\n\n<span data-ttu-id=\"e787e-202\">Para obtener más información acerca de los requisitos de aplicación y servidor de host de Office, vea [requisitos para ejecutar Office Add-ins](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-202\">For more information about Office host application and server requirements, see [Requirements for running Office Add-ins](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span></span>\n\n<span data-ttu-id=\"e787e-203\">*Hosts compatibles, por plataforma*</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-203\">*Supported hosts, by platform*</span></span> <table> <tr><th> </th><th> <span data-ttu-id=\"e787e-204\">Office para escritorio de Windows</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-204\">Office for Windows desktop</span></span> </th><th> <span data-ttu-id=\"e787e-205\">Office Online (en el explorador)</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-205\">Office Online (in browser)</span></span> </th><th> <span data-ttu-id=\"e787e-206\">Office para iPad</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-206\">Office for iPad</span></span> </th><th> <span data-ttu-id=\"e787e-207\">OWA para dispositivos</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-207\">OWA for Devices</span></span> </th><th> <span data-ttu-id=\"e787e-208\">Office para Mac</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-208\">Office for Mac</span></span> </th></tr> <tr><td><span data-ttu-id=\"e787e-209\"><strong>Access</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-209\"><strong> Access </strong></span></span></td><td> </td><td> <span data-ttu-id=\"e787e-210\">v</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-210\">Y</span></span> </td><td> </td><td> </td><td> </td></tr> <tr><td><span data-ttu-id=\"e787e-211\"><strong>Excel</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-211\"><strong> Excel </strong></span></span></td><td> <span data-ttu-id=\"e787e-212\">v</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-212\">Y</span></span> </td><td> <span data-ttu-id=\"e787e-213\">v</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-213\">Y</span></span> </td><td> <span data-ttu-id=\"e787e-214\">v</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-214\">Y</span></span> </td><td> </td><td> </td></tr> <tr><td><span data-ttu-id=\"e787e-215\"><strong>Outlook</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-215\"><strong> Outlook </strong></span></span></td><td> <span data-ttu-id=\"e787e-216\">v</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-216\">Y</span></span> </td><td> <span data-ttu-id=\"e787e-217\">v</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-217\">Y</span></span> </td><td> </td><td> <span data-ttu-id=\"e787e-218\">v</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-218\">Y</span></span> </td><td> <span data-ttu-id=\"e787e-219\">v</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-219\">Y</span></span> </td></tr> <tr><td><span data-ttu-id=\"e787e-220\"><strong>PowerPoint</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-220\"><strong> PowerPoint </strong></span></span></td><td> <span data-ttu-id=\"e787e-221\">v</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-221\">Y</span></span> </td><td> <span data-ttu-id=\"e787e-222\">v</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-222\">Y</span></span> </td><td> <span data-ttu-id=\"e787e-223\">v</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-223\">Y</span></span> </td><td> </td><td> </td></tr> <tr><td><span data-ttu-id=\"e787e-224\"><strong>Proyecto</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-224\"><strong> Project </strong></span></span></td><td> <span data-ttu-id=\"e787e-225\">v</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-225\">Y</span></span> </td><td> </td><td> </td><td> </td><td> </td></tr> <tr><td><span data-ttu-id=\"e787e-226\"><strong>Word</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-226\"><strong> Word </strong></span></span></td><td> <span data-ttu-id=\"e787e-227\">v</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-227\">Y</span></span> </td><td> <span data-ttu-id=\"e787e-228\">v</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-228\">Y</span></span> </td><td> <span data-ttu-id=\"e787e-229\">v</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-229\">Y</span></span> </td><td> </td><td> </td></tr> </table>\n#### <a name=\"examples\"></a><span data-ttu-id=\"e787e-230\">Ejemplos</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-230\">Examples</span></span>\n\n```javascript\nfunction getData() {\n    Office.context.document.getSelectedDataAsync(Office.CoercionType.Table, function(asyncResult) {\n        if (asyncResult.status == Office.AsyncResultStatus.Failed) {\n            write(asyncResult.error.message);\n        }\n        else {\n            write(asyncResult.value);\n        }\n    });\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
-  name: status
-  fullName: status
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'status: AsyncResultStatus;'
-    return:
-      type:
-      - office.Office.AsyncResultStatus
-- uid: office.Office.AsyncResult.value
-  summary: <span data-ttu-id="e787e-231">Obtiene la carga o el contenido de una operación asincrónica, si la hay.</span><span class="sxs-lookup"><span data-stu-id="e787e-231">Gets the payload or content of this asynchronous operation, if any.</span></span>
-  remarks: "<span data-ttu-id=\"e787e-232\">Acceso al objeto AsyncResult de la función que se pasa como el argumento para el parámetro de devolución de llamada de un método \"Async\", como el `getSelectedDataAsync` y `setSelectedDataAsync` métodos del objeto [Document](xref:office.Office.Document) .</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-232\">You access the AsyncResult object in the function passed as the argument to the callback parameter of an \"Async\" method, such as the `getSelectedDataAsync` and `setSelectedDataAsync` methods of the [Document](xref:office.Office.Document) object.</span></span>\n\n<span data-ttu-id=\"e787e-233\">**Nota**: lo que devuelve la propiedad value para un método \"Async\" concreto varía en función de la finalidad y el contexto de este método.</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-233\">**Note**: What the value property returns for a particular \"Async\" method varies depending on the purpose and context of that method.</span></span> <span data-ttu-id=\"e787e-234\">Para determinar lo que es devuelto por la propiedad value para un método \"Async\", consulte la sección \"Valor de devolución de llamada\" del tema del método.</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-234\">To determine what is returned by the value property for an \"Async\" method, refer to the \"Callback value\" section of the method's topic.</span></span>\n\n<span data-ttu-id=\"e787e-235\">**Detalles de compatibilidad**</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-235\">**Support details**</span></span>\n\n<span data-ttu-id=\"e787e-236\">Una letra mayúscula Y en la siguiente matriz indica que esta propiedad se admite en la aplicación host de Office correspondiente.</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-236\">A capital Y in the following matrix indicates that this property is supported in the corresponding Office host application.</span></span> <span data-ttu-id=\"e787e-237\">Una celda vacía indica que la aplicación host de Office no admite esta enumeración.</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-237\">An empty cell indicates that the Office host application doesn't support this enumeration.</span></span>\n\n<span data-ttu-id=\"e787e-238\">Para obtener más información acerca de los requisitos de aplicación y servidor de host de Office, vea [requisitos para ejecutar Office Add-ins](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-238\">For more information about Office host application and server requirements, see [Requirements for running Office Add-ins](https://docs.microsoft.com/office/dev/add-ins/concepts/requirements-for-running-office-add-ins)<!-- -->.</span></span>\n\n<span data-ttu-id=\"e787e-239\">*Hosts compatibles, por plataforma*</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-239\">*Supported hosts, by platform*</span></span> <table> <tr><th> </th><th> <span data-ttu-id=\"e787e-240\">Office para escritorio de Windows</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-240\">Office for Windows desktop</span></span> </th><th> <span data-ttu-id=\"e787e-241\">Office Online (en el explorador)</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-241\">Office Online (in browser)</span></span> </th><th> <span data-ttu-id=\"e787e-242\">Office para iPad</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-242\">Office for iPad</span></span> </th><th> <span data-ttu-id=\"e787e-243\">OWA para dispositivos</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-243\">OWA for Devices</span></span> </th><th> <span data-ttu-id=\"e787e-244\">Office para Mac</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-244\">Office for Mac</span></span> </th></tr> <tr><td><span data-ttu-id=\"e787e-245\"><strong>Access</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-245\"><strong> Access </strong></span></span></td><td> </td><td> <span data-ttu-id=\"e787e-246\">v</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-246\">Y</span></span> </td><td> </td><td> </td><td> </td></tr> <tr><td><span data-ttu-id=\"e787e-247\"><strong>Excel</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-247\"><strong> Excel </strong></span></span></td><td> <span data-ttu-id=\"e787e-248\">v</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-248\">Y</span></span> </td><td> <span data-ttu-id=\"e787e-249\">v</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-249\">Y</span></span> </td><td> <span data-ttu-id=\"e787e-250\">v</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-250\">Y</span></span> </td><td> </td><td> </td></tr> <tr><td><span data-ttu-id=\"e787e-251\"><strong>Outlook</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-251\"><strong> Outlook </strong></span></span></td><td> <span data-ttu-id=\"e787e-252\">v</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-252\">Y</span></span> </td><td> <span data-ttu-id=\"e787e-253\">v</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-253\">Y</span></span> </td><td> </td><td> <span data-ttu-id=\"e787e-254\">v</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-254\">Y</span></span> </td><td> <span data-ttu-id=\"e787e-255\">v</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-255\">Y</span></span> </td></tr> <tr><td><span data-ttu-id=\"e787e-256\"><strong>PowerPoint</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-256\"><strong> PowerPoint </strong></span></span></td><td> <span data-ttu-id=\"e787e-257\">v</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-257\">Y</span></span> </td><td> <span data-ttu-id=\"e787e-258\">v</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-258\">Y</span></span> </td><td> <span data-ttu-id=\"e787e-259\">v</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-259\">Y</span></span> </td><td> </td><td> </td></tr> <tr><td><span data-ttu-id=\"e787e-260\"><strong>Proyecto</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-260\"><strong> Project </strong></span></span></td><td> <span data-ttu-id=\"e787e-261\">v</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-261\">Y</span></span> </td><td> </td><td> </td><td> </td><td> </td></tr> <tr><td><span data-ttu-id=\"e787e-262\"><strong>Word</strong></span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-262\"><strong> Word </strong></span></span></td><td> <span data-ttu-id=\"e787e-263\">v</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-263\">Y</span></span> </td><td> <span data-ttu-id=\"e787e-264\">v</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-264\">Y</span></span> </td><td> <span data-ttu-id=\"e787e-265\">v</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-265\">Y</span></span> </td><td> </td><td> </td></tr> </table>\n#### <a name=\"examples\"></a><span data-ttu-id=\"e787e-266\">Ejemplos</span><span class=\"sxs-lookup\"><span data-stu-id=\"e787e-266\">Examples</span></span>\n\n```javascript\nfunction getData() {\n    Office.context.document.getSelectedDataAsync(Office.CoercionType.Table, function(asyncResult) {\n        if (asyncResult.status == Office.AsyncResultStatus.Failed) {\n            write(asyncResult.error.message);\n        }\n        else {\n            write(asyncResult.value);\n        }\n    });\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
-  name: value
-  fullName: value
-  langs:
-  - typeScript
-  type: property
-  syntax:
-    content: 'value: T;'
-    return:
-      type:
-      - T
+      ```javascript
+      function getData() {
+          Office.context.document.getSelectedDataAsync(Office.CoercionType.Table, function(asyncResult) {
+              if (asyncResult.status == Office.AsyncResultStatus.Failed) {
+                  write(asyncResult.error.message);
+              }
+              else {
+                  write(asyncResult.value);
+              }
+          });
+      }
+      // Function that writes to a div with id='message' on the page.
+      function write(message){
+          document.getElementById('message').innerText += message; 
+      }
+      ```
+    name: value
+    fullName: value
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'value: T;'
+      return:
+        type:
+          - T
