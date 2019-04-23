@@ -1,40 +1,42 @@
 ### YamlMime:UniversalReference
 items:
-  - uid: outlook.Office.Categories
+  - uid: outlook.Office.MasterCategories
     summary: |-
-      Representa las categorías de un elemento.
+      Representa la lista maestra de categorías en el buzón.
 
-      En Outlook, un usuario puede agrupar los mensajes y citas utilizando una categoría para asignarles colores. El usuario define las [categorías de una lista maestra](xref:outlook.Office.MasterCategories) en su buzón. Puede aplicar una o más categorías a un elemento.
+      En Outlook, un usuario puede agrupar mensajes y citas mediante una categoría para codificarlas por colores. El usuario define las categorías de una lista maestra en su buzón. A continuación, pueden aplicar una o más categorías a un elemento.
 
       \[[Conjunto de API: vista previa de buzón](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadMailbox
 
       **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: redacción o lectura
     isPreview: true
-    name: Office.Categories
-    fullName: Office.Categories
+    name: Office.MasterCategories
+    fullName: Office.MasterCategories
     langs:
       - typeScript
     type: interface
     package: outlook
     children:
-      - outlook.Office.Categories.addAsync
-      - outlook.Office.Categories.addAsync_1
-      - outlook.Office.Categories.getAsync
-      - outlook.Office.Categories.getAsync_1
-      - outlook.Office.Categories.removeAsync
-      - outlook.Office.Categories.removeAsync_1
-  - uid: outlook.Office.Categories.addAsync
-    summary: 'Agrega categorías a un elemento. Cada categoría debe estar en la lista de maestro de categorías en ese buzón de correo, por lo que debe tener un nombre único, pero varias categorías pueden usar el mismo color.'
+      - outlook.Office.MasterCategories.addAsync
+      - outlook.Office.MasterCategories.addAsync_1
+      - outlook.Office.MasterCategories.getAsync
+      - outlook.Office.MasterCategories.getAsync_1
+      - outlook.Office.MasterCategories.removeAsync
+      - outlook.Office.MasterCategories.removeAsync_1
+  - uid: outlook.Office.MasterCategories.addAsync
+    summary: 'Agrega categorías a la lista maestra en un buzón. Cada categoría debe tener un nombre único, pero varias categorías pueden usar el mismo color.'
     remarks: |-
-      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadWriteItem
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadWriteMailbox
 
       **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: redacción o lectura
 
       **Errores**:
 
-      - InvalidCategory: se proporcionaron categorías no válidas.
+      - DuplicateCategory: una de las categorías proporcionadas ya está en la lista principal de categorías.
+
+      - PermissionDenied: el usuario no tiene permiso para realizar esta acción.
     isPreview: true
     name: 'addAsync(categories, options, callback)'
     fullName: 'addAsync(categories, options, callback)'
@@ -42,16 +44,16 @@ items:
       - typeScript
     type: method
     syntax:
-      content: 'addAsync(categories: string[], options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+      content: 'addAsync(categories: CategoryDetails[], options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
       return:
         type:
           - void
         description: ''
       parameters:
         - id: categories
-          description: Las categorías que se van a agregar al elemento.
+          description: Las categorías que se agregarán a la lista maestra en el buzón de correo.
           type:
-            - 'string[]'
+            - 'CategoryDetails[]'
         - id: options
           description: 'Opcional. Un objeto literal que contiene una o más de las siguientes propiedades. asyncContext: los desarrolladores pueden proporcionar cualquier objeto al que quieran tener acceso en el método de devolución de llamada.'
           type:
@@ -63,33 +65,18 @@ items:
             \[Conjunto de API: vista previa de buzón\]
           type:
             - '(asyncResult: Office.AsyncResult<void>) => void'
-  - uid: outlook.Office.Categories.addAsync_1
-    summary: 'Agrega categorías a un elemento. Cada categoría debe estar en la lista de maestro de categorías en ese buzón de correo, por lo que debe tener un nombre único, pero varias categorías pueden usar el mismo color.'
+  - uid: outlook.Office.MasterCategories.addAsync_1
+    summary: 'Agrega categorías a la lista maestra en un buzón. Cada categoría debe tener un nombre único, pero varias categorías pueden usar el mismo color.'
     remarks: |-
-      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadWriteItem
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadWriteMailbox
 
       **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: redacción o lectura
 
       **Errores**:
 
-      - InvalidCategory: se proporcionaron categorías no válidas.
+      - DuplicateCategory: una de las categorías proporcionadas ya está en la lista principal de categorías.
 
-      #### <a name="examples"></a>Ejemplos
-
-      ```javascript
-      // Note: In order for you to successfully add a category,
-      // it must be in the mailbox categories master list.
-
-      var categoriesToAdd = ["Urgent!"];
-
-      Office.context.mailbox.item.categories.addAsync(categoriesToAdd, function (asyncResult) {
-          if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
-              console.log("Successfully added categories");
-          } else {
-              console.log("categories.addAsync call failed with error: " + asyncResult.error.message);
-          }
-      });
-      ```
+      - PermissionDenied: el usuario no tiene permiso para realizar esta acción.
     isPreview: true
     name: 'addAsync(categories, callback)'
     fullName: 'addAsync(categories, callback)'
@@ -97,16 +84,16 @@ items:
       - typeScript
     type: method
     syntax:
-      content: 'addAsync(categories: string[], callback: (asyncResult: Office.AsyncResult<void>) => void): void;'
+      content: 'addAsync(categories: CategoryDetails[], callback: (asyncResult: Office.AsyncResult<void>) => void): void;'
       return:
         type:
           - void
         description: ''
       parameters:
         - id: categories
-          description: Las categorías que se van a agregar al elemento.
+          description: Las categorías que se agregarán a la lista maestra en el buzón de correo.
           type:
-            - 'string[]'
+            - 'CategoryDetails[]'
         - id: callback
           description: |-
             Cuando el método finaliza, la función que se pasa en el parámetro callback se llama con un único parámetro de tipo Office. AsyncResult. Si se produce un error al agregar categorías, la propiedad asyncResult. error contendrá un código de error.
@@ -114,10 +101,10 @@ items:
             \[Conjunto de API: vista previa de buzón\]
           type:
             - '(asyncResult: Office.AsyncResult<void>) => void'
-  - uid: outlook.Office.Categories.getAsync
-    summary: Obtiene las categorías de un elemento.
+  - uid: outlook.Office.MasterCategories.getAsync
+    summary: Obtiene la lista principal de categorías en un buzón.
     remarks: |-
-      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadMailbox
 
       **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: redacción o lectura
     isPreview: true
@@ -144,28 +131,12 @@ items:
             \[Conjunto de API: vista previa de buzón\]
           type:
             - '(asyncResult: Office.AsyncResult<CategoryDetails[]>) => void'
-  - uid: outlook.Office.Categories.getAsync_1
-    summary: Obtiene las categorías de un elemento.
+  - uid: outlook.Office.MasterCategories.getAsync_1
+    summary: Obtiene la lista principal de categorías en un buzón.
     remarks: |-
-      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadMailbox
 
       **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: redacción o lectura
-
-      #### <a name="examples"></a>Ejemplos
-
-      ```javascript
-      Office.context.mailbox.item.categories.getAsync(function (asyncResult) {
-          if (asyncResult.status === Office.AsyncResultStatus.Failed) {
-              console.log("Action failed with error: " + asyncResult.error.message);
-          } else {
-              var categories = asyncResult.value;
-              console.log("Categories:");
-              categories.forEach(function (item) {
-                  console.log("-- " + JSON.stringify(item));
-              });
-          }
-      });
-      ```
     isPreview: true
     name: getAsync(callback)
     fullName: getAsync(callback)
@@ -186,12 +157,16 @@ items:
             \[Conjunto de API: vista previa de buzón\]
           type:
             - '(asyncResult: Office.AsyncResult<CategoryDetails[]>) => void'
-  - uid: outlook.Office.Categories.removeAsync
-    summary: Quita categorías de un elemento.
+  - uid: outlook.Office.MasterCategories.removeAsync
+    summary: Quita categorías de la lista general en un buzón.
     remarks: |-
-      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadWriteItem
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadWriteMailbox
 
       **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: redacción o lectura
+
+      **Errores**:
+
+      - PermissionDenied: el usuario no tiene permiso para realizar esta acción.
     isPreview: true
     name: 'removeAsync(categories, options, callback)'
     fullName: 'removeAsync(categories, options, callback)'
@@ -206,7 +181,7 @@ items:
         description: ''
       parameters:
         - id: categories
-          description: Las categorías que se quitarán del elemento.
+          description: Las categorías que se quitarán de la lista maestra en el buzón de correo.
           type:
             - 'string[]'
         - id: options
@@ -220,26 +195,16 @@ items:
             \[Conjunto de API: vista previa de buzón\]
           type:
             - '(asyncResult: Office.AsyncResult<void>) => void'
-  - uid: outlook.Office.Categories.removeAsync_1
-    summary: Quita categorías de un elemento.
+  - uid: outlook.Office.MasterCategories.removeAsync_1
+    summary: Quita categorías de la lista general en un buzón.
     remarks: |-
-      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadWriteItem
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadWriteMailbox
 
       **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: redacción o lectura
 
-      #### <a name="examples"></a>Ejemplos
+      **Errores**:
 
-      ```javascript
-      var categoriesToRemove = ["Urgent!"];
-
-      Office.context.mailbox.item.categories.removeAsync(categoriesToRemove, function (asyncResult) {
-          if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
-              console.log("Successfully removed categories");
-          } else {
-              console.log("categories.removeAsync call failed with error: " + asyncResult.error.message);
-          }
-      });
-      ```
+      - PermissionDenied: el usuario no tiene permiso para realizar esta acción.
     isPreview: true
     name: 'removeAsync(categories, callback)'
     fullName: 'removeAsync(categories, callback)'
@@ -254,7 +219,7 @@ items:
         description: ''
       parameters:
         - id: categories
-          description: Las categorías que se quitarán del elemento.
+          description: Las categorías que se quitarán de la lista maestra en el buzón de correo.
           type:
             - 'string[]'
         - id: callback

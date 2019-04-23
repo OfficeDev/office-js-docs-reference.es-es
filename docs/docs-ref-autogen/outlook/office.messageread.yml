@@ -379,7 +379,7 @@ items:
 
       Aunque el nivel de permiso mínimo para usar este método es Restricted, algunos tipos de entidad requieren ReadItem para tener acceso, como se especifica en la tabla siguiente.
 
-      <table> <tr> <th>Valor de entityType</th> <th>Tipo de objetos de la matriz devuelta</th> <th>Nivel de permiso requerido</th> </tr> <tr> <td>Address</td> <td>Cadena</td> <td>Restringido</td> </tr> <tr> <td>Contacto</td> <td>Contacto</td> <td>ReadItem</td> </tr> <tr> <td>EmailAddress</td> <td>Cadena</td> <td>ReadItem</td> </tr> <tr> <td>MeetingSuggestion</td> <td>MeetingSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>PhoneNumber</td> <td>PhoneNumber</td> <td>Restringido</td> </tr> <tr> <td>TaskSuggestion</td> <td>TaskSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>URL</td> <td>Cadena</td> <td>Restringido</td> </tr> </table>
+      <table> <tr> <th>Valor de entityType</th> <th>Tipo de objetos de la matriz devuelta</th> <th>Nivel de permiso requerido</th> </tr> <tr> <td>Address</td> <td>String</td> <td>Restricted</td> </tr> <tr> <td>Contact</td> <td>Contact</td> <td>ReadItem</td> </tr> <tr> <td>EmailAddress</td> <td>String</td> <td>ReadItem</td> </tr> <tr> <td>MeetingSuggestion</td> <td>MeetingSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>PhoneNumber</td> <td>PhoneNumber</td> <td>Restricted</td> </tr> <tr> <td>TaskSuggestion</td> <td>TaskSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>URL</td> <td>String</td> <td>Restricted</td> </tr> </table>
 
       #### <a name="examples"></a>Ejemplos
 
@@ -881,6 +881,18 @@ items:
       **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
 
       **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: mensaje leído
+
+      #### <a name="examples"></a>Ejemplos
+
+      ```javascript
+      Office.context.mailbox.item.categories.getAsync(function (asyncResult) {
+          if (asyncResult.status === Office.AsyncResultStatus.Failed) {
+              console.log("Action failed with error: " + asyncResult.error.message);
+          } else {
+              console.log("Categories: " + JSON.stringify(asyncResult.value));
+          }
+      });
+      ```
     isPreview: true
     name: categories
     fullName: categories
