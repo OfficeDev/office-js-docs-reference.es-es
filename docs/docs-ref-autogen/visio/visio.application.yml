@@ -14,6 +14,7 @@ items:
       - office.OfficeExtension.ClientObject
     package: visio
     children:
+      - visio.Visio.Application.context
       - visio.Visio.Application.load
       - visio.Visio.Application.load_1
       - visio.Visio.Application.load_2
@@ -24,6 +25,18 @@ items:
       - visio.Visio.Application.showToolbar_1
       - visio.Visio.Application.showToolbars
       - visio.Visio.Application.toJSON
+  - uid: visio.Visio.Application.context
+    summary: Contexto de la solicitud asociado al objeto. Esto conecta el proceso del complemento con el proceso de la aplicación host de Office.
+    name: context
+    fullName: context
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'context: RequestContext;'
+      return:
+        type:
+          - RequestContext
   - uid: visio.Visio.Application.load
     summary: 'Pone en cola un comando para cargar las propiedades especificadas del objeto. Antes de leer las propiedades, debe llamar a "context.sync()".'
     remarks: |-
@@ -229,6 +242,7 @@ items:
         type:
           - boolean
   - uid: visio.Visio.Application.toJSON
+    summary: 'Reemplaza el método JavaScript `toJSON()` para proporcionar un resultado más útil cuando se pasa un objeto API a`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama `toJSON` al método del objeto que se le pasa.) Mientras que el objeto Visio. Application original es un objeto API, `toJSON` el método devuelve un objeto JavaScript sin formato (escrito como`Visio.Interfaces.ApplicationData`<!-- -->) que contiene copias rasas de las propiedades secundarias cargadas del objeto original.'
     name: toJSON()
     fullName: toJSON()
     langs:
