@@ -16,14 +16,18 @@ items:
     children:
       - excel_release.Excel.Application.calculate
       - excel_release.Excel.Application.calculate_1
+      - excel_release.Excel.Application.calculationEngineVersion
       - excel_release.Excel.Application.calculationMode
+      - excel_release.Excel.Application.calculationState
       - excel_release.Excel.Application.context
+      - excel_release.Excel.Application.iterativeCalculation
       - excel_release.Excel.Application.load
       - excel_release.Excel.Application.load_1
       - excel_release.Excel.Application.load_2
       - excel_release.Excel.Application.set
       - excel_release.Excel.Application.set_1
       - excel_release.Excel.Application.suspendApiCalculationUntilNextSync
+      - excel_release.Excel.Application.suspendScreenUpdatingUntilNextSync
       - excel_release.Excel.Application.toJSON
   - uid: excel_release.Excel.Application.calculate
     summary: |-
@@ -82,6 +86,21 @@ items:
           description: Especifica el tipo de cálculo que se va a usar. Consulte Excel. CalculationType para obtener información detallada.
           type:
             - '"Recalculate" | "Full" | "FullRebuild"'
+  - uid: excel_release.Excel.Application.calculationEngineVersion
+    summary: |-
+      Devuelve la versión del motor de cálculo de Excel usada para la última actualización completa. Solo lectura.
+
+      \[[Conjunto de API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: calculationEngineVersion
+    fullName: calculationEngineVersion
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly calculationEngineVersion: number;'
+      return:
+        type:
+          - number
   - uid: excel_release.Excel.Application.calculationMode
     summary: |-
       Devuelve el modo de cálculo utilizado en el libro, tal y como se define en las constantes de Excel. CalculationMode. Los valores posibles son:`Automatic`<!-- -->, donde Excel controla la actualización de los cálculos;`AutomaticExceptTables`<!-- -->, donde Excel controla la actualización de cálculos, pero ignora los cambios en las tablas;`Manual`<!-- -->, donde se realiza el cálculo cuando el usuario lo solicita.
@@ -97,6 +116,21 @@ items:
       return:
         type:
           - Excel.CalculationMode | "Automatic" | "AutomaticExceptTables" | "Manual"
+  - uid: excel_release.Excel.Application.calculationState
+    summary: |-
+      Devuelve el estado de cálculo de la aplicación. Para obtener más información, vea Excel.CalculationState. Solo lectura.
+
+      \[[Conjunto de API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: calculationState
+    fullName: calculationState
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly calculationState: Excel.CalculationState | "Done" | "Calculating" | "Pending";'
+      return:
+        type:
+          - Excel.CalculationState | "Done" | "Calculating" | "Pending"
   - uid: excel_release.Excel.Application.context
     summary: Contexto de la solicitud asociado al objeto. Esto conecta el proceso del complemento con el proceso de la aplicación host de Office.
     name: context
@@ -109,6 +143,21 @@ items:
       return:
         type:
           - RequestContext
+  - uid: excel_release.Excel.Application.iterativeCalculation
+    summary: |-
+      Devuelve la configuración de cálculo iterativo. En Excel para Windows y Excel para Mac, la configuración se aplicará a la aplicación de Excel. En Excel online y Excel para otras plataformas, la configuración se aplicará al libro activo.
+
+      \[[Conjunto de API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: iterativeCalculation
+    fullName: iterativeCalculation
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly iterativeCalculation: Excel.IterativeCalculation;'
+      return:
+        type:
+          - excel.Excel.IterativeCalculation
   - uid: excel_release.Excel.Application.load
     summary: 'Pone en cola un comando para cargar las propiedades especificadas del objeto. Antes de leer las propiedades, debe llamar a "context.sync()".'
     remarks: |-
@@ -249,6 +298,54 @@ items:
         type:
           - void
         description: ''
+  - uid: excel_release.Excel.Application.suspendScreenUpdatingUntilNextSync
+    summary: |-
+      Suspende la actualización de pantalla hasta que se llama al siguiente "context.sync()".
+
+      \[[Conjunto de API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: suspendScreenUpdatingUntilNextSync()
+    fullName: suspendScreenUpdatingUntilNextSync()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'suspendScreenUpdatingUntilNextSync(): void;'
+      return:
+        type:
+          - void
+        description: |-
+
+
+          #### <a name="examples"></a>Ejemplos
+
+          ```typescript
+          await Excel.run(async (context) => {
+              const sheet = context.workbook.worksheets.getActiveWorksheet();
+              const rowCount = 500;
+              const columnCount = 20;
+
+              const startTime = Date.now();
+              console.log("Starting...");
+
+              if (pauseScreenPainting) {
+                  context.application.suspendScreenUpdatingUntilNextSync();
+              }
+
+              for (let i = 0; i < rowCount; i++) {
+                  for (let j = 0; j < columnCount; j++) {
+                      let cell = sheet.getCell(i, j);
+                      cell.values = [[i * j * Math.random()]];
+                      if (untrack) {
+                          cell.untrack();
+                      }
+                  }
+              }
+
+              await context.sync();
+
+              console.log(`Ending. Adding ${rowCount * columnCount} cells took ${Date.now() - startTime} milliseconds`);
+          });
+          ```
   - uid: excel_release.Excel.Application.toJSON
     summary: 'Reemplaza el método JavaScript `toJSON()` para proporcionar un resultado más útil cuando se pasa un objeto API a`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama `toJSON` al método del objeto que se le pasa.) Mientras que el objeto Excel. Application original es un objeto API, `toJSON` el método devuelve un objeto JavaScript sin formato (escrito como`Excel.Interfaces.ApplicationData`<!-- -->) que contiene copias rasas de las propiedades secundarias cargadas del objeto original.'
     name: toJSON()

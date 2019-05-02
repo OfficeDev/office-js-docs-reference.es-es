@@ -25,6 +25,8 @@ items:
       - excel_release.Excel.PivotField.set_1
       - excel_release.Excel.PivotField.showAllItems
       - excel_release.Excel.PivotField.sortByLabels
+      - excel_release.Excel.PivotField.sortByValues
+      - excel_release.Excel.PivotField.sortByValues_1
       - excel_release.Excel.PivotField.subtotals
       - excel_release.Excel.PivotField.toJSON
   - uid: excel_release.Excel.PivotField.context
@@ -210,22 +212,80 @@ items:
       Ordena el PivotField. Si se especifica una DataPivotHierarchy, entonces el orden se aplicará basándose en ella, si no, se basará en el propio PivotField.
 
       \[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-    name: sortByLabels(sortby)
-    fullName: sortByLabels(sortby)
+    name: sortByLabels(sortBy)
+    fullName: sortByLabels(sortBy)
     langs:
       - typeScript
     type: method
     syntax:
-      content: 'sortByLabels(sortby: SortBy): void;'
+      content: 'sortByLabels(sortBy: SortBy): void;'
       return:
         type:
           - void
         description: ''
       parameters:
-        - id: sortby
+        - id: sortBy
           description: Representa si la ordenación se realiza en orden ascendente o descendente.
           type:
             - SortBy
+  - uid: excel_release.Excel.PivotField.sortByValues
+    summary: |-
+      Ordena el campo de tabla dinámica por los valores especificados en un ámbito determinado. El ámbito define los valores específicos que se usarán para ordenar cuando hay varios valores de la misma DataPivotHierarchy.
+
+      \[[Conjunto de API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: 'sortByValues(sortBy, valuesHierarchy, pivotItemScope)'
+    fullName: 'sortByValues(sortBy, valuesHierarchy, pivotItemScope)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'sortByValues(sortBy: Excel.SortBy, valuesHierarchy: Excel.DataPivotHierarchy, pivotItemScope?: Array<PivotItem | string>): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: sortBy
+          description: Representa si la ordenación se realiza en orden ascendente o descendente.
+          type:
+            - excel.Excel.SortBy
+        - id: valuesHierarchy
+          description: Especifica la jerarquía de valores del eje de datos que se va a usar para la ordenación.
+          type:
+            - excel.Excel.DataPivotHierarchy
+        - id: pivotItemScope
+          description: 'Elementos que se deben usar para el ámbito de la ordenación. Estos serán los elementos que componen la fila o la columna por la que desea ordenar. Si se usa una cadena en lugar de un PivotItem, la cadena representa el identificador de PivotItem. Si no hay ningún elemento que no sea una jerarquía de datos en el eje que desea ordenar, puede estar vacío.'
+          type:
+            - Array<PivotItem | string>
+  - uid: excel_release.Excel.PivotField.sortByValues_1
+    summary: |-
+      Ordena el campo de tabla dinámica por los valores especificados en un ámbito determinado. El ámbito define los valores específicos que se usarán para ordenar cuando hay varios valores de la misma DataPivotHierarchy.
+
+      \[[Conjunto de API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: 'sortByValues(sortByString, valuesHierarchy, pivotItemScope)'
+    fullName: 'sortByValues(sortByString, valuesHierarchy, pivotItemScope)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'sortByValues(sortByString: "Ascending" | "Descending", valuesHierarchy: Excel.DataPivotHierarchy, pivotItemScope?: Array<PivotItem | string>): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: sortByString
+          description: Representa si la ordenación se realiza en orden ascendente o descendente.
+          type:
+            - '"Ascending" | "Descending"'
+        - id: valuesHierarchy
+          description: Especifica la jerarquía de valores del eje de datos que se va a usar para la ordenación.
+          type:
+            - excel.Excel.DataPivotHierarchy
+        - id: pivotItemScope
+          description: 'Elementos que se deben usar para el ámbito de la ordenación. Estos serán los elementos que componen la fila o la columna por la que desea ordenar. Si se usa una cadena en lugar de un PivotItem, la cadena representa el identificador de PivotItem. Si no hay ningún elemento que no sea una jerarquía de datos en el eje que desea ordenar, puede estar vacío.'
+          type:
+            - Array<PivotItem | string>
   - uid: excel_release.Excel.PivotField.subtotals
     summary: "Subtotales del PivotField.\t\n\n\\[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\\]"
     name: subtotals

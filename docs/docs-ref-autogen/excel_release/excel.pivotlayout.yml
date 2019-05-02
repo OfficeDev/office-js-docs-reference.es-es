@@ -14,22 +14,44 @@ items:
       - office.OfficeExtension.ClientObject
     package: excel_release
     children:
+      - excel_release.Excel.PivotLayout.autoFormat
       - excel_release.Excel.PivotLayout.context
       - excel_release.Excel.PivotLayout.getColumnLabelRange
       - excel_release.Excel.PivotLayout.getDataBodyRange
+      - excel_release.Excel.PivotLayout.getDataHierarchy
       - excel_release.Excel.PivotLayout.getFilterAxisRange
+      - excel_release.Excel.PivotLayout.getPivotItems
+      - excel_release.Excel.PivotLayout.getPivotItems_1
       - excel_release.Excel.PivotLayout.getRange
       - excel_release.Excel.PivotLayout.getRowLabelRange
       - excel_release.Excel.PivotLayout.layoutType
       - excel_release.Excel.PivotLayout.load
       - excel_release.Excel.PivotLayout.load_1
       - excel_release.Excel.PivotLayout.load_2
+      - excel_release.Excel.PivotLayout.preserveFormatting
       - excel_release.Excel.PivotLayout.set
       - excel_release.Excel.PivotLayout.set_1
+      - excel_release.Excel.PivotLayout.setAutoSortOnCell
+      - excel_release.Excel.PivotLayout.setAutoSortOnCell_1
       - excel_release.Excel.PivotLayout.showColumnGrandTotals
       - excel_release.Excel.PivotLayout.showRowGrandTotals
       - excel_release.Excel.PivotLayout.subtotalLocation
       - excel_release.Excel.PivotLayout.toJSON
+  - uid: excel_release.Excel.PivotLayout.autoFormat
+    summary: |-
+      Especifica si se aplica formato a los formatos de forma automática cuando se actualizan o cuando se mueven los campos
+
+      \[[Conjunto de API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: autoFormat
+    fullName: autoFormat
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'autoFormat: boolean;'
+      return:
+        type:
+          - boolean
   - uid: excel_release.Excel.PivotLayout.context
     summary: Contexto de la solicitud asociado al objeto. Esto conecta el proceso del complemento con el proceso de la aplicación host de Office.
     name: context
@@ -96,6 +118,27 @@ items:
               await context.sync();
           });
           ```
+  - uid: excel_release.Excel.PivotLayout.getDataHierarchy
+    summary: |-
+      Obtiene la DataHierarchy que se usa para calcular el valor de un intervalo especificado en la tabla dinámica.
+
+      \[[Conjunto de API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getDataHierarchy(cell)
+    fullName: getDataHierarchy(cell)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getDataHierarchy(cell: Range | string): Excel.DataPivotHierarchy;'
+      return:
+        type:
+          - excel.Excel.DataPivotHierarchy
+        description: Objeto DataPivotHierarchy que se usa para calcular el valor de la celda especificada.
+      parameters:
+        - id: cell
+          description: Una sola celda del cuerpo de datos de la tabla dinámica.
+          type:
+            - Range | string
   - uid: excel_release.Excel.PivotLayout.getFilterAxisRange
     summary: |-
       Devuelve el intervalo del área de filtro de la tabla dinámica.
@@ -112,6 +155,56 @@ items:
         type:
           - excel.Excel.Range
         description: ''
+  - uid: excel_release.Excel.PivotLayout.getPivotItems
+    summary: |-
+      Obtiene los elementos dinámicos de un eje que componen el valor de un intervalo especificado en la tabla dinámica.
+
+      \[[Conjunto de API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: 'getPivotItems(axis, cell)'
+    fullName: 'getPivotItems(axis, cell)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getPivotItems(axis: Excel.PivotAxis, cell: Range | string): OfficeExtension.ClientResult<Excel.PivotItem[]>;'
+      return:
+        type:
+          - 'OfficeExtension.ClientResult<Excel.PivotItem[]>'
+        description: Una colección de PivotItems que se usa para calcular los valores de la fila especificada.
+      parameters:
+        - id: axis
+          description: Eje del que se va a obtener el PivotItems. Debe ser "fila" o "columna".
+          type:
+            - excel.Excel.PivotAxis
+        - id: cell
+          description: Una sola celda del cuerpo de datos de la tabla dinámica.
+          type:
+            - Range | string
+  - uid: excel_release.Excel.PivotLayout.getPivotItems_1
+    summary: |-
+      Obtiene los elementos dinámicos de un eje que componen el valor de un intervalo especificado en la tabla dinámica.
+
+      \[[Conjunto de API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: 'getPivotItems(axisString, cell)'
+    fullName: 'getPivotItems(axisString, cell)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getPivotItems(axisString: "Unknown" | "Row" | "Column" | "Data" | "Filter", cell: Range | string): OfficeExtension.ClientResult<Excel.PivotItem[]>;'
+      return:
+        type:
+          - 'OfficeExtension.ClientResult<Excel.PivotItem[]>'
+        description: Una colección de PivotItems que se usa para calcular los valores de la fila especificada.
+      parameters:
+        - id: axisString
+          description: Eje del que se va a obtener el PivotItems. Debe ser "fila" o "columna".
+          type:
+            - '"Unknown" | "Row" | "Column" | "Data" | "Filter"'
+        - id: cell
+          description: Una sola celda del cuerpo de datos de la tabla dinámica.
+          type:
+            - Range | string
   - uid: excel_release.Excel.PivotLayout.getRange
     summary: |-
       Devuelve el intervalo en el que existe la tabla dinámica, excluyendo el área de filtro.
@@ -221,6 +314,21 @@ items:
           description: Donde propertyNamesAndPaths. Select es una cadena delimitada por comas que especifica las propiedades que se van a cargar y propertyNamesAndPaths. Expand es una cadena delimitada por comas que especifica las propiedades de navegación que se deben cargar.
           type:
             - '{ select?: string; expand?: string; }'
+  - uid: excel_release.Excel.PivotLayout.preserveFormatting
+    summary: |-
+      Especifica si el formato se conserva cuando el informe se actualiza o se vuelve a calcular por operaciones como la dinamización, ordenación o cambio de los elementos del campo de página.
+
+      \[[Conjunto de API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: preserveFormatting
+    fullName: preserveFormatting
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'preserveFormatting: boolean;'
+      return:
+        type:
+          - boolean
   - uid: excel_release.Excel.PivotLayout.set
     summary: Establece varias propiedades de un objeto al mismo tiempo. Puede pasar un objeto sin formato con las propiedades apropiadas o cualquier otro objeto de la API del mismo tipo.
     remarks: |-
@@ -265,9 +373,59 @@ items:
           description: ''
           type:
             - excel.Excel.PivotLayout
+  - uid: excel_release.Excel.PivotLayout.setAutoSortOnCell
+    summary: |-
+      Establece que la tabla dinámica se ordene automáticamente mediante la celda especificada para que seleccione automáticamente todos los criterios y el contexto necesarios. Esto tiene un comportamiento idéntico a la aplicación de una ordenación autoordenación desde la interfaz de usuario.
+
+      \[[Conjunto de API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: 'setAutoSortOnCell(cell, sortBy)'
+    fullName: 'setAutoSortOnCell(cell, sortBy)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'setAutoSortOnCell(cell: Range | string, sortBy: Excel.SortBy): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: cell
+          description: Una sola celda que se utiliza para obtener los criterios de para aplicar la ordenación.
+          type:
+            - Range | string
+        - id: sortBy
+          description: Dirección de la ordenación.
+          type:
+            - excel.Excel.SortBy
+  - uid: excel_release.Excel.PivotLayout.setAutoSortOnCell_1
+    summary: |-
+      Establece que la tabla dinámica se ordene automáticamente mediante la celda especificada para que seleccione automáticamente todos los criterios y el contexto necesarios. Esto tiene un comportamiento idéntico a la aplicación de una ordenación autoordenación desde la interfaz de usuario.
+
+      \[[Conjunto de API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: 'setAutoSortOnCell(cell, sortByString)'
+    fullName: 'setAutoSortOnCell(cell, sortByString)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'setAutoSortOnCell(cell: Range | string, sortByString: "Ascending" | "Descending"): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: cell
+          description: Una sola celda que se utiliza para obtener los criterios de para aplicar la ordenación.
+          type:
+            - Range | string
+        - id: sortByString
+          description: Dirección de la ordenación.
+          type:
+            - '"Ascending" | "Descending"'
   - uid: excel_release.Excel.PivotLayout.showColumnGrandTotals
     summary: |-
-      True si el informe de tabla dinámica muestra el total general de las columnas.
+      Especifica si el informe de tabla dinámica muestra el total general de las columnas.
 
       \[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: showColumnGrandTotals
@@ -282,7 +440,7 @@ items:
           - boolean
   - uid: excel_release.Excel.PivotLayout.showRowGrandTotals
     summary: |-
-      True si el informe de tabla dinámica muestra el total general de las filas.
+      Especifica si el informe de tabla dinámica muestra el total general de las filas.
 
       \[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: showRowGrandTotals
