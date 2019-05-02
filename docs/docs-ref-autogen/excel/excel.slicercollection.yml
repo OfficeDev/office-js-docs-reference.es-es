@@ -42,7 +42,22 @@ items:
       return:
         type:
           - excel.Excel.Slicer
-        description: Nueva segmentación de los segmentos.
+        description: |-
+          Nueva segmentación de los segmentos.
+
+          #### <a name="examples"></a>Ejemplos
+
+          ```typescript
+          await Excel.run(async (context) => {
+              const sheet = context.workbook.worksheets.getItem("Pivot");
+              const slicer = sheet.slicers.add(
+                  "Farm Sales", /* The slicer data source. For PivotTables, this can be the PivotTable object reference or name. */
+                  "Type" /* The field in the data source to filter by. For PivotTables, this can be a PivotField object reference or ID. */
+              );
+              slicer.name = "Fruit Slicer";
+              await context.sync();
+          });
+          ```
       parameters:
         - id: slicerSource
           description: 'El origen de datos en el que se basará la nueva segmentación de datos. Puede ser un objeto de tabla dinámica, un objeto Table o una cadena. Cuando se pasa un objeto PivotTable, el origen de datos es el origen del objeto PivotTable. Cuando se pasa un objeto Table, el origen de datos es el objeto Table. Cuando se pasa una cadena, se interpreta como el nombre o el identificador de una tabla dinámica o tabla.'
@@ -102,7 +117,22 @@ items:
       return:
         type:
           - excel.Excel.Slicer
-        description: ''
+        description: |-
+
+
+          #### <a name="examples"></a>Ejemplos
+
+          ```typescript
+          await Excel.run(async (context) => {
+              const slicer = context.workbook.slicers.getItem("Fruit Slicer");
+              slicer.caption = "Fruit Types";
+              slicer.left = 395;
+              slicer.top = 15;
+              slicer.height = 135;
+              slicer.width = 150;
+              await context.sync();
+          });
+          ```
       parameters:
         - id: key
           description: El nombre o el identificador de la segmentación de la segmentación.
