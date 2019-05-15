@@ -17,6 +17,10 @@ items:
       - word.Word.DocumentCreated.body
       - word.Word.DocumentCreated.contentControls
       - word.Word.DocumentCreated.context
+      - word.Word.DocumentCreated.customXmlParts
+      - word.Word.DocumentCreated.deleteBookmark
+      - word.Word.DocumentCreated.getBookmarkRange
+      - word.Word.DocumentCreated.getBookmarkRangeOrNullObject
       - word.Word.DocumentCreated.load
       - word.Word.DocumentCreated.load_1
       - word.Word.DocumentCreated.load_2
@@ -27,6 +31,7 @@ items:
       - word.Word.DocumentCreated.sections
       - word.Word.DocumentCreated.set
       - word.Word.DocumentCreated.set_1
+      - word.Word.DocumentCreated.settings
       - word.Word.DocumentCreated.toJSON
       - word.Word.DocumentCreated.track
       - word.Word.DocumentCreated.untrack
@@ -35,6 +40,7 @@ items:
       Obtiene el objeto de cuerpo del documento. El cuerpo es el texto excluidos los encabezados, los pies de página, las notas al pie, los cuadros de texto, etc. Solo lectura.
 
       \[[Conjunto de API: WordApiHiddenDocument 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    isPreview: true
     name: body
     fullName: body
     langs:
@@ -50,6 +56,7 @@ items:
       Obtiene la colección de objetos de control de contenido en el documento. Esto incluye los controles de contenido en el cuerpo de los documentos, los encabezados, los pies de página, los cuadros de texto, etc. Solo lectura.
 
       \[[Conjunto de API: WordApiHiddenDocument 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    isPreview: true
     name: contentControls
     fullName: contentControls
     langs:
@@ -72,6 +79,88 @@ items:
       return:
         type:
           - RequestContext
+  - uid: word.Word.DocumentCreated.customXmlParts
+    summary: |-
+      Obtiene los elementos XML personalizados del documento. Solo lectura.
+
+      \[[Conjunto de API: WordApiHiddenDocument 1,4](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    isPreview: true
+    name: customXmlParts
+    fullName: customXmlParts
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly customXmlParts: Word.CustomXmlPartCollection;'
+      return:
+        type:
+          - Word.CustomXmlPartCollection
+  - uid: word.Word.DocumentCreated.deleteBookmark
+    summary: |-
+      Elimina del documento un marcador, si existe.
+
+      \[[Conjunto de API: WordApiHiddenDocument 1,4](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    isPreview: true
+    name: deleteBookmark(name)
+    fullName: deleteBookmark(name)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'deleteBookmark(name: string): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: name
+          description: 'Necesario. Nombre del marcador, que no distingue mayúsculas de minúsculas.'
+          type:
+            - string
+  - uid: word.Word.DocumentCreated.getBookmarkRange
+    summary: |-
+      Obtiene el intervalo de un marcador. Produce una excepción si no existe el marcador.
+
+      \[[Conjunto de API: WordApiHiddenDocument 1,4](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    isPreview: true
+    name: getBookmarkRange(name)
+    fullName: getBookmarkRange(name)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getBookmarkRange(name: string): Word.Range;'
+      return:
+        type:
+          - Word.Range
+        description: ''
+      parameters:
+        - id: name
+          description: 'Necesario. Nombre del marcador, que no distingue mayúsculas de minúsculas.'
+          type:
+            - string
+  - uid: word.Word.DocumentCreated.getBookmarkRangeOrNullObject
+    summary: |-
+      Obtiene el intervalo de un marcador. Devuelve un objeto nulo si el marcador no existe.
+
+      \[[Conjunto de API: WordApiHiddenDocument 1,4](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    isPreview: true
+    name: getBookmarkRangeOrNullObject(name)
+    fullName: getBookmarkRangeOrNullObject(name)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getBookmarkRangeOrNullObject(name: string): Word.Range;'
+      return:
+        type:
+          - Word.Range
+        description: ''
+      parameters:
+        - id: name
+          description: 'Necesario. Nombre del marcador, que no distingue mayúsculas de minúsculas.'
+          type:
+            - string
   - uid: word.Word.DocumentCreated.load
     summary: 'Pone en cola un comando para cargar las propiedades especificadas del objeto. Antes de leer las propiedades, debe llamar a "context.sync()".'
     remarks: |-
@@ -155,6 +244,7 @@ items:
       Obtiene las propiedades del documento. Solo lectura.
 
       \[[Conjunto de API: WordApiHiddenDocument 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    isPreview: true
     name: properties
     fullName: properties
     langs:
@@ -170,6 +260,7 @@ items:
       Guarda el documento. Usará la convención de nomenclatura de archivos predeterminada de Word si el documento no se guardó anteriormente.
 
       \[[Conjunto de API: WordApiHiddenDocument 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    isPreview: true
     name: save()
     fullName: save()
     langs:
@@ -186,6 +277,7 @@ items:
       Indica si se guardaron los cambios en el documento. Un valor de true indica que el documento no cambió desde que se guardó. Solo lectura.
 
       \[[Conjunto de API: WordApiHiddenDocument 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    isPreview: true
     name: saved
     fullName: saved
     langs:
@@ -201,6 +293,7 @@ items:
       Obtiene la colección de objetos Section del documento. Solo lectura.
 
       \[[Conjunto de API: WordApiHiddenDocument 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    isPreview: true
     name: sections
     fullName: sections
     langs:
@@ -255,6 +348,22 @@ items:
           description: ''
           type:
             - word.Word.DocumentCreated
+  - uid: word.Word.DocumentCreated.settings
+    summary: |-
+      Obtiene la configuración del complemento en el documento. Solo lectura.
+
+      \[[Conjunto de API: WordApiHiddenDocument 1,4](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    isPreview: true
+    name: settings
+    fullName: settings
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly settings: Word.SettingCollection;'
+      return:
+        type:
+          - Word.SettingCollection
   - uid: word.Word.DocumentCreated.toJSON
     summary: 'Reemplaza el método JavaScript `toJSON()` para proporcionar un resultado más útil cuando se pasa un objeto API a`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama `toJSON` al método del objeto que se le pasa.) Mientras que el objeto Word. DocumentCreated original es un objeto API, `toJSON` el método devuelve un objeto JavaScript sin formato (escrito como`Word.Interfaces.DocumentCreatedData`<!-- -->) que contiene copias rasas de las propiedades secundarias cargadas del objeto original.'
     name: toJSON()

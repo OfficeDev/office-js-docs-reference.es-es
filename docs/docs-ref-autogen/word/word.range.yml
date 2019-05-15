@@ -22,6 +22,7 @@ items:
       - word.Word.Range.expandTo
       - word.Word.Range.expandToOrNullObject
       - word.Word.Range.font
+      - word.Word.Range.getBookmarks
       - word.Word.Range.getHtml
       - word.Word.Range.getHyperlinkRanges
       - word.Word.Range.getNextTextRange
@@ -32,6 +33,7 @@ items:
       - word.Word.Range.getTextRanges
       - word.Word.Range.hyperlink
       - word.Word.Range.inlinePictures
+      - word.Word.Range.insertBookmark
       - word.Word.Range.insertBreak
       - word.Word.Range.insertBreak_1
       - word.Word.Range.insertContentControl
@@ -139,7 +141,7 @@ items:
         description: ''
       parameters:
         - id: range
-          description: Obligatorio. Intervalo que se va a comparar con este intervalo.
+          description: Necesario. Intervalo que se va a comparar con este intervalo.
           type:
             - Word.Range
   - uid: word.Word.Range.contentControls
@@ -231,7 +233,7 @@ items:
         description: ''
       parameters:
         - id: range
-          description: Obligatorio. Otro intervalo.
+          description: Necesario. Otro intervalo.
           type:
             - Word.Range
   - uid: word.Word.Range.expandToOrNullObject
@@ -252,7 +254,7 @@ items:
         description: ''
       parameters:
         - id: range
-          description: Obligatorio. Otro intervalo.
+          description: Necesario. Otro intervalo.
           type:
             - Word.Range
   - uid: word.Word.Range.font
@@ -270,6 +272,32 @@ items:
       return:
         type:
           - word.Word.Font
+  - uid: word.Word.Range.getBookmarks
+    summary: |-
+      Obtiene los nombres de todos los marcadores o superpuestos del intervalo. Un marcador se oculta si su nombre comienza por el carácter de subrayado.
+
+      \[[Conjunto de API: versión beta de WordApi (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    isPreview: true
+    name: 'getBookmarks(includeHidden, includeAdjacent)'
+    fullName: 'getBookmarks(includeHidden, includeAdjacent)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getBookmarks(includeHidden?: boolean, includeAdjacent?: boolean): OfficeExtension.ClientResult<string[]>;'
+      return:
+        type:
+          - 'OfficeExtension.ClientResult<string[]>'
+        description: ''
+      parameters:
+        - id: includeHidden
+          description: 'Opcional. Indica si se van a incluir marcadores ocultos. El valor predeterminado es false, que indica que se excluyen los marcadores ocultos.'
+          type:
+            - boolean
+        - id: includeAdjacent
+          description: 'Opcional. Indica si se van a incluir marcadores adyacentes al rango. El valor predeterminado es false, que indica que se excluyen los marcadores adyacentes.'
+          type:
+            - boolean
   - uid: word.Word.Range.getHtml
     summary: |-
       Obtiene una representación HTML del objeto Range. Cuando se representa en una página web o visor de HTML, el formato será una coincidencia aproximada, pero no exacta, para el formato del documento. Este método no devuelve el mismo HTML exacto para el mismo documento en diferentes plataformas (Windows, Mac, Word online, etc.). Si necesita fidelidad exacta, o coherencia entre plataformas, use `Range.getOoxml()` y convierta el XML devuelto en HTML.
@@ -348,7 +376,7 @@ items:
         description: ''
       parameters:
         - id: endingMarks
-          description: Obligatorio. Los signos de puntuación u otras marcas de fin como una matriz de cadenas.
+          description: Necesario. Los signos de puntuación u otras marcas de fin como una matriz de cadenas.
           type:
             - 'string[]'
         - id: trimSpacing
@@ -373,7 +401,7 @@ items:
         description: ''
       parameters:
         - id: endingMarks
-          description: Obligatorio. Los signos de puntuación u otras marcas de fin como una matriz de cadenas.
+          description: Necesario. Los signos de puntuación u otras marcas de fin como una matriz de cadenas.
           type:
             - 'string[]'
         - id: trimSpacing
@@ -515,7 +543,7 @@ items:
           ```
       parameters:
         - id: endingMarks
-          description: Obligatorio. Los signos de puntuación u otras marcas de fin como una matriz de cadenas.
+          description: Necesario. Los signos de puntuación u otras marcas de fin como una matriz de cadenas.
           type:
             - 'string[]'
         - id: trimSpacing
@@ -552,6 +580,28 @@ items:
       return:
         type:
           - word.Word.InlinePictureCollection
+  - uid: word.Word.Range.insertBookmark
+    summary: |-
+      Inserta un marcador en el rango. Si existe un marcador del mismo nombre en algún lugar, se elimina primero.
+
+      \[[Conjunto de API: versión beta de WordApi (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    isPreview: true
+    name: insertBookmark(name)
+    fullName: insertBookmark(name)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'insertBookmark(name: string): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: name
+          description: 'Necesario. Nombre del marcador, que no distingue mayúsculas de minúsculas. Si el nombre empieza con un carácter de subrayado, el marcador es uno oculto.'
+          type:
+            - string
   - uid: word.Word.Range.insertBreak
     summary: |-
       Inserta un salto en la ubicación especificada del documento principal. El valor de insertLocation puede ser 'Before' o 'After'.
@@ -570,7 +620,7 @@ items:
         description: ''
       parameters:
         - id: breakType
-          description: Obligatorio. Tipo de salto que se va a agregar.
+          description: Necesario. Tipo de salto que se va a agregar.
           type:
             - word.Word.BreakType
         - id: insertLocation
@@ -623,7 +673,7 @@ items:
           ```
       parameters:
         - id: breakTypeString
-          description: Obligatorio. Tipo de salto que se va a agregar.
+          description: Necesario. Tipo de salto que se va a agregar.
           type:
             - '"Page" | "Next" | "SectionNext" | "SectionContinuous" | "SectionEven" | "SectionOdd" | "Line"'
         - id: insertLocation
@@ -749,11 +799,11 @@ items:
           ```
       parameters:
         - id: base64File
-          description: Obligatorio. El contenido codificado en Base64 de un archivo. docx.
+          description: Necesario. El contenido codificado en Base64 de un archivo. docx.
           type:
             - string
         - id: insertLocation
-          description: 'Obligatorio. El valor puede ser "Replace", "Start", "End", "Before" o "after".'
+          description: 'Necesario. El valor puede ser "Replace", "Start", "End", "Before" o "after".'
           type:
             - Word.InsertLocation
   - uid: word.Word.Range.insertFileFromBase64_1
@@ -774,11 +824,11 @@ items:
         description: ''
       parameters:
         - id: base64File
-          description: Obligatorio. El contenido codificado en Base64 de un archivo. docx.
+          description: Necesario. El contenido codificado en Base64 de un archivo. docx.
           type:
             - string
         - id: insertLocationString
-          description: 'Obligatorio. El valor puede ser "Replace", "Start", "End", "Before" o "after".'
+          description: 'Necesario. El valor puede ser "Replace", "Start", "End", "Before" o "after".'
           type:
             - '"Before" | "After" | "Start" | "End" | "Replace"'
   - uid: word.Word.Range.insertHtml
@@ -827,11 +877,11 @@ items:
           ```
       parameters:
         - id: html
-          description: Obligatorio. El código HTML que se va a insertar.
+          description: Necesario. El código HTML que se va a insertar.
           type:
             - string
         - id: insertLocation
-          description: 'Obligatorio. El valor puede ser "Replace", "Start", "End", "Before" o "after".'
+          description: 'Necesario. El valor puede ser "Replace", "Start", "End", "Before" o "after".'
           type:
             - Word.InsertLocation
   - uid: word.Word.Range.insertHtml_1
@@ -852,11 +902,11 @@ items:
         description: ''
       parameters:
         - id: html
-          description: Obligatorio. El código HTML que se va a insertar.
+          description: Necesario. El código HTML que se va a insertar.
           type:
             - string
         - id: insertLocationString
-          description: 'Obligatorio. El valor puede ser "Replace", "Start", "End", "Before" o "after".'
+          description: 'Necesario. El valor puede ser "Replace", "Start", "End", "Before" o "after".'
           type:
             - '"Before" | "After" | "Start" | "End" | "Replace"'
   - uid: word.Word.Range.insertInlinePictureFromBase64
@@ -877,11 +927,11 @@ items:
         description: ''
       parameters:
         - id: base64EncodedImage
-          description: Obligatorio. La imagen codificada en Base64 que se va a insertar.
+          description: Necesario. La imagen codificada en Base64 que se va a insertar.
           type:
             - string
         - id: insertLocation
-          description: 'Obligatorio. El valor puede ser "Replace", "Start", "End", "Before" o "after".'
+          description: 'Necesario. El valor puede ser "Replace", "Start", "End", "Before" o "after".'
           type:
             - Word.InsertLocation
   - uid: word.Word.Range.insertInlinePictureFromBase64_1
@@ -902,11 +952,11 @@ items:
         description: ''
       parameters:
         - id: base64EncodedImage
-          description: Obligatorio. La imagen codificada en Base64 que se va a insertar.
+          description: Necesario. La imagen codificada en Base64 que se va a insertar.
           type:
             - string
         - id: insertLocationString
-          description: 'Obligatorio. El valor puede ser "Replace", "Start", "End", "Before" o "after".'
+          description: 'Necesario. El valor puede ser "Replace", "Start", "End", "Before" o "after".'
           type:
             - '"Before" | "After" | "Start" | "End" | "Replace"'
   - uid: word.Word.Range.insertOoxml
@@ -958,11 +1008,11 @@ items:
           ```
       parameters:
         - id: ooxml
-          description: Obligatorio. OOXML que se va a insertar.
+          description: Necesario. OOXML que se va a insertar.
           type:
             - string
         - id: insertLocation
-          description: 'Obligatorio. El valor puede ser "Replace", "Start", "End", "Before" o "after".'
+          description: 'Necesario. El valor puede ser "Replace", "Start", "End", "Before" o "after".'
           type:
             - Word.InsertLocation
   - uid: word.Word.Range.insertOoxml_1
@@ -983,11 +1033,11 @@ items:
         description: ''
       parameters:
         - id: ooxml
-          description: Obligatorio. OOXML que se va a insertar.
+          description: Necesario. OOXML que se va a insertar.
           type:
             - string
         - id: insertLocationString
-          description: 'Obligatorio. El valor puede ser "Replace", "Start", "End", "Before" o "after".'
+          description: 'Necesario. El valor puede ser "Replace", "Start", "End", "Before" o "after".'
           type:
             - '"Before" | "After" | "Start" | "End" | "Replace"'
   - uid: word.Word.Range.insertParagraph
@@ -1036,11 +1086,11 @@ items:
           ```
       parameters:
         - id: paragraphText
-          description: Obligatorio. Texto de párrafo que se va a insertar.
+          description: Necesario. Texto de párrafo que se va a insertar.
           type:
             - string
         - id: insertLocation
-          description: Obligatorio. El valor puede ser "Before" o "After".
+          description: Necesario. El valor puede ser "Before" o "After".
           type:
             - Word.InsertLocation
   - uid: word.Word.Range.insertParagraph_1
@@ -1061,11 +1111,11 @@ items:
         description: ''
       parameters:
         - id: paragraphText
-          description: Obligatorio. Texto de párrafo que se va a insertar.
+          description: Necesario. Texto de párrafo que se va a insertar.
           type:
             - string
         - id: insertLocationString
-          description: Obligatorio. El valor puede ser "Before" o "After".
+          description: Necesario. El valor puede ser "Before" o "After".
           type:
             - '"Before" | "After" | "Start" | "End" | "Replace"'
   - uid: word.Word.Range.insertTable
@@ -1086,7 +1136,7 @@ items:
         description: ''
       parameters:
         - id: rowCount
-          description: Obligatorio. Número de filas de la tabla.
+          description: Necesario. Número de filas de la tabla.
           type:
             - number
         - id: columnCount
@@ -1094,7 +1144,7 @@ items:
           type:
             - number
         - id: insertLocation
-          description: Obligatorio. El valor puede ser "Before" o "After".
+          description: Necesario. El valor puede ser "Before" o "After".
           type:
             - Word.InsertLocation
         - id: values
@@ -1103,7 +1153,7 @@ items:
             - 'string[][]'
   - uid: word.Word.Range.insertTable_1
     summary: |-
-      Inserta una tabla con el número especificado de filas y columnas. El valor insertLocation puede ser 'Before' o 'After'.
+      Inserta una tabla con el número especificado de filas y columnas. El valor de insertLocation puede ser 'Before' o 'After'.
 
       \[[Conjunto de API: WordApi 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
     name: 'insertTable(rowCount, columnCount, insertLocationString, values)'
@@ -1119,7 +1169,7 @@ items:
         description: ''
       parameters:
         - id: rowCount
-          description: Obligatorio. Número de filas de la tabla.
+          description: Necesario. Número de filas de la tabla.
           type:
             - number
         - id: columnCount
@@ -1127,7 +1177,7 @@ items:
           type:
             - number
         - id: insertLocationString
-          description: Obligatorio. El valor puede ser "Before" o "After".
+          description: Necesario. El valor puede ser "Before" o "After".
           type:
             - '"Before" | "After" | "Start" | "End" | "Replace"'
         - id: values
@@ -1180,11 +1230,11 @@ items:
           ```
       parameters:
         - id: text
-          description: Obligatorio. Texto que se va a insertar.
+          description: Necesario. Texto que se va a insertar.
           type:
             - string
         - id: insertLocation
-          description: 'Obligatorio. El valor puede ser "Replace", "Start", "End", "Before" o "after".'
+          description: 'Necesario. El valor puede ser "Replace", "Start", "End", "Before" o "after".'
           type:
             - Word.InsertLocation
   - uid: word.Word.Range.insertText_1
@@ -1205,11 +1255,11 @@ items:
         description: ''
       parameters:
         - id: text
-          description: Obligatorio. Texto que se va a insertar.
+          description: Necesario. Texto que se va a insertar.
           type:
             - string
         - id: insertLocationString
-          description: 'Obligatorio. El valor puede ser "Replace", "Start", "End", "Before" o "after".'
+          description: 'Necesario. El valor puede ser "Replace", "Start", "End", "Before" o "after".'
           type:
             - '"Before" | "After" | "Start" | "End" | "Replace"'
   - uid: word.Word.Range.intersectWith
@@ -1230,7 +1280,7 @@ items:
         description: ''
       parameters:
         - id: range
-          description: Obligatorio. Otro intervalo.
+          description: Necesario. Otro intervalo.
           type:
             - Word.Range
   - uid: word.Word.Range.intersectWithOrNullObject
@@ -1251,7 +1301,7 @@ items:
         description: ''
       parameters:
         - id: range
-          description: Obligatorio. Otro intervalo.
+          description: Necesario. Otro intervalo.
           type:
             - Word.Range
   - uid: word.Word.Range.isEmpty
@@ -1644,7 +1694,7 @@ items:
         description: ''
       parameters:
         - id: delimiters
-          description: Obligatorio. Los delimitadores como una matriz de cadenas.
+          description: Necesario. Los delimitadores como una matriz de cadenas.
           type:
             - 'string[]'
         - id: multiParagraphs

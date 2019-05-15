@@ -15,7 +15,9 @@ items:
     package: word
     children:
       - word.Word.List.context
+      - word.Word.List.getLevelFont
       - word.Word.List.getLevelParagraphs
+      - word.Word.List.getLevelPicture
       - word.Word.List.getLevelString
       - word.Word.List.id
       - word.Word.List.insertParagraph
@@ -26,6 +28,7 @@ items:
       - word.Word.List.load_1
       - word.Word.List.load_2
       - word.Word.List.paragraphs
+      - word.Word.List.resetLevelFont
       - word.Word.List.setLevelAlignment
       - word.Word.List.setLevelAlignment_1
       - word.Word.List.setLevelBullet
@@ -33,6 +36,7 @@ items:
       - word.Word.List.setLevelIndents
       - word.Word.List.setLevelNumbering
       - word.Word.List.setLevelNumbering_1
+      - word.Word.List.setLevelPicture
       - word.Word.List.setLevelStartingNumber
       - word.Word.List.toJSON
       - word.Word.List.track
@@ -49,6 +53,28 @@ items:
       return:
         type:
           - RequestContext
+  - uid: word.Word.List.getLevelFont
+    summary: |-
+      Obtiene la fuente de la viñeta, el número o la imagen en el nivel especificado de la lista.
+
+      \[[Conjunto de API: versión beta de WordApi (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    isPreview: true
+    name: getLevelFont(level)
+    fullName: getLevelFont(level)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getLevelFont(level: number): Word.Font;'
+      return:
+        type:
+          - word.Word.Font
+        description: ''
+      parameters:
+        - id: level
+          description: Necesario. El nivel de la lista.
+          type:
+            - number
   - uid: word.Word.List.getLevelParagraphs
     summary: |-
       Obtiene los párrafos que se producen en el nivel especificado de la lista.
@@ -67,7 +93,29 @@ items:
         description: ''
       parameters:
         - id: level
-          description: Obligatorio. El nivel de la lista.
+          description: Necesario. El nivel de la lista.
+          type:
+            - number
+  - uid: word.Word.List.getLevelPicture
+    summary: |-
+      Obtiene la representación de cadena codificada en Base64 de la imagen en el nivel especificado de la lista.
+
+      \[[Conjunto de API: versión beta de WordApi (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    isPreview: true
+    name: getLevelPicture(level)
+    fullName: getLevelPicture(level)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getLevelPicture(level: number): OfficeExtension.ClientResult<string>;'
+      return:
+        type:
+          - OfficeExtension.ClientResult<string>
+        description: ''
+      parameters:
+        - id: level
+          description: Necesario. El nivel de la lista.
           type:
             - number
   - uid: word.Word.List.getLevelString
@@ -88,7 +136,7 @@ items:
         description: ''
       parameters:
         - id: level
-          description: Obligatorio. El nivel de la lista.
+          description: Necesario. El nivel de la lista.
           type:
             - number
   - uid: word.Word.List.id
@@ -128,7 +176,7 @@ items:
           type:
             - string
         - id: insertLocation
-          description: 'Obligatorio. El valor puede ser "Start", "End", "Before" o "after".'
+          description: 'Necesario. El valor puede ser "Start", "End", "Before" o "after".'
           type:
             - Word.InsertLocation
   - uid: word.Word.List.insertParagraph_1
@@ -153,7 +201,7 @@ items:
           type:
             - string
         - id: insertLocationString
-          description: 'Obligatorio. El valor puede ser "Start", "End", "Before" o "after".'
+          description: 'Necesario. El valor puede ser "Start", "End", "Before" o "after".'
           type:
             - '"Before" | "After" | "Start" | "End" | "Replace"'
   - uid: word.Word.List.levelExistences
@@ -263,6 +311,32 @@ items:
       return:
         type:
           - Word.ParagraphCollection
+  - uid: word.Word.List.resetLevelFont
+    summary: |-
+      Restablece la fuente de la viñeta, el número o la imagen en el nivel especificado de la lista.
+
+      \[[Conjunto de API: versión beta de WordApi (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    isPreview: true
+    name: 'resetLevelFont(level, resetFontName)'
+    fullName: 'resetLevelFont(level, resetFontName)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'resetLevelFont(level: number, resetFontName?: boolean): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: level
+          description: Necesario. El nivel de la lista.
+          type:
+            - number
+        - id: resetFontName
+          description: 'Opcional. Indica si se va a restablecer el nombre de la fuente. El valor predeterminado es false, que indica que el nombre de la fuente se mantiene sin cambios.'
+          type:
+            - boolean
   - uid: word.Word.List.setLevelAlignment
     summary: |-
       Obtiene la alineación de la viñeta, el número o la imagen en el nivel especificado de la lista.
@@ -281,11 +355,11 @@ items:
         description: ''
       parameters:
         - id: level
-          description: Obligatorio. El nivel de la lista.
+          description: Necesario. El nivel de la lista.
           type:
             - number
         - id: alignment
-          description: 'Obligatorio. La alineación del nivel que puede ser "left", "centered" o "Right".'
+          description: 'Necesario. La alineación del nivel que puede ser "left", "centered" o "Right".'
           type:
             - word.Word.Alignment
   - uid: word.Word.List.setLevelAlignment_1
@@ -306,11 +380,11 @@ items:
         description: ''
       parameters:
         - id: level
-          description: Obligatorio. El nivel de la lista.
+          description: Necesario. El nivel de la lista.
           type:
             - number
         - id: alignmentString
-          description: 'Obligatorio. La alineación del nivel que puede ser "left", "centered" o "Right".'
+          description: 'Necesario. La alineación del nivel que puede ser "left", "centered" o "Right".'
           type:
             - '"Mixed" | "Unknown" | "Left" | "Centered" | "Right" | "Justified"'
   - uid: word.Word.List.setLevelBullet
@@ -331,11 +405,11 @@ items:
         description: ''
       parameters:
         - id: level
-          description: Obligatorio. El nivel de la lista.
+          description: Necesario. El nivel de la lista.
           type:
             - number
         - id: listBullet
-          description: Obligatorio. La viñeta.
+          description: Necesario. La viñeta.
           type:
             - word.Word.ListBullet
         - id: charCode
@@ -364,11 +438,11 @@ items:
         description: ''
       parameters:
         - id: level
-          description: Obligatorio. El nivel de la lista.
+          description: Necesario. El nivel de la lista.
           type:
             - number
         - id: listBulletString
-          description: Obligatorio. La viñeta.
+          description: Necesario. La viñeta.
           type:
             - '"Custom" | "Solid" | "Hollow" | "Square" | "Diamonds" | "Arrow" | "Checkmark"'
         - id: charCode
@@ -397,15 +471,15 @@ items:
         description: ''
       parameters:
         - id: level
-          description: Obligatorio. El nivel de la lista.
+          description: Necesario. El nivel de la lista.
           type:
             - number
         - id: textIndent
-          description: Obligatorio. Sangría de texto en puntos. Es la misma que la sangría izquierda del párrafo.
+          description: Necesario. Sangría de texto en puntos. Es la misma que la sangría izquierda del párrafo.
           type:
             - number
         - id: bulletNumberPictureIndent
-          description: 'Obligatorio. Sangría relativa, en puntos, de la viñeta, el número o la imagen. Es el mismo que la sangría de primera línea de párrafo.'
+          description: 'Necesario. Sangría relativa, en puntos, de la viñeta, el número o la imagen. Es el mismo que la sangría de primera línea de párrafo.'
           type:
             - number
   - uid: word.Word.List.setLevelNumbering
@@ -426,11 +500,11 @@ items:
         description: ''
       parameters:
         - id: level
-          description: Obligatorio. El nivel de la lista.
+          description: Necesario. El nivel de la lista.
           type:
             - number
         - id: listNumbering
-          description: Obligatorio. El formato ordinal.
+          description: Necesario. El formato ordinal.
           type:
             - word.Word.ListNumbering
         - id: formatString
@@ -455,17 +529,43 @@ items:
         description: ''
       parameters:
         - id: level
-          description: Obligatorio. El nivel de la lista.
+          description: Necesario. El nivel de la lista.
           type:
             - number
         - id: listNumberingString
-          description: Obligatorio. El formato ordinal.
+          description: Necesario. El formato ordinal.
           type:
             - '"None" | "Arabic" | "UpperRoman" | "LowerRoman" | "UpperLetter" | "LowerLetter"'
         - id: formatString
           description: 'Opcional. El formato de cadena de numeración definido como una matriz de cadenas o enteros. Cada entero es un nivel de tipo de número que es mayor o igual que este nivel. Por ejemplo, una matriz de \["(", Level-1, ".", LEVEL ")"\] puede definir el formato de "(2. c)", donde 2 es el número de elemento de la matriz y c es el número de elemento de este nivel.'
           type:
             - Array<string | number>
+  - uid: word.Word.List.setLevelPicture
+    summary: |-
+      Establece la imagen en el nivel especificado de la lista.
+
+      \[[Conjunto de API: versión beta de WordApi (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+    isPreview: true
+    name: 'setLevelPicture(level, base64EncodedImage)'
+    fullName: 'setLevelPicture(level, base64EncodedImage)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'setLevelPicture(level: number, base64EncodedImage?: string): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: level
+          description: Necesario. El nivel de la lista.
+          type:
+            - number
+        - id: base64EncodedImage
+          description: 'Opcional. La imagen codificada en Base64 que se va a establecer. Si no se especifica, se establece la imagen predeterminada.'
+          type:
+            - string
   - uid: word.Word.List.setLevelStartingNumber
     summary: |-
       Establece el número de inicio en el nivel especificado de la lista. El valor predeterminado es 1.
@@ -484,11 +584,11 @@ items:
         description: ''
       parameters:
         - id: level
-          description: Obligatorio. El nivel de la lista.
+          description: Necesario. El nivel de la lista.
           type:
             - number
         - id: startingNumber
-          description: Obligatorio. Número con el que se va a empezar.
+          description: Necesario. Número con el que se va a empezar.
           type:
             - number
   - uid: word.Word.List.toJSON
