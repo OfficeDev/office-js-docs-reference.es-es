@@ -28,6 +28,8 @@ items:
       - outlook.Office.AppointmentCompose.getAttachmentsAsync_1
       - outlook.Office.AppointmentCompose.getInitializationContextAsync
       - outlook.Office.AppointmentCompose.getInitializationContextAsync_1
+      - outlook.Office.AppointmentCompose.getItemIdAsync
+      - outlook.Office.AppointmentCompose.getItemIdAsync_1
       - outlook.Office.AppointmentCompose.getSelectedDataAsync
       - outlook.Office.AppointmentCompose.getSelectedDataAsync_1
       - outlook.Office.AppointmentCompose.loadCustomPropertiesAsync
@@ -638,6 +640,76 @@ items:
       parameters:
         - id: callback
           description: 'Opcional. Cuando el método finaliza, la función que se pasa en el parámetro callback se llama con un único parámetro de tipo Office. AsyncResult. Si se realiza correctamente, los datos de inicialización se proporcionan en la propiedad asyncResult. Value como una cadena. Si no hay contexto de inicialización, el objeto asyncResult contendrá un objeto error con su propiedad code establecida en 9020 y su propiedad Name se establecerá en GenericResponseError.'
+          type:
+            - '(asyncResult: Office.AsyncResult<string>) => void'
+  - uid: outlook.Office.AppointmentCompose.getItemIdAsync
+    summary: |-
+      Obtiene de forma asíncrona el identificador de un elemento guardado.
+
+      Cuando se invoca, este método devuelve el identificador de elemento a través del método de devolución de llamada.
+
+      **Nota**: Si el complemento llama `getItemIdAsync` a un elemento en el modo de redacción (por ejemplo, para obtener un `itemId` para usarlo con EWS o la API de REST), tenga en cuenta que cuando Outlook está en modo de caché, puede tardar algún tiempo antes de que el elemento se sincronice con el servidor. Hasta que el elemento se sincronice, el `itemId` no se reconoce y el uso devuelve un error.
+
+      \[[Conjunto de API: vista previa de buzón](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
+
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: Organizador de citas
+
+      **Errores**:
+
+      - `ItemNotSaved`<!-- -->: El identificador no se puede recuperar hasta que se guarde el elemento.
+    name: 'getItemIdAsync(options, callback)'
+    fullName: 'getItemIdAsync(options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getItemIdAsync(options: Office.AsyncContextOptions, callback: (asyncResult: Office.AsyncResult<string>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: options
+          description: 'Un objeto literal que contiene una o más de las siguientes propiedades. asyncContext: los desarrolladores pueden proporcionar cualquier objeto al que quieran tener acceso en el método de devolución de llamada.'
+          type:
+            - Office.AsyncContextOptions
+        - id: callback
+          description: 'Cuando el método finaliza, la función que se pasa en el parámetro callback se llama con un único parámetro de tipo Office. AsyncResult.'
+          type:
+            - '(asyncResult: Office.AsyncResult<string>) => void'
+  - uid: outlook.Office.AppointmentCompose.getItemIdAsync_1
+    summary: |-
+      Obtiene de forma asíncrona el identificador de un elemento guardado.
+
+      Cuando se invoca, este método devuelve el identificador de elemento a través del método de devolución de llamada.
+
+      **Nota**: Si el complemento llama `getItemIdAsync` a un elemento en el modo de redacción (por ejemplo, para obtener un `itemId` para usarlo con EWS o la API de REST), tenga en cuenta que cuando Outlook está en modo de caché, puede tardar algún tiempo antes de que el elemento se sincronice con el servidor. Hasta que el elemento se sincronice, el `itemId` no se reconoce y el uso devuelve un error.
+
+      \[[Conjunto de API: vista previa de buzón](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
+
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: Organizador de citas
+
+      **Errores**:
+
+      - `ItemNotSaved`<!-- -->: El identificador no se puede recuperar hasta que se guarde el elemento.
+    name: getItemIdAsync(callback)
+    fullName: getItemIdAsync(callback)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getItemIdAsync(callback: (asyncResult: Office.AsyncResult<string>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: callback
+          description: 'Cuando el método finaliza, la función que se pasa en el parámetro callback se llama con un único parámetro de tipo Office. AsyncResult.'
           type:
             - '(asyncResult: Office.AsyncResult<string>) => void'
   - uid: outlook.Office.AppointmentCompose.getSelectedDataAsync
