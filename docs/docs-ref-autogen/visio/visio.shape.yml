@@ -114,41 +114,6 @@ items:
       `load(option?: { select?: string; expand?: string; }): Visio.Shape`-Where opción. Select es una cadena delimitada por comas que especifica las propiedades que se van a cargar y Options. Expand es una cadena delimitada por comas que especifica las propiedades de navegación que se deben cargar.
 
       `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Visio.Shape`-Solo disponible en tipos de colección. Es similar a la firma anterior. Option. Top especifica el número máximo de elementos de colección que se pueden incluir en el resultado. La opción. SKIP especifica el número de elementos que se deben omitir y que no se incluyen en el resultado. Si se especifica Option. Top, el conjunto de resultados se iniciará después de omitir el número especificado de elementos.
-
-      #### <a name="examples"></a>Ejemplos
-
-      ```javascript
-      Visio.run(session, function (ctx) {
-          var activePage = ctx.document.getActivePage();
-          var shapeName = "Sample Name";
-          var shape = activePage.shapes.getItem(shapeName);
-          shape.load();
-          return ctx.sync().then(function () {
-              console.log(shape.name );
-              console.log(shape.id );
-              console.log(shape.Text );
-              console.log(shape.Select );
-          });
-      }).catch(function(error) {
-          console.log("Error: " + error);
-          if (error instanceof OfficeExtension.Error) {
-              console.log("Debug info: " + JSON.stringify(error.debugInfo));
-          }
-      });
-      ```
-      ```javascript
-      Visio.run(session, function (ctx) {
-          var activePage = ctx.document.getActivePage();
-          var shape = activePage.shapes.getItem(0);
-          shape.view.highlight = { color: "#E7E7E7", width: 100 };
-          return ctx.sync();
-      }).catch(function(error) {
-          console.log("Error: " + error);
-          if (error instanceof OfficeExtension.Error) {
-              console.log("Debug info: " + JSON.stringify(error.debugInfo));
-          }
-      });
-      ```
     name: load(option)
     fullName: load(option)
     langs:
@@ -177,7 +142,43 @@ items:
       return:
         type:
           - Visio.Shape
-        description: ''
+        description: |-
+
+
+          #### <a name="examples"></a>Ejemplos
+
+          ```javascript
+          Visio.run(session, function (ctx) {
+              var activePage = ctx.document.getActivePage();
+              var shapeName = "Sample Name";
+              var shape = activePage.shapes.getItem(shapeName);
+              shape.load(["name", "id", "text", "select"]);
+              return ctx.sync().then(function () {
+                  console.log(shape.name);
+                  console.log(shape.id);
+                  console.log(shape.text);
+                  console.log(shape.select);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+          ```javascript
+          Visio.run(session, function (ctx) {
+              var activePage = ctx.document.getActivePage();
+              var shape = activePage.shapes.getItem(0);
+              shape.view.highlight = { color: "#E7E7E7", width: 100 };
+              return ctx.sync();
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
       parameters:
         - id: propertyNames
           description: Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades que se van a cargar.

@@ -218,7 +218,7 @@ items:
             - '{ select?: string; expand?: string; }'
   - uid: excel.Excel.DataValidation.prompt
     summary: |-
-      Pregunta cuando los usuarios seleccionan una celda.
+      Pregunta cuando los usuarios seleccionan una celda. El `DataValidationPrompt` objeto debe establecerse como un objeto JSON (usar `x.prompt = {...}` en lugar de`x.prompt.message = ...`<!-- -->).
 
       \[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: prompt
@@ -231,6 +231,44 @@ items:
       return:
         type:
           - excel.Excel.DataValidationPrompt
+        description: |-
+
+
+          #### <a name="examples"></a>Ejemplos
+
+          ```typescript
+          await Excel.run(async (context) => {
+              const sheet = context.workbook.worksheets.getItem("Decision");
+              const rankingRange = sheet.tables.getItem("NameOptionsTable").columns.getItem("Ranking").getDataBodyRange();
+
+              // When you are developing, it is a good practice to
+              // clear the dataValidation object with each run of your code.
+              rankingRange.dataValidation.clear();
+
+              let greaterThanZeroRule = {
+                  wholeNumber: {
+                      formula1: 0,
+                      operator: Excel.DataValidationOperator.greaterThan
+                  }
+              };
+              rankingRange.dataValidation.rule = greaterThanZeroRule;
+
+              rankingRange.dataValidation.prompt = {
+                  message: "Please enter a positive number.",
+                  showPrompt: true,
+                  title: "Positive numbers only."
+              };
+
+              rankingRange.dataValidation.errorAlert = {
+                  message: "Sorry, only positive numbers are allowed",
+                  showAlert: true,
+                  style: "Stop",
+                  title: "Negative Number Entered"
+              };
+
+              await context.sync();
+          });
+          ```
   - uid: excel.Excel.DataValidation.rule
     summary: |-
       Regla de validación de datos que contiene distintos tipos de criterios de validación de datos.
@@ -246,6 +284,34 @@ items:
       return:
         type:
           - excel.Excel.DataValidationRule
+        description: |-
+
+
+          #### <a name="examples"></a>Ejemplos
+
+          ```typescript
+          await Excel.run(async (context) => {
+              const sheet = context.workbook.worksheets.getItem("Decision");
+              const nameRange = 
+                  sheet.tables.getItem("NameOptionsTable").columns.getItem("Baby Name").getDataBodyRange();
+
+              // When you are developing, it is a good practice to
+              // clear the dataValidation object with each run of your code.
+              nameRange.dataValidation.clear();
+
+              const nameSourceRange = context.workbook.worksheets.getItem("Names").getRange("A1:A3");
+
+              let approvedListRule = {
+                  list: {
+                      inCellDropDown: true,
+                      source: nameSourceRange
+                  }
+              };
+              nameRange.dataValidation.rule = approvedListRule;
+
+              await context.sync();
+          });
+          ```
   - uid: excel.Excel.DataValidation.set
     summary: Establece varias propiedades de un objeto al mismo tiempo. Puede pasar un objeto sin formato con las propiedades apropiadas o cualquier otro objeto de la API del mismo tipo.
     remarks: |-
