@@ -8,7 +8,7 @@ items:
 
       No se llama nunca directamente al objeto Binding. Es la clase primaria abstracta de los objetos que representan cada tipo de enlace: [Office. MatrixBinding](xref:office.Office.MatrixBinding)<!-- -->, [Office. TableBinding](xref:office.Office.TableBinding)<!-- -->u [Office. TextBinding](xref:office.Office.TextBinding)<!-- -->. Los tres objetos heredan los métodos getDataAsync y setDataAsync del objeto Binding que le permiten interactuar con los datos en el enlace. También heredan las propiedades id y type para realizar consultas de estos valores de propiedad. Asimismo, los objetos MatrixBinding y TableBinding exponen métodos adicionales para las características específicas de matrices y tablas, como contar el número de filas y columnas.
     remarks: |-
-      **Hosts**: Access, Excel y Word
+      **Hosts**: Excel, Word
 
       **Conjuntos de requisitos**:
 
@@ -375,7 +375,7 @@ items:
 
       <table> <tr> <th>`data`Value</th> <th>Datos escritos</th> </tr> <tr> <td>Una cadena</td> <td>El texto especificado se inserta como el valor de la primera celda enlazada. También puede especificar una fórmula válida para agregar esa fórmula a la celda enlazada. Por ejemplo, establecer data en `"=SUM(A1:A5)"` totalizará los valores en el rango especificado. Pero cuando se establece una fórmula en la celda dependiente, después de hacerlo, no se puede leer desde la celda dependiente la fórmula agregada (o cualquier fórmula preexistente). Si llama al método Binding.getDataAsync en la celda enlazada para leer sus datos, el método puede devolver solo los datos que se muestra en la celda (resultado de la fórmula).</td> </tr> <tr> <td>Una matriz de matrices ("matrix") y la forma coincide exactamente con la forma del enlace que se ha especificado</td> <td>Se escribe el conjunto de filas y columnas. También puede especificar una matriz de matrices que contenga fórmulas válidas para agregarlas a las celdas enlazadas. Por ejemplo, al establecer los `[["=SUM(A1:A5)","=AVERAGE(A1:A5)"]]` datos, se agregarán esas dos fórmulas a un enlace que contenga dos celdas. Al igual que cuando se establece una fórmula en una celda enlazada única, no se pueden leer las fórmulas agregadas (ni las fórmulas preexistentes) desde el enlace con el `Binding.getDataAsync` método-it devuelve sólo los datos que se muestran en las celdas enlazadas.</td> </tr> <tr> <td>Un `TableData` objeto y la forma de la tabla coincide con la tabla enlazada.</td> <td>Se escribe el conjunto especificado de filas o encabezados si no se van a sobrescribir otros datos de las celdas contiguas. **Nota**: Si especifica fórmulas en el objeto TableData que pasa para el parámetro *Data* , es posible que no obtenga los resultados esperados debido a la característica "columnas calculadas" de Excel, que duplica automáticamente las fórmulas en una columna. Para solucionar esto cuando quiere escribir *data* que contienen fórmulas a una tabla enlazada, pruebe a especificar los datos como una matriz de matrices (en lugar de un objeto TableData) y especifique *coercionType* como Microsoft.Office.Matrix o "matriz".</td> </tr> </table>
 
-      Para Excel online:
+      Para Excel en la web:
 
       - El número total de celdas en el valor pasado al parámetro Data no puede ser superior a 20.000 en una sola llamada a este método.
 
@@ -404,13 +404,13 @@ items:
           description: |-
             Los datos que se definirán en la selección actual. Posibles tipos de datos por host:
 
-            cadena: solo en Excel, Excel online, Word y Word online
+            String: Excel en la web y Windows, y Word en la web y solo Windows
 
             matriz de matrices: solo en Excel y Word
 
-            [Office. TableData](xref:office.Office.TableData)<!-- -->: Solo en Access, Excel y Word
+            [Office. TableData](xref:office.Office.TableData)<!-- -->: Solo en Excel y Word
 
-            HTML: solo Word y Word online
+            HTML: Word en la web y solo en Windows
 
             Office Open XML: solo en Word
           type:
@@ -456,7 +456,7 @@ items:
 
       <table> <tr> <th>`data`Value</th> <th>Datos escritos</th> </tr> <tr> <td>Una cadena</td> <td>El texto especificado se inserta como el valor de la primera celda enlazada. También puede especificar una fórmula válida para agregar esa fórmula a la celda enlazada. Por ejemplo, establecer data en `"=SUM(A1:A5)"` totalizará los valores en el rango especificado. Pero cuando se establece una fórmula en la celda dependiente, después de hacerlo, no se puede leer desde la celda dependiente la fórmula agregada (o cualquier fórmula preexistente). Si llama al método Binding.getDataAsync en la celda enlazada para leer sus datos, el método puede devolver solo los datos que se muestra en la celda (resultado de la fórmula).</td> </tr> <tr> <td>Una matriz de matrices ("matrix") y la forma coincide exactamente con la forma del enlace que se ha especificado</td> <td>Se escribe el conjunto de filas y columnas. También puede especificar una matriz de matrices que contenga fórmulas válidas para agregarlas a las celdas enlazadas. Por ejemplo, al establecer los `[["=SUM(A1:A5)","=AVERAGE(A1:A5)"]]` datos, se agregarán esas dos fórmulas a un enlace que contenga dos celdas. Al igual que cuando se establece una fórmula en una celda enlazada única, no se pueden leer las fórmulas agregadas (ni las fórmulas preexistentes) desde el enlace con el `Binding.getDataAsync` método-it devuelve sólo los datos que se muestran en las celdas enlazadas.</td> </tr> <tr> <td>Un `TableData` objeto y la forma de la tabla coincide con la tabla enlazada.</td> <td>Se escribe el conjunto especificado de filas o encabezados si no se van a sobrescribir otros datos de las celdas contiguas. **Nota**: Si especifica fórmulas en el objeto TableData que pasa para el parámetro *Data* , es posible que no obtenga los resultados esperados debido a la característica "columnas calculadas" de Excel, que duplica automáticamente las fórmulas en una columna. Para solucionar esto cuando quiere escribir *data* que contienen fórmulas a una tabla enlazada, pruebe a especificar los datos como una matriz de matrices (en lugar de un objeto TableData) y especifique *coercionType* como Microsoft.Office.Matrix o "matriz".</td> </tr> </table>
 
-      Para Excel online:
+      Para Excel en la web:
 
       - El número total de celdas en el valor pasado al parámetro Data no puede ser superior a 20.000 en una sola llamada a este método.
 
@@ -574,13 +574,13 @@ items:
           description: |-
             Los datos que se definirán en la selección actual. Posibles tipos de datos por host:
 
-            cadena: solo en Excel, Excel online, Word y Word online
+            String: Excel en la web y Windows, y Word en la web y solo Windows
 
             matriz de matrices: solo en Excel y Word
 
-            `TableData`<!-- -->: Solo en Access, Excel y Word
+            `TableData`<!-- -->: Solo en Excel y Word
 
-            HTML: solo Word y Word online
+            HTML: Word en la web y solo en Windows
 
             Office Open XML: solo en Word
           type:

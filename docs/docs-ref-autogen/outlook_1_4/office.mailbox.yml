@@ -44,7 +44,7 @@ items:
 
       Los identificadores de elemento obtenidos a través de una API de REST (como la API de correo de Outlook o Microsoft Graph) usan un formato diferente al formato que usa Exchange Web Services (EWS). El método Converttoewsid agregado convierte un identificador con formato REST al formato adecuado para EWS.
 
-      **Nota**: este método no se admite en Outlook para iOS ni en Outlook para Android.
+      **Nota**: este método no es compatible con Outlook en iOS o Android.
 
       \[[Conjunto de API: buzón de correo 1,3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
@@ -85,9 +85,9 @@ items:
     summary: |-
       Obtiene un diccionario con información de tiempo en el tiempo del cliente local.
 
-      Las fechas y horas usadas por una aplicación de correo para Outlook o Outlook Web App pueden usar distintas zonas horarias. Outlook usa la zona horaria del equipo cliente; Outlook Web App usa la zona horaria definida en el Centro de administración de Exchange (EAC). Debería tratar los valores de fecha y hora de modo que los valores que aparezcan en la interfaz de usuario sean siempre coherentes con la zona horaria que el usuario espera.
+      Las fechas y las horas usadas por una aplicación de correo para los clientes de Outlook en la web o de escritorio pueden usar zonas horarias diferentes. Outlook usa la zona horaria del equipo cliente; Outlook en la Web usa la zona horaria establecida en el centro de administración de Exchange (EAC). Debería tratar los valores de fecha y hora de modo que los valores que aparezcan en la interfaz de usuario sean siempre coherentes con la zona horaria que el usuario espera.
 
-      Si la aplicación de correo se ejecuta en Outlook, el método convertToLocalClientTime devolverá un objeto diccionario con los valores establecidos en la zona horaria del equipo cliente. Si la aplicación de correo se ejecuta en Outlook Web App, el método convertToLocalClientTime devolverá un objeto Dictionary con los valores establecidos en la zona horaria especificada en el EAC.
+      Si la aplicación de correo se ejecuta en los clientes de Outlook en el escritorio, el método convertToLocalClientTime devolverá un objeto Dictionary con los valores establecidos en la zona horaria del equipo cliente. Si la aplicación de correo se ejecuta en Outlook en la web, el método convertToLocalClientTime devolverá un objeto Dictionary con los valores establecidos en la zona horaria especificada en el EAC.
 
       \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
@@ -114,7 +114,7 @@ items:
     summary: |-
       Convierte un identificador de elemento con formato para EWS al formato REST.
 
-      **Nota**: este método no se admite en Outlook para iOS ni en Outlook para Android.
+      **Nota**: este método no es compatible con Outlook en iOS o Android.
 
       \[[Conjunto de API: buzón de correo 1,3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
@@ -186,13 +186,13 @@ items:
 
       El método displayAppointmentForm abre una cita de calendario existente en una nueva ventana del escritorio o en un cuadro de diálogo en los dispositivos móviles.
 
-      En Outlook para Mac, puede usar este método para mostrar una cita que no forme parte de una serie periódica o la cita principal de una serie periódica, pero no puede mostrar una instancia de la serie. Esto es porque en Outlook para Mac no se puede tener acceso a las propiedades (incluido el identificador de elemento) de las instancias de una serie periódica.
+      En Outlook en Mac, puede usar este método para mostrar una cita única que no forma parte de una serie periódica, o la cita principal de una serie periódica, pero no puede mostrar una instancia de la serie. Esto se debe a que en Outlook en Mac no se puede tener acceso a las propiedades (incluido el identificador de elemento) de las instancias de una serie periódica.
 
-      En Outlook Web App, este método abre el formato especificado solo si el cuerpo del formulario es inferior o igual a 32 KB en el número de caracteres.
+      En Outlook en la web, este método abre el formulario especificado sólo si el cuerpo del formulario es inferior o igual a 32 KB en el número de caracteres.
 
       Si el identificador de elemento especificado no identifica una cita existente, se abrirá una página en blanco en el dispositivo o equipo cliente y no se generará ningún mensaje de error.
 
-      **Nota**: este método no se admite en Outlook para iOS ni en Outlook para Android.
+      **Nota**: este método no es compatible con Outlook en iOS o Android.
 
       \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
@@ -227,13 +227,13 @@ items:
 
       El método displayMessageForm abre un mensaje existente en una nueva ventana del escritorio o en un cuadro de diálogo en los dispositivos móviles.
 
-      En Outlook Web App, este método abre el formato especificado solo si el cuerpo del formulario es inferior o igual a 32 KB en el número de caracteres.
+      En Outlook en la web, este método abre el formulario especificado sólo si el cuerpo del formulario es inferior o igual a 32 KB, el número de caracteres.
 
       Si el identificador de elemento especificado no identifica un mensaje existente, no se mostrará ningún mensaje en el equipo cliente ni se generará ningún mensaje de error.
 
       No use displayMessageForm con un itemId que represente una cita. Use el método displayAppointmentForm para mostrar una cita existente y displayNewAppointmentForm para mostrar un formulario para crear una nueva cita.
 
-      **Nota**: este método no se admite en Outlook para iOS ni en Outlook para Android.
+      **Nota**: este método no es compatible con Outlook en iOS o Android.
 
       \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
@@ -268,13 +268,13 @@ items:
 
       El método displayNewAppointmentForm abre un formulario que permite al usuario crear una cita o reunión. Si se especifican parámetros, los campos de formulario de cita se rellenan automáticamente con el contenido de los parámetros.
 
-      En Outlook Web App y OWA para dispositivos, este método muestra siempre un formulario con un campo de asistentes. Si no especifica ningún asistente como argumento de entrada, el método muestra un formulario con un botón Guardar. Si ha especificado asistentes, el formulario incluirá a los asistentes y un botón Enviar.
+      En Outlook en la web, este método siempre muestra un formulario con un campo de asistentes. Si no especifica ningún asistente como argumento de entrada, el método muestra un formulario con un botón Guardar. Si ha especificado asistentes, el formulario incluirá a los asistentes y un botón Enviar.
 
       En el cliente enriquecido de Outlook y Outlook RT, si especifica los asistentes o los recursos en el parámetro requiredAttendees, optionalAttendees o Resources, este método muestra un formulario de reunión con un botón Enviar. Si no especifica ningún destinatario, este método muestra un formulario de cita con un botón Guardar &amp; cierre.
 
       Si cualquiera de los parámetros supera los límites de tamaño especificados o si se especifica un nombre de parámetro desconocido, se genera una excepción.
 
-      **Nota**: este método no se admite en Outlook para iOS ni en Outlook para Android.
+      **Nota**: este método no es compatible con Outlook en iOS o Android.
 
       \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
@@ -417,7 +417,7 @@ items:
           type:
             - any
   - uid: Outlook_1_4.Office.Mailbox.makeEwsRequestAsync
-    summary: "Realiza una solicitud asincrónica a un servicio de servicios web Exchange (EWS) en el servidor Exchange que hospeda el buzón del usuario.\n\nEn estos casos, los complementos tendrían que usar las API de REST para obtener acceso al buzón del usuario en su lugar.\n\nEl método makeEwsRequestAsync envía una solicitud de EWS en nombre del complemento a Exchange.\n\nNo puede solicitar elementos asociados de las carpetas con el método makeEwsRequestAsync.\n\nLa solicitud XML debe especificar codificación UTF-8. &lt;<!-- -->? XML versión = \"1.0\" Encoding = \"UTF-8\"?<!-- -->&gt;\n\nEl complemento debe tener el permiso ReadWriteMailbox para usar el método makeEwsRequestAsync. Para obtener información sobre cómo usar el permiso ReadWriteMailbox y las operaciones de EWS a las que puede llamar con el método makeEwsRequestAsync, vea [especificar permisos para el acceso de los complementos de correo al buzón del usuario](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions) .<!-- -->.\n\nEl resultado XML de la llamada EWS se proporciona como una cadena en la propiedad asyncResult. Value. Si el resultado supera 1\_MB de tamaño, se devuelve un mensaje de error en su lugar.\n\n**Nota**: este método no se admite en los siguientes escenarios:\n\n- En Outlook para iOS o Outlook para Android.\n\n- Cuando el complemento se carga en un buzón de gmail.\n\n**Nota**: el administrador del servidor debe establecer OAuthAuthentication en true en el directorio EWS del servidor de acceso de cliente para permitir que el método makeEwsRequestAsync realice solicitudes EWS.\n\n*Diferencias de versión*\n\nSi utiliza el método makeEwsRequestAsync en aplicaciones de correo que se ejecutan en versiones de Outlook anteriores a 15.0.4535.1004, debe establecer el valor de codificación a ISO-8859-1.\n\n`<?xml version=\"1.0\" encoding=\"iso-8859-1\"?>`\n\nNo es necesario establecer el valor de codificación si la aplicación de correo se ejecuta en Outlook en la web. Puede averiguar si su aplicación de correo se ejecuta en Outlook o en Outlook en la web usando la propiedad mailbox.diagnostics.hostName. Para averiguar qué versión de Outlook se está ejecutando, use la propiedad mailbox.diagnostics.hostVersion.\n\n\\[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
+    summary: "Realiza una solicitud asincrónica a un servicio de servicios web Exchange (EWS) en el servidor Exchange que hospeda el buzón del usuario.\n\nEn estos casos, los complementos tendrían que usar las API de REST para obtener acceso al buzón del usuario en su lugar.\n\nEl método makeEwsRequestAsync envía una solicitud de EWS en nombre del complemento a Exchange.\n\nNo puede solicitar elementos asociados de las carpetas con el método makeEwsRequestAsync.\n\nLa solicitud XML debe especificar codificación UTF-8. &lt;<!-- -->? XML versión = \"1.0\" Encoding = \"UTF-8\"?<!-- -->&gt;\n\nEl complemento debe tener el permiso ReadWriteMailbox para usar el método makeEwsRequestAsync. Para obtener información sobre cómo usar el permiso ReadWriteMailbox y las operaciones de EWS a las que puede llamar con el método makeEwsRequestAsync, vea [especificar permisos para el acceso de los complementos de correo al buzón del usuario](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions) .<!-- -->.\n\nEl resultado XML de la llamada EWS se proporciona como una cadena en la propiedad asyncResult. Value. Si el resultado supera 1\_MB de tamaño, se devuelve un mensaje de error en su lugar.\n\n**Nota**: este método no se admite en los siguientes escenarios:\n\n- En Outlook en iOS o Android.\n\n- Cuando el complemento se carga en un buzón de gmail.\n\n**Nota**: el administrador del servidor debe establecer OAuthAuthentication en true en el directorio EWS del servidor de acceso de cliente para permitir que el método makeEwsRequestAsync realice solicitudes EWS.\n\n*Diferencias de versión*\n\nSi utiliza el método makeEwsRequestAsync en aplicaciones de correo que se ejecutan en versiones de Outlook anteriores a 15.0.4535.1004, debe establecer el valor de codificación a ISO-8859-1.\n\n`<?xml version=\"1.0\" encoding=\"iso-8859-1\"?>`\n\nNo es necesario establecer el valor de codificación si la aplicación de correo se ejecuta en Outlook en la web. Puede averiguar si su aplicación de correo se ejecuta en Outlook o en Outlook en la web usando la propiedad mailbox.diagnostics.hostName. Para averiguar qué versión de Outlook se está ejecutando, use la propiedad mailbox.diagnostics.hostVersion.\n\n\\[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\\]"
     remarks: |-
       **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadWriteMailbox
 
@@ -498,9 +498,9 @@ items:
 
       - hostName (cadena): cadena que representa el nombre de la aplicación host. Debe ser uno de los siguientes valores: Outlook, Mac Outlook, OutlookIOS o OutlookWebApp.
 
-      - hostVersion (String): una cadena que representa la versión de la aplicación host o de Exchange Server. Si el complemento de correo se está ejecutando en el cliente de escritorio de Outlook o en Outlook para iOS, la propiedad hostVersion devuelve la versión de la aplicación host, Outlook. En Outlook Web App, la propiedad devuelve la versión de Exchange Server. Un ejemplo es la cadena 15.0.468.0.
+      - hostVersion (String): una cadena que representa la versión de la aplicación host o de Exchange Server. Si el complemento de correo se está ejecutando en Outlook en clientes de escritorio o en iOS, la propiedad hostVersion devuelve la versión de la aplicación host, Outlook. En Outlook en la web, la propiedad devuelve la versión del servidor Exchange. Un ejemplo es la cadena 15.0.468.0.
 
-      - OWAView (MailboxEnums. OWAView o String): una enumeración (o literal de cadena) que representa la vista actual de Outlook Web App. Si la aplicación host no es Outlook Web App, el acceso a esta propiedad da como resultado undefined. Outlook Web App tiene tres vistas (OneColumn se muestra cuando la pantalla es estrecha, TwoColumns se muestra cuando la pantalla es más ancha, y ThreeColumns cuando la pantalla es ancha) que se corresponden con el ancho de la pantalla y la ventana, y el número de columnas. que se pueden mostrar.
+      - OWAView (MailboxEnums. OWAView o String): una enumeración (o literal de cadena) que representa la vista actual de Outlook en la Web. Si la aplicación host no es Outlook en la web, el acceso a esta propiedad da como resultado undefined. Outlook en la web tiene tres vistas (OneColumn se muestra cuando la pantalla es estrecha, TwoColumns cuando la pantalla es más ancha y ThreeColumns cuando la pantalla es ancha) que se corresponden con el ancho de la pantalla y la ventana, y el número de columnas. que se pueden mostrar.
 
       Hay más información en [Office. Diagnostics](xref:Outlook_1_4.Office.Diagnostics)<!-- -->.
 
@@ -535,7 +535,7 @@ items:
 
       Un servicio remoto puede usar el valor ewsUrl para realizar llamadas EWS al buzón del usuario. Por ejemplo, puede crear un servicio remoto para [obtener datos adjuntos del elemento seleccionado](https://docs.microsoft.com/outlook/add-ins/get-attachments-of-an-outlook-item) .<!-- -->.
 
-      **Nota**: este miembro no se admite en Outlook para iOS ni en Outlook para Android.
+      **Nota**: este miembro no es compatible con Outlook en iOS o Android.
     name: ewsUrl
     fullName: ewsUrl
     langs:
