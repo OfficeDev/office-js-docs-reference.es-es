@@ -37,8 +37,10 @@ items:
       - excel.Excel.WorksheetCollection.onDeleted
       - excel.Excel.WorksheetCollection.onFiltered
       - excel.Excel.WorksheetCollection.onFormatChanged
+      - excel.Excel.WorksheetCollection.onRowHiddenChanged
       - excel.Excel.WorksheetCollection.onRowSorted
       - excel.Excel.WorksheetCollection.onSelectionChanged
+      - excel.Excel.WorksheetCollection.onSingleClicked
       - excel.Excel.WorksheetCollection.toJSON
   - uid: excel.Excel.WorksheetCollection.add
     summary: |-
@@ -126,7 +128,7 @@ items:
           ```
       parameters:
         - id: base64File
-          description: Obligatorio. Cadena codificada en Base64 que representa el archivo del libro de origen.
+          description: Necesario. Cadena codificada en Base64 que representa el archivo del libro de origen.
           type:
             - string
         - id: sheetNamesToInsert
@@ -160,7 +162,7 @@ items:
         description: Matriz de identificadores correspondientes a cada hoja de cálculo recién insertada.
       parameters:
         - id: base64File
-          description: Obligatorio. Cadena codificada en Base64 que representa el archivo del libro de origen.
+          description: Necesario. Cadena codificada en Base64 que representa el archivo del libro de origen.
           type:
             - string
         - id: sheetNamesToInsert
@@ -660,6 +662,22 @@ items:
       return:
         type:
           - OfficeExtension.EventHandlers<Excel.WorksheetFormatChangedEventArgs>
+  - uid: excel.Excel.WorksheetCollection.onRowHiddenChanged
+    summary: |-
+      Se produce cuando se cambia el estado oculto de fila de una hoja de cálculo del libro.
+
+      \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    isPreview: true
+    name: onRowHiddenChanged
+    fullName: onRowHiddenChanged
+    langs:
+      - typeScript
+    type: event
+    syntax:
+      content: 'readonly onRowHiddenChanged: OfficeExtension.EventHandlers<Excel.WorksheetRowHiddenChangedEventArgs>;'
+      return:
+        type:
+          - OfficeExtension.EventHandlers<Excel.WorksheetRowHiddenChangedEventArgs>
   - uid: excel.Excel.WorksheetCollection.onRowSorted
     summary: |-
       Se produce al ordenar por filas.
@@ -691,6 +709,22 @@ items:
       return:
         type:
           - OfficeExtension.EventHandlers<Excel.WorksheetSelectionChangedEventArgs>
+  - uid: excel.Excel.WorksheetCollection.onSingleClicked
+    summary: |-
+      Ocurre cuando se produce una operación de clic con el botón primario o punteado en la colección Worksheet.
+
+      \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    isPreview: true
+    name: onSingleClicked
+    fullName: onSingleClicked
+    langs:
+      - typeScript
+    type: event
+    syntax:
+      content: 'readonly onSingleClicked: OfficeExtension.EventHandlers<Excel.WorksheetSingleClickedEventArgs>;'
+      return:
+        type:
+          - OfficeExtension.EventHandlers<Excel.WorksheetSingleClickedEventArgs>
   - uid: excel.Excel.WorksheetCollection.toJSON
     summary: 'Reemplaza el método JavaScript `toJSON()` para proporcionar un resultado más útil cuando se pasa un objeto API a`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama `toJSON` al método del objeto que se le pasa.) Mientras que el `Excel.WorksheetCollection` objeto original es un objeto API, `toJSON` el método devuelve un objeto JavaScript sin formato (escrito como`Excel.Interfaces.WorksheetCollectionData`<!-- -->) que contiene una matriz "items" con copias rasas de las propiedades cargadas de los elementos de la colección.'
     name: toJSON()

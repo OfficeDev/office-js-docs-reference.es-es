@@ -51,6 +51,7 @@ items:
       - excel.Excel.Worksheet.onDeactivated
       - excel.Excel.Worksheet.onFiltered
       - excel.Excel.Worksheet.onFormatChanged
+      - excel.Excel.Worksheet.onRowHiddenChanged
       - excel.Excel.Worksheet.onRowSorted
       - excel.Excel.Worksheet.onSelectionChanged
       - excel.Excel.Worksheet.onSingleClicked
@@ -270,7 +271,7 @@ items:
             - excel.Excel.Worksheet
   - uid: excel.Excel.Worksheet.delete
     summary: |-
-      Elimina la hoja de cálculo del libro. Tenga en cuenta que si la visibilidad de la hoja de cálculo se establece en "VeryHidden", se producirá un error en la operación de eliminación con una GeneralException.
+      Elimina la hoja de cálculo del libro. Tenga en cuenta que si la visibilidad de la hoja de cálculo se establece en "VeryHidden", se producirá un error en la operación de eliminación con una `InvalidOperation` excepción. Primero debe cambiar su visibilidad a oculto o visible antes de eliminarlo.
 
       \[[Conjunto de API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: delete()
@@ -1105,6 +1106,22 @@ items:
       return:
         type:
           - OfficeExtension.EventHandlers<Excel.WorksheetFormatChangedEventArgs>
+  - uid: excel.Excel.Worksheet.onRowHiddenChanged
+    summary: |-
+      Se produce cuando cambia el estado oculto de fila en una hoja de cálculo específica.
+
+      \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    isPreview: true
+    name: onRowHiddenChanged
+    fullName: onRowHiddenChanged
+    langs:
+      - typeScript
+    type: event
+    syntax:
+      content: 'readonly onRowHiddenChanged: OfficeExtension.EventHandlers<Excel.WorksheetRowHiddenChangedEventArgs>;'
+      return:
+        type:
+          - OfficeExtension.EventHandlers<Excel.WorksheetRowHiddenChangedEventArgs>
   - uid: excel.Excel.Worksheet.onRowSorted
     summary: |-
       Se produce al ordenar por filas.
