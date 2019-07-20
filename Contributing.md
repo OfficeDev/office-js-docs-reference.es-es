@@ -20,20 +20,21 @@ Estas son algunas formas en las que puede colaborar con esta documentación:
 
 ## <a name="contribute-using-github"></a>Contribuir con GitHub
 
-Use GitHub para colaborar en esta documentación sin tener que clonar el repositorio en el escritorio. Esta es la forma más sencilla de crear una solicitud de incorporación de cambios en este repositorio. Use este método para realizar un cambio secundario que no implique cambios en el código. 
+> **Importante**: el contenido de referencia de este repositorio se genera automáticamente. Consulte la [documentación sobre las notas de herramientas](https://github.com/OfficeDev/office-js-docs-reference/blob/master/DocumentationToolingNotes.md) antes de editar archivos.
 
-**Nota** Con este método podrá colaborar en un artículo cada vez.
+Use GitHub para colaborar en esta documentación sin tener que clonar el repositorio en el escritorio. Esta es la forma más sencilla de crear una solicitud de incorporación de cambios en este repositorio. Use este método para realizar un cambio secundario que no implique cambios en el código.
+
+El uso de este método permite contribuir a un artículo a la vez.
 
 ### <a name="to-contribute-using-github"></a>Para colaborar con GitHub
 
 1. Busque el artículo en el que quiera colaborar en GitHub.
 2. Cuando esté en el artículo de GitHub, inicie sesión en GitHub ([únase a GitHub](https://github.com/join) para obtener una cuenta gratuita).
-3. Seleccione el **icono de lápiz** (edite el archivo en la bifurcación de este proyecto) y realice los cambios en la ventana **<> Editar archivo**. 
+3. Seleccione el **icono de lápiz** (edite el archivo en la bifurcación de este proyecto) y realice los cambios en la ventana **<> Editar archivo**.
 4. Desplácese hasta la parte inferior y escriba una descripción.
 5. Seleccione **Proponer cambio de archivo**>**Crear solicitud de incorporación de cambios**.
 
-Envió correctamente una solicitud de incorporación de cambios. Las solicitudes de incorporación de cambios se suelen revisar en un plazo de 10 días hábiles. 
-
+Envió correctamente una solicitud de incorporación de cambios. Las solicitudes de incorporación de cambios se suelen revisar en un plazo de 10 días hábiles.
 
 ## <a name="contribute-using-git"></a>Contribuir con Git
 
@@ -46,7 +47,7 @@ Use Git para colaborar con cambios importantes, como:
 
 ### <a name="to-contribute-using-git"></a>Para colaborar con Git
 
-1. Si no tiene una cuenta de GitHub, cree una en [GitHub](https://github.com/join). 
+1. Si no tiene una cuenta de GitHub, cree una en [GitHub](https://github.com/join).
 2. Cuando tenga una cuenta, instale Git en el equipo. Siga los pasos descritos en el tutorial de [configuración de Git] .
 3. Para enviar una solicitud de incorporación de cambios con Git, siga los pasos que se indican en las instrucciones para [usar GitHub, Git y este repositorio](#use-github-git-and-this-repository).
 4. Se le pedirá que firme el Contrato de licencia de colaborador si es:
@@ -66,10 +67,10 @@ Las solicitudes de incorporación de cambios se suelen revisar en un plazo de 10
 
 ### <a name="to-set-up-your-fork-of-the-repository"></a>Para configurar una bifurcación del repositorio
 
-1.  Configure una cuenta de GitHub para colaborar con este proyecto. Si aún no lo ha hecho, vaya a [GitHub](https://github.com/join) ahora y realice este procedimiento.
-2.  Instale Git en el equipo. Siga los pasos descritos en el tutorial de [configuración de Git] .
-3.  Cree su propia bifurcación de este repositorio. Para ello, en la parte superior de la página, elija el **** botón bifurcar.
-4.  Copie la bifurcación en el equipo. Para hacerlo, abra Git Bash. En el símbolo del sistema, escriba:
+1. Configure una cuenta de GitHub para colaborar con este proyecto. Si aún no lo ha hecho, vaya a [GitHub](https://github.com/join) ahora y realice este procedimiento.
+2. Instale Git en el equipo. Siga los pasos descritos en el tutorial de [configuración de Git] .
+3. Cree su propia bifurcación de este repositorio. Para ello, en la parte superior de la página, elija el **** botón bifurcar.
+4. Copie la bifurcación en el equipo. Para hacerlo, abra Git Bash. En el símbolo del sistema, escriba:
 
         git clone https://github.com/<your user name>/<repo name>.git
 
@@ -100,10 +101,10 @@ Para que el proceso de colaboración sea lo más fluido posible, siga estos paso
 
 #### <a name="to-create-a-new-branch"></a>Para crear una rama
 
-1.  Abra Git Bash.
-2.  En el símbolo del sistema de Git Bash, escriba `git pull upstream master:<new branch name>`. Se creará una rama de forma local que se copiará de la última rama principal de OfficeDev.
-3.  En el símbolo del sistema de Git Bash, escriba `git push origin <new branch name>`. De esta forma, se enviará una alerta a GitHub sobre la nueva rama. Después, verá la nueva rama en la bifurcación del repositorio en GitHub.
-4.  En el símbolo del sistema de Git Bash, escriba `git checkout <new branch name>` para cambiar a la nueva rama.
+1. Abra Git Bash.
+2. En el símbolo del sistema de Git Bash, escriba `git pull upstream master:<new branch name>`. Se creará una rama de forma local que se copiará de la última rama principal de OfficeDev.
+3. En el símbolo del sistema de Git Bash, escriba `git push origin <new branch name>`. De esta forma, se enviará una alerta a GitHub sobre la nueva rama. Después, verá la nueva rama en la bifurcación del repositorio en GitHub.
+4. En el símbolo del sistema de Git Bash, escriba `git checkout <new branch name>` para cambiar a la nueva rama.
 
 #### <a name="add-new-content-or-edit-existing-content"></a>Agregar contenido nuevo o editar contenido existente
 
@@ -128,13 +129,13 @@ Cuando termine el trabajo y esté listo para combinarlo con el repositorio princ
 
 #### <a name="to-submit-a-pull-request-to-the-main-repository"></a>Para enviar una solicitud de incorporación de cambios al repositorio principal
 
-1.  En el símbolo del sistema de Git Bash, escriba `git push origin <new branch name>`. En el repositorio local, `origin` hace referencia a su repositorio de GitHub desde el que se clonó el repositorio local. Este comando inserta el estado actual de la nueva rama, incluyendo todas las confirmaciones realizadas en los pasos anteriores, en la bifurcación de GitHub.
-2.  En el sitio de GitHub, vaya a la bifurcación de la rama nueva.
-3.  Haga clic en el botón **Pull Request** (solicitud de incorporación de cambios) en la parte superior de la página.
-4.  Compruebe que la rama base sea `OfficeDev/<repo name>@master` y que la rama principal sea `<your username>/<repo name>@<branch name>`.
-5.  Haga clic en el botón **Update Commit Range** (Actualizar intervalo de confirmación).
-6.  Agregue un título a la solicitud de incorporación de cambios y describa todos los cambios que realizó.
-7.  Envíe la solicitud de incorporación de cambios.
+1. En el símbolo del sistema de Git Bash, escriba `git push origin <new branch name>`. En el repositorio local, `origin` hace referencia a su repositorio de GitHub desde el que se clonó el repositorio local. Este comando inserta el estado actual de la nueva rama, incluyendo todas las confirmaciones realizadas en los pasos anteriores, en la bifurcación de GitHub.
+2. En el sitio de GitHub, vaya a la bifurcación de la rama nueva.
+3. Haga clic en el botón **Pull Request** (solicitud de incorporación de cambios) en la parte superior de la página.
+4. Compruebe que la rama base sea `OfficeDev/<repo name>@master` y que la rama principal sea `<your username>/<repo name>@<branch name>`.
+5. Haga clic en el botón **Update Commit Range** (Actualizar intervalo de confirmación).
+6. Agregue un título a la solicitud de incorporación de cambios y describa todos los cambios que realizó.
+7. Envíe la solicitud de incorporación de cambios.
 
 Uno de los administradores del sitio procesará su solicitud de incorporación de cambios. La solicitud de incorporación de cambios se mostrará en el sitio OfficeDev/<repo name>, en la sección de problemas. Cuando se acepte la solicitud de incorporación de cambios, el problema se solucionará.
 
@@ -160,9 +161,9 @@ Después de combinar correctamente los cambios en el repositorio principal, elim
 
 #### <a name="to-delete-a-branch"></a>Para eliminar una rama
 
-1.  En el símbolo del sistema de Git Bash, escriba `git checkout master`. Esto garantiza que no esté en la rama que se eliminará (lo que no está permitido).
-2.  Después, en el símbolo del sistema, escriba `git branch -d <branch name>`. Esto elimina la rama en el equipo local solo si se combinó correctamente en el repositorio precedente. (Puede invalidar este comportamiento con la marca `–D`, pero primero asegúrese de que quiere hacerlo).
-3.  Por último, escriba `git push origin :<branch name>` en el símbolo del sistema (un espacio antes de los dos puntos y sin espacios después).  Esto eliminará la rama en la bifurcación de GitHub.  
+1. En el símbolo del sistema de Git Bash, escriba `git checkout master`. Esto garantiza que no esté en la rama que se eliminará (lo que no está permitido).
+2. Después, en el símbolo del sistema, escriba `git branch -d <branch name>`. Esto elimina la rama en el equipo local solo si se combinó correctamente en el repositorio precedente. (Puede invalidar este comportamiento con la marca `–D`, pero primero asegúrese de que quiere hacerlo).
+3. Por último, escriba `git push origin :<branch name>` en el símbolo del sistema (un espacio antes de los dos puntos y sin espacios después).  Esto eliminará la rama en la bifurcación de GitHub.  
 
 Colaboró correctamente con el proyecto.
 
@@ -171,16 +172,16 @@ Colaboró correctamente con el proyecto.
 ### <a name="markdown"></a>Markdown
 
 En todos los artículos de este repositorio se usa Markdown. Puede encontrar una introducción completa (y una lista de toda la sintaxis) en [Daring Fireball-Markdown].
- 
+
 ## <a name="faq"></a>Preguntas más frecuentes
 
 ### <a name="how-do-i-get-a-github-account"></a>¿Cómo se puede obtener una cuenta de GitHub?
 
-Rellene el formulario en [Join GitHub](https://github.com/join) (Unirse a GitHub) para abrir una cuenta gratuita de GitHub. 
+Rellene el formulario en [Join GitHub](https://github.com/join) (Unirse a GitHub) para abrir una cuenta gratuita de GitHub.
 
 ### <a name="where-do-i-get-a-contributors-license-agreement"></a>¿Dónde se puede conseguir el contrato de licencia de colaborador? 
 
-Se enviará automáticamente un aviso de que necesita firmar el contrato de licencia de colaborador (CLA) si su solicitud de incorporación de cambios requiere uno. 
+Se enviará automáticamente un aviso de que necesita firmar el contrato de licencia de colaborador (CLA) si su solicitud de incorporación de cambios requiere uno.
 
 Como miembro de la comunidad, **debe firmar el contrato de licencia de colaborador (CLA) antes de poder realizar grandes envíos a este proyecto**. Solo necesita completar y enviar la documentación una vez. Revise detenidamente el documento. Es posible que un responsable de su empresa tenga que firmar el documento.
 
@@ -195,7 +196,6 @@ Actualmente no permitimos que colaboradores externos aprueben solicitudes de inc
 ### <a name="how-soon-will-i-get-a-response-about-my-change-request"></a>¿Cuándo recibirá una respuesta sobre mi solicitud de cambio?
 
 Las solicitudes de incorporación de cambios se suelen revisar en un plazo de 10 días hábiles.
-
 
 ## <a name="more-resources"></a>Más recursos
 

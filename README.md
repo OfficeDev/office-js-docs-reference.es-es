@@ -12,13 +12,11 @@ Su opinión es importante para nosotros.
 
 * También le damos la bienvenida a sus contribuciones a esta documentación. Para colaborar, bifurcar este repositorio, actualice los archivos según considere necesario y envíe una solicitud de incorporación de cambios con los cambios propuestos. Para obtener información más detallada, consulte [Contribuir a este contenido](Contributing.md).
 
-    > **Importante**: no modifique los archivos de la carpeta [/docs/docs-Ref-autogen](https://github.com/OfficeDev/office-js-docs-reference/tree/master/docs/docs-ref-autogen) de este repositorio. Todos los archivos de la carpeta se generan automáticamente, por lo que no se pueden actualizar a través de la solicitud de extracción. Para solicitar un cambio en cualquiera de los archivos de la carpeta [/docs/docs-Ref-autogen](https://github.com/OfficeDev/office-js-docs-reference/tree/master/docs/docs-ref-autogen) , [envíe un problema](https://github.com/OfficeDev/office-js-docs-reference/issues) en este repositorio.
+    > **Importante**: no modifique los archivos de la carpeta [/docs/docs-Ref-autogen](https://github.com/OfficeDev/office-js-docs-reference/tree/master/docs/docs-ref-autogen) de este repositorio. Todos los archivos de la carpeta se generan automáticamente, por lo que no se pueden actualizar a través de la solicitud de extracción. Para solicitar un cambio en cualquiera de los archivos de la carpeta [/docs/docs-Ref-autogen](https://github.com/OfficeDev/office-js-docs-reference/tree/master/docs/docs-ref-autogen) , [envíe un problema](https://github.com/OfficeDev/office-js-docs-reference/issues) en este repositorio. Puede obtener más información sobre cómo se ejecutan las herramientas en [](https://github.com/OfficeDev/office-js-docs-reference/blob/master/DocumentationToolingNotes.md)este repositorio.
 
 * Para enviarnos comentarios sobre su experiencia de programación, lo que le gustaría ver en versiones futuras o ejemplos de código, escriba sus sugerencias e ideas en [Office Developer Platform UserVoice](https://officespdev.uservoice.com/).
-
 
 ## <a name="microsoft-open-source-code-of-conduct"></a>Código de conducta de código abierto de Microsoft
 
 Este proyecto ha adoptado el [Código de conducta de código abierto de Microsoft](https://opensource.microsoft.com/codeofconduct/).
 Para obtener más información, consulte las preguntas más [frecuentes sobre el código de conducta](https://opensource.microsoft.com/codeofconduct/faq/)o póngase en contacto con [opencode@microsoft.com](mailto:opencode@microsoft.com) con otras preguntas o comentarios.
-
