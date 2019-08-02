@@ -1,0 +1,226 @@
+### YamlMime:UniversalReference
+items:
+  - uid: excel.Excel.TableChangedEventArgs
+    summary: |-
+      Proporciona información acerca de la tabla que ha generado el evento Changed.
+
+      \[[Conjunto de API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: Excel.TableChangedEventArgs
+    fullName: Excel.TableChangedEventArgs
+    langs:
+      - typeScript
+    type: interface
+    package: excel
+    children:
+      - excel.Excel.TableChangedEventArgs.getRange
+      - excel.Excel.TableChangedEventArgs.getRangeOrNullObject
+      - excel.Excel.TableChangedEventArgs.address
+      - excel.Excel.TableChangedEventArgs.changeType
+      - excel.Excel.TableChangedEventArgs.details
+      - excel.Excel.TableChangedEventArgs.source
+      - excel.Excel.TableChangedEventArgs.tableId
+      - excel.Excel.TableChangedEventArgs.type
+      - excel.Excel.TableChangedEventArgs.worksheetId
+  - uid: excel.Excel.TableChangedEventArgs.getRange
+    summary: |-
+      Obtiene el rango que representa el área modificada de una tabla en una hoja de cálculo específica.
+
+      \[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getRange(ctx)
+    fullName: getRange(ctx)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getRange(ctx: Excel.RequestContext): Excel.Range;'
+      return:
+        type:
+          - excel.Excel.Range
+        description: ''
+      parameters:
+        - id: ctx
+          description: ''
+          type:
+            - excel.Excel.RequestContext
+  - uid: excel.Excel.TableChangedEventArgs.getRangeOrNullObject
+    summary: |-
+      Obtiene el rango que representa el área modificada de una tabla en una hoja de cálculo específica. Puede devolver un objeto null.
+
+      \[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getRangeOrNullObject(ctx)
+    fullName: getRangeOrNullObject(ctx)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getRangeOrNullObject(ctx: Excel.RequestContext): Excel.Range;'
+      return:
+        type:
+          - excel.Excel.Range
+        description: ''
+      parameters:
+        - id: ctx
+          description: ''
+          type:
+            - excel.Excel.RequestContext
+  - uid: excel.Excel.TableChangedEventArgs.address
+    summary: |-
+      Obtiene la dirección que representa el área de cambio de una tabla en una hoja de cálculo concreta.
+
+      \[[Conjunto de API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: address
+    fullName: address
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'address: string;'
+      return:
+        type:
+          - string
+  - uid: excel.Excel.TableChangedEventArgs.changeType
+    summary: |-
+      Obtiene el tipo de cambio que representa cómo se activa el evento cambiado. Consulte Excel. DataChangeType para obtener información detallada.
+
+      \[[Conjunto de API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: changeType
+    fullName: changeType
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'changeType: Excel.DataChangeType | "Unknown" | "RangeEdited" | "RowInserted" | "RowDeleted" | "ColumnInserted" | "ColumnDeleted" | "CellInserted" | "CellDeleted";'
+      return:
+        type:
+          - Excel.DataChangeType | "Unknown" | "RangeEdited" | "RowInserted" | "RowDeleted" | "ColumnInserted" | "ColumnDeleted" | "CellInserted" | "CellDeleted"
+  - uid: excel.Excel.TableChangedEventArgs.details
+    summary: |-
+      Representa la información sobre los detalles de los cambios. Esta propiedad puede recuperarse cuando se desencadena el evento Changed en una sola celda. Si el evento Changed se desencadena en varias celdas, esta propiedad no se puede recuperar.
+
+      \[[Conjunto de API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: details
+    fullName: details
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'details: Excel.ChangedEventDetail;'
+      return:
+        type:
+          - excel.Excel.ChangedEventDetail
+        description: |-
+
+
+          #### <a name="examples"></a>Ejemplos
+
+          ```typescript
+          async function onTableChanged(eventArgs: Excel.TableChangedEventArgs) {
+              await Excel.run(async (context) => {
+                  const details = eventArgs.details;
+                  const address = eventArgs.address;
+
+                  console.log(`Change at ${address}: was ${details.valueBefore}(${details.valueTypeBefore}),`
+                    + ` now is ${details.valueAfter}(${details.valueTypeAfter})`);
+              });
+          }
+          ```
+  - uid: excel.Excel.TableChangedEventArgs.source
+    summary: |-
+      Obtiene el origen del evento. Para obtener más información, vea Excel.EventSource.
+
+      \[[Conjunto de API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: source
+    fullName: source
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'source: Excel.EventSource | "Local" | "Remote";'
+      return:
+        type:
+          - Excel.EventSource | "Local" | "Remote"
+  - uid: excel.Excel.TableChangedEventArgs.tableId
+    summary: |-
+      Obtiene el identificador de la tabla en la que se cambian los datos.
+
+      \[[Conjunto de API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: tableId
+    fullName: tableId
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'tableId: string;'
+      return:
+        type:
+          - string
+        description: |-
+
+
+          #### <a name="examples"></a>Ejemplos
+
+          ```typescript
+          async function onChange(event) {
+              await Excel.run(async (context) => {
+                  let table = context.workbook.tables.getItem(event.tableId);
+                  let worksheet = context.workbook.worksheets.getItem(event.worksheetId);
+                  worksheet.load("name");
+
+                  await context.sync();
+
+                  console.log("Handler for table collection onChanged event has been triggered. Data changed address: " + event.address);
+                  console.log("Table Id : " + event.tableId);
+                  console.log("Worksheet Id : " + worksheet.name);
+              });
+          }
+          ```
+  - uid: excel.Excel.TableChangedEventArgs.type
+    summary: |-
+      Obtiene el tipo del evento. Para obtener más información, vea Excel.EventType.
+
+      \[[Conjunto de API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: type
+    fullName: type
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'type: "TableChanged";'
+      return:
+        type:
+          - '"TableChanged"'
+  - uid: excel.Excel.TableChangedEventArgs.worksheetId
+    summary: |-
+      Obtiene el identificador de la hoja de cálculo en la que se cambian los datos.
+
+      \[[Conjunto de API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: worksheetId
+    fullName: worksheetId
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'worksheetId: string;'
+      return:
+        type:
+          - string
+        description: |-
+
+
+          #### <a name="examples"></a>Ejemplos
+
+          ```typescript
+          async function onChange(event) {
+              await Excel.run(async (context) => {
+                  let table = context.workbook.tables.getItem(event.tableId);
+                  let worksheet = context.workbook.worksheets.getItem(event.worksheetId);
+                  worksheet.load("name");
+
+                  await context.sync();
+
+                  console.log("Handler for table collection onChanged event has been triggered. Data changed address: " + event.address);
+                  console.log("Table Id : " + event.tableId);
+                  console.log("Worksheet Id : " + worksheet.name);
+              });
+          }
+          ```
