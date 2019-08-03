@@ -1,0 +1,629 @@
+### YamlMime:UniversalReference
+items:
+  - uid: Outlook.Office.MessageCompose
+    summary: |-
+      <span data-ttu-id="68b54-101">El modo de redacción de mensajes de [Office. Context. Mailbox. Item](xref:Outlook.Office.Item)</span><span class="sxs-lookup"><span data-stu-id="68b54-101">The message compose mode of [Office.context.mailbox.item](xref:Outlook.Office.Item)</span></span><!-- --><span data-ttu-id="68b54-102">.</span><span class="sxs-lookup"><span data-stu-id="68b54-102"></span></span>
+
+      <span data-ttu-id="68b54-103">**Importante**: se trata de un objeto interno de Outlook, que no se expone directamente a través de las interfaces existentes.</span><span class="sxs-lookup"><span data-stu-id="68b54-103">**Important**: This is an internal Outlook object, not directly exposed through existing interfaces.</span></span> <span data-ttu-id="68b54-104">Debe tratarlo como un modo de Office. Context. Mailbox. Item.</span><span class="sxs-lookup"><span data-stu-id="68b54-104">You should treat this as a mode of Office.context.mailbox.item.</span></span> <span data-ttu-id="68b54-105">Consulte la página del [modelo de objetos](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/requirement-set-1.1/office.context.mailbox.item) para obtener más información.</span><span class="sxs-lookup"><span data-stu-id="68b54-105">Refer to the [Object Model](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/requirement-set-1.1/office.context.mailbox.item) page for more information.</span></span>
+    name: Office.MessageCompose
+    fullName: Office.MessageCompose
+    langs:
+      - typeScript
+    type: interface
+    extends:
+      - Outlook.Office.Message
+      - Outlook.Office.ItemCompose
+    package: Outlook
+    children:
+      - Outlook.Office.MessageCompose.addFileAttachmentAsync
+      - Outlook.Office.MessageCompose.addFileAttachmentAsync_1
+      - Outlook.Office.MessageCompose.addItemAttachmentAsync
+      - Outlook.Office.MessageCompose.addItemAttachmentAsync_1
+      - Outlook.Office.MessageCompose.loadCustomPropertiesAsync
+      - Outlook.Office.MessageCompose.removeAttachmentAsync
+      - Outlook.Office.MessageCompose.removeAttachmentAsync_1
+      - Outlook.Office.MessageCompose.bcc
+      - Outlook.Office.MessageCompose.body
+      - Outlook.Office.MessageCompose.cc
+      - Outlook.Office.MessageCompose.conversationId
+      - Outlook.Office.MessageCompose.itemType
+      - Outlook.Office.MessageCompose.subject
+      - Outlook.Office.MessageCompose.to
+  - uid: Outlook.Office.MessageCompose.addFileAttachmentAsync
+    summary: |-
+      <span data-ttu-id="68b54-106">Agrega un archivo a un mensaje o cita como datos adjuntos.</span><span class="sxs-lookup"><span data-stu-id="68b54-106">Adds a file to a message or appointment as an attachment.</span></span>
+
+      <span data-ttu-id="68b54-107">El método addFileAttachmentAsync carga el archivo en el URI especificado y lo asocia al elemento en el formulario de redacción.</span><span class="sxs-lookup"><span data-stu-id="68b54-107">The addFileAttachmentAsync method uploads the file at the specified URI and attaches it to the item in the compose form.</span></span>
+
+      <span data-ttu-id="68b54-108">A continuación, puede utilizar el identificador con el método removeAttachmentAsync para quitar los datos adjuntos en la misma sesión.</span><span class="sxs-lookup"><span data-stu-id="68b54-108">You can subsequently use the identifier with the removeAttachmentAsync method to remove the attachment in the same session.</span></span>
+
+      <span data-ttu-id="68b54-109">\[[Conjunto de API: buzón de correo 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="68b54-109">\[ [API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]</span></span>
+    remarks: |-
+      <span data-ttu-id="68b54-110">**<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadWriteItem</span><span class="sxs-lookup"><span data-stu-id="68b54-110">**[Minimum permission level](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadWriteItem</span></span>
+
+      <span data-ttu-id="68b54-111">**<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: redacción de mensaje</span><span class="sxs-lookup"><span data-stu-id="68b54-111">**[Applicable Outlook mode](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: Message Compose</span></span>
+
+      <span data-ttu-id="68b54-112">**Errores**:</span><span class="sxs-lookup"><span data-stu-id="68b54-112">**Errors**:</span></span>
+
+      - <span data-ttu-id="68b54-113">AttachmentSizeExceeded: los datos adjuntos son más grandes de lo permitidos.</span><span class="sxs-lookup"><span data-stu-id="68b54-113">AttachmentSizeExceeded: The attachment is larger than allowed.</span></span>
+
+      - <span data-ttu-id="68b54-114">FileTypeNotSupported: los datos adjuntos tienen una extensión no permitida.</span><span class="sxs-lookup"><span data-stu-id="68b54-114">FileTypeNotSupported: The attachment has an extension that is not allowed.</span></span>
+
+      - <span data-ttu-id="68b54-115">NumberOfAttachmentsExceeded: el mensaje o la cita tiene demasiados datos adjuntos.</span><span class="sxs-lookup"><span data-stu-id="68b54-115">NumberOfAttachmentsExceeded: The message or appointment has too many attachments.</span></span>
+
+      #### <a name="examples"></a><span data-ttu-id="68b54-116">Ejemplos</span><span class="sxs-lookup"><span data-stu-id="68b54-116">Examples</span></span>
+
+      ```javascript
+      function callback(result) {
+          if (result.error) {
+              console.log(result.error);
+          } else {
+              console.log("Attachment added");
+          }
+      }
+
+      function addAttachment() {
+          // The values in asyncContext can be accessed in the callback.
+          var options = { 'asyncContext': { var1: 1, var2: 2 } };
+
+          var attachmentURL = "https://contoso.com/rtm/icon.png";
+          Office.context.mailbox.item.addFileAttachmentAsync(attachmentURL, attachmentURL, options, callback);
+      }
+      ```
+      ```javascript
+      // The following example adds an image file as an inline attachment and
+      // references the attachment in the message body.
+      Office.context.mailbox.item.addFileAttachmentAsync(
+          "http://i.imgur.com/WJXklif.png",
+          "cute_bird.png",
+          {
+              isInline: true
+          },
+          function (asyncResult) {
+              Office.context.mailbox.item.body.setAsync(
+                  "<p>Here's a cute bird!</p><img src='cid:cute_bird.png'>",
+                  {
+                      "coercionType": "html"
+                  },
+                  function (asyncResult) {
+                      // Do something here.
+                  });
+          });
+      ```
+    name: 'addFileAttachmentAsync(uri, attachmentName, options, callback)'
+    fullName: 'addFileAttachmentAsync(uri, attachmentName, options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'addFileAttachmentAsync(uri: string, attachmentName: string, options?: Office.AsyncContextOptions & { isInline: boolean }, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: uri
+          description: <span data-ttu-id="68b54-117">El URI que proporciona la ubicación del archivo que se va a adjuntar al mensaje o a la cita.</span><span class="sxs-lookup"><span data-stu-id="68b54-117">The URI that provides the location of the file to attach to the message or appointment.</span></span> <span data-ttu-id="68b54-118">La longitud máxima es de 2048 caracteres.</span><span class="sxs-lookup"><span data-stu-id="68b54-118">The maximum length is 2048 characters.</span></span>
+          type:
+            - string
+        - id: attachmentName
+          description: <span data-ttu-id="68b54-119">El nombre de los datos adjuntos que se muestra mientras estos se cargan.</span><span class="sxs-lookup"><span data-stu-id="68b54-119">The name of the attachment that is shown while the attachment is uploading.</span></span> <span data-ttu-id="68b54-120">La longitud máxima es de 255 caracteres.</span><span class="sxs-lookup"><span data-stu-id="68b54-120">The maximum length is 255 characters.</span></span>
+          type:
+            - string
+        - id: options
+          description: '<span data-ttu-id="68b54-121">Opcional.</span><span class="sxs-lookup"><span data-stu-id="68b54-121">Optional.</span></span> <span data-ttu-id="68b54-122">Un objeto literal que contiene una o más de las siguientes propiedades.</span><span class="sxs-lookup"><span data-stu-id="68b54-122">An object literal that contains one or more of the following properties.</span></span> <span data-ttu-id="68b54-123">asyncContext: los desarrolladores pueden proporcionar cualquier objeto al que quieran tener acceso en el método de devolución de llamada.</span><span class="sxs-lookup"><span data-stu-id="68b54-123">asyncContext: Developers can provide any object they wish to access in the callback method.</span></span> <span data-ttu-id="68b54-124">isInline: si es true, indica que los datos adjuntos se mostrarán en línea en el cuerpo del mensaje y no deben mostrarse en la lista de datos adjuntos.</span><span class="sxs-lookup"><span data-stu-id="68b54-124">isInline: If true, indicates that the attachment will be shown inline in the message body, and should not be displayed in the attachment list.</span></span>'
+          type:
+            - 'Office.AsyncContextOptions & { isInline: boolean }'
+        - id: callback
+          description: '<span data-ttu-id="68b54-125">Opcional.</span><span class="sxs-lookup"><span data-stu-id="68b54-125">Optional.</span></span> <span data-ttu-id="68b54-126">Cuando el método finaliza, la función que se pasa en el parámetro callback se llama con un único parámetro de tipo Office. AsyncResult.</span><span class="sxs-lookup"><span data-stu-id="68b54-126">When the method completes, the function passed in the callback parameter is called with a single parameter of type Office.AsyncResult.</span></span> <span data-ttu-id="68b54-127">Si se realiza correctamente, se proporcionará el identificador de datos adjuntos en la propiedad asyncResult. Value.</span><span class="sxs-lookup"><span data-stu-id="68b54-127">On success, the attachment identifier will be provided in the asyncResult.value property.</span></span> <span data-ttu-id="68b54-128">Si la carga de los datos adjuntos no se completa correctamente, el objeto asyncResult contendrá otro objeto Error que proporcionará una descripción del error.</span><span class="sxs-lookup"><span data-stu-id="68b54-128">If uploading the attachment fails, the asyncResult object will contain an Error object that provides a description of the error.</span></span>'
+          type:
+            - '(asyncResult: Office.AsyncResult<string>) => void'
+  - uid: Outlook.Office.MessageCompose.addFileAttachmentAsync_1
+    summary: |-
+      <span data-ttu-id="68b54-129">Agrega un archivo a un mensaje o cita como datos adjuntos.</span><span class="sxs-lookup"><span data-stu-id="68b54-129">Adds a file to a message or appointment as an attachment.</span></span>
+
+      <span data-ttu-id="68b54-130">El método addFileAttachmentAsync carga el archivo en el URI especificado y lo asocia al elemento en el formulario de redacción.</span><span class="sxs-lookup"><span data-stu-id="68b54-130">The addFileAttachmentAsync method uploads the file at the specified URI and attaches it to the item in the compose form.</span></span>
+
+      <span data-ttu-id="68b54-131">A continuación, puede utilizar el identificador con el método removeAttachmentAsync para quitar los datos adjuntos en la misma sesión.</span><span class="sxs-lookup"><span data-stu-id="68b54-131">You can subsequently use the identifier with the removeAttachmentAsync method to remove the attachment in the same session.</span></span>
+
+      <span data-ttu-id="68b54-132">\[[Conjunto de API: buzón de correo 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="68b54-132">\[ [API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]</span></span>
+    remarks: |-
+      <span data-ttu-id="68b54-133">**<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadWriteItem</span><span class="sxs-lookup"><span data-stu-id="68b54-133">**[Minimum permission level](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadWriteItem</span></span>
+
+      <span data-ttu-id="68b54-134">**<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: redacción de mensaje</span><span class="sxs-lookup"><span data-stu-id="68b54-134">**[Applicable Outlook mode](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: Message Compose</span></span>
+
+      <span data-ttu-id="68b54-135">**Errores**:</span><span class="sxs-lookup"><span data-stu-id="68b54-135">**Errors**:</span></span>
+
+      - <span data-ttu-id="68b54-136">AttachmentSizeExceeded: los datos adjuntos son más grandes de lo permitidos.</span><span class="sxs-lookup"><span data-stu-id="68b54-136">AttachmentSizeExceeded: The attachment is larger than allowed.</span></span>
+
+      - <span data-ttu-id="68b54-137">FileTypeNotSupported: los datos adjuntos tienen una extensión no permitida.</span><span class="sxs-lookup"><span data-stu-id="68b54-137">FileTypeNotSupported: The attachment has an extension that is not allowed.</span></span>
+
+      - <span data-ttu-id="68b54-138">NumberOfAttachmentsExceeded: el mensaje o la cita tiene demasiados datos adjuntos.</span><span class="sxs-lookup"><span data-stu-id="68b54-138">NumberOfAttachmentsExceeded: The message or appointment has too many attachments.</span></span>
+    name: 'addFileAttachmentAsync(uri, attachmentName, callback)'
+    fullName: 'addFileAttachmentAsync(uri, attachmentName, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'addFileAttachmentAsync(uri: string, attachmentName: string, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: uri
+          description: <span data-ttu-id="68b54-139">El URI que proporciona la ubicación del archivo que se va a adjuntar al mensaje o a la cita.</span><span class="sxs-lookup"><span data-stu-id="68b54-139">The URI that provides the location of the file to attach to the message or appointment.</span></span> <span data-ttu-id="68b54-140">La longitud máxima es de 2048 caracteres.</span><span class="sxs-lookup"><span data-stu-id="68b54-140">The maximum length is 2048 characters.</span></span>
+          type:
+            - string
+        - id: attachmentName
+          description: <span data-ttu-id="68b54-141">El nombre de los datos adjuntos que se muestra mientras estos se cargan.</span><span class="sxs-lookup"><span data-stu-id="68b54-141">The name of the attachment that is shown while the attachment is uploading.</span></span> <span data-ttu-id="68b54-142">La longitud máxima es de 255 caracteres.</span><span class="sxs-lookup"><span data-stu-id="68b54-142">The maximum length is 255 characters.</span></span>
+          type:
+            - string
+        - id: callback
+          description: '<span data-ttu-id="68b54-143">Opcional.</span><span class="sxs-lookup"><span data-stu-id="68b54-143">Optional.</span></span> <span data-ttu-id="68b54-144">Cuando el método finaliza, la función que se pasa en el parámetro callback se llama con un único parámetro de tipo Office. AsyncResult.</span><span class="sxs-lookup"><span data-stu-id="68b54-144">When the method completes, the function passed in the callback parameter is called with a single parameter of type Office.AsyncResult.</span></span> <span data-ttu-id="68b54-145">Si se realiza correctamente, se proporcionará el identificador de datos adjuntos en la propiedad asyncResult. Value.</span><span class="sxs-lookup"><span data-stu-id="68b54-145">On success, the attachment identifier will be provided in the asyncResult.value property.</span></span> <span data-ttu-id="68b54-146">Si la carga de los datos adjuntos no se completa correctamente, el objeto asyncResult contendrá otro objeto Error que proporcionará una descripción del error.</span><span class="sxs-lookup"><span data-stu-id="68b54-146">If uploading the attachment fails, the asyncResult object will contain an Error object that provides a description of the error.</span></span>'
+          type:
+            - '(asyncResult: Office.AsyncResult<string>) => void'
+  - uid: Outlook.Office.MessageCompose.addItemAttachmentAsync
+    summary: |-
+      <span data-ttu-id="68b54-147">Agrega un elemento de Exchange (por ejemplo, un mensaje) como datos adjuntos al mensaje o a la cita.</span><span class="sxs-lookup"><span data-stu-id="68b54-147">Adds an Exchange item, such as a message, as an attachment to the message or appointment.</span></span>
+
+      <span data-ttu-id="68b54-148">El método addItemAttachmentAsync adjunta el elemento con el identificador de Exchange especificado al elemento en el formulario de redacción.</span><span class="sxs-lookup"><span data-stu-id="68b54-148">The addItemAttachmentAsync method attaches the item with the specified Exchange identifier to the item in the compose form.</span></span> <span data-ttu-id="68b54-149">Si especifica un método de devolución de llamada, se llamará a este con un parámetro (asyncResult) que contiene el identificador de datos adjuntos o un código que indica cualquier error que se haya generado al adjuntar el elemento.</span><span class="sxs-lookup"><span data-stu-id="68b54-149">If you specify a callback method, the method is called with one parameter, asyncResult, which contains either the attachment identifier or a code that indicates any error that occurred while attaching the item.</span></span> <span data-ttu-id="68b54-150">Con el parámetro options puede pasar información de estado al método de devolución de llamada, si lo considera necesario.</span><span class="sxs-lookup"><span data-stu-id="68b54-150">You can use the options parameter to pass state information to the callback method, if needed.</span></span>
+
+      <span data-ttu-id="68b54-151">A continuación, puede utilizar el identificador con el método removeAttachmentAsync para quitar los datos adjuntos en la misma sesión.</span><span class="sxs-lookup"><span data-stu-id="68b54-151">You can subsequently use the identifier with the removeAttachmentAsync method to remove the attachment in the same session.</span></span>
+
+      <span data-ttu-id="68b54-152">Si el complemento de Office se está ejecutando en Outlook en la web, el método addItemAttachmentAsync puede adjuntar elementos a elementos que no sean el elemento que está editando; sin embargo, esto no se admite y no se recomienda.</span><span class="sxs-lookup"><span data-stu-id="68b54-152">If your Office add-in is running in Outlook on the web, the addItemAttachmentAsync method can attach items to items other than the item that you are editing; however, this is not supported and is not recommended.</span></span>
+
+      <span data-ttu-id="68b54-153">\[[Conjunto de API: buzón de correo 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="68b54-153">\[ [API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]</span></span>
+    remarks: |-
+      <span data-ttu-id="68b54-154">**<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadWriteItem</span><span class="sxs-lookup"><span data-stu-id="68b54-154">**[Minimum permission level](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadWriteItem</span></span>
+
+      <span data-ttu-id="68b54-155">**<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: redacción de mensaje</span><span class="sxs-lookup"><span data-stu-id="68b54-155">**[Applicable Outlook mode](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: Message Compose</span></span>
+
+      <span data-ttu-id="68b54-156">**Errores**:</span><span class="sxs-lookup"><span data-stu-id="68b54-156">**Errors**:</span></span>
+
+      - <span data-ttu-id="68b54-157">NumberOfAttachmentsExceeded: el mensaje o la cita tiene demasiados datos adjuntos.</span><span class="sxs-lookup"><span data-stu-id="68b54-157">NumberOfAttachmentsExceeded: The message or appointment has too many attachments.</span></span>
+
+      #### <a name="examples"></a><span data-ttu-id="68b54-158">Ejemplos</span><span class="sxs-lookup"><span data-stu-id="68b54-158">Examples</span></span>
+
+      ```javascript
+      // The following example adds an existing Outlook item as an attachment
+      // with the name `My Attachment`.
+      function callback(result) {
+          if (result.error) {
+              console.log(result.error);
+          } else {
+              console.log("Attachment added");
+          }
+      }
+
+      function addAttachment() {
+          // EWS ID of item to attach (shortened for readability).
+          var itemId = "AAMkADI1...AAA=";
+
+          // The values in asyncContext can be accessed in the callback.
+          var options = { 'asyncContext': { var1: 1, var2: 2 } };
+
+          Office.context.mailbox.item.addItemAttachmentAsync(itemId, "My Attachment", options, callback);
+      }
+      ```
+    name: 'addItemAttachmentAsync(itemId, attachmentName, options, callback)'
+    fullName: 'addItemAttachmentAsync(itemId, attachmentName, options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'addItemAttachmentAsync(itemId: any, attachmentName: string, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: itemId
+          description: <span data-ttu-id="68b54-159">El identificador de Exchange del elemento que debe adjuntarse.</span><span class="sxs-lookup"><span data-stu-id="68b54-159">The Exchange identifier of the item to attach.</span></span> <span data-ttu-id="68b54-160">La longitud máxima es de 100 caracteres.</span><span class="sxs-lookup"><span data-stu-id="68b54-160">The maximum length is 100 characters.</span></span>
+          type:
+            - any
+        - id: attachmentName
+          description: <span data-ttu-id="68b54-161">El nombre de los datos adjuntos que se muestra mientras estos se cargan.</span><span class="sxs-lookup"><span data-stu-id="68b54-161">The name of the attachment that is shown while the attachment is uploading.</span></span> <span data-ttu-id="68b54-162">La longitud máxima es de 255 caracteres.</span><span class="sxs-lookup"><span data-stu-id="68b54-162">The maximum length is 255 characters.</span></span>
+          type:
+            - string
+        - id: options
+          description: '<span data-ttu-id="68b54-163">Opcional.</span><span class="sxs-lookup"><span data-stu-id="68b54-163">Optional.</span></span> <span data-ttu-id="68b54-164">Un objeto literal que contiene una o más de las siguientes propiedades.</span><span class="sxs-lookup"><span data-stu-id="68b54-164">An object literal that contains one or more of the following properties.</span></span> <span data-ttu-id="68b54-165">asyncContext: los desarrolladores pueden proporcionar cualquier objeto al que quieran tener acceso en el método de devolución de llamada.</span><span class="sxs-lookup"><span data-stu-id="68b54-165">asyncContext: Developers can provide any object they wish to access in the callback method.</span></span>'
+          type:
+            - Office.AsyncContextOptions
+        - id: callback
+          description: '<span data-ttu-id="68b54-166">Opcional.</span><span class="sxs-lookup"><span data-stu-id="68b54-166">Optional.</span></span> <span data-ttu-id="68b54-167">Cuando el método finaliza, la función que se pasa en el parámetro callback se llama con un único parámetro de tipo Office. AsyncResult.</span><span class="sxs-lookup"><span data-stu-id="68b54-167">When the method completes, the function passed in the callback parameter is called with a single parameter of type Office.AsyncResult.</span></span> <span data-ttu-id="68b54-168">Si se realiza correctamente, se proporcionará el identificador de datos adjuntos en la propiedad asyncResult. Value.</span><span class="sxs-lookup"><span data-stu-id="68b54-168">On success, the attachment identifier will be provided in the asyncResult.value property.</span></span> <span data-ttu-id="68b54-169">Si se produce un error al agregar los datos adjuntos, el objeto asyncResult contendrá un objeto error que proporciona una descripción del error.</span><span class="sxs-lookup"><span data-stu-id="68b54-169">If adding the attachment fails, the asyncResult object will contain an Error object that provides a description of the error.</span></span>'
+          type:
+            - '(asyncResult: Office.AsyncResult<string>) => void'
+  - uid: Outlook.Office.MessageCompose.addItemAttachmentAsync_1
+    summary: |-
+      <span data-ttu-id="68b54-170">Agrega un elemento de Exchange (por ejemplo, un mensaje) como datos adjuntos al mensaje o a la cita.</span><span class="sxs-lookup"><span data-stu-id="68b54-170">Adds an Exchange item, such as a message, as an attachment to the message or appointment.</span></span>
+
+      <span data-ttu-id="68b54-171">El método addItemAttachmentAsync adjunta el elemento con el identificador de Exchange especificado al elemento en el formulario de redacción.</span><span class="sxs-lookup"><span data-stu-id="68b54-171">The addItemAttachmentAsync method attaches the item with the specified Exchange identifier to the item in the compose form.</span></span> <span data-ttu-id="68b54-172">Si especifica un método de devolución de llamada, se llamará a este con un parámetro (asyncResult) que contiene el identificador de datos adjuntos o un código que indica cualquier error que se haya generado al adjuntar el elemento.</span><span class="sxs-lookup"><span data-stu-id="68b54-172">If you specify a callback method, the method is called with one parameter, asyncResult, which contains either the attachment identifier or a code that indicates any error that occurred while attaching the item.</span></span> <span data-ttu-id="68b54-173">Con el parámetro options puede pasar información de estado al método de devolución de llamada, si lo considera necesario.</span><span class="sxs-lookup"><span data-stu-id="68b54-173">You can use the options parameter to pass state information to the callback method, if needed.</span></span>
+
+      <span data-ttu-id="68b54-174">A continuación, puede utilizar el identificador con el método removeAttachmentAsync para quitar los datos adjuntos en la misma sesión.</span><span class="sxs-lookup"><span data-stu-id="68b54-174">You can subsequently use the identifier with the removeAttachmentAsync method to remove the attachment in the same session.</span></span>
+
+      <span data-ttu-id="68b54-175">Si el complemento de Office se está ejecutando en Outlook en la web, el método addItemAttachmentAsync puede adjuntar elementos a elementos que no sean el elemento que está editando; sin embargo, esto no se admite y no se recomienda.</span><span class="sxs-lookup"><span data-stu-id="68b54-175">If your Office add-in is running in Outlook on the web, the addItemAttachmentAsync method can attach items to items other than the item that you are editing; however, this is not supported and is not recommended.</span></span>
+
+      <span data-ttu-id="68b54-176">\[[Conjunto de API: buzón de correo 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="68b54-176">\[ [API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]</span></span>
+    remarks: |-
+      <span data-ttu-id="68b54-177">**<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadWriteItem</span><span class="sxs-lookup"><span data-stu-id="68b54-177">**[Minimum permission level](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadWriteItem</span></span>
+
+      <span data-ttu-id="68b54-178">**<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: redacción de mensaje</span><span class="sxs-lookup"><span data-stu-id="68b54-178">**[Applicable Outlook mode](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: Message Compose</span></span>
+
+      <span data-ttu-id="68b54-179">**Errores**:</span><span class="sxs-lookup"><span data-stu-id="68b54-179">**Errors**:</span></span>
+
+      - <span data-ttu-id="68b54-180">NumberOfAttachmentsExceeded: el mensaje o la cita tiene demasiados datos adjuntos.</span><span class="sxs-lookup"><span data-stu-id="68b54-180">NumberOfAttachmentsExceeded: The message or appointment has too many attachments.</span></span>
+    name: 'addItemAttachmentAsync(itemId, attachmentName, callback)'
+    fullName: 'addItemAttachmentAsync(itemId, attachmentName, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'addItemAttachmentAsync(itemId: any, attachmentName: string, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: itemId
+          description: <span data-ttu-id="68b54-181">El identificador de Exchange del elemento que debe adjuntarse.</span><span class="sxs-lookup"><span data-stu-id="68b54-181">The Exchange identifier of the item to attach.</span></span> <span data-ttu-id="68b54-182">La longitud máxima es de 100 caracteres.</span><span class="sxs-lookup"><span data-stu-id="68b54-182">The maximum length is 100 characters.</span></span>
+          type:
+            - any
+        - id: attachmentName
+          description: <span data-ttu-id="68b54-183">El nombre de los datos adjuntos que se muestra mientras estos se cargan.</span><span class="sxs-lookup"><span data-stu-id="68b54-183">The name of the attachment that is shown while the attachment is uploading.</span></span> <span data-ttu-id="68b54-184">La longitud máxima es de 255 caracteres.</span><span class="sxs-lookup"><span data-stu-id="68b54-184">The maximum length is 255 characters.</span></span>
+          type:
+            - string
+        - id: callback
+          description: '<span data-ttu-id="68b54-185">Opcional.</span><span class="sxs-lookup"><span data-stu-id="68b54-185">Optional.</span></span> <span data-ttu-id="68b54-186">Cuando el método finaliza, la función que se pasa en el parámetro callback se llama con un único parámetro de tipo Office. AsyncResult.</span><span class="sxs-lookup"><span data-stu-id="68b54-186">When the method completes, the function passed in the callback parameter is called with a single parameter of type Office.AsyncResult.</span></span> <span data-ttu-id="68b54-187">Si se realiza correctamente, se proporcionará el identificador de datos adjuntos en la propiedad asyncResult. Value.</span><span class="sxs-lookup"><span data-stu-id="68b54-187">On success, the attachment identifier will be provided in the asyncResult.value property.</span></span> <span data-ttu-id="68b54-188">Si se produce un error al agregar los datos adjuntos, el objeto asyncResult contendrá un objeto error que proporciona una descripción del error.</span><span class="sxs-lookup"><span data-stu-id="68b54-188">If adding the attachment fails, the asyncResult object will contain an Error object that provides a description of the error.</span></span>'
+          type:
+            - '(asyncResult: Office.AsyncResult<string>) => void'
+  - uid: Outlook.Office.MessageCompose.loadCustomPropertiesAsync
+    summary: |-
+      <span data-ttu-id="68b54-189">Carga de forma asincrónica las propiedades personalizadas de este complemento en el elemento seleccionado.</span><span class="sxs-lookup"><span data-stu-id="68b54-189">Asynchronously loads custom properties for this add-in on the selected item.</span></span>
+
+      <span data-ttu-id="68b54-190">Las propiedades personalizadas se almacenan como pares de clave/valor según la aplicación y el elemento.</span><span class="sxs-lookup"><span data-stu-id="68b54-190">Custom properties are stored as key/value pairs on a per-app, per-item basis.</span></span> <span data-ttu-id="68b54-191">Este método devuelve un objeto CustomProperties en la devolución de llamada, que proporciona métodos para tener acceso a las propiedades personalizadas específicas del elemento actual y del complemento actual.</span><span class="sxs-lookup"><span data-stu-id="68b54-191">This method returns a CustomProperties object in the callback, which provides methods to access the custom properties specific to the current item and the current add-in.</span></span> <span data-ttu-id="68b54-192">Las propiedades personalizadas no están cifradas en el elemento, por lo que no debería usarse como almacenamiento seguro.</span><span class="sxs-lookup"><span data-stu-id="68b54-192">Custom properties are not encrypted on the item, so this should not be used as secure storage.</span></span>
+
+      <span data-ttu-id="68b54-193">Las propiedades personalizadas se proporcionan como un objeto CustomProperties en la propiedad asyncResult. Value.</span><span class="sxs-lookup"><span data-stu-id="68b54-193">The custom properties are provided as a CustomProperties object in the asyncResult.value property.</span></span> <span data-ttu-id="68b54-194">Este objeto puede usarse para obtener, establecer y quitar las propiedades personalizadas del elemento, así como para guardar los cambios en la propiedad personalizada que se vuelve a establecer en el servidor.</span><span class="sxs-lookup"><span data-stu-id="68b54-194">This object can be used to get, set, and remove custom properties from the item and save changes to the custom property set back to the server.</span></span>
+
+      <span data-ttu-id="68b54-195">\[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="68b54-195">\[ [API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]</span></span>
+    remarks: |-
+      <span data-ttu-id="68b54-196">**<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem</span><span class="sxs-lookup"><span data-stu-id="68b54-196">**[Minimum permission level](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem</span></span>
+
+      <span data-ttu-id="68b54-197">**<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: redacción de mensaje</span><span class="sxs-lookup"><span data-stu-id="68b54-197">**[Applicable Outlook mode](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: Message Compose</span></span>
+    name: 'loadCustomPropertiesAsync(callback, userContext)'
+    fullName: 'loadCustomPropertiesAsync(callback, userContext)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'loadCustomPropertiesAsync(callback: (asyncResult: Office.AsyncResult<CustomProperties>) => void, userContext?: any): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: callback
+          description: '<span data-ttu-id="68b54-198">Cuando el método finaliza, la función que se pasa en el parámetro callback se llama con un único parámetro de tipo Office. AsyncResult.</span><span class="sxs-lookup"><span data-stu-id="68b54-198">When the method completes, the function passed in the callback parameter is called with a single parameter of type Office.AsyncResult.</span></span>'
+          type:
+            - '(asyncResult: Office.AsyncResult<CustomProperties>) => void'
+        - id: userContext
+          description: <span data-ttu-id="68b54-199">Opcional.</span><span class="sxs-lookup"><span data-stu-id="68b54-199">Optional.</span></span> <span data-ttu-id="68b54-200">Los desarrolladores pueden proporcionar cualquier objeto al que quieran obtener acceso en la función de devolución de llamada.</span><span class="sxs-lookup"><span data-stu-id="68b54-200">Developers can provide any object they wish to access in the callback function.</span></span> <span data-ttu-id="68b54-201">Se puede obtener acceso a este objeto mediante la propiedad asyncResult. asyncContext en la función de devolución de llamada.</span><span class="sxs-lookup"><span data-stu-id="68b54-201">This object can be accessed by the asyncResult.asyncContext property in the callback function.</span></span>
+          type:
+            - any
+  - uid: Outlook.Office.MessageCompose.removeAttachmentAsync
+    summary: |-
+      <span data-ttu-id="68b54-202">Quita los datos adjuntos de un mensaje o cita.</span><span class="sxs-lookup"><span data-stu-id="68b54-202">Removes an attachment from a message or appointment.</span></span>
+
+      <span data-ttu-id="68b54-203">El método removeAttachmentAsync quita los datos adjuntos con el identificador especificado del elemento.</span><span class="sxs-lookup"><span data-stu-id="68b54-203">The removeAttachmentAsync method removes the attachment with the specified identifier from the item.</span></span> <span data-ttu-id="68b54-204">Como práctica recomendada, debe usar el identificador de datos adjuntos para quitar datos adjuntos solo si la misma aplicación de correo ha agregado los datos adjuntos en la misma sesión.</span><span class="sxs-lookup"><span data-stu-id="68b54-204">As a best practice, you should use the attachment identifier to remove an attachment only if the same mail app has added that attachment in the same session.</span></span> <span data-ttu-id="68b54-205">En Outlook en la web y dispositivos móviles, el identificador de datos adjuntos solo es válido en la misma sesión.</span><span class="sxs-lookup"><span data-stu-id="68b54-205">In Outlook on the web and mobile devices, the attachment identifier is valid only within the same session.</span></span> <span data-ttu-id="68b54-206">Una sesión es superior a cuando el usuario cierra la aplicación o si el usuario comienza a redactar un formulario en línea y, a continuación, el formulario continúa en una ventana independiente.</span><span class="sxs-lookup"><span data-stu-id="68b54-206">A session is over when the user closes the app, or if the user starts composing an inline form then subsequently pops out the form to continue in a separate window.</span></span>
+
+      <span data-ttu-id="68b54-207">\[[Conjunto de API: buzón de correo 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="68b54-207">\[ [API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]</span></span>
+    remarks: |-
+      <span data-ttu-id="68b54-208">**<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadWriteItem</span><span class="sxs-lookup"><span data-stu-id="68b54-208">**[Minimum permission level](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadWriteItem</span></span>
+
+      <span data-ttu-id="68b54-209">**<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: redacción de mensaje</span><span class="sxs-lookup"><span data-stu-id="68b54-209">**[Applicable Outlook mode](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: Message Compose</span></span>
+
+      <span data-ttu-id="68b54-210">**Errores**:</span><span class="sxs-lookup"><span data-stu-id="68b54-210">**Errors**:</span></span>
+
+      - <span data-ttu-id="68b54-211">InvalidAttachmentId: el identificador de datos adjuntos no existe.</span><span class="sxs-lookup"><span data-stu-id="68b54-211">InvalidAttachmentId: The attachment identifier does not exist.</span></span>
+
+      #### <a name="examples"></a><span data-ttu-id="68b54-212">Ejemplos</span><span class="sxs-lookup"><span data-stu-id="68b54-212">Examples</span></span>
+
+      ```javascript
+      // The following code removes an attachment with an identifier of '0'.
+      Office.context.mailbox.item.removeAttachmentAsync(
+          '0',
+          { asyncContext : null },
+          function (asyncResult)
+          {
+              console.log(asyncResult.status);
+          }
+      );
+      ```
+    name: 'removeAttachmentAsync(attachmentId, options, callback)'
+    fullName: 'removeAttachmentAsync(attachmentId, options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'removeAttachmentAsync(attachmentId: string, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: attachmentId
+          description: <span data-ttu-id="68b54-213">El identificador de los datos adjuntos para quitar.</span><span class="sxs-lookup"><span data-stu-id="68b54-213">The identifier of the attachment to remove.</span></span>
+          type:
+            - string
+        - id: options
+          description: '<span data-ttu-id="68b54-214">Opcional.</span><span class="sxs-lookup"><span data-stu-id="68b54-214">Optional.</span></span> <span data-ttu-id="68b54-215">Un objeto literal que contiene una o más de las siguientes propiedades.</span><span class="sxs-lookup"><span data-stu-id="68b54-215">An object literal that contains one or more of the following properties.</span></span> <span data-ttu-id="68b54-216">asyncContext: los desarrolladores pueden proporcionar cualquier objeto al que quieran tener acceso en el método de devolución de llamada.</span><span class="sxs-lookup"><span data-stu-id="68b54-216">asyncContext: Developers can provide any object they wish to access in the callback method.</span></span>'
+          type:
+            - Office.AsyncContextOptions
+        - id: callback
+          description: '<span data-ttu-id="68b54-217">Opcional.</span><span class="sxs-lookup"><span data-stu-id="68b54-217">Optional.</span></span> <span data-ttu-id="68b54-218">Cuando el método finaliza, la función que se pasa en el parámetro callback se llama con un único parámetro de tipo Office. AsyncResult.</span><span class="sxs-lookup"><span data-stu-id="68b54-218">When the method completes, the function passed in the callback parameter is called with a single parameter of type Office.AsyncResult.</span></span> <span data-ttu-id="68b54-219">Si se produce un error en la eliminación de los datos adjuntos, la propiedad asyncResult. error contendrá un código de error con el motivo del error.</span><span class="sxs-lookup"><span data-stu-id="68b54-219">If removing the attachment fails, the asyncResult.error property will contain an error code with the reason for the failure.</span></span>'
+          type:
+            - '(asyncResult: Office.AsyncResult<void>) => void'
+  - uid: Outlook.Office.MessageCompose.removeAttachmentAsync_1
+    summary: |-
+      <span data-ttu-id="68b54-220">Quita los datos adjuntos de un mensaje o cita.</span><span class="sxs-lookup"><span data-stu-id="68b54-220">Removes an attachment from a message or appointment.</span></span>
+
+      <span data-ttu-id="68b54-221">El método removeAttachmentAsync quita los datos adjuntos con el identificador especificado del elemento.</span><span class="sxs-lookup"><span data-stu-id="68b54-221">The removeAttachmentAsync method removes the attachment with the specified identifier from the item.</span></span> <span data-ttu-id="68b54-222">Como práctica recomendada, debe usar el identificador de datos adjuntos para quitar datos adjuntos solo si la misma aplicación de correo ha agregado los datos adjuntos en la misma sesión.</span><span class="sxs-lookup"><span data-stu-id="68b54-222">As a best practice, you should use the attachment identifier to remove an attachment only if the same mail app has added that attachment in the same session.</span></span> <span data-ttu-id="68b54-223">En Outlook en la web y dispositivos móviles, el identificador de datos adjuntos solo es válido en la misma sesión.</span><span class="sxs-lookup"><span data-stu-id="68b54-223">In Outlook on the web and mobile devices, the attachment identifier is valid only within the same session.</span></span> <span data-ttu-id="68b54-224">Una sesión es superior a cuando el usuario cierra la aplicación o si el usuario comienza a redactar un formulario en línea y, a continuación, el formulario continúa en una ventana independiente.</span><span class="sxs-lookup"><span data-stu-id="68b54-224">A session is over when the user closes the app, or if the user starts composing an inline form then subsequently pops out the form to continue in a separate window.</span></span>
+
+      <span data-ttu-id="68b54-225">\[[Conjunto de API: buzón de correo 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="68b54-225">\[ [API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]</span></span>
+    remarks: |-
+      <span data-ttu-id="68b54-226">**<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadWriteItem</span><span class="sxs-lookup"><span data-stu-id="68b54-226">**[Minimum permission level](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadWriteItem</span></span>
+
+      <span data-ttu-id="68b54-227">**<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: redacción de mensaje</span><span class="sxs-lookup"><span data-stu-id="68b54-227">**[Applicable Outlook mode](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: Message Compose</span></span>
+
+      <span data-ttu-id="68b54-228">**Errores**:</span><span class="sxs-lookup"><span data-stu-id="68b54-228">**Errors**:</span></span>
+
+      - <span data-ttu-id="68b54-229">InvalidAttachmentId: el identificador de datos adjuntos no existe.</span><span class="sxs-lookup"><span data-stu-id="68b54-229">InvalidAttachmentId: The attachment identifier does not exist.</span></span>
+    name: 'removeAttachmentAsync(attachmentId, callback)'
+    fullName: 'removeAttachmentAsync(attachmentId, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'removeAttachmentAsync(attachmentId: string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: attachmentId
+          description: <span data-ttu-id="68b54-230">El identificador de los datos adjuntos para quitar.</span><span class="sxs-lookup"><span data-stu-id="68b54-230">The identifier of the attachment to remove.</span></span>
+          type:
+            - string
+        - id: callback
+          description: '<span data-ttu-id="68b54-231">Opcional.</span><span class="sxs-lookup"><span data-stu-id="68b54-231">Optional.</span></span> <span data-ttu-id="68b54-232">Cuando el método finaliza, la función que se pasa en el parámetro callback se llama con un único parámetro de tipo Office. AsyncResult.</span><span class="sxs-lookup"><span data-stu-id="68b54-232">When the method completes, the function passed in the callback parameter is called with a single parameter of type Office.AsyncResult.</span></span> <span data-ttu-id="68b54-233">Si se produce un error en la eliminación de los datos adjuntos, la propiedad asyncResult. error contendrá un código de error con el motivo del error.</span><span class="sxs-lookup"><span data-stu-id="68b54-233">If removing the attachment fails, the asyncResult.error property will contain an error code with the reason for the failure.</span></span>'
+          type:
+            - '(asyncResult: Office.AsyncResult<void>) => void'
+  - uid: Outlook.Office.MessageCompose.bcc
+    summary: |-
+      <span data-ttu-id="68b54-234">Obtiene un objeto que proporciona métodos para obtener o actualizar los destinatarios de la línea CCO (copia carbón oculta) de un mensaje.</span><span class="sxs-lookup"><span data-stu-id="68b54-234">Gets an object that provides methods to get or update the recipients on the Bcc (blind carbon copy) line of a message.</span></span>
+
+      <span data-ttu-id="68b54-235">\[[Conjunto de API: buzón de correo 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="68b54-235">\[ [API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]</span></span>
+    remarks: |-
+      <span data-ttu-id="68b54-236">**<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem</span><span class="sxs-lookup"><span data-stu-id="68b54-236">**[Minimum permission level](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem</span></span>
+
+      <span data-ttu-id="68b54-237">**<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: redacción de mensaje</span><span class="sxs-lookup"><span data-stu-id="68b54-237">**[Applicable Outlook mode](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: Message Compose</span></span>
+
+      #### <a name="examples"></a><span data-ttu-id="68b54-238">Ejemplos</span><span class="sxs-lookup"><span data-stu-id="68b54-238">Examples</span></span>
+
+      ```javascript
+      Office.context.mailbox.item.bcc.setAsync( ['alice@contoso.com', 'bob@contoso.com'] );
+      Office.context.mailbox.item.bcc.addAsync( ['jason@contoso.com'] );
+      Office.context.mailbox.item.bcc.getAsync(callback);
+
+      function callback(asyncResult) {
+          var arrayOfBccRecipients = asyncResult.value;
+      }
+      ```
+    name: bcc
+    fullName: bcc
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'bcc: Recipients;'
+      return:
+        type:
+          - Outlook.Office.Recipients
+  - uid: Outlook.Office.MessageCompose.body
+    summary: |-
+      <span data-ttu-id="68b54-239">Obtiene un objeto que proporciona métodos para manipular el cuerpo de un elemento.</span><span class="sxs-lookup"><span data-stu-id="68b54-239">Gets an object that provides methods for manipulating the body of an item.</span></span>
+
+      <span data-ttu-id="68b54-240">\[[Conjunto de API: buzón de correo 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="68b54-240">\[ [API set: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]</span></span>
+    remarks: |-
+      <span data-ttu-id="68b54-241">**<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem</span><span class="sxs-lookup"><span data-stu-id="68b54-241">**[Minimum permission level](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem</span></span>
+
+      <span data-ttu-id="68b54-242">**<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: redacción de mensaje</span><span class="sxs-lookup"><span data-stu-id="68b54-242">**[Applicable Outlook mode](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: Message Compose</span></span>
+
+      #### <a name="examples"></a><span data-ttu-id="68b54-243">Ejemplos</span><span class="sxs-lookup"><span data-stu-id="68b54-243">Examples</span></span>
+
+      ```javascript
+      // This example gets the body of the item as plain text.
+      Office.context.mailbox.item.body.getAsync(
+          "text",
+          { asyncContext: "This is passed to the callback" },
+          function callback(result) {
+              // Do something with the result.
+          });
+
+      // The following is an example of the result parameter passed to the callback function.
+      {
+          "value": "TEXT of whole body (including threads below)",
+          "status": "succeeded",
+          "asyncContext": "This is passed to the callback"
+      }
+      ```
+    name: body
+    fullName: body
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'body: Body;'
+      return:
+        type:
+          - Outlook.Office.Body
+  - uid: Outlook.Office.MessageCompose.cc
+    summary: |-
+      <span data-ttu-id="68b54-244">Proporciona acceso a los destinatarios CC (en copia) de un mensaje.</span><span class="sxs-lookup"><span data-stu-id="68b54-244">Provides access to the Cc (carbon copy) recipients of a message.</span></span> <span data-ttu-id="68b54-245">El tipo de objeto y el nivel de acceso dependen del modo del elemento actual.</span><span class="sxs-lookup"><span data-stu-id="68b54-245">The type of object and level of access depends on the mode of the current item.</span></span>
+
+      <span data-ttu-id="68b54-246">La propiedad CC devuelve un objeto [Office. Recipients](xref:Outlook.Office.Recipients) que proporciona métodos para obtener o actualizar los destinatarios en la línea CC del mensaje.</span><span class="sxs-lookup"><span data-stu-id="68b54-246">The cc property returns an [Office.Recipients](xref:Outlook.Office.Recipients) object that provides methods to get or update the recipients on the Cc line of the message.</span></span>
+
+      <span data-ttu-id="68b54-247">\[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="68b54-247">\[ [API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]</span></span>
+    remarks: |-
+      <span data-ttu-id="68b54-248">**<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem</span><span class="sxs-lookup"><span data-stu-id="68b54-248">**[Minimum permission level](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem</span></span>
+
+      <span data-ttu-id="68b54-249">**<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: redacción de mensaje</span><span class="sxs-lookup"><span data-stu-id="68b54-249">**[Applicable Outlook mode](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: Message Compose</span></span>
+
+      #### <a name="examples"></a><span data-ttu-id="68b54-250">Ejemplos</span><span class="sxs-lookup"><span data-stu-id="68b54-250">Examples</span></span>
+
+      ```javascript
+      Office.context.mailbox.item.cc.setAsync( ['alice@contoso.com', 'bob@contoso.com'] );
+      Office.context.mailbox.item.cc.addAsync( ['jason@contoso.com'] );
+      Office.context.mailbox.item.cc.getAsync(callback);
+
+      function callback(asyncResult) {
+          var arrayOfCcRecipients = asyncResult.value;
+      }
+      ```
+    name: cc
+    fullName: cc
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'cc: Recipients;'
+      return:
+        type:
+          - Outlook.Office.Recipients
+  - uid: Outlook.Office.MessageCompose.conversationId
+    summary: |-
+      <span data-ttu-id="68b54-251">Obtiene un identificador de la conversación de correo electrónico que contiene un mensaje determinado.</span><span class="sxs-lookup"><span data-stu-id="68b54-251">Gets an identifier for the email conversation that contains a particular message.</span></span>
+
+      <span data-ttu-id="68b54-p127">Puede obtener un entero para esta propiedad si la aplicación de correo se activa en respuestas o formularios de lectura o en formularios de redacción. Si, después, el usuario cambia el asunto del mensaje de respuesta, al enviar dicha respuesta, el Id. de conversación de ese mensaje cambiará y el valor que se obtuvo anteriormente ya no será de aplicación.</span><span class="sxs-lookup"><span data-stu-id="68b54-p127">You can get an integer for this property if your mail app is activated in read forms or responses in compose forms. If subsequently the user changes the subject of the reply message, upon sending the reply, the conversation ID for that message will change and that value you obtained earlier will no longer apply.</span></span>
+
+      <span data-ttu-id="68b54-254">Obtiene un valor NULL para esta propiedad para un nuevo elemento de un formulario de redacción.</span><span class="sxs-lookup"><span data-stu-id="68b54-254">You get null for this property for a new item in a compose form.</span></span> <span data-ttu-id="68b54-255">Si el usuario establece un asunto y guarda el elemento, la propiedad conversationId devolverá un valor.</span><span class="sxs-lookup"><span data-stu-id="68b54-255">If the user sets a subject and saves the item, the conversationId property will return a value.</span></span>
+
+      <span data-ttu-id="68b54-256">\[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="68b54-256">\[ [API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]</span></span>
+    remarks: |-
+      <span data-ttu-id="68b54-257">**<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem</span><span class="sxs-lookup"><span data-stu-id="68b54-257">**[Minimum permission level](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem</span></span>
+
+      <span data-ttu-id="68b54-258">**<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: redacción de mensaje</span><span class="sxs-lookup"><span data-stu-id="68b54-258">**[Applicable Outlook mode](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: Message Compose</span></span>
+
+      #### <a name="examples"></a><span data-ttu-id="68b54-259">Ejemplos</span><span class="sxs-lookup"><span data-stu-id="68b54-259">Examples</span></span>
+
+      ```javascript
+      var conversationId = Office.context.mailbox.item.conversationId;
+      console.log("conversationId: " + conversationId);
+      ```
+    name: conversationId
+    fullName: conversationId
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'conversationId: string;'
+      return:
+        type:
+          - string
+  - uid: Outlook.Office.MessageCompose.itemType
+    summary: |-
+      <span data-ttu-id="68b54-260">Obtiene el tipo de elemento que representa una instancia.</span><span class="sxs-lookup"><span data-stu-id="68b54-260">Gets the type of item that an instance represents.</span></span>
+
+      <span data-ttu-id="68b54-261">La propiedad itemType devuelve uno de los valores de enumeración de ItemType, lo que indica si la instancia de objeto de elemento es un mensaje o una cita.</span><span class="sxs-lookup"><span data-stu-id="68b54-261">The itemType property returns one of the ItemType enumeration values, indicating whether the item object instance is a message or an appointment.</span></span>
+
+      <span data-ttu-id="68b54-262">\[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="68b54-262">\[ [API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]</span></span>
+    remarks: |-
+      <span data-ttu-id="68b54-263">**<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem</span><span class="sxs-lookup"><span data-stu-id="68b54-263">**[Minimum permission level](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem</span></span>
+
+      <span data-ttu-id="68b54-264">**<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: redacción de mensaje</span><span class="sxs-lookup"><span data-stu-id="68b54-264">**[Applicable Outlook mode](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: Message Compose</span></span>
+
+      #### <a name="examples"></a><span data-ttu-id="68b54-265">Ejemplos</span><span class="sxs-lookup"><span data-stu-id="68b54-265">Examples</span></span>
+
+      ```javascript
+      if (Office.context.mailbox.item.itemType === Office.MailboxEnums.ItemType.Message) {
+          // Do something.
+      } else {
+          // Do something else.
+      }
+      ```
+    name: itemType
+    fullName: itemType
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'itemType: MailboxEnums.ItemType | string;'
+      return:
+        type:
+          - MailboxEnums.ItemType | string
+  - uid: Outlook.Office.MessageCompose.subject
+    summary: |-
+      <span data-ttu-id="68b54-266">Obtiene o establece la descripción que se muestra en el campo de asunto de un elemento.</span><span class="sxs-lookup"><span data-stu-id="68b54-266">Gets or sets the description that appears in the subject field of an item.</span></span>
+
+      <span data-ttu-id="68b54-267">La propiedad Subject obtiene o establece el asunto completo del elemento, como lo ha enviado el servidor de correo electrónico.</span><span class="sxs-lookup"><span data-stu-id="68b54-267">The subject property gets or sets the entire subject of the item, as sent by the email server.</span></span>
+
+      <span data-ttu-id="68b54-268">La propiedad Subject devuelve un objeto Subject que proporciona métodos para obtener y establecer el asunto.</span><span class="sxs-lookup"><span data-stu-id="68b54-268">The subject property returns a Subject object that provides methods to get and set the subject.</span></span>
+
+      <span data-ttu-id="68b54-269">\[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="68b54-269">\[ [API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]</span></span>
+    remarks: |-
+      <span data-ttu-id="68b54-270">**<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem</span><span class="sxs-lookup"><span data-stu-id="68b54-270">**[Minimum permission level](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem</span></span>
+
+      <span data-ttu-id="68b54-271">**<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: redacción de mensaje</span><span class="sxs-lookup"><span data-stu-id="68b54-271">**[Applicable Outlook mode](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: Message Compose</span></span>
+
+      #### <a name="examples"></a><span data-ttu-id="68b54-272">Ejemplos</span><span class="sxs-lookup"><span data-stu-id="68b54-272">Examples</span></span>
+
+      ```javascript
+      Office.context.mailbox.item.subject.getAsync(callback);
+
+      function callback(asyncResult) {
+          var subject = asyncResult.value;
+      }
+      ```
+    name: subject
+    fullName: subject
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'subject: Subject;'
+      return:
+        type:
+          - Outlook.Office.Subject
+  - uid: Outlook.Office.MessageCompose.to
+    summary: |-
+      <span data-ttu-id="68b54-273">Proporciona acceso a los destinatarios en la línea Para de un mensaje.</span><span class="sxs-lookup"><span data-stu-id="68b54-273">Provides access to the recipients on the To line of a message.</span></span> <span data-ttu-id="68b54-274">El tipo de objeto y el nivel de acceso dependen del modo del elemento actual.</span><span class="sxs-lookup"><span data-stu-id="68b54-274">The type of object and level of access depends on the mode of the current item.</span></span>
+
+      <span data-ttu-id="68b54-275">La propiedad to devuelve un objeto Recipients que proporciona métodos para obtener o actualizar los destinatarios en la línea para del mensaje.</span><span class="sxs-lookup"><span data-stu-id="68b54-275">The to property returns a Recipients object that provides methods to get or update the recipients on the To line of the message.</span></span>
+
+      <span data-ttu-id="68b54-276">\[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]</span><span class="sxs-lookup"><span data-stu-id="68b54-276">\[ [API set: Mailbox 1.0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets) \]</span></span>
+    remarks: |-
+      <span data-ttu-id="68b54-277">**<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem</span><span class="sxs-lookup"><span data-stu-id="68b54-277">**[Minimum permission level](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)<!-- -->**: ReadItem</span></span>
+
+      <span data-ttu-id="68b54-278">**<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: redacción de mensaje</span><span class="sxs-lookup"><span data-stu-id="68b54-278">**[Applicable Outlook mode](https://docs.microsoft.com/outlook/add-ins/#extension-points)<!-- -->**: Message Compose</span></span>
+
+      #### <a name="examples"></a><span data-ttu-id="68b54-279">Ejemplos</span><span class="sxs-lookup"><span data-stu-id="68b54-279">Examples</span></span>
+
+      ```javascript
+      Office.context.mailbox.item.to.setAsync( ['alice@contoso.com', 'bob@contoso.com'] );
+      Office.context.mailbox.item.to.addAsync( ['jason@contoso.com'] );
+      Office.context.mailbox.item.to.getAsync(callback);
+
+      function callback(asyncResult) {
+          var arrayOfToRecipients = asyncResult.value;
+      }
+      ```
+    name: to
+    fullName: to
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'to: Recipients;'
+      return:
+        type:
+          - Outlook.Office.Recipients
