@@ -1,0 +1,158 @@
+### YamlMime:UniversalReference
+items:
+  - uid: office.OfficeExtension.ClientRequestContext
+    summary: Un objeto RequestContext abstracto que facilita las solicitudes a la aplicación host de Office. Los `Excel.run` métodos `Word.run` y proporcionan un contexto de solicitud.
+    name: OfficeExtension.ClientRequestContext
+    fullName: OfficeExtension.ClientRequestContext
+    langs:
+      - typeScript
+    type: class
+    package: office
+    children:
+      - office.OfficeExtension.ClientRequestContext.(constructor)
+      - office.OfficeExtension.ClientRequestContext.debugInfo
+      - office.OfficeExtension.ClientRequestContext.load
+      - office.OfficeExtension.ClientRequestContext.loadRecursive
+      - office.OfficeExtension.ClientRequestContext.requestHeaders
+      - office.OfficeExtension.ClientRequestContext.sync
+      - office.OfficeExtension.ClientRequestContext.trace
+      - office.OfficeExtension.ClientRequestContext.trackedObjects
+  - uid: office.OfficeExtension.ClientRequestContext.(constructor)
+    summary: Construye una nueva instancia de la `ClientRequestContext` clase.
+    name: (constructor)(url)
+    fullName: (constructor)(url)
+    langs:
+      - typeScript
+    type: constructor
+    syntax:
+      content: 'constructor(url?: string);'
+      parameters:
+        - id: url
+          description: ''
+          type:
+            - string
+  - uid: office.OfficeExtension.ClientRequestContext.debugInfo
+    summary: Información de depuración
+    name: debugInfo
+    fullName: debugInfo
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly debugInfo: RequestContextDebugInfo;'
+      return:
+        type:
+          - office.OfficeExtension.RequestContextDebugInfo
+  - uid: office.OfficeExtension.ClientRequestContext.load
+    summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar `context.sync()` antes de leer las propiedades.
+    name: 'load(object, option)'
+    fullName: 'load(object, option)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(object: ClientObject, option?: string | string[] | LoadOption): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: object
+          description: Objeto cuyas propiedades se cargan.
+          type:
+            - office.OfficeExtension.ClientObject
+        - id: option
+          description: 'Cadena delimitada por comas, o matriz de cadenas, que especifica las propiedades que se van a cargar o un objeto [objeto officeextension. LoadOption](xref:office.OfficeExtension.LoadOption) .'
+          type:
+            - 'string | string[] | LoadOption'
+  - uid: office.OfficeExtension.ClientRequestContext.loadRecursive
+    summary: |-
+      Pone en cola un comando para cargar de forma recursiva las propiedades especificadas del objeto y sus propiedades de navegación.
+
+      Debe llamar `context.sync()` antes de leer las propiedades.
+    name: 'loadRecursive(object, options, maxDepth)'
+    fullName: 'loadRecursive(object, options, maxDepth)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'loadRecursive(object: ClientObject, options: { [typeName: string]: string | string[] | LoadOption }, maxDepth?: number): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: object
+          description: Objeto que se va a cargar.
+          type:
+            - office.OfficeExtension.ClientObject
+        - id: options
+          description: 'El emparejamiento clave-valor de las opciones de carga para los tipos, como`{ "Workbook": "worksheets,tables",  "Worksheet": "tables",  "Tables": "name" }`'
+          type:
+            - '{ [typeName: string]: string | string[] | LoadOption }'
+        - id: maxDepth
+          description: Profundidad máxima recursiva.
+          type:
+            - number
+  - uid: office.OfficeExtension.ClientRequestContext.requestHeaders
+    summary: Encabezados de solicitud
+    name: requestHeaders
+    fullName: requestHeaders
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'requestHeaders: { [name: string]: string };'
+      return:
+        type:
+          - '{ [name: string]: string }'
+  - uid: office.OfficeExtension.ClientRequestContext.sync
+    summary: 'Sincroniza el estado entre los objetos proxy de JavaScript y el documento de Office mediante la ejecución de instrucciones en cola en el contexto de la solicitud y la recuperación de propiedades de objetos de Office cargados para su uso en el código. Este método devuelve una promesa, que se resuelve cuando se completa la sincronización.'
+    name: sync(passThroughValue)
+    fullName: sync(passThroughValue)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'sync<T>(passThroughValue?: T): Promise<T>;'
+      return:
+        type:
+          - Promise<T>
+        description: ''
+      parameters:
+        - id: passThroughValue
+          description: ''
+          type:
+            - T
+      typeParameters:
+        - id: T
+  - uid: office.OfficeExtension.ClientRequestContext.trace
+    summary: 'Agrega un mensaje de seguimiento a la cola. Si la promesa devuelta `context.sync()` por se rechaza debido a un error, se agrega una matriz ". traceMessages" al objeto objeto officeextension. error, que contiene todos los mensajes de seguimiento que se ejecutaron. Estos mensajes pueden ayudarle a supervisar la secuencia de ejecución del programa y detectar la causa del error.'
+    name: trace(message)
+    fullName: trace(message)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'trace(message: string): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: message
+          description: ''
+          type:
+            - string
+  - uid: office.OfficeExtension.ClientRequestContext.trackedObjects
+    summary: Colección de objetos de los que se realiza un seguimiento para los ajustes automáticos en función de los cambios circundantes en el documento.
+    name: trackedObjects
+    fullName: trackedObjects
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'trackedObjects: TrackedObjects;'
+      return:
+        type:
+          - office.OfficeExtension.TrackedObjects
