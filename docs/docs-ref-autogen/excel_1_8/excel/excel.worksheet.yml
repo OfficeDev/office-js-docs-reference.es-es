@@ -1,0 +1,1126 @@
+### YamlMime:UniversalReference
+items:
+  - uid: excel.Excel.Worksheet
+    summary: |-
+      Una hoja de cálculo de Excel es una cuadrícula de celdas. Puede contener datos, tablas, gráficos, etc.
+
+      \[[Conjunto de API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: Excel.Worksheet
+    fullName: Excel.Worksheet
+    langs:
+      - typeScript
+    type: class
+    extends:
+      - 'OfficeExtension.ClientObject '
+    package: excel
+    children:
+      - excel.Excel.Worksheet.activate
+      - excel.Excel.Worksheet.calculate
+      - excel.Excel.Worksheet.charts
+      - excel.Excel.Worksheet.context
+      - excel.Excel.Worksheet.copy
+      - excel.Excel.Worksheet.copy_1
+      - excel.Excel.Worksheet.delete
+      - excel.Excel.Worksheet.freezePanes
+      - excel.Excel.Worksheet.getCell
+      - excel.Excel.Worksheet.getNext
+      - excel.Excel.Worksheet.getNextOrNullObject
+      - excel.Excel.Worksheet.getPrevious
+      - excel.Excel.Worksheet.getPreviousOrNullObject
+      - excel.Excel.Worksheet.getRange
+      - excel.Excel.Worksheet.getRangeByIndexes
+      - excel.Excel.Worksheet.getUsedRange
+      - excel.Excel.Worksheet.getUsedRangeOrNullObject
+      - excel.Excel.Worksheet.id
+      - excel.Excel.Worksheet.load
+      - excel.Excel.Worksheet.load_1
+      - excel.Excel.Worksheet.load_2
+      - excel.Excel.Worksheet.name
+      - excel.Excel.Worksheet.names
+      - excel.Excel.Worksheet.onActivated
+      - excel.Excel.Worksheet.onCalculated
+      - excel.Excel.Worksheet.onChanged
+      - excel.Excel.Worksheet.onDeactivated
+      - excel.Excel.Worksheet.onSelectionChanged
+      - excel.Excel.Worksheet.pivotTables
+      - excel.Excel.Worksheet.position
+      - excel.Excel.Worksheet.protection
+      - excel.Excel.Worksheet.set
+      - excel.Excel.Worksheet.set_1
+      - excel.Excel.Worksheet.showGridlines
+      - excel.Excel.Worksheet.showHeadings
+      - excel.Excel.Worksheet.standardHeight
+      - excel.Excel.Worksheet.standardWidth
+      - excel.Excel.Worksheet.tabColor
+      - excel.Excel.Worksheet.tables
+      - excel.Excel.Worksheet.toJSON
+      - excel.Excel.Worksheet.visibility
+  - uid: excel.Excel.Worksheet.activate
+    summary: |-
+      Activa la hoja de cálculo en la interfaz de usuario de Excel.
+
+      \[[Conjunto de API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: activate()
+    fullName: activate()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'activate(): void;'
+      return:
+        type:
+          - void
+        description: |-
+
+
+          #### <a name="examples"></a>Ejemplos
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var wSheetName = 'Sheet1';
+              var worksheet = ctx.workbook.worksheets.getItem(wSheetName);
+              worksheet.activate();
+              return ctx.sync(); 
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+  - uid: excel.Excel.Worksheet.calculate
+    summary: |-
+      Calcula todas las celdas de una hoja de cálculo.
+
+      \[[Conjunto de API: ExcelApi 1,6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: calculate(markAllDirty)
+    fullName: calculate(markAllDirty)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'calculate(markAllDirty: boolean): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: markAllDirty
+          description: 'True, para marcar todos como modificados.'
+          type:
+            - boolean
+  - uid: excel.Excel.Worksheet.charts
+    summary: |-
+      Devuelve la colección de gráficos que forman parte de la hoja de cálculo. Solo lectura.
+
+      \[[Conjunto de API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: charts
+    fullName: charts
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly charts: Excel.ChartCollection;'
+      return:
+        type:
+          - excel.Excel.ChartCollection
+  - uid: excel.Excel.Worksheet.context
+    summary: Contexto de la solicitud asociado al objeto. Esto conecta el proceso del complemento con el proceso de la aplicación host de Office.
+    name: context
+    fullName: context
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'context: RequestContext;'
+      return:
+        type:
+          - excel.Excel.RequestContext
+  - uid: excel.Excel.Worksheet.copy
+    summary: |-
+      Copia una hoja de cálculo y la coloca en la posición especificada. Devuelve la hoja de cálculo copiada.
+
+      \[[Conjunto de API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: 'copy(positionType, relativeTo)'
+    fullName: 'copy(positionType, relativeTo)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'copy(positionType?: Excel.WorksheetPositionType, relativeTo?: Excel.Worksheet): Excel.Worksheet;'
+      return:
+        type:
+          - excel.Excel.Worksheet
+        description: |-
+
+
+          #### <a name="examples"></a>Ejemplos
+
+          ```typescript
+          await Excel.run(async (context) => {
+
+              let myWorkbook = context.workbook;
+              let sampleSheet = myWorkbook.worksheets.getActiveWorksheet();
+              let copiedSheet = sampleSheet.copy("End")
+
+              sampleSheet.load("name");
+              copiedSheet.load("name");
+
+              await context.sync();
+
+              console.log("'" + sampleSheet.name + "' was copied to '" + copiedSheet.name + "'")
+          });
+          ```
+      parameters:
+        - id: positionType
+          description: Opcional.
+          type:
+            - excel.Excel.WorksheetPositionType
+        - id: relativeTo
+          description: Opcional.
+          type:
+            - excel.Excel.Worksheet
+  - uid: excel.Excel.Worksheet.copy_1
+    summary: |-
+      Copia una hoja de cálculo y la coloca en la posición especificada. Devuelve la hoja de cálculo copiada.
+
+      \[[Conjunto de API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: 'copy(positionTypeString, relativeTo)'
+    fullName: 'copy(positionTypeString, relativeTo)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'copy(positionTypeString?: "None" | "Before" | "After" | "Beginning" | "End", relativeTo?: Excel.Worksheet): Excel.Worksheet;'
+      return:
+        type:
+          - excel.Excel.Worksheet
+        description: ''
+      parameters:
+        - id: positionTypeString
+          description: Opcional.
+          type:
+            - '"None" | "Before" | "After" | "Beginning" | "End"'
+        - id: relativeTo
+          description: Opcional.
+          type:
+            - excel.Excel.Worksheet
+  - uid: excel.Excel.Worksheet.delete
+    summary: |-
+      Elimina la hoja de cálculo del libro. Tenga en cuenta que si la visibilidad de la hoja de cálculo se establece en "VeryHidden", se producirá un error en la operación de eliminación con una GeneralException.
+
+      \[[Conjunto de API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: delete()
+    fullName: delete()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'delete(): void;'
+      return:
+        type:
+          - void
+        description: |-
+
+
+          #### <a name="examples"></a>Ejemplos
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var wSheetName = 'Sheet1';
+              var worksheet = ctx.workbook.worksheets.getItem(wSheetName);
+              worksheet.delete();
+              return ctx.sync(); 
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+  - uid: excel.Excel.Worksheet.freezePanes
+    summary: |-
+      Obtiene un objeto que se puede usar para manipular paneles inmovilizados en la hoja de cálculo. Solo lectura.
+
+      \[[Conjunto de API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: freezePanes
+    fullName: freezePanes
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly freezePanes: Excel.WorksheetFreezePanes;'
+      return:
+        type:
+          - excel.Excel.WorksheetFreezePanes
+  - uid: excel.Excel.Worksheet.getCell
+    summary: |-
+      Obtiene el objeto de intervalo que contiene la celda en función de los números de fila y columna. La celda puede estar fuera de los límites de su rango primario, siempre y cuando se mantenga dentro de la cuadrícula de la hoja de cálculo.
+
+      \[[Conjunto de API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: 'getCell(row, column)'
+    fullName: 'getCell(row, column)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getCell(row: number, column: number): Excel.Range;'
+      return:
+        type:
+          - excel.Excel.Range
+        description: |-
+
+
+          #### <a name="examples"></a>Ejemplos
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var sheetName = "Sheet1";
+              var rangeAddress = "A1:F8";
+              var worksheet = ctx.workbook.worksheets.getItem(sheetName);
+              var cell = worksheet.getCell(0,0);
+              cell.load('address');
+              return ctx.sync().then(function() {
+                  console.log(cell.address);
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: row
+          description: Número de fila de la celda que se va a recuperar. Indizado con cero.
+          type:
+            - number
+        - id: column
+          description: Número de columna de la celda que se va a recuperar. Indexado con cero.
+          type:
+            - number
+  - uid: excel.Excel.Worksheet.getNext
+    summary: |-
+      Obtiene la hoja de cálculo que sigue a este. Si no hay ninguna hoja de cálculo después de esta, este método producirá un error.
+
+      \[[Conjunto de API: ExcelApi 1,5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getNext(visibleOnly)
+    fullName: getNext(visibleOnly)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getNext(visibleOnly?: boolean): Excel.Worksheet;'
+      return:
+        type:
+          - excel.Excel.Worksheet
+        description: |-
+
+
+          #### <a name="examples"></a>Ejemplos
+
+          ```typescript
+          await Excel.run(async (context) => {
+              const sheets = context.workbook.worksheets;
+
+              // We don't want to include the default worksheet that was created
+              // when the workbook was created, so our "firstSheet" will be the one
+              // after the literal first. Note chaining of navigation methods.
+              const firstSheet = sheets.getFirst().getNext();
+              const lastSheet = sheets.getLast();
+              const firstTaxRateRange = firstSheet.getRange("B2");
+              const lastTaxRateRange = lastSheet.getRange("B2");
+
+              firstSheet.load("name");
+              lastSheet.load("name");
+              firstTaxRateRange.load("text");
+              lastTaxRateRange.load("text");
+
+              await context.sync();
+
+              let firstYear = firstSheet.name.substr(5, 4);
+              let lastYear = lastSheet.name.substr(5, 4);
+              console.log(`Tax Rate change from ${firstYear} to ${lastYear}`, `Tax rate for ${firstYear}: ${firstTaxRateRange.text[0][0]}\nTax rate for ${lastYear}: ${lastTaxRateRange.text[0][0]}`)
+
+              await context.sync();
+          });
+          ```
+      parameters:
+        - id: visibleOnly
+          description: 'Opcional. Si es true, solo tiene en cuenta las hojas de cálculo visibles y se omite sobre las ocultas.'
+          type:
+            - boolean
+  - uid: excel.Excel.Worksheet.getNextOrNullObject
+    summary: |-
+      Obtiene la hoja de cálculo que sigue a este. Si no hay ninguna hoja de cálculo después de ésta, este método devolverá un objeto null.
+
+      \[[Conjunto de API: ExcelApi 1,5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getNextOrNullObject(visibleOnly)
+    fullName: getNextOrNullObject(visibleOnly)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getNextOrNullObject(visibleOnly?: boolean): Excel.Worksheet;'
+      return:
+        type:
+          - excel.Excel.Worksheet
+        description: ''
+      parameters:
+        - id: visibleOnly
+          description: 'Opcional. Si es true, solo tiene en cuenta las hojas de cálculo visibles y se omite sobre las ocultas.'
+          type:
+            - boolean
+  - uid: excel.Excel.Worksheet.getPrevious
+    summary: |-
+      Obtiene la hoja de cálculo que precede a esta. Si no hay ninguna hoja de cálculo anterior, este método producirá un error.
+
+      \[[Conjunto de API: ExcelApi 1,5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getPrevious(visibleOnly)
+    fullName: getPrevious(visibleOnly)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getPrevious(visibleOnly?: boolean): Excel.Worksheet;'
+      return:
+        type:
+          - excel.Excel.Worksheet
+        description: |-
+
+
+          #### <a name="examples"></a>Ejemplos
+
+          ```typescript
+          await Excel.run(async (context) => {
+              const sheets = context.workbook.worksheets;
+              const currentSheet = sheets.getActiveWorksheet();
+              const previousYearSheet = currentSheet.getPrevious();
+              const currentTaxDueRange = currentSheet.getRange("C2");
+              const previousTaxDueRange = previousYearSheet.getRange("C2");
+
+              currentSheet.load("name");
+              previousYearSheet.load("name");
+              currentTaxDueRange.load("text");
+              previousTaxDueRange.load("text");
+
+              await context.sync();
+
+              let currentYear = currentSheet.name.substr(5, 4);
+              let previousYear = previousYearSheet.name.substr(5, 4);
+              console.log("Two Year Tax Due Comparison", `Tax due for ${currentYear} was ${currentTaxDueRange.text[0][0]}\nTax due for ${previousYear} was ${previousTaxDueRange.text[0][0]}`)
+
+              await context.sync();
+          });
+          ```
+      parameters:
+        - id: visibleOnly
+          description: 'Opcional. Si es true, solo tiene en cuenta las hojas de cálculo visibles y se omite sobre las ocultas.'
+          type:
+            - boolean
+  - uid: excel.Excel.Worksheet.getPreviousOrNullObject
+    summary: |-
+      Obtiene la hoja de cálculo que precede a esta. Si no hay ninguna hoja de cálculo anterior, este método devolverá un objetos null.
+
+      \[[Conjunto de API: ExcelApi 1,5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getPreviousOrNullObject(visibleOnly)
+    fullName: getPreviousOrNullObject(visibleOnly)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getPreviousOrNullObject(visibleOnly?: boolean): Excel.Worksheet;'
+      return:
+        type:
+          - excel.Excel.Worksheet
+        description: ''
+      parameters:
+        - id: visibleOnly
+          description: 'Opcional. Si es true, solo tiene en cuenta las hojas de cálculo visibles y se omite sobre las ocultas.'
+          type:
+            - boolean
+  - uid: excel.Excel.Worksheet.getRange
+    summary: |-
+      Obtiene el objeto de intervalo, que representa un único bloque rectangular de celdas, especificado por la dirección o el nombre.
+
+      \[[Conjunto de API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getRange(address)
+    fullName: getRange(address)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getRange(address?: string): Excel.Range;'
+      return:
+        type:
+          - excel.Excel.Range
+        description: |-
+
+
+          #### <a name="examples"></a>Ejemplos
+
+          ```javascript
+          // Below example uses range address to get the range object.
+          Excel.run(function (ctx) { 
+              var sheetName = "Sheet1";
+              var rangeAddress = "A1:F8";
+              var worksheet = ctx.workbook.worksheets.getItem(sheetName);
+              var range = worksheet.getRange(rangeAddress);
+              range.load('cellCount');
+              return ctx.sync().then(function() {
+                  console.log(range.cellCount);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+          ```javascript
+          // Below example uses a named-range to get the range object.
+          Excel.run(function (ctx) { 
+              var sheetName = "Sheet1";
+              var rangeName = 'MyRange';
+              var range = ctx.workbook.worksheets.getItem(sheetName).getRange(rangeName);
+              range.load('address');
+              return ctx.sync().then(function() {
+                  console.log(range.address);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: address
+          description: 'Opcional. La cadena que representa la dirección o el nombre del intervalo. Por ejemplo, "a1: B2". Si no se especifica, se devuelve todo el intervalo de la hoja de cálculo.'
+          type:
+            - string
+  - uid: excel.Excel.Worksheet.getRangeByIndexes
+    summary: |-
+      Obtiene el objeto de intervalo comenzando en un índice de columna y fila determinado, y que abarca un determinado número de filas y columnas.
+
+      \[[Conjunto de API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: 'getRangeByIndexes(startRow, startColumn, rowCount, columnCount)'
+    fullName: 'getRangeByIndexes(startRow, startColumn, rowCount, columnCount)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getRangeByIndexes(startRow: number, startColumn: number, rowCount: number, columnCount: number): Excel.Range;'
+      return:
+        type:
+          - excel.Excel.Range
+        description: ''
+      parameters:
+        - id: startRow
+          description: Fila de inicio (indizado con ceros).
+          type:
+            - number
+        - id: startColumn
+          description: Columna de inicio (indizado con ceros).
+          type:
+            - number
+        - id: rowCount
+          description: Número de filas que se van a incluir en el rango.
+          type:
+            - number
+        - id: columnCount
+          description: Número de columnas que se van a incluir en el rango.
+          type:
+            - number
+  - uid: excel.Excel.Worksheet.getUsedRange
+    summary: |-
+      El rango usado es el rango más pequeño que abarque todas las celdas que tengan asignado un valor o un formato. Si toda la hoja de cálculo está en blanco, esta función devolverá la celda superior izquierda (es decir, *no* generará un error).
+
+      \[[Conjunto de API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getUsedRange(valuesOnly)
+    fullName: getUsedRange(valuesOnly)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getUsedRange(valuesOnly?: boolean): Excel.Range;'
+      return:
+        type:
+          - excel.Excel.Range
+        description: |-
+
+
+          #### <a name="examples"></a>Ejemplos
+
+          ```javascript
+          Excel.run(function (ctx) { 
+              var wSheetName = 'Sheet1';
+              var worksheet = ctx.workbook.worksheets.getItem(wSheetName);
+              var usedRange = worksheet.getUsedRange();
+              usedRange.load('address');
+              return ctx.sync().then(function() {
+                      console.log(usedRange.address);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: valuesOnly
+          description: 'Opcional. Si es true, solo tiene en cuenta las celdas con valores como celdas usadas (ignora el formato). \[Conjunto de API: ExcelApi 1,2\]'
+          type:
+            - boolean
+  - uid: excel.Excel.Worksheet.getUsedRangeOrNullObject
+    summary: |-
+      El rango usado es el rango más pequeño que abarque todas las celdas que tengan asignado un valor o un formato. Si toda la hoja está en blanco, esta función devolverá un objeto NULL.
+
+      \[[Conjunto de API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getUsedRangeOrNullObject(valuesOnly)
+    fullName: getUsedRangeOrNullObject(valuesOnly)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getUsedRangeOrNullObject(valuesOnly?: boolean): Excel.Range;'
+      return:
+        type:
+          - excel.Excel.Range
+        description: ''
+      parameters:
+        - id: valuesOnly
+          description: Opcional. Solo tiene en cuenta las celdas con valores como celdas usadas.
+          type:
+            - boolean
+  - uid: excel.Excel.Worksheet.id
+    summary: |-
+      Devuelve un valor que identifica de forma única la hoja de cálculo de un libro determinado. El valor del identificador permanece igual, incluso cuando se cambia el nombre de la hoja de cálculo o cuando esta se mueve. Solo lectura.
+
+      \[[Conjunto de API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: id
+    fullName: id
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly id: string;'
+      return:
+        type:
+          - string
+  - uid: excel.Excel.Worksheet.load
+    summary: 'Pone en cola un comando para cargar las propiedades especificadas del objeto. Antes de leer las propiedades, debe llamar a "context.sync()".'
+    remarks: |-
+      Además de esta firma, este método tiene las siguientes firmas:
+
+      `load(option?: string | string[]): Excel.Worksheet`-Donde opción es una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades que se van a cargar.
+
+      `load(option?: { select?: string; expand?: string; }): Excel.Worksheet`-Where opción. Select es una cadena delimitada por comas que especifica las propiedades que se van a cargar y Options. Expand es una cadena delimitada por comas que especifica las propiedades de navegación que se deben cargar.
+
+      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Worksheet`-Solo disponible en tipos de colección. Es similar a la firma anterior. Option. Top especifica el número máximo de elementos de colección que se pueden incluir en el resultado. La opción. SKIP especifica el número de elementos que se deben omitir y que no se incluyen en el resultado. Si se especifica Option. Top, el conjunto de resultados se iniciará después de omitir el número especificado de elementos.
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: Excel.Interfaces.WorksheetLoadOptions): Excel.Worksheet;'
+      return:
+        type:
+          - excel.Excel.Worksheet
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - excel.Excel.Interfaces.WorksheetLoadOptions
+  - uid: excel.Excel.Worksheet.load_1
+    summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar `context.sync()` antes de leer las propiedades.
+    name: load(propertyNames)
+    fullName: load(propertyNames)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNames?: string | string[]): Excel.Worksheet;'
+      return:
+        type:
+          - excel.Excel.Worksheet
+        description: |-
+
+
+          #### <a name="examples"></a>Ejemplos
+
+          ```javascript
+          // Get worksheet properties based on sheet name.
+          Excel.run(function (ctx) { 
+              var wSheetName = 'Sheet1';
+              var worksheet = ctx.workbook.worksheets.getItem(wSheetName);
+              worksheet.load('position')
+              return ctx.sync().then(function() {
+                      console.log(worksheet.position);
+              });
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+          ```javascript
+          // Set worksheet position. 
+          Excel.run(function (ctx) { 
+              var wSheetName = 'Sheet1';
+              var worksheet = ctx.workbook.worksheets.getItem(wSheetName);
+              worksheet.position = 2;
+              return ctx.sync(); 
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+      parameters:
+        - id: propertyNames
+          description: Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades que se van a cargar.
+          type:
+            - 'string | string[]'
+  - uid: excel.Excel.Worksheet.load_2
+    summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar `context.sync()` antes de leer las propiedades.
+    name: load(propertyNamesAndPaths)
+    fullName: load(propertyNamesAndPaths)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.Worksheet;'
+      return:
+        type:
+          - excel.Excel.Worksheet
+        description: ''
+      parameters:
+        - id: propertyNamesAndPaths
+          description: Donde propertyNamesAndPaths. Select es una cadena delimitada por comas que especifica las propiedades que se van a cargar y propertyNamesAndPaths. Expand es una cadena delimitada por comas que especifica las propiedades de navegación que se deben cargar.
+          type:
+            - '{ select?: string; expand?: string; }'
+  - uid: excel.Excel.Worksheet.name
+    summary: |-
+      Nombre para mostrar de la hoja de cálculo.
+
+      \[[Conjunto de API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: name
+    fullName: name
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'name: string;'
+      return:
+        type:
+          - string
+  - uid: excel.Excel.Worksheet.names
+    summary: |-
+      Colección de nombres en el ámbito de la hoja de cálculo actual. Solo lectura.
+
+      \[[Conjunto de API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: names
+    fullName: names
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly names: Excel.NamedItemCollection;'
+      return:
+        type:
+          - excel.Excel.NamedItemCollection
+  - uid: excel.Excel.Worksheet.onActivated
+    summary: |-
+      Se produce cuando se activa la hoja de cálculo.
+
+      \[[Conjunto de API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: onActivated
+    fullName: onActivated
+    langs:
+      - typeScript
+    type: event
+    syntax:
+      content: 'readonly onActivated: OfficeExtension.EventHandlers<Excel.WorksheetActivatedEventArgs>;'
+      return:
+        type:
+          - OfficeExtension.EventHandlers<Excel.WorksheetActivatedEventArgs>
+        description: |-
+
+
+          #### <a name="examples"></a>Ejemplos
+
+          ```javascript
+          Excel.run(function (context) {
+              var sheet = context.workbook.worksheets.getItem("Sample");
+              sheet.onActivated.add(function (event) {
+                  return Excel.run((context) => {
+                      console.log("The activated worksheet ID is: " + event.worksheetId);
+                      return context.sync();
+                  });
+              });
+              return context.sync();
+          });
+          ```
+  - uid: excel.Excel.Worksheet.onCalculated
+    summary: |-
+      Se produce cuando se calcula la hoja de cálculo.
+
+      \[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: onCalculated
+    fullName: onCalculated
+    langs:
+      - typeScript
+    type: event
+    syntax:
+      content: 'readonly onCalculated: OfficeExtension.EventHandlers<Excel.WorksheetCalculatedEventArgs>;'
+      return:
+        type:
+          - OfficeExtension.EventHandlers<Excel.WorksheetCalculatedEventArgs>
+        description: |-
+
+
+          #### <a name="examples"></a>Ejemplos
+
+          ```javascript
+          Excel.run(function (context) {
+              var sheet = context.workbook.worksheets.getItem("Sample");
+              sheet.onCalculated.add(function (event) {
+                  return Excel.run((context) => {
+                      console.log("The worksheet has recalculated.");
+                      return context.sync();
+                  });
+              });
+              return context.sync();
+          });
+          ```
+  - uid: excel.Excel.Worksheet.onChanged
+    summary: |-
+      Se produce cuando cambian los datos en una hoja de cálculo específica.
+
+      \[[Conjunto de API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: onChanged
+    fullName: onChanged
+    langs:
+      - typeScript
+    type: event
+    syntax:
+      content: 'readonly onChanged: OfficeExtension.EventHandlers<Excel.WorksheetChangedEventArgs>;'
+      return:
+        type:
+          - OfficeExtension.EventHandlers<Excel.WorksheetChangedEventArgs>
+        description: |-
+
+
+          #### <a name="examples"></a>Ejemplos
+
+          ```typescript
+          await Excel.run(async (context) => {
+              let sheet = context.workbook.worksheets.getItem("Sample");
+              sheet.onChanged.add(onChange);
+
+              await context.sync();
+              console.log("A handler has been registered for the onChanged event.");
+          });
+          ```
+  - uid: excel.Excel.Worksheet.onDeactivated
+    summary: |-
+      Se produce cuando se desactiva la hoja de cálculo.
+
+      \[[Conjunto de API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: onDeactivated
+    fullName: onDeactivated
+    langs:
+      - typeScript
+    type: event
+    syntax:
+      content: 'readonly onDeactivated: OfficeExtension.EventHandlers<Excel.WorksheetDeactivatedEventArgs>;'
+      return:
+        type:
+          - OfficeExtension.EventHandlers<Excel.WorksheetDeactivatedEventArgs>
+        description: |-
+
+
+          #### <a name="examples"></a>Ejemplos
+
+          ```javascript
+          Excel.run(function (context) {
+              var sheet = context.workbook.worksheets.getItem("Sample");
+              sheet.onDeactivated.add(function (event) {
+                  return Excel.run((context) => {
+                      console.log("The deactivated worksheet is: " + event.worksheetId);
+                      return context.sync();
+                  });
+              });
+              return context.sync();
+          });
+          ```
+  - uid: excel.Excel.Worksheet.onSelectionChanged
+    summary: |-
+      Se produce cuando la selección cambia en una hoja de cálculo específica.
+
+      \[[Conjunto de API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: onSelectionChanged
+    fullName: onSelectionChanged
+    langs:
+      - typeScript
+    type: event
+    syntax:
+      content: 'readonly onSelectionChanged: OfficeExtension.EventHandlers<Excel.WorksheetSelectionChangedEventArgs>;'
+      return:
+        type:
+          - OfficeExtension.EventHandlers<Excel.WorksheetSelectionChangedEventArgs>
+        description: |-
+
+
+          #### <a name="examples"></a>Ejemplos
+
+          ```javascript
+          Excel.run(function (context) {
+              var sheet = context.workbook.worksheets.getItem("Sample");
+              sheet.onSelectionChanged.add(function (event) {
+                  return Excel.run((context) => {
+                      console.log("The selected range has changed to: " + event.address);
+                      return context.sync();
+                  });
+              });
+              return context.sync();
+          });
+          ```
+  - uid: excel.Excel.Worksheet.pivotTables
+    summary: |-
+      Colección de tablas dinámicas que forman parte de la hoja de cálculo. Solo lectura.
+
+      \[[Conjunto de API: ExcelApi 1,3](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: pivotTables
+    fullName: pivotTables
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly pivotTables: Excel.PivotTableCollection;'
+      return:
+        type:
+          - excel.Excel.PivotTableCollection
+  - uid: excel.Excel.Worksheet.position
+    summary: |-
+      Posición de base cero de la hoja de cálculo dentro del libro.
+
+      \[[Conjunto de API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: position
+    fullName: position
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'position: number;'
+      return:
+        type:
+          - number
+  - uid: excel.Excel.Worksheet.protection
+    summary: |-
+      Devuelve el objeto de protección de hoja de una hoja de cálculo. Solo lectura.
+
+      \[[Conjunto de API: ExcelApi 1,2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: protection
+    fullName: protection
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly protection: Excel.WorksheetProtection;'
+      return:
+        type:
+          - excel.Excel.WorksheetProtection
+  - uid: excel.Excel.Worksheet.set
+    summary: Establece varias propiedades de un objeto al mismo tiempo. Puede pasar un objeto sin formato con las propiedades apropiadas o cualquier otro objeto de la API del mismo tipo.
+    remarks: |-
+      Este método tiene la siguiente firma adicional:
+
+      `set(properties: Excel.Worksheet): void`
+    name: 'set(properties, options)'
+    fullName: 'set(properties, options)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(properties: Interfaces.WorksheetUpdateData, options?: OfficeExtension.UpdateOptions): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: properties
+          description: Objeto de JavaScript con propiedades que se estructuran de forma isomórfico a las propiedades del objeto en el que se llama al método.
+          type:
+            - Interfaces.WorksheetUpdateData
+        - id: options
+          description: Proporciona una opción para suprimir errores si el objeto Properties intenta establecer propiedades de solo lectura.
+          type:
+            - OfficeExtension.UpdateOptions
+  - uid: excel.Excel.Worksheet.set_1
+    summary: 'Establece varias propiedades en el objeto al mismo tiempo, basándose en un objeto cargado existente.'
+    name: set(properties)
+    fullName: set(properties)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(properties: Excel.Worksheet): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: properties
+          description: ''
+          type:
+            - excel.Excel.Worksheet
+  - uid: excel.Excel.Worksheet.showGridlines
+    summary: |-
+      Obtiene o establece la marca de las líneas de cuadrícula de la hoja de cálculo. Esta marca determina si el usuario puede ver las líneas de la cuadrícula.
+
+      \[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: showGridlines
+    fullName: showGridlines
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'showGridlines: boolean;'
+      return:
+        type:
+          - boolean
+        description: |-
+
+
+          #### <a name="examples"></a>Ejemplos
+
+          ```typescript
+          await Excel.run(async (context) => {
+              const sheet = context.workbook.worksheets.getActiveWorksheet();
+              sheet.showGridlines = true;
+
+              await context.sync();
+          });
+          ```
+  - uid: excel.Excel.Worksheet.showHeadings
+    summary: |-
+      Obtiene o establece la marca de títulos de la hoja de cálculo. Esta marca determina si los encabezados son visibles para el usuario.
+
+      \[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: showHeadings
+    fullName: showHeadings
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'showHeadings: boolean;'
+      return:
+        type:
+          - boolean
+  - uid: excel.Excel.Worksheet.standardHeight
+    summary: |-
+      Devuelve el ancho estándar (predeterminado) de todas las filas de la hoja de cálculo, en puntos. Solo lectura.
+
+      \[[Conjunto de API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: standardHeight
+    fullName: standardHeight
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly standardHeight: number;'
+      return:
+        type:
+          - number
+  - uid: excel.Excel.Worksheet.standardWidth
+    summary: |-
+      Devuelve o establece el ancho estándar (predeterminado) de todas las columnas en la hoja de cálculo. Una unidad de ancho de columna equivale al ancho de un carácter con el estilo Normal. En las fuentes proporcionales se utiliza el ancho del carácter 0 (cero).
+
+      \[[Conjunto de API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: standardWidth
+    fullName: standardWidth
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'standardWidth: number;'
+      return:
+        type:
+          - number
+  - uid: excel.Excel.Worksheet.tabColor
+    summary: |-
+      Obtiene o establece el color de pestaña de hoja de cálculo. Al recuperar el color de la pestaña, si la hoja de cálculo es invisible, el valor será null. Si la hoja de cálculo está visible pero el color de la pestaña está establecido en automático, se devolverá una cadena vacía. De lo contrario, la propiedad se establecerá en un color, con el\#formato "123456" cuando se establezca el color, use una cadena vacía para establecer un color "auto" o un color real en caso contrario.
+
+      \[[Conjunto de API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: tabColor
+    fullName: tabColor
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'tabColor: string;'
+      return:
+        type:
+          - string
+        description: |-
+
+
+          #### <a name="examples"></a>Ejemplos
+
+          ```typescript
+          await Excel.run(async (context) => {
+              const activeSheet = context.workbook.worksheets.getActiveWorksheet();
+              activeSheet.tabColor = "#FF0000";
+
+              await context.sync();
+          });
+          ```
+  - uid: excel.Excel.Worksheet.tables
+    summary: |-
+      Colección de tablas que forman parte de la hoja de cálculo. Solo lectura.
+
+      \[[Conjunto de API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: tables
+    fullName: tables
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly tables: Excel.TableCollection;'
+      return:
+        type:
+          - excel.Excel.TableCollection
+  - uid: excel.Excel.Worksheet.toJSON
+    summary: 'Reemplaza el método JavaScript `toJSON()` para proporcionar un resultado más útil cuando se pasa un objeto API a`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama `toJSON` al método del objeto que se le pasa.) Mientras que el objeto Excel. Worksheet original es un objeto API, `toJSON` el método devuelve un objeto JavaScript sin formato (escrito como`Excel.Interfaces.WorksheetData`<!-- -->) que contiene copias rasas de las propiedades secundarias cargadas del objeto original.'
+    name: toJSON()
+    fullName: toJSON()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'toJSON(): Excel.Interfaces.WorksheetData;'
+      return:
+        type:
+          - excel.Excel.Interfaces.WorksheetData
+        description: ''
+  - uid: excel.Excel.Worksheet.visibility
+    summary: |-
+      Visibilidad de la hoja de cálculo.
+
+      \[[Conjunto de API: ExcelApi 1,1 para la visibilidad de lectura; 1,2 para establecerla.](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) \]
+    name: visibility
+    fullName: visibility
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'visibility: Excel.SheetVisibility | "Visible" | "Hidden" | "VeryHidden";'
+      return:
+        type:
+          - Excel.SheetVisibility | "Visible" | "Hidden" | "VeryHidden"

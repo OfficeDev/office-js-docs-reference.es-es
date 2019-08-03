@@ -1,0 +1,226 @@
+### YamlMime:UniversalReference
+items:
+  - uid: excel.Excel.CustomConditionalFormat
+    summary: |-
+      Representa un tipo de formato condicional personalizado.
+
+      \[[Conjunto de API: ExcelApi 1,6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: Excel.CustomConditionalFormat
+    fullName: Excel.CustomConditionalFormat
+    langs:
+      - typeScript
+    type: class
+    extends:
+      - 'OfficeExtension.ClientObject '
+    package: excel
+    children:
+      - excel.Excel.CustomConditionalFormat.context
+      - excel.Excel.CustomConditionalFormat.format
+      - excel.Excel.CustomConditionalFormat.load
+      - excel.Excel.CustomConditionalFormat.load_1
+      - excel.Excel.CustomConditionalFormat.load_2
+      - excel.Excel.CustomConditionalFormat.rule
+      - excel.Excel.CustomConditionalFormat.set
+      - excel.Excel.CustomConditionalFormat.set_1
+      - excel.Excel.CustomConditionalFormat.toJSON
+  - uid: excel.Excel.CustomConditionalFormat.context
+    summary: Contexto de la solicitud asociado al objeto. Esto conecta el proceso del complemento con el proceso de la aplicación host de Office.
+    name: context
+    fullName: context
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'context: RequestContext;'
+      return:
+        type:
+          - excel.Excel.RequestContext
+  - uid: excel.Excel.CustomConditionalFormat.format
+    summary: |-
+      Devuelve un objeto Format, encapsulando la fuente de los formatos condicionales, el relleno, los bordes y otras propiedades. Solo lectura.
+
+      \[[Conjunto de API: ExcelApi 1,6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: format
+    fullName: format
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly format: Excel.ConditionalRangeFormat;'
+      return:
+        type:
+          - excel.Excel.ConditionalRangeFormat
+        description: |-
+
+
+          #### <a name="examples"></a>Ejemplos
+
+          ```typescript
+          await Excel.run(async (context) => {
+              const sheet = context.workbook.worksheets.getItem("Sample");
+              const range = sheet.getRange("B8:E13");
+              const conditionalFormat = range.conditionalFormats.add(Excel.ConditionalFormatType.custom);
+              conditionalFormat.custom.rule.formula = '=IF(B8>INDIRECT("RC[-1]",0),TRUE)';
+              conditionalFormat.custom.format.font.color = "green";
+
+              await context.sync();
+          });
+          ```
+  - uid: excel.Excel.CustomConditionalFormat.load
+    summary: 'Pone en cola un comando para cargar las propiedades especificadas del objeto. Antes de leer las propiedades, debe llamar a "context.sync()".'
+    remarks: |-
+      Además de esta firma, este método tiene las siguientes firmas:
+
+      `load(option?: string | string[]): Excel.CustomConditionalFormat`-Donde opción es una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades que se van a cargar.
+
+      `load(option?: { select?: string; expand?: string; }): Excel.CustomConditionalFormat`-Where opción. Select es una cadena delimitada por comas que especifica las propiedades que se van a cargar y Options. Expand es una cadena delimitada por comas que especifica las propiedades de navegación que se deben cargar.
+
+      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.CustomConditionalFormat`-Solo disponible en tipos de colección. Es similar a la firma anterior. Option. Top especifica el número máximo de elementos de colección que se pueden incluir en el resultado. La opción. SKIP especifica el número de elementos que se deben omitir y que no se incluyen en el resultado. Si se especifica Option. Top, el conjunto de resultados se iniciará después de omitir el número especificado de elementos.
+    name: load(option)
+    fullName: load(option)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(option?: Excel.Interfaces.CustomConditionalFormatLoadOptions): Excel.CustomConditionalFormat;'
+      return:
+        type:
+          - excel.Excel.CustomConditionalFormat
+        description: ''
+      parameters:
+        - id: option
+          description: ''
+          type:
+            - excel.Excel.Interfaces.CustomConditionalFormatLoadOptions
+  - uid: excel.Excel.CustomConditionalFormat.load_1
+    summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar `context.sync()` antes de leer las propiedades.
+    name: load(propertyNames)
+    fullName: load(propertyNames)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNames?: string | string[]): Excel.CustomConditionalFormat;'
+      return:
+        type:
+          - excel.Excel.CustomConditionalFormat
+        description: ''
+      parameters:
+        - id: propertyNames
+          description: Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades que se van a cargar.
+          type:
+            - 'string | string[]'
+  - uid: excel.Excel.CustomConditionalFormat.load_2
+    summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar `context.sync()` antes de leer las propiedades.
+    name: load(propertyNamesAndPaths)
+    fullName: load(propertyNamesAndPaths)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.CustomConditionalFormat;'
+      return:
+        type:
+          - excel.Excel.CustomConditionalFormat
+        description: ''
+      parameters:
+        - id: propertyNamesAndPaths
+          description: Donde propertyNamesAndPaths. Select es una cadena delimitada por comas que especifica las propiedades que se van a cargar y propertyNamesAndPaths. Expand es una cadena delimitada por comas que especifica las propiedades de navegación que se deben cargar.
+          type:
+            - '{ select?: string; expand?: string; }'
+  - uid: excel.Excel.CustomConditionalFormat.rule
+    summary: |-
+      Representa el objeto Rule en este formato condicional. Solo lectura.
+
+      \[[Conjunto de API: ExcelApi 1,6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: rule
+    fullName: rule
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly rule: Excel.ConditionalFormatRule;'
+      return:
+        type:
+          - excel.Excel.ConditionalFormatRule
+        description: |-
+
+
+          #### <a name="examples"></a>Ejemplos
+
+          ```javascript
+          Excel.run(function (ctx) {
+              var sheet = ctx.workbook.worksheets.getActiveWorksheet();
+              var range = sheet.getRange("A1:A5");
+              range.values = [[1], [20], [""], [5], ["test"]];
+              var cf = range.conditionalFormats.add(Excel.ConditionalFormatType.custom);
+              var cfCustom = cf.customOrNullObject;
+              cfCustom.rule.formula = "=ISBLANK(A1)";
+              cfCustom.format.fill.color = "#00FF00";
+              return ctx.sync().then(function () {
+                  console.log("Added new custom conditional format highlighting all blank cells.");
+              });
+          }).catch(function (error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+  - uid: excel.Excel.CustomConditionalFormat.set
+    summary: Establece varias propiedades de un objeto al mismo tiempo. Puede pasar un objeto sin formato con las propiedades apropiadas o cualquier otro objeto de la API del mismo tipo.
+    remarks: |-
+      Este método tiene la siguiente firma adicional:
+
+      `set(properties: Excel.CustomConditionalFormat): void`
+    name: 'set(properties, options)'
+    fullName: 'set(properties, options)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(properties: Interfaces.CustomConditionalFormatUpdateData, options?: OfficeExtension.UpdateOptions): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: properties
+          description: Objeto de JavaScript con propiedades que se estructuran de forma isomórfico a las propiedades del objeto en el que se llama al método.
+          type:
+            - Interfaces.CustomConditionalFormatUpdateData
+        - id: options
+          description: Proporciona una opción para suprimir errores si el objeto Properties intenta establecer propiedades de solo lectura.
+          type:
+            - OfficeExtension.UpdateOptions
+  - uid: excel.Excel.CustomConditionalFormat.set_1
+    summary: 'Establece varias propiedades en el objeto al mismo tiempo, basándose en un objeto cargado existente.'
+    name: set(properties)
+    fullName: set(properties)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(properties: Excel.CustomConditionalFormat): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: properties
+          description: ''
+          type:
+            - excel.Excel.CustomConditionalFormat
+  - uid: excel.Excel.CustomConditionalFormat.toJSON
+    summary: 'Reemplaza el método JavaScript `toJSON()` para proporcionar un resultado más útil cuando se pasa un objeto API a`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama `toJSON` al método del objeto que se le pasa.) Mientras que el objeto Excel. CustomConditionalFormat original es un objeto API, `toJSON` el método devuelve un objeto JavaScript sin formato (escrito como`Excel.Interfaces.CustomConditionalFormatData`<!-- -->) que contiene copias rasas de las propiedades secundarias cargadas del objeto original.'
+    name: toJSON()
+    fullName: toJSON()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'toJSON(): Excel.Interfaces.CustomConditionalFormatData;'
+      return:
+        type:
+          - excel.Excel.Interfaces.CustomConditionalFormatData
+        description: ''
