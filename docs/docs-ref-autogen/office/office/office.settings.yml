@@ -1,0 +1,419 @@
+### YamlMime:UniversalReference
+items:
+  - uid: office.Office.Settings
+    summary: Representa la configuración personalizada de un complemento de panel de tareas o de contenido que se almacena en el documento host como pares de nombre y valor.
+    remarks: |-
+      **Hosts**: Excel, PowerPoint y Word
+
+      La configuración creada mediante los métodos del objeto Settings se guarda por complemento y por documento. Es decir, solo está disponible para el complemento que la creó y solo desde el documento en el que se guarda.
+
+      El nombre de una configuración es una cadena, mientras que el valor puede ser String, Number, Boolean, null, Object o array.
+
+      El objeto Settings se carga automáticamente como parte del objeto Document y está disponible llamando a la propiedad settings del objeto cuando se activa el complemento.
+
+      El desarrollador es responsable de llamar al método saveAsync después de agregar o suprimir la configuración para guardar la configuración en el documento.
+    name: Office.Settings
+    fullName: Office.Settings
+    langs:
+      - typeScript
+    type: interface
+    package: office
+    children:
+      - office.Office.Settings.addHandlerAsync
+      - office.Office.Settings.addHandlerAsync_1
+      - office.Office.Settings.get
+      - office.Office.Settings.refreshAsync
+      - office.Office.Settings.remove
+      - office.Office.Settings.removeHandlerAsync
+      - office.Office.Settings.removeHandlerAsync_1
+      - office.Office.Settings.saveAsync
+      - office.Office.Settings.saveAsync_1
+      - office.Office.Settings.set
+  - uid: office.Office.Settings.addHandlerAsync
+    summary: |-
+      Agrega un controlador de eventos para el evento settingsChanged.
+
+      **Importante**: el código de su complemento puede registrar un controlador para el evento settingsChanged cuando el complemento se está ejecutando con cualquier cliente de Excel, pero el evento se desencadenará sólo cuando el complemento se cargue con una hoja de cálculo abierta en Excel en la web y más de un el usuario está editando la hoja de cálculo (coauthoring). Por lo tanto, el evento settingsChanged solo se admite en Excel en la web en escenarios de coautoría.
+    remarks: |-
+      **Conjunto de requisitos**: [no está en un conjunto](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#methods-that-arent-part-of-a-requirement-set)
+
+      Puede agregar varios controladores de eventos para el eventType especificado siempre que el nombre de cada función de controlador de eventos sea único.
+    name: 'addHandlerAsync(eventType, handler, options, callback)'
+    fullName: 'addHandlerAsync(eventType, handler, options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'addHandlerAsync(eventType: Office.EventType, handler: any, options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: eventType
+          description: Especifica el tipo de evento que se debe agregar. Obligatorio.
+          type:
+            - office.Office.EventType
+        - id: handler
+          description: 'La función del controlador de eventos que se va a agregar, cuyo único parámetro es de tipo [Office. SettingsChangedEventArgs](xref:office.Office.SettingsChangedEventArgs)<!-- -->. Necesario.'
+          type:
+            - any
+        - id: options
+          description: 'Proporciona una opción para conservar los datos de contexto de cualquier tipo, sin cambios, para su uso en una devolución de llamada.'
+          type:
+            - office.Office.AsyncContextOptions
+        - id: callback
+          description: |-
+            Opcional. Una función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office. asyncResult](xref:office.Office.AsyncResult)<!-- -->.
+
+            <table> <tr> <th>Propiedad</th> <th>Usar para...</th> </tr> <tr> <td>AsyncResult.value</td> <td>Siempre devuelve undefined porque no hay ningún objeto ni datos que recuperar al agregar un controlador de eventos.</td> </tr> <tr> <td>AsyncResult.status</td> <td>Determinar si la operación se ha completado correctamente o no.</td> </tr> <tr> <td>AsyncResult.error</td> <td>Tener acceso a un objeto Error que proporcione información sobre el error si no se ha completado correctamente la operación.</td> </tr> <tr> <td>AsyncResult.asyncContext</td> <td>Un elemento de cualquier tipo definido por el usuario que se devuelve en el objeto AsyncResult sin sufrir modificaciones.</td> </tr> </table>
+          type:
+            - '(result: AsyncResult<void>) => void'
+  - uid: office.Office.Settings.addHandlerAsync_1
+    summary: |-
+      Agrega un controlador de eventos para el evento settingsChanged.
+
+      **Importante**: el código de su complemento puede registrar un controlador para el evento settingsChanged cuando el complemento se está ejecutando con cualquier cliente de Excel, pero el evento se desencadenará sólo cuando el complemento se cargue con una hoja de cálculo abierta en Excel en la web y más de un el usuario está editando la hoja de cálculo (coauthoring). Por lo tanto, el evento settingsChanged solo se admite en Excel en la web en escenarios de coautoría.
+    remarks: |-
+      **Conjunto de requisitos**: [no está en un conjunto](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#methods-that-arent-part-of-a-requirement-set)
+
+      Puede agregar varios controladores de eventos para el eventType especificado siempre que el nombre de cada función de controlador de eventos sea único.
+
+      #### <a name="examples"></a>Ejemplos
+
+      ```javascript
+      function addSelectionChangedEventHandler() {
+          Office.context.document.settings.addHandlerAsync(Office.EventType.SettingsChanged, MyHandler);
+      }
+
+      function MyHandler(eventArgs) {
+          write('Event raised: ' + eventArgs.type);
+          doSomethingWithSettings(eventArgs.settings);
+      }
+
+      // Function that writes to a div with id='message' on the page.
+      function write(message){
+          document.getElementById('message').innerText += message; 
+      }
+      ```
+    name: 'addHandlerAsync(eventType, handler, callback)'
+    fullName: 'addHandlerAsync(eventType, handler, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'addHandlerAsync(eventType: Office.EventType, handler: any, callback?: (result: AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: eventType
+          description: Especifica el tipo de evento que se debe agregar. Obligatorio.
+          type:
+            - office.Office.EventType
+        - id: handler
+          description: 'La función del controlador de eventos que se va a agregar, cuyo único parámetro es de tipo [Office. SettingsChangedEventArgs](xref:office.Office.SettingsChangedEventArgs)<!-- -->. Necesario.'
+          type:
+            - any
+        - id: callback
+          description: |-
+            Opcional. Una función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office. asyncResult](xref:office.Office.AsyncResult)<!-- -->.
+
+            <table> <tr> <th>Propiedad</th> <th>Usar para...</th> </tr> <tr> <td>AsyncResult.value</td> <td>Siempre devuelve undefined porque no hay ningún objeto ni datos que recuperar al agregar un controlador de eventos.</td> </tr> <tr> <td>AsyncResult.status</td> <td>Determinar si la operación se ha completado correctamente o no.</td> </tr> <tr> <td>AsyncResult.error</td> <td>Tener acceso a un objeto Error que proporcione información sobre el error si no se ha completado correctamente la operación.</td> </tr> <tr> <td>AsyncResult.asyncContext</td> <td>Un elemento de cualquier tipo definido por el usuario que se devuelve en el objeto AsyncResult sin sufrir modificaciones.</td> </tr> </table>
+          type:
+            - '(result: AsyncResult<void>) => void'
+  - uid: office.Office.Settings.get
+    summary: Recupera la configuración especificada.
+    remarks: |-
+      **Conjunto de requisitos**: [configuración](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#settings)
+
+      #### <a name="examples"></a>Ejemplos
+
+      ```javascript
+      function displayMySetting() {
+          write('Current value for mySetting: ' + Office.context.document.settings.get('mySetting'));
+      }
+      // Function that writes to a div with id='message' on the page.
+      function write(message){
+          document.getElementById('message').innerText += message; 
+      }
+      ```
+    name: get(name)
+    fullName: get(name)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'get(name: string): any;'
+      return:
+        type:
+          - any
+        description: Un objeto que tiene nombres de propiedad asignados a valores serializados JSON.
+      parameters:
+        - id: name
+          description: ''
+          type:
+            - string
+  - uid: office.Office.Settings.refreshAsync
+    summary: 'Lee toda la configuración que se conserva en el documento y actualiza la copia de dicha configuración del complemento de contenido o del panel de tareas, que se conserva en la memoria.'
+    remarks: |-
+      **Conjunto de requisitos**: [no está en un conjunto](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#methods-that-arent-part-of-a-requirement-set)
+
+      Este método es útil en escenarios de coautoría de Excel, Word y PowerPoint cuando varias instancias del mismo complemento están trabajando con el mismo documento. Como cada complemento está trabajando con una copia en memoria de la configuración que se ha cargado desde el documento en el momento en que el usuario lo abrió, los valores de configuración usados por cada usuario pueden no estar sincronizados. Esto puede ocurrir siempre que una instancia del complemento llame al método Settings. saveAsync para conservar toda la configuración del usuario en el documento. Si se llama al método refreshAsync desde el controlador de eventos para el evento settingsChanged del complemento, se actualizarán los valores de configuración para todos los usuarios.
+
+      In the callback function passed to the refreshAsync method, you can use the properties of the AsyncResult object to return the following information.
+
+      <table> <tr> <th>Propiedad</th> <th>Usar para...</th> </tr> <tr> <td>AsyncResult.value</td> <td>Tener acceso a un objeto Settings con los valores actualizados.</td> </tr> <tr> <td>AsyncResult.status</td> <td>Determinar si la operación se ha completado correctamente o no.</td> </tr> <tr> <td>AsyncResult.error</td> <td>Tener acceso a un objeto Error que proporcione información sobre el error si no se ha completado correctamente la operación.</td> </tr> <tr> <td>AsyncResult.asyncContext</td> <td>Un elemento de cualquier tipo definido por el usuario que se devuelve en el objeto AsyncResult sin sufrir modificaciones.</td> </tr> </table>
+
+      #### <a name="examples"></a>Ejemplos
+
+      ```javascript
+      function refreshSettings() {
+          Office.context.document.settings.refreshAsync(function (asyncResult) {
+              write('Settings refreshed with status: ' + asyncResult.status);
+          });
+      }
+      // Function that writes to a div with id='message' on the page.
+      function write(message){
+          document.getElementById('message').innerText += message; 
+      }
+      ```
+    name: refreshAsync(callback)
+    fullName: refreshAsync(callback)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'refreshAsync(callback?: (result: AsyncResult<Office.Settings>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: callback
+          description: 'Opcional. Una función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office. asyncResult](xref:office.Office.AsyncResult)<!-- -->. La `value` propiedad del resultado es un objeto [Office. Settings](xref:office.Office.Settings) con los valores actualizados.'
+          type:
+            - '(result: AsyncResult<Office.Settings>) => void'
+  - uid: office.Office.Settings.remove
+    summary: |-
+      Elimina la configuración especificada.
+
+      **Importante**: tenga en cuenta que el método Settings. Remove solo afecta a la copia en memoria del contenedor de propiedades de la configuración. To persist the removal of the specified setting in the document, at some point after calling the Settings.remove method and before the add-in is closed, you must call the Settings.saveAsync method.
+    remarks: |-
+      **Conjunto de requisitos**: [configuración](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#settings)
+
+      null es un valor válido para una configuración. Por lo tanto, si se asigna null a la configuración, no se eliminará del contenedor de propiedades de la configuración.
+
+      #### <a name="examples"></a>Ejemplos
+
+      ```javascript
+      function removeMySetting() {
+          Office.context.document.settings.remove('mySetting');
+      }
+      ```
+    name: remove(name)
+    fullName: remove(name)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'remove(name: string): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: name
+          description: ''
+          type:
+            - string
+  - uid: office.Office.Settings.removeHandlerAsync
+    summary: Quita un controlador de eventos para el evento settingsChanged.
+    remarks: |-
+      **Conjunto de requisitos**: [no está en un conjunto](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#methods-that-arent-part-of-a-requirement-set)
+
+      Si se omite el parámetro handler opcional al llamar al método removeHandlerAsync, se quitarán todos los controladores de eventos del eventType especificado.
+
+      Cuando la función que ha remitido al parámetro callback se ejecute, recibirá un objeto AsyncResult al que puede obtener acceso desde el parámetro único de la función de devolución de llamada.
+
+      En la función de devolución de llamada que se ha remitido al método removeHandlerAsync, puede usar las propiedades del objeto AsyncResult para devolver la siguiente información.
+    name: 'removeHandlerAsync(eventType, options, callback)'
+    fullName: 'removeHandlerAsync(eventType, options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'removeHandlerAsync(eventType: Office.EventType, options?: RemoveHandlerOptions, callback?: (result: AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: eventType
+          description: Especifica el tipo de evento que se debe quitar. Necesario.
+          type:
+            - office.Office.EventType
+        - id: options
+          description: Proporciona opciones para determinar qué controlador o controladores de eventos se quitan.
+          type:
+            - office.Office.RemoveHandlerOptions
+        - id: callback
+          description: 'Opcional. Una función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office. asyncResult](xref:office.Office.AsyncResult)<!-- -->.'
+          type:
+            - '(result: AsyncResult<void>) => void'
+  - uid: office.Office.Settings.removeHandlerAsync_1
+    summary: Quita un controlador de eventos para el evento settingsChanged.
+    remarks: |-
+      **Conjunto de requisitos**: [no está en un conjunto](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#methods-that-arent-part-of-a-requirement-set)
+
+      Si se omite el parámetro handler opcional al llamar al método removeHandlerAsync, se quitarán todos los controladores de eventos del eventType especificado.
+
+      Cuando la función que ha remitido al parámetro callback se ejecute, recibirá un objeto AsyncResult al que puede obtener acceso desde el parámetro único de la función de devolución de llamada.
+
+      En la función de devolución de llamada que se ha remitido al método removeHandlerAsync, puede usar las propiedades del objeto AsyncResult para devolver la siguiente información.
+
+      #### <a name="examples"></a>Ejemplos
+
+      ```javascript
+      function removeSettingsChangedEventHandler() {
+          Office.context.document.settings.removeHandlerAsync(Office.EventType.SettingsChanged, MyHandler);
+      }
+
+      function MyHandler(eventArgs) {
+          write('Event raised: ' + eventArgs.type);
+          doSomethingWithSettings(eventArgs.settings);
+      }
+
+      // Function that writes to a div with id='message' on the page.
+      function write(message){
+          document.getElementById('message').innerText += message; 
+      }
+      ```
+    name: 'removeHandlerAsync(eventType, callback)'
+    fullName: 'removeHandlerAsync(eventType, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'removeHandlerAsync(eventType: Office.EventType, callback?: (result: AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: eventType
+          description: Especifica el tipo de evento que se debe quitar. Necesario.
+          type:
+            - office.Office.EventType
+        - id: callback
+          description: 'Opcional. Una función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office. asyncResult](xref:office.Office.AsyncResult)<!-- -->.'
+          type:
+            - '(result: AsyncResult<void>) => void'
+  - uid: office.Office.Settings.saveAsync
+    summary: Mantiene la copia en memoria del contenedor de propiedades de configuración en el documento.
+    remarks: |-
+      **Conjunto de requisitos**: [configuración](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#settings)
+
+      Cualquier configuración guardada anteriormente por un complemento se carga al inicializarse, por lo que, durante la duración de la sesión, basta con usar los métodos set y Get para trabajar con la copia en memoria del contenedor de propiedades de la configuración. Cuando desee conservar la configuración para que esté disponible la próxima vez que se use el complemento, use el método saveAsync.
+
+      **Nota**: el método saveAsync conserva el contenedor de propiedades de la configuración en memoria en el archivo del documento. Sin embargo, los cambios en el propio archivo de documento solo se guardan cuando el usuario (o la configuración de Autorrecuperación) guarda el documento en el sistema de archivos. El método refreshAsync solo es útil en escenarios de coautoría cuando otras instancias del mismo complemento pueden cambiar la configuración y los cambios deben estar disponibles para todas las instancias.
+
+      <table> <tr> <th>Propiedad</th> <th>Usar para...</th> </tr> <tr> <td>AsyncResult.value</td> <td>Devuelve siempre undefined porque no hay ningún objeto o dato que recuperar.</td> </tr> <tr> <td>AsyncResult.status</td> <td>Determinar si la operación se ha completado correctamente o no.</td> </tr> <tr> <td>AsyncResult.error</td> <td>Tener acceso a un objeto Error que proporcione información sobre el error si no se ha completado correctamente la operación.</td> </tr> <tr> <td>AsyncResult.asyncContext</td> <td>Un elemento de cualquier tipo definido por el usuario que se devuelve en el objeto AsyncResult sin sufrir modificaciones.</td> </tr> </table>
+    name: 'saveAsync(options, callback)'
+    fullName: 'saveAsync(options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'saveAsync(options?: SaveSettingsOptions, callback?: (result: AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: options
+          description: Proporciona opciones para guardar la configuración.
+          type:
+            - office.Office.SaveSettingsOptions
+        - id: callback
+          description: 'Opcional. Una función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office. asyncResult](xref:office.Office.AsyncResult)<!-- -->.'
+          type:
+            - '(result: AsyncResult<void>) => void'
+  - uid: office.Office.Settings.saveAsync_1
+    summary: Mantiene la copia en memoria del contenedor de propiedades de configuración en el documento.
+    remarks: |-
+      **Conjunto de requisitos**: [configuración](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#settings)
+
+      Cualquier configuración guardada anteriormente por un complemento se carga al inicializarse, por lo que, durante la duración de la sesión, basta con usar los métodos set y Get para trabajar con la copia en memoria del contenedor de propiedades de la configuración. Cuando desee conservar la configuración para que esté disponible la próxima vez que se use el complemento, use el método saveAsync.
+
+      **Nota**: el método saveAsync conserva el contenedor de propiedades de la configuración en memoria en el archivo del documento. Sin embargo, los cambios en el propio archivo de documento solo se guardan cuando el usuario (o la configuración de Autorrecuperación) guarda el documento en el sistema de archivos. El método refreshAsync solo es útil en escenarios de coautoría cuando otras instancias del mismo complemento pueden cambiar la configuración y los cambios deben estar disponibles para todas las instancias.
+
+      <table> <tr> <th>Propiedad</th> <th>Usar para...</th> </tr> <tr> <td>AsyncResult.value</td> <td>Devuelve siempre undefined porque no hay ningún objeto o dato que recuperar.</td> </tr> <tr> <td>AsyncResult.status</td> <td>Determinar si la operación se ha completado correctamente o no.</td> </tr> <tr> <td>AsyncResult.error</td> <td>Tener acceso a un objeto Error que proporcione información sobre el error si no se ha completado correctamente la operación.</td> </tr> <tr> <td>AsyncResult.asyncContext</td> <td>Un elemento de cualquier tipo definido por el usuario que se devuelve en el objeto AsyncResult sin sufrir modificaciones.</td> </tr> </table>
+
+      #### <a name="examples"></a>Ejemplos
+
+      ```javascript
+      function persistSettings() {
+          Office.context.document.settings.saveAsync(function (asyncResult) {
+              write('Settings saved with status: ' + asyncResult.status);
+          });
+      }
+      // Function that writes to a div with id='message' on the page.
+      function write(message){
+          document.getElementById('message').innerText += message; 
+      }
+      ```
+    name: saveAsync(callback)
+    fullName: saveAsync(callback)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'saveAsync(callback?: (result: AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: callback
+          description: 'Opcional. Una función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office. asyncResult](xref:office.Office.AsyncResult)<!-- -->.'
+          type:
+            - '(result: AsyncResult<void>) => void'
+  - uid: office.Office.Settings.set
+    summary: |-
+      Define o crea la configuración especificada.
+
+      **Importante**: tenga en cuenta que el método Settings. Set solo afecta a la copia en memoria del contenedor de propiedades de la configuración. To make sure that additions or changes to settings will be available to your add-in the next time the document is opened, at some point after calling the Settings.set method and before the add-in is closed, you must call the Settings.saveAsync method to persist settings in the document.
+    remarks: |-
+      **Conjunto de requisitos**: [configuración](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#settings)
+
+      El método Set crea una nueva configuración del nombre especificado si aún no existe, o bien establece una configuración existente del nombre especificado en la copia en memoria del contenedor de propiedades de la configuración. Tras llamar al método Settings.saveAsync, el valor se almacena en el documento como la representación JSON en serie del tipo de datos correspondiente. El espacio máximo disponible para la configuración de cada complemento es de 2 MB.
+
+      #### <a name="examples"></a>Ejemplos
+
+      ```javascript
+      function setMySetting() {
+          Office.context.document.settings.set('mySetting', 'mySetting value');
+      }
+      ```
+    name: 'set(name, value)'
+    fullName: 'set(name, value)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(name: string, value: any): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: name
+          description: ''
+          type:
+            - string
+        - id: value
+          description: Especifica el valor que se debe almacenar.
+          type:
+            - any
