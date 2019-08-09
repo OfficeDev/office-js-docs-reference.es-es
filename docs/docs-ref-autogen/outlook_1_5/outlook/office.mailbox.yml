@@ -422,6 +422,8 @@ items:
 
       El método getCallbackTokenAsync realiza una llamada asincrónica para obtener un token opaco desde el servidor Exchange que hospeda el buzón del usuario. La duración del token de devolución de llamada es de 5 minutos.
 
+      El token se devuelve como una cadena en la `asyncResult.value` propiedad.
+
       *Tokens de REST*
 
       Cuando se solicita un token de REST (Options. isRest = true), el token resultante no funcionará para autenticar las llamadas de servicios Web de Exchange. El token será limitado en el ámbito hasta el acceso de solo lectura al elemento actual y a sus datos adjuntos, a menos que el complemento haya especificado el permiso ReadWriteMailbox en su manifiesto. Si se especifica el permiso ReadWriteMailbox, el token resultante concederá acceso de lectura y escritura para el correo, el calendario y los contactos, incluida la capacidad de enviar correo.
@@ -441,6 +443,14 @@ items:
       **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
 
       **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: redacción o lectura
+
+      **Errores**:
+
+      - HTTPRequestFailure: error de la solicitud. Consulte el objeto Diagnostics para ver el código de error HTTP.
+
+      - InternalServerError: el servidor de Exchange devolvió un error. Consulte el objeto Diagnostics para obtener más información.
+
+      - NetworkError: el usuario ya no está conectado a la red. Compruebe la conexión de red y vuelva a intentarlo.
 
       #### <a name="examples"></a>Ejemplos
 
@@ -475,7 +485,7 @@ items:
           type:
             - 'Office.AsyncContextOptions & { isRest?: boolean }'
         - id: callback
-          description: 'Cuando el método finaliza, la función que se pasa en el parámetro callback se llama con un único parámetro de tipo Office. AsyncResult. El token se proporciona como una cadena en la propiedad `asyncResult.value`. Si se ha producido un error, las `asyncResult.error` propiedades `asyncResult.diagnostics` y pueden proporcionar información adicional.'
+          description: 'Cuando el método finaliza, la función que se pasa en el parámetro callback se llama con un único parámetro de tipo Office. AsyncResult. El token se devuelve como una cadena en la `asyncResult.value` propiedad. Si se ha producido un error, `asyncResult.error` las `asyncResult.diagnostics` propiedades y pueden proporcionar información adicional.'
           type:
             - '(asyncResult: Office.AsyncResult<string>) => void'
   - uid: Outlook.Office.Mailbox.getCallbackTokenAsync_1
@@ -484,14 +494,24 @@ items:
 
       El método getCallbackTokenAsync realiza una llamada asincrónica para obtener un token opaco desde el servidor Exchange que hospeda el buzón del usuario. La duración del token de devolución de llamada es de 5 minutos.
 
+      El token se devuelve como una cadena en la `asyncResult.value` propiedad.
+
       Puede pasar el token y un identificador de archivo adjunto o el identificador del elemento a un sistema de terceros. El sistema de terceros usa el token como token de autorización del portador para llamar a los Servicios web de Exchange (EWS) o a las operaciones GetAttachment o GetItem para devolver datos adjuntos o un elemento. Por ejemplo, puede crear un servicio remoto para obtener datos adjuntos desde el elemento seleccionado.
 
       La aplicación debe tener el permiso ReadItem especificado en su manifiesto para llamar al método getCallbackTokenAsync en modo de lectura.
 
       En el modo de redacción debe llamar al método saveAsync para obtener un identificador de elemento para pasar al método getCallbackTokenAsync. La aplicación debe tener permisos ReadWriteItem para llamar al método saveAsync.
 
-      \[[Conjunto de API: buzón de correo 1,3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+      \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
+      **Errores**:
+
+      - HTTPRequestFailure: error de la solicitud. Consulte el objeto Diagnostics para ver el código de error HTTP.
+
+      - InternalServerError: el servidor de Exchange devolvió un error. Consulte el objeto Diagnostics para obtener más información.
+
+      - NetworkError: el usuario ya no está conectado a la red. Compruebe la conexión de red y vuelva a intentarlo.
+
       **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
 
       **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: redacción o lectura
@@ -520,7 +540,7 @@ items:
         description: ''
       parameters:
         - id: callback
-          description: 'Cuando el método finaliza, la función que se pasa en el parámetro callback se llama con un único parámetro de tipo Office. AsyncResult. El token se proporciona como una cadena en la propiedad `asyncResult.value`. Si se ha producido un error, las `asyncResult.error` propiedades `asyncResult.diagnostics` y pueden proporcionar información adicional.'
+          description: 'Cuando el método finaliza, la función que se pasa en el parámetro callback se llama con un único parámetro de tipo Office. AsyncResult. El token se devuelve como una cadena en la `asyncResult.value` propiedad. Si se ha producido un error, `asyncResult.error` las `asyncResult.diagnostics` propiedades y pueden proporcionar información adicional.'
           type:
             - '(asyncResult: Office.AsyncResult<string>) => void'
         - id: userContext
@@ -531,7 +551,7 @@ items:
     summary: |-
       Obtiene un token que identifica al usuario y al complemento de Office.
 
-      El token se proporciona como una cadena en la propiedad asyncResult. Value.
+      El token se devuelve como una cadena en la `asyncResult.value` propiedad.
 
       \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
@@ -540,6 +560,14 @@ items:
       **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: redacción o lectura
 
       El método getUserIdentityTokenAsync devuelve un token que puede usar para identificar y [autenticar el complemento y el usuario con un sistema de terceros](https://docs.microsoft.com/outlook/add-ins/authentication) .<!-- -->.
+
+      **Errores**:
+
+      - HTTPRequestFailure: error de la solicitud. Consulte el objeto Diagnostics para ver el código de error HTTP.
+
+      - InternalServerError: el servidor de Exchange devolvió un error. Consulte el objeto Diagnostics para obtener más información.
+
+      - NetworkError: el usuario ya no está conectado a la red. Compruebe la conexión de red y vuelva a intentarlo.
 
       #### <a name="examples"></a>Ejemplos
 
@@ -565,7 +593,7 @@ items:
         description: ''
       parameters:
         - id: callback
-          description: 'Cuando el método finaliza, la función que se pasa en el parámetro callback se llama con un único parámetro de tipo Office. AsyncResult. El token se proporciona como una cadena en la propiedad `asyncResult.value`. Si se ha producido un error, las `asyncResult.error` propiedades `asyncResult.diagnostics` y pueden proporcionar información adicional.'
+          description: 'Cuando el método finaliza, la función que se pasa en el parámetro callback se llama con un único parámetro de tipo Office. AsyncResult. El token se devuelve como una cadena en la `asyncResult.value` propiedad. Si se ha producido un error, `asyncResult.error` las `asyncResult.diagnostics` propiedades y pueden proporcionar información adicional.'
           type:
             - '(asyncResult: Office.AsyncResult<string>) => void'
         - id: userContext
@@ -718,9 +746,9 @@ items:
 
       Contiene los siguientes miembros:
 
-      - hostName (cadena): cadena que representa el nombre de la aplicación host. Debe ser uno de los siguientes valores: "Outlook", "OutlookWebApp", "OutlookIOS" o "OutlookAndroid".
+      - hostName (cadena): cadena que representa el nombre de la aplicación host. Debe ser uno de los siguientes valores: "Outlook", "OutlookWebApp", "OutlookIOS" o "OutlookAndroid". **Nota**: el valor "Outlook" se devuelve para Outlook en clientes de escritorio (por ejemplo, Windows y Mac).
 
-      - hostVersion (String): una cadena que representa la versión de la aplicación host o de Exchange Server. Si el complemento de correo se está ejecutando en Outlook en clientes de escritorio o en iOS, la propiedad hostVersion devuelve la versión de la aplicación host, Outlook. En Outlook en la web, la propiedad devuelve la versión del servidor Exchange. Un ejemplo es la cadena "15.0.468.0".
+      - hostVersion (String): cadena que representa la versión de la aplicación host o Exchange Server (por ejemplo, "15.0.468.0"). Si el complemento de correo se está ejecutando en Outlook en los clientes móviles o de escritorio, la propiedad hostVersion devuelve la versión de la aplicación host, Outlook. En Outlook en la web, la propiedad devuelve la versión del servidor Exchange.
 
       - OWAView (MailboxEnums. OWAView o String): una enumeración (o literal de cadena) que representa la vista actual de Outlook en la Web. Si la aplicación host no es Outlook en la web, el acceso a esta propiedad da como resultado undefined. Outlook en la web tiene tres vistas ("OneColumn": se muestra cuando la pantalla es estrecha, "TwoColumns"-se muestra cuando la pantalla es más ancha y "ThreeColumns"-se muestra cuando la pantalla es ancha) que se corresponden con el ancho de la pantalla y la ventana, y el número de columnas que se pueden mostrar.
 
