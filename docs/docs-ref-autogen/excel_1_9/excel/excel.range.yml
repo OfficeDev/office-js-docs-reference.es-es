@@ -140,7 +140,9 @@ items:
           - string
   - uid: excel.Excel.Range.autoFill
     summary: |-
-      Rellena el rango desde el rango actual al rango de destino. El rango de destino debe extender el código fuente tanto horizontal como verticalmente. No se admiten rangos discontinuos.
+      Rellena el intervalo actual con el rango de destino utilizando la lógica de Autorrelleno especificada. El rango de destino puede ser null o puede extender el código fuente tanto horizontal como verticalmente. Si el rango de destino es null, los datos se rellenan en función de las celdas circundantes (que es el comportamiento al hacer doble clic en el controlador de relleno de intervalo de la interfaz de usuario). No se admiten rangos discontinuos.
+
+      Para obtener más información, lea [usar Autorrellenar y relleno rápido](https://support.office.com/article/video-use-autofill-and-flash-fill-2e79a709-c814-4b27-8bc2-c4dc84d49464)<!-- -->.
 
       \[[Conjunto de API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: 'autoFill(destinationRange, autoFillType)'
@@ -165,7 +167,9 @@ items:
             - excel.Excel.AutoFillType
   - uid: excel.Excel.Range.autoFill_1
     summary: |-
-      Rellena el rango desde el rango actual al rango de destino. El rango de destino debe extender el código fuente tanto horizontal como verticalmente. No se admiten rangos discontinuos.
+      Rellena el intervalo actual con el rango de destino utilizando la lógica de Autorrelleno especificada. El rango de destino puede ser null o puede extender el código fuente tanto horizontal como verticalmente. Si el rango de destino es null, los datos se rellenan en función de las celdas circundantes (que es el comportamiento al hacer doble clic en el controlador de relleno de intervalo de la interfaz de usuario). No se admiten rangos discontinuos.
+
+      Para obtener más información, lea [usar Autorrellenar y relleno rápido](https://support.office.com/article/video-use-autofill-and-flash-fill-2e79a709-c814-4b27-8bc2-c4dc84d49464)<!-- -->.
 
       \[[Conjunto de API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: 'autoFill(destinationRange, autoFillTypeString)'
@@ -579,9 +583,9 @@ items:
               // NOTE: If no match is found, an ItemNotFound error
               // is thrown when Range.find is evaluated.
               const foundRange = searchRange.find($("#searchText").text(), {
-                  completeMatch: completeMatch,
-                  matchCase: matchCase,
-                  searchDirection: searchDirection
+                  completeMatch: isCompleteMatchToggle,
+                  matchCase: isMatchCaseToggle,
+                  searchDirection: searchDirectionToggle
               });
               
               foundRange.load("address");
@@ -626,9 +630,9 @@ items:
               const table = sheet.tables.getItem("ExpensesTable");
               const searchRange = table.getRange();
               const foundRange = searchRange.findOrNullObject($("#searchText").text(), {
-                  completeMatch: completeMatch,
-                  matchCase: matchCase,
-                  searchDirection: searchDirection
+                  completeMatch: isCompleteMatchToggle,
+                  matchCase: isMatchCaseToggle,
+                  searchDirection: searchDirectionToggle
               });
               
               foundRange.load("address");
