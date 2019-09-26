@@ -2,7 +2,7 @@
 items:
   - uid: 'excel!Excel.Comment:class'
     summary: |-
-      Representa un objeto de comentario de celda en el libro.
+      Representa un Comentario en el libro.
 
       \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     isPreview: true
@@ -26,11 +26,14 @@ items:
       - 'excel!Excel.Comment#load:member(1)'
       - 'excel!Excel.Comment#load:member(2)'
       - 'excel!Excel.Comment#load:member(3)'
+      - 'excel!Excel.Comment#mentions:member'
       - 'excel!Excel.Comment#replies:member'
       - 'excel!Excel.Comment#resolved:member'
+      - 'excel!Excel.Comment#richContent:member'
       - 'excel!Excel.Comment#set:member(1)'
       - 'excel!Excel.Comment#set:member(2)'
       - 'excel!Excel.Comment#toJSON:member(1)'
+      - 'excel!Excel.Comment#updateMentions:member(1)'
   - uid: 'excel!Excel.Comment#authorEmail:member'
     summary: |-
       Obtiene el correo electrónico del autor del comentario.
@@ -122,7 +125,7 @@ items:
           - '!Date:interface'
   - uid: 'excel!Excel.Comment#delete:member(1)'
     summary: |-
-      Elimina el hilo de comentarios.
+      Elimina el comentario y todas las respuestas conectadas.
 
       \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     isPreview: true
@@ -181,30 +184,22 @@ items:
         type:
           - string
   - uid: 'excel!Excel.Comment#load:member(1)'
-    summary: 'Pone en cola un comando para cargar las propiedades especificadas del objeto. Antes de leer las propiedades, debe llamar a "context.sync()".'
-    remarks: |-
-      Además de esta firma, este método tiene las siguientes firmas:
-
-      `load(option?: string | string[]): Excel.Comment`-Donde opción es una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades que se van a cargar.
-
-      `load(option?: { select?: string; expand?: string; }): Excel.Comment`-Where opción. Select es una cadena delimitada por comas que especifica las propiedades que se van a cargar y Options. Expand es una cadena delimitada por comas que especifica las propiedades de navegación que se deben cargar.
-
-      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Comment`-Solo disponible en tipos de colección. Es similar a la firma anterior. Option. Top especifica el número máximo de elementos de colección que se pueden incluir en el resultado. La opción. SKIP especifica el número de elementos que se deben omitir y que no se incluyen en el resultado. Si se especifica Option. Top, el conjunto de resultados se iniciará después de omitir el número especificado de elementos.
+    summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar `context.sync()` antes de leer las propiedades.
     isPreview: true
-    name: load(option)
-    fullName: load(option)
+    name: load(options)
+    fullName: load(options)
     langs:
       - typeScript
     type: method
     syntax:
-      content: 'load(option?: Excel.Interfaces.CommentLoadOptions): Excel.Comment;'
+      content: 'load(options?: Excel.Interfaces.CommentLoadOptions): Excel.Comment;'
       return:
         type:
           - 'excel!Excel.Comment:class'
         description: ''
       parameters:
-        - id: option
-          description: ''
+        - id: options
+          description: Proporciona opciones para las propiedades del objeto que se va a cargar.
           type:
             - 'excel!Excel.Interfaces.CommentLoadOptions:interface'
   - uid: 'excel!Excel.Comment#load:member(2)'
@@ -249,16 +244,40 @@ items:
       - typeScript
     type: method
     syntax:
-      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.Comment;'
+      content: |-
+        load(propertyNamesAndPaths?: {
+                    select?: string;
+                    expand?: string;
+                }): Excel.Comment;
       return:
         type:
           - 'excel!Excel.Comment:class'
         description: ''
       parameters:
         - id: propertyNamesAndPaths
-          description: Donde propertyNamesAndPaths. Select es una cadena delimitada por comas que especifica las propiedades que se van a cargar y propertyNamesAndPaths. Expand es una cadena delimitada por comas que especifica las propiedades de navegación que se deben cargar.
+          description: '`propertyNamesAndPaths.select`es una cadena delimitada por comas que especifica las propiedades que se van `propertyNamesAndPaths.expand` a cargar y es una cadena delimitada por comas que especifica las propiedades de navegación que se deben cargar.'
           type:
-            - '{ select?: string; expand?: string; }'
+            - |-
+              {
+                          select?: string;
+                          expand?: string;
+                      }
+  - uid: 'excel!Excel.Comment#mentions:member'
+    summary: |-
+      Obtiene las entidades (por ejemplo, personas) que se mencionan en los comentarios.
+
+      \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    isPreview: true
+    name: mentions
+    fullName: mentions
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly mentions: Excel.CommentMention[];'
+      return:
+        type:
+          - 'excel!Excel.Comment#mentions~0:complex'
   - uid: 'excel!Excel.Comment#replies:member'
     summary: |-
       Indica una colección de objetos de respuesta asociados con el comentario. Solo lectura.
@@ -291,6 +310,22 @@ items:
       return:
         type:
           - boolean
+  - uid: 'excel!Excel.Comment#richContent:member'
+    summary: |-
+      Obtiene el contenido de comentario enriquecido (por ejemplo, menciones en comentarios). Esta cadena no está pensada para mostrarse a los usuarios finales. El complemento solo debe usarlo para analizar el contenido de comentarios enriquecidos.
+
+      \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    isPreview: true
+    name: richContent
+    fullName: richContent
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly richContent: string;'
+      return:
+        type:
+          - string
   - uid: 'excel!Excel.Comment#set:member(1)'
     summary: Establece varias propiedades de un objeto al mismo tiempo. Puede pasar un objeto sin formato con las propiedades apropiadas o cualquier otro objeto de la API del mismo tipo.
     remarks: |-
@@ -351,6 +386,28 @@ items:
         type:
           - 'excel!Excel.Interfaces.CommentData:interface'
         description: ''
+  - uid: 'excel!Excel.Comment#updateMentions:member(1)'
+    summary: |-
+      Actualiza el contenido del comentario con una cadena con formato especial y una lista de menciones.
+
+      \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    isPreview: true
+    name: updateMentions(contentWithMentions)
+    fullName: updateMentions(contentWithMentions)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'updateMentions(contentWithMentions: Excel.CommentRichContent): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: contentWithMentions
+          description: El contenido del comentario. Contiene una cadena con un formato especial y una lista de menciones que se analizará en la cadena cuando la muestre Excel.
+          type:
+            - 'excel!Excel.CommentRichContent:interface'
 references:
   - uid: 'excel!OfficeExtension.ClientObject:class'
     name: OfficeExtension.ClientObject
@@ -364,6 +421,15 @@ references:
     name: Excel.Comment
   - uid: 'excel!Excel.Interfaces.CommentLoadOptions:interface'
     name: Excel.Interfaces.CommentLoadOptions
+  - uid: 'excel!Excel.Comment#mentions~0:complex'
+    name: 'Excel.CommentMention[]'
+    fullName: 'Excel.CommentMention[]'
+    spec.typeScript:
+      - uid: 'excel!Excel.CommentMention:interface'
+        name: Excel.CommentMention
+        fullName: Excel.CommentMention
+      - name: '[]'
+        fullName: '[]'
   - uid: 'excel!Excel.CommentReplyCollection:class'
     name: Excel.CommentReplyCollection
   - uid: 'excel!Excel.Interfaces.CommentUpdateData:interface'
@@ -372,3 +438,5 @@ references:
     name: OfficeExtension.UpdateOptions
   - uid: 'excel!Excel.Interfaces.CommentData:interface'
     name: Excel.Interfaces.CommentData
+  - uid: 'excel!Excel.CommentRichContent:interface'
+    name: Excel.CommentRichContent

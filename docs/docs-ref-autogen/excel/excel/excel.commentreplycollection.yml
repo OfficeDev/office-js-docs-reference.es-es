@@ -38,7 +38,7 @@ items:
       - typeScript
     type: method
     syntax:
-      content: 'add(content: string, contentType?: Excel.ContentType): Excel.CommentReply;'
+      content: 'add(content: CommentRichContent | string, contentType?: Excel.ContentType): Excel.CommentReply;'
       return:
         type:
           - 'excel!Excel.CommentReply:class'
@@ -56,11 +56,11 @@ items:
           ```
       parameters:
         - id: content
-          description: El contenido del comentario.
+          description: 'Contenido del comentario. Puede ser una cadena o una interfaz CommentRichContent (por ejemplo, para comentarios con menciones). \[Conjunto de API: ExcelApi BETA (solo vista previa) para String, ExcelApi Preview para CommentRichContent Object\]'
           type:
-            - string
+            - 'excel!Excel.CommentReplyCollection#add~0:complex'
         - id: contentType
-          description: Opcional. Tipo de contenido de comentario
+          description: Opcional. Tipo de contenido incluido en el comentario. El valor predeterminado es enum.`ContentType.plain`<!-- -->.
           type:
             - 'excel!Excel.ContentType:enum'
   - uid: 'excel!Excel.CommentReplyCollection#add:member(2)'
@@ -75,20 +75,20 @@ items:
       - typeScript
     type: method
     syntax:
-      content: 'add(content: string, contentTypeString?: "Plain"): Excel.CommentReply;'
+      content: 'add(content: CommentRichContent | string, contentTypeString?: "Plain" | "Mention"): Excel.CommentReply;'
       return:
         type:
           - 'excel!Excel.CommentReply:class'
         description: ''
       parameters:
         - id: content
-          description: El contenido del comentario.
+          description: 'Contenido del comentario. Puede ser una cadena o una interfaz CommentRichContent (por ejemplo, para comentarios con menciones). \[Conjunto de API: ExcelApi BETA (solo vista previa) para String, ExcelApi Preview para CommentRichContent Object\]'
           type:
-            - string
+            - 'excel!Excel.CommentReplyCollection#add~1:complex'
         - id: contentTypeString
-          description: Opcional. Tipo de contenido de comentario
+          description: Opcional. Tipo de contenido incluido en el comentario. El valor predeterminado es enum.`ContentType.plain`<!-- -->.
           type:
-            - '"Plain"'
+            - '"Plain" | "Mention"'
   - uid: 'excel!Excel.CommentReplyCollection#context:member'
     summary: Contexto de la solicitud asociado al objeto. Esto conecta el proceso del complemento con el proceso de la aplicación host de Office.
     isPreview: true
@@ -160,7 +160,7 @@ items:
         description: ''
       parameters:
         - id: index
-          description: Valor de índice del objeto que se va a recuperar. Indizado con cero.
+          description: Valor de índice de la respuesta de comentario que se va a recuperar. La colección usa indización basada en cero.
           type:
             - number
   - uid: 'excel!Excel.CommentReplyCollection#items:member'
@@ -177,30 +177,22 @@ items:
         type:
           - 'excel!Excel.CommentReplyCollection#items~0:complex'
   - uid: 'excel!Excel.CommentReplyCollection#load:member(1)'
-    summary: 'Pone en cola un comando para cargar las propiedades especificadas del objeto. Antes de leer las propiedades, debe llamar a "context.sync()".'
-    remarks: |-
-      Además de esta firma, este método tiene las siguientes firmas:
-
-      `load(option?: string | string[]): Excel.CommentReplyCollection`-Donde opción es una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades que se van a cargar.
-
-      `load(option?: { select?: string; expand?: string; }): Excel.CommentReplyCollection`-Where opción. Select es una cadena delimitada por comas que especifica las propiedades que se van a cargar y Options. Expand es una cadena delimitada por comas que especifica las propiedades de navegación que se deben cargar.
-
-      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.CommentReplyCollection`-Solo disponible en tipos de colección. Es similar a la firma anterior. Option. Top especifica el número máximo de elementos de colección que se pueden incluir en el resultado. La opción. SKIP especifica el número de elementos que se deben omitir y que no se incluyen en el resultado. Si se especifica Option. Top, el conjunto de resultados se iniciará después de omitir el número especificado de elementos.
+    summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar `context.sync()` antes de leer las propiedades.
     isPreview: true
-    name: load(option)
-    fullName: load(option)
+    name: load(options)
+    fullName: load(options)
     langs:
       - typeScript
     type: method
     syntax:
-      content: 'load(option?: Excel.Interfaces.CommentReplyCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.CommentReplyCollection;'
+      content: 'load(options?: Excel.Interfaces.CommentReplyCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.CommentReplyCollection;'
       return:
         type:
           - 'excel!Excel.CommentReplyCollection:class'
         description: ''
       parameters:
-        - id: option
-          description: ''
+        - id: options
+          description: Proporciona opciones para las propiedades del objeto que se va a cargar.
           type:
             - 'excel!Excel.CommentReplyCollection#load~0:complex'
   - uid: 'excel!Excel.CommentReplyCollection#load:member(2)'
@@ -223,21 +215,22 @@ items:
           type:
             - 'string | string[]'
   - uid: 'excel!Excel.CommentReplyCollection#load:member(3)'
+    summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar `context.sync()` antes de leer las propiedades.
     isPreview: true
-    name: load(option)
-    fullName: load(option)
+    name: load(propertyNamesAndPaths)
+    fullName: load(propertyNamesAndPaths)
     langs:
       - typeScript
     type: method
     syntax:
-      content: 'load(option?: OfficeExtension.LoadOption): Excel.CommentReplyCollection;'
+      content: 'load(propertyNamesAndPaths?: OfficeExtension.LoadOption): Excel.CommentReplyCollection;'
       return:
         type:
           - 'excel!Excel.CommentReplyCollection:class'
         description: ''
       parameters:
-        - id: option
-          description: ''
+        - id: propertyNamesAndPaths
+          description: '`propertyNamesAndPaths.select`es una cadena delimitada por comas que especifica las propiedades que se van `propertyNamesAndPaths.expand` a cargar y es una cadena delimitada por comas que especifica las propiedades de navegación que se deben cargar.'
           type:
             - 'excel!OfficeExtension.LoadOption:interface'
   - uid: 'excel!Excel.CommentReplyCollection#toJSON:member(1)'
@@ -259,8 +252,26 @@ references:
     name: OfficeExtension.ClientObject
   - uid: 'excel!Excel.CommentReply:class'
     name: Excel.CommentReply
+  - uid: 'excel!Excel.CommentReplyCollection#add~0:complex'
+    name: CommentRichContent | string
+    fullName: Excel.CommentRichContent | string
+    spec.typeScript:
+      - uid: 'excel!Excel.CommentRichContent:interface'
+        name: CommentRichContent
+        fullName: Excel.CommentRichContent
+      - name: ' | string'
+        fullName: ' | string'
   - uid: 'excel!Excel.ContentType:enum'
     name: Excel.ContentType
+  - uid: 'excel!Excel.CommentReplyCollection#add~1:complex'
+    name: CommentRichContent | string
+    fullName: Excel.CommentRichContent | string
+    spec.typeScript:
+      - uid: 'excel!Excel.CommentRichContent:interface'
+        name: CommentRichContent
+        fullName: Excel.CommentRichContent
+      - name: ' | string'
+        fullName: ' | string'
   - uid: 'excel!Excel.RequestContext:class'
     name: RequestContext
   - uid: 'excel!Excel.CommentReplyCollection#getCount~0:complex'
