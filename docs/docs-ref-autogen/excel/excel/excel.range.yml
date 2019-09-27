@@ -158,9 +158,7 @@ items:
           - string
   - uid: 'excel!Excel.Range#autoFill:member(1)'
     summary: |-
-      Rellena el intervalo actual con el rango de destino utilizando la lógica de Autorrelleno especificada. El rango de destino puede ser null o puede extender el código fuente tanto horizontal como verticalmente. Si el rango de destino es null, los datos se rellenan en función de las celdas circundantes (que es el comportamiento al hacer doble clic en el controlador de relleno de intervalo de la interfaz de usuario).
-
-      Para obtener más información, lea [usar Autorrellenar y relleno rápido](https://support.office.com/article/video-use-autofill-and-flash-fill-2e79a709-c814-4b27-8bc2-c4dc84d49464)<!-- -->.
+      Rellena el intervalo actual con el rango de destino utilizando la lógica de Autorrelleno especificada. El rango de destino puede ser null o puede extender el código fuente tanto horizontal como verticalmente. No se admiten rangos discontinuos. Para obtener más información, lea [usar Autorrellenar y relleno rápido](https://support.office.com/article/video-use-autofill-and-flash-fill-2e79a709-c814-4b27-8bc2-c4dc84d49464)<!-- -->.
 
       \[[Conjunto de API: ExcelApi 1,9, EXCELAPI beta (solo vista previa) `destinationRange` para null](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: 'autoFill(destinationRange, autoFillType)'
@@ -173,10 +171,25 @@ items:
       return:
         type:
           - void
-        description: ''
+        description: |-
+
+
+          #### <a name="examples"></a>Ejemplos
+
+          ```typescript
+          await Excel.run(async (context) => {
+            const sheet = context.workbook.worksheets.getActiveWorksheet();
+            const sumCell = sheet.getRange("P4");
+            
+            // Copy everything. The formulas will be contextually updated based on their new locations.
+            sumCell.autoFill("P4:P7", Excel.AutoFillType.fillCopy);
+            sumCell.format.autofitColumns();
+            await context.sync();
+          });
+          ```
       parameters:
         - id: destinationRange
-          description: Rango de destino que se va a rellenar. No se admiten rangos discontinuos.
+          description: 'Intervalo de destino que se va a rellenar. Si el rango de destino es null, los datos se rellenan en función de las celdas circundantes (que es el comportamiento al hacer doble clic en el controlador de relleno de intervalo de la interfaz de usuario).'
           type:
             - 'excel!Excel.Range#autoFill~0:complex'
         - id: autoFillType
@@ -185,9 +198,7 @@ items:
             - 'excel!Excel.AutoFillType:enum'
   - uid: 'excel!Excel.Range#autoFill:member(2)'
     summary: |-
-      Rellena el intervalo actual con el rango de destino utilizando la lógica de Autorrelleno especificada. El rango de destino puede ser null o puede extender el código fuente tanto horizontal como verticalmente. Si el rango de destino es null, los datos se rellenan en función de las celdas circundantes (que es el comportamiento al hacer doble clic en el controlador de relleno de intervalo de la interfaz de usuario).
-
-      Para obtener más información, lea [usar Autorrellenar y relleno rápido](https://support.office.com/article/video-use-autofill-and-flash-fill-2e79a709-c814-4b27-8bc2-c4dc84d49464)<!-- -->.
+      Rellena el intervalo actual con el rango de destino utilizando la lógica de Autorrelleno especificada. El rango de destino puede ser null o puede extender el código fuente tanto horizontal como verticalmente. No se admiten rangos discontinuos. Para obtener más información, lea [usar Autorrellenar y relleno rápido](https://support.office.com/article/video-use-autofill-and-flash-fill-2e79a709-c814-4b27-8bc2-c4dc84d49464)<!-- -->.
 
       \[[Conjunto de API: ExcelApi 1,9, EXCELAPI beta (solo vista previa) `destinationRange` para null](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: 'autoFill(destinationRange, autoFillTypeString)'
@@ -203,7 +214,7 @@ items:
         description: ''
       parameters:
         - id: destinationRange
-          description: Rango de destino que se va a rellenar. No se admiten rangos discontinuos.
+          description: 'Intervalo de destino que se va a rellenar. Si el rango de destino es null, los datos se rellenan en función de las celdas circundantes (que es el comportamiento al hacer doble clic en el controlador de relleno de intervalo de la interfaz de usuario).'
           type:
             - 'excel!Excel.Range#autoFill~1:complex'
         - id: autoFillTypeString
@@ -449,7 +460,7 @@ items:
           ```
       parameters:
         - id: sourceRange
-          description: 'El rango de origen o RangeAreas desde el que se va a copiar. Cuando la RangeAreas de origen tiene varios rangos, debe estar en el formulario de esquema que se puede crear quitando filas o columnas completas de un rango rectangular.'
+          description: 'El rango de origen o RangeAreas desde el que se va a copiar. Cuando la RangeAreas de origen tiene varios intervalos, su formulario debe poder crearse quitando filas o columnas completas de un rango rectangular.'
           type:
             - 'excel!Excel.Range#copyFrom~0:complex'
         - id: copyType
@@ -482,7 +493,7 @@ items:
         description: ''
       parameters:
         - id: sourceRange
-          description: 'El rango de origen o RangeAreas desde el que se va a copiar. Cuando la RangeAreas de origen tiene varios rangos, debe estar en el formulario de esquema que se puede crear quitando filas o columnas completas de un rango rectangular.'
+          description: 'El rango de origen o RangeAreas desde el que se va a copiar. Cuando la RangeAreas de origen tiene varios intervalos, su formulario debe poder crearse quitando filas o columnas completas de un rango rectangular.'
           type:
             - 'excel!Excel.Range#copyFrom~1:complex'
         - id: copyTypeString
@@ -588,7 +599,7 @@ items:
         type:
           - 'excel!Excel.Range:class'
         description: |-
-          Intervalo que coincide con los criterios de búsqueda.
+          Objeto Range que representa la primera celda que contiene un valor que coincide con el texto y los criterios de búsqueda.
 
           #### <a name="examples"></a>Ejemplos
 
@@ -1928,7 +1939,26 @@ items:
       return:
         type:
           - void
-        description: ''
+        description: |-
+
+
+          #### <a name="examples"></a>Ejemplos
+
+          ```typescript
+          Excel.run(async (context) => {
+              const sheet = context.workbook.worksheets.getActiveWorksheet();
+              
+              // Group the larger, main level. Note that the outline controls
+              // will be on row 10, meaning 4-9 will collapse and expand.
+              sheet.getRange("4:9").group(Excel.GroupOption.byRows);
+
+              // Group the smaller, sublevels. Note that the outline controls
+              // will be on rows 6 and 9, meaning 4-5 and 7-8 will collapse and expand.
+              sheet.getRange("4:5").group(Excel.GroupOption.byRows);
+              sheet.getRange("7:8").group(Excel.GroupOption.byRows);
+              await context.sync();
+          });
+          ```
       parameters:
         - id: groupOption
           description: 'Especifica cómo se puede agrupar el intervalo por filas o columnas. Se `InvalidArgument` produce un error si la opción de grupo difiere de la propiedad `isEntireRow` o `isEntireColumn` del rango (es decir `range.isEntireRow` , es true `groupOption` y es "ByColumns" `range.isEntireColumn` , o es `groupOption` true y es "ByRows").'
@@ -2216,29 +2246,21 @@ items:
         type:
           - 'excel!Excel.Range#linkedDataTypeState~0:complex'
   - uid: 'excel!Excel.Range#load:member(1)'
-    summary: 'Pone en cola un comando para cargar las propiedades especificadas del objeto. Antes de leer las propiedades, debe llamar a "context.sync()".'
-    remarks: |-
-      Además de esta firma, este método tiene las siguientes firmas:
-
-      `load(option?: string | string[]): Excel.Range`-Donde opción es una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades que se van a cargar.
-
-      `load(option?: { select?: string; expand?: string; }): Excel.Range`-Where opción. Select es una cadena delimitada por comas que especifica las propiedades que se van a cargar y Options. Expand es una cadena delimitada por comas que especifica las propiedades de navegación que se deben cargar.
-
-      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Excel.Range`-Solo disponible en tipos de colección. Es similar a la firma anterior. Option. Top especifica el número máximo de elementos de colección que se pueden incluir en el resultado. La opción. SKIP especifica el número de elementos que se deben omitir y que no se incluyen en el resultado. Si se especifica Option. Top, el conjunto de resultados se iniciará después de omitir el número especificado de elementos.
-    name: load(option)
-    fullName: load(option)
+    summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar `context.sync()` antes de leer las propiedades.
+    name: load(options)
+    fullName: load(options)
     langs:
       - typeScript
     type: method
     syntax:
-      content: 'load(option?: Excel.Interfaces.RangeLoadOptions): Excel.Range;'
+      content: 'load(options?: Excel.Interfaces.RangeLoadOptions): Excel.Range;'
       return:
         type:
           - 'excel!Excel.Range:class'
         description: ''
       parameters:
-        - id: option
-          description: ''
+        - id: options
+          description: Proporciona opciones para las propiedades del objeto que se va a cargar.
           type:
             - 'excel!Excel.Interfaces.RangeLoadOptions:interface'
   - uid: 'excel!Excel.Range#load:member(2)'
@@ -2328,16 +2350,24 @@ items:
       - typeScript
     type: method
     syntax:
-      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Excel.Range;'
+      content: |-
+        load(propertyNamesAndPaths?: {
+                    select?: string;
+                    expand?: string;
+                }): Excel.Range;
       return:
         type:
           - 'excel!Excel.Range:class'
         description: ''
       parameters:
         - id: propertyNamesAndPaths
-          description: Donde propertyNamesAndPaths. Select es una cadena delimitada por comas que especifica las propiedades que se van a cargar y propertyNamesAndPaths. Expand es una cadena delimitada por comas que especifica las propiedades de navegación que se deben cargar.
+          description: '`propertyNamesAndPaths.select`es una cadena delimitada por comas que especifica las propiedades que se van `propertyNamesAndPaths.expand` a cargar y es una cadena delimitada por comas que especifica las propiedades de navegación que se deben cargar.'
           type:
-            - '{ select?: string; expand?: string; }'
+            - |-
+              {
+                          select?: string;
+                          expand?: string;
+                      }
   - uid: 'excel!Excel.Range#merge:member(1)'
     summary: |-
       Combinar las celdas del rango en una región de la hoja de cálculo.
@@ -2539,7 +2569,7 @@ items:
           - number
   - uid: 'excel!Excel.Range#savedAsArray:member'
     summary: |-
-      Representa si todas las celdas se guardarían como una fórmula de matriz. Devuelve true si todas las celdas se guardarán como una matriz, o false si no se guardan todas las celdas como una fórmula de matriz. Devuelve NULL si hay una mezcla de celdas que no se guardarían como fórmula de matriz.
+      Representa si todas las celdas se guardarían como una fórmula de matriz. Devuelve true si todas las celdas se guardarían como una fórmula de matriz o false si no se guardan todas las celdas como una fórmula de matriz. Devuelve NULL si algunas celdas se guardarían como una fórmula de matriz y otras no.
 
       \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     isPreview: true
@@ -3009,7 +3039,7 @@ items:
         type:
           - number
   - uid: 'excel!Excel.Range#track:member(1)'
-    summary: 'Realiza un seguimiento del objeto de ajuste automático según cambios adyacentes en el documento. Esta llamada es una forma abreviada de context.trackedObjects.add(thisObject). Si usa este objeto en llamadas ".sync" y fuera de la ejecución secuencial de un lote de ".run", y obtiene un error "InvalidObjectPath" al establecer una propiedad o invocar un método en el objeto, debería haber agregado el objeto a la colección de objetos de la que realiza un seguimiento cuando se creó el objeto.'
+    summary: 'Realiza un seguimiento del objeto de ajuste automático según cambios adyacentes en el documento. Esta llamada es una abreviatura de`context.trackedObjects.add(thisObject)`<!-- -->. Si usa este objeto a través `.sync` de llamadas y fuera de la ejecución secuencial de un lote ". Run", y obtiene un error "InvalidObjectPath" al establecer una propiedad o invocar un método en el objeto, es necesario que haya agregado el objeto al objeto con seguimiento colección cuando se creó el objeto por primera vez.'
     name: track()
     fullName: track()
     langs:
@@ -3037,7 +3067,24 @@ items:
       return:
         type:
           - void
-        description: ''
+        description: |-
+
+
+          #### <a name="examples"></a>Ejemplos
+
+          ```typescript
+          Excel.run(async (context) => {
+              const sheet = context.workbook.worksheets.getActiveWorksheet();
+              
+              // This removes two levels of groups from the "A1-R10" range.
+              // Any groups at the same level on the same dimension will be removed by a single call.
+              sheet.getRange("A1:R10").ungroup(Excel.GroupOption.byRows);
+              sheet.getRange("A1:R10").ungroup(Excel.GroupOption.byRows);
+              sheet.getRange("A1:R10").ungroup(Excel.GroupOption.byColumns);
+              sheet.getRange("A1:R10").ungroup(Excel.GroupOption.byColumns);
+              await context.sync();
+          });
+          ```
       parameters:
         - id: groupOption
           description: Especifica cómo se puede desagrupar el rango por filas o columnas.
@@ -3100,7 +3147,7 @@ items:
           });
           ```
   - uid: 'excel!Excel.Range#untrack:member(1)'
-    summary: 'Libere la memoria asociada a este objeto, si se ha realizado un seguimiento de él anteriormente. Esta llamada es una forma abreviada de context.trackedObjects.remove(thisObject). Tener muchos objetos marcados ralentiza la aplicación host, así que debe recordar liberar los objetos que agregue cuando haya terminado con ellos. Debe llamar a "context.sync()" antes de que surta efecto la liberación de memoria.'
+    summary: 'Libere la memoria asociada a este objeto, si se ha realizado un seguimiento de él anteriormente. Esta llamada es una forma abreviada de`context.trackedObjects.remove(thisObject)`<!-- -->. Tener muchos objetos marcados ralentiza la aplicación host, así que debe recordar liberar los objetos que agregue cuando haya terminado con ellos. Tendrá que llamar `context.sync()` antes de que la liberación de memoria surta efecto.'
     name: untrack()
     fullName: untrack()
     langs:
