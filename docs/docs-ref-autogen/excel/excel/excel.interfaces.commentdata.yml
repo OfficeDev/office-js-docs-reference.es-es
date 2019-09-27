@@ -1,7 +1,7 @@
 ### YamlMime:UniversalReference
 items:
   - uid: 'excel!Excel.Interfaces.CommentData:interface'
-    summary: Una interfaz que describe los datos devueltos al llamar a "comment. toJSON ()".
+    summary: Una interfaz que describe los datos devueltos por las llamadas`comment.toJSON()`<!-- -->.
     name: Excel.Interfaces.CommentData
     fullName: Excel.Interfaces.CommentData
     langs:
@@ -14,8 +14,10 @@ items:
       - 'excel!Excel.Interfaces.CommentData#content:member'
       - 'excel!Excel.Interfaces.CommentData#creationDate:member'
       - 'excel!Excel.Interfaces.CommentData#id:member'
+      - 'excel!Excel.Interfaces.CommentData#mentions:member'
       - 'excel!Excel.Interfaces.CommentData#replies:member'
       - 'excel!Excel.Interfaces.CommentData#resolved:member'
+      - 'excel!Excel.Interfaces.CommentData#richContent:member'
   - uid: 'excel!Excel.Interfaces.CommentData#authorEmail:member'
     summary: |-
       Obtiene el correo electrónico del autor del comentario.
@@ -96,6 +98,22 @@ items:
       return:
         type:
           - string
+  - uid: 'excel!Excel.Interfaces.CommentData#mentions:member'
+    summary: |-
+      Obtiene las entidades (por ejemplo, personas) que se mencionan en los comentarios.
+
+      \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    isPreview: true
+    name: mentions
+    fullName: mentions
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'mentions?: Excel.CommentMention[];'
+      return:
+        type:
+          - 'excel!Excel.Interfaces.CommentData#mentions~0:complex'
   - uid: 'excel!Excel.Interfaces.CommentData#replies:member'
     summary: |-
       Indica una colección de objetos de respuesta asociados con el comentario. Solo lectura.
@@ -128,9 +146,34 @@ items:
       return:
         type:
           - boolean
+  - uid: 'excel!Excel.Interfaces.CommentData#richContent:member'
+    summary: |-
+      Obtiene el contenido de comentario enriquecido (por ejemplo, menciones en comentarios). Esta cadena no está pensada para mostrarse a los usuarios finales. El complemento solo debe usarlo para analizar el contenido de comentarios enriquecidos.
+
+      \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    isPreview: true
+    name: richContent
+    fullName: richContent
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'richContent?: string;'
+      return:
+        type:
+          - string
 references:
   - uid: '!Date:interface'
     name: Date
+  - uid: 'excel!Excel.Interfaces.CommentData#mentions~0:complex'
+    name: 'Excel.CommentMention[]'
+    fullName: 'Excel.CommentMention[]'
+    spec.typeScript:
+      - uid: 'excel!Excel.CommentMention:interface'
+        name: Excel.CommentMention
+        fullName: Excel.CommentMention
+      - name: '[]'
+        fullName: '[]'
   - uid: 'excel!Excel.Interfaces.CommentData#replies~0:complex'
     name: 'Excel.Interfaces.CommentReplyData[]'
     fullName: 'Excel.Interfaces.CommentReplyData[]'
