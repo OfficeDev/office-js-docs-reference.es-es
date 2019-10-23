@@ -203,7 +203,7 @@ items:
           - 'excel!Excel.RequestContext:class'
   - uid: 'excel!Excel.Worksheet#copy:member(1)'
     summary: |-
-      Copia una hoja de cálculo y la coloca en la posición especificada. Devuelve la hoja de cálculo copiada.
+      Copia una hoja de cálculo y la coloca en la posición especificada.
 
       \[[Conjunto de API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: 'copy(positionType, relativeTo)'
@@ -217,7 +217,7 @@ items:
         type:
           - 'excel!Excel.Worksheet:class'
         description: |-
-
+          La hoja de cálculo recién creada.
 
           #### <a name="examples"></a>Ejemplos
 
@@ -238,16 +238,16 @@ items:
           ```
       parameters:
         - id: positionType
-          description: Opcional.
+          description: 'Ubicación del libro en la que se va a ubicar la hoja de cálculo recién creada. El valor predeterminado es "none", que inserta la hoja de cálculo al principio de la hoja de cálculo.'
           type:
             - 'excel!Excel.WorksheetPositionType:enum'
         - id: relativeTo
-          description: Opcional.
+          description: La hoja de cálculo existente que determina la posición de la hoja de cálculo recién creada. Esto solo es necesario si `positionType` es "Before" o "after".
           type:
             - 'excel!Excel.Worksheet:class'
   - uid: 'excel!Excel.Worksheet#copy:member(2)'
     summary: |-
-      Copia una hoja de cálculo y la coloca en la posición especificada. Devuelve la hoja de cálculo copiada.
+      Copia una hoja de cálculo y la coloca en la posición especificada.
 
       \[[Conjunto de API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: 'copy(positionTypeString, relativeTo)'
@@ -260,14 +260,14 @@ items:
       return:
         type:
           - 'excel!Excel.Worksheet:class'
-        description: ''
+        description: La hoja de cálculo recién creada.
       parameters:
         - id: positionTypeString
-          description: Opcional.
+          description: 'Ubicación del libro en la que se va a ubicar la hoja de cálculo recién creada. El valor predeterminado es "none", que inserta la hoja de cálculo al principio de la hoja de cálculo.'
           type:
             - '"None" | "Before" | "After" | "Beginning" | "End"'
         - id: relativeTo
-          description: Opcional.
+          description: La hoja de cálculo existente que determina la posición de la hoja de cálculo recién creada. Esto solo es necesario si `positionType` es "Before" o "after".
           type:
             - 'excel!Excel.Worksheet:class'
   - uid: 'excel!Excel.Worksheet#delete:member(1)'
@@ -1030,7 +1030,7 @@ items:
           ```
   - uid: 'excel!Excel.Worksheet#onColumnSorted:member'
     summary: |-
-      Se produce cuando se han ordenado una o más columnas. Esto ocurre como resultado de una operación de ordenación de izquierda a derecha.
+      Se produce cuando se han ordenado una o más columnas. Esto sucede cuando se produce una operación de ordenación de izquierda a derecha.
 
       \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     isPreview: true
@@ -1152,7 +1152,7 @@ items:
           - 'excel!Excel.Worksheet#onRowHiddenChanged~0:complex'
   - uid: 'excel!Excel.Worksheet#onRowSorted:member'
     summary: |-
-      Se produce cuando se han ordenado una o más filas. Esto ocurre como resultado de una operación de ordenación de arriba a abajo.
+      Se produce cuando se han ordenado una o más filas. Esto sucede cuando se produce una operación de ordenación de arriba a abajo.
 
       \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     isPreview: true
@@ -1472,7 +1472,29 @@ items:
       return:
         type:
           - void
-        description: ''
+        description: |-
+
+
+          #### <a name="examples"></a>Ejemplos
+
+          ```typescript
+          Excel.run(async (context) => {
+              const sheet = context.workbook.worksheets.getActiveWorksheet();
+
+              // This collapses the entire outline.
+              sheet.showOutlineLevels(1, 1);
+              await context.sync();
+          });
+          ```
+          ```typescript
+          Excel.run(async (context) => {
+              const sheet = context.workbook.worksheets.getActiveWorksheet();
+
+              // This shows the top 3 outline levels; collapsing any additional sublevels.
+              sheet.showOutlineLevels(3, 3);
+              await context.sync();
+          });
+          ```
       parameters:
         - id: rowLevels
           description: Número de niveles de fila de un esquema que se va a mostrar.
