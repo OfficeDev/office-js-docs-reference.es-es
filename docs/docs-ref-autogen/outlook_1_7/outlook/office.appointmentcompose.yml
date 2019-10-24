@@ -671,7 +671,11 @@ items:
           - 'outlook!Office.NotificationMessages:interface'
   - uid: 'outlook!Office.AppointmentCompose#optionalAttendees:member'
     summary: |-
-      Proporciona acceso a los asistentes opcionales de un evento. El tipo de objeto y el nivel de acceso dependen del modo del elemento actual. La propiedad optionalAttendees devuelve un objeto [Office. Recipients](xref:outlook!Office.Recipients:interface) que proporciona métodos para obtener o actualizar los asistentes opcionales para una reunión.
+      Proporciona acceso a los asistentes opcionales de un evento. El tipo de objeto y el nivel de acceso dependen del modo del elemento actual. La propiedad optionalAttendees devuelve un objeto [Office. Recipients](xref:outlook!Office.Recipients:interface) que proporciona métodos para obtener o actualizar los asistentes opcionales para una reunión. De forma predeterminada, la colección está limitada a un máximo de 100 miembros. Sin embargo, en Windows y Mac, se aplican los límites siguientes.
+
+      - Obtener el máximo de 500 miembros.
+
+      - Establezca un máximo de 100 miembros por llamada, hasta 500 miembros totales.
 
       \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
@@ -788,7 +792,7 @@ items:
     summary: |-
       Quita los datos adjuntos de un mensaje o cita.
 
-      El método removeAttachmentAsync quita los datos adjuntos con el identificador especificado del elemento. Como práctica recomendada, debe usar el identificador de datos adjuntos para quitar datos adjuntos solo si la misma aplicación de correo ha agregado los datos adjuntos en la misma sesión. En Outlook en la web y dispositivos móviles, el identificador de datos adjuntos solo es válido en la misma sesión. Una sesión es superior a cuando el usuario cierra la aplicación o si el usuario comienza a redactar un formulario en línea y, a continuación, el formulario continúa en una ventana independiente.
+      El método removeAttachmentAsync quita los datos adjuntos con el identificador especificado del elemento. Como práctica recomendada, debe usar el identificador de datos adjuntos para quitar datos adjuntos solo si la misma aplicación de correo ha agregado los datos adjuntos en la misma sesión. En Outlook en la Web y dispositivos móviles, el identificador de datos adjuntos solo es válido en la misma sesión. Una sesión es superior a cuando el usuario cierra la aplicación o si el usuario comienza a redactar un formulario en línea y, a continuación, el formulario continúa en una ventana independiente.
 
       \[[Conjunto de API: buzón de correo 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
@@ -841,7 +845,7 @@ items:
     summary: |-
       Quita los datos adjuntos de un mensaje o cita.
 
-      El método removeAttachmentAsync quita los datos adjuntos con el identificador especificado del elemento. Como práctica recomendada, debe usar el identificador de datos adjuntos para quitar datos adjuntos solo si la misma aplicación de correo ha agregado los datos adjuntos en la misma sesión. En Outlook en la web y dispositivos móviles, el identificador de datos adjuntos solo es válido en la misma sesión. Una sesión es superior a cuando el usuario cierra la aplicación o si el usuario comienza a redactar un formulario en línea y, a continuación, el formulario continúa en una ventana independiente.
+      El método removeAttachmentAsync quita los datos adjuntos con el identificador especificado del elemento. Como práctica recomendada, debe usar el identificador de datos adjuntos para quitar datos adjuntos solo si la misma aplicación de correo ha agregado los datos adjuntos en la misma sesión. En Outlook en la Web y dispositivos móviles, el identificador de datos adjuntos solo es válido en la misma sesión. Una sesión es superior a cuando el usuario cierra la aplicación o si el usuario comienza a redactar un formulario en línea y, a continuación, el formulario continúa en una ventana independiente.
 
       \[[Conjunto de API: buzón de correo 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
@@ -940,7 +944,13 @@ items:
             - 'outlook!Office.AppointmentCompose#removeHandlerAsync~3:complex'
   - uid: 'outlook!Office.AppointmentCompose#requiredAttendees:member'
     summary: |-
-      Proporciona acceso a los asistentes necesarios de un evento. El tipo de objeto y el nivel de acceso dependen del modo del elemento actual. La propiedad requiredAttendees devuelve un objeto [Office. Recipients](xref:outlook!Office.Recipients:interface) que proporciona métodos para obtener o actualizar los asistentes necesarios para una reunión.
+      Proporciona acceso a los asistentes necesarios de un evento. El tipo de objeto y el nivel de acceso dependen del modo del elemento actual.
+
+      La propiedad requiredAttendees devuelve un objeto [Office. Recipients](xref:outlook!Office.Recipients:interface) que proporciona métodos para obtener o actualizar los asistentes necesarios para una reunión. De forma predeterminada, la colección está limitada a un máximo de 100 miembros. Sin embargo, en Windows y Mac, se aplican los límites siguientes.
+
+      - Obtener el máximo de 500 miembros.
+
+      - Establezca un máximo de 100 miembros por llamada, hasta 500 miembros totales.
 
       \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
@@ -974,7 +984,7 @@ items:
     summary: |-
       Guarda un elemento de forma asincrónica.
 
-      Cuando se invoca, este método guarda el mensaje actual como un borrador y devuelve el identificador de elemento a través del método de devolución de llamada. En Outlook en la web o en Outlook en modo en línea, el elemento se guarda en el servidor. En modo en caché de Outlook, se guarda el elemento en la caché local.
+      Cuando se invoca, este método guarda el mensaje actual como un borrador y devuelve el identificador de elemento a través del método de devolución de llamada. En el modo en línea de Outlook o en Outlook en la web, el elemento se guarda en el servidor. En modo en caché de Outlook, se guarda el elemento en la caché local.
 
       Dado que las citas no tienen el estado de borrador, si se llama a saveAsync en una cita en modo de redacción, el elemento se guardará como una cita normal en el calendario del usuario. Para las citas nuevas que no se han guardado antes, no se enviará ninguna invitación. Al guardar una cita existente, se enviará una actualización a los asistentes agregados o eliminados.
 
@@ -982,7 +992,7 @@ items:
 
       **Nota**: los siguientes clientes tienen un comportamiento diferente para saveAsync en las citas en el modo de redacción:
 
-      - Outlook en Mac no admite guardar una reunión. El método saveAsync produce un error cuando se llama desde una reunión en el modo de redacción. Consulte [no se puede guardar una reunión como borrador en Outlook para Mac mediante la API de Office js](https://support.microsoft.com/help/4505745) para obtener una solución alternativa.
+      - Outlook para Mac no permite guardar una reunión. El método saveAsync produce un error cuando se llama desde una reunión en el modo de redacción. Consulte [No se puede guardar una reunión como borrador en Outlook para Mac mediante la API de Office JS](https://support.microsoft.com/help/4505745) para obtener una solución alternativa.
 
       - Outlook en la web siempre envía una invitación o actualización cuando se llama al método saveAsync en una cita en el modo redacción.
 
@@ -1019,7 +1029,7 @@ items:
     summary: |-
       Guarda un elemento de forma asincrónica.
 
-      Cuando se invoca, este método guarda el mensaje actual como un borrador y devuelve el identificador de elemento a través del método de devolución de llamada. En Outlook en la web o en Outlook en modo en línea, el elemento se guarda en el servidor. En modo en caché de Outlook, se guarda el elemento en la caché local.
+      Cuando se invoca, este método guarda el mensaje actual como un borrador y devuelve el identificador de elemento a través del método de devolución de llamada. En el modo en línea de Outlook o en Outlook en la web, el elemento se guarda en el servidor. En modo en caché de Outlook, se guarda el elemento en la caché local.
 
       Dado que las citas no tienen el estado de borrador, si se llama a saveAsync en una cita en modo de redacción, el elemento se guardará como una cita normal en el calendario del usuario. Para las citas nuevas que no se han guardado antes, no se enviará ninguna invitación. Al guardar una cita existente, se enviará una actualización a los asistentes agregados o eliminados.
 
@@ -1027,7 +1037,7 @@ items:
 
       **Nota**: los siguientes clientes tienen un comportamiento diferente para saveAsync en las citas en el modo de redacción:
 
-      - Outlook en Mac no admite guardar una reunión. El método saveAsync produce un error cuando se llama desde una reunión en el modo de redacción. Consulte [no se puede guardar una reunión como borrador en Outlook para Mac mediante la API de Office js](https://support.microsoft.com/help/4505745) para obtener una solución alternativa.
+      - Outlook para Mac no permite guardar una reunión. El método saveAsync produce un error cuando se llama desde una reunión en el modo de redacción. Consulte [No se puede guardar una reunión como borrador en Outlook para Mac mediante la API de Office JS](https://support.microsoft.com/help/4505745) para obtener una solución alternativa.
 
       - Outlook en la web siempre envía una invitación o actualización cuando se llama al método saveAsync en una cita en el modo redacción.
 

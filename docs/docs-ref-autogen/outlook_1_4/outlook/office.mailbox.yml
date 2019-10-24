@@ -237,9 +237,9 @@ items:
 
       El método displayAppointmentForm abre una cita de calendario existente en una nueva ventana del escritorio o en un cuadro de diálogo en los dispositivos móviles.
 
-      En Outlook en Mac, puede usar este método para mostrar una cita única que no forma parte de una serie periódica, o la cita principal de una serie periódica, pero no puede mostrar una instancia de la serie. Esto se debe a que en Outlook en Mac no se puede tener acceso a las propiedades (incluido el identificador de elemento) de las instancias de una serie periódica.
+      En Outlook para Mac, puede usar este método para mostrar una cita que no forme parte de una serie periódica o la cita principal de una serie periódica, pero no puede mostrar una instancia de la serie. Esto es porque en Outlook para Mac no se puede tener acceso a las propiedades (incluido el identificador de elemento) de las instancias de una serie periódica.
 
-      En Outlook en la web, este método abre el formulario especificado sólo si el cuerpo del formulario es inferior o igual a 32 KB en el número de caracteres.
+      En Outlook para la web, este método abre el formato especificado solo si el cuerpo del formulario es inferior o igual a 32 KB en el número de caracteres.
 
       Si el identificador de elemento especificado no identifica una cita existente, se abrirá una página en blanco en el dispositivo o equipo cliente y no se generará ningún mensaje de error.
 
@@ -278,7 +278,7 @@ items:
 
       El método displayMessageForm abre un mensaje existente en una nueva ventana del escritorio o en un cuadro de diálogo en los dispositivos móviles.
 
-      En Outlook en la web, este método abre el formulario especificado sólo si el cuerpo del formulario es inferior o igual a 32 KB, el número de caracteres.
+      En Outlook para la web, este método abre el formato especificado solo si el cuerpo del formulario es inferior o igual a 32 KB en el número de caracteres.
 
       Si el identificador de elemento especificado no identifica un mensaje existente, no se mostrará ningún mensaje en el equipo cliente ni se generará ningún mensaje de error.
 
@@ -399,17 +399,17 @@ items:
     summary: |-
       Obtiene una cadena que contiene un token usado para obtener datos adjuntos o un elemento de Exchange Server.
 
-      El método getCallbackTokenAsync realiza una llamada asincrónica para obtener un token opaco desde el servidor Exchange que hospeda el buzón del usuario. La duración del token de devolución de llamada es de 5 minutos.
+      El método `getCallbackTokenAsync` realiza una llamada asincrónica para obtener un token opaco desde Exchange Server que hospeda el buzón del usuario. La duración del token de devolución de llamada es de 5 minutos.
 
       El token se devuelve como una cadena en la `asyncResult.value` propiedad.
 
-      Puede pasar el token y un identificador de archivo adjunto o el identificador del elemento a un sistema de terceros. El sistema de terceros usa el token como token de autorización del portador para llamar a los Servicios web de Exchange (EWS) o a las operaciones GetAttachment o GetItem para devolver datos adjuntos o un elemento. Por ejemplo, puede crear un servicio remoto para obtener datos adjuntos desde el elemento seleccionado.
+      Podrá pasar tanto el token como un identificador de datos adjuntos o de elementos a un sistema de terceros. El sistema de terceros usa el token como autorización del portador para llamar a los servicios Web de Exchange (EWS) o a las operaciones [GetAttachment](https://docs.microsoft.com/exchange/client-developer/web-service-reference/getattachment-operation) o [GetItem](https://docs.microsoft.com/exchange/client-developer/web-service-reference/getitem-operation) para devolver datos adjuntos o un elemento. Por ejemplo, puede crear un servicio remoto para [obtener datos adjuntos del elemento seleccionado](https://docs.microsoft.com/outlook/add-ins/get-attachments-of-an-outlook-item) .<!-- -->.
 
-      La aplicación debe tener el permiso ReadItem especificado en su manifiesto para llamar al método getCallbackTokenAsync en modo de lectura.
+      Para llamar `getCallbackTokenAsync` al método en modo lectura se requiere un nivel de permiso mínimo de**ReadItem**.
 
-      En el modo de redacción debe llamar al método saveAsync para obtener un identificador de elemento para pasar al método getCallbackTokenAsync. La aplicación debe tener permisos ReadWriteItem para llamar al método saveAsync.
+      Para llamar `getCallbackTokenAsync` al método en el modo de redacción es necesario que haya guardado el elemento. El método `saveAsync` requiere un nivel de permiso mínimo de **ReadWriteItem**.
 
-      \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+      \[[Conjunto de API: buzón de correo 1,0 para compatibilidad con modo de lectura; 1,3 para la compatibilidad con el modo de redacción](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
       **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
 
@@ -417,9 +417,9 @@ items:
 
       **Errores**:
 
-      - HTTPRequestFailure: error de la solicitud. Consulte el objeto Diagnostics para ver el código de error HTTP.
+      - HTTPRequestFailure: error de la solicitud. Compruebe el objeto de diagnóstico para ver el código de error HTTP.
 
-      - InternalServerError: el servidor de Exchange devolvió un error. Consulte el objeto Diagnostics para obtener más información.
+      - InternalServerError: el servidor de Exchange devolvió un error. Compruebe el objeto de diagnóstico para obtener más información.
 
       - NetworkError: el usuario ya no está conectado a la red. Compruebe la conexión de red y vuelva a intentarlo.
 
@@ -452,7 +452,7 @@ items:
         description: ''
       parameters:
         - id: callback
-          description: 'Cuando el método finaliza, la función que se pasa en el parámetro callback se llama con un único parámetro de tipo Office. AsyncResult. El token se devuelve como una cadena en la `asyncResult.value` propiedad. Si se ha producido un error, `asyncResult.error` las `asyncResult.diagnostics` propiedades y pueden proporcionar información adicional.'
+          description: 'Cuando el método finaliza, la función que se pasa en el parámetro callback se llama con un único parámetro de tipo Office. AsyncResult. El token se devuelve como una cadena en la `asyncResult.value` propiedad. Si se produjo un error, las propiedades `asyncResult.error` y `asyncResult.diagnostics` pueden proporcionar información adicional.'
           type:
             - 'outlook!Office.Mailbox#getCallbackTokenAsync~0:complex'
         - id: userContext
@@ -475,9 +475,9 @@ items:
 
       **Errores**:
 
-      - HTTPRequestFailure: error de la solicitud. Consulte el objeto Diagnostics para ver el código de error HTTP.
+      - HTTPRequestFailure: error de la solicitud. Compruebe el objeto de diagnóstico para ver el código de error HTTP.
 
-      - InternalServerError: el servidor de Exchange devolvió un error. Consulte el objeto Diagnostics para obtener más información.
+      - InternalServerError: el servidor de Exchange devolvió un error. Compruebe el objeto de diagnóstico para obtener más información.
 
       - NetworkError: el usuario ya no está conectado a la red. Compruebe la conexión de red y vuelva a intentarlo.
 
@@ -505,7 +505,7 @@ items:
         description: ''
       parameters:
         - id: callback
-          description: 'Cuando el método finaliza, la función que se pasa en el parámetro callback se llama con un único parámetro de tipo Office. AsyncResult. El token se devuelve como una cadena en la `asyncResult.value` propiedad. Si se ha producido un error, `asyncResult.error` las `asyncResult.diagnostics` propiedades y pueden proporcionar información adicional.'
+          description: 'Cuando el método finaliza, la función que se pasa en el parámetro callback se llama con un único parámetro de tipo Office. AsyncResult. El token se devuelve como una cadena en la `asyncResult.value` propiedad. Si se produjo un error, las propiedades `asyncResult.error` y `asyncResult.diagnostics` pueden proporcionar información adicional.'
           type:
             - 'outlook!Office.Mailbox#getUserIdentityTokenAsync~0:complex'
         - id: userContext
