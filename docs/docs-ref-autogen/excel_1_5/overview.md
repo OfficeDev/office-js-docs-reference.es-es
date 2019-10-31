@@ -1,13 +1,13 @@
 ---
 title: Referencia de la API de JavaScript de Office
 description: El conjunto de requisitos de las API de JavaScript de Office por host
-ms.date: 07/25/2019
-ms.openlocfilehash: e4b45370dcaf82a60d39264a97f1e28c0dab543d
-ms.sourcegitcommit: ceb67bed1111b63e75e3a69a9a42a27ccc4d5749
+ms.date: 10/24/2019
+ms.openlocfilehash: fb6f228306c6fc5840c2f8b9c9bc46d56b43f50c
+ms.sourcegitcommit: dc57153a05b103a8493370c8aa1bd936f4d5f7c4
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 08/02/2019
-ms.locfileid: "36130980"
+ms.lasthandoff: 10/31/2019
+ms.locfileid: "37907158"
 ---
 # <a name="office-javascript-api-reference"></a>Referencia de la API de JavaScript de Office
 
@@ -21,6 +21,7 @@ A continuación se muestra una lista de conjuntos de requisitos específicos del
 ## <a name="excel"></a>Excel
 
 - [Vista previa de ExcelApi](/javascript/api/excel?view=excel-js-preview)
+- [ExcelApi 1.10](/javascript/api/excel?view=excel-js-1.10)
 - [ExcelApi 1.9](/javascript/api/excel?view=excel-js-1.9)
 - [ExcelApi 1.8](/javascript/api/excel?view=excel-js-1.8)
 - [ExcelApi 1.7](/javascript/api/excel?view=excel-js-1.7)
@@ -38,6 +39,7 @@ A continuación se muestra una lista de conjuntos de requisitos específicos del
 ## <a name="outlook"></a>Outlook
 
 - [Vista previa de buzón](/javascript/api/outlook?view=outlook-js-preview)
+- [Buzón 1,8](/javascript/api/outlook?view=outlook-js-1.8)
 - [Mailbox 1.7](/javascript/api/outlook?view=outlook-js-1.7)
 - [Mailbox 1.6](/javascript/api/outlook?view=outlook-js-1.6)
 - [Mailbox 1.5](/javascript/api/outlook?view=outlook-js-1.5)
@@ -48,7 +50,7 @@ A continuación se muestra una lista de conjuntos de requisitos específicos del
 
 ## <a name="powerpoint"></a>PowerPoint
 
-- [PowerPointApi 1,1](/javascript/api/powerpoint?view=powerpoint-js-1.1)
+- [PowerPointApi 1.1](/javascript/api/powerpoint?view=powerpoint-js-1.1)
 
 ## <a name="visio"></a>Visio
 
@@ -65,7 +67,7 @@ A continuación se muestra una lista de conjuntos de requisitos específicos del
 
 - [API común](/javascript/api/office?view=common-js)
 
-## <a name="see-also"></a>Vea también
+## <a name="see-also"></a>Ver también
 
 - [Acerca de los complementos de Office](/office/dev/add-ins/overview)
 - [Disponibilidad de plataformas y hosts de los complementos de Office](/office/dev/add-ins/overview/office-add-in-availability)
