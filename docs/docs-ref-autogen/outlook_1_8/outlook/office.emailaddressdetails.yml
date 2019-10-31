@@ -1,0 +1,133 @@
+### YamlMime:UniversalReference
+items:
+  - uid: 'outlook!Office.EmailAddressDetails:interface'
+    summary: |-
+      Proporciona las propiedades de correo electrónico del remitente o los destinatarios especificados de un mensaje de correo o una cita.
+
+      \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
+
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: redacción o lectura
+    name: Office.EmailAddressDetails
+    fullName: Office.EmailAddressDetails
+    langs:
+      - typeScript
+    type: interface
+    package: outlook!
+    children:
+      - 'outlook!Office.EmailAddressDetails#appointmentResponse:member'
+      - 'outlook!Office.EmailAddressDetails#displayName:member'
+      - 'outlook!Office.EmailAddressDetails#emailAddress:member'
+      - 'outlook!Office.EmailAddressDetails#recipientType:member'
+  - uid: 'outlook!Office.EmailAddressDetails#appointmentResponse:member'
+    summary: 'Obtiene la respuesta que ha devuelto un asistente de una cita. Esta propiedad sólo se aplica a un asistente de una cita, como se representa en la propiedad optionalAttendees o requiredAttendees. Esta propiedad devuelve undefined en otros escenarios.'
+    name: appointmentResponse
+    fullName: appointmentResponse
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'appointmentResponse: MailboxEnums.ResponseType | string;'
+      return:
+        type:
+          - 'outlook!Office.EmailAddressDetails#appointmentResponse~0:complex'
+        description: |-
+
+
+          #### <a name="examples"></a>Ejemplos
+
+          ```javascript
+          // The following sample provides the responses from required attendees.
+          // Note that this sample needs the add-in to be in Appointment Read (Attendee) mode.
+          var requiredAttendees = Office.context.mailbox.item.requiredAttendees;
+          console.log("There are " + requiredAttendees.length + " required attendees.")
+          requiredAttendees.forEach(function (requiredAttendee) {
+              console.log("Attendee " + requiredAttendee.displayName + ": " + requiredAttendee.appointmentResponse);
+          });
+          ```
+  - uid: 'outlook!Office.EmailAddressDetails#displayName:member'
+    summary: Obtiene el nombre para mostrar asociado a una dirección de correo electrónico.
+    name: displayName
+    fullName: displayName
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'displayName: string;'
+      return:
+        type:
+          - string
+        description: |-
+
+
+          #### <a name="examples"></a>Ejemplos
+
+          ```javascript
+          var organizerName = Office.context.mailbox.item.organizer.displayName;
+          console.log("Organizer: " + organizerName);
+          ```
+  - uid: 'outlook!Office.EmailAddressDetails#emailAddress:member'
+    summary: Obtiene la dirección de correo electrónico SMTP.
+    name: emailAddress
+    fullName: emailAddress
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'emailAddress: string;'
+      return:
+        type:
+          - string
+        description: |-
+
+
+          #### <a name="examples"></a>Ejemplos
+
+          ```javascript
+          var organizerAddress = Office.context.mailbox.item.organizer.emailAddress;
+          console.log("Organizer's email address: " + organizerAddress);
+          ```
+  - uid: 'outlook!Office.EmailAddressDetails#recipientType:member'
+    summary: Obtiene el tipo de dirección de correo electrónico de un destinatario.
+    name: recipientType
+    fullName: recipientType
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'recipientType: MailboxEnums.RecipientType | string;'
+      return:
+        type:
+          - 'outlook!Office.EmailAddressDetails#recipientType~0:complex'
+        description: |-
+
+
+          #### <a name="examples"></a>Ejemplos
+
+          ```javascript
+          var requiredAttendees = Office.context.mailbox.item.requiredAttendees;
+          console.log("There are " + requiredAttendees.length + " required attendees.")
+          requiredAttendees.forEach(function (requiredAttendee) {
+              console.log("Attendee " + requiredAttendee.displayName + ": " + requiredAttendee.recipientType);
+          });
+          ```
+references:
+  - uid: 'outlook!Office.EmailAddressDetails#appointmentResponse~0:complex'
+    name: MailboxEnums.ResponseType | string
+    fullName: Office.MailboxEnums.ResponseType | string
+    spec.typeScript:
+      - uid: 'outlook!Office.MailboxEnums.ResponseType:enum'
+        name: MailboxEnums.ResponseType
+        fullName: Office.MailboxEnums.ResponseType
+      - name: ' | string'
+        fullName: ' | string'
+  - uid: 'outlook!Office.EmailAddressDetails#recipientType~0:complex'
+    name: MailboxEnums.RecipientType | string
+    fullName: Office.MailboxEnums.RecipientType | string
+    spec.typeScript:
+      - uid: 'outlook!Office.MailboxEnums.RecipientType:enum'
+        name: MailboxEnums.RecipientType
+        fullName: Office.MailboxEnums.RecipientType
+      - name: ' | string'
+        fullName: ' | string'

@@ -1,0 +1,519 @@
+### YamlMime:UniversalReference
+items:
+  - uid: 'outlook!Office.ItemRead:interface'
+    summary: |-
+      El modo de lectura de [Office. Context. Mailbox. Item](xref:outlook!Office.Item:interface)<!-- -->.
+
+      **Importante**: se trata de un objeto interno de Outlook, que no se expone directamente a través de las interfaces existentes. Debe tratarlo como un modo de Office. Context. Mailbox. Item. Consulte la página del [modelo de objetos](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/requirement-set-1.8/office.context.mailbox.item) para obtener más información.
+    name: Office.ItemRead
+    fullName: Office.ItemRead
+    langs:
+      - typeScript
+    type: interface
+    extends:
+      - 'outlook!Office.Item:interface'
+    package: outlook!
+    children:
+      - 'outlook!Office.ItemRead#attachments:member'
+      - 'outlook!Office.ItemRead#displayReplyAllForm:member(1)'
+      - 'outlook!Office.ItemRead#displayReplyForm:member(1)'
+      - 'outlook!Office.ItemRead#getEntities:member(1)'
+      - 'outlook!Office.ItemRead#getEntitiesByType:member(1)'
+      - 'outlook!Office.ItemRead#getFilteredEntitiesByName:member(1)'
+      - 'outlook!Office.ItemRead#getRegExMatches:member(1)'
+      - 'outlook!Office.ItemRead#getRegExMatchesByName:member(1)'
+      - 'outlook!Office.ItemRead#getSelectedEntities:member(1)'
+      - 'outlook!Office.ItemRead#getSelectedRegExMatches:member(1)'
+      - 'outlook!Office.ItemRead#itemClass:member'
+      - 'outlook!Office.ItemRead#itemId:member'
+      - 'outlook!Office.ItemRead#normalizedSubject:member'
+      - 'outlook!Office.ItemRead#subject:member'
+  - uid: 'outlook!Office.ItemRead#attachments:member'
+    summary: |-
+      Obtiene los datos adjuntos del elemento como una matriz.
+
+      \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
+
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: lectura
+
+      **Nota**: ciertos tipos de archivos están bloqueados por Outlook debido a posibles problemas de seguridad y, por lo tanto, no se devuelven. Para obtener más información, consulte [datos adjuntos bloqueados en Outlook](https://support.office.com/article/Blocked-attachments-in-Outlook-434752E1-02D3-4E90-9124-8B81E49A8519) .<!-- -->.
+    name: attachments
+    fullName: attachments
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'attachments: AttachmentDetails[];'
+      return:
+        type:
+          - 'outlook!Office.ItemRead#attachments~0:complex'
+  - uid: 'outlook!Office.ItemRead#displayReplyAllForm:member(1)'
+    summary: |-
+      Muestra un formulario de respuesta que incluye el remitente y todos los destinatarios del mensaje seleccionado o el organizador y todos los asistentes de la cita seleccionada.
+
+      En Outlook en la Web, el formulario de respuestas aparece como formulario emergente en la vista de tres columnas y en la vista de una o de dos columnas.
+
+      Si alguno de los parámetros de cadena supera sus límites, displayReplyAllForm inicia una excepción.
+
+      Cuando los datos adjuntos se especifican en el parámetro Formulariomodo. Attachments, Outlook en la web y los clientes de escritorio intentan descargar todos los datos adjuntos y adjuntarlos al formulario de respuesta. Si se produce un error al agregar los datos adjuntos, se muestra un error en la interfaz de usuario del formulario. Si esto no es posible, no se produce ningún mensaje de error.
+
+      **Nota**: este método no es compatible con Outlook en iOS o Android.
+
+      \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
+
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: lectura
+    name: 'displayReplyAllForm(formData, callback)'
+    fullName: 'displayReplyAllForm(formData, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'displayReplyAllForm(formData: string | ReplyFormData, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: formData
+          description: 'Una cadena que contiene texto y HTML y que representa el cuerpo del formulario de respuestas. La cadena está limitada a 32 KB o un objeto [ReplyFormData](xref:outlook!Office.ReplyFormData:interface) que contiene datos de cuerpo o datos adjuntos y una función de devolución de llamada.'
+          type:
+            - 'outlook!Office.ItemRead#displayReplyAllForm~0:complex'
+        - id: callback
+          description: 'Opcional. Cuando el método finaliza, la función que se pasa en el parámetro callback se llama con un único parámetro, asyncResult, que es un objeto Office. AsyncResult.'
+          type:
+            - 'outlook!Office.ItemRead#displayReplyAllForm~1:complex'
+  - uid: 'outlook!Office.ItemRead#displayReplyForm:member(1)'
+    summary: |-
+      Muestra un formulario de respuesta que incluye solo el remitente del mensaje seleccionado o el organizador de la cita seleccionada.
+
+      En Outlook en la Web, el formulario de respuestas aparece como formulario emergente en la vista de tres columnas y en la vista de una o de dos columnas.
+
+      Si alguno de los parámetros de cadena supera sus límites, displayReplyForm inicia una excepción.
+
+      Cuando los datos adjuntos se especifican en el parámetro Formulariomodo. Attachments, Outlook en la web y los clientes de escritorio intentan descargar todos los datos adjuntos y adjuntarlos al formulario de respuesta. Si se produce un error al agregar los datos adjuntos, se muestra un error en la interfaz de usuario del formulario. Si esto no es posible, no se produce ningún mensaje de error.
+
+      **Nota**: este método no es compatible con Outlook en iOS o Android.
+
+      \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
+
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: lectura
+    name: 'displayReplyForm(formData, callback)'
+    fullName: 'displayReplyForm(formData, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'displayReplyForm(formData: string | ReplyFormData, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: formData
+          description: 'Una cadena que contiene texto y HTML y que representa el cuerpo del formulario de respuestas. La cadena está limitada a 32 KB o un objeto [ReplyFormData](xref:outlook!Office.ReplyFormData:interface) que contiene datos de cuerpo o datos adjuntos y una función de devolución de llamada.'
+          type:
+            - 'outlook!Office.ItemRead#displayReplyForm~0:complex'
+        - id: callback
+          description: 'Opcional. Cuando el método finaliza, la función que se pasa en el parámetro callback se llama con un único parámetro, asyncResult, que es un objeto Office. AsyncResult.'
+          type:
+            - 'outlook!Office.ItemRead#displayReplyForm~1:complex'
+  - uid: 'outlook!Office.ItemRead#getEntities:member(1)'
+    summary: |-
+      Obtiene las entidades que obtenidas en el cuerpo del elemento seleccionado.
+
+      **Nota**: este método no es compatible con Outlook en iOS o Android.
+
+      \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
+
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: lectura
+    name: getEntities()
+    fullName: getEntities()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getEntities(): Entities;'
+      return:
+        type:
+          - 'outlook!Office.Entities:interface'
+        description: ''
+  - uid: 'outlook!Office.ItemRead#getEntitiesByType:member(1)'
+    summary: |-
+      Obtiene una matriz de todas las entidades del tipo de entidad especificado encontrado en el cuerpo del elemento seleccionado.
+
+      **Nota**: este método no es compatible con Outlook en iOS o Android.
+
+      \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: restringido
+
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: lectura
+
+      Aunque el nivel de permiso mínimo para usar este método es Restricted, algunos tipos de entidad requieren ReadItem para tener acceso, como se especifica en la tabla siguiente.
+
+      <table> <tr> <th>Valor de entityType</th> <th>Tipo de objetos de la matriz devuelta</th> <th>Nivel de permiso requerido</th> </tr> <tr> <td>Address</td> <td>String</td> <td>Restringido</td> </tr> <tr> <td>Contacto</td> <td>Contacto</td> <td>ReadItem</td> </tr> <tr> <td>EmailAddress</td> <td>String</td> <td>ReadItem</td> </tr> <tr> <td>MeetingSuggestion</td> <td>MeetingSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>PhoneNumber</td> <td>PhoneNumber</td> <td>Restringido</td> </tr> <tr> <td>TaskSuggestion</td> <td>TaskSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>URL</td> <td>String</td> <td>Restringido</td> </tr> </table>
+    name: getEntitiesByType(entityType)
+    fullName: getEntitiesByType(entityType)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getEntitiesByType(entityType: MailboxEnums.EntityType | string): (string | Contact | MeetingSuggestion | PhoneNumber | TaskSuggestion)[];'
+      return:
+        type:
+          - 'outlook!Office.ItemRead#getEntitiesByType~0:complex'
+        description: 'Si el valor pasado en entityType no es un miembro válido de la enumeración EntityType, el método devuelve NULL. Si no hay presente ninguna entidad del tipo especificado en el cuerpo del elemento, el método devuelve una matriz vacía. De lo contrario, el tipo de los objetos en la matriz devuelta depende del tipo de entidad solicitada en el parámetro entityType.'
+      parameters:
+        - id: entityType
+          description: Uno de los valores de enumeración de EntityType.
+          type:
+            - 'outlook!Office.ItemRead#getEntitiesByType~1:complex'
+  - uid: 'outlook!Office.ItemRead#getFilteredEntitiesByName:member(1)'
+    summary: |-
+      Devuelve entidades conocidas en el elemento seleccionado que pasan el filtro con nombre definido en el archivo XML de manifiesto.
+
+      El método getFilteredEntitiesByName devuelve las entidades que coinciden con la expresión regular definida en el elemento de regla ItemHasKnownEntity del archivo XML de manifiesto con el valor de elemento FilterName especificado.
+
+      **Nota**: este método no es compatible con Outlook en iOS o Android.
+
+      \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
+
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: lectura
+    name: getFilteredEntitiesByName(name)
+    fullName: getFilteredEntitiesByName(name)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getFilteredEntitiesByName(name: string): (string | Contact | MeetingSuggestion | PhoneNumber | TaskSuggestion)[];'
+      return:
+        type:
+          - 'outlook!Office.ItemRead#getFilteredEntitiesByName~0:complex'
+        description: 'Si no hay ningún elemento ItemHasKnownEntity en el manifiesto con un valor de elemento FilterName que coincida con el parámetro name, el método devuelve NULL. Si el parámetro name coincide con un elemento ItemHasKnownEntity en el manifiesto, pero no hay entidades en el elemento actual que coinciden, el método devuelve una matriz vacía.'
+      parameters:
+        - id: name
+          description: El nombre del elemento de regla ItemHasKnownEntity que define el filtro para que sea coincidente.
+          type:
+            - string
+  - uid: 'outlook!Office.ItemRead#getRegExMatches:member(1)'
+    summary: |-
+      Devuelve valores de cadena en el elemento seleccionado que coinciden con las expresiones regulares definidas en el archivo XML de manifiesto.
+
+      El método getRegExMatches devuelve las cadenas que coinciden con la expresión regular definida en cada elemento de regla ItemHasRegularExpressionMatch o ItemHasKnownEntity del archivo XML de manifiesto. Para una regla ItemHasRegularExpressionMatch, debe haber una cadena coincidente en la propiedad del elemento especificado por esa regla. El tipo simple PropertyName define las propiedades admitidas.
+
+      Si especifica una regla ItemHasRegularExpressionMatch en la propiedad de cuerpo de un elemento, la expresión regular debe filtrar aún más el cuerpo y no intentar devolver todo el cuerpo del elemento. El uso de una expresión regular como .* para obtener todo el cuerpo de un elemento no siempre devuelve los resultados esperados. En su lugar, use el método Body. getAsync para recuperar todo el cuerpo.
+
+      **Nota**: este método no es compatible con Outlook en iOS o Android.
+
+      \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
+
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: lectura
+    name: getRegExMatches()
+    fullName: getRegExMatches()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getRegExMatches(): any;'
+      return:
+        type:
+          - any
+        description: Un objeto que contiene matrices de cadenas que coinciden con las expresiones regulares definidas en el archivo XML de manifiesto. El nombre de cada matriz es igual al valor correspondiente del atributo RegExName de la regla ItemHasRegularExpressionMatch correspondiente o al atributo FilterName de la regla ItemHasKnownEntity correspondiente.
+  - uid: 'outlook!Office.ItemRead#getRegExMatchesByName:member(1)'
+    summary: |-
+      Devuelve valores de cadena en el elemento seleccionado que coinciden con la expresión regular de nombre definida en el archivo XML de manifiesto.
+
+      El método getRegExMatchesByName devuelve las cadenas que coinciden con la expresión regular definida en el elemento de regla ItemHasRegularExpressionMatch del archivo XML de manifiesto con el valor de elemento RegExName especificado.
+
+      Si especifica una regla ItemHasRegularExpressionMatch en la propiedad de cuerpo de un elemento, la expresión regular debe filtrar aún más el cuerpo y no intentar devolver todo el cuerpo del elemento. El uso de una expresión regular como .* para obtener todo el cuerpo de un elemento no siempre devuelve los resultados esperados.
+
+      **Nota**: este método no es compatible con Outlook en iOS o Android.
+
+      \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
+
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: lectura
+    name: getRegExMatchesByName(name)
+    fullName: getRegExMatchesByName(name)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getRegExMatchesByName(name: string): string[];'
+      return:
+        type:
+          - 'string[]'
+        description: Una matriz que contiene las cadenas que coinciden con la expresión regular definida en el archivo XML de manifiesto.
+      parameters:
+        - id: name
+          description: Nombre del elemento de regla ItemHasRegularExpressionMatch que define el filtro que debe coincidir.
+          type:
+            - string
+  - uid: 'outlook!Office.ItemRead#getSelectedEntities:member(1)'
+    summary: |-
+      Obtiene las entidades que se han detectado en una coincidencia resaltada que un usuario ha seleccionado. Las coincidencias resaltadas se aplican a complementos contextuales.
+
+      **Nota**: este método no es compatible con Outlook en iOS o Android.
+
+      \[[Conjunto de API: buzón de correo 1,6](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
+
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: lectura
+    name: getSelectedEntities()
+    fullName: getSelectedEntities()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getSelectedEntities(): Entities;'
+      return:
+        type:
+          - 'outlook!Office.Entities:interface'
+        description: ''
+  - uid: 'outlook!Office.ItemRead#getSelectedRegExMatches:member(1)'
+    summary: |-
+      Devuelve valores de cadena en una coincidencia resaltada que coinciden con las expresiones regulares definidas en el archivo XML de manifiesto. Las coincidencias resaltadas se aplican a complementos contextuales.
+
+      El método getSelectedRegExMatches devuelve las cadenas que coinciden con la expresión regular definida en cada elemento de regla ItemHasRegularExpressionMatch o ItemHasKnownEntity del archivo XML de manifiesto. Para una regla ItemHasRegularExpressionMatch, debe haber una cadena coincidente en la propiedad del elemento especificado por esa regla. El tipo simple PropertyName define las propiedades admitidas.
+
+      Si especifica una regla ItemHasRegularExpressionMatch en la propiedad de cuerpo de un elemento, la expresión regular debe filtrar aún más el cuerpo y no intentar devolver todo el cuerpo del elemento. El uso de una expresión regular como .* para obtener todo el cuerpo de un elemento no siempre devuelve los resultados esperados. En su lugar, use el método Body. getAsync para recuperar todo el cuerpo.
+
+      **Nota**: este método no es compatible con Outlook en iOS o Android.
+
+      \[[Conjunto de API: buzón de correo 1,6](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
+
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: lectura
+    name: getSelectedRegExMatches()
+    fullName: getSelectedRegExMatches()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getSelectedRegExMatches(): any;'
+      return:
+        type:
+          - any
+        description: Un objeto que contiene matrices de cadenas que coinciden con las expresiones regulares definidas en el archivo XML de manifiesto. El nombre de cada matriz es igual al valor correspondiente del atributo RegExName de la regla ItemHasRegularExpressionMatch correspondiente o al atributo FilterName de la regla ItemHasKnownEntity correspondiente.
+  - uid: 'outlook!Office.ItemRead#itemClass:member'
+    summary: |-
+      Obtiene la clase de elemento Servicios Web Exchange del elemento seleccionado.
+
+      Puede crear clases de mensaje personalizadas para especificar aún más las clases de mensaje predeterminadas; por ejemplo, puede crear la clase de mensaje de cita personalizada IPM.Appointment.Contoso.
+
+      \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
+
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: lectura
+
+      La propiedad itemClass especifica la clase de mensaje del elemento seleccionado. Las siguientes son las clases de mensaje predeterminadas para el elemento de mensaje o cita.
+
+      <table> <tr> <th>Tipo</th> <th>Descripción</th> <th>Clase Item</th> </tr> <tr> <td>Elementos de cita</td> <td>Estos son los elementos de calendario de la clase de elemento IPM. Appointment o IPM. Appointment. repeticiones.</td> <td>IPM. Cita, IPM. Appointment. repeticiones</td> </tr> <tr> <td>Elementos de mensaje</td> <td>Entre estos se encuentran los correos electrónicos que tienen la clase de mensaje predeterminada IPM.Note y las convocatorias de reunión, respuestas y cancelaciones que usan IPM.Schedule.Meeting como clase de mensaje base.</td> <td>IPM. Nota: IPM. Program. Meeting. request, IPM. Program. Meeting. NEG, IPM. Program. Meeting. POS, IPM. Program. Meeting. carpa, IPM. Schedule. Meeting. Canceled</td> </tr> </table>
+    name: itemClass
+    fullName: itemClass
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'itemClass: string;'
+      return:
+        type:
+          - string
+  - uid: 'outlook!Office.ItemRead#itemId:member'
+    summary: |-
+      Obtiene el identificador de elemento de Servicios Web Exchange para el elemento actual.
+
+      La propiedad itemId no está disponible en el modo de redacción. Si se requiere un identificador de elemento, se puede usar el método saveAsync para guardar el elemento en el almacén, que devolverá el identificador de elemento en el parámetro asyncResult. Value de la función de devolución de llamada.
+
+      **Nota**: el identificador devuelto por la propiedad Itemid es el mismo que el identificador de elemento de servicios web Exchange. La propiedad itemId no es idéntica al identificador de entrada de Outlook ni al identificador usado por la API de REST de Outlook. Para realizar llamadas API de REST con este valor, hay que convertirlo con Office.context.mailbox.convertToRestId. Para obtener más información, vea [usar las API de REST de Outlook desde un complemento de Outlook](https://docs.microsoft.com/outlook/add-ins/use-rest-api#get-the-item-id) .<!-- -->.
+
+      \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
+
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: lectura
+    name: itemId
+    fullName: itemId
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'itemId: string;'
+      return:
+        type:
+          - string
+  - uid: 'outlook!Office.ItemRead#normalizedSubject:member'
+    summary: |-
+      Obtiene el asunto de un elemento, con todos los prefijos quitados (incluidos RE: y FWD:).
+
+      La propiedad normalizedSubject obtiene el asunto del elemento, con todos los prefijos estándar (como RE: y FW:). agregados por los programas de correo electrónico. Para obtener el asunto del elemento con los prefijos intactos, use la propiedad Subject.
+
+      \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
+
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: lectura
+    name: normalizedSubject
+    fullName: normalizedSubject
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'normalizedSubject: string;'
+      return:
+        type:
+          - string
+  - uid: 'outlook!Office.ItemRead#subject:member'
+    summary: |-
+      Obtiene la descripción que aparece en el campo de asunto de un elemento.
+
+      La propiedad Subject obtiene o establece el asunto completo del elemento, como lo ha enviado el servidor de correo electrónico.
+
+      La propiedad Subject devuelve una cadena. Use la propiedad normalizedSubject para obtener el asunto menos los prefijos iniciales como RE: y RV:.
+
+      \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
+
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: lectura
+    name: subject
+    fullName: subject
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'subject: string;'
+      return:
+        type:
+          - string
+references:
+  - uid: 'outlook!Office.Item:interface'
+    name: Item
+  - uid: 'outlook!Office.ItemRead#attachments~0:complex'
+    name: 'AttachmentDetails[]'
+    fullName: 'Office.AttachmentDetails[]'
+    spec.typeScript:
+      - uid: 'outlook!Office.AttachmentDetails:interface'
+        name: AttachmentDetails
+        fullName: Office.AttachmentDetails
+      - name: '[]'
+        fullName: '[]'
+  - uid: 'outlook!Office.ItemRead#displayReplyAllForm~0:complex'
+    name: string | ReplyFormData
+    fullName: string | Office.ReplyFormData
+    spec.typeScript:
+      - name: 'string | '
+        fullName: 'string | '
+      - uid: 'outlook!Office.ReplyFormData:interface'
+        name: ReplyFormData
+        fullName: Office.ReplyFormData
+  - uid: 'outlook!Office.ItemRead#displayReplyAllForm~1:complex'
+    name: '(asyncResult: Office.AsyncResult<void>) => void'
+    fullName: '(asyncResult: Office.AsyncResult<void>) => void'
+    spec.typeScript:
+      - name: '(asyncResult: '
+        fullName: '(asyncResult: '
+      - uid: 'outlook!Office.AsyncResult:interface'
+        name: Office.AsyncResult
+        fullName: Office.AsyncResult
+      - name: <void>) => void
+        fullName: <void>) => void
+  - uid: 'outlook!Office.ItemRead#displayReplyForm~0:complex'
+    name: string | ReplyFormData
+    fullName: string | Office.ReplyFormData
+    spec.typeScript:
+      - name: 'string | '
+        fullName: 'string | '
+      - uid: 'outlook!Office.ReplyFormData:interface'
+        name: ReplyFormData
+        fullName: Office.ReplyFormData
+  - uid: 'outlook!Office.ItemRead#displayReplyForm~1:complex'
+    name: '(asyncResult: Office.AsyncResult<void>) => void'
+    fullName: '(asyncResult: Office.AsyncResult<void>) => void'
+    spec.typeScript:
+      - name: '(asyncResult: '
+        fullName: '(asyncResult: '
+      - uid: 'outlook!Office.AsyncResult:interface'
+        name: Office.AsyncResult
+        fullName: Office.AsyncResult
+      - name: <void>) => void
+        fullName: <void>) => void
+  - uid: 'outlook!Office.Entities:interface'
+    name: Entities
+  - uid: 'outlook!Office.ItemRead#getEntitiesByType~0:complex'
+    name: '(string | Contact | MeetingSuggestion | PhoneNumber | TaskSuggestion)[]'
+    fullName: '(string | Office.Contact | Office.MeetingSuggestion | Office.PhoneNumber | Office.TaskSuggestion)[]'
+    spec.typeScript:
+      - name: '(string | '
+        fullName: '(string | '
+      - uid: 'outlook!Office.Contact:interface'
+        name: Contact
+        fullName: Office.Contact
+      - name: ' | '
+        fullName: ' | '
+      - uid: 'outlook!Office.MeetingSuggestion:interface'
+        name: MeetingSuggestion
+        fullName: Office.MeetingSuggestion
+      - name: ' | '
+        fullName: ' | '
+      - uid: 'outlook!Office.PhoneNumber:interface'
+        name: PhoneNumber
+        fullName: Office.PhoneNumber
+      - name: ' | '
+        fullName: ' | '
+      - uid: 'outlook!Office.TaskSuggestion:interface'
+        name: TaskSuggestion
+        fullName: Office.TaskSuggestion
+      - name: ')[]'
+        fullName: ')[]'
+  - uid: 'outlook!Office.ItemRead#getEntitiesByType~1:complex'
+    name: MailboxEnums.EntityType | string
+    fullName: Office.MailboxEnums.EntityType | string
+    spec.typeScript:
+      - uid: 'outlook!Office.MailboxEnums.EntityType:enum'
+        name: MailboxEnums.EntityType
+        fullName: Office.MailboxEnums.EntityType
+      - name: ' | string'
+        fullName: ' | string'
+  - uid: 'outlook!Office.ItemRead#getFilteredEntitiesByName~0:complex'
+    name: '(string | Contact | MeetingSuggestion | PhoneNumber | TaskSuggestion)[]'
+    fullName: '(string | Office.Contact | Office.MeetingSuggestion | Office.PhoneNumber | Office.TaskSuggestion)[]'
+    spec.typeScript:
+      - name: '(string | '
+        fullName: '(string | '
+      - uid: 'outlook!Office.Contact:interface'
+        name: Contact
+        fullName: Office.Contact
+      - name: ' | '
+        fullName: ' | '
+      - uid: 'outlook!Office.MeetingSuggestion:interface'
+        name: MeetingSuggestion
+        fullName: Office.MeetingSuggestion
+      - name: ' | '
+        fullName: ' | '
+      - uid: 'outlook!Office.PhoneNumber:interface'
+        name: PhoneNumber
+        fullName: Office.PhoneNumber
+      - name: ' | '
+        fullName: ' | '
+      - uid: 'outlook!Office.TaskSuggestion:interface'
+        name: TaskSuggestion
+        fullName: Office.TaskSuggestion
+      - name: ')[]'
+        fullName: ')[]'
