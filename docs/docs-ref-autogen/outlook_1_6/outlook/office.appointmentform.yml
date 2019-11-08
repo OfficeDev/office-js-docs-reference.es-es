@@ -39,10 +39,10 @@ items:
       - typeScript
     type: property
     syntax:
-      content: 'body: string;'
+      content: 'body: Body | string;'
       return:
         type:
-          - string
+          - 'outlook!Office.AppointmentForm#body~0:complex'
   - uid: 'outlook!Office.AppointmentForm#end:member'
     summary: |-
       Obtiene o establece la fecha y la hora de finalización de la cita.
@@ -70,10 +70,10 @@ items:
       - typeScript
     type: property
     syntax:
-      content: 'end: Date;'
+      content: 'end: Time | Date;'
       return:
         type:
-          - '!Date:interface'
+          - 'outlook!Office.AppointmentForm#end~0:complex'
   - uid: 'outlook!Office.AppointmentForm#location:member'
     summary: |-
       Obtiene o establece la ubicación de una cita.
@@ -97,25 +97,25 @@ items:
       - typeScript
     type: property
     syntax:
-      content: 'location: string;'
+      content: 'location: Location | string;'
       return:
         type:
-          - string
+          - 'outlook!Office.AppointmentForm#location~0:complex'
   - uid: 'outlook!Office.AppointmentForm#optionalAttendees:member'
     summary: |-
       Proporciona acceso a los asistentes opcionales de un evento. El tipo de objeto y el nivel de acceso dependen del modo del elemento actual.
 
       *Modo Lectura*
 
-      La propiedad optionalAttendees devuelve una matriz que contiene un objeto EmailAddressDetails para cada asistente opcional a la reunión. De forma predeterminada, la colección está limitada a un máximo de 100 miembros. Sin embargo, en Windows y Mac, puede obtener 500 máximo de miembros.
+      La propiedad optionalAttendees devuelve una matriz que contiene un objeto EmailAddressDetails para cada asistente opcional a la reunión. Por defecto, la colección está limitada a un máximo de 100 miembros. Sin embargo, en Windows y Mac, puede obtener un máximo de 500 miembros.
 
       *Modo Redacción*
 
-      La propiedad optionalAttendees devuelve un objeto Recipients que proporciona métodos para obtener o actualizar los asistentes opcionales para una reunión. De forma predeterminada, la colección está limitada a un máximo de 100 miembros. Sin embargo, en Windows y Mac, se aplican los límites siguientes.
+      La propiedad optionalAttendees devuelve un objeto Recipients que proporciona métodos para obtener o actualizar los asistentes opcionales para una reunión. Por defecto, la colección está limitada a un máximo de 100 miembros. Sin embargo, en Windows y Mac, se aplican los siguientes límites.
 
-      - Obtener el máximo de 500 miembros.
+      - Obtenga un máximo de 500 miembros.
 
-      - Establezca un máximo de 100 miembros por llamada, hasta 500 miembros totales.
+      - Establezca un máximo de 100 miembros por llamada, hasta un total de 500 miembros.
 
       \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
@@ -138,15 +138,15 @@ items:
 
       *Modo Lectura*
 
-      La propiedad requiredAttendees devuelve una matriz que contiene un objeto EmailAddressDetails para cada asistente requerido a la reunión. De forma predeterminada, la colección está limitada a un máximo de 100 miembros. Sin embargo, en Windows y Mac, puede obtener 500 máximo de miembros.
+      La propiedad requiredAttendees devuelve una matriz que contiene un objeto EmailAddressDetails para cada asistente requerido a la reunión. Por defecto, la colección está limitada a un máximo de 100 miembros. Sin embargo, en Windows y Mac, puede obtener un máximo de 500 miembros.
 
       *Modo Redacción*
 
-      La propiedad requiredAttendees devuelve un objeto Recipients que proporciona métodos para obtener o actualizar los asistentes necesarios para una reunión. De forma predeterminada, la colección está limitada a un máximo de 100 miembros. Sin embargo, en Windows y Mac, se aplican los límites siguientes.
+      La propiedad requiredAttendees devuelve un objeto Recipients que proporciona métodos para obtener o actualizar los asistentes necesarios para una reunión. Por defecto, la colección está limitada a un máximo de 100 miembros. Sin embargo, en Windows y Mac, se aplican los siguientes límites.
 
-      - Obtener el máximo de 500 miembros.
+      - Obtenga un máximo de 500 miembros.
 
-      - Establezca un máximo de 100 miembros por llamada, hasta 500 miembros totales.
+      - Establezca un máximo de 100 miembros por llamada, hasta un total de 500 miembros.
 
       \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
@@ -209,10 +209,10 @@ items:
       - typeScript
     type: property
     syntax:
-      content: 'start: Date;'
+      content: 'start: Time | Date;'
       return:
         type:
-          - '!Date:interface'
+          - 'outlook!Office.AppointmentForm#start~0:complex'
   - uid: 'outlook!Office.AppointmentForm#subject:member'
     summary: |-
       Obtiene o establece la descripción que se muestra en el campo de asunto de un elemento.
@@ -238,13 +238,41 @@ items:
       - typeScript
     type: property
     syntax:
-      content: 'subject: string;'
+      content: 'subject: Subject | string;'
       return:
         type:
-          - string
+          - 'outlook!Office.AppointmentForm#subject~0:complex'
 references:
-  - uid: '!Date:interface'
-    name: Date
+  - uid: 'outlook!Office.AppointmentForm#body~0:complex'
+    name: Body | string
+    fullName: Office.Body | string
+    spec.typeScript:
+      - uid: 'outlook!Office.Body:interface'
+        name: Body
+        fullName: Office.Body
+      - name: ' | string'
+        fullName: ' | string'
+  - uid: 'outlook!Office.AppointmentForm#end~0:complex'
+    name: Time | Date
+    fullName: Office.Time | Date
+    spec.typeScript:
+      - uid: 'outlook!Office.Time:interface'
+        name: Time
+        fullName: Office.Time
+      - name: ' | '
+        fullName: ' | '
+      - uid: '!Date:interface'
+        name: Date
+        fullName: Date
+  - uid: 'outlook!Office.AppointmentForm#location~0:complex'
+    name: Location | string
+    fullName: Office.Location | string
+    spec.typeScript:
+      - uid: 'outlook!Office.Location:interface'
+        name: Location
+        fullName: Office.Location
+      - name: ' | string'
+        fullName: ' | string'
   - uid: 'outlook!Office.AppointmentForm#optionalAttendees~0:complex'
     name: 'Recipients[] | EmailAddressDetails[]'
     fullName: 'Office.Recipients[] | Office.EmailAddressDetails[]'
@@ -273,3 +301,24 @@ references:
         fullName: Office.EmailAddressDetails
       - name: '[]'
         fullName: '[]'
+  - uid: 'outlook!Office.AppointmentForm#start~0:complex'
+    name: Time | Date
+    fullName: Office.Time | Date
+    spec.typeScript:
+      - uid: 'outlook!Office.Time:interface'
+        name: Time
+        fullName: Office.Time
+      - name: ' | '
+        fullName: ' | '
+      - uid: '!Date:interface'
+        name: Date
+        fullName: Date
+  - uid: 'outlook!Office.AppointmentForm#subject~0:complex'
+    name: Subject | string
+    fullName: Office.Subject | string
+    spec.typeScript:
+      - uid: 'outlook!Office.Subject:interface'
+        name: Subject
+        fullName: Office.Subject
+      - name: ' | string'
+        fullName: ' | string'
