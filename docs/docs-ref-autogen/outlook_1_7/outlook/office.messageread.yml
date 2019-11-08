@@ -25,6 +25,7 @@ items:
       - 'outlook!Office.MessageRead#dateTimeModified:member'
       - 'outlook!Office.MessageRead#displayReplyAllForm:member(1)'
       - 'outlook!Office.MessageRead#displayReplyForm:member(1)'
+      - 'outlook!Office.MessageRead#end:member'
       - 'outlook!Office.MessageRead#from:member'
       - 'outlook!Office.MessageRead#getEntities:member(1)'
       - 'outlook!Office.MessageRead#getEntitiesByType:member(1)'
@@ -38,6 +39,7 @@ items:
       - 'outlook!Office.MessageRead#itemId:member'
       - 'outlook!Office.MessageRead#itemType:member'
       - 'outlook!Office.MessageRead#loadCustomPropertiesAsync:member(1)'
+      - 'outlook!Office.MessageRead#location:member'
       - 'outlook!Office.MessageRead#normalizedSubject:member'
       - 'outlook!Office.MessageRead#notificationMessages:member'
       - 'outlook!Office.MessageRead#recurrence:member'
@@ -45,6 +47,7 @@ items:
       - 'outlook!Office.MessageRead#removeHandlerAsync:member(2)'
       - 'outlook!Office.MessageRead#sender:member'
       - 'outlook!Office.MessageRead#seriesId:member'
+      - 'outlook!Office.MessageRead#start:member'
       - 'outlook!Office.MessageRead#subject:member'
       - 'outlook!Office.MessageRead#to:member'
   - uid: 'outlook!Office.MessageRead#addHandlerAsync:member(1)'
@@ -524,6 +527,29 @@ items:
           description: 'Opcional. Cuando el método finaliza, la función que se pasa en el parámetro callback se llama con un único parámetro, asyncResult, que es un objeto Office. AsyncResult.'
           type:
             - 'outlook!Office.MessageRead#displayReplyForm~1:complex'
+  - uid: 'outlook!Office.MessageRead#end:member'
+    summary: |-
+      Obtiene la fecha y la hora de finalización de la cita.
+
+      La propiedad end es un objeto Date expresado como un valor de fecha y hora de la hora universal coordinada (UTC). Puede usar el método convertToLocalClientTime para convertir el valor de la propiedad end en la fecha y hora local del cliente.
+
+      Cuando use el método Time. setAsync para establecer la hora de finalización, debe usar el método convertToUtcClientTime para convertir la hora local del cliente en un valor UTC para el servidor.
+
+      \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
+
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: mensaje leído
+    name: end
+    fullName: end
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'end: Date;'
+      return:
+        type:
+          - '!Date:interface'
   - uid: 'outlook!Office.MessageRead#from:member'
     summary: |-
       Obtiene la dirección de correo electrónico del remitente de un mensaje.
@@ -912,11 +938,11 @@ items:
           - string
   - uid: 'outlook!Office.MessageRead#itemId:member'
     summary: |-
-      Obtiene el identificador de elemento de Servicios Web Exchange para el elemento actual.
+      Obtiene el [identificador de elemento de servicios web Exchange](https://docs.microsoft.com/exchange/client-developer/exchange-web-services/ews-identifiers-in-exchange) para el elemento actual.
 
       La propiedad itemId no está disponible en el modo de redacción. Si se requiere un identificador de elemento, se puede usar el método saveAsync para guardar el elemento en el almacén, que devolverá el identificador de elemento en el parámetro asyncResult. Value de la función de devolución de llamada.
 
-      **Nota**: el identificador devuelto por la propiedad Itemid es el mismo que el identificador de elemento de servicios web Exchange. La propiedad itemId no es idéntica al identificador de entrada de Outlook ni al identificador usado por la API de REST de Outlook. Para realizar llamadas API de REST con este valor, hay que convertirlo con Office.context.mailbox.convertToRestId. Para obtener más información, vea [usar las API de REST de Outlook desde un complemento de Outlook](https://docs.microsoft.com/outlook/add-ins/use-rest-api#get-the-item-id) .<!-- -->.
+      **Nota**: el identificador devuelto por la propiedad Itemid es el mismo que el [identificador de elemento de servicios web Exchange](https://docs.microsoft.com/exchange/client-developer/exchange-web-services/ews-identifiers-in-exchange)<!-- -->. La propiedad itemId no es idéntica al identificador de entrada de Outlook ni al identificador usado por la API de REST de Outlook. Para realizar llamadas API de REST con este valor, hay que convertirlo con Office.context.mailbox.convertToRestId. Para obtener más información, vea [usar las API de REST de Outlook desde un complemento de Outlook](https://docs.microsoft.com/outlook/add-ins/use-rest-api#get-the-item-id) .<!-- -->.
 
       \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
@@ -1012,6 +1038,27 @@ items:
           description: Opcional. Los desarrolladores pueden proporcionar cualquier objeto al que quieran obtener acceso en la función de devolución de llamada. Se puede obtener acceso a este objeto mediante la propiedad asyncResult. asyncContext en la función de devolución de llamada.
           type:
             - any
+  - uid: 'outlook!Office.MessageRead#location:member'
+    summary: |-
+      Obtiene la ubicación de una convocatoria de reunión.
+
+      La propiedad Location devuelve una cadena que contiene la ubicación de la cita.
+
+      \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
+
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: mensaje leído
+    name: location
+    fullName: location
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'location: string;'
+      return:
+        type:
+          - string
   - uid: 'outlook!Office.MessageRead#normalizedSubject:member'
     summary: |-
       Obtiene el asunto de un elemento, con todos los prefijos quitados (incluidos RE: y FWD:).
@@ -1238,6 +1285,27 @@ items:
       return:
         type:
           - string
+  - uid: 'outlook!Office.MessageRead#start:member'
+    summary: |-
+      Obtiene la fecha y hora de inicio de la cita.
+
+      La propiedad Start es un objeto Date expresado como un valor de fecha y hora de la hora universal coordinada (UTC). Puede usar el método convertToLocalClientTime para convertir el valor a la fecha y hora local del cliente.
+
+      \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
+
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: mensaje leído
+    name: start
+    fullName: start
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'start: Date;'
+      return:
+        type:
+          - '!Date:interface'
   - uid: 'outlook!Office.MessageRead#subject:member'
     summary: |-
       Obtiene la descripción que aparece en el campo de asunto de un elemento.
