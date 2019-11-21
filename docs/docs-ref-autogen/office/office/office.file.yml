@@ -48,6 +48,55 @@ items:
       In the callback function passed to the getSliceAsync method, you can use the properties of the AsyncResult object to return the following information.
 
       <table> <tr> <th>Propiedad</th> <th>Usar para...</th> </tr> <tr> <td>AsyncResult.value</td> <td>Tener acceso al objeto Slice.</td> </tr> <tr> <td>AsyncResult.status</td> <td>Determinar si la operación se ha completado correctamente o no.</td> </tr> <tr> <td>AsyncResult.error</td> <td>Tener acceso a un objeto Error que proporcione información sobre el error si no se ha completado correctamente la operación.</td> </tr> <tr> <td>AsyncResult.asyncContext</td> <td>Un elemento de cualquier tipo definido por el usuario que se devuelve en el objeto AsyncResult sin sufrir modificaciones.</td> </tr> </table>
+
+      #### <a name="examples"></a>Ejemplos
+
+      ```typescript
+      // This sample shows how to get all the slices of a file. 
+      // The asynchronous operation returns a Promise so it can be awaited.
+      private getAllSlices(file: any): Promise<any> {
+          var self = this;
+          var isError = false;
+
+          return new Promise(async (resolve, reject) => {
+              var documentFileData = [];
+              for (var sliceIndex = 0; (sliceIndex < file.sliceCount) && !isError; sliceIndex++) {
+                  var sliceReadPromise = new Promise((sliceResolve, sliceReject) => {
+                      file.getSliceAsync(sliceIndex, (asyncResult) => {
+                          if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+                              documentFileData = documentFileData.concat(asyncResult.value.data);
+                              sliceResolve({
+                                  IsSuccess: true,
+                                  Data: documentFileData
+                              });
+                          } else {
+                              file.closeAsync();
+                              sliceReject({
+                                  IsSuccess: false,
+                                  ErrorMessage: `Error in reading the slice: ${sliceIndex} of the document`
+                              });
+                          }
+                      });
+                  });
+                  await sliceReadPromise.catch((error) => {
+                      isError = true;
+                  });
+              }
+
+              if (isError || !documentFileData.length) {
+                  reject('Error while reading document. Please try it again.');
+                  return;
+              }
+
+              file.closeAsync();
+
+              resolve({
+                  IsSuccess: true,
+                  Data: documentFileData
+              });
+          });
+      }
+      ```
     name: 'getSliceAsync(sliceIndex, callback)'
     fullName: 'getSliceAsync(sliceIndex, callback)'
     langs:

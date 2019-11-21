@@ -1,13 +1,13 @@
 ---
 title: Referencia de la API de JavaScript de Office
 description: El conjunto de requisitos de las API de JavaScript de Office por host
-ms.date: 10/24/2019
-ms.openlocfilehash: fb6f228306c6fc5840c2f8b9c9bc46d56b43f50c
-ms.sourcegitcommit: dc57153a05b103a8493370c8aa1bd936f4d5f7c4
+ms.date: 11/19/2019
+ms.openlocfilehash: f4072c23cb0d6e0d5375cf79d92b4f6dd9b35f0f
+ms.sourcegitcommit: d37268ff5254061632a886b196ec28f2f4087377
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 10/31/2019
-ms.locfileid: "37904958"
+ms.lasthandoff: 11/21/2019
+ms.locfileid: "38757948"
 ---
 # <a name="office-javascript-api-reference"></a>Referencia de la API de JavaScript de Office
 
@@ -15,12 +15,15 @@ La API de JavaScript para Office le permite crear aplicaciones web que interact�
 
 A continuación se muestra una lista de conjuntos de requisitos específicos del host (y las API comunes entre hosts). Cada elemento se vincula a una versión de la documentación de referencia de la API que es compatible con el conjunto de requisitos (por ejemplo, ExcelApi 1,3 muestra las API de ExcelApi 1,1, 1,2, 1,3 y la API común).
 
+`ExcelApiOnline 1.1`es un conjunto de requisitos especial. Contiene las API más recientes para Excel en la web, pero es posible que todavía no se admitan por completo en todas las plataformas. Para obtener más información [, vea el conjunto de requisitos de la API de JavaScript de Excel en línea](/office/dev/add-ins/reference/requirement-sets/excel-api-online-requirement-set) .
+
 > [!TIP]
 > Elija un vínculo en esta página para ver la documentación de referencia de las API compatibles con el conjunto de requisitos especificado o use el menú desplegable de selección de filtro que se encuentra encima de la tabla de contenido para cambiar el conjunto de requisitos en cualquier momento.
 
 ## <a name="excel"></a>Excel
 
 - [Vista previa de ExcelApi](/javascript/api/excel?view=excel-js-preview)
+- [ExcelApiOnline 1,1](/javascript/api/excel?view=excel-js-online)
 - [ExcelApi 1.10](/javascript/api/excel?view=excel-js-1.10)
 - [ExcelApi 1.9](/javascript/api/excel?view=excel-js-1.9)
 - [ExcelApi 1.8](/javascript/api/excel?view=excel-js-1.8)
@@ -39,7 +42,7 @@ A continuación se muestra una lista de conjuntos de requisitos específicos del
 ## <a name="outlook"></a>Outlook
 
 - [Vista previa de buzón](/javascript/api/outlook?view=outlook-js-preview)
-- [Buzón 1,8](/javascript/api/outlook?view=outlook-js-1.8)
+- [Mailbox 1.8](/javascript/api/outlook?view=outlook-js-1.8)
 - [Mailbox 1.7](/javascript/api/outlook?view=outlook-js-1.7)
 - [Mailbox 1.6](/javascript/api/outlook?view=outlook-js-1.6)
 - [Mailbox 1.5](/javascript/api/outlook?view=outlook-js-1.5)
@@ -67,7 +70,7 @@ A continuación se muestra una lista de conjuntos de requisitos específicos del
 
 - [API común](/javascript/api/office?view=common-js)
 
-## <a name="see-also"></a>Ver también
+## <a name="see-also"></a>Vea también
 
 - [Acerca de los complementos de Office](/office/dev/add-ins/overview)
 - [Disponibilidad de plataformas y hosts de los complementos de Office](/office/dev/add-ins/overview/office-add-in-availability)
