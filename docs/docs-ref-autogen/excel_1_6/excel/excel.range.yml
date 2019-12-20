@@ -58,6 +58,7 @@ items:
       - 'excel!Excel.Range#load:member(2)'
       - 'excel!Excel.Range#load:member(3)'
       - 'excel!Excel.Range#merge:member(1)'
+      - 'excel!Excel.Range#moveTo:member(1)'
       - 'excel!Excel.Range#numberFormat:member'
       - 'excel!Excel.Range#rowCount:member'
       - 'excel!Excel.Range#rowHidden:member'
@@ -213,7 +214,7 @@ items:
           - number
   - uid: 'excel!Excel.Range#columnHidden:member'
     summary: |-
-      Representa si todas las columnas del intervalo actual están ocultas.
+      Representa si todas las columnas del rango actual están ocultas.
 
       \[[Conjunto de API: ExcelApi 1,2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: columnHidden
@@ -898,7 +899,7 @@ items:
                   ctx.workbook.worksheets.getItem(sheetName).getRange(rangeAddress).getOffsetRange(-1,4);
               range.load('address');
               return ctx.sync().then(function() {
-                  console.log(range.address); // prints Sheet1!H3:K5
+                  console.log(range.address); // prints Sheet1!H3:J5
               });
           }).catch(function(error) {
               console.log("Error: " + error);
@@ -1398,7 +1399,7 @@ items:
                       }
   - uid: 'excel!Excel.Range#merge:member(1)'
     summary: |-
-      Combinar las celdas del rango en una región de la hoja de cálculo.
+      Combina las celdas del intervalo en una región de la hoja de cálculo.
 
       \[[Conjunto de API: ExcelApi 1,2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: merge(across)
@@ -1449,6 +1450,27 @@ items:
           description: Opcional. Verdadero para que se combinen las celdas de cada fila del rango especificado como celdas combinadas distintas. El valor predeterminado es falso.
           type:
             - boolean
+  - uid: 'excel!Excel.Range#moveTo:member(1)'
+    summary: |-
+      Mueve los valores de celda, el formato y las fórmulas del rango actual al rango de destino, reemplazando la información antigua de esas celdas. El rango de destino se expandirá automáticamente si es menor que el intervalo actual. Las celdas del rango de destino que están fuera del área del rango original no cambian.
+
+      \[[Conjunto de API: ExcelApiOnline 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: moveTo(destinationRange)
+    fullName: moveTo(destinationRange)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'moveTo(destinationRange: Range | string): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: destinationRange
+          description: destinationRange especifica el intervalo al que se moverá la información de este intervalo.
+          type:
+            - 'excel!Excel.Range#moveTo~0:complex'
   - uid: 'excel!Excel.Range#numberFormat:member'
     summary: |-
       Representa el código de formato numérico de Excel para el intervalo especificado. Cuando se establece el formato de número en un rango, el argumento de valor puede ser un valor único (String) o una matriz de dos dimensiones. Si el argumento es un valor único, se aplicará a todas las celdas del rango.
@@ -1481,7 +1503,7 @@ items:
           - number
   - uid: 'excel!Excel.Range#rowHidden:member'
     summary: |-
-      Representa si todas las filas del intervalo actual están ocultas.
+      Representa si todas las filas del rango actual están ocultas.
 
       \[[Conjunto de API: ExcelApi 1,2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: rowHidden
@@ -1701,7 +1723,7 @@ items:
           - 'excel!Excel.Interfaces.RangeData:interface'
         description: ''
   - uid: 'excel!Excel.Range#track:member(1)'
-    summary: 'Realiza un seguimiento del objeto de ajuste automático según cambios adyacentes en el documento. Esta llamada es una abreviatura de`context.trackedObjects.add(thisObject)`<!-- -->. Si usa este objeto a través `.sync` de llamadas y fuera de la ejecución secuencial de un lote ". Run", y obtiene un error "InvalidObjectPath" al establecer una propiedad o invocar un método en el objeto, es necesario que haya agregado el objeto al objeto con seguimiento colección cuando se creó el objeto por primera vez.'
+    summary: 'Realiza un seguimiento del objeto de ajuste automático según cambios adyacentes en el documento. Esta llamada es una abreviatura de`context.trackedObjects.add(thisObject)`<!-- -->. Si usa este objeto a través `.sync` de llamadas y fuera de la ejecución secuencial de un lote ". Run", y obtiene un error "InvalidObjectPath" al establecer una propiedad o invocar un método en el objeto, es necesario que haya agregado el objeto a la colección de objetos con seguimiento cuando se creó el objeto por primera vez.'
     name: track()
     fullName: track()
     langs:
@@ -1715,7 +1737,7 @@ items:
         description: ''
   - uid: 'excel!Excel.Range#unmerge:member(1)'
     summary: |-
-      Separar las celdas del rango en celdas independientes.
+      Separa las celdas del intervalo en celdas independientes.
 
       \[[Conjunto de API: ExcelApi 1,2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: unmerge()
@@ -1876,6 +1898,15 @@ references:
     name: Excel.InsertShiftDirection
   - uid: 'excel!Excel.Interfaces.RangeLoadOptions:interface'
     name: Excel.Interfaces.RangeLoadOptions
+  - uid: 'excel!Excel.Range#moveTo~0:complex'
+    name: Range | string
+    fullName: Excel.Range | string
+    spec.typeScript:
+      - uid: 'excel!Excel.Range:class'
+        name: Range
+        fullName: Excel.Range
+      - name: ' | string'
+        fullName: ' | string'
   - uid: 'excel!Excel.Interfaces.RangeUpdateData:interface'
     name: Interfaces.RangeUpdateData
   - uid: 'excel!OfficeExtension.UpdateOptions:interface'
