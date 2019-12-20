@@ -5,6 +5,12 @@ items:
       El modo de asistente de cita de [Office. Context. Mailbox. Item](xref:outlook!Office.Item:interface)<!-- -->.
 
       **Importante**: se trata de un objeto interno de Outlook, que no se expone directamente a través de las interfaces existentes. Debe tratarlo como un modo de Office. Context. Mailbox. Item. Consulte la página del [modelo de objetos](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/preview-requirement-set/office.context.mailbox.item) para obtener más información.
+
+      Interfaces principales:
+
+      - [ItemRead](xref:outlook!Office.ItemRead:interface)
+
+      - [Appointment](xref:outlook!Office.Appointment:interface)
     name: Office.AppointmentRead
     fullName: Office.AppointmentRead
     langs:
@@ -26,6 +32,8 @@ items:
       - 'outlook!Office.AppointmentRead#displayReplyForm:member(1)'
       - 'outlook!Office.AppointmentRead#end:member'
       - 'outlook!Office.AppointmentRead#enhancedLocation:member'
+      - 'outlook!Office.AppointmentRead#getAttachmentContentAsync:member(1)'
+      - 'outlook!Office.AppointmentRead#getAttachmentContentAsync:member(2)'
       - 'outlook!Office.AppointmentRead#getEntities:member(1)'
       - 'outlook!Office.AppointmentRead#getEntitiesByType:member(1)'
       - 'outlook!Office.AppointmentRead#getFilteredEntitiesByName:member(1)'
@@ -35,6 +43,8 @@ items:
       - 'outlook!Office.AppointmentRead#getRegExMatchesByName:member(1)'
       - 'outlook!Office.AppointmentRead#getSelectedEntities:member(1)'
       - 'outlook!Office.AppointmentRead#getSelectedRegExMatches:member(1)'
+      - 'outlook!Office.AppointmentRead#getSharedPropertiesAsync:member(1)'
+      - 'outlook!Office.AppointmentRead#getSharedPropertiesAsync:member(2)'
       - 'outlook!Office.AppointmentRead#itemClass:member'
       - 'outlook!Office.AppointmentRead#itemId:member'
       - 'outlook!Office.AppointmentRead#itemType:member'
@@ -126,10 +136,7 @@ items:
           type:
             - 'outlook!Office.AppointmentRead#addHandlerAsync~3:complex'
   - uid: 'outlook!Office.AppointmentRead#attachments:member'
-    summary: |-
-      Obtiene los datos adjuntos del elemento como una matriz.
-
-      \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    summary: Obtiene los datos adjuntos del elemento como una matriz.
     remarks: |-
       **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
 
@@ -239,10 +246,7 @@ items:
         type:
           - 'outlook!Office.Categories:interface'
   - uid: 'outlook!Office.AppointmentRead#dateTimeCreated:member'
-    summary: |-
-      Obtiene la fecha y hora de creación de un elemento.
-
-      \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    summary: Obtiene la fecha y hora de creación de un elemento.
     remarks: |-
       **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
 
@@ -265,10 +269,7 @@ items:
         type:
           - '!Date:interface'
   - uid: 'outlook!Office.AppointmentRead#dateTimeModified:member'
-    summary: |-
-      Obtiene la fecha y hora en que se modificó por última vez un elemento.
-
-      \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    summary: Obtiene la fecha y hora en que se modificó por última vez un elemento.
     remarks: |-
       **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
 
@@ -303,8 +304,6 @@ items:
       Cuando los datos adjuntos se especifican en el parámetro Formulariomodo. Attachments, Outlook en la web y los clientes de escritorio intentan descargar todos los datos adjuntos y adjuntarlos al formulario de respuesta. Si se produce un error al agregar los datos adjuntos, se muestra un error en la interfaz de usuario del formulario. Si esto no es posible, no se produce ningún mensaje de error.
 
       **Nota**: este método no es compatible con Outlook en iOS o Android.
-
-      \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
       **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
 
@@ -408,8 +407,6 @@ items:
       Cuando los datos adjuntos se especifican en el parámetro Formulariomodo. Attachments, Outlook en la web y los clientes de escritorio intentan descargar todos los datos adjuntos y adjuntarlos al formulario de respuesta. Si se produce un error al agregar los datos adjuntos, se muestra un error en la interfaz de usuario del formulario. Si esto no es posible, no se produce ningún mensaje de error.
 
       **Nota**: este método no es compatible con Outlook en iOS o Android.
-
-      \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
       **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
 
@@ -509,8 +506,6 @@ items:
       La propiedad end es un objeto Date expresado como un valor de fecha y hora de la hora universal coordinada (UTC). Puede usar el método convertToLocalClientTime para convertir el valor de la propiedad end en la fecha y hora local del cliente.
 
       Cuando use el método Time. setAsync para establecer la hora de finalización, debe usar el método convertToUtcClientTime para convertir la hora local del cliente en un valor UTC para el servidor.
-
-      \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
       **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
 
@@ -569,13 +564,85 @@ items:
       return:
         type:
           - 'outlook!Office.EnhancedLocation:interface'
+  - uid: 'outlook!Office.AppointmentRead#getAttachmentContentAsync:member(1)'
+    summary: |-
+      Obtiene datos adjuntos de un mensaje o cita y los devuelve como un objeto **AttachmentContent** .
+
+      El `getAttachmentContentAsync` método obtiene los datos adjuntos con el identificador especificado del elemento. Como práctica recomendada, debe usar el identificador para recuperar datos adjuntos en la misma sesión que identificadores se recuperaron con la `getAttachmentsAsync` llamada o `item.attachments` . En Outlook en la Web y dispositivos móviles, el identificador de datos adjuntos solo es válido en la misma sesión. Una sesión es superior a cuando el usuario cierra la aplicación o si el usuario comienza a redactar un formulario en línea y, a continuación, el formulario continúa en una ventana independiente.
+
+      \[[Conjunto de API: buzón de correo 1,8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
+
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: Asistente de cita
+
+      **Errores**:
+
+      - InvalidAttachmentId: el identificador de datos adjuntos no existe.
+    name: 'getAttachmentContentAsync(attachmentId, options, callback)'
+    fullName: 'getAttachmentContentAsync(attachmentId, options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getAttachmentContentAsync(attachmentId: string, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<AttachmentContent>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: attachmentId
+          description: El identificador de los datos adjuntos que desea obtener.
+          type:
+            - string
+        - id: options
+          description: 'Opcional. Un objeto literal que contiene una o más de las siguientes propiedades. asyncContext: los desarrolladores pueden proporcionar cualquier objeto al que quieran tener acceso en el método de devolución de llamada.'
+          type:
+            - 'outlook!Office.AsyncContextOptions:interface'
+        - id: callback
+          description: 'Opcional. Cuando el método finaliza, la función que se pasa en el parámetro callback se llama con un único parámetro, asyncResult, que es un objeto Office. AsyncResult. Si se produce un error en la llamada, la propiedad asyncResult. error contendrá y código de error con el motivo del error.'
+          type:
+            - 'outlook!Office.AppointmentRead#getAttachmentContentAsync~0:complex'
+  - uid: 'outlook!Office.AppointmentRead#getAttachmentContentAsync:member(2)'
+    summary: |-
+      Obtiene datos adjuntos de un mensaje o cita y los devuelve como un objeto **AttachmentContent** .
+
+      El `getAttachmentContentAsync` método obtiene los datos adjuntos con el identificador especificado del elemento. Como práctica recomendada, debe usar el identificador para recuperar datos adjuntos en la misma sesión que identificadores se recuperaron con la `getAttachmentsAsync` llamada o `item.attachments` . En Outlook en la Web y dispositivos móviles, el identificador de datos adjuntos solo es válido en la misma sesión. Una sesión es superior a cuando el usuario cierra la aplicación o si el usuario comienza a redactar un formulario en línea y, a continuación, el formulario continúa en una ventana independiente.
+
+      \[[Conjunto de API: buzón de correo 1,8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
+
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: Asistente de cita
+
+      **Errores**:
+
+      - InvalidAttachmentId: el identificador de datos adjuntos no existe.
+    name: 'getAttachmentContentAsync(attachmentId, callback)'
+    fullName: 'getAttachmentContentAsync(attachmentId, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getAttachmentContentAsync(attachmentId: string, callback?: (asyncResult: Office.AsyncResult<AttachmentContent>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: attachmentId
+          description: El identificador de los datos adjuntos que desea obtener.
+          type:
+            - string
+        - id: callback
+          description: 'Opcional. Cuando el método finaliza, la función que se pasa en el parámetro callback se llama con un único parámetro, asyncResult, que es un objeto Office. AsyncResult. Si se produce un error en la llamada, la propiedad asyncResult. error contendrá y código de error con el motivo del error.'
+          type:
+            - 'outlook!Office.AppointmentRead#getAttachmentContentAsync~1:complex'
   - uid: 'outlook!Office.AppointmentRead#getEntities:member(1)'
     summary: |-
       Obtiene las entidades que obtenidas en el cuerpo del elemento seleccionado.
 
       **Nota**: este método no es compatible con Outlook en iOS o Android.
-
-      \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
       **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
 
@@ -604,8 +671,6 @@ items:
       Obtiene una matriz de todas las entidades del tipo de entidad especificado encontrado en el cuerpo del elemento seleccionado.
 
       **Nota**: este método no es compatible con Outlook en iOS o Android.
-
-      \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
       **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: restringido
 
@@ -613,7 +678,7 @@ items:
 
       Aunque el nivel de permiso mínimo para usar este método es Restricted, algunos tipos de entidad requieren ReadItem para tener acceso, como se especifica en la tabla siguiente.
 
-      <table> <tr> <th>Valor de entityType</th> <th>Tipo de objetos de la matriz devuelta</th> <th>Nivel de permiso requerido</th> </tr> <tr> <td>Address</td> <td>String</td> <td>Restringido</td> </tr> <tr> <td>Contacto</td> <td>Contacto</td> <td>ReadItem</td> </tr> <tr> <td>EmailAddress</td> <td>String</td> <td>ReadItem</td> </tr> <tr> <td>MeetingSuggestion</td> <td>MeetingSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>PhoneNumber</td> <td>PhoneNumber</td> <td>Restringido</td> </tr> <tr> <td>TaskSuggestion</td> <td>TaskSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>URL</td> <td>String</td> <td>Restringido</td> </tr> </table>
+      <table> <tr> <th>Valor de entityType</th> <th>Tipo de objetos de la matriz devuelta</th> <th>Nivel de permiso requerido</th> </tr> <tr> <td>Address</td> <td>String</td> <td>Restringido</td> </tr> <tr> <td>Contact</td> <td>Contact</td> <td>ReadItem</td> </tr> <tr> <td>EmailAddress</td> <td>String</td> <td>ReadItem</td> </tr> <tr> <td>MeetingSuggestion</td> <td>MeetingSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>PhoneNumber</td> <td>PhoneNumber</td> <td>Restringido</td> </tr> <tr> <td>TaskSuggestion</td> <td>TaskSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>URL</td> <td>String</td> <td>Restringido</td> </tr> </table>
 
       #### <a name="examples"></a>Ejemplos
 
@@ -656,8 +721,6 @@ items:
       El método getFilteredEntitiesByName devuelve las entidades que coinciden con la expresión regular definida en el elemento de regla ItemHasKnownEntity del archivo XML de manifiesto con el valor de elemento FilterName especificado.
 
       **Nota**: este método no es compatible con Outlook en iOS o Android.
-
-      \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
       **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
 
@@ -747,8 +810,6 @@ items:
       Si especifica una regla ItemHasRegularExpressionMatch en la propiedad de cuerpo de un elemento, la expresión regular debe filtrar aún más el cuerpo y no intentar devolver todo el cuerpo del elemento. El uso de una expresión regular como .* para obtener todo el cuerpo de un elemento no siempre devuelve los resultados esperados. En su lugar, use el método Body. getAsync para recuperar todo el cuerpo.
 
       **Nota**: este método no es compatible con Outlook en iOS o Android.
-
-      \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
       **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
 
@@ -799,8 +860,6 @@ items:
       Si especifica una regla ItemHasRegularExpressionMatch en la propiedad de cuerpo de un elemento, la expresión regular debe filtrar aún más el cuerpo y no intentar devolver todo el cuerpo del elemento. El uso de una expresión regular como .* para obtener todo el cuerpo de un elemento no siempre devuelve los resultados esperados.
 
       **Nota**: este método no es compatible con Outlook en iOS o Android.
-
-      \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
       **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
 
@@ -910,13 +969,65 @@ items:
         type:
           - any
         description: Un objeto que contiene matrices de cadenas que coinciden con las expresiones regulares definidas en el archivo XML de manifiesto. El nombre de cada matriz es igual al valor correspondiente del atributo RegExName de la regla ItemHasRegularExpressionMatch correspondiente o al atributo FilterName de la regla ItemHasKnownEntity correspondiente.
+  - uid: 'outlook!Office.AppointmentRead#getSharedPropertiesAsync:member(1)'
+    summary: |-
+      Obtiene las propiedades de una cita o un mensaje en una carpeta compartida, calendario o buzón.
+
+      \[[Conjunto de API: buzón de correo 1,8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
+
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: Asistente de cita
+    name: 'getSharedPropertiesAsync(options, callback)'
+    fullName: 'getSharedPropertiesAsync(options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getSharedPropertiesAsync(options: Office.AsyncContextOptions, callback: (asyncResult: Office.AsyncResult<SharedProperties>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: options
+          description: 'Un objeto literal que contiene una o más de las siguientes propiedades. asyncContext: los desarrolladores pueden proporcionar cualquier objeto al que quieran tener acceso en el método de devolución de llamada.'
+          type:
+            - 'outlook!Office.AsyncContextOptions:interface'
+        - id: callback
+          description: 'Cuando el método finaliza, la función que se pasa en el parámetro callback se llama con un único parámetro de tipo Office. AsyncResult. La `value` propiedad del resultado son las propiedades del elemento compartido.'
+          type:
+            - 'outlook!Office.AppointmentRead#getSharedPropertiesAsync~0:complex'
+  - uid: 'outlook!Office.AppointmentRead#getSharedPropertiesAsync:member(2)'
+    summary: |-
+      Obtiene las propiedades de una cita o un mensaje en una carpeta compartida, calendario o buzón.
+
+      \[[Conjunto de API: buzón de correo 1,8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
+
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: Asistente de cita
+    name: getSharedPropertiesAsync(callback)
+    fullName: getSharedPropertiesAsync(callback)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getSharedPropertiesAsync(callback: (asyncResult: Office.AsyncResult<SharedProperties>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: callback
+          description: 'Cuando el método finaliza, la función que se pasa en el parámetro callback se llama con un único parámetro de tipo Office. AsyncResult. La `value` propiedad del resultado son las propiedades del elemento compartido.'
+          type:
+            - 'outlook!Office.AppointmentRead#getSharedPropertiesAsync~1:complex'
   - uid: 'outlook!Office.AppointmentRead#itemClass:member'
     summary: |-
       Obtiene la clase de elemento Servicios Web Exchange del elemento seleccionado.
 
       Puede crear clases de mensaje personalizadas para especificar aún más las clases de mensaje predeterminadas; por ejemplo, puede crear la clase de mensaje de cita personalizada IPM.Appointment.Contoso.
-
-      \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
       **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
 
@@ -949,8 +1060,6 @@ items:
       La propiedad itemId no está disponible en el modo de redacción. Si se requiere un identificador de elemento, se puede usar el método saveAsync para guardar el elemento en el almacén, que devolverá el identificador de elemento en el parámetro asyncResult. Value de la función de devolución de llamada.
 
       **Nota**: el identificador devuelto por la propiedad Itemid es el mismo que el [identificador de elemento de servicios web Exchange](https://docs.microsoft.com/exchange/client-developer/exchange-web-services/ews-identifiers-in-exchange)<!-- -->. La propiedad itemId no es idéntica al identificador de entrada de Outlook ni al identificador usado por la API de REST de Outlook. Para realizar llamadas API de REST con este valor, hay que convertirlo con Office.context.mailbox.convertToRestId. Para obtener más información, vea [usar las API de REST de Outlook desde un complemento de Outlook](https://docs.microsoft.com/outlook/add-ins/use-rest-api#get-the-item-id) .<!-- -->.
-
-      \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
       **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
 
@@ -963,6 +1072,8 @@ items:
       // identifier. If the `itemId` property returns `null` or
       // `undefined`, it saves the item to the store and gets the
       // item identifier from the asynchronous result.
+      // **Important**: `saveAsync` was introduced with requirement set 1.3
+      // so you can't get the `itemId` in Compose mode in earlier sets.
       var itemId = Office.context.mailbox.item.itemId;
       if (itemId === null || itemId == undefined) {
           Office.context.mailbox.item.saveAsync(function(result) {
@@ -985,8 +1096,6 @@ items:
       Obtiene el tipo de elemento que representa una instancia.
 
       La propiedad itemType devuelve uno de los valores de enumeración de ItemType, lo que indica si la instancia de objeto de elemento es un mensaje o una cita.
-
-      \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
       **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
 
@@ -1018,8 +1127,6 @@ items:
       Las propiedades personalizadas se almacenan como pares de clave/valor según la aplicación y el elemento. Este método devuelve un objeto CustomProperties en la devolución de llamada, que proporciona métodos para tener acceso a las propiedades personalizadas específicas del elemento actual y del complemento actual. Las propiedades personalizadas no están cifradas en el elemento, por lo que no debería usarse como almacenamiento seguro.
 
       Las propiedades personalizadas se proporcionan como un objeto CustomProperties en la propiedad asyncResult. Value. Este objeto puede usarse para obtener, establecer y quitar las propiedades personalizadas del elemento, así como para guardar los cambios en la propiedad personalizada que se vuelve a establecer en el servidor.
-
-      \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
       **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
 
@@ -1049,8 +1156,6 @@ items:
       Obtiene la ubicación de una cita.
 
       La propiedad Location devuelve una cadena que contiene la ubicación de la cita.
-
-      \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
       **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
 
@@ -1077,8 +1182,6 @@ items:
       Obtiene el asunto de un elemento, con todos los prefijos quitados (incluidos RE: y FWD:).
 
       La propiedad normalizedSubject obtiene el asunto del elemento, con todos los prefijos estándar (como RE: y FW:). agregados por los programas de correo electrónico. Para obtener el asunto del elemento con los prefijos intactos, use la propiedad Subject.
-
-      \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
       **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
 
@@ -1135,8 +1238,6 @@ items:
       Proporciona acceso a los asistentes opcionales de un evento. El tipo de objeto y el nivel de acceso dependen del modo del elemento actual.
 
       La propiedad optionalAttendees devuelve una matriz que contiene un objeto [EmailAddressDetails](xref:outlook!Office.EmailAddressDetails:interface) para cada asistente opcional a la reunión. Por defecto, la colección está limitada a un máximo de 100 miembros. Sin embargo, en Windows y Mac, puede obtener un máximo de 500 miembros.
-
-      \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
       **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
 
@@ -1159,10 +1260,7 @@ items:
         type:
           - 'outlook!Office.AppointmentRead#optionalAttendees~0:complex'
   - uid: 'outlook!Office.AppointmentRead#organizer:member'
-    summary: |-
-      Obtiene la dirección de correo electrónico del organizador de una reunión especificada.
-
-      \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    summary: Obtiene la dirección de correo electrónico del organizador de una reunión especificada.
     remarks: |-
       **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
 
@@ -1288,8 +1386,6 @@ items:
       Proporciona acceso a los asistentes necesarios de un evento. El tipo de objeto y el nivel de acceso dependen del modo del elemento actual.
 
       La propiedad requiredAttendees devuelve una matriz que contiene un objeto [EmailAddressDetails](xref:outlook!Office.EmailAddressDetails:interface) para cada asistente requerido a la reunión. Por defecto, la colección está limitada a un máximo de 100 miembros. Sin embargo, en Windows y Mac, puede obtener un máximo de 500 miembros.
-
-      \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
       **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
 
@@ -1355,8 +1451,6 @@ items:
       Obtiene la fecha y hora de inicio de la cita.
 
       La propiedad Start es un objeto Date expresado como un valor de fecha y hora de la hora universal coordinada (UTC). Puede usar el método convertToLocalClientTime para convertir el valor a la fecha y hora local del cliente.
-
-      \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
       **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
 
@@ -1385,8 +1479,6 @@ items:
       La propiedad Subject obtiene o establece el asunto completo del elemento, como lo ha enviado el servidor de correo electrónico.
 
       La propiedad Subject devuelve una cadena. Use la propiedad normalizedSubject para obtener el asunto menos los prefijos iniciales como RE: y RV:.
-
-      \[[Conjunto de API: buzón de correo 1,0](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
       **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
 
@@ -1524,6 +1616,38 @@ references:
         fullName: <void>) => void
   - uid: 'outlook!Office.EnhancedLocation:interface'
     name: EnhancedLocation
+  - uid: 'outlook!Office.AppointmentRead#getAttachmentContentAsync~0:complex'
+    name: '(asyncResult: Office.AsyncResult<AttachmentContent>) => void'
+    fullName: '(asyncResult: Office.AsyncResult<Office.AttachmentContent>) => void'
+    spec.typeScript:
+      - name: '(asyncResult: '
+        fullName: '(asyncResult: '
+      - uid: 'outlook!Office.AsyncResult:interface'
+        name: Office.AsyncResult
+        fullName: Office.AsyncResult
+      - name: <
+        fullName: <
+      - uid: 'outlook!Office.AttachmentContent:interface'
+        name: AttachmentContent
+        fullName: Office.AttachmentContent
+      - name: '>) => void'
+        fullName: '>) => void'
+  - uid: 'outlook!Office.AppointmentRead#getAttachmentContentAsync~1:complex'
+    name: '(asyncResult: Office.AsyncResult<AttachmentContent>) => void'
+    fullName: '(asyncResult: Office.AsyncResult<Office.AttachmentContent>) => void'
+    spec.typeScript:
+      - name: '(asyncResult: '
+        fullName: '(asyncResult: '
+      - uid: 'outlook!Office.AsyncResult:interface'
+        name: Office.AsyncResult
+        fullName: Office.AsyncResult
+      - name: <
+        fullName: <
+      - uid: 'outlook!Office.AttachmentContent:interface'
+        name: AttachmentContent
+        fullName: Office.AttachmentContent
+      - name: '>) => void'
+        fullName: '>) => void'
   - uid: 'outlook!Office.Entities:interface'
     name: Entities
   - uid: 'outlook!Office.AppointmentRead#getEntitiesByType~0:complex'
@@ -1609,6 +1733,38 @@ references:
         fullName: Office.AsyncResult
       - name: <string>) => void
         fullName: <string>) => void
+  - uid: 'outlook!Office.AppointmentRead#getSharedPropertiesAsync~0:complex'
+    name: '(asyncResult: Office.AsyncResult<SharedProperties>) => void'
+    fullName: '(asyncResult: Office.AsyncResult<Office.SharedProperties>) => void'
+    spec.typeScript:
+      - name: '(asyncResult: '
+        fullName: '(asyncResult: '
+      - uid: 'outlook!Office.AsyncResult:interface'
+        name: Office.AsyncResult
+        fullName: Office.AsyncResult
+      - name: <
+        fullName: <
+      - uid: 'outlook!Office.SharedProperties:interface'
+        name: SharedProperties
+        fullName: Office.SharedProperties
+      - name: '>) => void'
+        fullName: '>) => void'
+  - uid: 'outlook!Office.AppointmentRead#getSharedPropertiesAsync~1:complex'
+    name: '(asyncResult: Office.AsyncResult<SharedProperties>) => void'
+    fullName: '(asyncResult: Office.AsyncResult<Office.SharedProperties>) => void'
+    spec.typeScript:
+      - name: '(asyncResult: '
+        fullName: '(asyncResult: '
+      - uid: 'outlook!Office.AsyncResult:interface'
+        name: Office.AsyncResult
+        fullName: Office.AsyncResult
+      - name: <
+        fullName: <
+      - uid: 'outlook!Office.SharedProperties:interface'
+        name: SharedProperties
+        fullName: Office.SharedProperties
+      - name: '>) => void'
+        fullName: '>) => void'
   - uid: 'outlook!Office.AppointmentRead#itemType~0:complex'
     name: MailboxEnums.ItemType | string
     fullName: Office.MailboxEnums.ItemType | string
