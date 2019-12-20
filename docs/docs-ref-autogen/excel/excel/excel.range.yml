@@ -473,11 +473,11 @@ items:
           type:
             - 'excel!Excel.RangeCopyType:enum'
         - id: skipBlanks
-          description: True si se omiten las celdas en blanco en el rango de origen. El valor predeterminado es falso.
+          description: True si se omiten las celdas en blanco en el rango de origen. El valor predeterminado es false.
           type:
             - boolean
         - id: transpose
-          description: True si se van a transponer las celdas en el rango de destino. El valor predeterminado es falso.
+          description: True si se van a transponer las celdas en el rango de destino. El valor predeterminado es false.
           type:
             - boolean
   - uid: 'excel!Excel.Range#copyFrom:member(2)'
@@ -506,11 +506,11 @@ items:
           type:
             - '"All" | "Formulas" | "Values" | "Formats"'
         - id: skipBlanks
-          description: True si se omiten las celdas en blanco en el rango de origen. El valor predeterminado es falso.
+          description: True si se omiten las celdas en blanco en el rango de origen. El valor predeterminado es false.
           type:
             - boolean
         - id: transpose
-          description: True si se van a transponer las celdas en el rango de destino. El valor predeterminado es falso.
+          description: True si se van a transponer las celdas en el rango de destino. El valor predeterminado es false.
           type:
             - boolean
   - uid: 'excel!Excel.Range#dataValidation:member'
@@ -1386,7 +1386,7 @@ items:
                   ctx.workbook.worksheets.getItem(sheetName).getRange(rangeAddress).getOffsetRange(-1,4);
               range.load('address');
               return ctx.sync().then(function() {
-                  console.log(range.address); // prints Sheet1!H3:K5
+                  console.log(range.address); // prints Sheet1!H3:J5
               });
           }).catch(function(error) {
               console.log("Error: " + error);
@@ -2424,8 +2424,7 @@ items:
     summary: |-
       Mueve los valores de celda, el formato y las fórmulas del rango actual al rango de destino, reemplazando la información antigua de esas celdas. El rango de destino se expandirá automáticamente si es menor que el intervalo actual. Las celdas del rango de destino que están fuera del área del rango original no cambian.
 
-      \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-    isPreview: true
+      \[[Conjunto de API: ExcelApiOnline 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: moveTo(destinationRange)
     fullName: moveTo(destinationRange)
     langs:
@@ -2511,7 +2510,7 @@ items:
           type:
             - 'number[]'
         - id: includesHeader
-          description: True si el encabezado contiene datos de entrada. El valor predeterminado es falso.
+          description: True si el encabezado contiene datos de entrada. El valor predeterminado es false.
           type:
             - boolean
   - uid: 'excel!Excel.Range#replaceAll:member(1)'
@@ -3058,7 +3057,7 @@ items:
         type:
           - number
   - uid: 'excel!Excel.Range#track:member(1)'
-    summary: 'Realiza un seguimiento del objeto de ajuste automático según cambios adyacentes en el documento. Esta llamada es una abreviatura de`context.trackedObjects.add(thisObject)`<!-- -->. Si usa este objeto a través `.sync` de llamadas y fuera de la ejecución secuencial de un lote ". Run", y obtiene un error "InvalidObjectPath" al establecer una propiedad o invocar un método en el objeto, es necesario que haya agregado el objeto al objeto con seguimiento colección cuando se creó el objeto por primera vez.'
+    summary: 'Realiza un seguimiento del objeto de ajuste automático según cambios adyacentes en el documento. Esta llamada es una abreviatura de`context.trackedObjects.add(thisObject)`<!-- -->. Si usa este objeto a través `.sync` de llamadas y fuera de la ejecución secuencial de un lote ". Run", y obtiene un error "InvalidObjectPath" al establecer una propiedad o invocar un método en el objeto, es necesario que haya agregado el objeto a la colección de objetos con seguimiento cuando se creó el objeto por primera vez.'
     name: track()
     fullName: track()
     langs:
