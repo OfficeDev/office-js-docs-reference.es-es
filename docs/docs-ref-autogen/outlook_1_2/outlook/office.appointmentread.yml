@@ -445,7 +445,7 @@ items:
 
       Aunque el nivel de permiso mínimo para usar este método es Restricted, algunos tipos de entidad requieren ReadItem para tener acceso, como se especifica en la tabla siguiente.
 
-      <table> <tr> <th>Valor de entityType</th> <th>Tipo de objetos de la matriz devuelta</th> <th>Nivel de permiso requerido</th> </tr> <tr> <td>Address</td> <td>String</td> <td>Restringido</td> </tr> <tr> <td>Contact</td> <td>Contact</td> <td>ReadItem</td> </tr> <tr> <td>EmailAddress</td> <td>String</td> <td>ReadItem</td> </tr> <tr> <td>MeetingSuggestion</td> <td>MeetingSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>PhoneNumber</td> <td>PhoneNumber</td> <td>Restringido</td> </tr> <tr> <td>TaskSuggestion</td> <td>TaskSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>URL</td> <td>String</td> <td>Restringido</td> </tr> </table>
+      <table> <tr> <th>Valor de entityType</th> <th>Tipo de objetos de la matriz devuelta</th> <th>Nivel de permiso requerido</th> </tr> <tr> <td>Address</td> <td>Cadena</td> <td>Restricted</td> </tr> <tr> <td>Contact</td> <td>Contact</td> <td>ReadItem</td> </tr> <tr> <td>EmailAddress</td> <td>Cadena</td> <td>ReadItem</td> </tr> <tr> <td>MeetingSuggestion</td> <td>MeetingSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>PhoneNumber</td> <td>PhoneNumber</td> <td>Restricted</td> </tr> <tr> <td>TaskSuggestion</td> <td>TaskSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>URL</td> <td>Cadena</td> <td>Restricted</td> </tr> </table>
 
       #### <a name="examples"></a>Ejemplos
 
@@ -621,7 +621,7 @@ items:
 
       La propiedad itemClass especifica la clase de mensaje del elemento seleccionado. Las siguientes son las clases de mensaje predeterminadas para el elemento de mensaje o cita.
 
-      <table> <tr> <th>Tipo</th> <th>Descripción</th> <th>Clase Item</th> </tr> <tr> <td>Elementos de cita</td> <td>Estos son los elementos de calendario de la clase de elemento IPM. Appointment o IPM. Appointment. repeticiones.</td> <td>IPM. Cita, IPM. Appointment. repeticiones</td> </tr> <tr> <td>Elementos de mensaje</td> <td>Entre estos se encuentran los correos electrónicos que tienen la clase de mensaje predeterminada IPM.Note y las convocatorias de reunión, respuestas y cancelaciones que usan IPM.Schedule.Meeting como clase de mensaje base.</td> <td>IPM. Nota: IPM. Program. Meeting. request, IPM. Program. Meeting. NEG, IPM. Program. Meeting. POS, IPM. Program. Meeting. carpa, IPM. Schedule. Meeting. Canceled</td> </tr> </table>
+      <table> <tr> <th>Tipo</th> <th>Description</th> <th>Clase Item</th> </tr> <tr> <td>Elementos de cita</td> <td>Estos son los elementos de calendario de la clase de elemento IPM. Appointment o IPM. Appointment. repeticiones.</td> <td>IPM. Cita, IPM. Appointment. repeticiones</td> </tr> <tr> <td>Elementos de mensaje</td> <td>Entre estos se encuentran los correos electrónicos que tienen la clase de mensaje predeterminada IPM.Note y las convocatorias de reunión, respuestas y cancelaciones que usan IPM.Schedule.Meeting como clase de mensaje base.</td> <td>IPM. Nota: IPM. Program. Meeting. request, IPM. Program. Meeting. NEG, IPM. Program. Meeting. POS, IPM. Program. Meeting. carpa, IPM. Schedule. Meeting. Canceled</td> </tr> </table>
 
       #### <a name="examples"></a>Ejemplos
 
@@ -717,6 +717,37 @@ items:
       **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/outlook/add-ins/understanding-outlook-add-in-permissions)**: ReadItem
 
       **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/outlook/add-ins/#extension-points)**: Asistente de cita
+
+      #### <a name="examples"></a>Ejemplos
+
+      ```javascript
+      // The following example shows how to use the loadCustomPropertiesAsync method
+      // to asynchronously load custom properties that are specific to the current item.
+      // The example also shows how to use the saveAsync method to save these properties
+      // back to the server. After loading the custom properties, the example uses the
+      // get method to read the custom property myProp, the set method to write the
+      // custom property otherProp, and then finally calls the saveAsync method to save
+      // the custom properties.
+      Office.initialize = function () {
+          // Checks for the DOM to load using the jQuery ready function.
+          $(document).ready(function () {
+              // After the DOM is loaded, add-in-specific code can run.
+              var mailbox = Office.context.mailbox;
+              mailbox.item.loadCustomPropertiesAsync(customPropsCallback);
+          });
+      };
+
+      function customPropsCallback(asyncResult) {
+          var customProps = asyncResult.value;
+          var myProp = customProps.get("myProp");
+
+          customProps.set("otherProp", "value");
+          customProps.saveAsync(saveCallback);
+      }
+
+      function saveCallback(asyncResult) {
+      }
+      ```
     name: 'loadCustomPropertiesAsync(callback, userContext)'
     fullName: 'loadCustomPropertiesAsync(callback, userContext)'
     langs:
