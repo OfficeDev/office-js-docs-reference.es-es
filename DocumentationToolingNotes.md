@@ -8,28 +8,28 @@ Se combinan dos tipos de contenido para crear la documentación de referencia de
 
 ### <a name="type-definition-files"></a>Archivos de definición de tipo
 
-Los archivos de definición de tipo en [tipos](https://github.com/DefinitelyTyped/DefinitelyTyped) indefinidos son el único origen de verdad para la documentación. Cualquier complemento de Office que usa TypeScript compila con estos archivos de definición de tipo. También ofrece capacidades de IntelliSense de JavaScript y TypeScript para desarrolladores. Al crear la documentación de referencia a partir de estas definiciones, proporcionamos información más precisa.
+Los archivos de definición de tipo en [tipos indefinidos](https://github.com/DefinitelyTyped/DefinitelyTyped) son el único origen de verdad para la documentación. Cualquier complemento de Office que usa TypeScript compila con estos archivos de definición de tipo. También ofrece capacidades de IntelliSense de JavaScript y TypeScript para desarrolladores. Al crear la documentación de referencia a partir de estas definiciones, proporcionamos información más precisa.
 
 Hay cuatro archivos d. ts relevantes que proporcionan contenido de origen para diferentes subsecciones de los documentos.
 
-- [Office-js/index. d. ts](https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/master/types/office-js/index.d.ts) (Definiciones de la versión).
+- [Office-js/index. d. ts](https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/master/types/office-js/index.d.ts) (las definiciones de la versión).
   - [Excel (versión)](https://docs.microsoft.com/javascript/api/excel_release)
   - [OneNote](https://docs.microsoft.com/javascript/api/onenote)
   - [PowerPoint](https://docs.microsoft.com/javascript/api/powerpoint)
   - [Visio](https://docs.microsoft.com/javascript/api/visio)
   - [Word (versión)](https://docs.microsoft.com/javascript/api/word_release)
   - [Subsección OfficeExtensions de la API común](https://docs.microsoft.com/javascript/api/office)
-- [Office-js-Preview/index. d. ts](https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/master/types/office-js-preview/index.d.ts) (Definiciones de vista previa).
+- [Office-js-Preview/index. d. ts](https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/master/types/office-js-preview/index.d.ts) (las definiciones de vista previa).
   - [Excel (versión preliminar)](https://docs.microsoft.com/javascript/api/excel)
   - [Outlook (versión preliminar)](https://docs.microsoft.com/javascript/api/outlook)
   - [Word (vista previa)](https://docs.microsoft.com/javascript/api/word)
   - [API común](https://docs.microsoft.com/javascript/api/office)
-- [Custom-Functions-Runtime](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/custom-functions-runtime/index.d.ts) (Las definiciones de tiempo de ejecución de las funciones personalizadas de Excel).
+- [Custom-Functions-Runtime](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/custom-functions-runtime/index.d.ts)(las definiciones de tiempo de ejecución de las funciones personalizadas de Excel).
   - [Funciones personalizadas](https://docs.microsoft.com/javascript/api/custom-functions-runtime)
-- [Office-Runtime](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/office-runtime/index.d.ts) (Las definiciones en tiempo de ejecución de Office para la plataforma de funciones personalizadas).
+- [Office-Runtime](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/office-runtime/index.d.ts)(las definiciones de tiempo de ejecución de Office para la plataforma de funciones personalizadas).
   - [Tiempo de ejecución de Office](https://docs.microsoft.com/javascript/api/office-runtime)
 
-Las versiones anteriores de las API tienen sus propios archivos d. TS. Se conservan cuando se publica un nuevo conjunto de requisitos de la API. También pueden generarse con la herramienta de descambio de [versión](https://github.com/OfficeDev/office-js-docs-reference/blob/master/generate-docs/tools/VersionRemover.ts). Estos archivos d. ts antiguos se mantienen para que, en las API de evento se revisen o modifiquen, el comportamiento original sigue estando documentado. Esto es útil si tiene que dirigirse a una versión anterior de la API.
+Las versiones anteriores de las API tienen sus propios archivos d. TS. Se conservan cuando se publica un nuevo conjunto de requisitos de la API. También pueden generarse con la [herramienta de descambio de versión](https://github.com/OfficeDev/office-js-docs-reference/blob/master/generate-docs/tools/VersionRemover.ts). Estos archivos d. ts antiguos se mantienen para que, en las API de evento se revisen o modifiquen, el comportamiento original sigue estando documentado. Esto es útil si tiene que dirigirse a una versión anterior de la API.
 
 ### <a name="code-snippets"></a>Fragmentos de código
 
@@ -44,21 +44,24 @@ Los fragmentos de código del laboratorio de scripts se extraen de las muestras 
 
 ## <a name="tooling-pipeline"></a>Canalización de herramientas
 
-![Una imagen que muestra el flujo de control de tipo definido, al preprocesador, extractor de API, documentador de API y a a través del postprocesador.](ToolingPipeline.png)
+![Una imagen que muestra el flujo de control de tipo definido de forma indefinida, al preprocesador, extractor de API, procesador, documentador de API y a a través del postprocesador.](ToolingPipeline.png)
 
-Entre los orígenes de contenido y las páginas finales, el contenido de la documentación pasa por cuatro pasos de la herramienta:
+Entre los orígenes de contenido y las páginas finales, el contenido de la documentación pasa por cinco pasos de herramientas:
 
 1. [Script de preprocesador](https://github.com/OfficeDev/office-js-docs-reference/blob/master/generate-docs/scripts/preprocessor.ts)
 1. [Extractor de API](https://api-extractor.com/)
-1. [Documentador de la API](https://github.com/microsoft/web-build-tools/blob/master/apps/api-documenter/README.md)
+1. [Script de procesador](https://github.com/OfficeDev/office-js-docs-reference/blob/master/generate-docs/scripts/midprocessor.ts)
+1. [Documentador de la API](https://github.com/microsoft/rushstack/blob/master/apps/api-documenter/README.md)
 1. [Script de postprocesador](https://github.com/OfficeDev/office-js-docs-reference/blob/master/generate-docs/scripts/postprocessor.ts)
 
 El preprocesador toma los archivos d. TS y los divide en secciones específicas de host. Lleva a cabo las operaciones de limpieza necesarias para las herramientas siguientes para procesar los datos correctamente.
 
 El extractor de API convierte los archivos d. TS en datos JSON. Esto tokenizes todos los datos de tipo, lo que permite un análisis más sencillo.
 
+El procesador es el que recupera los fragmentos de código y los empareja con los hosts adecuados.
+
 El Documentador de la API convierte los datos JSON en archivos. yml. Los archivos. yml se convierten en Markdown por el sistema de publicación abierto que publica nuestros documentos en docs.microsoft.com. El Documentador de la API también contiene una extensión específica de Office que inserta los fragmentos de código.
 
 El postprocesador limpia la tabla de contenido y mueve los archivos. yml a la carpeta de [publicación](https://github.com/OfficeDev/office-js-docs-reference/tree/master/docs/docs-ref-autogen).
 
-Estos cuatro pasos se llevan a cabo cuando se ejecuta [GenerateDocs. cmd](https://github.com/OfficeDev/office-js-docs-reference/blob/master/generate-docs/GenerateDocs.cmd) . Ese script también controla la instalación del módulo de nodo y limpia los conjuntos de archivos antiguos.
+Estos cinco pasos se llevan a cabo cuando se ejecuta [GenerateDocs. cmd](https://github.com/OfficeDev/office-js-docs-reference/blob/master/generate-docs/GenerateDocs.cmd) . Ese script también controla la instalación del módulo de nodo, limpia los conjuntos de archivos antiguos y los archivos de definición de tipo de versiones para cada conjunto de requisitos.
