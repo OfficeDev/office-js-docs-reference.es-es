@@ -659,20 +659,6 @@ items:
               }
           });
           ```
-          ```javascript
-          // Set worksheet position. 
-          Excel.run(function (ctx) { 
-              var wSheetName = 'Sheet1';
-              var worksheet = ctx.workbook.worksheets.getItem(wSheetName);
-              worksheet.position = 2;
-              return ctx.sync(); 
-          }).catch(function(error) {
-              console.log("Error: " + error);
-              if (error instanceof OfficeExtension.Error) {
-                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
-              }
-          });
-          ```
       parameters:
         - id: propertyNames
           description: Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades que se van a cargar.
@@ -921,6 +907,25 @@ items:
       return:
         type:
           - number
+        description: |-
+
+
+          #### <a name="examples"></a>Ejemplos
+
+          ```javascript
+          // Set worksheet position. 
+          Excel.run(function (ctx) { 
+              var wSheetName = 'Sheet1';
+              var worksheet = ctx.workbook.worksheets.getItem(wSheetName);
+              worksheet.position = 2;
+              return ctx.sync(); 
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
   - uid: 'excel!Excel.Worksheet#protection:member'
     summary: |-
       Devuelve el objeto de protección de hoja de una hoja de cálculo. Solo lectura.
@@ -936,6 +941,43 @@ items:
       return:
         type:
           - 'excel!Excel.WorksheetProtection:class'
+        description: |-
+
+
+          #### <a name="examples"></a>Ejemplos
+
+          ```javascript
+          Excel.run(function(ctx) {
+            // get a reference to Sheet1
+            var sheet = ctx.workbook.worksheets.getItem("Sheet1");
+
+            // Protect inserting or deleting rows in Sheet1
+            sheet.protection.protect({
+              allowInsertRows: false,
+              allowDeleteRows: false
+            });
+
+            return ctx.sync();
+          }).catch(function(error) {
+              console.log("Error: " + error);
+              if (error instanceof OfficeExtension.Error) {
+                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
+          ```javascript
+          // Unprotecting a worksheet with unprotect() will remove all 
+          // WorksheetProtectionOptions options applied to a worksheet.
+          // To remove only a subset of WorksheetProtectionOptions use the 
+          // protect() method and set the options you wish to remove to true.
+          Excel.run(function(ctx) {
+            var sheet = ctx.workbook.worksheets.getItem("Sheet1");
+            sheet.protection.protect({
+              allowInsertRows: false, // Protect row insertion
+              allowDeleteRows: true // Unprotect row deletion
+            });
+          });
+          ```
   - uid: 'excel!Excel.Worksheet#set:member(1)'
     summary: Establece varias propiedades de un objeto al mismo tiempo. Puede pasar un objeto sin formato con las propiedades apropiadas o cualquier otro objeto de la API del mismo tipo.
     remarks: |-
