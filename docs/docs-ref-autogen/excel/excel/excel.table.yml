@@ -40,6 +40,7 @@ items:
       - 'excel!Excel.Table#rows:member'
       - 'excel!Excel.Table#set:member(1)'
       - 'excel!Excel.Table#set:member(2)'
+      - 'excel!Excel.Table#setStyle:member(1)'
       - 'excel!Excel.Table#showBandedColumns:member'
       - 'excel!Excel.Table#showBandedRows:member'
       - 'excel!Excel.Table#showFilterButton:member'
@@ -47,6 +48,7 @@ items:
       - 'excel!Excel.Table#showTotals:member'
       - 'excel!Excel.Table#sort:member'
       - 'excel!Excel.Table#style:member'
+      - 'excel!Excel.Table#tableStyle:member'
       - 'excel!Excel.Table#toJSON:member(1)'
       - 'excel!Excel.Table#worksheet:member'
   - uid: 'excel!Excel.Table#autoFilter:member'
@@ -494,7 +496,9 @@ items:
                       }
   - uid: 'excel!Excel.Table#name:member'
     summary: |-
-      Nombre de la tabla. Al establecer el nombre de la tabla, debe seguir las instrucciones especificadas en el artículo [cambiar el nombre de una tabla de Excel](https://support.office.com/article/Rename-an-Excel-table-FBF49A4F-82A3-43EB-8BA2-44D21233B114) .
+      Nombre de la tabla.
+
+      El nombre de conjunto de la tabla debe seguir las instrucciones especificadas en el artículo [cambiar el nombre de una tabla de Excel](https://support.office.com/article/Rename-an-Excel-table-FBF49A4F-82A3-43EB-8BA2-44D21233B114) .
 
       \[[Conjunto de API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: name
@@ -656,6 +660,28 @@ items:
           description: ''
           type:
             - 'excel!Excel.Table:class'
+  - uid: 'excel!Excel.Table#setStyle:member(1)'
+    summary: |-
+      Establece el estilo aplicado a la segmentación de la rebanada.
+
+      \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    isPreview: true
+    name: setStyle(style)
+    fullName: setStyle(style)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'setStyle(style: string | PivotTableStyle | BuiltInTableStyle): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: style
+          description: Estilo que se va a aplicar a la tabla dinámica. Se `InvalidArgumentException` produce una excepción si se proporciona una cadena que no coincide con el nombre de ningún estilo.
+          type:
+            - 'excel!Excel.Table#setStyle~0:complex'
   - uid: 'excel!Excel.Table#showBandedColumns:member'
     summary: |-
       Indica si las columnas muestran un formato con bandas en el que las columnas impares están resaltadas de manera diferente que las pares para facilitar la lectura de la tabla.
@@ -785,6 +811,22 @@ items:
               }
           });
           ```
+  - uid: 'excel!Excel.Table#tableStyle:member'
+    summary: |-
+      Estilo aplicado a la tabla.
+
+      \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    isPreview: true
+    name: tableStyle
+    fullName: tableStyle
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly tableStyle: Excel.TableStyle;'
+      return:
+        type:
+          - 'excel!Excel.TableStyle:class'
   - uid: 'excel!Excel.Table#toJSON:member(1)'
     summary: 'Reemplaza el método JavaScript `toJSON()` para proporcionar un resultado más útil cuando se pasa un objeto API a`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama `toJSON` al método del objeto que se le pasa.) Mientras que el objeto Excel. Table original es un objeto API, `toJSON` el método devuelve un objeto JavaScript sin formato (escrito como`Excel.Interfaces.TableData`<!-- -->) que contiene copias rasas de las propiedades secundarias cargadas del objeto original.'
     name: toJSON()
@@ -876,8 +918,24 @@ references:
     name: Interfaces.TableUpdateData
   - uid: 'excel!OfficeExtension.UpdateOptions:interface'
     name: OfficeExtension.UpdateOptions
+  - uid: 'excel!Excel.Table#setStyle~0:complex'
+    name: string | PivotTableStyle | BuiltInTableStyle
+    fullName: string | Excel.PivotTableStyle | Excel.BuiltInTableStyle
+    spec.typeScript:
+      - name: 'string | '
+        fullName: 'string | '
+      - uid: 'excel!Excel.PivotTableStyle:class'
+        name: PivotTableStyle
+        fullName: Excel.PivotTableStyle
+      - name: ' | '
+        fullName: ' | '
+      - uid: 'excel!Excel.BuiltInTableStyle:enum'
+        name: BuiltInTableStyle
+        fullName: Excel.BuiltInTableStyle
   - uid: 'excel!Excel.TableSort:class'
     name: Excel.TableSort
+  - uid: 'excel!Excel.TableStyle:class'
+    name: Excel.TableStyle
   - uid: 'excel!Excel.Interfaces.TableData:interface'
     name: Excel.Interfaces.TableData
   - uid: 'excel!Excel.Worksheet:class'
