@@ -16,6 +16,8 @@ items:
     type: interface
     package: outlook!
     children:
+      - 'outlook!Office.Body#appendOnSendAsync:member(1)'
+      - 'outlook!Office.Body#appendOnSendAsync:member(2)'
       - 'outlook!Office.Body#getAsync:member(1)'
       - 'outlook!Office.Body#getAsync:member(2)'
       - 'outlook!Office.Body#getTypeAsync:member(1)'
@@ -26,6 +28,108 @@ items:
       - 'outlook!Office.Body#setAsync:member(2)'
       - 'outlook!Office.Body#setSelectedDataAsync:member(1)'
       - 'outlook!Office.Body#setSelectedDataAsync:member(2)'
+  - uid: 'outlook!Office.Body#appendOnSendAsync:member(1)'
+    summary: |-
+      Agrega en envía el contenido especificado al final del cuerpo del elemento, después de cualquier firma.
+
+      Si el usuario está ejecutando complementos que implementan la [característica on-Send mediante \`ItemSend\` en el manifiesto](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-on-send-addins?tabs=windows)<!-- -->, anexar en el envío se ejecuta antes que la funcionalidad de envío.
+
+      **Importante**: para usar`appendOnSendAsync`<!-- -->, el `AppendOnSend` permiso extendido debe incluirse en el `ExtendedPermissions` nodo del manifiesto.
+
+      **Nota**: para borrar datos de una llamada `appendOnSendAsync` anterior, puede llamarlo de nuevo con el `data` parámetro establecido en`null`<!-- -->.
+
+      \[[Conjunto de API: vista previa de buzón](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadWriteItem`
+
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: redacción
+
+      **Errores**:
+
+      - `DataExceedsMaximumSize`<!-- -->: El `data` parámetro tiene más de 5.000 caracteres.
+
+      - `InvalidFormatError`<!-- -->: El `options.coercionType` parámetro se establece en `Office.CoercionType.Html` , pero el cuerpo del mensaje está en texto sin formato.
+
+      #### <a name="examples"></a>Ejemplos
+
+      ```javascript
+      Office.context.mailbox.item.body.appendOnSendAsync(
+          "P.S. This text was appended on send.",
+          {coercionType: Office.CoercionType.Html},
+          function (asyncResult) {
+              if (asyncResult.status === Office.AsyncResultStatus.Failed) {
+                  console.log("Action failed with error: " + asyncResult.error.message);
+              }
+          }
+      );
+      ```
+    isPreview: true
+    name: 'appendOnSendAsync(data, options, callback)'
+    fullName: 'appendOnSendAsync(data, options, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'appendOnSendAsync(data: string, options?: Office.AsyncContextOptions & CoercionTypeOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: data
+          description: Cadena que se va a agregar al final del cuerpo. La cadena está limitada a 5.000 caracteres.
+          type:
+            - string
+        - id: options
+          description: 'Opcional. Un objeto literal que contiene una o más de las siguientes propiedades. `asyncContext`<!-- -->: Los desarrolladores pueden proporcionar cualquier objeto al que quieran tener acceso en el método de devolución de llamada. `coercionType`<!-- -->: El formato deseado para los datos que se van a anexar. La cadena del parámetro `data` se convertirá a este formato.'
+          type:
+            - 'outlook!Office.Body#appendOnSendAsync~0:complex'
+        - id: callback
+          description: 'Opcional. Cuando el método finaliza, la función que se pasa en `callback` el parámetro se llama con un único parámetro de tipo`Office.AsyncResult`<!-- -->. Cualquier error que se detecte se proporcionará en la propiedad `asyncResult.error`.'
+          type:
+            - 'outlook!Office.Body#appendOnSendAsync~1:complex'
+  - uid: 'outlook!Office.Body#appendOnSendAsync:member(2)'
+    summary: |-
+      Agrega en envía el contenido especificado al final del cuerpo del elemento, después de cualquier firma.
+
+      Si el usuario está ejecutando complementos que implementan la [característica on-Send mediante \`ItemSend\` en el manifiesto](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-on-send-addins?tabs=windows)<!-- -->, anexar en el envío se ejecuta antes que la funcionalidad de envío.
+
+      **Importante**: para usar`appendOnSendAsync`<!-- -->, el `AppendOnSend` permiso extendido debe incluirse en el `ExtendedPermissions` nodo del manifiesto.
+
+      **Nota**: para borrar datos de una llamada `appendOnSendAsync` anterior, puede llamarlo de nuevo con el `data` parámetro establecido en`null`<!-- -->.
+
+      \[[Conjunto de API: vista previa de buzón](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadWriteItem`
+
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: redacción
+
+      **Errores**:
+
+      - `DataExceedsMaximumSize`<!-- -->: El `data` parámetro tiene más de 5.000 caracteres.
+
+      - `InvalidFormatError`<!-- -->: El `options.coercionType` parámetro se establece en `Office.CoercionType.Html` , pero el cuerpo del mensaje está en texto sin formato.
+    isPreview: true
+    name: 'appendOnSendAsync(data, callback)'
+    fullName: 'appendOnSendAsync(data, callback)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'appendOnSendAsync(data: string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: data
+          description: Cadena que se va a agregar al final del cuerpo. La cadena está limitada a 5.000 caracteres.
+          type:
+            - string
+        - id: callback
+          description: 'Opcional. Cuando el método finaliza, la función que se pasa en `callback` el parámetro se llama con un único parámetro de tipo`Office.AsyncResult`<!-- -->. Cualquier error que se detecte se proporcionará en la propiedad `asyncResult.error`.'
+          type:
+            - 'outlook!Office.Body#appendOnSendAsync~2:complex'
   - uid: 'outlook!Office.Body#getAsync:member(1)'
     summary: |-
       Devuelve el cuerpo actual en un formato especificado.
@@ -288,7 +392,7 @@ items:
 
       - `DataExceedsMaximumSize`<!-- -->: El parámetro Data tiene más de 1 millón caracteres.
 
-      - `InvalidFormatError`<!-- -->: El parámetro Options. coercionType se establece `Office.CoercionType.Html` en y el cuerpo del mensaje está en texto sin formato.
+      - `InvalidFormatError`<!-- -->: El `options.coercionType` parámetro se establece en `Office.CoercionType.Html` y el cuerpo del mensaje está en texto sin formato.
 
       #### <a name="examples"></a>Ejemplos
 
@@ -470,6 +574,40 @@ items:
           type:
             - 'outlook!Office.Body#setSelectedDataAsync~2:complex'
 references:
+  - uid: 'outlook!Office.Body#appendOnSendAsync~0:complex'
+    name: Office.AsyncContextOptions & CoercionTypeOptions
+    fullName: Office.AsyncContextOptions & Office.CoercionTypeOptions
+    spec.typeScript:
+      - uid: 'outlook!Office.AsyncContextOptions:interface'
+        name: Office.AsyncContextOptions
+        fullName: Office.AsyncContextOptions
+      - name: ' & '
+        fullName: ' & '
+      - uid: 'outlook!Office.CoercionTypeOptions:interface'
+        name: CoercionTypeOptions
+        fullName: Office.CoercionTypeOptions
+  - uid: 'outlook!Office.Body#appendOnSendAsync~1:complex'
+    name: '(asyncResult: Office.AsyncResult<void>) => void'
+    fullName: '(asyncResult: Office.AsyncResult<void>) => void'
+    spec.typeScript:
+      - name: '(asyncResult: '
+        fullName: '(asyncResult: '
+      - uid: 'outlook!Office.AsyncResult:interface'
+        name: Office.AsyncResult
+        fullName: Office.AsyncResult
+      - name: <void>) => void
+        fullName: <void>) => void
+  - uid: 'outlook!Office.Body#appendOnSendAsync~2:complex'
+    name: '(asyncResult: Office.AsyncResult<void>) => void'
+    fullName: '(asyncResult: Office.AsyncResult<void>) => void'
+    spec.typeScript:
+      - name: '(asyncResult: '
+        fullName: '(asyncResult: '
+      - uid: 'outlook!Office.AsyncResult:interface'
+        name: Office.AsyncResult
+        fullName: Office.AsyncResult
+      - name: <void>) => void
+        fullName: <void>) => void
   - uid: 'outlook!Office.Body#getAsync~0:complex'
     name: Office.CoercionType | string
     fullName: Office.CoercionType | string
