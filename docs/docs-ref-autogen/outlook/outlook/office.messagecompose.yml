@@ -800,10 +800,11 @@ items:
       Para los clientes enriquecidos de Windows y Mac, esta API establece la firma en las secciones "nuevo mensaje" y "respuestas/reenvíos" de la cuenta de envío como "(ninguno)", deshabilitando efectivamente la firma. Para Outlook en la web, la API debe deshabilitar la opción de firma para nuevos correos, respuestas y reenvíos. Si se selecciona la firma, esta llamada de API debe deshabilitarla.
 
       \[[Conjunto de API: vista previa de buzón](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-
+    remarks: |-
       **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadWriteItem`
 
       **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/#extension-points)**: redacción de mensaje
+    isPreview: true
     name: 'disableClientSignatureAsync(options, callback)'
     fullName: 'disableClientSignatureAsync(options, callback)'
     langs:
@@ -831,10 +832,24 @@ items:
       Para los clientes enriquecidos de Windows y Mac, esta API establece la firma en las secciones "nuevo mensaje" y "respuestas/reenvíos" de la cuenta de envío como "(ninguno)", deshabilitando efectivamente la firma. Para Outlook en la web, la API debe deshabilitar la opción de firma para nuevos correos, respuestas y reenvíos. Si se selecciona la firma, esta llamada de API debe deshabilitarla.
 
       \[[Conjunto de API: vista previa de buzón](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-
+    remarks: |-
       **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadWriteItem`
 
       **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/#extension-points)**: redacción de mensaje
+
+      #### <a name="examples"></a>Ejemplos
+
+      ```javascript
+      // Disable the client signature.
+      Office.context.mailbox.item.disableClientSignatureAsync(function(asyncResult) {
+        if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+          console.log("disableClientSignatureAsync succeeded");
+        } else {
+          console.error(asyncResult.error);
+        }
+      });
+      ```
+    isPreview: true
     name: disableClientSignatureAsync(callback)
     fullName: disableClientSignatureAsync(callback)
     langs:
@@ -845,21 +860,7 @@ items:
       return:
         type:
           - void
-        description: |-
-
-
-          #### <a name="examples"></a>Ejemplos
-
-          ```javascript
-          // Disable the client signature.
-          Office.context.mailbox.item.disableClientSignatureAsync(function(asyncResult) {
-            if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
-              console.log("disableClientSignatureAsync succeeded");
-            } else {
-              console.error(asyncResult.error);
-            }
-          });
-          ```
+        description: ''
       parameters:
         - id: callback
           description: 'Opcional. Cuando el método finaliza, la función que se pasa en el parámetro callback se llama con un único parámetro,`asyncResult`<!-- -->, que es un `Office.AsyncResult` objeto.'
@@ -1157,11 +1158,15 @@ items:
           type:
             - 'outlook!Office.MessageCompose#getAttachmentsAsync~1:complex'
   - uid: 'outlook!Office.MessageCompose#getComposeTypeAsync:member(1)'
-    summary: 'Especifica el tipo de redacción de mensaje y su tipo de coerción. El mensaje puede ser nuevo, o bien responder o reenviar. El tipo de coerción puede ser HTML o texto sin formato.'
+    summary: |-
+      Especifica el tipo de redacción de mensaje y su tipo de coerción. El mensaje puede ser nuevo, o bien responder o reenviar. El tipo de coerción puede ser HTML o texto sin formato.
+
+      \[[Conjunto de API: vista previa de buzón](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
       **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
 
       **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/#extension-points)**: redacción de mensaje
+    isPreview: true
     name: 'getComposeTypeAsync(options, callback)'
     fullName: 'getComposeTypeAsync(options, callback)'
     langs:
@@ -1179,14 +1184,14 @@ items:
           type:
             - 'outlook!Office.AsyncContextOptions:interface'
         - id: callback
-          description: |-
-            Cuando el método finaliza, la función que se pasa en `callback` el parámetro se llama con un único parámetro de tipo`Office.AsyncResult`<!-- -->. Si se realiza correctamente `asyncResult.value` , la propiedad contiene un objeto con el tipo de redacción y el tipo de conversión del elemento.
-
-            \[Conjunto de API: vista previa de buzón\]
+          description: 'Cuando el método finaliza, la función que se pasa en `callback` el parámetro se llama con un único parámetro de tipo`Office.AsyncResult`<!-- -->. Si se realiza correctamente `asyncResult.value` , la propiedad contiene un objeto con el tipo de redacción y el tipo de conversión del elemento.'
           type:
             - 'outlook!Office.MessageCompose#getComposeTypeAsync~0:complex'
   - uid: 'outlook!Office.MessageCompose#getComposeTypeAsync:member(2)'
-    summary: 'Especifica el tipo de redacción de mensaje y su tipo de coerción. El mensaje puede ser nuevo, o bien responder o reenviar. El tipo de coerción puede ser HTML o texto sin formato.'
+    summary: |-
+      Especifica el tipo de redacción de mensaje y su tipo de coerción. El mensaje puede ser nuevo, o bien responder o reenviar. El tipo de coerción puede ser HTML o texto sin formato.
+
+      \[[Conjunto de API: vista previa de buzón](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
       **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
 
@@ -1209,6 +1214,7 @@ items:
         }
       });
       ```
+    isPreview: true
     name: getComposeTypeAsync(callback)
     fullName: getComposeTypeAsync(callback)
     langs:
@@ -1222,10 +1228,7 @@ items:
         description: Un objeto con `ComposeType` y `CoercionType` valores de enumeración para el elemento de mensaje.
       parameters:
         - id: callback
-          description: |-
-            Cuando el método finaliza, la función que se pasa en `callback` el parámetro se llama con un único parámetro de tipo`Office.AsyncResult`<!-- -->. Si se realiza correctamente `asyncResult.value` , la propiedad contiene un objeto con el tipo de redacción y el tipo de conversión del elemento.
-
-            \[Conjunto de API: vista previa de buzón\]
+          description: 'Cuando el método finaliza, la función que se pasa en `callback` el parámetro se llama con un único parámetro de tipo`Office.AsyncResult`<!-- -->. Si se realiza correctamente `asyncResult.value` , la propiedad contiene un objeto con el tipo de redacción y el tipo de conversión del elemento.'
           type:
             - 'outlook!Office.MessageCompose#getComposeTypeAsync~1:complex'
   - uid: 'outlook!Office.MessageCompose#getInitializationContextAsync:member(1)'
@@ -1666,6 +1669,7 @@ items:
       **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
 
       **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/#extension-points)**: redacción de mensaje
+    isPreview: true
     name: 'isClientSignatureEnabledAsync(options, callback)'
     fullName: 'isClientSignatureEnabledAsync(options, callback)'
     langs:
@@ -1710,6 +1714,7 @@ items:
         }
       });
       ```
+    isPreview: true
     name: isClientSignatureEnabledAsync(callback)
     fullName: isClientSignatureEnabledAsync(callback)
     langs:
