@@ -45,6 +45,7 @@ items:
       - 'outlook!Office.AppointmentRead#getSelectedRegExMatches:member(1)'
       - 'outlook!Office.AppointmentRead#getSharedPropertiesAsync:member(1)'
       - 'outlook!Office.AppointmentRead#getSharedPropertiesAsync:member(2)'
+      - 'outlook!Office.AppointmentRead#isAllDayEvent:member'
       - 'outlook!Office.AppointmentRead#itemClass:member'
       - 'outlook!Office.AppointmentRead#itemId:member'
       - 'outlook!Office.AppointmentRead#itemType:member'
@@ -58,6 +59,7 @@ items:
       - 'outlook!Office.AppointmentRead#removeHandlerAsync:member(1)'
       - 'outlook!Office.AppointmentRead#removeHandlerAsync:member(2)'
       - 'outlook!Office.AppointmentRead#requiredAttendees:member'
+      - 'outlook!Office.AppointmentRead#sensitivity:member'
       - 'outlook!Office.AppointmentRead#seriesId:member'
       - 'outlook!Office.AppointmentRead#start:member'
       - 'outlook!Office.AppointmentRead#subject:member'
@@ -1366,6 +1368,33 @@ items:
           description: 'Cuando el método finaliza, la función que se pasa en el parámetro callback se llama con un único parámetro de tipo`Office.AsyncResult`<!-- -->. La `value` propiedad del resultado son las propiedades del elemento compartido.'
           type:
             - 'outlook!Office.AppointmentRead#getSharedPropertiesAsync~1:complex'
+  - uid: 'outlook!Office.AppointmentRead#isAllDayEvent:member'
+    summary: |-
+      Devuelve un valor Boolean que indica si el evento es todo el día.
+
+      \[[Conjunto de API: vista previa de buzón](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: Asistente de cita
+
+      #### <a name="examples"></a>Ejemplos
+
+      ```javascript
+      var isAllDayEvent = Office.context.mailbox.item.isAllDayEvent;
+      console.log("Is this an all-day event? " + isAllDayEvent);
+      ```
+    isPreview: true
+    name: isAllDayEvent
+    fullName: isAllDayEvent
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'isAllDayEvent: boolean;'
+      return:
+        type:
+          - boolean
   - uid: 'outlook!Office.AppointmentRead#itemClass:member'
     summary: |-
       Obtiene la clase de elemento Servicios Web Exchange del elemento seleccionado.
@@ -1378,7 +1407,7 @@ items:
 
       La propiedad `itemClass` especifica la clase de mensaje del elemento seleccionado. Las siguientes son las clases de mensaje predeterminadas para el elemento de mensaje o cita.
 
-      <table> <tr> <th>Tipo</th> <th>Descripción</th> <th>Clase Item</th> </tr> <tr> <td>Elementos de cita</td> <td>Estos son los elementos de calendario de la clase de elemento IPM. Appointment o IPM. Appointment. repeticiones.</td> <td>IPM. Cita, IPM. Appointment. repeticiones</td> </tr> <tr> <td>Elementos de mensaje</td> <td>Entre estos se encuentran los correos electrónicos que tienen la clase de mensaje predeterminada IPM.Note y las convocatorias de reunión, respuestas y cancelaciones que usan IPM.Schedule.Meeting como clase de mensaje base.</td> <td>IPM. Nota: IPM. Program. Meeting. request, IPM. Program. Meeting. NEG, IPM. Program. Meeting. POS, IPM. Program. Meeting. carpa, IPM. Schedule. Meeting. Canceled</td> </tr> </table>
+      <table> <tr> <th>Tipo</th> <th>Description</th> <th>Clase Item</th> </tr> <tr> <td>Elementos de cita</td> <td>Estos son los elementos de calendario de la clase de elemento IPM. Appointment o IPM. Appointment. repeticiones.</td> <td>IPM. Cita, IPM. Appointment. repeticiones</td> </tr> <tr> <td>Elementos de mensaje</td> <td>Entre estos se encuentran los correos electrónicos que tienen la clase de mensaje predeterminada IPM.Note y las convocatorias de reunión, respuestas y cancelaciones que usan IPM.Schedule.Meeting como clase de mensaje base.</td> <td>IPM. Nota: IPM. Program. Meeting. request, IPM. Program. Meeting. NEG, IPM. Program. Meeting. POS, IPM. Program. Meeting. carpa, IPM. Schedule. Meeting. Canceled</td> </tr> </table>
 
       #### <a name="examples"></a>Ejemplos
 
@@ -1890,6 +1919,33 @@ items:
       return:
         type:
           - 'outlook!Office.AppointmentRead#requiredAttendees~0:complex'
+  - uid: 'outlook!Office.AppointmentRead#sensitivity:member'
+    summary: |-
+      Proporciona el valor de sensibilidad de la cita.
+
+      \[[Conjunto de API: vista previa de buzón](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    remarks: |-
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permission)**:`ReadItem`
+
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: Asistente de cita
+
+      #### <a name="examples"></a>Ejemplos
+
+      ```javascript
+      var sensitivity = Office.context.mailbox.item.sensitivity;
+      console.log("Sensitivity: " + sensitivity);
+      ```
+    isPreview: true
+    name: sensitivity
+    fullName: sensitivity
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'sensitivity: MailboxEnums.AppointmentSensitivityType;'
+      return:
+        type:
+          - 'outlook!Office.MailboxEnums.AppointmentSensitivityType:enum'
   - uid: 'outlook!Office.AppointmentRead#seriesId:member'
     summary: |-
       Obtiene el identificador de la serie a la que pertenece una instancia.
@@ -2326,3 +2382,5 @@ references:
         fullName: Office.EmailAddressDetails
       - name: '[]'
         fullName: '[]'
+  - uid: 'outlook!Office.MailboxEnums.AppointmentSensitivityType:enum'
+    name: MailboxEnums.AppointmentSensitivityType
