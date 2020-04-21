@@ -16,7 +16,6 @@ items:
     children:
       - 'excel!Excel.CommentCollection#add:member(1)'
       - 'excel!Excel.CommentCollection#add:member(2)'
-      - 'excel!Excel.CommentCollection#add:member(3)'
       - 'excel!Excel.CommentCollection#context:member'
       - 'excel!Excel.CommentCollection#getCount:member(1)'
       - 'excel!Excel.CommentCollection#getItem:member(1)'
@@ -32,7 +31,7 @@ items:
     summary: |-
       Crea un nuevo comentario con el contenido específico de la celda. Si `InvalidArgument` el rango proporcionado tiene más de una celda, se produce un error.
 
-      \[[Conjunto de API: ExcelApiOnline 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Conjunto de API: ExcelApi 1,10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: 'add(cellAddress, content, contentType)'
     fullName: 'add(cellAddress, content, contentType)'
     langs:
@@ -49,6 +48,7 @@ items:
           #### <a name="examples"></a>Ejemplos
 
           ```typescript
+          // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/12-comment/comment-basics.yaml
           await Excel.run(async (context) => {
               const sheet = context.workbook.worksheets.getItem("Comments");
 
@@ -63,18 +63,18 @@ items:
           type:
             - 'excel!Excel.CommentCollection#add~0:complex'
         - id: content
-          description: 'Contenido del comentario. Puede ser una cadena o un objeto CommentRichContent. Las cadenas se usan para texto sin formato. Los objetos CommentRichContent permiten otras características de comentarios, como menciones.'
+          description: 'Contenido del comentario. Puede ser una cadena o un objeto CommentRichContent. Las cadenas se usan para texto sin formato. Los objetos CommentRichContent permiten otras características de comentarios, como menciones. \[Conjunto de API: ExcelApi 1,10 para String, ExcelApiOnline 1,1 para el objeto CommentRichContent\]'
           type:
             - 'excel!Excel.CommentCollection#add~1:complex'
         - id: contentType
-          description: Opcional. Tipo de contenido incluido en el comentario. El valor predeterminado es enum.`ContentType.Plain`<!-- -->.
+          description: 'Opcional. Tipo de contenido incluido en el comentario. El valor predeterminado es enum.`ContentType.Plain`<!-- -->. \[Conjunto de API: ExcelApi 1,10 para enum ContentType. Plain, ExcelApiOnline 1,1 para enum ContentType. mencione\]'
           type:
             - 'excel!Excel.ContentType:enum'
   - uid: 'excel!Excel.CommentCollection#add:member(2)'
     summary: |-
       Crea un nuevo comentario con el contenido específico de la celda. Si `InvalidArgument` el rango proporcionado tiene más de una celda, se produce un error.
 
-      \[[Conjunto de API: ExcelApiOnline 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Conjunto de API: ExcelApi 1,10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: 'add(cellAddress, content, contentTypeString)'
     fullName: 'add(cellAddress, content, contentTypeString)'
     langs:
@@ -92,38 +92,13 @@ items:
           type:
             - 'excel!Excel.CommentCollection#add~2:complex'
         - id: content
-          description: 'Contenido del comentario. Puede ser una cadena o un objeto CommentRichContent. Las cadenas se usan para texto sin formato. Los objetos CommentRichContent permiten otras características de comentarios, como menciones.'
+          description: 'Contenido del comentario. Puede ser una cadena o un objeto CommentRichContent. Las cadenas se usan para texto sin formato. Los objetos CommentRichContent permiten otras características de comentarios, como menciones. \[Conjunto de API: ExcelApi 1,10 para String, ExcelApiOnline 1,1 para el objeto CommentRichContent\]'
           type:
             - 'excel!Excel.CommentCollection#add~3:complex'
         - id: contentTypeString
-          description: Opcional. Tipo de contenido incluido en el comentario. El valor predeterminado es enum.`ContentType.Plain`<!-- -->.
+          description: 'Opcional. Tipo de contenido incluido en el comentario. El valor predeterminado es enum.`ContentType.Plain`<!-- -->. \[Conjunto de API: ExcelApi 1,10 para enum ContentType. Plain, ExcelApiOnline 1,1 para enum ContentType. mencione\]'
           type:
             - '"Plain" | "Mention"'
-  - uid: 'excel!Excel.CommentCollection#add:member(3)'
-    summary: |-
-      Crea un nuevo comentario con el contenido específico de la celda. Si `InvalidArgument` el rango proporcionado tiene más de una celda, se produce un error.
-
-      \[[Conjunto de API: ExcelApi 1,10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-    name: 'add(cellAddress, content)'
-    fullName: 'add(cellAddress, content)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'add(cellAddress: Range | string, content: string): Excel.Comment;'
-      return:
-        type:
-          - 'excel!Excel.Comment:class'
-        description: ''
-      parameters:
-        - id: cellAddress
-          description: 'Celda a la que se agrega el comentario. Puede ser un objeto de rango o una cadena. Si es una cadena, debe contener la dirección completa, incluido el nombre de la hoja. Si `InvalidArgument` el rango proporcionado tiene más de una celda, se produce un error.'
-          type:
-            - 'excel!Excel.CommentCollection#add~4:complex'
-        - id: content
-          description: 'El contenido del comentario, como una cadena que representa el texto sin formato.'
-          type:
-            - string
   - uid: 'excel!Excel.CommentCollection#context:member'
     summary: Contexto de la solicitud asociado al objeto. Esto conecta el proceso del complemento con el proceso de la aplicación host de Office.
     name: context
@@ -356,15 +331,6 @@ references:
       - uid: 'excel!Excel.CommentRichContent:interface'
         name: CommentRichContent
         fullName: Excel.CommentRichContent
-      - name: ' | string'
-        fullName: ' | string'
-  - uid: 'excel!Excel.CommentCollection#add~4:complex'
-    name: Range | string
-    fullName: Excel.Range | string
-    spec.typeScript:
-      - uid: 'excel!Excel.Range:class'
-        name: Range
-        fullName: Excel.Range
       - name: ' | string'
         fullName: ' | string'
   - uid: 'excel!Excel.RequestContext:class'
