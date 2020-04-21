@@ -46,7 +46,7 @@ Se agregan fragmentos de código de ejemplo a las páginas de referencia de dos 
 
 Los fragmentos de código locales se encuentran en archivos YAML específicos del host. El contenido se organiza por clase y campo, por lo que se puede asignar al espacio adecuado en una página de referencia. El idioma del fragmento de código (JavaScript o TypeScript) se deduce mediante el uso de instrucciones Await.
 
-Los fragmentos de código del laboratorio de scripts se extraen de las muestras de trabajo. Actualmente, los ejemplos de Excel y Word se asignan para hacer referencia a secciones de documento a través [de un par de archivos de asignación](https://github.com/OfficeDev/office-js-snippets/tree/master/snippet-extractor-metadata). Estos métodos de ejemplo individuales coinciden con las propiedades o los métodos de la API. Cuando se `yarn start` ejecuta el repositorio Office-js-Snippets, se crea [un archivo YAML](https://github.com/OfficeDev/office-js-snippets/blob/master/snippet-extractor-output/snippets.yaml) que contiene todos los fragmentos de código asignados. Este archivo YAML es la entrada en la herramienta de documentación de referencia.
+Los fragmentos de código del laboratorio de scripts se extraen de las muestras de trabajo. Actualmente, los ejemplos de Excel, Outlook y Word se asignan para hacer referencia a secciones de documento mediante [archivos de asignación](https://github.com/OfficeDev/office-js-snippets/tree/master/snippet-extractor-metadata). Estos métodos de ejemplo individuales coinciden con las propiedades o los métodos de la API. Cuando se `yarn start` ejecuta el repositorio Office-js-Snippets, se crea [un archivo YAML](https://github.com/OfficeDev/office-js-snippets/blob/master/snippet-extractor-output/snippets.yaml) que contiene todos los fragmentos de código asignados. Este archivo YAML es la entrada en la herramienta de documentación de referencia.
 
 ## <a name="tooling-pipeline"></a>Canalización de herramientas
 
@@ -64,7 +64,7 @@ El preprocesador toma los archivos d. TS y los divide en secciones específicas 
 
 El extractor de API convierte los archivos d. TS en datos JSON. Esto tokenizes todos los datos de tipo, lo que permite un análisis más sencillo.
 
-El procesador es el que recupera los fragmentos de código y los empareja con los hosts adecuados.
+El procesador es el que recupera los fragmentos de código y los empareja con los hosts adecuados y limpia el vínculo cruzado entre Outlook y los objetos de la API comunes.
 
 El Documentador de la API convierte los datos JSON en archivos. yml. Los archivos. yml se convierten en Markdown por el sistema de publicación abierto que publica nuestros documentos en docs.microsoft.com. El Documentador de la API también contiene una extensión específica de Office que inserta los fragmentos de código.
 
