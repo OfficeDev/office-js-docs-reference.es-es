@@ -1,13 +1,13 @@
 ---
 title: Referencia de la API de JavaScript de Office
 description: El host establece el conjunto de requisitos de las API de JavaScript de Office.
-ms.date: 04/17/2020
-ms.openlocfilehash: 765b2ee6108f6433ffe17d3ca15ba9c68fbd9617
-ms.sourcegitcommit: 6dd770ff4893a67c625e1e4fd06ee197a3992ae0
+ms.date: 05/05/2020
+ms.openlocfilehash: 3a32c47b23fd6635c4c2b44b58ee9b351fffd8d5
+ms.sourcegitcommit: c38b0b4cf446e10aed0f7de4401cf7060020d260
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "43602000"
+ms.lasthandoff: 05/06/2020
+ms.locfileid: "44119797"
 ---
 # <a name="office-javascript-api-reference"></a>Referencia de la API de JavaScript de Office
 
@@ -24,6 +24,7 @@ A continuación se muestra una lista de conjuntos de requisitos específicos del
 
 - [Vista previa de ExcelApi](/javascript/api/excel?view=excel-js-preview)
 - [ExcelApiOnline 1,1](/javascript/api/excel?view=excel-js-online)
+- [ExcelApi 1,11](/javascript/api/excel?view=excel-js-1.11)
 - [ExcelApi 1.10](/javascript/api/excel?view=excel-js-1.10)
 - [ExcelApi 1.9](/javascript/api/excel?view=excel-js-1.9)
 - [ExcelApi 1.8](/javascript/api/excel?view=excel-js-1.8)
@@ -70,7 +71,7 @@ A continuación se muestra una lista de conjuntos de requisitos específicos del
 
 - [API común](/javascript/api/office?view=common-js)
 
-## <a name="see-also"></a>Vea también
+## <a name="see-also"></a>Consulte también
 
 - [Acerca de los complementos de Office](/office/dev/add-ins/overview)
 - [Disponibilidad de plataformas y hosts de los complementos de Office](/office/dev/add-ins/overview/office-add-in-availability)
