@@ -12,14 +12,17 @@ items:
       - typeScript
     type: class
     extends:
-      - 'excel!OfficeExtension.ClientObject:class'
+      - 'office!OfficeExtension.ClientObject:class'
     package: excel!
     children:
       - 'excel!Excel.WorksheetCustomProperty#context:member'
+      - 'excel!Excel.WorksheetCustomProperty#delete:member(1)'
       - 'excel!Excel.WorksheetCustomProperty#key:member'
       - 'excel!Excel.WorksheetCustomProperty#load:member(1)'
       - 'excel!Excel.WorksheetCustomProperty#load:member(2)'
       - 'excel!Excel.WorksheetCustomProperty#load:member(3)'
+      - 'excel!Excel.WorksheetCustomProperty#set:member(1)'
+      - 'excel!Excel.WorksheetCustomProperty#set:member(2)'
       - 'excel!Excel.WorksheetCustomProperty#toJSON:member(1)'
       - 'excel!Excel.WorksheetCustomProperty#value:member'
   - uid: 'excel!Excel.WorksheetCustomProperty#context:member'
@@ -35,9 +38,26 @@ items:
       return:
         type:
           - 'excel!Excel.RequestContext:class'
+  - uid: 'excel!Excel.WorksheetCustomProperty#delete:member(1)'
+    summary: |-
+      Elimina la propiedad personalizada.
+
+      \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    isPreview: true
+    name: delete()
+    fullName: delete()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'delete(): void;'
+      return:
+        type:
+          - void
+        description: ''
   - uid: 'excel!Excel.WorksheetCustomProperty#key:member'
     summary: |-
-      Obtiene la clave de la propiedad personalizada. Solo lectura.
+      Obtiene la clave de la propiedad personalizada. Las claves de propiedades personalizadas no distinguen mayúsculas de minúsculas.
 
       \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     isPreview: true
@@ -116,6 +136,52 @@ items:
                           select?: string;
                           expand?: string;
                       }
+  - uid: 'excel!Excel.WorksheetCustomProperty#set:member(1)'
+    summary: Establece varias propiedades de un objeto al mismo tiempo. Puede pasar un objeto sin formato con las propiedades apropiadas o cualquier otro objeto de la API del mismo tipo.
+    remarks: |-
+      Este método tiene la siguiente firma adicional:
+
+      `set(properties: Excel.WorksheetCustomProperty): void`
+    isPreview: true
+    name: 'set(properties, options)'
+    fullName: 'set(properties, options)'
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(properties: Interfaces.WorksheetCustomPropertyUpdateData, options?: OfficeExtension.UpdateOptions): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: properties
+          description: Objeto de JavaScript con propiedades que se estructuran de forma isomórfico a las propiedades del objeto en el que se llama al método.
+          type:
+            - 'excel!Excel.Interfaces.WorksheetCustomPropertyUpdateData:interface'
+        - id: options
+          description: Proporciona una opción para suprimir errores si el objeto Properties intenta establecer propiedades de solo lectura.
+          type:
+            - 'office!OfficeExtension.UpdateOptions:interface'
+  - uid: 'excel!Excel.WorksheetCustomProperty#set:member(2)'
+    summary: 'Establece varias propiedades en el objeto al mismo tiempo, basándose en un objeto cargado existente.'
+    isPreview: true
+    name: set(properties)
+    fullName: set(properties)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'set(properties: Excel.WorksheetCustomProperty): void;'
+      return:
+        type:
+          - void
+        description: ''
+      parameters:
+        - id: properties
+          description: ''
+          type:
+            - 'excel!Excel.WorksheetCustomProperty:class'
   - uid: 'excel!Excel.WorksheetCustomProperty#toJSON:member(1)'
     summary: 'Reemplaza el método JavaScript `toJSON()` para proporcionar un resultado más útil cuando se pasa un objeto API a`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama `toJSON` al método del objeto que se le pasa.) Mientras que el objeto Excel. WorksheetCustomProperty original es un objeto API, `toJSON` el método devuelve un objeto JavaScript sin formato (escrito como`Excel.Interfaces.WorksheetCustomPropertyData`<!-- -->) que contiene copias rasas de las propiedades secundarias cargadas del objeto original.'
     isPreview: true
@@ -132,7 +198,7 @@ items:
         description: ''
   - uid: 'excel!Excel.WorksheetCustomProperty#value:member'
     summary: |-
-      Obtiene el valor de la propiedad personalizada. Solo lectura.
+      Obtiene o establece el valor de la propiedad personalizada.
 
       \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     isPreview: true
@@ -142,12 +208,12 @@ items:
       - typeScript
     type: property
     syntax:
-      content: 'readonly value: string;'
+      content: 'value: string;'
       return:
         type:
           - string
 references:
-  - uid: 'excel!OfficeExtension.ClientObject:class'
+  - uid: 'office!OfficeExtension.ClientObject:class'
     name: OfficeExtension.ClientObject
   - uid: 'excel!Excel.RequestContext:class'
     name: RequestContext
@@ -155,5 +221,9 @@ references:
     name: Excel.WorksheetCustomProperty
   - uid: 'excel!Excel.Interfaces.WorksheetCustomPropertyLoadOptions:interface'
     name: Excel.Interfaces.WorksheetCustomPropertyLoadOptions
+  - uid: 'excel!Excel.Interfaces.WorksheetCustomPropertyUpdateData:interface'
+    name: Interfaces.WorksheetCustomPropertyUpdateData
+  - uid: 'office!OfficeExtension.UpdateOptions:interface'
+    name: OfficeExtension.UpdateOptions
   - uid: 'excel!Excel.Interfaces.WorksheetCustomPropertyData:interface'
     name: Excel.Interfaces.WorksheetCustomPropertyData
