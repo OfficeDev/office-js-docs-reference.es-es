@@ -11,7 +11,7 @@ items:
       - typeScript
     type: class
     extends:
-      - 'excel!OfficeExtension.ClientObject:class'
+      - 'office!OfficeExtension.ClientObject:class'
     package: excel!
     children:
       - 'excel!Excel.Comment#authorEmail:member'
@@ -27,6 +27,7 @@ items:
       - 'excel!Excel.Comment#load:member(3)'
       - 'excel!Excel.Comment#mentions:member'
       - 'excel!Excel.Comment#replies:member'
+      - 'excel!Excel.Comment#resolved:member'
       - 'excel!Excel.Comment#richContent:member'
       - 'excel!Excel.Comment#set:member(1)'
       - 'excel!Excel.Comment#set:member(2)'
@@ -64,7 +65,7 @@ items:
           - string
   - uid: 'excel!Excel.Comment#content:member'
     summary: |-
-      Obtiene o establece el contenido del comentario. La cadena es texto sin formato.
+      Contenido del comentario. La cadena es texto sin formato.
 
       \[[Conjunto de API: ExcelApi 1,10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: content
@@ -163,7 +164,7 @@ items:
         description: ''
   - uid: 'excel!Excel.Comment#id:member'
     summary: |-
-      Indica el identificador del comentario. Solo lectura.
+      Especifica el identificador del comentario.
 
       \[[Conjunto de API: ExcelApi 1,10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: id
@@ -257,7 +258,7 @@ items:
     summary: |-
       Obtiene las entidades (por ejemplo, personas) que se mencionan en los comentarios.
 
-      \[[Conjunto de API: ExcelApiOnline 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Conjunto de API: ExcelApi 1,11](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: mentions
     fullName: mentions
     langs:
@@ -270,7 +271,7 @@ items:
           - 'excel!Excel.Comment#mentions~0:complex'
   - uid: 'excel!Excel.Comment#replies:member'
     summary: |-
-      Indica una colección de objetos de respuesta asociados con el comentario. Solo lectura.
+      Indica una colección de objetos de respuesta asociados con el comentario.
 
       \[[Conjunto de API: ExcelApi 1,10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: replies
@@ -283,11 +284,39 @@ items:
       return:
         type:
           - 'excel!Excel.CommentReplyCollection:class'
+  - uid: 'excel!Excel.Comment#resolved:member'
+    summary: |-
+      El estado del hilo de comentarios. Un valor de "true" significa que se ha resuelto el hilo de comentarios.
+
+      \[[Conjunto de API: ExcelApi 1,11](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: resolved
+    fullName: resolved
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'resolved: boolean;'
+      return:
+        type:
+          - boolean
+        description: |-
+
+
+          #### <a name="examples"></a>Ejemplos
+
+          ```typescript
+          // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/12-comment/comment-resolution.yaml
+          await Excel.run(async (context) => {
+              const sheet = context.workbook.worksheets.getItem("Comments");
+              sheet.comments.getItemAt(0).resolved = true;
+              await context.sync();
+          });
+          ```
   - uid: 'excel!Excel.Comment#richContent:member'
     summary: |-
       Obtiene el contenido de comentario enriquecido (por ejemplo, menciones en comentarios). Esta cadena no está pensada para mostrarse a los usuarios finales. El complemento solo debe usarlo para analizar el contenido de comentarios enriquecidos.
 
-      \[[Conjunto de API: ExcelApiOnline 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Conjunto de API: ExcelApi 1,11](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: richContent
     fullName: richContent
     langs:
@@ -323,7 +352,7 @@ items:
         - id: options
           description: Proporciona una opción para suprimir errores si el objeto Properties intenta establecer propiedades de solo lectura.
           type:
-            - 'excel!OfficeExtension.UpdateOptions:interface'
+            - 'office!OfficeExtension.UpdateOptions:interface'
   - uid: 'excel!Excel.Comment#set:member(2)'
     summary: 'Establece varias propiedades en el objeto al mismo tiempo, basándose en un objeto cargado existente.'
     name: set(properties)
@@ -359,7 +388,7 @@ items:
     summary: |-
       Actualiza el contenido del comentario con una cadena con formato especial y una lista de menciones.
 
-      \[[Conjunto de API: ExcelApiOnline 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Conjunto de API: ExcelApi 1,11](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: updateMentions(contentWithMentions)
     fullName: updateMentions(contentWithMentions)
     langs:
@@ -377,7 +406,7 @@ items:
           type:
             - 'excel!Excel.CommentRichContent:interface'
 references:
-  - uid: 'excel!OfficeExtension.ClientObject:class'
+  - uid: 'office!OfficeExtension.ClientObject:class'
     name: OfficeExtension.ClientObject
   - uid: 'excel!Excel.RequestContext:class'
     name: RequestContext
@@ -402,7 +431,7 @@ references:
     name: Excel.CommentReplyCollection
   - uid: 'excel!Excel.Interfaces.CommentUpdateData:interface'
     name: Interfaces.CommentUpdateData
-  - uid: 'excel!OfficeExtension.UpdateOptions:interface'
+  - uid: 'office!OfficeExtension.UpdateOptions:interface'
     name: OfficeExtension.UpdateOptions
   - uid: 'excel!Excel.Interfaces.CommentData:interface'
     name: Excel.Interfaces.CommentData
