@@ -49,6 +49,7 @@ items:
       - 'excel!Excel.Range#getColumnProperties:member(1)'
       - 'excel!Excel.Range#getColumnsAfter:member(1)'
       - 'excel!Excel.Range#getColumnsBefore:member(1)'
+      - 'excel!Excel.Range#getDirectPrecedents:member(1)'
       - 'excel!Excel.Range#getEntireColumn:member(1)'
       - 'excel!Excel.Range#getEntireRow:member(1)'
       - 'excel!Excel.Range#getImage:member(1)'
@@ -57,8 +58,10 @@ items:
       - 'excel!Excel.Range#getLastCell:member(1)'
       - 'excel!Excel.Range#getLastColumn:member(1)'
       - 'excel!Excel.Range#getLastRow:member(1)'
+      - 'excel!Excel.Range#getMergedAreas:member(1)'
       - 'excel!Excel.Range#getOffsetRange:member(1)'
       - 'excel!Excel.Range#getPivotTables:member(1)'
+      - 'excel!Excel.Range#getPrecedents:member(1)'
       - 'excel!Excel.Range#getResizedRange:member(1)'
       - 'excel!Excel.Range#getRow:member(1)'
       - 'excel!Excel.Range#getRowProperties:member(1)'
@@ -165,7 +168,7 @@ items:
 
       Para obtener más información, lea [usar Autorrellenar y relleno rápido](https://support.office.com/article/video-use-autofill-and-flash-fill-2e79a709-c814-4b27-8bc2-c4dc84d49464)<!-- -->.
 
-      \[[Conjunto de API: ExcelApi 1,9, ExcelApi Preview `destinationRange` para null](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Conjunto de API: ExcelApi 1,9, ExcelApi Preview `destinationRange` <!-- --> para null](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: 'autoFill(destinationRange, autoFillType)'
     fullName: 'autoFill(destinationRange, autoFillType)'
     langs:
@@ -208,7 +211,7 @@ items:
 
       Para obtener más información, lea [usar Autorrellenar y relleno rápido](https://support.office.com/article/video-use-autofill-and-flash-fill-2e79a709-c814-4b27-8bc2-c4dc84d49464)<!-- -->.
 
-      \[[Conjunto de API: ExcelApi 1,9, ExcelApi Preview `destinationRange` para null](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Conjunto de API: ExcelApi 1,9, ExcelApi Preview `destinationRange` <!-- --> para null](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: 'autoFill(destinationRange, autoFillTypeString)'
     fullName: 'autoFill(destinationRange, autoFillTypeString)'
     langs:
@@ -742,7 +745,7 @@ items:
           - 'any[][]'
   - uid: 'excel!Excel.Range#formulasLocal:member'
     summary: |-
-      Representa la fórmula en notación de estilo A1, en el idioma del usuario y en la configuración regional del formato numérico. Por ejemplo, la fórmula "=SUM(A1, 1.5)" en inglés se convertiría en "=SUMME(A1; 1,5)" en alemán.
+      Represents the formula in A1-style notation, in the user's language and number-formatting locale. For example, the English "=SUM(A1, 1.5)" formula would become "=SUMME(A1; 1,5)" in German.
 
       \[[Conjunto de API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: formulasLocal
@@ -1015,7 +1018,7 @@ items:
         description: ''
       parameters:
         - id: count
-          description: 'Opcional. El número de columnas que se va a incluir en el rango resultante. En general, use un número positivo para crear un intervalo fuera del intervalo actual. También puede usar un número negativo para crear un intervalo dentro del intervalo actual. El valor predeterminado es 1.'
+          description: 'Optional. The number of columns to include in the resulting range. In general, use a positive number to create a range outside the current range. You can also use a negative number to create a range within the current range. The default value is 1.'
           type:
             - number
   - uid: 'excel!Excel.Range#getColumnsBefore:member(1)'
@@ -1036,9 +1039,26 @@ items:
         description: ''
       parameters:
         - id: count
-          description: 'Opcional. El número de columnas que se va a incluir en el rango resultante. En general, use un número positivo para crear un intervalo fuera del intervalo actual. También puede usar un número negativo para crear un intervalo dentro del intervalo actual. El valor predeterminado es 1.'
+          description: 'Optional. The number of columns to include in the resulting range. In general, use a positive number to create a range outside the current range. You can also use a negative number to create a range within the current range. The default value is 1.'
           type:
             - number
+  - uid: 'excel!Excel.Range#getDirectPrecedents:member(1)'
+    summary: |-
+      Devuelve un `WorkbookRangeAreas` objeto Object que representa el rango que contiene todas las celdas precedentes directas de una celda en la misma hoja de cálculo o en varias hojas de cálculo.
+
+      \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    isPreview: true
+    name: getDirectPrecedents()
+    fullName: getDirectPrecedents()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getDirectPrecedents(): Excel.WorkbookRangeAreas;'
+      return:
+        type:
+          - 'excel!Excel.WorkbookRangeAreas:class'
+        description: ''
   - uid: 'excel!Excel.Range#getEntireColumn:member(1)'
     summary: |-
       Obtiene un objeto que representa toda la columna del rango (por ejemplo, si el rango actual representa las celdas "B4: E11", `getEntireColumn` es un rango que representa las columnas "B:E").
@@ -1122,7 +1142,7 @@ items:
     summary: |-
       Representa el intervalo como una imagen PNG codificada en Base64.
 
-      **Importante**: Actualmente, esta API no es compatible con Excel para Mac. Visite \[OfficeDev/Office-js Issue \#235\](https://github.com/OfficeDev/office-js/issues/235) para obtener el estado actual.
+      **Importante**: Actualmente, esta API no es compatible con Excel para Mac. Visite \[ OfficeDev/Office-js Issue \# 235 \] ( https://github.com/OfficeDev/office-js/issues/235) para obtener el estado actual.
 
       \[[Conjunto de API: ExcelApi 1,7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: getImage()
@@ -1368,9 +1388,26 @@ items:
               }
           });
           ```
+  - uid: 'excel!Excel.Range#getMergedAreas:member(1)'
+    summary: |-
+      Devuelve un objeto RangeAreas que representa las áreas combinadas de este intervalo. Tenga en cuenta que si el número de áreas combinadas de este intervalo es superior a 512, la API no podrá devolver el resultado.
+
+      \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    isPreview: true
+    name: getMergedAreas()
+    fullName: getMergedAreas()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getMergedAreas(): Excel.RangeAreas;'
+      return:
+        type:
+          - 'excel!Excel.RangeAreas:class'
+        description: ''
   - uid: 'excel!Excel.Range#getOffsetRange:member(1)'
     summary: |-
-      Obtiene un objeto que representa un intervalo desplazado con respecto al intervalo especificado. La dimensión del rango devuelto coincidirá con este rango. Si el rango resultante se fuerza más allá de los límites de la cuadrícula de la hoja de cálculo, se producirá un error.
+      Gets an object which represents a range that's offset from the specified range. The dimension of the returned range will match this range. If the resulting range is forced outside the bounds of the worksheet grid, an error will be thrown.
 
       \[[Conjunto de API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: 'getOffsetRange(rowOffset, columnOffset)'
@@ -1407,11 +1444,11 @@ items:
           ```
       parameters:
         - id: rowOffset
-          description: 'Número de filas (número positivo, negativo o 0) que debe desplazarse el intervalo. Los valores positivos desplazan hacia abajo, mientras que los negativos lo hacen hacia arriba.'
+          description: 'The number of rows (positive, negative, or 0) by which the range is to be offset. Positive values are offset downward, and negative values are offset upward.'
           type:
             - number
         - id: columnOffset
-          description: 'Número de columnas (número positivo, negativo o 0) que debe desplazarse el intervalo. Los valores positivos desplazan hacia la derecha, mientras que los negativos lo hacen hacia la izquierda.'
+          description: 'The number of columns (positive, negative, or 0) by which the range is to be offset. Positive values are offset to the right, and negative values are offset to the left.'
           type:
             - number
   - uid: 'excel!Excel.Range#getPivotTables:member(1)'
@@ -1435,6 +1472,23 @@ items:
           description: 'Si es true, devuelve sólo las tablas dinámicas que están completamente contenidas dentro de los límites del rango. El valor predeterminado es False.'
           type:
             - boolean
+  - uid: 'excel!Excel.Range#getPrecedents:member(1)'
+    summary: |-
+      Devuelve un `WorkbookRangeAreas` objeto Object que representa el rango que contiene todas las celdas precedentes de una celda en la misma hoja de cálculo o en varias hojas de cálculo.
+
+      \[[Conjunto de API: EXCELAPI beta (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    isPreview: true
+    name: getPrecedents()
+    fullName: getPrecedents()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getPrecedents(): Excel.WorkbookRangeAreas;'
+      return:
+        type:
+          - 'excel!Excel.WorkbookRangeAreas:class'
+        description: ''
   - uid: 'excel!Excel.Range#getResizedRange:member(1)'
     summary: |-
       Obtiene un objeto Range similar al objeto Range actual, pero con su esquina inferior derecha expandida (o contraída) mediante un número de filas y columnas.
@@ -1453,7 +1507,7 @@ items:
         description: ''
       parameters:
         - id: deltaRows
-          description: 'El número de filas en el que se va a expandir la esquina inferior derecha, con respecto al intervalo actual. Use un número positivo para expandir el intervalo, o un número negativo para reducirlo.'
+          description: 'The number of rows by which to expand the bottom-right corner, relative to the current range. Use a positive number to expand the range, or a negative number to decrease it.'
           type:
             - number
         - id: deltaColumns
@@ -1540,7 +1594,7 @@ items:
         description: ''
       parameters:
         - id: count
-          description: 'Opcional. El número de filas que se va a incluir en el intervalo resultante. En general, use un número positivo para crear un intervalo fuera del intervalo actual. También puede usar un número negativo para crear un intervalo dentro del intervalo actual. El valor predeterminado es 1.'
+          description: 'Optional. The number of rows to include in the resulting range. In general, use a positive number to create a range outside the current range. You can also use a negative number to create a range within the current range. The default value is 1.'
           type:
             - number
   - uid: 'excel!Excel.Range#getRowsBelow:member(1)'
@@ -1561,7 +1615,7 @@ items:
         description: ''
       parameters:
         - id: count
-          description: 'Opcional. El número de filas que se va a incluir en el intervalo resultante. En general, use un número positivo para crear un intervalo fuera del intervalo actual. También puede usar un número negativo para crear un intervalo dentro del intervalo actual. El valor predeterminado es 1.'
+          description: 'Optional. The number of rows to include in the resulting range. In general, use a positive number to create a range outside the current range. You can also use a negative number to create a range within the current range. The default value is 1.'
           type:
             - number
   - uid: 'excel!Excel.Range#getSpecialCells:member(1)'
@@ -1789,7 +1843,7 @@ items:
             - boolean
   - uid: 'excel!Excel.Range#getUsedRange:member(1)'
     summary: |-
-      Devuelve el rango usado del objeto de rango especificado. Si no hay ninguna celda usada dentro del rango, esta función producirá un error ItemNotFound.
+      Returns the used range of the given range object. If there are no used cells within the range, this function will throw an ItemNotFound error.
 
       \[[Conjunto de API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: getUsedRange(valuesOnly)
@@ -1871,7 +1925,7 @@ items:
             - boolean
   - uid: 'excel!Excel.Range#getUsedRangeOrNullObject:member(1)'
     summary: |-
-      Devuelve el rango usado del objeto de rango especificado. Si no hay ninguna celda usada dentro del rango, esta función devolverá un objeto NULL.
+      Returns the used range of the given range object. If there are no used cells within the range, this function will return a null object.
 
       \[[Conjunto de API: ExcelApi 1,4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: getUsedRangeOrNullObject(valuesOnly)
@@ -1983,7 +2037,7 @@ items:
           ```
       parameters:
         - id: groupOption
-          description: 'Especifica cómo se puede agrupar el intervalo por filas o columnas. Se `InvalidArgument` produce un error si la opción de grupo difiere de la propiedad `isEntireRow` o `isEntireColumn` del rango (es decir `range.isEntireRow` , es true `groupOption` y es "ByColumns" `range.isEntireColumn` , o es `groupOption` true y es "ByRows").'
+          description: 'Especifica cómo se puede agrupar el intervalo por filas o columnas. `InvalidArgument`Se produce un error si la opción de grupo difiere de la `isEntireRow` propiedad o del rango `isEntireColumn` (es decir, `range.isEntireRow` es true y `groupOption` es "ByColumns", o `range.isEntireColumn` es true y `groupOption` es "ByRows").'
           type:
             - 'excel!Excel.GroupOption:enum'
   - uid: 'excel!Excel.Range#group:member(2)'
@@ -2004,7 +2058,7 @@ items:
         description: ''
       parameters:
         - id: groupOptionString
-          description: 'Especifica cómo se puede agrupar el intervalo por filas o columnas. Se `InvalidArgument` produce un error si la opción de grupo difiere de la propiedad `isEntireRow` o `isEntireColumn` del rango (es decir `range.isEntireRow` , es true `groupOption` y es "ByColumns" `range.isEntireColumn` , o es `groupOption` true y es "ByRows").'
+          description: 'Especifica cómo se puede agrupar el intervalo por filas o columnas. `InvalidArgument`Se produce un error si la opción de grupo difiere de la `isEntireRow` propiedad o del rango `isEntireColumn` (es decir, `range.isEntireRow` es true y `groupOption` es "ByColumns", o `range.isEntireColumn` es true y `groupOption` es "ByRows").'
           type:
             - '"ByRows" | "ByColumns"'
   - uid: 'excel!Excel.Range#hasSpill:member'
@@ -2144,7 +2198,7 @@ items:
           ```
   - uid: 'excel!Excel.Range#insert:member(1)'
     summary: |-
-      Inserta una celda o un intervalo de celdas en la hoja de cálculo en lugar de este rango y desplaza las demás celdas para crear espacio. Devuelve un nuevo objeto Range en el espacio que queda en blanco.
+      Inserts a cell or a range of cells into the worksheet in place of this range, and shifts the other cells to make space. Returns a new Range object at the now blank space.
 
       \[[Conjunto de API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: insert(shift)
@@ -2184,7 +2238,7 @@ items:
             - 'excel!Excel.InsertShiftDirection:enum'
   - uid: 'excel!Excel.Range#insert:member(2)'
     summary: |-
-      Inserta una celda o un intervalo de celdas en la hoja de cálculo en lugar de este rango y desplaza las demás celdas para crear espacio. Devuelve un nuevo objeto Range en el espacio que queda en blanco.
+      Inserts a cell or a range of cells into the worksheet in place of this range, and shifts the other cells to make space. Returns a new Range object at the now blank space.
 
       \[[Conjunto de API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: insert(shiftString)
@@ -2340,7 +2394,7 @@ items:
         description: ''
       parameters:
         - id: propertyNamesAndPaths
-          description: '`propertyNamesAndPaths.select`es una cadena delimitada por comas que especifica las propiedades que se van `propertyNamesAndPaths.expand` a cargar y es una cadena delimitada por comas que especifica las propiedades de navegación que se deben cargar.'
+          description: '`propertyNamesAndPaths.select`es una cadena delimitada por comas que especifica las propiedades que se van a cargar y `propertyNamesAndPaths.expand` es una cadena delimitada por comas que especifica las propiedades de navegación que se deben cargar.'
           type:
             - |-
               {
@@ -3061,7 +3115,7 @@ items:
         type:
           - 'string[][]'
   - uid: 'excel!Excel.Range#toJSON:member(1)'
-    summary: 'Reemplaza el método JavaScript `toJSON()` para proporcionar un resultado más útil cuando se pasa un objeto API a`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama `toJSON` al método del objeto que se le pasa.) Mientras que el objeto Excel. Range original es un objeto API, `toJSON` el método devuelve un objeto JavaScript sin formato (escrito como`Excel.Interfaces.RangeData`<!-- -->) que contiene copias rasas de las propiedades secundarias cargadas del objeto original.'
+    summary: 'Reemplaza el `toJSON()` método JavaScript para proporcionar un resultado más útil cuando se pasa un objeto API a`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama al `toJSON` método del objeto que se le pasa.) Mientras que el objeto Excel. Range original es un objeto API, el `toJSON` método devuelve un objeto JavaScript sin formato (escrito como`Excel.Interfaces.RangeData`<!-- -->) que contiene copias rasas de las propiedades secundarias cargadas del objeto original.'
     name: toJSON()
     fullName: toJSON()
     langs:
@@ -3401,6 +3455,8 @@ references:
         fullName: '[]>'
   - uid: 'excel!Excel.ColumnPropertiesLoadOptions:interface'
     name: ColumnPropertiesLoadOptions
+  - uid: 'excel!Excel.WorkbookRangeAreas:class'
+    name: Excel.WorkbookRangeAreas
   - uid: 'excel!Excel.Range#getImage~0:complex'
     name: OfficeExtension.ClientResult<string>
     fullName: OfficeExtension.ClientResult<string>
@@ -3428,6 +3484,8 @@ references:
         fullName: Excel.Range
       - name: ' | string'
         fullName: ' | string'
+  - uid: 'excel!Excel.RangeAreas:class'
+    name: Excel.RangeAreas
   - uid: 'excel!Excel.PivotTableScopedCollection:class'
     name: Excel.PivotTableScopedCollection
   - uid: 'excel!Excel.Range#getRowProperties~0:complex'
@@ -3446,8 +3504,6 @@ references:
         fullName: '[]>'
   - uid: 'excel!Excel.RowPropertiesLoadOptions:interface'
     name: RowPropertiesLoadOptions
-  - uid: 'excel!Excel.RangeAreas:class'
-    name: Excel.RangeAreas
   - uid: 'excel!Excel.SpecialCellType:enum'
     name: Excel.SpecialCellType
   - uid: 'excel!Excel.SpecialCellValueType:enum'
