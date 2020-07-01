@@ -234,29 +234,21 @@ items:
         type:
           - '!Date:interface'
   - uid: 'word!Word.DocumentProperties#load:member(1)'
-    summary: 'Pone en cola un comando para cargar las propiedades especificadas del objeto. Antes de leer las propiedades, debe llamar a "context.sync()".'
-    remarks: |-
-      Además de esta firma, este método tiene las siguientes firmas:
-
-      `load(option?: string | string[]): Word.DocumentProperties`-Donde opción es una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades que se van a cargar.
-
-      `load(option?: { select?: string; expand?: string; }): Word.DocumentProperties`-Where opción. Select es una cadena delimitada por comas que especifica las propiedades que se van a cargar y Options. Expand es una cadena delimitada por comas que especifica las propiedades de navegación que se deben cargar.
-
-      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Word.DocumentProperties`-Solo disponible en tipos de colección. Es similar a la firma anterior. Option. Top especifica el número máximo de elementos de colección que se pueden incluir en el resultado. La opción. SKIP especifica el número de elementos que se deben omitir y que no se incluyen en el resultado. Si se especifica Option. Top, el conjunto de resultados se iniciará después de omitir el número especificado de elementos.
-    name: load(option)
-    fullName: load(option)
+    summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar `context.sync()` antes de leer las propiedades.
+    name: load(options)
+    fullName: load(options)
     langs:
       - typeScript
     type: method
     syntax:
-      content: 'load(option?: Word.Interfaces.DocumentPropertiesLoadOptions): Word.DocumentProperties;'
+      content: 'load(options?: Word.Interfaces.DocumentPropertiesLoadOptions): Word.DocumentProperties;'
       return:
         type:
           - 'word!Word.DocumentProperties:class'
         description: ''
       parameters:
-        - id: option
-          description: ''
+        - id: options
+          description: Proporciona opciones para las propiedades del objeto que se va a cargar.
           type:
             - 'word!Word.Interfaces.DocumentPropertiesLoadOptions:interface'
   - uid: 'word!Word.DocumentProperties#load:member(2)'
@@ -285,16 +277,24 @@ items:
       - typeScript
     type: method
     syntax:
-      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Word.DocumentProperties;'
+      content: |-
+        load(propertyNamesAndPaths?: {
+                    select?: string;
+                    expand?: string;
+                }): Word.DocumentProperties;
       return:
         type:
           - 'word!Word.DocumentProperties:class'
         description: ''
       parameters:
         - id: propertyNamesAndPaths
-          description: Donde propertyNamesAndPaths. Select es una cadena delimitada por comas que especifica las propiedades que se van a cargar y propertyNamesAndPaths. Expand es una cadena delimitada por comas que especifica las propiedades de navegación que se deben cargar.
+          description: '`propertyNamesAndPaths.select`es una cadena delimitada por comas que especifica las propiedades que se van a cargar y `propertyNamesAndPaths.expand` es una cadena delimitada por comas que especifica las propiedades de navegación que se deben cargar.'
           type:
-            - '{ select?: string; expand?: string; }'
+            - |-
+              {
+                          select?: string;
+                          expand?: string;
+                      }
   - uid: 'word!Word.DocumentProperties#manager:member'
     summary: |-
       Obtiene o establece el administrador del documento.
@@ -327,7 +327,7 @@ items:
           - string
   - uid: 'word!Word.DocumentProperties#security:member'
     summary: |-
-      Obtiene la configuración de seguridad del documento. Solo lectura. Algunas son restricciones de acceso al archivo en el disco. Otros son la configuración de protección de documentos. Algunos valores posibles son 0 = el archivo del disco es de lectura y escritura; 1 = proteger documento: el archivo está cifrado y requiere una contraseña para abrirlo; 2 = proteger documento: siempre se abre como de solo lectura; 3 = proteger documento: \#1 y \#2; 4 = el archivo en el disco es de solo lectura; 5 = \#1 y \#4; 6 = \#2 y \#4; 7 = \#1, \#2 y \#4; 8 = proteger documento: restringir la edición a solo lectura; 9 = \#1 y \#8; 10 = \#2 y \#8; 11 = \#1, \#2 y \#8; 12 = \#4 y \#8; 13 = \#1, \#4 y \#8; 14 = \#2, \#4 y \#8; 15 = \#1, \#2, \#4 y \#8.
+      Obtiene la configuración de seguridad del documento. Solo lectura. Algunas son restricciones de acceso al archivo en el disco. Otros son la configuración de protección de documentos. Algunos valores posibles son 0 = el archivo del disco es de lectura y escritura; 1 = proteger documento: el archivo está cifrado y requiere una contraseña para abrirlo; 2 = proteger documento: siempre se abre como de solo lectura; 3 = proteger documento: tanto \# 1 como \# 2; 4 = el archivo en el disco es de solo lectura; 5 = tanto \# 1 como \# 4; 6 = tanto \# 2 como \# 4; 7 = \# 1, \# 2 y \# 4; 8 = proteger documento: restringir la edición a solo lectura; 9 = \# 1 y \# 8; 10 = ambos \# y \# 8; 11 = 1, 2 y \# \# \# 8; 12 = \# 4 y \# 8; 13 = \# 1, 4 y 8; 14 = \# \# todos \# 2, \# 4 y \# 8; 15 = todo \# 1, \# 2, \# 4, y \# 8 en su totalidad.
 
       \[[Conjunto de API: WordApi 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
     name: security
@@ -430,7 +430,7 @@ items:
         type:
           - string
   - uid: 'word!Word.DocumentProperties#toJSON:member(1)'
-    summary: 'Reemplaza el método JavaScript `toJSON()` para proporcionar un resultado más útil cuando se pasa un objeto API a`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama `toJSON` al método del objeto que se le pasa.) Mientras que el objeto Word. DocumentProperties original es un objeto API, `toJSON` el método devuelve un objeto JavaScript sin formato (escrito como`Word.Interfaces.DocumentPropertiesData`<!-- -->) que contiene copias rasas de las propiedades secundarias cargadas del objeto original.'
+    summary: 'Reemplaza el `toJSON()` método JavaScript para proporcionar un resultado más útil cuando se pasa un objeto API a`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama al `toJSON` método del objeto que se le pasa.) Mientras que el objeto Word.DocumentProperties original es un objeto API, el `toJSON` método devuelve un objeto JavaScript sin formato (escrito como`Word.Interfaces.DocumentPropertiesData`<!-- -->) que contiene copias rasas de las propiedades secundarias cargadas del objeto original.'
     name: toJSON()
     fullName: toJSON()
     langs:
@@ -443,7 +443,7 @@ items:
           - 'word!Word.Interfaces.DocumentPropertiesData:interface'
         description: ''
   - uid: 'word!Word.DocumentProperties#track:member(1)'
-    summary: 'Realiza un seguimiento del objeto de ajuste automático según cambios adyacentes en el documento. Esta llamada es una forma abreviada de context.trackedObjects.add(thisObject). Si usa este objeto en llamadas ".sync" y fuera de la ejecución secuencial de un lote de ".run", y obtiene un error "InvalidObjectPath" al establecer una propiedad o invocar un método en el objeto, debería haber agregado el objeto a la colección de objetos de la que realiza un seguimiento cuando se creó el objeto.'
+    summary: 'Realiza un seguimiento del objeto de ajuste automático según cambios adyacentes en el documento. Esta llamada es una abreviatura de`context.trackedObjects.add(thisObject)`<!-- -->. Si usa este objeto a través `.sync` de llamadas y fuera de la ejecución secuencial de un lote ". Run", y obtiene un error "InvalidObjectPath" al establecer una propiedad o invocar un método en el objeto, es necesario que haya agregado el objeto a la colección de objetos con seguimiento cuando se creó el objeto por primera vez.'
     name: track()
     fullName: track()
     langs:
@@ -456,7 +456,7 @@ items:
           - 'word!Word.DocumentProperties:class'
         description: ''
   - uid: 'word!Word.DocumentProperties#untrack:member(1)'
-    summary: 'Libere la memoria asociada a este objeto, si se ha realizado un seguimiento de él anteriormente. Esta llamada es una forma abreviada de context.trackedObjects.remove(thisObject). Tener muchos objetos marcados ralentiza la aplicación host, así que debe recordar liberar los objetos que agregue cuando haya terminado con ellos. Debe llamar a "context.sync()" antes de que surta efecto la liberación de memoria.'
+    summary: 'Libere la memoria asociada a este objeto, si se ha realizado un seguimiento de él anteriormente. Esta llamada es una forma abreviada de`context.trackedObjects.remove(thisObject)`<!-- -->. Tener muchos objetos marcados ralentiza la aplicación host, así que debe recordar liberar los objetos que agregue cuando haya terminado con ellos. Tendrá que llamar `context.sync()` antes de que la liberación de memoria surta efecto.'
     name: untrack()
     fullName: untrack()
     langs:
