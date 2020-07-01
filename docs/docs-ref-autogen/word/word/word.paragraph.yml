@@ -119,7 +119,7 @@ items:
           ```
   - uid: 'word!Word.Paragraph#attachToList:member(1)'
     summary: |-
-      Permite que el párrafo se una a una lista existente en el nivel especificado. Se produce un error si el párrafo no puede unirse a la lista o si este ya es un elemento de lista.
+      Lets the paragraph join an existing list at the specified level. Fails if the paragraph cannot join the list or if the paragraph is already a list item.
 
       \[[Conjunto de API: WordApi 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
     name: 'attachToList(listId, level)'
@@ -289,7 +289,7 @@ items:
         description: ''
   - uid: 'word!Word.Paragraph#firstLineIndent:member'
     summary: |-
-      Obtiene o establece el valor (en puntos) para una sangría en la primera línea o francesa. Para establecer una sangría en la primera línea se debe usar un valor positivo, para establecer una sangría francesa se debe usar un valor negativo.
+      Gets or sets the value, in points, for a first line or hanging indent. Use a positive value to set a first-line indent, and use a negative value to set a hanging indent.
 
       \[[Conjunto de API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
     name: firstLineIndent
@@ -1426,29 +1426,21 @@ items:
         type:
           - 'word!Word.List:class'
   - uid: 'word!Word.Paragraph#load:member(1)'
-    summary: 'Pone en cola un comando para cargar las propiedades especificadas del objeto. Antes de leer las propiedades, debe llamar a "context.sync()".'
-    remarks: |-
-      Además de esta firma, este método tiene las siguientes firmas:
-
-      `load(option?: string | string[]): Word.Paragraph`-Donde opción es una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades que se van a cargar.
-
-      `load(option?: { select?: string; expand?: string; }): Word.Paragraph`-Where opción. Select es una cadena delimitada por comas que especifica las propiedades que se van a cargar y Options. Expand es una cadena delimitada por comas que especifica las propiedades de navegación que se deben cargar.
-
-      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Word.Paragraph`-Solo disponible en tipos de colección. Es similar a la firma anterior. Option. Top especifica el número máximo de elementos de colección que se pueden incluir en el resultado. La opción. SKIP especifica el número de elementos que se deben omitir y que no se incluyen en el resultado. Si se especifica Option. Top, el conjunto de resultados se iniciará después de omitir el número especificado de elementos.
-    name: load(option)
-    fullName: load(option)
+    summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar `context.sync()` antes de leer las propiedades.
+    name: load(options)
+    fullName: load(options)
     langs:
       - typeScript
     type: method
     syntax:
-      content: 'load(option?: Word.Interfaces.ParagraphLoadOptions): Word.Paragraph;'
+      content: 'load(options?: Word.Interfaces.ParagraphLoadOptions): Word.Paragraph;'
       return:
         type:
           - 'word!Word.Paragraph:class'
         description: ''
       parameters:
-        - id: option
-          description: ''
+        - id: options
+          description: Proporciona opciones para las propiedades del objeto que se va a cargar.
           type:
             - 'word!Word.Interfaces.ParagraphLoadOptions:interface'
   - uid: 'word!Word.Paragraph#load:member(2)'
@@ -1477,16 +1469,24 @@ items:
       - typeScript
     type: method
     syntax:
-      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Word.Paragraph;'
+      content: |-
+        load(propertyNamesAndPaths?: {
+                    select?: string;
+                    expand?: string;
+                }): Word.Paragraph;
       return:
         type:
           - 'word!Word.Paragraph:class'
         description: ''
       parameters:
         - id: propertyNamesAndPaths
-          description: Donde propertyNamesAndPaths. Select es una cadena delimitada por comas que especifica las propiedades que se van a cargar y propertyNamesAndPaths. Expand es una cadena delimitada por comas que especifica las propiedades de navegación que se deben cargar.
+          description: '`propertyNamesAndPaths.select`es una cadena delimitada por comas que especifica las propiedades que se van a cargar y `propertyNamesAndPaths.expand` es una cadena delimitada por comas que especifica las propiedades de navegación que se deben cargar.'
           type:
-            - '{ select?: string; expand?: string; }'
+            - |-
+              {
+                          select?: string;
+                          expand?: string;
+                      }
   - uid: 'word!Word.Paragraph#outlineLevel:member'
     summary: |-
       Obtiene o establece el nivel de esquema del párrafo.
@@ -1954,7 +1954,7 @@ items:
           - string
   - uid: 'word!Word.Paragraph#styleBuiltIn:member'
     summary: |-
-      Obtiene o establece el nombre del estilo integrado del párrafo. Use esta propiedad para los estilos integrados que son portátiles entre configuraciones regionales. Para usar estilos personalizados o nombres de estilo localizados, consulte la propiedad "style".
+      Gets or sets the built-in style name for the paragraph. Use this property for built-in styles that are portable between locales. To use custom styles or localized style names, see the "style" property.
 
       \[[Conjunto de API: WordApi 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
     name: styleBuiltIn
@@ -2014,7 +2014,7 @@ items:
           });
           ```
   - uid: 'word!Word.Paragraph#toJSON:member(1)'
-    summary: 'Reemplaza el método JavaScript `toJSON()` para proporcionar un resultado más útil cuando se pasa un objeto API a`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama `toJSON` al método del objeto que se le pasa.) Mientras que el objeto Word. Paragraph original es un objeto API `toJSON` , el método devuelve un objeto JavaScript sin formato (escrito como`Word.Interfaces.ParagraphData`<!-- -->) que contiene copias rasas de las propiedades secundarias cargadas del objeto original.'
+    summary: 'Reemplaza el `toJSON()` método JavaScript para proporcionar un resultado más útil cuando se pasa un objeto API a`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama al `toJSON` método del objeto que se le pasa.) Mientras que el objeto Word. Paragraph original es un objeto API, el `toJSON` método devuelve un objeto JavaScript sin formato (escrito como`Word.Interfaces.ParagraphData`<!-- -->) que contiene copias rasas de las propiedades secundarias cargadas del objeto original.'
     name: toJSON()
     fullName: toJSON()
     langs:
@@ -2027,7 +2027,7 @@ items:
           - 'word!Word.Interfaces.ParagraphData:interface'
         description: ''
   - uid: 'word!Word.Paragraph#track:member(1)'
-    summary: 'Realiza un seguimiento del objeto de ajuste automático según cambios adyacentes en el documento. Esta llamada es una forma abreviada de context.trackedObjects.add(thisObject). Si usa este objeto en llamadas ".sync" y fuera de la ejecución secuencial de un lote de ".run", y obtiene un error "InvalidObjectPath" al establecer una propiedad o invocar un método en el objeto, debería haber agregado el objeto a la colección de objetos de la que realiza un seguimiento cuando se creó el objeto.'
+    summary: 'Realiza un seguimiento del objeto de ajuste automático según cambios adyacentes en el documento. Esta llamada es una abreviatura de`context.trackedObjects.add(thisObject)`<!-- -->. Si usa este objeto a través `.sync` de llamadas y fuera de la ejecución secuencial de un lote ". Run", y obtiene un error "InvalidObjectPath" al establecer una propiedad o invocar un método en el objeto, es necesario que haya agregado el objeto a la colección de objetos con seguimiento cuando se creó el objeto por primera vez.'
     name: track()
     fullName: track()
     langs:
@@ -2040,7 +2040,7 @@ items:
           - 'word!Word.Paragraph:class'
         description: ''
   - uid: 'word!Word.Paragraph#untrack:member(1)'
-    summary: 'Libere la memoria asociada a este objeto, si se ha realizado un seguimiento de él anteriormente. Esta llamada es una forma abreviada de context.trackedObjects.remove(thisObject). Tener muchos objetos marcados ralentiza la aplicación host, así que debe recordar liberar los objetos que agregue cuando haya terminado con ellos. Debe llamar a "context.sync()" antes de que surta efecto la liberación de memoria.'
+    summary: 'Libere la memoria asociada a este objeto, si se ha realizado un seguimiento de él anteriormente. Esta llamada es una forma abreviada de`context.trackedObjects.remove(thisObject)`<!-- -->. Tener muchos objetos marcados ralentiza la aplicación host, así que debe recordar liberar los objetos que agregue cuando haya terminado con ellos. Tendrá que llamar `context.sync()` antes de que la liberación de memoria surta efecto.'
     name: untrack()
     fullName: untrack()
     langs:

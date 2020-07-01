@@ -2,7 +2,7 @@
 items:
   - uid: 'word!Word.ContentControl:class'
     summary: |-
-      Representa un control de contenido. Los controles de contenido son regiones delimitadas y posiblemente con etiquetas de un documento que funcionan como contenedores para tipos de contenido específicos. Los controles de contenido individuales pueden incluir contenido como imágenes, tablas o párrafos de texto con formato. Actualmente, solo se admiten controles de contenido de texto enriquecido.
+      Represents a content control. Content controls are bounded and potentially labeled regions in a document that serve as containers for specific types of content. Individual content controls may contain contents such as images, tables, or paragraphs of formatted text. Currently, only rich text content controls are supported.
 
       \[[Conjunto de API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
     name: Word.ContentControl
@@ -183,7 +183,7 @@ items:
           ```
   - uid: 'word!Word.ContentControl#color:member'
     summary: |-
-      Obtiene o establece el color del control de contenido. El color se especifica en\#el formato ' RRGGBB ' o usa el nombre de color.
+      Obtiene o establece el color del control de contenido. El color se especifica en \# el formato ' RRGGBB ' o usa el nombre de color.
 
       \[[Conjunto de API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
     name: color
@@ -1150,97 +1150,90 @@ items:
         type:
           - 'word!Word.ListCollection:class'
   - uid: 'word!Word.ContentControl#load:member(1)'
-    summary: 'Pone en cola un comando para cargar las propiedades especificadas del objeto. Antes de leer las propiedades, debe llamar a "context.sync()".'
-    remarks: |-
-      Además de esta firma, este método tiene las siguientes firmas:
-
-      `load(option?: string | string[]): Word.ContentControl`-Donde opción es una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades que se van a cargar.
-
-      `load(option?: { select?: string; expand?: string; }): Word.ContentControl`-Where opción. Select es una cadena delimitada por comas que especifica las propiedades que se van a cargar y Options. Expand es una cadena delimitada por comas que especifica las propiedades de navegación que se deben cargar.
-
-      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Word.ContentControl`-Solo disponible en tipos de colección. Es similar a la firma anterior. Option. Top especifica el número máximo de elementos de colección que se pueden incluir en el resultado. La opción. SKIP especifica el número de elementos que se deben omitir y que no se incluyen en el resultado. Si se especifica Option. Top, el conjunto de resultados se iniciará después de omitir el número especificado de elementos.
-
-      #### <a name="examples"></a>Ejemplos
-
-      ```javascript
-      // Load all of the content control properties
-      // Run a batch operation against the Word object model.
-      Word.run(function (context) {
-          
-          // Create a proxy object for the content controls collection.
-          var contentControls = context.document.contentControls;
-          
-          // Queue a command to load the id property for all of the content controls. 
-          context.load(contentControls, 'id');
-           
-          // Synchronize the document state by executing the queued commands, 
-          // and return a promise to indicate task completion.
-          return context.sync().then(function () {
-              if (contentControls.items.length === 0) {
-                  console.log('No content control found.');
-              }
-              else {
-                  // Queue a command to load the properties on the first content control. 
-                  contentControls.items[0].load(  'appearance,' +
-                                                  'cannotDelete,' +
-                                                  'cannotEdit,' +
-                                                  'id,' +
-                                                  'placeHolderText,' +
-                                                  'removeWhenEdited,' +
-                                                  'title,' +
-                                                  'text,' +
-                                                  'type,' +
-                                                  'style,' +
-                                                  'tag,' +
-                                                  'font/size,' +
-                                                  'font/name,' +
-                                                  'font/color');             
-              
-                  // Synchronize the document state by executing the queued commands, 
-                  // and return a promise to indicate task completion.
-                  return context.sync()
-                      .then(function () {
-                          console.log('Property values of the first content control:' + 
-                              '   ----- appearance: ' + contentControls.items[0].appearance + 
-                              '   ----- cannotDelete: ' + contentControls.items[0].cannotDelete +
-                              '   ----- cannotEdit: ' + contentControls.items[0].cannotEdit +
-                              '   ----- color: ' + contentControls.items[0].color +
-                              '   ----- id: ' + contentControls.items[0].id +
-                              '   ----- placeHolderText: ' + contentControls.items[0].placeholderText +
-                              '   ----- removeWhenEdited: ' + contentControls.items[0].removeWhenEdited +
-                              '   ----- title: ' + contentControls.items[0].title +
-                              '   ----- text: ' + contentControls.items[0].text +
-                              '   ----- type: ' + contentControls.items[0].type +
-                              '   ----- style: ' + contentControls.items[0].style +
-                              '   ----- tag: ' + contentControls.items[0].tag +
-                              '   ----- font size: ' + contentControls.items[0].font.size +
-                              '   ----- font name: ' + contentControls.items[0].font.name +
-                              '   ----- font color: ' + contentControls.items[0].font.color);
-                  });
-              }
-          });  
-      })
-      .catch(function (error) {
-          console.log('Error: ' + JSON.stringify(error));
-          if (error instanceof OfficeExtension.Error) {
-              console.log('Debug info: ' + JSON.stringify(error.debugInfo));
-          }
-      });
-      ```
-    name: load(option)
-    fullName: load(option)
+    summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar `context.sync()` antes de leer las propiedades.
+    name: load(options)
+    fullName: load(options)
     langs:
       - typeScript
     type: method
     syntax:
-      content: 'load(option?: Word.Interfaces.ContentControlLoadOptions): Word.ContentControl;'
+      content: 'load(options?: Word.Interfaces.ContentControlLoadOptions): Word.ContentControl;'
       return:
         type:
           - 'word!Word.ContentControl:class'
-        description: ''
+        description: |-
+
+
+          #### <a name="examples"></a>Ejemplos
+
+          ```javascript
+          // Load all of the content control properties
+          // Run a batch operation against the Word object model.
+          Word.run(function (context) {
+              
+              // Create a proxy object for the content controls collection.
+              var contentControls = context.document.contentControls;
+              
+              // Queue a command to load the id property for all of the content controls. 
+              context.load(contentControls, 'id');
+               
+              // Synchronize the document state by executing the queued commands, 
+              // and return a promise to indicate task completion.
+              return context.sync().then(function () {
+                  if (contentControls.items.length === 0) {
+                      console.log('No content control found.');
+                  }
+                  else {
+                      // Queue a command to load the properties on the first content control. 
+                      contentControls.items[0].load(  'appearance,' +
+                                                      'cannotDelete,' +
+                                                      'cannotEdit,' +
+                                                      'id,' +
+                                                      'placeHolderText,' +
+                                                      'removeWhenEdited,' +
+                                                      'title,' +
+                                                      'text,' +
+                                                      'type,' +
+                                                      'style,' +
+                                                      'tag,' +
+                                                      'font/size,' +
+                                                      'font/name,' +
+                                                      'font/color');             
+                  
+                      // Synchronize the document state by executing the queued commands, 
+                      // and return a promise to indicate task completion.
+                      return context.sync()
+                          .then(function () {
+                              console.log('Property values of the first content control:' + 
+                                  '   ----- appearance: ' + contentControls.items[0].appearance + 
+                                  '   ----- cannotDelete: ' + contentControls.items[0].cannotDelete +
+                                  '   ----- cannotEdit: ' + contentControls.items[0].cannotEdit +
+                                  '   ----- color: ' + contentControls.items[0].color +
+                                  '   ----- id: ' + contentControls.items[0].id +
+                                  '   ----- placeHolderText: ' + contentControls.items[0].placeholderText +
+                                  '   ----- removeWhenEdited: ' + contentControls.items[0].removeWhenEdited +
+                                  '   ----- title: ' + contentControls.items[0].title +
+                                  '   ----- text: ' + contentControls.items[0].text +
+                                  '   ----- type: ' + contentControls.items[0].type +
+                                  '   ----- style: ' + contentControls.items[0].style +
+                                  '   ----- tag: ' + contentControls.items[0].tag +
+                                  '   ----- font size: ' + contentControls.items[0].font.size +
+                                  '   ----- font name: ' + contentControls.items[0].font.name +
+                                  '   ----- font color: ' + contentControls.items[0].font.color);
+                      });
+                  }
+              });  
+          })
+          .catch(function (error) {
+              console.log('Error: ' + JSON.stringify(error));
+              if (error instanceof OfficeExtension.Error) {
+                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+              }
+          });
+          ```
       parameters:
-        - id: option
-          description: ''
+        - id: options
+          description: Proporciona opciones para las propiedades del objeto que se va a cargar.
           type:
             - 'word!Word.Interfaces.ContentControlLoadOptions:interface'
   - uid: 'word!Word.ContentControl#load:member(2)'
@@ -1269,16 +1262,24 @@ items:
       - typeScript
     type: method
     syntax:
-      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Word.ContentControl;'
+      content: |-
+        load(propertyNamesAndPaths?: {
+                    select?: string;
+                    expand?: string;
+                }): Word.ContentControl;
       return:
         type:
           - 'word!Word.ContentControl:class'
         description: ''
       parameters:
         - id: propertyNamesAndPaths
-          description: Donde propertyNamesAndPaths. Select es una cadena delimitada por comas que especifica las propiedades que se van a cargar y propertyNamesAndPaths. Expand es una cadena delimitada por comas que especifica las propiedades de navegación que se deben cargar.
+          description: '`propertyNamesAndPaths.select`es una cadena delimitada por comas que especifica las propiedades que se van a cargar y `propertyNamesAndPaths.expand` es una cadena delimitada por comas que especifica las propiedades de navegación que se deben cargar.'
           type:
-            - '{ select?: string; expand?: string; }'
+            - |-
+              {
+                          select?: string;
+                          expand?: string;
+                      }
   - uid: 'word!Word.ContentControl#onDataChanged:member'
     summary: |-
       Se produce cuando se cambian los datos del control de contenido. Para obtener el nuevo texto, cargue este control de contenido en el controlador. Para obtener el texto anterior, no lo cargue.
@@ -1725,7 +1726,7 @@ items:
           - string
   - uid: 'word!Word.ContentControl#styleBuiltIn:member'
     summary: |-
-      Obtiene o establece el nombre del estilo integrado del control de contenido. Use esta propiedad para los estilos integrados que son portátiles entre configuraciones regionales. Para usar estilos personalizados o nombres de estilo localizados, consulte la propiedad "style".
+      Gets or sets the built-in style name for the content control. Use this property for built-in styles that are portable between locales. To use custom styles or localized style names, see the "style" property.
 
       \[[Conjunto de API: WordApi 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
     name: styleBuiltIn
@@ -1842,7 +1843,7 @@ items:
         type:
           - string
   - uid: 'word!Word.ContentControl#toJSON:member(1)'
-    summary: 'Reemplaza el método JavaScript `toJSON()` para proporcionar un resultado más útil cuando se pasa un objeto API a`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama `toJSON` al método del objeto que se le pasa.) Mientras que el objeto Word. ContentControl original es un objeto API, `toJSON` el método devuelve un objeto JavaScript sin formato (escrito como`Word.Interfaces.ContentControlData`<!-- -->) que contiene copias rasas de las propiedades secundarias cargadas del objeto original.'
+    summary: 'Reemplaza el `toJSON()` método JavaScript para proporcionar un resultado más útil cuando se pasa un objeto API a`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama al `toJSON` método del objeto que se le pasa.) Mientras que el objeto Word. ContentControl original es un objeto API, el `toJSON` método devuelve un objeto JavaScript sin formato (escrito como`Word.Interfaces.ContentControlData`<!-- -->) que contiene copias rasas de las propiedades secundarias cargadas del objeto original.'
     name: toJSON()
     fullName: toJSON()
     langs:
@@ -1855,7 +1856,7 @@ items:
           - 'word!Word.Interfaces.ContentControlData:interface'
         description: ''
   - uid: 'word!Word.ContentControl#track:member(1)'
-    summary: 'Realiza un seguimiento del objeto de ajuste automático según cambios adyacentes en el documento. Esta llamada es una forma abreviada de context.trackedObjects.add(thisObject). Si usa este objeto en llamadas ".sync" y fuera de la ejecución secuencial de un lote de ".run", y obtiene un error "InvalidObjectPath" al establecer una propiedad o invocar un método en el objeto, debería haber agregado el objeto a la colección de objetos de la que realiza un seguimiento cuando se creó el objeto.'
+    summary: 'Realiza un seguimiento del objeto de ajuste automático según cambios adyacentes en el documento. Esta llamada es una abreviatura de`context.trackedObjects.add(thisObject)`<!-- -->. Si usa este objeto a través `.sync` de llamadas y fuera de la ejecución secuencial de un lote ". Run", y obtiene un error "InvalidObjectPath" al establecer una propiedad o invocar un método en el objeto, es necesario que haya agregado el objeto a la colección de objetos con seguimiento cuando se creó el objeto por primera vez.'
     name: track()
     fullName: track()
     langs:
@@ -1883,7 +1884,7 @@ items:
         type:
           - 'word!Word.ContentControl#type~0:complex'
   - uid: 'word!Word.ContentControl#untrack:member(1)'
-    summary: 'Libere la memoria asociada a este objeto, si se ha realizado un seguimiento de él anteriormente. Esta llamada es una forma abreviada de context.trackedObjects.remove(thisObject). Tener muchos objetos marcados ralentiza la aplicación host, así que debe recordar liberar los objetos que agregue cuando haya terminado con ellos. Debe llamar a "context.sync()" antes de que surta efecto la liberación de memoria.'
+    summary: 'Libere la memoria asociada a este objeto, si se ha realizado un seguimiento de él anteriormente. Esta llamada es una forma abreviada de`context.trackedObjects.remove(thisObject)`<!-- -->. Tener muchos objetos marcados ralentiza la aplicación host, así que debe recordar liberar los objetos que agregue cuando haya terminado con ellos. Tendrá que llamar `context.sync()` antes de que la liberación de memoria surta efecto.'
     name: untrack()
     fullName: untrack()
     langs:
