@@ -40,7 +40,6 @@ items:
       Obtiene el objeto de cuerpo del documento. El cuerpo es el texto excluidos los encabezados, los pies de página, las notas al pie, los cuadros de texto, etc. Solo lectura.
 
       \[[Conjunto de API: WordApiHiddenDocument 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
-    isPreview: true
     name: body
     fullName: body
     langs:
@@ -56,7 +55,6 @@ items:
       Obtiene la colección de objetos de control de contenido en el documento. Esto incluye los controles de contenido en el cuerpo de los documentos, los encabezados, los pies de página, los cuadros de texto, etc. Solo lectura.
 
       \[[Conjunto de API: WordApiHiddenDocument 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
-    isPreview: true
     name: contentControls
     fullName: contentControls
     langs:
@@ -162,29 +160,21 @@ items:
           type:
             - string
   - uid: 'word!Word.DocumentCreated#load:member(1)'
-    summary: 'Pone en cola un comando para cargar las propiedades especificadas del objeto. Antes de leer las propiedades, debe llamar a "context.sync()".'
-    remarks: |-
-      Además de esta firma, este método tiene las siguientes firmas:
-
-      `load(option?: string | string[]): Word.DocumentCreated`-Donde opción es una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades que se van a cargar.
-
-      `load(option?: { select?: string; expand?: string; }): Word.DocumentCreated`-Where opción. Select es una cadena delimitada por comas que especifica las propiedades que se van a cargar y Options. Expand es una cadena delimitada por comas que especifica las propiedades de navegación que se deben cargar.
-
-      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): Word.DocumentCreated`-Solo disponible en tipos de colección. Es similar a la firma anterior. Option. Top especifica el número máximo de elementos de colección que se pueden incluir en el resultado. La opción. SKIP especifica el número de elementos que se deben omitir y que no se incluyen en el resultado. Si se especifica Option. Top, el conjunto de resultados se iniciará después de omitir el número especificado de elementos.
-    name: load(option)
-    fullName: load(option)
+    summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar `context.sync()` antes de leer las propiedades.
+    name: load(options)
+    fullName: load(options)
     langs:
       - typeScript
     type: method
     syntax:
-      content: 'load(option?: Word.Interfaces.DocumentCreatedLoadOptions): Word.DocumentCreated;'
+      content: 'load(options?: Word.Interfaces.DocumentCreatedLoadOptions): Word.DocumentCreated;'
       return:
         type:
           - 'word!Word.DocumentCreated:class'
         description: ''
       parameters:
-        - id: option
-          description: ''
+        - id: options
+          description: Proporciona opciones para las propiedades del objeto que se va a cargar.
           type:
             - 'word!Word.Interfaces.DocumentCreatedLoadOptions:interface'
   - uid: 'word!Word.DocumentCreated#load:member(2)'
@@ -213,16 +203,24 @@ items:
       - typeScript
     type: method
     syntax:
-      content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): Word.DocumentCreated;'
+      content: |-
+        load(propertyNamesAndPaths?: {
+                    select?: string;
+                    expand?: string;
+                }): Word.DocumentCreated;
       return:
         type:
           - 'word!Word.DocumentCreated:class'
         description: ''
       parameters:
         - id: propertyNamesAndPaths
-          description: Donde propertyNamesAndPaths. Select es una cadena delimitada por comas que especifica las propiedades que se van a cargar y propertyNamesAndPaths. Expand es una cadena delimitada por comas que especifica las propiedades de navegación que se deben cargar.
+          description: '`propertyNamesAndPaths.select`es una cadena delimitada por comas que especifica las propiedades que se van a cargar y `propertyNamesAndPaths.expand` es una cadena delimitada por comas que especifica las propiedades de navegación que se deben cargar.'
           type:
-            - '{ select?: string; expand?: string; }'
+            - |-
+              {
+                          select?: string;
+                          expand?: string;
+                      }
   - uid: 'word!Word.DocumentCreated#open:member(1)'
     summary: |-
       Abre el documento.
@@ -244,7 +242,6 @@ items:
       Obtiene las propiedades del documento. Solo lectura.
 
       \[[Conjunto de API: WordApiHiddenDocument 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
-    isPreview: true
     name: properties
     fullName: properties
     langs:
@@ -260,7 +257,6 @@ items:
       Guarda el documento. Se utiliza la Convención de nomenclatura de archivos predeterminada de Word si el documento no se ha guardado antes.
 
       \[[Conjunto de API: WordApiHiddenDocument 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
-    isPreview: true
     name: save()
     fullName: save()
     langs:
@@ -274,10 +270,9 @@ items:
         description: ''
   - uid: 'word!Word.DocumentCreated#saved:member'
     summary: |-
-      Indica si se guardaron los cambios en el documento. Un valor de true indica que el documento no cambió desde que se guardó. Solo lectura.
+      Indicates whether the changes in the document have been saved. A value of true indicates that the document hasn't changed since it was saved. Read-only.
 
       \[[Conjunto de API: WordApiHiddenDocument 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
-    isPreview: true
     name: saved
     fullName: saved
     langs:
@@ -293,7 +288,6 @@ items:
       Obtiene la colección de objetos Section del documento. Solo lectura.
 
       \[[Conjunto de API: WordApiHiddenDocument 1,3](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
-    isPreview: true
     name: sections
     fullName: sections
     langs:
@@ -365,7 +359,7 @@ items:
         type:
           - 'word!Word.SettingCollection:class'
   - uid: 'word!Word.DocumentCreated#toJSON:member(1)'
-    summary: 'Reemplaza el método JavaScript `toJSON()` para proporcionar un resultado más útil cuando se pasa un objeto API a`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama `toJSON` al método del objeto que se le pasa.) Mientras que el objeto Word. DocumentCreated original es un objeto API, `toJSON` el método devuelve un objeto JavaScript sin formato (escrito como`Word.Interfaces.DocumentCreatedData`<!-- -->) que contiene copias rasas de las propiedades secundarias cargadas del objeto original.'
+    summary: 'Reemplaza el `toJSON()` método JavaScript para proporcionar un resultado más útil cuando se pasa un objeto API a`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama al `toJSON` método del objeto que se le pasa.) Mientras que el objeto Word.DocumentCreated original es un objeto API, el `toJSON` método devuelve un objeto JavaScript sin formato (escrito como`Word.Interfaces.DocumentCreatedData`<!-- -->) que contiene copias rasas de las propiedades secundarias cargadas del objeto original.'
     name: toJSON()
     fullName: toJSON()
     langs:
@@ -378,7 +372,7 @@ items:
           - 'word!Word.Interfaces.DocumentCreatedData:interface'
         description: ''
   - uid: 'word!Word.DocumentCreated#track:member(1)'
-    summary: 'Realiza un seguimiento del objeto de ajuste automático según cambios adyacentes en el documento. Esta llamada es una forma abreviada de context.trackedObjects.add(thisObject). Si usa este objeto en llamadas ".sync" y fuera de la ejecución secuencial de un lote de ".run", y obtiene un error "InvalidObjectPath" al establecer una propiedad o invocar un método en el objeto, debería haber agregado el objeto a la colección de objetos de la que realiza un seguimiento cuando se creó el objeto.'
+    summary: 'Realiza un seguimiento del objeto de ajuste automático según cambios adyacentes en el documento. Esta llamada es una abreviatura de`context.trackedObjects.add(thisObject)`<!-- -->. Si usa este objeto a través `.sync` de llamadas y fuera de la ejecución secuencial de un lote ". Run", y obtiene un error "InvalidObjectPath" al establecer una propiedad o invocar un método en el objeto, es necesario que haya agregado el objeto a la colección de objetos con seguimiento cuando se creó el objeto por primera vez.'
     name: track()
     fullName: track()
     langs:
@@ -391,7 +385,7 @@ items:
           - 'word!Word.DocumentCreated:class'
         description: ''
   - uid: 'word!Word.DocumentCreated#untrack:member(1)'
-    summary: 'Libere la memoria asociada a este objeto, si se ha realizado un seguimiento de él anteriormente. Esta llamada es una forma abreviada de context.trackedObjects.remove(thisObject). Tener muchos objetos marcados ralentiza la aplicación host, así que debe recordar liberar los objetos que agregue cuando haya terminado con ellos. Debe llamar a "context.sync()" antes de que surta efecto la liberación de memoria.'
+    summary: 'Libere la memoria asociada a este objeto, si se ha realizado un seguimiento de él anteriormente. Esta llamada es una forma abreviada de`context.trackedObjects.remove(thisObject)`<!-- -->. Tener muchos objetos marcados ralentiza la aplicación host, así que debe recordar liberar los objetos que agregue cuando haya terminado con ellos. Tendrá que llamar `context.sync()` antes de que la liberación de memoria surta efecto.'
     name: untrack()
     fullName: untrack()
     langs:

@@ -803,7 +803,7 @@ items:
           - string
   - uid: 'outlook!Office.Mailbox#getCallbackTokenAsync:member(1)'
     summary: |-
-      Obtiene una cadena que contiene un token usado para llamar a las API de REST o a los servicios Web Exchange.
+      Obtiene una cadena que contiene un token usado para llamar a las API de REST o a los servicios web Exchange (EWS).
 
       The `getCallbackTokenAsync` method makes an asynchronous call to get an opaque token from the Exchange Server that hosts the user's mailbox. The lifetime of the callback token is 5 minutes.
 
@@ -813,9 +813,11 @@ items:
 
       Para llamar al `getCallbackTokenAsync` método en el modo de redacción es necesario que haya guardado el elemento. El `saveAsync` método requiere un nivel de permisos mínimo de`ReadWriteItem`<!-- -->.
 
+      **Importante**: para obtener instrucciones sobre los escenarios de delegación o compartidos, consulte el artículo [delegados de acceso](https://docs.microsoft.com/office/dev/add-ins/outlook/delegate-access) .
+
       *Tokens de REST*
 
-      Cuando se solicita un token de REST (`options.isRest` = `true`<!-- -->), el token resultante no funcionará para autenticar llamadas de servicios Web de Exchange. El token se limitará en su ámbito para el acceso de solo lectura al elemento actual y a sus datos adjuntos, a no ser que el complemento haya especificado el permiso `ReadWriteMailbox` en su manifiesto. Si está especificado el permiso `ReadWriteMailbox`, el token resultante concederá acceso de lectura o escritura al correo, calendario y contactos, incluida la capacidad de enviar correo.
+      Cuando se solicita un token de REST (`options.isRest` = `true`<!-- -->), el token resultante no funcionará para autenticar las llamadas de EWS. El token se limitará en su ámbito para el acceso de solo lectura al elemento actual y a sus datos adjuntos, a no ser que el complemento haya especificado el permiso `ReadWriteMailbox` en su manifiesto. Si está especificado el permiso `ReadWriteMailbox`, el token resultante concederá acceso de lectura o escritura al correo, calendario y contactos, incluida la capacidad de enviar correo.
 
       El complemento debe usar la propiedad `restUrl` para determinar la URL correcta que se va a usar al realizar las llamadas a la API de REST.
 
@@ -905,6 +907,8 @@ items:
       La llamada al `getCallbackTokenAsync` método en el modo de lectura requiere un nivel de permiso mínimo de`ReadItem`<!-- -->.
 
       Para llamar al `getCallbackTokenAsync` método en el modo de redacción es necesario que haya guardado el elemento. El `saveAsync` método requiere un nivel de permisos mínimo de`ReadWriteItem`<!-- -->.
+
+      **Importante**: para obtener instrucciones sobre los escenarios de delegación o compartidos, consulte el artículo [delegados de acceso](https://docs.microsoft.com/office/dev/add-ins/outlook/delegate-access) .
 
       \[[Conjunto de API: todos admiten el modo de lectura; El buzón 1,3 ha lanzado la compatibilidad con el modo redacción](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
