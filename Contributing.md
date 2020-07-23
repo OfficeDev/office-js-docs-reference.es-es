@@ -69,7 +69,7 @@ Las solicitudes de incorporación de cambios se suelen revisar en un plazo de 10
 
 1. Configure una cuenta de GitHub para colaborar con este proyecto. Si aún no lo ha hecho, vaya a [GitHub](https://github.com/join) ahora y realice este procedimiento.
 2. Instale Git en el equipo. Siga los pasos descritos en el tutorial de [configuración de Git] .
-3. Cree su propia bifurcación de este repositorio. Para ello, en la parte superior de la página, elija el **** botón bifurcar.
+3. Cree su propia bifurcación de este repositorio. Para ello, en la parte superior de la página, elija el botón **bifurcar** .
 4. Copie la bifurcación en el equipo. Para hacerlo, abra Git Bash. En el símbolo del sistema, escriba:
 
         git clone https://github.com/<your user name>/<repo name>.git
