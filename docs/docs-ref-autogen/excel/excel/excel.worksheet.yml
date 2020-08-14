@@ -289,6 +289,26 @@ items:
       return:
         type:
           - 'excel!Excel.WorksheetCustomPropertyCollection:class'
+        description: |-
+
+
+          #### <a name="examples"></a>Ejemplos
+
+          ```typescript
+          // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/85-preview-apis/custom-properties.yaml
+          await Excel.run(async (context) => {
+            // Load the keys and values of all custom properties in the current worksheet.
+            const customWorksheetProperties = context.workbook.worksheets.getActiveWorksheet().customProperties;
+            customWorksheetProperties.load(["key", "value"]);
+            await context.sync();
+
+            // Log each custom property to the console.
+            // Note that your document may have more properties than those you have set using this snippet.
+            customWorksheetProperties.items.forEach((property) => {
+              console.log(`${property.key}:${property.value}`);
+            });
+          });
+          ```
   - uid: 'excel!Excel.Worksheet#delete:member(1)'
     summary: |-
       Elimina la hoja de cálculo del libro. Tenga en cuenta que si la visibilidad de la hoja de cálculo se establece en "VeryHidden", se producirá un error en la operación de eliminación con una `InvalidOperation` excepción. Primero debe cambiar su visibilidad a oculto o visible antes de eliminarlo.
@@ -907,7 +927,7 @@ items:
         description: ''
       parameters:
         - id: propertyNamesAndPaths
-          description: '`propertyNamesAndPaths.select`es una cadena delimitada por comas que especifica las propiedades que se van a cargar y `propertyNamesAndPaths.expand` es una cadena delimitada por comas que especifica las propiedades de navegación que se deben cargar.'
+          description: '`propertyNamesAndPaths.select` es una cadena delimitada por comas que especifica las propiedades que se van a cargar y `propertyNamesAndPaths.expand` es una cadena delimitada por comas que especifica las propiedades de navegación que se deben cargar.'
           type:
             - |-
               {
@@ -1731,7 +1751,7 @@ items:
         type:
           - 'excel!Excel.TableCollection:class'
   - uid: 'excel!Excel.Worksheet#toJSON:member(1)'
-    summary: 'Reemplaza el `toJSON()` método JavaScript para proporcionar un resultado más útil cuando se pasa un objeto API a`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama al `toJSON` método del objeto que se le pasa.) Mientras que el objeto Excel. Worksheet original es un objeto API, el `toJSON` método devuelve un objeto JavaScript sin formato (escrito como`Excel.Interfaces.WorksheetData`<!-- -->) que contiene copias rasas de las propiedades secundarias cargadas del objeto original.'
+    summary: 'Reemplaza el `toJSON()` método JavaScript para proporcionar un resultado más útil cuando se pasa un objeto API a `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama al `toJSON` método del objeto que se le pasa.) Mientras que el objeto Excel. Worksheet original es un objeto API, el `toJSON` método devuelve un objeto JavaScript sin formato (escrito como `Excel.Interfaces.WorksheetData`<!-- -->) que contiene copias rasas de las propiedades secundarias cargadas del objeto original.'
     name: toJSON()
     fullName: toJSON()
     langs:

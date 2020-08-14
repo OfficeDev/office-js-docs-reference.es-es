@@ -40,7 +40,27 @@ items:
       return:
         type:
           - 'excel!Excel.CustomProperty:class'
-        description: ''
+        description: |-
+
+
+          #### <a name="examples"></a>Ejemplos
+
+          ```typescript
+          // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/85-preview-apis/custom-properties.yaml
+          await Excel.run(async (context) => {
+            // Get the key/value pair from the task pane.
+            const userKey = $("#key").text();
+            const userValue = $("#value").text();
+
+            // Add the custom property.
+            const customDocProperties = context.workbook.properties.custom;
+            customDocProperties.add(userKey, userValue);
+
+            await context.sync();
+
+            console.log(`Successfully set custom document property ${userKey}:${userValue}.`);
+          });
+          ```
       parameters:
         - id: key
           description: 'Obligatorio. La tecla de la propiedad personalizada, que no distingue mayúsculas de minúsculas. La clave está limitada a 255 caracteres fuera de Excel en la web (las claves más grandes se recortan automáticamente a 255 caracteres en otras plataformas).'
@@ -199,11 +219,11 @@ items:
         description: ''
       parameters:
         - id: propertyNamesAndPaths
-          description: '`propertyNamesAndPaths.select`es una cadena delimitada por comas que especifica las propiedades que se van a cargar y `propertyNamesAndPaths.expand` es una cadena delimitada por comas que especifica las propiedades de navegación que se deben cargar.'
+          description: '`propertyNamesAndPaths.select` es una cadena delimitada por comas que especifica las propiedades que se van a cargar y `propertyNamesAndPaths.expand` es una cadena delimitada por comas que especifica las propiedades de navegación que se deben cargar.'
           type:
             - 'office!OfficeExtension.LoadOption:interface'
   - uid: 'excel!Excel.CustomPropertyCollection#toJSON:member(1)'
-    summary: 'Reemplaza el `toJSON()` método JavaScript para proporcionar un resultado más útil cuando se pasa un objeto API a`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama al `toJSON` método del objeto que se le pasa.) Mientras que el `Excel.CustomPropertyCollection` objeto original es un objeto API, el `toJSON` método devuelve un objeto JavaScript sin formato (escrito como`Excel.Interfaces.CustomPropertyCollectionData`<!-- -->) que contiene una matriz "items" con copias rasas de las propiedades cargadas de los elementos de la colección.'
+    summary: 'Reemplaza el `toJSON()` método JavaScript para proporcionar un resultado más útil cuando se pasa un objeto API a `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama al `toJSON` método del objeto que se le pasa.) Mientras que el `Excel.CustomPropertyCollection` objeto original es un objeto API, el `toJSON` método devuelve un objeto JavaScript sin formato (escrito como `Excel.Interfaces.CustomPropertyCollectionData`<!-- -->) que contiene una matriz "items" con copias rasas de las propiedades cargadas de los elementos de la colección.'
     name: toJSON()
     fullName: toJSON()
     langs:
