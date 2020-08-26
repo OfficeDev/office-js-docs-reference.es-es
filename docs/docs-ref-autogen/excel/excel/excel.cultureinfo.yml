@@ -50,6 +50,49 @@ items:
       return:
         type:
           - 'excel!Excel.DatetimeFormatInfo:class'
+        description: |-
+
+
+          #### <a name="examples"></a>Ejemplos
+
+          ```typescript
+          // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/85-preview-apis/culture-info-date-time.yaml
+          await Excel.run(async (context) => {
+            context.application.cultureInfo.datetimeFormat.load([
+              "longDatePattern",
+              "shortDatePattern",
+              "dateSeparator",
+              "longTimePattern",
+              "timeSeparator"
+            ]);
+            await context.sync();
+
+            // Use the cultural settings API to retrieve the user's system date and time settings.
+            const systemLongDatePattern = context.application.cultureInfo.datetimeFormat.longDatePattern;
+            const systemShortDatePattern = context.application.cultureInfo.datetimeFormat.shortDatePattern;
+            const systemDateSeparator = context.application.cultureInfo.datetimeFormat.dateSeparator;
+            const systemLongTimePattern = context.application.cultureInfo.datetimeFormat.longTimePattern;
+            const systemTimeSeparator = context.application.cultureInfo.datetimeFormat.timeSeparator;
+
+            // Write the date and time settings in your table. 
+            const sheet = context.workbook.worksheets.getActiveWorksheet();
+            const dateTimeData = sheet.getRange("A2:B6");
+            dateTimeData.values = [
+              ["Long date", systemLongDatePattern], 
+              ["Short date", systemShortDatePattern], 
+              ["Date separator", systemDateSeparator], 
+              ["Long time format", systemLongTimePattern],
+              ["Time separator", systemTimeSeparator]
+            ];
+
+            sheet.tables
+              .getItemAt(0)
+              .getRange()
+              .format.autofitColumns();
+
+            await context.sync();
+          });
+          ```
   - uid: 'excel!Excel.CultureInfo#load:member(1)'
     summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar a `context.sync()` antes de leer las propiedades.
     name: load(options)
@@ -105,7 +148,7 @@ items:
         description: ''
       parameters:
         - id: propertyNamesAndPaths
-          description: '`propertyNamesAndPaths.select`es una cadena delimitada por comas que especifica las propiedades que se van a cargar y `propertyNamesAndPaths.expand` es una cadena delimitada por comas que especifica las propiedades de navegación que se deben cargar.'
+          description: '`propertyNamesAndPaths.select` es una cadena delimitada por comas que especifica las propiedades que se van a cargar y `propertyNamesAndPaths.expand` es una cadena delimitada por comas que especifica las propiedades de navegación que se deben cargar.'
           type:
             - |-
               {
@@ -143,7 +186,7 @@ items:
         type:
           - 'excel!Excel.NumberFormatInfo:class'
   - uid: 'excel!Excel.CultureInfo#toJSON:member(1)'
-    summary: 'Reemplaza el `toJSON()` método JavaScript para proporcionar un resultado más útil cuando se pasa un objeto API a`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama al `toJSON` método del objeto que se le pasa.) Mientras que el objeto Excel. CultureInfo original es un objeto API, el `toJSON` método devuelve un objeto JavaScript sin formato (escrito como`Excel.Interfaces.CultureInfoData`<!-- -->) que contiene copias rasas de las propiedades secundarias cargadas del objeto original.'
+    summary: 'Reemplaza el `toJSON()` método JavaScript para proporcionar un resultado más útil cuando se pasa un objeto API a `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama al `toJSON` método del objeto que se le pasa.) Mientras que el objeto Excel. CultureInfo original es un objeto API, el `toJSON` método devuelve un objeto JavaScript sin formato (escrito como `Excel.Interfaces.CultureInfoData`<!-- -->) que contiene copias rasas de las propiedades secundarias cargadas del objeto original.'
     name: toJSON()
     fullName: toJSON()
     langs:
