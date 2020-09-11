@@ -4,13 +4,13 @@ items:
     summary: |-
       El modo de lectura de mensajes de [Office. Context. Mailbox. Item](xref:outlook!Office.Item:interface)<!-- -->.
 
-      **Importante**: se trata de un objeto interno de Outlook, que no se expone directamente a través de las interfaces existentes. Debe tratarlo como un modo de`Office.context.mailbox.item`<!-- -->. Consulte la página del [modelo de objetos](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/requirement-set-1.4/office.context.mailbox.item) para obtener más información.
+      **Importante**: se trata de un objeto interno de Outlook, que no se expone directamente a través de las interfaces existentes. Debe tratarlo como un modo de `Office.context.mailbox.item`<!-- -->. Consulte la página del [modelo de objetos](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/requirement-set-1.4/office.context.mailbox.item) para obtener más información.
 
       Interfaces principales:
 
       - [ItemRead](xref:outlook!Office.ItemRead:interface)
 
-      - [Message](xref:outlook!Office.Message:interface)
+      - [Mensaje](xref:outlook!Office.Message:interface)
     name: Office.MessageRead
     fullName: Office.MessageRead
     langs:
@@ -613,15 +613,15 @@ items:
       return:
         type:
           - 'outlook!Office.MessageRead#getEntitiesByType~0:complex'
-        description: 'Si el valor pasado `entityType` no es un miembro válido de la `EntityType` enumeración, el método devuelve`null`<!-- -->. Si no hay presente ninguna entidad del tipo especificado en el cuerpo del elemento, el método devuelve una matriz vacía. De lo contrario, el tipo de los objetos en la matriz devuelta depende del tipo de entidad solicitada en el parámetro `entityType`.'
+        description: 'Si el valor pasado `entityType` no es un miembro válido de la `EntityType` enumeración, el método devuelve `null`<!-- -->. Si no hay presente ninguna entidad del tipo especificado en el cuerpo del elemento, el método devuelve una matriz vacía. De lo contrario, el tipo de los objetos en la matriz devuelta depende del tipo de entidad solicitada en el parámetro `entityType`.'
       parameters:
         - id: entityType
           description: |-
             Uno de los `EntityType` valores de enumeración.
 
-            Aunque el nivel de permiso mínimo para usar este método es`Restricted`<!-- -->, algunos tipos de entidad necesitan `ReadItem` tener acceso, como se especifica en la siguiente tabla.
+            Aunque el nivel de permiso mínimo para usar este método es `Restricted`<!-- -->, algunos tipos de entidad necesitan `ReadItem` tener acceso, como se especifica en la siguiente tabla.
 
-            <table> <tr> <th>Valor de entityType</th> <th>Tipo de objetos de la matriz devuelta</th> <th>Nivel de permiso requerido</th> </tr> <tr> <td>Dirección</td> <td>Cadena</td> <td>Restricted</td> </tr> <tr> <td>Contacto</td> <td>Contacto</td> <td>ReadItem</td> </tr> <tr> <td>EmailAddress</td> <td>Cadena</td> <td>ReadItem</td> </tr> <tr> <td>MeetingSuggestion</td> <td>MeetingSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>PhoneNumber</td> <td>PhoneNumber</td> <td>Restricted</td> </tr> <tr> <td>TaskSuggestion</td> <td>TaskSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>URL</td> <td>Cadena</td> <td>Restricted</td> </tr> </table>
+            <table> <tr> <th>Valor de entityType</th> <th>Tipo de objetos de la matriz devuelta</th> <th>Nivel de permiso requerido</th> </tr> <tr> <td>Address</td> <td>Cadena</td> <td>Restricted</td> </tr> <tr> <td>Contacto</td> <td>Contacto</td> <td>ReadItem</td> </tr> <tr> <td>EmailAddress</td> <td>Cadena</td> <td>ReadItem</td> </tr> <tr> <td>MeetingSuggestion</td> <td>MeetingSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>PhoneNumber</td> <td>PhoneNumber</td> <td>Restricted</td> </tr> <tr> <td>TaskSuggestion</td> <td>TaskSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>URL</td> <td>Cadena</td> <td>Restricted</td> </tr> </table>
           type:
             - 'outlook!Office.MessageRead#getEntitiesByType~1:complex'
   - uid: 'outlook!Office.MessageRead#getFilteredEntitiesByName:member(1)'
@@ -653,7 +653,7 @@ items:
       return:
         type:
           - 'outlook!Office.MessageRead#getFilteredEntitiesByName~0:complex'
-        description: 'Si no hay ningún `ItemHasKnownEntity` elemento en el manifiesto con un `FilterName` valor de elemento que coincida con el `name` parámetro, el método devuelve`null`<!-- -->. Si el parámetro `name` no coincide con un elemento `ItemHasKnownEntity` del manifiesto, pero no existen entidades en el elemento actual que coincidan, el método devuelve una matriz vacía.'
+        description: 'Si no hay ningún `ItemHasKnownEntity` elemento en el manifiesto con un `FilterName` valor de elemento que coincida con el `name` parámetro, el método devuelve `null`<!-- -->. Si el parámetro `name` no coincide con un elemento `ItemHasKnownEntity` del manifiesto, pero no existen entidades en el elemento actual que coincidan, el método devuelve una matriz vacía.'
       parameters:
         - id: name
           description: El nombre del elemento de regla `ItemHasKnownEntity` que define el filtro para que coincidan.
@@ -771,7 +771,10 @@ items:
           type:
             - string
   - uid: 'outlook!Office.MessageRead#internetMessageId:member'
-    summary: Obtiene el identificador de mensaje de Internet de un mensaje de correo electrónico.
+    summary: |-
+      Obtiene el identificador de mensaje de Internet de un mensaje de correo electrónico.
+
+      **Importante**: en la carpeta **elementos enviados** , `internetMessageId` es posible que no esté disponible aún en los elementos enviados recientemente. En ese caso, considere la posibilidad de usar los [servicios web Exchange](https://docs.microsoft.com/office/dev/add-ins/outlook/web-services) para obtener esta [propiedad del servidor](https://docs.microsoft.com/exchange/client-developer/web-service-reference/internetmessageid)<!-- -->.
     remarks: |-
       ** <!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
 
@@ -797,7 +800,7 @@ items:
     summary: |-
       Obtiene la clase de elemento Servicios Web Exchange del elemento seleccionado.
 
-      Puede crear clases de mensaje personalizadas que extienda una clase de mensaje predeterminada, por ejemplo, una clase de mensaje de cita personalizada.`IPM.Appointment.Contoso`<!-- -->.
+      Puede crear clases de mensaje personalizadas que extienda una clase de mensaje predeterminada, por ejemplo, una clase de mensaje de cita personalizada. `IPM.Appointment.Contoso`<!-- -->.
     remarks: |-
       ** <!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
 
@@ -829,7 +832,7 @@ items:
 
       La propiedad `itemId` no está disponible en el modo redacción. Si se requiere un identificador de elemento, el método `saveAsync` puede usarse para guardar el elemento en el servidor, que devolverá el identificador de elemento en el parámetro `asyncResult.value` de la función de devolución de llamada.
 
-      **Nota**: el identificador que devuelve la `itemId` propiedad es el mismo que el [identificador de elemento de servicios web Exchange](https://docs.microsoft.com/exchange/client-developer/exchange-web-services/ews-identifiers-in-exchange)<!-- -->. La propiedad `itemId` no es idéntica al identificador de entrada de Outlook ni al identificador que usa la API de REST de Outlook. Antes de realizar llamadas a la API de REST con este valor, se debe convertir mediante`Office.context.mailbox.convertToRestId`<!-- -->. Para obtener más información, vea [usar las API de REST de Outlook desde un complemento de Outlook](https://docs.microsoft.com/office/dev/add-ins/outlook/use-rest-api#get-the-item-id) .<!-- -->.
+      **Nota**: el identificador que devuelve la `itemId` propiedad es el mismo que el [identificador de elemento de servicios web Exchange](https://docs.microsoft.com/exchange/client-developer/exchange-web-services/ews-identifiers-in-exchange)<!-- -->. La propiedad `itemId` no es idéntica al identificador de entrada de Outlook ni al identificador que usa la API de REST de Outlook. Antes de realizar llamadas a la API de REST con este valor, se debe convertir mediante `Office.context.mailbox.convertToRestId`<!-- -->. Para obtener más información, vea [usar las API de REST de Outlook desde un complemento de Outlook](https://docs.microsoft.com/office/dev/add-ins/outlook/use-rest-api#get-the-item-id) .<!-- -->.
     remarks: |-
       ** <!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
 
@@ -961,7 +964,7 @@ items:
         description: ''
       parameters:
         - id: callback
-          description: 'Cuando el método finaliza, la función que se pasa en el `callback` parámetro se llama con un único parámetro de tipo`Office.AsyncResult`<!-- -->.'
+          description: 'Cuando el método finaliza, la función que se pasa en el `callback` parámetro se llama con un único parámetro de tipo `Office.AsyncResult`<!-- -->.'
           type:
             - 'outlook!Office.MessageRead#loadCustomPropertiesAsync~0:complex'
         - id: userContext
