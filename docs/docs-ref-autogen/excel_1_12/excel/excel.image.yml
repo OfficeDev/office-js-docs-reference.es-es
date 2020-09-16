@@ -1,0 +1,195 @@
+### YamlMime:UniversalReference
+items:
+  - uid: 'excel!Excel.Image:class'
+    summary: |-
+      Representa una imagen de la hoja de cálculo. Para obtener el objeto Shape correspondiente, use Image. Shape.
+
+      \[[Conjunto de API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: Excel.Image
+    fullName: Excel.Image
+    langs:
+      - typeScript
+    type: class
+    extends:
+      - 'office!OfficeExtension.ClientObject:class'
+    package: excel!
+    children:
+      - 'excel!Excel.Image#context:member'
+      - 'excel!Excel.Image#format:member'
+      - 'excel!Excel.Image#id:member'
+      - 'excel!Excel.Image#load:member(1)'
+      - 'excel!Excel.Image#load:member(2)'
+      - 'excel!Excel.Image#load:member(3)'
+      - 'excel!Excel.Image#shape:member'
+      - 'excel!Excel.Image#toJSON:member(1)'
+  - uid: 'excel!Excel.Image#context:member'
+    summary: Contexto de la solicitud asociado al objeto. Esto conecta el proceso del complemento con el proceso de la aplicación host de Office.
+    name: context
+    fullName: context
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'context: RequestContext;'
+      return:
+        type:
+          - 'excel!Excel.RequestContext:class'
+  - uid: 'excel!Excel.Image#format:member'
+    summary: |-
+      Devuelve el formato de la imagen.
+
+      \[[Conjunto de API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: format
+    fullName: format
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly format: Excel.PictureFormat | "UNKNOWN" | "BMP" | "JPEG" | "GIF" | "PNG" | "SVG";'
+      return:
+        type:
+          - 'excel!Excel.Image#format~0:complex'
+        description: |-
+
+
+          #### <a name="examples"></a>Ejemplos
+
+          ```typescript
+          // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/44-shape/shape-images.yaml
+          await Excel.run(async (context) => {
+              const sheet = context.workbook.worksheets.getItem("Shapes");
+              const image = sheet.shapes.getItem("Image").image;
+              image.load("format");
+              await context.sync();
+
+              console.log("The image's format is: " + image.format);
+              await context.sync();
+          });
+          ```
+  - uid: 'excel!Excel.Image#id:member'
+    summary: |-
+      Especifica el identificador de la forma del objeto Image.
+
+      \[[Conjunto de API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: id
+    fullName: id
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly id: string;'
+      return:
+        type:
+          - string
+  - uid: 'excel!Excel.Image#load:member(1)'
+    summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar a `context.sync()` antes de leer las propiedades.
+    name: load(options)
+    fullName: load(options)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(options?: Excel.Interfaces.ImageLoadOptions): Excel.Image;'
+      return:
+        type:
+          - 'excel!Excel.Image:class'
+        description: ''
+      parameters:
+        - id: options
+          description: Proporciona opciones para las propiedades del objeto que se va a cargar.
+          type:
+            - 'excel!Excel.Interfaces.ImageLoadOptions:interface'
+  - uid: 'excel!Excel.Image#load:member(2)'
+    summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar a `context.sync()` antes de leer las propiedades.
+    name: load(propertyNames)
+    fullName: load(propertyNames)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'load(propertyNames?: string | string[]): Excel.Image;'
+      return:
+        type:
+          - 'excel!Excel.Image:class'
+        description: ''
+      parameters:
+        - id: propertyNames
+          description: Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades que se van a cargar.
+          type:
+            - 'string | string[]'
+  - uid: 'excel!Excel.Image#load:member(3)'
+    summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar a `context.sync()` antes de leer las propiedades.
+    name: load(propertyNamesAndPaths)
+    fullName: load(propertyNamesAndPaths)
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: |-
+        load(propertyNamesAndPaths?: {
+                    select?: string;
+                    expand?: string;
+                }): Excel.Image;
+      return:
+        type:
+          - 'excel!Excel.Image:class'
+        description: ''
+      parameters:
+        - id: propertyNamesAndPaths
+          description: '`propertyNamesAndPaths.select` es una cadena delimitada por comas que especifica las propiedades que se van a cargar y `propertyNamesAndPaths.expand` es una cadena delimitada por comas que especifica las propiedades de navegación que se deben cargar.'
+          type:
+            - |-
+              {
+                          select?: string;
+                          expand?: string;
+                      }
+  - uid: 'excel!Excel.Image#shape:member'
+    summary: |-
+      Devuelve el objeto de forma asociado con la imagen.
+
+      \[[Conjunto de API: ExcelApi 1,9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: shape
+    fullName: shape
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly shape: Excel.Shape;'
+      return:
+        type:
+          - 'excel!Excel.Shape:class'
+  - uid: 'excel!Excel.Image#toJSON:member(1)'
+    summary: 'Reemplaza el `toJSON()` método JavaScript para proporcionar un resultado más útil cuando se pasa un objeto API a `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama al `toJSON` método del objeto que se le pasa.) Mientras que el objeto Excel. Image original es un objeto API, el `toJSON` método devuelve un objeto JavaScript sin formato (escrito como `Excel.Interfaces.ImageData`<!-- -->) que contiene copias rasas de las propiedades secundarias cargadas del objeto original.'
+    name: toJSON()
+    fullName: toJSON()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'toJSON(): Excel.Interfaces.ImageData;'
+      return:
+        type:
+          - 'excel!Excel.Interfaces.ImageData:interface'
+        description: ''
+references:
+  - uid: 'office!OfficeExtension.ClientObject:class'
+    name: OfficeExtension.ClientObject
+  - uid: 'excel!Excel.RequestContext:class'
+    name: RequestContext
+  - uid: 'excel!Excel.Image#format~0:complex'
+    name: Excel.PictureFormat | "UNKNOWN" | "BMP" | "JPEG" | "GIF" | "PNG" | "SVG"
+    fullName: Excel.PictureFormat | "UNKNOWN" | "BMP" | "JPEG" | "GIF" | "PNG" | "SVG"
+    spec.typeScript:
+      - uid: 'excel!Excel.PictureFormat:enum'
+        name: Excel.PictureFormat
+        fullName: Excel.PictureFormat
+      - name: ' | "UNKNOWN" | "BMP" | "JPEG" | "GIF" | "PNG" | "SVG"'
+        fullName: ' | "UNKNOWN" | "BMP" | "JPEG" | "GIF" | "PNG" | "SVG"'
+  - uid: 'excel!Excel.Image:class'
+    name: Excel.Image
+  - uid: 'excel!Excel.Interfaces.ImageLoadOptions:interface'
+    name: Excel.Interfaces.ImageLoadOptions
+  - uid: 'excel!Excel.Shape:class'
+    name: Excel.Shape
+  - uid: 'excel!Excel.Interfaces.ImageData:interface'
+    name: Excel.Interfaces.ImageData
