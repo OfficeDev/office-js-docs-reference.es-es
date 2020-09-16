@@ -49,6 +49,7 @@ items:
       - 'excel!Excel.Range#getColumnProperties:member(1)'
       - 'excel!Excel.Range#getColumnsAfter:member(1)'
       - 'excel!Excel.Range#getColumnsBefore:member(1)'
+      - 'excel!Excel.Range#getDirectPrecedents:member(1)'
       - 'excel!Excel.Range#getEntireColumn:member(1)'
       - 'excel!Excel.Range#getEntireRow:member(1)'
       - 'excel!Excel.Range#getImage:member(1)'
@@ -68,6 +69,10 @@ items:
       - 'excel!Excel.Range#getSpecialCells:member(2)'
       - 'excel!Excel.Range#getSpecialCellsOrNullObject:member(1)'
       - 'excel!Excel.Range#getSpecialCellsOrNullObject:member(2)'
+      - 'excel!Excel.Range#getSpillingToRange:member(1)'
+      - 'excel!Excel.Range#getSpillingToRangeOrNullObject:member(1)'
+      - 'excel!Excel.Range#getSpillParent:member(1)'
+      - 'excel!Excel.Range#getSpillParentOrNullObject:member(1)'
       - 'excel!Excel.Range#getSurroundingRegion:member(1)'
       - 'excel!Excel.Range#getTables:member(1)'
       - 'excel!Excel.Range#getUsedRange:member(1)'
@@ -75,6 +80,7 @@ items:
       - 'excel!Excel.Range#getVisibleView:member(1)'
       - 'excel!Excel.Range#group:member(1)'
       - 'excel!Excel.Range#group:member(2)'
+      - 'excel!Excel.Range#hasSpill:member'
       - 'excel!Excel.Range#height:member'
       - 'excel!Excel.Range#hidden:member'
       - 'excel!Excel.Range#hideGroupDetails:member(1)'
@@ -92,12 +98,14 @@ items:
       - 'excel!Excel.Range#merge:member(1)'
       - 'excel!Excel.Range#moveTo:member(1)'
       - 'excel!Excel.Range#numberFormat:member'
+      - 'excel!Excel.Range#numberFormatCategories:member'
       - 'excel!Excel.Range#numberFormatLocal:member'
       - 'excel!Excel.Range#removeDuplicates:member(1)'
       - 'excel!Excel.Range#replaceAll:member(1)'
       - 'excel!Excel.Range#rowCount:member'
       - 'excel!Excel.Range#rowHidden:member'
       - 'excel!Excel.Range#rowIndex:member'
+      - 'excel!Excel.Range#savedAsArray:member'
       - 'excel!Excel.Range#select:member(1)'
       - 'excel!Excel.Range#set:member(1)'
       - 'excel!Excel.Range#set:member(2)'
@@ -1032,6 +1040,47 @@ items:
           description: 'Opcional. El número de columnas que se va a incluir en el rango resultante. En general, use un número positivo para crear un intervalo fuera del intervalo actual. También puede usar un número negativo para crear un intervalo dentro del intervalo actual. El valor predeterminado es 1.'
           type:
             - number
+  - uid: 'excel!Excel.Range#getDirectPrecedents:member(1)'
+    summary: |-
+      Devuelve un objeto WorkbookRangeAreas que representa el rango que contiene todas las celdas precedentes directas de una celda en la misma hoja de cálculo o en varias hojas de cálculo.
+
+      \[[Conjunto de API: ExcelApi 1,12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getDirectPrecedents()
+    fullName: getDirectPrecedents()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getDirectPrecedents(): Excel.WorkbookRangeAreas;'
+      return:
+        type:
+          - 'excel!Excel.WorkbookRangeAreas:class'
+        description: |-
+
+
+          #### <a name="examples"></a>Ejemplos
+
+          ```typescript
+          // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/85-preview-apis/direct-precedents.yaml
+          await Excel.run(async (context) => {
+            // Precedents are cells referenced by the formula in a cell.
+            let range = context.workbook.getActiveCell();
+            let directPrecedents = range.getDirectPrecedents();
+            range.load("address");
+            directPrecedents.areas.load("address");
+            await context.sync();
+
+            console.log(`Direct precedent cells of ${range.address}:`);
+
+            // Use the direct precedents API to loop through precedents of the active cell. 
+            for (var i = 0; i < directPrecedents.areas.items.length; i++) {
+              // Highlight and console the address of each precedent cell.
+              directPrecedents.areas.items[i].format.fill.color = "Yellow";
+              console.log(`  ${directPrecedents.areas.items[i].address}`);
+            }
+            await context.sync();
+          });
+          ```
   - uid: 'excel!Excel.Range#getEntireColumn:member(1)'
     summary: |-
       Obtiene un objeto que representa toda la columna del rango (por ejemplo, si el rango actual representa las celdas "B4: E11", `getEntireColumn` es un rango que representa las columnas "B:E").
@@ -1411,7 +1460,7 @@ items:
     summary: |-
       Obtiene una colección con ámbito de tablas dinámicas superpuestas con el intervalo.
 
-      \[[Conjunto de API: ExcelApiOnline 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+      \[[Conjunto de API: ExcelApi 1,12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
     name: getPivotTables(fullyContained)
     fullName: getPivotTables(fullyContained)
     langs:
@@ -1704,6 +1753,94 @@ items:
           description: 'Si el argumento cellType es constante o fórmulas, este argumento se usa para determinar los tipos de celdas que se van a incluir en el resultado. Estos valores se pueden combinar para que devuelvan más de un tipo. El valor predeterminado es seleccionar todas las constantes o fórmulas, sea cual sea el tipo.'
           type:
             - '"All" | "Errors" | "ErrorsLogical" | "ErrorsNumbers" | "ErrorsText" | "ErrorsLogicalNumber" | "ErrorsLogicalText" | "ErrorsNumberText" | "Logical" | "LogicalNumbers" | "LogicalText" | "LogicalNumbersText" | "Numbers" | "NumbersText" | "Text"'
+  - uid: 'excel!Excel.Range#getSpillingToRange:member(1)'
+    summary: |-
+      Obtiene el objeto de intervalo que contiene el intervalo de desbordamiento al llamar en una celda de delimitador. Se produce un error si se aplica a un intervalo con más de una celda.
+
+      \[[Conjunto de API: ExcelApi 1,12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getSpillingToRange()
+    fullName: getSpillingToRange()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getSpillingToRange(): Excel.Range;'
+      return:
+        type:
+          - 'excel!Excel.Range:class'
+        description: |-
+
+
+          #### <a name="examples"></a>Ejemplos
+
+          ```typescript
+          // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/85-preview-apis/dynamic-arrays.yaml
+          await Excel.run(async (context) => {
+            const sheet = context.workbook.worksheets.getItem("Sample");
+
+            // Set G4 to a formula that returns a dynamic array.
+            const targetCell = sheet.getRange("G4");
+            targetCell.formulas = [["=A4:D4"]];
+
+            // Get the address of the cells that the dynamic array spilled into.
+            const spillRange = targetCell.getSpillingToRange();
+            spillRange.load("address");
+
+            // Fit the columns for readability.
+            sheet.getUsedRange().format.autofitColumns();
+            await context.sync();
+
+            console.log(`Copying the table headers spilled into ${spillRange.address}.`);
+          });
+          ```
+  - uid: 'excel!Excel.Range#getSpillingToRangeOrNullObject:member(1)'
+    summary: |-
+      Obtiene el objeto de intervalo que contiene el intervalo de desbordamiento al llamar en una celda de delimitador. Si el rango no es una celda de anclaje o no se encuentra un intervalo de derrame, se devolverá un objeto null.
+
+      \[[Conjunto de API: ExcelApi 1,12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getSpillingToRangeOrNullObject()
+    fullName: getSpillingToRangeOrNullObject()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getSpillingToRangeOrNullObject(): Excel.Range;'
+      return:
+        type:
+          - 'excel!Excel.Range:class'
+        description: ''
+  - uid: 'excel!Excel.Range#getSpillParent:member(1)'
+    summary: |-
+      Obtiene el intervalo que contiene la celda de delimitador de una celda en la que se derrama. Se produce un error si se aplica a un intervalo con más de una celda.
+
+      \[[Conjunto de API: ExcelApi 1,12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getSpillParent()
+    fullName: getSpillParent()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getSpillParent(): Excel.Range;'
+      return:
+        type:
+          - 'excel!Excel.Range:class'
+        description: ''
+  - uid: 'excel!Excel.Range#getSpillParentOrNullObject:member(1)'
+    summary: |-
+      Obtiene el intervalo que contiene la celda de delimitador de una celda en la que se derrama. Si no es una celda de derrame o si se proporcionan más de una vez, se devolverá un objeto null.
+
+      \[[Conjunto de API: ExcelApi 1,12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: getSpillParentOrNullObject()
+    fullName: getSpillParentOrNullObject()
+    langs:
+      - typeScript
+    type: method
+    syntax:
+      content: 'getSpillParentOrNullObject(): Excel.Range;'
+      return:
+        type:
+          - 'excel!Excel.Range:class'
+        description: ''
   - uid: 'excel!Excel.Range#getSurroundingRegion:member(1)'
     summary: |-
       Devuelve un objeto Range que representa la región circundante para la celda superior izquierda de este intervalo. Una región circundante es un intervalo limitado por cualquier combinación de filas y columnas en blanco en relación a este intervalo.
@@ -1961,6 +2098,21 @@ items:
           description: 'Especifica cómo se puede agrupar el intervalo por filas o columnas. `InvalidArgument`Se produce un error si la opción de grupo difiere de la `isEntireRow` propiedad o del rango `isEntireColumn` (es decir, `range.isEntireRow` es true y `groupOption` es "ByColumns", o `range.isEntireColumn` es true y `groupOption` es "ByRows").'
           type:
             - '"ByRows" | "ByColumns"'
+  - uid: 'excel!Excel.Range#hasSpill:member'
+    summary: |-
+      Indica si todas las celdas tienen un borde de desbordamiento. Devuelve true si todas las celdas tienen un borde de derrame o false si todas las celdas no tienen borde de derrame. Devuelve NULL si hay celdas con y sin bordes derramados dentro del rango.
+
+      \[[Conjunto de API: ExcelApi 1,12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: hasSpill
+    fullName: hasSpill
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly hasSpill: boolean;'
+      return:
+        type:
+          - boolean
   - uid: 'excel!Excel.Range#height:member'
     summary: |-
       Devuelve la distancia en puntos, con un zoom del 100%, desde el borde superior del rango hasta el borde inferior del mismo.
@@ -2404,6 +2556,21 @@ items:
               }
           });
           ```
+  - uid: 'excel!Excel.Range#numberFormatCategories:member'
+    summary: |-
+      Representa la categoría del formato de número de cada celda.
+
+      \[[Conjunto de API: ExcelApi 1,12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: numberFormatCategories
+    fullName: numberFormatCategories
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly numberFormatCategories: Excel.NumberFormatCategory[][];'
+      return:
+        type:
+          - 'excel!Excel.Range#numberFormatCategories~0:complex'
   - uid: 'excel!Excel.Range#numberFormatLocal:member'
     summary: |-
       Representa el código de formato numérico de Excel para el intervalo determinado, en función de la configuración de idioma del usuario. Excel no realiza ninguna coerción de idioma o formato al obtener o establecer la `numberFormatLocal` propiedad. Cualquier texto devuelto utiliza las cadenas con formato local según el idioma especificado en la configuración del sistema.
@@ -2536,6 +2703,21 @@ items:
       return:
         type:
           - number
+  - uid: 'excel!Excel.Range#savedAsArray:member'
+    summary: |-
+      Representa si todas las celdas se guardarían como una fórmula de matriz. Devuelve true si todas las celdas se guardarían como una fórmula de matriz o false si no se guardan todas las celdas como una fórmula de matriz. Devuelve NULL si algunas celdas se guardarían como una fórmula de matriz y otras no.
+
+      \[[Conjunto de API: ExcelApi 1,12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    name: savedAsArray
+    fullName: savedAsArray
+    langs:
+      - typeScript
+    type: property
+    syntax:
+      content: 'readonly savedAsArray: boolean;'
+      return:
+        type:
+          - boolean
   - uid: 'excel!Excel.Range#select:member(1)'
     summary: |-
       Selecciona el intervalo especificado en la interfaz de usuario de Excel.
@@ -3307,6 +3489,8 @@ references:
         fullName: '[]>'
   - uid: 'excel!Excel.ColumnPropertiesLoadOptions:interface'
     name: ColumnPropertiesLoadOptions
+  - uid: 'excel!Excel.WorkbookRangeAreas:class'
+    name: Excel.WorkbookRangeAreas
   - uid: 'excel!Excel.Range#getImage~0:complex'
     name: OfficeExtension.ClientResult<string>
     fullName: OfficeExtension.ClientResult<string>
@@ -3388,6 +3572,15 @@ references:
         fullName: Excel.Range
       - name: ' | string'
         fullName: ' | string'
+  - uid: 'excel!Excel.Range#numberFormatCategories~0:complex'
+    name: 'Excel.NumberFormatCategory[][]'
+    fullName: 'Excel.NumberFormatCategory[][]'
+    spec.typeScript:
+      - uid: 'excel!Excel.NumberFormatCategory:enum'
+        name: Excel.NumberFormatCategory
+        fullName: Excel.NumberFormatCategory
+      - name: '[][]'
+        fullName: '[][]'
   - uid: 'excel!Excel.RemoveDuplicatesResult:class'
     name: Excel.RemoveDuplicatesResult
   - uid: 'excel!Excel.Range#replaceAll~0:complex'
