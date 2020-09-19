@@ -51,6 +51,36 @@ items:
       return:
         type:
           - 'excel!Excel.PivotFieldCollection:class'
+        description: |-
+
+
+          #### <a name="examples"></a>Ejemplos
+
+          ```typescript
+          // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/85-preview-apis/pivottable-pivotfilters.yaml
+          await Excel.run(async (context) => {
+            // Add a PivotFilter to filter on the values correlated with a row.
+
+            // Get the PivotTable.
+            const pivotTable = context.workbook.worksheets.getActiveWorksheet().pivotTables.getItem("Farm Sales");
+
+            // Get the "Farm" field.
+            const field = pivotTable.hierarchies.getItem("Farm").fields.getItem("Farm");
+
+            // See if any value filter is currently applied to this field, if not, create a new one and apply it to the field.
+            if (field.isFiltered(Excel.PivotFilterType.value)) {
+              // Filter to only include rows with more than 500 wholesale crates sold.
+              const filter: Excel.PivotValueFilter = {
+                condition: Excel.ValueFilterCondition.greaterThan,
+                comparator: 500,
+                value: "Sum of Crates Sold Wholesale"
+              };
+              field.applyFilter({ valueFilter: filter });
+            }
+
+            await context.sync();
+          });
+          ```
   - uid: 'excel!Excel.PivotHierarchy#id:member'
     summary: |-
       Id. de la PivotHierarchy.
@@ -121,7 +151,7 @@ items:
         description: ''
       parameters:
         - id: propertyNamesAndPaths
-          description: '`propertyNamesAndPaths.select`es una cadena delimitada por comas que especifica las propiedades que se van a cargar y `propertyNamesAndPaths.expand` es una cadena delimitada por comas que especifica las propiedades de navegación que se deben cargar.'
+          description: '`propertyNamesAndPaths.select` es una cadena delimitada por comas que especifica las propiedades que se van a cargar y `propertyNamesAndPaths.expand` es una cadena delimitada por comas que especifica las propiedades de navegación que se deben cargar.'
           type:
             - |-
               {
@@ -188,7 +218,7 @@ items:
           type:
             - 'excel!Excel.PivotHierarchy:class'
   - uid: 'excel!Excel.PivotHierarchy#toJSON:member(1)'
-    summary: 'Reemplaza el `toJSON()` método JavaScript para proporcionar un resultado más útil cuando se pasa un objeto API a`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama al `toJSON` método del objeto que se le pasa.) Mientras que el objeto Excel. PivotHierarchy original es un objeto API, el `toJSON` método devuelve un objeto JavaScript sin formato (escrito como`Excel.Interfaces.PivotHierarchyData`<!-- -->) que contiene copias rasas de las propiedades secundarias cargadas del objeto original.'
+    summary: 'Reemplaza el `toJSON()` método JavaScript para proporcionar un resultado más útil cuando se pasa un objeto API a `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama al `toJSON` método del objeto que se le pasa.) Mientras que el objeto Excel. PivotHierarchy original es un objeto API, el `toJSON` método devuelve un objeto JavaScript sin formato (escrito como `Excel.Interfaces.PivotHierarchyData`<!-- -->) que contiene copias rasas de las propiedades secundarias cargadas del objeto original.'
     name: toJSON()
     fullName: toJSON()
     langs:
