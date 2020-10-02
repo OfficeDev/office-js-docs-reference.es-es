@@ -1528,6 +1528,14 @@ items:
     summary: |-
       Obtiene las propiedades de una cita o un mensaje en una carpeta compartida, calendario o buzón.
 
+      **Importante**: en el modo de redacción de mensajes, esta API no es compatible con Outlook en la web o Windows a menos que se cumplan las siguientes condiciones.
+
+      1. El propietario comparte al menos una carpeta de buzón con el delegado.
+
+      2. El delegado borra un mensaje en la carpeta compartida.
+
+      Una vez enviado el mensaje, suele encontrarse en la carpeta **elementos enviados** del delegado.
+
       Para obtener más información sobre el uso de esta API, vea el artículo [delegados de acceso](https://docs.microsoft.com/office/dev/add-ins/outlook/delegate-access) .
 
       **Nota**: este método no es compatible con Outlook en iOS o Android.
@@ -1558,7 +1566,7 @@ items:
               let sharedProperties = result2.value;
               let delegatePermissions = sharedProperties.delegatePermissions;
 
-              // Determine if user can do the expected operation, e.g., do they have Write permission?
+              // Determine if user has the appropriate permission to do the operation.
               if ((delegatePermissions & Office.MailboxEnums.DelegatePermissions.Read) != 0) {
                 var ewsId = Office.context.mailbox.item.itemId;
                 var restId = Office.context.mailbox.convertToRestId(ewsId, Office.MailboxEnums.RestVersion.v2_0);
@@ -1606,6 +1614,14 @@ items:
     summary: |-
       Obtiene las propiedades de una cita o un mensaje en una carpeta compartida, calendario o buzón.
 
+      **Importante**: en el modo de redacción de mensajes, esta API no es compatible con Outlook en la web o Windows a menos que se cumplan las siguientes condiciones.
+
+      1. El propietario comparte al menos una carpeta de buzón con el delegado.
+
+      2. El delegado borra un mensaje en la carpeta compartida.
+
+      Una vez enviado el mensaje, suele encontrarse en la carpeta **elementos enviados** del delegado.
+
       Para obtener más información sobre el uso de esta API, vea el artículo [delegados de acceso](https://docs.microsoft.com/office/dev/add-ins/outlook/delegate-access) .
 
       **Nota**: este método no es compatible con Outlook en iOS o Android.
@@ -1621,7 +1637,7 @@ items:
       ```javascript
       // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/65-delegates-and-shared-folders/get-shared-properties.yaml
       if (!Office.context.mailbox.item.getSharedPropertiesAsync) {
-        console.error("Try this sample on a message from a shared folder.");
+        console.error("Try this sample on an item from a shared folder.");
         return;
       }
 
