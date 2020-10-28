@@ -4,7 +4,7 @@ items:
     summary: |-
       El modo de lectura de mensajes de [Office. Context. Mailbox. Item](xref:outlook!Office.Item:interface)<!-- -->.
 
-      **Importante**: se trata de un objeto interno de Outlook, que no se expone directamente a través de las interfaces existentes. Debe tratarlo como un modo de `Office.context.mailbox.item`<!-- -->. Consulte la página del [modelo de objetos](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/requirement-set-1.8/office.context.mailbox.item) para obtener más información.
+      **Importante** : se trata de un objeto interno de Outlook, que no se expone directamente a través de las interfaces existentes. Debe tratarlo como un modo de `Office.context.mailbox.item`<!-- -->. Consulte la página del [modelo de objetos](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/requirement-set-1.8/office.context.mailbox.item) para obtener más información.
 
       Interfaces principales:
 
@@ -22,7 +22,6 @@ items:
     package: outlook!
     children:
       - 'outlook!Office.MessageRead#addHandlerAsync:member(1)'
-      - 'outlook!Office.MessageRead#addHandlerAsync:member(2)'
       - 'outlook!Office.MessageRead#attachments:member'
       - 'outlook!Office.MessageRead#body:member'
       - 'outlook!Office.MessageRead#categories:member'
@@ -37,9 +36,7 @@ items:
       - 'outlook!Office.MessageRead#end:member'
       - 'outlook!Office.MessageRead#from:member'
       - 'outlook!Office.MessageRead#getAllInternetHeadersAsync:member(1)'
-      - 'outlook!Office.MessageRead#getAllInternetHeadersAsync:member(2)'
       - 'outlook!Office.MessageRead#getAttachmentContentAsync:member(1)'
-      - 'outlook!Office.MessageRead#getAttachmentContentAsync:member(2)'
       - 'outlook!Office.MessageRead#getEntities:member(1)'
       - 'outlook!Office.MessageRead#getEntitiesByType:member(1)'
       - 'outlook!Office.MessageRead#getFilteredEntitiesByName:member(1)'
@@ -59,7 +56,6 @@ items:
       - 'outlook!Office.MessageRead#notificationMessages:member'
       - 'outlook!Office.MessageRead#recurrence:member'
       - 'outlook!Office.MessageRead#removeHandlerAsync:member(1)'
-      - 'outlook!Office.MessageRead#removeHandlerAsync:member(2)'
       - 'outlook!Office.MessageRead#sender:member'
       - 'outlook!Office.MessageRead#seriesId:member'
       - 'outlook!Office.MessageRead#start:member'
@@ -67,15 +63,29 @@ items:
       - 'outlook!Office.MessageRead#to:member'
   - uid: 'outlook!Office.MessageRead#addHandlerAsync:member(1)'
     summary: |-
-      Agrega un controlador de eventos para un evento admitido. **Nota**: los eventos solo están disponibles con el panel de tareas.
+      Agrega un controlador de eventos para un evento admitido. **Nota** : los eventos solo están disponibles con el panel de tareas.
 
       Consulte la [sección eventos](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/requirement-set-1.8/office.context.mailbox.item#events) del modelo de objetos de elementos para ver los eventos admitidos.
 
       \[[Conjunto de API: buzón de correo 1,7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      ** <!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)** :`ReadItem`
 
-      ** <!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: mensaje leído
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)** : mensaje leído
+
+      #### <a name="examples"></a>Ejemplos
+
+      ```javascript
+      function myHandlerFunction(eventarg) {
+          if (eventarg.attachmentStatus === Office.MailboxEnums.AttachmentStatus.Added) {
+              var attachment = eventarg.attachmentDetails;
+              console.log("Event Fired and Attachment Added!");
+              getAttachmentContentAsync(attachment.id, options, callback);
+          }
+      }
+
+      Office.context.mailbox.item.addHandlerAsync(Office.EventType.AttachmentsChanged, myHandlerFunction, myCallback);
+      ```
     name: 'addHandlerAsync(eventType, handler, options, callback)'
     fullName: 'addHandlerAsync(eventType, handler, options, callback)'
     langs:
@@ -104,63 +114,14 @@ items:
           description: 'Opcional. Cuando el método finaliza, la función que se pasa en el `callback` parámetro se llama con un único parámetro, `asyncResult`<!-- -->, que es un `Office.AsyncResult` objeto.'
           type:
             - 'outlook!Office.MessageRead#addHandlerAsync~1:complex'
-  - uid: 'outlook!Office.MessageRead#addHandlerAsync:member(2)'
-    summary: |-
-      Agrega un controlador de eventos para un evento admitido. **Nota**: los eventos solo están disponibles con el panel de tareas.
-
-      Consulte la [sección eventos](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/requirement-set-1.8/office.context.mailbox.item#events) del modelo de objetos de elementos para ver los eventos admitidos.
-
-      \[[Conjunto de API: buzón de correo 1,7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-    remarks: |-
-      ** <!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
-
-      ** <!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: mensaje leído
-
-      #### <a name="examples"></a>Ejemplos
-
-      ```javascript
-      function myHandlerFunction(eventarg) {
-          if (eventarg.attachmentStatus === Office.MailboxEnums.AttachmentStatus.Added) {
-              var attachment = eventarg.attachmentDetails;
-              console.log("Event Fired and Attachment Added!");
-              getAttachmentContentAsync(attachment.id, options, callback);
-          }
-      }
-
-      Office.context.mailbox.item.addHandlerAsync(Office.EventType.AttachmentsChanged, myHandlerFunction, myCallback);
-      ```
-    name: 'addHandlerAsync(eventType, handler, callback)'
-    fullName: 'addHandlerAsync(eventType, handler, callback)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'addHandlerAsync(eventType: Office.EventType | string, handler: any, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: eventType
-          description: El evento que debe invocar el controlador.
-          type:
-            - 'outlook!Office.MessageRead#addHandlerAsync~2:complex'
-        - id: handler
-          description: 'La función que va a controlar el evento. La función debe aceptar un único parámetro, que es un literal de objeto. La propiedad Type del parámetro coincidirá con el `eventType` parámetro que se ha pasado a `addHandlerAsync`<!-- -->.'
-          type:
-            - any
-        - id: callback
-          description: 'Opcional. Cuando el método finaliza, la función que se pasa en el `callback` parámetro se llama con un único parámetro, `asyncResult`<!-- -->, que es un `Office.AsyncResult` objeto.'
-          type:
-            - 'outlook!Office.MessageRead#addHandlerAsync~3:complex'
   - uid: 'outlook!Office.MessageRead#attachments:member'
     summary: Obtiene los datos adjuntos del elemento como una matriz.
     remarks: |-
-      ** <!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)** :`ReadItem`
 
-      ** <!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: mensaje leído
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)** : mensaje leído
 
-      **Nota**: ciertos tipos de archivos están bloqueados por Outlook debido a posibles problemas de seguridad y, por lo tanto, no se devuelven. Para obtener más información, consulte [datos adjuntos bloqueados en Outlook](https://support.office.com/article/Blocked-attachments-in-Outlook-434752E1-02D3-4E90-9124-8B81E49A8519) .<!-- -->.
+      **Nota** : ciertos tipos de archivos están bloqueados por Outlook debido a posibles problemas de seguridad y, por lo tanto, no se devuelven. Para obtener más información, consulte [datos adjuntos bloqueados en Outlook](https://support.office.com/article/Blocked-attachments-in-Outlook-434752E1-02D3-4E90-9124-8B81E49A8519) .<!-- -->.
 
       #### <a name="examples"></a>Ejemplos
 
@@ -205,9 +166,9 @@ items:
 
       \[[Conjunto de API: buzón de correo 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      ** <!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)** :`ReadItem`
 
-      ** <!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: mensaje leído
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)** : mensaje leído
 
       #### <a name="examples"></a>Ejemplos
 
@@ -243,9 +204,9 @@ items:
 
       \[[Conjunto de API: buzón de correo 1,8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      ** <!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)** :`ReadItem`
 
-      ** <!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: mensaje leído
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)** : mensaje leído
 
       #### <a name="examples"></a>Ejemplos
 
@@ -338,9 +299,9 @@ items:
 
       - Other: sin límite
     remarks: |-
-      ** <!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)** :`ReadItem`
 
-      ** <!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: mensaje leído
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)** : mensaje leído
 
       #### <a name="examples"></a>Ejemplos
 
@@ -370,9 +331,9 @@ items:
 
       Obtiene un valor NULL para esta propiedad para un nuevo elemento de un formulario de redacción. Si el usuario establece un asunto y guarda el elemento, la propiedad `conversationId` devolverá un valor.
     remarks: |-
-      ** <!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)** :`ReadItem`
 
-      ** <!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: mensaje leído
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)** : mensaje leído
 
       #### <a name="examples"></a>Ejemplos
 
@@ -393,9 +354,9 @@ items:
   - uid: 'outlook!Office.MessageRead#dateTimeCreated:member'
     summary: Obtiene la fecha y hora de creación de un elemento.
     remarks: |-
-      ** <!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)** :`ReadItem`
 
-      ** <!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: mensaje leído
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)** : mensaje leído
 
       #### <a name="examples"></a>Ejemplos
 
@@ -417,11 +378,11 @@ items:
     summary: |-
       Obtiene la fecha y hora en que se modificó por última vez un elemento.
 
-      **Nota**: este miembro no es compatible con Outlook en iOS o Android.
+      **Nota** : este miembro no es compatible con Outlook en iOS o Android.
     remarks: |-
-      ** <!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)** :`ReadItem`
 
-      ** <!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: mensaje leído
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)** : mensaje leído
 
       #### <a name="examples"></a>Ejemplos
 
@@ -449,11 +410,11 @@ items:
 
       Cuando se especifican datos adjuntos en el `formData.attachments` parámetro, Outlook intenta descargar todos los datos adjuntos y adjuntarlos al formulario de respuesta. Si se produce un error al agregar los datos adjuntos, se muestra un error en la interfaz de usuario del formulario. Si esto no es posible, no se produce ningún mensaje de error.
 
-      **Nota**: este método no es compatible con Outlook en iOS o Android.
+      **Nota** : este método no es compatible con Outlook en iOS o Android.
     remarks: |-
-      ** <!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)** :`ReadItem`
 
-      ** <!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: mensaje leído
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)** : mensaje leído
 
       #### <a name="examples"></a>Ejemplos
 
@@ -552,13 +513,13 @@ items:
 
       Cuando se especifican datos adjuntos en el `formData.attachments` parámetro, Outlook intenta descargar todos los datos adjuntos y adjuntarlos al formulario de respuesta. Si se produce un error al agregar los datos adjuntos, se muestra un error en la interfaz de usuario del formulario. Si esto no es posible, no se produce ningún mensaje de error.
 
-      **Nota**: este método no es compatible con Outlook en iOS o Android.
+      **Nota** : este método no es compatible con Outlook en iOS o Android.
 
       \[[Conjunto de API: buzón de correo 1,9](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      ** <!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)** :`ReadItem`
 
-      ** <!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: mensaje leído
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)** : mensaje leído
 
       #### <a name="examples"></a>Ejemplos
 
@@ -604,11 +565,11 @@ items:
 
       Cuando se especifican datos adjuntos en el `formData.attachments` parámetro, Outlook intenta descargar todos los datos adjuntos y adjuntarlos al formulario de respuesta. Si se produce un error al agregar los datos adjuntos, se muestra un error en la interfaz de usuario del formulario. Si esto no es posible, no se produce ningún mensaje de error.
 
-      **Nota**: este método no es compatible con Outlook en iOS o Android.
+      **Nota** : este método no es compatible con Outlook en iOS o Android.
     remarks: |-
-      ** <!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)** :`ReadItem`
 
-      ** <!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: mensaje leído
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)** : mensaje leído
 
       #### <a name="examples"></a>Ejemplos
 
@@ -723,13 +684,13 @@ items:
 
       Cuando se especifican datos adjuntos en el `formData.attachments` parámetro, Outlook intenta descargar todos los datos adjuntos y adjuntarlos al formulario de respuesta. Si se produce un error al agregar los datos adjuntos, se muestra un error en la interfaz de usuario del formulario. Si esto no es posible, no se produce ningún mensaje de error.
 
-      **Nota**: este método no es compatible con Outlook en iOS o Android.
+      **Nota** : este método no es compatible con Outlook en iOS o Android.
 
       \[[Conjunto de API: buzón de correo 1,9](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      ** <!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)** :`ReadItem`
 
-      ** <!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: mensaje leído
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)** : mensaje leído
 
       #### <a name="examples"></a>Ejemplos
 
@@ -790,9 +751,9 @@ items:
 
       Si usa el método `Time.setAsync` para establecer la hora de finalización, use el método `convertToUtcClientTime` para convertir la hora local del cliente en un valor UTC para el servidor.
     remarks: |-
-      ** <!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)** :`ReadItem`
 
-      ** <!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: mensaje leído
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)** : mensaje leído
 
       #### <a name="examples"></a>Ejemplos
 
@@ -816,13 +777,13 @@ items:
 
       Las propiedades `from` y `sender` representan a la misma persona, a menos que un delegado envíe el mensaje. En ese caso, la `from` propiedad representa al usuario que delega, y la `sender` propiedad representa el delegado.
 
-      **Nota**: la `recipientType` propiedad del `EmailAddressDetails` objeto de la `from` propiedad está sin definir.
+      **Nota** : la `recipientType` propiedad del `EmailAddressDetails` objeto de la `from` propiedad está sin definir.
 
       La `from` propiedad devuelve un `EmailAddressDetails` objeto.
     remarks: |-
-      ** <!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)** :`ReadItem`
 
-      ** <!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: mensaje leído
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)** : mensaje leído
 
       #### <a name="examples"></a>Ejemplos
 
@@ -847,9 +808,9 @@ items:
 
       \[[Conjunto de API: buzón de correo 1,8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      ** <!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)** :`ReadItem`
 
-      ** <!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: mensaje leído
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)** : mensaje leído
 
       #### <a name="examples"></a>Ejemplos
 
@@ -890,31 +851,6 @@ items:
           description: 'Opcional. Cuando el método finaliza, la función que se pasa en el `callback` parámetro se llama con un único parámetro, `asyncResult`<!-- -->, que es un `Office.AsyncResult` objeto. Si se realiza correctamente, los datos de los encabezados de Internet se proporcionan en la `asyncResult.value` propiedad como una cadena. Consulte [RFC 2183](https://tools.ietf.org/html/rfc2183) para obtener información sobre el formato del valor de cadena devuelto. Si se produce un error en la llamada, la propiedad contendrá `asyncResult.error` un código de error con el motivo del error.'
           type:
             - 'outlook!Office.MessageRead#getAllInternetHeadersAsync~0:complex'
-  - uid: 'outlook!Office.MessageRead#getAllInternetHeadersAsync:member(2)'
-    summary: |-
-      Obtiene todos los encabezados de Internet del mensaje en forma de cadena.
-
-      \[[Conjunto de API: buzón de correo 1,8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-    remarks: |-
-      ** <!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
-
-      ** <!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: mensaje leído
-    name: getAllInternetHeadersAsync(callback)
-    fullName: getAllInternetHeadersAsync(callback)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'getAllInternetHeadersAsync(callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: callback
-          description: 'Opcional. Cuando el método finaliza, la función que se pasa en el `callback` parámetro se llama con un único parámetro, `asyncResult`<!-- -->, que es un `Office.AsyncResult` objeto. Si se realiza correctamente, los datos de los encabezados de Internet se proporcionan en la propiedad asyncResult. Value como una cadena. Consulte [RFC 2183](https://tools.ietf.org/html/rfc2183) para obtener información sobre el formato del valor de cadena devuelto. Si se produce un error en la llamada, la propiedad contendrá `asyncResult.error` un código de error con el motivo del error.'
-          type:
-            - 'outlook!Office.MessageRead#getAllInternetHeadersAsync~1:complex'
   - uid: 'outlook!Office.MessageRead#getAttachmentContentAsync:member(1)'
     summary: |-
       Obtiene datos adjuntos de un mensaje o cita y los devuelve como un `AttachmentContent` objeto.
@@ -923,11 +859,11 @@ items:
 
       \[[Conjunto de API: buzón de correo 1,8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      ** <!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)** :`ReadItem`
 
-      ** <!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: mensaje leído
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)** : mensaje leído
 
-      **Errores**:
+      **Errores** :
 
       - `AttachmentTypeNotSupported`<!-- -->: No se admite el tipo de datos adjuntos. Los tipos no admitidos incluyen imágenes insertadas en formato de texto enriquecido o tipos de datos adjuntos que no sean de correo electrónico o de calendario (como un elemento de contacto o tarea).
 
@@ -997,52 +933,15 @@ items:
           description: 'Opcional. Cuando el método finaliza, la función que se pasa en el `callback` parámetro se llama con un único parámetro, `asyncResult`<!-- -->, que es un `Office.AsyncResult` objeto. Si se produce un error en la llamada, la propiedad contendrá `asyncResult.error` un código de error con el motivo del error.'
           type:
             - 'outlook!Office.MessageRead#getAttachmentContentAsync~0:complex'
-  - uid: 'outlook!Office.MessageRead#getAttachmentContentAsync:member(2)'
-    summary: |-
-      Obtiene datos adjuntos de un mensaje o cita y los devuelve como un `AttachmentContent` objeto.
-
-      El `getAttachmentContentAsync` método obtiene los datos adjuntos con el identificador especificado del elemento. Como práctica recomendada, debe usar el identificador para recuperar datos adjuntos en la misma sesión que identificadores se recuperaron con la `getAttachmentsAsync` llamada o `item.attachments` . En Outlook en la Web y dispositivos móviles, el identificador de datos adjuntos solo es válido en la misma sesión. Una sesión es superior a cuando el usuario cierra la aplicación o si el usuario comienza a redactar un formulario en línea y, a continuación, el formulario continúa en una ventana independiente.
-
-      \[[Conjunto de API: buzón de correo 1,8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-    remarks: |-
-      ** <!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
-
-      ** <!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: mensaje leído
-
-      **Errores**:
-
-      - `AttachmentTypeNotSupported`<!-- -->: No se admite el tipo de datos adjuntos. Los tipos no admitidos incluyen imágenes insertadas en formato de texto enriquecido o tipos de datos adjuntos que no sean de correo electrónico o de calendario (como un elemento de contacto o tarea).
-
-      - `InvalidAttachmentId`<!-- -->: El identificador de los datos adjuntos no existe.
-    name: 'getAttachmentContentAsync(attachmentId, callback)'
-    fullName: 'getAttachmentContentAsync(attachmentId, callback)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'getAttachmentContentAsync(attachmentId: string, callback?: (asyncResult: Office.AsyncResult<AttachmentContent>) => void): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: attachmentId
-          description: El identificador de los datos adjuntos que desea obtener.
-          type:
-            - string
-        - id: callback
-          description: 'Opcional. Cuando el método finaliza, la función que se pasa en el `callback` parámetro se llama con un único parámetro, `asyncResult`<!-- -->, que es un `Office.AsyncResult` objeto. Si se produce un error en la llamada, la propiedad contendrá `asyncResult.error` un código de error con el motivo del error.'
-          type:
-            - 'outlook!Office.MessageRead#getAttachmentContentAsync~1:complex'
   - uid: 'outlook!Office.MessageRead#getEntities:member(1)'
     summary: |-
       Obtiene las entidades que obtenidas en el cuerpo del elemento seleccionado.
 
-      **Nota**: este método no es compatible con Outlook en iOS o Android.
+      **Nota** : este método no es compatible con Outlook en iOS o Android.
     remarks: |-
-      ** <!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)** :`ReadItem`
 
-      ** <!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: mensaje leído
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)** : mensaje leído
 
       #### <a name="examples"></a>Ejemplos
 
@@ -1105,11 +1004,11 @@ items:
     summary: |-
       Obtiene una matriz de todas las entidades del tipo de entidad especificado encontrado en el cuerpo del elemento seleccionado.
 
-      **Nota**: este método no es compatible con Outlook en iOS o Android.
+      **Nota** : este método no es compatible con Outlook en iOS o Android.
     remarks: |-
-      ** <!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`Restricted`
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)** :`Restricted`
 
-      ** <!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: mensaje leído
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)** : mensaje leído
 
       #### <a name="examples"></a>Ejemplos
 
@@ -1135,7 +1034,7 @@ items:
 
             Aunque el nivel de permiso mínimo para usar este método es `Restricted`<!-- -->, algunos tipos de entidad necesitan `ReadItem` tener acceso, como se especifica en la siguiente tabla.
 
-            <table> <tr> <th>Valor de entityType</th> <th>Tipo de objetos de la matriz devuelta</th> <th>Nivel de permiso requerido</th> </tr> <tr> <td>Address</td> <td>Cadena</td> <td>Restricted</td> </tr> <tr> <td>Contacto</td> <td>Contacto</td> <td>ReadItem</td> </tr> <tr> <td>EmailAddress</td> <td>Cadena</td> <td>ReadItem</td> </tr> <tr> <td>MeetingSuggestion</td> <td>MeetingSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>PhoneNumber</td> <td>PhoneNumber</td> <td>Restricted</td> </tr> <tr> <td>TaskSuggestion</td> <td>TaskSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>URL</td> <td>Cadena</td> <td>Restricted</td> </tr> </table>
+            <table> <tr> <th>Valor de entityType</th> <th>Tipo de objetos de la matriz devuelta</th> <th>Nivel de permiso requerido</th> </tr> <tr> <td>Address</td> <td>String</td> <td>Restricted</td> </tr> <tr> <td>Contacto</td> <td>Contacto</td> <td>ReadItem</td> </tr> <tr> <td>EmailAddress</td> <td>String</td> <td>ReadItem</td> </tr> <tr> <td>MeetingSuggestion</td> <td>MeetingSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>PhoneNumber</td> <td>PhoneNumber</td> <td>Restricted</td> </tr> <tr> <td>TaskSuggestion</td> <td>TaskSuggestion</td> <td>ReadItem</td> </tr> <tr> <td>URL</td> <td>String</td> <td>Restricted</td> </tr> </table>
           type:
             - 'outlook!Office.MessageRead#getEntitiesByType~1:complex'
   - uid: 'outlook!Office.MessageRead#getFilteredEntitiesByName:member(1)'
@@ -1144,11 +1043,11 @@ items:
 
       El `getFilteredEntitiesByName` método devuelve las entidades que coinciden con la expresión regular definida en el `ItemHasKnownEntity` elemento rule del archivo XML de manifiesto con el `FilterName` valor de elemento especificado.
 
-      **Nota**: este método no es compatible con Outlook en iOS o Android.
+      **Nota** : este método no es compatible con Outlook en iOS o Android.
     remarks: |-
-      ** <!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)** :`ReadItem`
 
-      ** <!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: mensaje leído
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)** : mensaje leído
 
       #### <a name="examples"></a>Ejemplos
 
@@ -1181,11 +1080,11 @@ items:
 
       Si especifica una regla `ItemHasRegularExpressionMatch` en la propiedad body de un elemento, la expresión regular debe filtrar aún más el cuerpo y no debe intentar devolver todo el cuerpo del elemento. El uso de una expresión regular como .* para obtener todo el cuerpo de un elemento no siempre devuelve los resultados esperados. En su lugar, use el método `Body.getAsync` para recuperar todo el cuerpo.
 
-      **Nota**: este método no es compatible con Outlook en iOS o Android.
+      **Nota** : este método no es compatible con Outlook en iOS o Android.
     remarks: |-
-      ** <!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)** :`ReadItem`
 
-      ** <!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: mensaje leído
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)** : mensaje leído
 
       #### <a name="examples"></a>Ejemplos
 
@@ -1236,11 +1135,11 @@ items:
 
       Si especifica una regla `ItemHasRegularExpressionMatch` en la propiedad body de un elemento, la expresión regular debe filtrar aún más el cuerpo y no debe intentar devolver todo el cuerpo del elemento. El uso de una expresión regular como .* para obtener todo el cuerpo de un elemento no siempre devuelve los resultados esperados.
 
-      **Nota**: este método no es compatible con Outlook en iOS o Android.
+      **Nota** : este método no es compatible con Outlook en iOS o Android.
     remarks: |-
-      ** <!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)** :`ReadItem`
 
-      ** <!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: mensaje leído
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)** : mensaje leído
 
       #### <a name="examples"></a>Ejemplos
 
@@ -1288,13 +1187,13 @@ items:
     summary: |-
       Obtiene las entidades que se han detectado en una coincidencia resaltada que un usuario ha seleccionado. Las coincidencias resaltadas se aplican a complementos contextuales.
 
-      **Nota**: este método no es compatible con Outlook en iOS o Android.
+      **Nota** : este método no es compatible con Outlook en iOS o Android.
 
       \[[Conjunto de API: buzón de correo 1,6](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      ** <!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)** :`ReadItem`
 
-      ** <!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: mensaje leído
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)** : mensaje leído
 
       #### <a name="examples"></a>Ejemplos
 
@@ -1361,13 +1260,13 @@ items:
 
       Si especifica una regla `ItemHasRegularExpressionMatch` en la propiedad body de un elemento, la expresión regular debe filtrar aún más el cuerpo y no debe intentar devolver todo el cuerpo del elemento. El uso de una expresión regular como .* para obtener todo el cuerpo de un elemento no siempre devuelve los resultados esperados. En su lugar, use el método `Body.getAsync` para recuperar todo el cuerpo.
 
-      **Nota**: este método no es compatible con Outlook en iOS o Android.
+      **Nota** : este método no es compatible con Outlook en iOS o Android.
 
       \[[Conjunto de API: buzón de correo 1,6](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      ** <!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)** :`ReadItem`
 
-      ** <!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: mensaje leído
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)** : mensaje leído
 
       #### <a name="examples"></a>Ejemplos
 
@@ -1421,13 +1320,13 @@ items:
 
       Para obtener más información sobre el uso de esta API, vea el artículo [delegados de acceso](https://docs.microsoft.com/office/dev/add-ins/outlook/delegate-access) .
 
-      **Nota**: este método no es compatible con Outlook en iOS o Android.
+      **Nota** : este método no es compatible con Outlook en iOS o Android.
 
       \[[Conjunto de API: buzón de correo 1,8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      ** <!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)** :`ReadItem`
 
-      ** <!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: mensaje leído
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)** : mensaje leído
 
       #### <a name="examples"></a>Ejemplos
 
@@ -1499,13 +1398,13 @@ items:
 
       Para obtener más información sobre el uso de esta API, vea el artículo [delegados de acceso](https://docs.microsoft.com/office/dev/add-ins/outlook/delegate-access) .
 
-      **Nota**: este método no es compatible con Outlook en iOS o Android.
+      **Nota** : este método no es compatible con Outlook en iOS o Android.
 
       \[[Conjunto de API: buzón de correo 1,8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      ** <!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)** :`ReadItem`
 
-      ** <!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: mensaje leído
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)** : mensaje leído
 
       #### <a name="examples"></a>Ejemplos
 
@@ -1540,11 +1439,11 @@ items:
     summary: |-
       Obtiene el identificador de mensaje de Internet de un mensaje de correo electrónico.
 
-      **Importante**: en la carpeta **elementos enviados** , `internetMessageId` es posible que no esté disponible aún en los elementos enviados recientemente. En ese caso, considere la posibilidad de usar los [servicios web Exchange](https://docs.microsoft.com/office/dev/add-ins/outlook/web-services) para obtener esta [propiedad del servidor](https://docs.microsoft.com/exchange/client-developer/web-service-reference/internetmessageid)<!-- -->.
+      **Importante** : en la carpeta **elementos enviados** , `internetMessageId` es posible que no esté disponible aún en los elementos enviados recientemente. En ese caso, considere la posibilidad de usar los [servicios web Exchange](https://docs.microsoft.com/office/dev/add-ins/outlook/web-services) para obtener esta [propiedad del servidor](https://docs.microsoft.com/exchange/client-developer/web-service-reference/internetmessageid)<!-- -->.
     remarks: |-
-      ** <!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)** :`ReadItem`
 
-      ** <!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: mensaje leído
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)** : mensaje leído
 
       #### <a name="examples"></a>Ejemplos
 
@@ -1568,9 +1467,9 @@ items:
 
       Puede crear clases de mensaje personalizadas que extienda una clase de mensaje predeterminada, por ejemplo, una clase de mensaje de cita personalizada. `IPM.Appointment.Contoso`<!-- -->.
     remarks: |-
-      ** <!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)** :`ReadItem`
 
-      ** <!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: mensaje leído
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)** : mensaje leído
 
       La propiedad `itemClass` especifica la clase de mensaje del elemento seleccionado. Las siguientes son las clases de mensaje predeterminadas para el elemento de mensaje o cita.
 
@@ -1598,11 +1497,11 @@ items:
 
       La propiedad `itemId` no está disponible en el modo redacción. Si se requiere un identificador de elemento, el método `saveAsync` puede usarse para guardar el elemento en el servidor, que devolverá el identificador de elemento en el parámetro `asyncResult.value` de la función de devolución de llamada.
 
-      **Nota**: el identificador que devuelve la `itemId` propiedad es el mismo que el [identificador de elemento de servicios web Exchange](https://docs.microsoft.com/exchange/client-developer/exchange-web-services/ews-identifiers-in-exchange)<!-- -->. La propiedad `itemId` no es idéntica al identificador de entrada de Outlook ni al identificador que usa la API de REST de Outlook. Antes de realizar llamadas a la API de REST con este valor, se debe convertir mediante `Office.context.mailbox.convertToRestId`<!-- -->. Para obtener más información, vea [usar las API de REST de Outlook desde un complemento de Outlook](https://docs.microsoft.com/office/dev/add-ins/outlook/use-rest-api#get-the-item-id) .<!-- -->.
+      **Nota** : el identificador que devuelve la `itemId` propiedad es el mismo que el [identificador de elemento de servicios web Exchange](https://docs.microsoft.com/exchange/client-developer/exchange-web-services/ews-identifiers-in-exchange)<!-- -->. La propiedad `itemId` no es idéntica al identificador de entrada de Outlook ni al identificador que usa la API de REST de Outlook. Antes de realizar llamadas a la API de REST con este valor, se debe convertir mediante `Office.context.mailbox.convertToRestId`<!-- -->. Para obtener más información, vea [usar las API de REST de Outlook desde un complemento de Outlook](https://docs.microsoft.com/office/dev/add-ins/outlook/use-rest-api#get-the-item-id) .<!-- -->.
     remarks: |-
-      ** <!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)** :`ReadItem`
 
-      ** <!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: mensaje leído
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)** : mensaje leído
 
       #### <a name="examples"></a>Ejemplos
 
@@ -1636,9 +1535,9 @@ items:
 
       La `itemType` propiedad devuelve uno de los `ItemType` valores de enumeración, lo que indica si la instancia del objeto Item es un mensaje o una cita.
     remarks: |-
-      ** <!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)** :`ReadItem`
 
-      ** <!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: mensaje leído
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)** : mensaje leído
 
       #### <a name="examples"></a>Ejemplos
 
@@ -1664,9 +1563,9 @@ items:
 
       Las propiedades personalizadas se proporcionan como un objeto `CustomProperties` en la propiedad `asyncResult.value`. Este objeto puede usarse para obtener, establecer y quitar las propiedades personalizadas del elemento, así como para guardar los cambios en la propiedad personalizada que se vuelve a establecer en el servidor.
     remarks: |-
-      ** <!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)** :`ReadItem`
 
-      ** <!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: mensaje leído
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)** : mensaje leído
 
       #### <a name="examples"></a>Ejemplos
 
@@ -1743,9 +1642,9 @@ items:
 
       La propiedad `location` devuelve una cadena que contiene la ubicación de la cita.
     remarks: |-
-      ** <!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)** :`ReadItem`
 
-      ** <!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: mensaje leído
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)** : mensaje leído
 
       #### <a name="examples"></a>Ejemplos
 
@@ -1769,9 +1668,9 @@ items:
 
       La `normalizedSubject` propiedad obtiene el asunto del elemento, con todos los prefijos estándar (como re: y RV:) agregados por los programas de correo electrónico. Para obtener el asunto del elemento con los prefijos intactos, use la propiedad `subject`.
     remarks: |-
-      ** <!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)** :`ReadItem`
 
-      ** <!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: mensaje leído
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)** : mensaje leído
 
       #### <a name="examples"></a>Ejemplos
 
@@ -1795,9 +1694,9 @@ items:
 
       \[[Conjunto de API: buzón de correo 1,3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      ** <!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)** :`ReadItem`
 
-      ** <!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: mensaje leído
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)** : mensaje leído
 
       #### <a name="examples"></a>Ejemplos
 
@@ -1873,15 +1772,15 @@ items:
 
       La `recurrence` propiedad devuelve un `Recurrence` objeto para citas periódicas o convocatorias de reunión si un elemento es una serie o una instancia de una serie. `null` se devuelve para citas únicas y convocatorias de reunión de citas únicas. `undefined` se devuelve para los mensajes que no son convocatorias de reunión.
 
-      **Nota**: las convocatorias de reunión tienen un valor itemClass de `IPM.Schedule.Meeting.Request`<!-- -->.
+      **Nota** : las convocatorias de reunión tienen un valor itemClass de `IPM.Schedule.Meeting.Request`<!-- -->.
 
-      **Nota**: Si el `recurrence` objeto es null, indica que el objeto es una cita única o una convocatoria de reunión de una sola cita y no forma parte de una serie.
+      **Nota** : Si el `recurrence` objeto es null, indica que el objeto es una cita única o una convocatoria de reunión de una sola cita y no forma parte de una serie.
 
       \[[Conjunto de API: buzón de correo 1,7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      ** <!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)** :`ReadItem`
 
-      ** <!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: mensaje leído
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)** : mensaje leído
 
       #### <a name="examples"></a>Ejemplos
 
@@ -1909,15 +1808,15 @@ items:
           - 'outlook!Office.Recurrence:interface'
   - uid: 'outlook!Office.MessageRead#removeHandlerAsync:member(1)'
     summary: |-
-      Elimina el controlador de eventos de un tpo de evento admitido. **Nota**: los eventos solo están disponibles con el panel de tareas.
+      Elimina el controlador de eventos de un tpo de evento admitido. **Nota** : los eventos solo están disponibles con el panel de tareas.
 
       Consulte la [sección eventos](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/requirement-set-1.8/office.context.mailbox.item#events) del modelo de objetos de elementos para ver los eventos admitidos.
 
       \[[Conjunto de API: buzón de correo 1,7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      ** <!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)** :`ReadItem`
 
-      ** <!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: mensaje leído
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)** : mensaje leído
     name: 'removeHandlerAsync(eventType, options, callback)'
     fullName: 'removeHandlerAsync(eventType, options, callback)'
     langs:
@@ -1942,48 +1841,17 @@ items:
           description: 'Opcional. Cuando el método finaliza, la función que se pasa en el `callback` parámetro se llama con un único parámetro, `asyncResult`<!-- -->, que es un `Office.AsyncResult` objeto.'
           type:
             - 'outlook!Office.MessageRead#removeHandlerAsync~1:complex'
-  - uid: 'outlook!Office.MessageRead#removeHandlerAsync:member(2)'
-    summary: |-
-      Elimina el controlador de eventos de un tpo de evento admitido. **Nota**: los eventos solo están disponibles con el panel de tareas.
-
-      Consulte la [sección eventos](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/requirement-set-1.8/office.context.mailbox.item#events) del modelo de objetos de elementos para ver los eventos admitidos.
-
-      \[[Conjunto de API: buzón de correo 1,7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-    remarks: |-
-      ** <!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
-
-      ** <!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: mensaje leído
-    name: 'removeHandlerAsync(eventType, callback)'
-    fullName: 'removeHandlerAsync(eventType, callback)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'removeHandlerAsync(eventType: Office.EventType | string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: eventType
-          description: El evento que debe revocar el controlador.
-          type:
-            - 'outlook!Office.MessageRead#removeHandlerAsync~2:complex'
-        - id: callback
-          description: 'Opcional. Cuando el método finaliza, la función que se pasa en el `callback` parámetro se llama con un único parámetro, `asyncResult`<!-- -->, que es un `Office.AsyncResult` objeto.'
-          type:
-            - 'outlook!Office.MessageRead#removeHandlerAsync~3:complex'
   - uid: 'outlook!Office.MessageRead#sender:member'
     summary: |-
       Obtiene la dirección de correo electrónico del remitente de un mensaje de correo electrónico.
 
       Las propiedades `from` y `sender` representan a la misma persona, a menos que un delegado envíe el mensaje. En ese caso, la `from` propiedad representa al usuario que delega, y la `sender` propiedad representa el delegado.
 
-      **Nota**: la `recipientType` propiedad del `EmailAddressDetails` objeto de la `sender` propiedad está sin definir.
+      **Nota** : la `recipientType` propiedad del `EmailAddressDetails` objeto de la `sender` propiedad está sin definir.
     remarks: |-
-      ** <!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)** :`ReadItem`
 
-      ** <!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: mensaje leído
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)** : mensaje leído
 
       #### <a name="examples"></a>Ejemplos
 
@@ -2008,15 +1876,15 @@ items:
 
       En los clientes de Outlook en la web y de escritorio, el `seriesId` devuelve el identificador de los servicios web Exchange (EWS) del elemento primario (serie) al que pertenece este elemento. Sin embargo, en iOS y Android, el `seriesId` devuelve el identificador de REST del elemento primario.
 
-      **Nota**: el identificador que devuelve la `seriesId` propiedad es el mismo que el identificador de elemento de servicios web Exchange. La `seriesId` propiedad no es idéntica a los identificadores de Outlook usados por la API de REST de Outlook. Antes de realizar llamadas a la API de REST con este valor, se debe convertir mediante `Office.context.mailbox.convertToRestId`<!-- -->. Para obtener más información, vea [usar las API de REST de Outlook desde un complemento de Outlook](https://docs.microsoft.com/office/dev/add-ins/outlook/use-rest-api) .<!-- -->.
+      **Nota** : el identificador que devuelve la `seriesId` propiedad es el mismo que el identificador de elemento de servicios web Exchange. La `seriesId` propiedad no es idéntica a los identificadores de Outlook usados por la API de REST de Outlook. Antes de realizar llamadas a la API de REST con este valor, se debe convertir mediante `Office.context.mailbox.convertToRestId`<!-- -->. Para obtener más información, vea [usar las API de REST de Outlook desde un complemento de Outlook](https://docs.microsoft.com/office/dev/add-ins/outlook/use-rest-api) .<!-- -->.
 
       La `seriesId` propiedad devuelve los `null` elementos que no tienen elementos primarios, como citas únicas, elementos de serie o convocatorias de reunión, y devuelven los `undefined` elementos que no son convocatorias de reunión.
 
       \[[Conjunto de API: buzón de correo 1,7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
     remarks: |-
-      ** <!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)** :`ReadItem`
 
-      ** <!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: mensaje leído
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)** : mensaje leído
 
       #### <a name="examples"></a>Ejemplos
 
@@ -2048,9 +1916,9 @@ items:
 
       La `start` propiedad es un `Date` objeto expresado como un valor de fecha y hora de la hora universal coordinada (UTC). Puede usar el `convertToLocalClientTime` método para convertir el valor a la fecha y hora local del cliente.
     remarks: |-
-      ** <!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)** :`ReadItem`
 
-      ** <!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: mensaje leído
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)** : mensaje leído
 
       #### <a name="examples"></a>Ejemplos
 
@@ -2076,9 +1944,9 @@ items:
 
       La propiedad `subject` devuelve una cadena. Use la `normalizedSubject` propiedad para obtener el asunto menos los prefijos iniciales como re: y RV:.
     remarks: |-
-      ** <!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)** :`ReadItem`
 
-      ** <!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: mensaje leído
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)** : mensaje leído
 
       #### <a name="examples"></a>Ejemplos
 
@@ -2110,9 +1978,9 @@ items:
 
       - Other: sin límite
     remarks: |-
-      ** <!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)** :`ReadItem`
 
-      ** <!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: mensaje leído
+      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)** : mensaje leído
 
       #### <a name="examples"></a>Ejemplos
 
@@ -2151,26 +2019,6 @@ references:
   - uid: 'office!Office.AsyncContextOptions:interface'
     name: Office.AsyncContextOptions
   - uid: 'outlook!Office.MessageRead#addHandlerAsync~1:complex'
-    name: '(asyncResult: Office.AsyncResult<void>) => void'
-    fullName: '(asyncResult: Office.AsyncResult<void>) => void'
-    spec.typeScript:
-      - name: '(asyncResult: '
-        fullName: '(asyncResult: '
-      - uid: 'office!Office.AsyncResult:interface'
-        name: Office.AsyncResult
-        fullName: Office.AsyncResult
-      - name: <void>) => void
-        fullName: <void>) => void
-  - uid: 'outlook!Office.MessageRead#addHandlerAsync~2:complex'
-    name: Office.EventType | string
-    fullName: Office.EventType | string
-    spec.typeScript:
-      - uid: 'office!Office.EventType:enum'
-        name: Office.EventType
-        fullName: Office.EventType
-      - name: ' | string'
-        fullName: ' | string'
-  - uid: 'outlook!Office.MessageRead#addHandlerAsync~3:complex'
     name: '(asyncResult: Office.AsyncResult<void>) => void'
     fullName: '(asyncResult: Office.AsyncResult<void>) => void'
     spec.typeScript:
@@ -2276,34 +2124,7 @@ references:
         fullName: Office.AsyncResult
       - name: <string>) => void
         fullName: <string>) => void
-  - uid: 'outlook!Office.MessageRead#getAllInternetHeadersAsync~1:complex'
-    name: '(asyncResult: Office.AsyncResult<string>) => void'
-    fullName: '(asyncResult: Office.AsyncResult<string>) => void'
-    spec.typeScript:
-      - name: '(asyncResult: '
-        fullName: '(asyncResult: '
-      - uid: 'office!Office.AsyncResult:interface'
-        name: Office.AsyncResult
-        fullName: Office.AsyncResult
-      - name: <string>) => void
-        fullName: <string>) => void
   - uid: 'outlook!Office.MessageRead#getAttachmentContentAsync~0:complex'
-    name: '(asyncResult: Office.AsyncResult<AttachmentContent>) => void'
-    fullName: '(asyncResult: Office.AsyncResult<Office.AttachmentContent>) => void'
-    spec.typeScript:
-      - name: '(asyncResult: '
-        fullName: '(asyncResult: '
-      - uid: 'office!Office.AsyncResult:interface'
-        name: Office.AsyncResult
-        fullName: Office.AsyncResult
-      - name: <
-        fullName: <
-      - uid: 'outlook!Office.AttachmentContent:interface'
-        name: AttachmentContent
-        fullName: Office.AttachmentContent
-      - name: '>) => void'
-        fullName: '>) => void'
-  - uid: 'outlook!Office.MessageRead#getAttachmentContentAsync~1:complex'
     name: '(asyncResult: Office.AsyncResult<AttachmentContent>) => void'
     fullName: '(asyncResult: Office.AsyncResult<Office.AttachmentContent>) => void'
     spec.typeScript:
@@ -2453,26 +2274,6 @@ references:
       - name: ' | string'
         fullName: ' | string'
   - uid: 'outlook!Office.MessageRead#removeHandlerAsync~1:complex'
-    name: '(asyncResult: Office.AsyncResult<void>) => void'
-    fullName: '(asyncResult: Office.AsyncResult<void>) => void'
-    spec.typeScript:
-      - name: '(asyncResult: '
-        fullName: '(asyncResult: '
-      - uid: 'office!Office.AsyncResult:interface'
-        name: Office.AsyncResult
-        fullName: Office.AsyncResult
-      - name: <void>) => void
-        fullName: <void>) => void
-  - uid: 'outlook!Office.MessageRead#removeHandlerAsync~2:complex'
-    name: Office.EventType | string
-    fullName: Office.EventType | string
-    spec.typeScript:
-      - uid: 'office!Office.EventType:enum'
-        name: Office.EventType
-        fullName: Office.EventType
-      - name: ' | string'
-        fullName: ' | string'
-  - uid: 'outlook!Office.MessageRead#removeHandlerAsync~3:complex'
     name: '(asyncResult: Office.AsyncResult<void>) => void'
     fullName: '(asyncResult: Office.AsyncResult<void>) => void'
     spec.typeScript:
