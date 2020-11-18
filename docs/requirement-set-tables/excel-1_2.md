@@ -2,8 +2,8 @@
 |:---|:---|:---|
 |[Enlace](/javascript/api/excel/excel.binding)|[onDataChanged](/javascript/api/excel/excel.binding#ondatachanged)|Se produce al cambiar los datos del enlace o al darles formato.|
 ||[onSelectionChanged](/javascript/api/excel/excel.binding#onselectionchanged)|Se produce cuando cambia el contenido seleccionado en el enlace.|
-|[BindingDataChangedEventArgs](/javascript/api/excel/excel.bindingdatachangedeventargs)|[binding](/javascript/api/excel/excel.bindingdatachangedeventargs#binding)|Obtiene un `Binding` objeto temporal que contiene el identificador del `Binding` objeto que ha generado el evento.|
-|[BindingSelectionChangedEventArgs](/javascript/api/excel/excel.bindingselectionchangedeventargs)|[binding](/javascript/api/excel/excel.bindingselectionchangedeventargs#binding)|Obtiene un `Binding` objeto temporal que contiene el identificador del `Binding` objeto que ha generado el evento.|
+|[BindingDataChangedEventArgs](/javascript/api/excel/excel.bindingdatachangedeventargs)|[binding](/javascript/api/excel/excel.bindingdatachangedeventargs#binding)|Obtiene un  `Binding`   objeto temporal que contiene el identificador del  `Binding`   objeto que ha generado el evento.Use ese ID con `BindingCollection.getItem(id)`   para obtener el enlace.|
+|[BindingSelectionChangedEventArgs](/javascript/api/excel/excel.bindingselectionchangedeventargs)|[binding](/javascript/api/excel/excel.bindingselectionchangedeventargs#binding)|Obtiene un  `Binding`   objeto temporal que contiene el identificador del  `Binding`   objeto que ha generado el evento.Use ese ID con `BindingCollection.getItem(id)`   para obtener el enlace.|
 ||[columnCount](/javascript/api/excel/excel.bindingselectionchangedeventargs#columncount)|Obtiene la cantidad de columnas seleccionadas.|
 ||[Filas](/javascript/api/excel/excel.bindingselectionchangedeventargs#rowcount)|Obtiene la cantidad de filas seleccionadas.|
 ||[startColumn](/javascript/api/excel/excel.bindingselectionchangedeventargs#startcolumn)|Obtiene el índice de la primera columna de la selección (de base cero).|
