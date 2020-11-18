@@ -1,809 +1,774 @@
-### YamlMime:UniversalReference
-items:
-  - uid: 'outlook!Office.Mailbox:interface'
-    summary: |-
-      Proporciona acceso al modelo de objetos del complemento de Microsoft Outlook.
-
-      Propiedades de clave:
-
-      - `diagnostics`<!-- -->: Proporciona información de diagnóstico a un complemento de Outlook.
-
-      - `item`<!-- -->: Proporciona métodos y propiedades para tener acceso a un mensaje o una cita en un complemento de Outlook.
-
-      - `userProfile`<!-- -->: Proporciona información sobre el usuario en un complemento de Outlook.
-    remarks: |-
-      ** <!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`Restricted`
-
-      ** <!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: redacción o lectura
-    name: Office.Mailbox
-    fullName: Office.Mailbox
-    langs:
-      - typeScript
-    type: interface
-    package: outlook!
-    children:
-      - 'outlook!Office.Mailbox#convertToEwsId:member(1)'
-      - 'outlook!Office.Mailbox#convertToLocalClientTime:member(1)'
-      - 'outlook!Office.Mailbox#convertToRestId:member(1)'
-      - 'outlook!Office.Mailbox#convertToUtcClientTime:member(1)'
-      - 'outlook!Office.Mailbox#diagnostics:member'
-      - 'outlook!Office.Mailbox#displayAppointmentForm:member(1)'
-      - 'outlook!Office.Mailbox#displayMessageForm:member(1)'
-      - 'outlook!Office.Mailbox#displayNewAppointmentForm:member(1)'
-      - 'outlook!Office.Mailbox#ewsUrl:member'
-      - 'outlook!Office.Mailbox#getCallbackTokenAsync:member(1)'
-      - 'outlook!Office.Mailbox#getUserIdentityTokenAsync:member(1)'
-      - 'outlook!Office.Mailbox#item:member'
-      - 'outlook!Office.Mailbox#makeEwsRequestAsync:member(1)'
-      - 'outlook!Office.Mailbox#userProfile:member'
-  - uid: 'outlook!Office.Mailbox#convertToEwsId:member(1)'
-    summary: |-
-      Convierte un identificador de elemento con formato para REST al formato EWS.
-
-      Los identificadores de elemento obtenidos a través de una API de REST (como la API de correo de Outlook o Microsoft Graph) usan un formato diferente al formato que usa Exchange Web Services (EWS). El método `convertToEwsId` convierte un identificador con formato REST al formato adecuado para EWS.
-
-      **Nota**: este método no es compatible con Outlook en iOS o Android.
-
-      \[[Conjunto de API: buzón de correo 1,3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-    remarks: |-
-      ** <!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`Restricted`
-
-      ** <!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: redacción o lectura
-
-      #### <a name="examples"></a>Ejemplos
-
-      ```javascript
-      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/85-tokens-and-service-calls/ids-and-urls.yaml
-      console.log("EWS URL: " + Office.context.mailbox.ewsUrl);
-      var ewsId = Office.context.mailbox.item.itemId;
-      console.log("EWS item ID: " + Office.context.mailbox.item.itemId);
-
-      console.log("REST URL: " + Office.context.mailbox.restUrl);
-      var restId = Office.context.mailbox.convertToRestId(ewsId, Office.MailboxEnums.RestVersion.v2_0);
-      console.log("REST item ID: " + restId);
-
-      var ewsId2 = Office.context.mailbox.convertToEwsId(restId, Office.MailboxEnums.RestVersion.v2_0);
-      console.log("EWS ID (from REST ID): " + ewsId2);
-      ```
-    name: 'convertToEwsId(itemId, restVersion)'
-    fullName: 'convertToEwsId(itemId, restVersion)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'convertToEwsId(itemId: string, restVersion: MailboxEnums.RestVersion | string): string;'
-      return:
-        type:
-          - string
-        description: ''
-      parameters:
-        - id: itemId
-          description: Un identificador de elemento con formato para las API de REST de Outlook.
-          type:
-            - string
-        - id: restVersion
-          description: Un valor que indica la versión de la API de REST de Outlook que se usa para recuperar el identificador de elemento.
-          type:
-            - 'outlook!Office.Mailbox#convertToEwsId~0:complex'
-  - uid: 'outlook!Office.Mailbox#convertToLocalClientTime:member(1)'
-    summary: |-
-      Obtiene un diccionario con información de tiempo en el tiempo del cliente local.
-
-      Las fechas y las horas usadas por una aplicación de correo para los clientes de Outlook en la web o de escritorio pueden usar zonas horarias diferentes. Outlook usa la zona horaria del equipo cliente; Outlook en la Web usa la zona horaria establecida en el centro de administración de Exchange (EAC). Debería tratar los valores de fecha y hora de modo que los valores que aparezcan en la interfaz de usuario sean siempre coherentes con la zona horaria que el usuario espera.
-
-      Si la aplicación de correo se ejecuta en los clientes de Outlook en el escritorio, el `convertToLocalClientTime` método devolverá un objeto Dictionary con los valores establecidos en la zona horaria del equipo cliente. Si la aplicación de correo se ejecuta en Outlook en la web, el `convertToLocalClientTime` método devolverá un objeto Dictionary con los valores establecidos en la zona horaria especificada en el EAC.
-    remarks: |-
-      ** <!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
-
-      ** <!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: redacción o lectura
-    name: convertToLocalClientTime(timeValue)
-    fullName: convertToLocalClientTime(timeValue)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'convertToLocalClientTime(timeValue: Date): LocalClientTime;'
-      return:
-        type:
-          - 'outlook!Office.LocalClientTime:interface'
-        description: ''
-      parameters:
-        - id: timeValue
-          description: Un `Date` objeto.
-          type:
-            - '!Date:interface'
-  - uid: 'outlook!Office.Mailbox#convertToRestId:member(1)'
-    summary: |-
-      Convierte un identificador de elemento con formato para EWS al formato REST.
-
-      **Nota**: este método no es compatible con Outlook en iOS o Android.
-
-      \[[Conjunto de API: buzón de correo 1,3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-    remarks: |-
-      ** <!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`Restricted`
-
-      ** <!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: redacción o lectura
-
-      Los identificadores de elemento recuperados a través de EWS o a través de la `itemId` propiedad usan un formato diferente del formato usado por las API de REST (como la [API de correo de Outlook](https://docs.microsoft.com/previous-versions/office/office-365-api/api/version-2.0/mail-rest-operations) o [Microsoft Graph](https://graph.microsoft.io/) .<!-- -->. El método `convertToRestId` convierte un identificador con formato EWS al formato adecuado para REST.
-
-      #### <a name="examples"></a>Ejemplos
-
-      ```javascript
-      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/85-tokens-and-service-calls/basic-rest-cors.yaml
-      Office.context.mailbox.getCallbackTokenAsync({ isRest: true }, function (result) {
-          var ewsId = Office.context.mailbox.item.itemId;
-          var token = result.value;
-          var restId = Office.context.mailbox.convertToRestId(ewsId, Office.MailboxEnums.RestVersion.v2_0);
-          var getMessageUrl = Office.context.mailbox.restUrl + '/v2.0/me/messages/' + restId;
-                  
-          var xhr = new XMLHttpRequest();
-          xhr.open('GET', getMessageUrl);
-          xhr.setRequestHeader("Authorization", "Bearer " + token);
-          xhr.onload = function (e) {
-              console.log(this.response);
-          }
-          xhr.send();
-      });
-      ```
-      ```javascript
-      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/85-tokens-and-service-calls/ids-and-urls.yaml
-      console.log("EWS URL: " + Office.context.mailbox.ewsUrl);
-      var ewsId = Office.context.mailbox.item.itemId;
-      console.log("EWS item ID: " + Office.context.mailbox.item.itemId);
-
-      console.log("REST URL: " + Office.context.mailbox.restUrl);
-      var restId = Office.context.mailbox.convertToRestId(ewsId, Office.MailboxEnums.RestVersion.v2_0);
-      console.log("REST item ID: " + restId);
-
-      var ewsId2 = Office.context.mailbox.convertToEwsId(restId, Office.MailboxEnums.RestVersion.v2_0);
-      console.log("EWS ID (from REST ID): " + ewsId2);
-      ```
-    name: 'convertToRestId(itemId, restVersion)'
-    fullName: 'convertToRestId(itemId, restVersion)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'convertToRestId(itemId: string, restVersion: MailboxEnums.RestVersion | string): string;'
-      return:
-        type:
-          - string
-        description: ''
-      parameters:
-        - id: itemId
-          description: Un identificador de elemento con formato para Exchange Web Services (EWS)
-          type:
-            - string
-        - id: restVersion
-          description: Un valor que indica la versión de la API de REST de Outlook con la que se usará el identificador convertido.
-          type:
-            - 'outlook!Office.Mailbox#convertToRestId~0:complex'
-  - uid: 'outlook!Office.Mailbox#convertToUtcClientTime:member(1)'
-    summary: |-
-      Obtiene un `Date` objeto a partir de un diccionario que contiene información de tiempo.
-
-      El `convertToUtcClientTime` método convierte un diccionario que contiene la fecha y la hora locales en un `Date` objeto con los valores correctos para la fecha y la hora locales.
-    remarks: |-
-      ** <!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
-
-      ** <!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: redacción o lectura
-
-      #### <a name="examples"></a>Ejemplos
-
-      ```javascript
-      // Represents 3:37 PM PDT on Monday, August 26, 2019.
-      var input = {
-          date: 26,
-          hours: 15,
-          milliseconds: 2,
-          minutes: 37,
-          month: 7,
-          seconds: 2,
-          timezoneOffset: -420,
-          year: 2019
-      };
-
-      // result should be a Date object.
-      var result = Office.context.mailbox.convertToUtcClientTime(input);
-
-      // Output should be "2019-08-26T22:37:02.002Z".
-      console.log(result.toISOString());
-      ```
-    name: convertToUtcClientTime(input)
-    fullName: convertToUtcClientTime(input)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'convertToUtcClientTime(input: LocalClientTime): Date;'
-      return:
-        type:
-          - '!Date:interface'
-        description: Objeto Date con el tiempo expresado en UTC.
-      parameters:
-        - id: input
-          description: El valor de la hora local para convertir.
-          type:
-            - 'outlook!Office.LocalClientTime:interface'
-  - uid: 'outlook!Office.Mailbox#diagnostics:member'
-    summary: |-
-      Proporciona información de diagnóstico a un complemento de Outlook.
-
-      Contiene los siguientes miembros:
-
-      - `hostName` (cadena): cadena que representa el nombre de la aplicación host. Debe ser uno de los siguientes valores: `Outlook`<!-- -->, `OutlookWebApp`<!-- -->, `OutlookIOS`<!-- -->, o bien `OutlookAndroid`<!-- -->. **Nota**: el valor "Outlook" se devuelve para Outlook en clientes de escritorio (por ejemplo, Windows y Mac).
-
-      - `hostVersion` (cadena): cadena que representa la versión de la aplicación host o de Exchange Server (por ejemplo, "15.0.468.0"). Si el complemento de correo se está ejecutando en Outlook en los clientes móviles o de escritorio, la `hostVersion` propiedad devuelve la versión de la aplicación host, Outlook. En Outlook en la web, la propiedad devuelve la versión del servidor Exchange.
-
-      - `OWAView` ( `MailboxEnums.OWAView` o cadena): enumeración (o literal de cadena) que representa la vista actual de Outlook en la Web. Si la aplicación host no es Outlook en la web, el acceso a esta propiedad da como resultado undefined. Outlook en la web tiene tres vistas (que `OneColumn` se muestran cuando la pantalla es estrecha, se `TwoColumns` muestra cuando la pantalla es más ancha y se `ThreeColumns` muestra cuando la pantalla es ancha) que se corresponden con el ancho de la pantalla y la ventana, y el número de columnas que se pueden mostrar.
-
-      Hay más información en [Office. Diagnostics](xref:outlook!Office.Diagnostics:interface)<!-- -->.
-    remarks: |-
-      ** <!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
-
-      ** <!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: redacción o lectura
-    name: diagnostics
-    fullName: diagnostics
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'diagnostics: Diagnostics;'
-      return:
-        type:
-          - 'outlook!Office.Diagnostics:interface'
-  - uid: 'outlook!Office.Mailbox#displayAppointmentForm:member(1)'
-    summary: |-
-      Muestra una cita de calendario existente.
-
-      El método `displayAppointmentForm` abre una cita de calendario existente en una nueva ventana del escritorio o en un cuadro de diálogo en los dispositivos móviles.
-
-      En Outlook en Mac, puede usar este método para mostrar una cita única que no forma parte de una serie periódica o la cita principal de una serie periódica. Sin embargo, no se puede mostrar una instancia de la serie porque no se puede tener acceso a las propiedades (incluido el identificador de elemento) de las instancias de una serie periódica.
-
-      En Outlook en la web, este método abre el formulario especificado sólo si el cuerpo del formulario es inferior o igual a 32K caracteres.
-
-      Si el identificador de elemento especificado no identifica una cita existente, se abre un panel en blanco en el dispositivo o equipo cliente y no se devuelve ningún mensaje de error.
-
-      **Nota**: este método no es compatible con Outlook en iOS o Android.
-    remarks: |-
-      ** <!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
-
-      ** <!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: redacción o lectura
-
-      #### <a name="examples"></a>Ejemplos
-
-      ```javascript
-      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/55-display-items/display-existing-appointment.yaml
-      var itemId = $("#itemId").val();
-      Office.context.mailbox.displayAppointmentForm(itemId);
-      ```
-    name: displayAppointmentForm(itemId)
-    fullName: displayAppointmentForm(itemId)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'displayAppointmentForm(itemId: string): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: itemId
-          description: Identificador de los servicios web de Exchange (EWS) para una cita de calendario existente.
-          type:
-            - string
-  - uid: 'outlook!Office.Mailbox#displayMessageForm:member(1)'
-    summary: |-
-      Muestra un mensaje existente.
-
-      El método `displayMessageForm` abre un mensaje existente en una nueva ventana del escritorio o en un cuadro de diálogo en los dispositivos móviles.
-
-      En Outlook en la web, este método abre el formulario especificado sólo si el cuerpo del formulario es inferior o igual a 32K caracteres.
-
-      Si el identificador de elemento especificado no identifica un mensaje existente, no se mostrará ningún mensaje en el equipo cliente y no se devolverá ningún mensaje de error.
-
-      No use el `displayMessageForm` con un Itemid que represente una cita. Use el método `displayAppointmentForm` para mostrar una cita existente y `displayNewAppointmentForm` para mostrar un formulario para crear una cita nueva.
-
-      **Nota**: este método no es compatible con Outlook en iOS o Android.
-    remarks: |-
-      ** <!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
-
-      ** <!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: redacción o lectura
-
-      #### <a name="examples"></a>Ejemplos
-
-      ```javascript
-      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/55-display-items/display-existing-message.yaml
-      var itemId = $("#itemId").val();
-      Office.context.mailbox.displayMessageForm(itemId);
-      ```
-    name: displayMessageForm(itemId)
-    fullName: displayMessageForm(itemId)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'displayMessageForm(itemId: string): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: itemId
-          description: Identificador de los servicios web de Exchange (EWS) para un mensaje existente.
-          type:
-            - string
-  - uid: 'outlook!Office.Mailbox#displayNewAppointmentForm:member(1)'
-    summary: |-
-      Muestra un formulario para crear una cita de calendario.
-
-      El método `displayNewAppointmentForm` abre un formulario que permite al usuario crear una nueva cita o reunión. Si se especifican parámetros, los campos de formulario de cita se rellenan automáticamente con el contenido de los parámetros.
-
-      En Outlook en la web, este método siempre muestra un formulario con un campo de asistentes. Si no especifica ningún asistente como argumento de entrada, el método muestra un formulario con un botón **Guardar**. Si ha especificado asistentes, el formulario incluirá a los asistentes y un botón **Enviar**.
-
-      En el cliente enriquecido de Outlook y Outlook RT, si especifica los asistentes o los recursos en el `requiredAttendees`<!-- -->, `optionalAttendees`<!-- -->, o `resources` parámetro, este método muestra un formulario de reunión con un botón **Enviar** . Si no especifica ningún destinatario, este método muestra un formulario de cita con un botón **Guardar &amp; cierre** .
-
-      Si cualquiera de los parámetros supera los límites de tamaño especificados o si se especifica un nombre de parámetro desconocido, se genera una excepción.
-
-      **Nota**: este método no es compatible con Outlook en iOS o Android.
-    remarks: |-
-      ** <!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
-
-      ** <!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: lectura
-
-      #### <a name="examples"></a>Ejemplos
-
-      ```javascript
-      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/55-display-items/display-new-appointment.yaml
-      var start = new Date();
-      var end = new Date();
-      end.setHours(start.getHours() + 1);
-
-      Office.context.mailbox.displayNewAppointmentForm({
-        requiredAttendees: ["bob@contoso.com"],
-        optionalAttendees: ["sam@contoso.com"],
-        start: start,
-        end: end,
-        location: "Home",
-        subject: "meeting",
-        resources: ["projector@contoso.com"],
-        body: "Hello World!"
-      });
-      ```
-    name: displayNewAppointmentForm(parameters)
-    fullName: displayNewAppointmentForm(parameters)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'displayNewAppointmentForm(parameters: AppointmentForm): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: parameters
-          description: Una `AppointmentForm` Descripción de la nueva cita. Todas las propiedades son opcionales.
-          type:
-            - 'outlook!Office.AppointmentForm:interface'
-  - uid: 'outlook!Office.Mailbox#ewsUrl:member'
-    summary: |-
-      Obtiene la dirección URL del punto de conexión de Servicios Web Exchange (EWS) para esta cuenta de correo electrónico. Solo modo Lectura.
-
-      La aplicación debe tener el `ReadItem` permiso especificado en su manifiesto para llamar al `ewsUrl` miembro en modo de lectura.
-
-      En el modo de redacción debe llamar al método `saveAsync` antes de poder usar el miembro `ewsUrl`. La aplicación debe tener `ReadWriteItem` permisos para llamar al `saveAsync` método.
-
-      **Nota**: este miembro no es compatible con Outlook en iOS o Android.
-    remarks: |-
-      ** <!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
-
-      ** <!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: redacción o lectura
-
-      El valor `ewsUrl` puede usarse por un servicio remoto para realizar llamadas EWS al buzón del usuario. Por ejemplo, puede crear un servicio remoto para [obtener datos adjuntos del elemento seleccionado](https://docs.microsoft.com/office/dev/add-ins/outlook/get-attachments-of-an-outlook-item) .<!-- -->.
-
-      #### <a name="examples"></a>Ejemplos
-
-      ```javascript
-      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/85-tokens-and-service-calls/ids-and-urls.yaml
-      console.log("EWS URL: " + Office.context.mailbox.ewsUrl);
-      var ewsId = Office.context.mailbox.item.itemId;
-      console.log("EWS item ID: " + Office.context.mailbox.item.itemId);
-
-      console.log("REST URL: " + Office.context.mailbox.restUrl);
-      var restId = Office.context.mailbox.convertToRestId(ewsId, Office.MailboxEnums.RestVersion.v2_0);
-      console.log("REST item ID: " + restId);
-
-      var ewsId2 = Office.context.mailbox.convertToEwsId(restId, Office.MailboxEnums.RestVersion.v2_0);
-      console.log("EWS ID (from REST ID): " + ewsId2);
-      ```
-    name: ewsUrl
-    fullName: ewsUrl
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'ewsUrl: string;'
-      return:
-        type:
-          - string
-  - uid: 'outlook!Office.Mailbox#getCallbackTokenAsync:member(1)'
-    summary: |-
-      Obtiene una cadena que contiene un token usado para obtener datos adjuntos o un elemento de Exchange Server.
-
-      El método `getCallbackTokenAsync` realiza una llamada asincrónica para obtener un token opaco desde Exchange Server que hospeda el buzón del usuario. La duración del token de devolución de llamada es de 5 minutos.
-
-      El token se devuelve como una cadena en la `asyncResult.value` propiedad.
-
-      Podrá pasar tanto el token como un identificador de datos adjuntos o de elementos a un sistema de terceros. El sistema de terceros usa el token como autorización del portador para llamar a los servicios Web de Exchange (EWS) o a las operaciones [GetAttachment](https://docs.microsoft.com/exchange/client-developer/web-service-reference/getattachment-operation) o [GetItem](https://docs.microsoft.com/exchange/client-developer/web-service-reference/getitem-operation) para devolver datos adjuntos o un elemento. Por ejemplo, puede crear un servicio remoto para [obtener datos adjuntos del elemento seleccionado](https://docs.microsoft.com/office/dev/add-ins/outlook/get-attachments-of-an-outlook-item) .<!-- -->.
-
-      La llamada al `getCallbackTokenAsync` método en el modo de lectura requiere un nivel de permiso mínimo de `ReadItem`<!-- -->.
-
-      Para llamar al `getCallbackTokenAsync` método en el modo de redacción es necesario que haya guardado el elemento. El `saveAsync` método requiere un nivel de permisos mínimo de `ReadWriteItem`<!-- -->.
-
-      **Importante**: para obtener instrucciones sobre los escenarios de delegación o compartidos, consulte el artículo [delegados de acceso](https://docs.microsoft.com/office/dev/add-ins/outlook/delegate-access) .
-
-      \[[Conjunto de API: todos admiten el modo de lectura; El buzón 1,3 ha lanzado la compatibilidad con el modo redacción](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-    remarks: |-
-      ** <!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
-
-      ** <!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: redacción o lectura
-
-      **Errores**:
-
-      - `HTTPRequestFailure`<!-- -->: Error en la solicitud. Compruebe el objeto de diagnóstico para ver el código de error HTTP.
-
-      - `InternalServerError`<!-- -->: El servidor de Exchange devolvió un error. Compruebe el objeto de diagnóstico para obtener más información.
-
-      - `NetworkError`<!-- -->: El usuario ya no está conectado a la red. Compruebe la conexión de red y vuelva a intentarlo.
-
-      #### <a name="examples"></a>Ejemplos
-
-      ```javascript
-      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/85-tokens-and-service-calls/basic-rest-cors.yaml
-      Office.context.mailbox.getCallbackTokenAsync({ isRest: true }, function (result) {
-          var ewsId = Office.context.mailbox.item.itemId;
-          var token = result.value;
-          var restId = Office.context.mailbox.convertToRestId(ewsId, Office.MailboxEnums.RestVersion.v2_0);
-          var getMessageUrl = Office.context.mailbox.restUrl + '/v2.0/me/messages/' + restId;
-                  
-          var xhr = new XMLHttpRequest();
-          xhr.open('GET', getMessageUrl);
-          xhr.setRequestHeader("Authorization", "Bearer " + token);
-          xhr.onload = function (e) {
-              console.log(this.response);
-          }
-          xhr.send();
-      });
-      ```
-    name: 'getCallbackTokenAsync(callback, userContext)'
-    fullName: 'getCallbackTokenAsync(callback, userContext)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'getCallbackTokenAsync(callback: (asyncResult: Office.AsyncResult<string>) => void, userContext?: any): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: callback
-          description: 'Cuando el método finaliza, la función que se pasa en el parámetro callback se llama con un único parámetro de tipo `Office.AsyncResult`<!-- -->. El token se devuelve como una cadena en la `asyncResult.value` propiedad. Si se produjo un error, las propiedades `asyncResult.error` y `asyncResult.diagnostics` pueden proporcionar información adicional.'
-          type:
-            - 'outlook!Office.Mailbox#getCallbackTokenAsync~0:complex'
-        - id: userContext
-          description: Opcional. Cualquier dato de estado que se pasa al método asincrónico.
-          type:
-            - any
-  - uid: 'outlook!Office.Mailbox#getUserIdentityTokenAsync:member(1)'
-    summary: |-
-      Obtiene un token que identifica al usuario y al complemento de Office.
-
-      El token se devuelve como una cadena en la `asyncResult.value` propiedad.
-    remarks: |-
-      ** <!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
-
-      ** <!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: redacción o lectura
-
-      El `getUserIdentityTokenAsync` método devuelve un token que puede usar para identificar y [autenticar el complemento y el usuario con un sistema de terceros](https://docs.microsoft.com/office/dev/add-ins/outlook/authentication) .<!-- -->.
-
-      **Errores**:
-
-      - `HTTPRequestFailure`<!-- -->: Error en la solicitud. Compruebe el objeto de diagnóstico para ver el código de error HTTP.
-
-      - `InternalServerError`<!-- -->: El servidor de Exchange devolvió un error. Compruebe el objeto de diagnóstico para obtener más información.
-
-      - `NetworkError`<!-- -->: El usuario ya no está conectado a la red. Compruebe la conexión de red y vuelva a intentarlo.
-
-      #### <a name="examples"></a>Ejemplos
-
-      ```javascript
-      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/85-tokens-and-service-calls/user-identity-token.yaml
-      Office.context.mailbox.getUserIdentityTokenAsync(function (result) {
-          if (result.status !== Office.AsyncResultStatus.Succeeded) {
-              console.error(`Token retrieval failed with message: ${result.error.message}`);
-          } else {
-              console.log(result.value);
-          }
-      });
-      ```
-    name: 'getUserIdentityTokenAsync(callback, userContext)'
-    fullName: 'getUserIdentityTokenAsync(callback, userContext)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'getUserIdentityTokenAsync(callback: (asyncResult: Office.AsyncResult<string>) => void, userContext?: any): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: callback
-          description: 'Cuando el método finaliza, la función que se pasa en el parámetro callback se llama con un único parámetro de tipo `Office.AsyncResult`<!-- -->. El token se devuelve como una cadena en la `asyncResult.value` propiedad. Si se produjo un error, las propiedades `asyncResult.error` y `asyncResult.diagnostics` pueden proporcionar información adicional.'
-          type:
-            - 'outlook!Office.Mailbox#getUserIdentityTokenAsync~0:complex'
-        - id: userContext
-          description: Opcional. Cualquier dato de estado que se pasa al método asincrónico.
-          type:
-            - any
-  - uid: 'outlook!Office.Mailbox#item:member'
-    summary: |-
-      El elemento de buzón. Según el contexto en el que se abra el complemento, el tipo de elemento puede variar. Si desea ver IntelliSense solo para un tipo o modo específicos, convierta este elemento en uno de los siguientes:
-
-      [MessageCompose](xref:outlook!Office.MessageCompose:interface)<!-- -->, [MessageRead](xref:outlook!Office.MessageRead:interface)<!-- -->, [AppointmentCompose](xref:outlook!Office.AppointmentCompose:interface)<!-- -->, [AppointmentRead](xref:outlook!Office.AppointmentRead:interface)
-    name: item
-    fullName: item
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'item: Item & ItemCompose & ItemRead & Message & MessageCompose & MessageRead & Appointment & AppointmentCompose & AppointmentRead;'
-      return:
-        type:
-          - 'outlook!Office.Mailbox#item~0:complex'
-  - uid: 'outlook!Office.Mailbox#makeEwsRequestAsync:member(1)'
-    summary: "Realiza una solicitud asincrónica a un servicio de servicios web Exchange (EWS) en el servidor Exchange que hospeda el buzón del usuario.\n\nEn estos casos, los complementos tendrían que usar las API de REST para obtener acceso al buzón del usuario en su lugar.\n\nEl método `makeEwsRequestAsync` envía una solicitud de EWS en nombre del complemento a Exchange.\n\nNo puede solicitar elementos asociados de las carpetas con el método `makeEwsRequestAsync`.\n\nLa solicitud XML debe especificar la codificación UTF-8: `\\<?xml version=\"1.0\" encoding=\"utf-8\"?\\>`<!-- -->.\n\nEl complemento debe tener `ReadWriteMailbox` permiso para usar el `makeEwsRequestAsync` método. Para obtener información sobre cómo usar el `ReadWriteMailbox` permiso y las operaciones de EWS a las que puede llamar con el `makeEwsRequestAsync` método, vea [especificar permisos para el acceso de los complementos de correo al buzón del usuario](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) .<!-- -->.\n\nEl resultado XML de la llamada EWS se proporciona como cadena en la propiedad `asyncResult.value`. Si el resultado supera 1\_MB de tamaño, se devuelve un mensaje de error en su lugar.\n\n**Nota**: este método no se admite en los siguientes escenarios:\n\n- En Outlook en iOS o Android.\n\n- Cuando el complemento se carga en un buzón de gmail.\n\n**Nota**: el administrador del servidor debe `OAuthAuthentication` establecer `true` en el directorio EWS del servidor de acceso de cliente para permitir que el `makeEwsRequestAsync` método realice las solicitudes de EWS.\n\n*Diferencias de versión*\n\nCuando se usa el `makeEwsRequestAsync` método en las aplicaciones de correo que se ejecutan en versiones de Outlook anteriores a la versión 15.0.4535.1004, se debe establecer el valor de codificación en ISO-8859-1.\n\n`<?xml version=\"1.0\" encoding=\"iso-8859-1\"?>`\n\nNo es necesario establecer el valor de codificación si la aplicación de correo se ejecuta en Outlook en la web. Puede determinar si su aplicación de correo se está ejecutando en Outlook o en Outlook en la web con la `mailbox.diagnostics.hostName` propiedad. Puede determinar qué versión de Outlook se está ejecutando mediante la `mailbox.diagnostics.hostVersion` propiedad."
-    remarks: |-
-      ** <!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadWriteMailbox`
-
-      ** <!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: redacción o lectura
-
-      #### <a name="examples"></a>Ejemplos
-
-      ```javascript
-      function getSubjectRequest(id) {
-          // Return a GetItem operation request for the subject of the specified item.
-          var request =
-              '<?xml version="1.0" encoding="utf-8"?>' +
-              '<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"' +
-              '               xmlns:xsd="http://www.w3.org/2001/XMLSchema"' +
-              '               xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"' +
-              '               xmlns:t="http://schemas.microsoft.com/exchange/services/2006/types">' +
-              '  <soap:Header>' +
-              '    <RequestServerVersion Version="Exchange2013" xmlns="http://schemas.microsoft.com/exchange/services/2006/types" soap:mustUnderstand="0" />' +
-              '  </soap:Header>' +
-              '  <soap:Body>' +
-              '    <GetItem xmlns="http://schemas.microsoft.com/exchange/services/2006/messages">' +
-              '      <ItemShape>' +
-              '        <t:BaseShape>IdOnly</t:BaseShape>' +
-              '        <t:AdditionalProperties>' +
-              '            <t:FieldURI FieldURI="item:Subject"/>' +
-              '        </t:AdditionalProperties>' +
-              '      </ItemShape>' +
-              '      <ItemIds><t:ItemId Id="' + id + '"/></ItemIds>' +
-              '    </GetItem>' +
-              '  </soap:Body>' +
-              '</soap:Envelope>';
-
-          return request;
-      }
-
-      function sendRequest() {
-          // Create a local variable that contains the mailbox.
-          Office.context.mailbox.makeEwsRequestAsync(
-              getSubjectRequest(mailbox.item.itemId), callback);
-      }
-
-      function callback(asyncResult)  {
-          var result = asyncResult.value;
-          var context = asyncResult.asyncContext;
-
-          // Process the returned response here.
-      }
-      ```
-      ```javascript
-      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/85-tokens-and-service-calls/make-ews-request-async.yaml
-      var ewsId = Office.context.mailbox.item.itemId;
-      var request = '<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:m="http://schemas.microsoft.com/exchange/services/2006/messages" xmlns:t="http://schemas.microsoft.com/exchange/services/2006/types" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">' +
-          '  <soap:Header><t:RequestServerVersion Version="Exchange2013" /></soap:Header>' +
-          '  <soap:Body>' +
-          '    <m:GetItem>' +
-          '      <m:ItemShape>' +
-          '        <t:BaseShape>IdOnly</t:BaseShape>' +
-          '      </m:ItemShape >' +
-          '      <m:ItemIds>' +
-          '        <t:ItemId Id="' + ewsId + '" />' +
-          '      </m:ItemIds>' +
-          '    </m:GetItem>' +
-          '  </soap:Body>' +
-          '</soap:Envelope>';
-
-      Office.context.mailbox.makeEwsRequestAsync(request, function (result) {
-          console.log(result);
-      });
-      ```
-      ```javascript
-      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/85-tokens-and-service-calls/send-message-using-make-ews-request-async.yaml
-      var request = '<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:m="http://schemas.microsoft.com/exchange/services/2006/messages" xmlns:t="http://schemas.microsoft.com/exchange/services/2006/types" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">'+
-          '  <soap:Header><t:RequestServerVersion Version="Exchange2010" /></soap:Header>'+
-          '  <soap:Body>'+
-          '    <m:CreateItem MessageDisposition="SendAndSaveCopy">'+
-          '      <m:SavedItemFolderId><t:DistinguishedFolderId Id="sentitems" /></m:SavedItemFolderId>'+
-          '      <m:Items>'+
-          '        <t:Message>'+
-          '          <t:Subject>Hello, Outlook!</t:Subject>'+
-          '          <t:Body BodyType="HTML">This message was sent from a ScriptLab code sample, used from ' + Office.context.mailbox.diagnostics.hostName + ', version ' + Office.context.mailbox.diagnostics.hostVersion + '!</t:Body>'+
-          '          <t:ToRecipients>'+
-          '            <t:Mailbox><t:EmailAddress>' + Office.context.mailbox.userProfile.emailAddress + '</t:EmailAddress></t:Mailbox>'+
-          '          </t:ToRecipients>'+
-          '        </t:Message>'+
-          '      </m:Items>'+
-          '    </m:CreateItem>'+
-          '  </soap:Body>'+
-          '</soap:Envelope>';
-
-      Office.context.mailbox.makeEwsRequestAsync(request, function (result) {
-          console.log(result);
-      });
-      ```
-    name: 'makeEwsRequestAsync(data, callback, userContext)'
-    fullName: 'makeEwsRequestAsync(data, callback, userContext)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'makeEwsRequestAsync(data: any, callback: (asyncResult: Office.AsyncResult<string>) => void, userContext?: any): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: data
-          description: La solicitud de EWS.
-          type:
-            - any
-        - id: callback
-          description: "Cuando el método finaliza, la función que se pasa en el parámetro callback se llama con un único parámetro de tipo `Office.AsyncResult`<!-- -->. La `value` propiedad del resultado es el XML de la solicitud de EWS proporcionada como una cadena. Si el resultado supera 1\_MB de tamaño, se devuelve un mensaje de error en su lugar."
-          type:
-            - 'outlook!Office.Mailbox#makeEwsRequestAsync~0:complex'
-        - id: userContext
-          description: Opcional. Cualquier dato de estado que se pasa al método asincrónico.
-          type:
-            - any
-  - uid: 'outlook!Office.Mailbox#userProfile:member'
-    summary: |-
-      Información sobre el usuario asociado con el buzón. Esto incluye el tipo de cuenta, el nombre para mostrar, la dirección de correo electrónico y la zona horaria.
-
-      Hay más información en [Office. userprofile](xref:outlook!Office.UserProfile:interface)
-    name: userProfile
-    fullName: userProfile
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'userProfile: UserProfile;'
-      return:
-        type:
-          - 'outlook!Office.UserProfile:interface'
-references:
-  - uid: 'outlook!Office.Mailbox#convertToEwsId~0:complex'
-    name: MailboxEnums.RestVersion | string
-    fullName: Office.MailboxEnums.RestVersion | string
-    spec.typeScript:
-      - uid: 'outlook!Office.MailboxEnums.RestVersion:enum'
-        name: MailboxEnums.RestVersion
-        fullName: Office.MailboxEnums.RestVersion
-      - name: ' | string'
-        fullName: ' | string'
-  - uid: 'outlook!Office.LocalClientTime:interface'
-    name: LocalClientTime
-  - uid: '!Date:interface'
-    name: Date
-  - uid: 'outlook!Office.Mailbox#convertToRestId~0:complex'
-    name: MailboxEnums.RestVersion | string
-    fullName: Office.MailboxEnums.RestVersion | string
-    spec.typeScript:
-      - uid: 'outlook!Office.MailboxEnums.RestVersion:enum'
-        name: MailboxEnums.RestVersion
-        fullName: Office.MailboxEnums.RestVersion
-      - name: ' | string'
-        fullName: ' | string'
-  - uid: 'outlook!Office.Diagnostics:interface'
-    name: Diagnostics
-  - uid: 'outlook!Office.AppointmentForm:interface'
-    name: AppointmentForm
-  - uid: 'outlook!Office.Mailbox#getCallbackTokenAsync~0:complex'
-    name: '(asyncResult: Office.AsyncResult<string>) => void'
-    fullName: '(asyncResult: Office.AsyncResult<string>) => void'
-    spec.typeScript:
-      - name: '(asyncResult: '
-        fullName: '(asyncResult: '
-      - uid: 'office!Office.AsyncResult:interface'
-        name: Office.AsyncResult
-        fullName: Office.AsyncResult
-      - name: <string>) => void
-        fullName: <string>) => void
-  - uid: 'outlook!Office.Mailbox#getUserIdentityTokenAsync~0:complex'
-    name: '(asyncResult: Office.AsyncResult<string>) => void'
-    fullName: '(asyncResult: Office.AsyncResult<string>) => void'
-    spec.typeScript:
-      - name: '(asyncResult: '
-        fullName: '(asyncResult: '
-      - uid: 'office!Office.AsyncResult:interface'
-        name: Office.AsyncResult
-        fullName: Office.AsyncResult
-      - name: <string>) => void
-        fullName: <string>) => void
-  - uid: 'outlook!Office.Mailbox#item~0:complex'
-    name: Item & ItemCompose & ItemRead & Message & MessageCompose & MessageRead & Appointment & AppointmentCompose & AppointmentRead
-    fullName: Office.Item & Office.ItemCompose & Office.ItemRead & Office.Message & Office.MessageCompose & Office.MessageRead & Office.Appointment & Office.AppointmentCompose & Office.AppointmentRead
-    spec.typeScript:
-      - uid: 'outlook!Office.Item:interface'
-        name: Item
-        fullName: Office.Item
-      - name: ' & '
-        fullName: ' & '
-      - uid: 'outlook!Office.ItemCompose:interface'
-        name: ItemCompose
-        fullName: Office.ItemCompose
-      - name: ' & '
-        fullName: ' & '
-      - uid: 'outlook!Office.ItemRead:interface'
-        name: ItemRead
-        fullName: Office.ItemRead
-      - name: ' & '
-        fullName: ' & '
-      - uid: 'outlook!Office.Message:interface'
-        name: Message
-        fullName: Office.Message
-      - name: ' & '
-        fullName: ' & '
-      - uid: 'outlook!Office.MessageCompose:interface'
-        name: MessageCompose
-        fullName: Office.MessageCompose
-      - name: ' & '
-        fullName: ' & '
-      - uid: 'outlook!Office.MessageRead:interface'
-        name: MessageRead
-        fullName: Office.MessageRead
-      - name: ' & '
-        fullName: ' & '
-      - uid: 'outlook!Office.Appointment:interface'
-        name: Appointment
-        fullName: Office.Appointment
-      - name: ' & '
-        fullName: ' & '
-      - uid: 'outlook!Office.AppointmentCompose:interface'
-        name: AppointmentCompose
-        fullName: Office.AppointmentCompose
-      - name: ' & '
-        fullName: ' & '
-      - uid: 'outlook!Office.AppointmentRead:interface'
-        name: AppointmentRead
-        fullName: Office.AppointmentRead
-  - uid: 'outlook!Office.Mailbox#makeEwsRequestAsync~0:complex'
-    name: '(asyncResult: Office.AsyncResult<string>) => void'
-    fullName: '(asyncResult: Office.AsyncResult<string>) => void'
-    spec.typeScript:
-      - name: '(asyncResult: '
-        fullName: '(asyncResult: '
-      - uid: 'office!Office.AsyncResult:interface'
-        name: Office.AsyncResult
-        fullName: Office.AsyncResult
-      - name: <string>) => void
-        fullName: <string>) => void
-  - uid: 'outlook!Office.UserProfile:interface'
-    name: UserProfile
+### YamlMime:TSType
+name: Office.Mailbox
+uid: outlook!Office.Mailbox:interface
+package: outlook!
+fullName: Office.Mailbox
+summary: >-
+  Proporciona acceso al modelo de objetos del complemento de Microsoft Outlook.
+
+
+  Propiedades de clave:
+
+
+  - `diagnostics`<!-- -->: Proporciona información de diagnóstico a un complemento de Outlook.
+
+
+  - `item`<!-- -->: Proporciona métodos y propiedades para tener acceso a un mensaje o una cita en un complemento de Outlook.
+
+
+  - `userProfile`<!-- -->: Proporciona información sobre el usuario en un complemento de Outlook.
+remarks: >-
+  **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`Restricted`
+
+
+  **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: redacción o lectura
+isPreview: false
+isDeprecated: false
+type: interface
+properties:
+- name: diagnostics
+  uid: outlook!Office.Mailbox#diagnostics:member
+  package: outlook!
+  fullName: diagnostics
+  summary: >-
+    Proporciona información de diagnóstico a un complemento de Outlook.
+
+
+    Contiene los siguientes miembros:
+
+
+    - `hostName` (cadena): cadena que representa el nombre de la aplicación host. Debe ser uno de los siguientes valores: `Outlook`<!-- -->, `OutlookWebApp`<!-- -->, `OutlookIOS`<!-- -->, o bien `OutlookAndroid`<!-- -->. **Nota**: el valor "Outlook" se devuelve para Outlook en clientes de escritorio (por ejemplo, Windows y Mac).
+
+
+    - `hostVersion` (cadena): cadena que representa la versión de la aplicación host o de Exchange Server (por ejemplo, "15.0.468.0"). Si el complemento de correo se está ejecutando en Outlook en los clientes móviles o de escritorio, la `hostVersion` propiedad devuelve la versión de la aplicación host, Outlook. En Outlook en la web, la propiedad devuelve la versión del servidor Exchange.
+
+
+    - `OWAView` ( `MailboxEnums.OWAView` o cadena): enumeración (o literal de cadena) que representa la vista actual de Outlook en la Web. Si la aplicación host no es Outlook en la web, el acceso a esta propiedad da como resultado undefined. Outlook en la web tiene tres vistas (que `OneColumn` se muestran cuando la pantalla es estrecha, se `TwoColumns` muestra cuando la pantalla es más ancha y se `ThreeColumns` muestra cuando la pantalla es ancha) que se corresponden con el ancho de la pantalla y la ventana, y el número de columnas que se pueden mostrar.
+
+
+    Hay más información en [Office. Diagnostics](xref:outlook!Office.Diagnostics:interface)<!-- -->.
+  remarks: >-
+    **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+
+
+    **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: redacción o lectura
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'diagnostics: Diagnostics;'
+    return:
+      type: <xref uid="outlook!Office.Diagnostics:interface" />
+- name: ewsUrl
+  uid: outlook!Office.Mailbox#ewsUrl:member
+  package: outlook!
+  fullName: ewsUrl
+  summary: >-
+    Obtiene la dirección URL del punto de conexión de Servicios Web Exchange (EWS) para esta cuenta de correo electrónico. Solo modo Lectura.
+
+
+    La aplicación debe tener el `ReadItem` permiso especificado en su manifiesto para llamar al `ewsUrl` miembro en modo de lectura.
+
+
+    En el modo de redacción debe llamar al método `saveAsync` antes de poder usar el miembro `ewsUrl`. La aplicación debe tener `ReadWriteItem` permisos para llamar al `saveAsync` método.
+
+
+    **Nota**: este miembro no es compatible con Outlook en iOS o Android.
+  remarks: >-
+    **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+
+
+    **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: redacción o lectura
+
+
+    El valor `ewsUrl` puede usarse por un servicio remoto para realizar llamadas EWS al buzón del usuario. Por ejemplo, puede crear un servicio remoto para [obtener datos adjuntos del elemento seleccionado](https://docs.microsoft.com/office/dev/add-ins/outlook/get-attachments-of-an-outlook-item) .<!-- -->.
+
+
+    #### <a name="examples"></a>Ejemplos
+
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/85-tokens-and-service-calls/ids-and-urls.yaml
+
+    console.log("EWS URL: " + Office.context.mailbox.ewsUrl);
+
+    var ewsId = Office.context.mailbox.item.itemId;
+
+    console.log("EWS item ID: " + Office.context.mailbox.item.itemId);
+
+
+    console.log("REST URL: " + Office.context.mailbox.restUrl);
+
+    var restId = Office.context.mailbox.convertToRestId(ewsId, Office.MailboxEnums.RestVersion.v2_0);
+
+    console.log("REST item ID: " + restId);
+
+
+    var ewsId2 = Office.context.mailbox.convertToEwsId(restId, Office.MailboxEnums.RestVersion.v2_0);
+
+    console.log("EWS ID (from REST ID): " + ewsId2);
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'ewsUrl: string;'
+    return:
+      type: string
+- name: item
+  uid: outlook!Office.Mailbox#item:member
+  package: outlook!
+  fullName: item
+  summary: >-
+    El elemento de buzón. Según el contexto en el que se abra el complemento, el tipo de elemento puede variar. Si desea ver IntelliSense solo para un tipo o modo específicos, convierta este elemento en uno de los siguientes:
+
+
+    [MessageCompose](xref:outlook!Office.MessageCompose:interface)<!-- -->, [MessageRead](xref:outlook!Office.MessageRead:interface)<!-- -->, [AppointmentCompose](xref:outlook!Office.AppointmentCompose:interface)<!-- -->, [AppointmentRead](xref:outlook!Office.AppointmentRead:interface)
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'item: Item & ItemCompose & ItemRead & Message & MessageCompose & MessageRead & Appointment & AppointmentCompose & AppointmentRead;'
+    return:
+      type: <xref uid="outlook!Office.Item:interface" /> & <xref uid="outlook!Office.ItemCompose:interface" /> & <xref uid="outlook!Office.ItemRead:interface" /> & <xref uid="outlook!Office.Message:interface" /> & <xref uid="outlook!Office.MessageCompose:interface" /> & <xref uid="outlook!Office.MessageRead:interface" /> & <xref uid="outlook!Office.Appointment:interface" /> & <xref uid="outlook!Office.AppointmentCompose:interface" /> & <xref uid="outlook!Office.AppointmentRead:interface" />
+- name: userProfile
+  uid: outlook!Office.Mailbox#userProfile:member
+  package: outlook!
+  fullName: userProfile
+  summary: >-
+    Información sobre el usuario asociado con el buzón. Esto incluye el tipo de cuenta, el nombre para mostrar, la dirección de correo electrónico y la zona horaria.
+
+
+    Hay más información en [Office. userprofile](xref:outlook!Office.UserProfile:interface)
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'userProfile: UserProfile;'
+    return:
+      type: <xref uid="outlook!Office.UserProfile:interface" />
+methods:
+- name: convertToEwsId(itemId, restVersion)
+  uid: outlook!Office.Mailbox#convertToEwsId:member(1)
+  package: outlook!
+  fullName: convertToEwsId(itemId, restVersion)
+  summary: >-
+    Convierte un identificador de elemento con formato para REST al formato EWS.
+
+
+    Los identificadores de elemento obtenidos a través de una API de REST (como la API de correo de Outlook o Microsoft Graph) usan un formato diferente al formato que usa Exchange Web Services (EWS). El método `convertToEwsId` convierte un identificador con formato REST al formato adecuado para EWS.
+
+
+    **Nota**: este método no es compatible con Outlook en iOS o Android.
+
+
+    \[[Conjunto de API: buzón de correo 1,3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`Restricted`
+
+
+    **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: redacción o lectura
+
+
+    #### <a name="examples"></a>Ejemplos
+
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/85-tokens-and-service-calls/ids-and-urls.yaml
+
+    console.log("EWS URL: " + Office.context.mailbox.ewsUrl);
+
+    var ewsId = Office.context.mailbox.item.itemId;
+
+    console.log("EWS item ID: " + Office.context.mailbox.item.itemId);
+
+
+    console.log("REST URL: " + Office.context.mailbox.restUrl);
+
+    var restId = Office.context.mailbox.convertToRestId(ewsId, Office.MailboxEnums.RestVersion.v2_0);
+
+    console.log("REST item ID: " + restId);
+
+
+    var ewsId2 = Office.context.mailbox.convertToEwsId(restId, Office.MailboxEnums.RestVersion.v2_0);
+
+    console.log("EWS ID (from REST ID): " + ewsId2);
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'convertToEwsId(itemId: string, restVersion: MailboxEnums.RestVersion | string): string;'
+    parameters:
+    - id: itemId
+      description: Un identificador de elemento con formato para las API de REST de Outlook.
+      type: string
+    - id: restVersion
+      description: Un valor que indica la versión de la API de REST de Outlook que se usa para recuperar el identificador de elemento.
+      type: <xref uid="outlook!Office.MailboxEnums.RestVersion:enum" /> | string
+    return:
+      type: string
+      description: ''
+- name: convertToLocalClientTime(timeValue)
+  uid: outlook!Office.Mailbox#convertToLocalClientTime:member(1)
+  package: outlook!
+  fullName: convertToLocalClientTime(timeValue)
+  summary: >-
+    Obtiene un diccionario con información de tiempo en el tiempo del cliente local.
+
+
+    Las fechas y las horas usadas por una aplicación de correo para los clientes de Outlook en la web o de escritorio pueden usar zonas horarias diferentes. Outlook usa la zona horaria del equipo cliente; Outlook en la Web usa la zona horaria establecida en el centro de administración de Exchange (EAC). Debería tratar los valores de fecha y hora de modo que los valores que aparezcan en la interfaz de usuario sean siempre coherentes con la zona horaria que el usuario espera.
+
+
+    Si la aplicación de correo se ejecuta en los clientes de Outlook en el escritorio, el `convertToLocalClientTime` método devolverá un objeto Dictionary con los valores establecidos en la zona horaria del equipo cliente. Si la aplicación de correo se ejecuta en Outlook en la web, el `convertToLocalClientTime` método devolverá un objeto Dictionary con los valores establecidos en la zona horaria especificada en el EAC.
+  remarks: >-
+    **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+
+
+    **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: redacción o lectura
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'convertToLocalClientTime(timeValue: Date): LocalClientTime;'
+    parameters:
+    - id: timeValue
+      description: Un `Date` objeto.
+      type: Date
+    return:
+      type: <xref uid="outlook!Office.LocalClientTime:interface" />
+      description: ''
+- name: convertToRestId(itemId, restVersion)
+  uid: outlook!Office.Mailbox#convertToRestId:member(1)
+  package: outlook!
+  fullName: convertToRestId(itemId, restVersion)
+  summary: >-
+    Convierte un identificador de elemento con formato para EWS al formato REST.
+
+
+    **Nota**: este método no es compatible con Outlook en iOS o Android.
+
+
+    \[[Conjunto de API: buzón de correo 1,3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: "**<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`Restricted`\n\n**<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: redacción o lectura\n\nLos identificadores de elemento recuperados a través de EWS o a través de la `itemId` propiedad usan un formato diferente del formato usado por las API de REST (como la [API de correo de Outlook](https://docs.microsoft.com/previous-versions/office/office-365-api/api/version-2.0/mail-rest-operations) o [Microsoft Graph](https://graph.microsoft.io/) .<!-- -->. El método `convertToRestId` convierte un identificador con formato EWS al formato adecuado para REST.\n\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/85-tokens-and-service-calls/basic-rest-cors.yaml\nOffice.context.mailbox.getCallbackTokenAsync({ isRest: true }, function (result) {\n    var ewsId = Office.context.mailbox.item.itemId;\n    var token = result.value;\n    var restId = Office.context.mailbox.convertToRestId(ewsId, Office.MailboxEnums.RestVersion.v2_0);\n    var getMessageUrl = Office.context.mailbox.restUrl + '/v2.0/me/messages/' + restId;\n            \n    var xhr = new XMLHttpRequest();\n    xhr.open('GET', getMessageUrl);\n    xhr.setRequestHeader(\"Authorization\", \"Bearer \" + token);\n    xhr.onload = function (e) {\n        console.log(this.response);\n    }\n    xhr.send();\n});\n```\n```javascript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/85-tokens-and-service-calls/ids-and-urls.yaml\nconsole.log(\"EWS URL: \" + Office.context.mailbox.ewsUrl);\nvar ewsId = Office.context.mailbox.item.itemId;\nconsole.log(\"EWS item ID: \" + Office.context.mailbox.item.itemId);\n\nconsole.log(\"REST URL: \" + Office.context.mailbox.restUrl);\nvar restId = Office.context.mailbox.convertToRestId(ewsId, Office.MailboxEnums.RestVersion.v2_0);\nconsole.log(\"REST item ID: \" + restId);\n\nvar ewsId2 = Office.context.mailbox.convertToEwsId(restId, Office.MailboxEnums.RestVersion.v2_0);\nconsole.log(\"EWS ID (from REST ID): \" + ewsId2);\n```"
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'convertToRestId(itemId: string, restVersion: MailboxEnums.RestVersion | string): string;'
+    parameters:
+    - id: itemId
+      description: Un identificador de elemento con formato para Exchange Web Services (EWS)
+      type: string
+    - id: restVersion
+      description: Un valor que indica la versión de la API de REST de Outlook con la que se usará el identificador convertido.
+      type: <xref uid="outlook!Office.MailboxEnums.RestVersion:enum" /> | string
+    return:
+      type: string
+      description: ''
+- name: convertToUtcClientTime(input)
+  uid: outlook!Office.Mailbox#convertToUtcClientTime:member(1)
+  package: outlook!
+  fullName: convertToUtcClientTime(input)
+  summary: >-
+    Obtiene un `Date` objeto a partir de un diccionario que contiene información de tiempo.
+
+
+    El `convertToUtcClientTime` método convierte un diccionario que contiene la fecha y la hora locales en un `Date` objeto con los valores correctos para la fecha y la hora locales.
+  remarks: >-
+    **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+
+
+    **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: redacción o lectura
+
+
+    #### <a name="examples"></a>Ejemplos
+
+
+    ```javascript
+
+    // Represents 3:37 PM PDT on Monday, August 26, 2019.
+
+    var input = {
+        date: 26,
+        hours: 15,
+        milliseconds: 2,
+        minutes: 37,
+        month: 7,
+        seconds: 2,
+        timezoneOffset: -420,
+        year: 2019
+    };
+
+
+    // result should be a Date object.
+
+    var result = Office.context.mailbox.convertToUtcClientTime(input);
+
+
+    // Output should be "2019-08-26T22:37:02.002Z".
+
+    console.log(result.toISOString());
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'convertToUtcClientTime(input: LocalClientTime): Date;'
+    parameters:
+    - id: input
+      description: El valor de la hora local para convertir.
+      type: <xref uid="outlook!Office.LocalClientTime:interface" />
+    return:
+      type: Date
+      description: Objeto Date con el tiempo expresado en UTC.
+- name: displayAppointmentForm(itemId)
+  uid: outlook!Office.Mailbox#displayAppointmentForm:member(1)
+  package: outlook!
+  fullName: displayAppointmentForm(itemId)
+  summary: >-
+    Muestra una cita de calendario existente.
+
+
+    El método `displayAppointmentForm` abre una cita de calendario existente en una nueva ventana del escritorio o en un cuadro de diálogo en los dispositivos móviles.
+
+
+    En Outlook en Mac, puede usar este método para mostrar una cita única que no forma parte de una serie periódica o la cita principal de una serie periódica. Sin embargo, no se puede mostrar una instancia de la serie porque no se puede tener acceso a las propiedades (incluido el identificador de elemento) de las instancias de una serie periódica.
+
+
+    En Outlook en la web, este método abre el formulario especificado sólo si el cuerpo del formulario es inferior o igual a 32K caracteres.
+
+
+    Si el identificador de elemento especificado no identifica una cita existente, se abre un panel en blanco en el dispositivo o equipo cliente y no se devuelve ningún mensaje de error.
+
+
+    **Nota**: este método no es compatible con Outlook en iOS o Android.
+  remarks: >-
+    **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+
+
+    **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: redacción o lectura
+
+
+    #### <a name="examples"></a>Ejemplos
+
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/55-display-items/display-existing-appointment.yaml
+
+    var itemId = $("#itemId").val();
+
+    Office.context.mailbox.displayAppointmentForm(itemId);
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'displayAppointmentForm(itemId: string): void;'
+    parameters:
+    - id: itemId
+      description: Identificador de los servicios web de Exchange (EWS) para una cita de calendario existente.
+      type: string
+    return:
+      type: void
+      description: ''
+- name: displayMessageForm(itemId)
+  uid: outlook!Office.Mailbox#displayMessageForm:member(1)
+  package: outlook!
+  fullName: displayMessageForm(itemId)
+  summary: >-
+    Muestra un mensaje existente.
+
+
+    El método `displayMessageForm` abre un mensaje existente en una nueva ventana del escritorio o en un cuadro de diálogo en los dispositivos móviles.
+
+
+    En Outlook en la web, este método abre el formulario especificado sólo si el cuerpo del formulario es inferior o igual a 32K caracteres.
+
+
+    Si el identificador de elemento especificado no identifica un mensaje existente, no se mostrará ningún mensaje en el equipo cliente y no se devolverá ningún mensaje de error.
+
+
+    No use el `displayMessageForm` con un Itemid que represente una cita. Use el método `displayAppointmentForm` para mostrar una cita existente y `displayNewAppointmentForm` para mostrar un formulario para crear una cita nueva.
+
+
+    **Nota**: este método no es compatible con Outlook en iOS o Android.
+  remarks: >-
+    **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+
+
+    **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: redacción o lectura
+
+
+    #### <a name="examples"></a>Ejemplos
+
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/55-display-items/display-existing-message.yaml
+
+    var itemId = $("#itemId").val();
+
+    Office.context.mailbox.displayMessageForm(itemId);
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'displayMessageForm(itemId: string): void;'
+    parameters:
+    - id: itemId
+      description: Identificador de los servicios web de Exchange (EWS) para un mensaje existente.
+      type: string
+    return:
+      type: void
+      description: ''
+- name: displayNewAppointmentForm(parameters)
+  uid: outlook!Office.Mailbox#displayNewAppointmentForm:member(1)
+  package: outlook!
+  fullName: displayNewAppointmentForm(parameters)
+  summary: >-
+    Muestra un formulario para crear una cita de calendario.
+
+
+    El método `displayNewAppointmentForm` abre un formulario que permite al usuario crear una nueva cita o reunión. Si se especifican parámetros, los campos de formulario de cita se rellenan automáticamente con el contenido de los parámetros.
+
+
+    En Outlook en la web, este método siempre muestra un formulario con un campo de asistentes. Si no especifica ningún asistente como argumento de entrada, el método muestra un formulario con un botón **Guardar**. Si ha especificado asistentes, el formulario incluirá a los asistentes y un botón **Enviar**.
+
+
+    En el cliente enriquecido de Outlook y Outlook RT, si especifica los asistentes o los recursos en el `requiredAttendees`<!-- -->, `optionalAttendees`<!-- -->, o `resources` parámetro, este método muestra un formulario de reunión con un botón **Enviar** . Si no especifica ningún destinatario, este método muestra un formulario de cita con un botón **Guardar &amp; cierre** .
+
+
+    Si cualquiera de los parámetros supera los límites de tamaño especificados o si se especifica un nombre de parámetro desconocido, se genera una excepción.
+
+
+    **Nota**: este método no es compatible con Outlook en iOS o Android.
+  remarks: >-
+    **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+
+
+    **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: lectura
+
+
+    #### <a name="examples"></a>Ejemplos
+
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/55-display-items/display-new-appointment.yaml
+
+    var start = new Date();
+
+    var end = new Date();
+
+    end.setHours(start.getHours() + 1);
+
+
+    Office.context.mailbox.displayNewAppointmentForm({
+      requiredAttendees: ["bob@contoso.com"],
+      optionalAttendees: ["sam@contoso.com"],
+      start: start,
+      end: end,
+      location: "Home",
+      subject: "meeting",
+      resources: ["projector@contoso.com"],
+      body: "Hello World!"
+    });
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'displayNewAppointmentForm(parameters: AppointmentForm): void;'
+    parameters:
+    - id: parameters
+      description: Una `AppointmentForm` Descripción de la nueva cita. Todas las propiedades son opcionales.
+      type: <xref uid="outlook!Office.AppointmentForm:interface" />
+    return:
+      type: void
+      description: ''
+- name: getCallbackTokenAsync(callback, userContext)
+  uid: outlook!Office.Mailbox#getCallbackTokenAsync:member(1)
+  package: outlook!
+  fullName: getCallbackTokenAsync(callback, userContext)
+  summary: >-
+    Obtiene una cadena que contiene un token usado para obtener datos adjuntos o un elemento de Exchange Server.
+
+
+    El método `getCallbackTokenAsync` realiza una llamada asincrónica para obtener un token opaco desde Exchange Server que hospeda el buzón del usuario. La duración del token de devolución de llamada es de 5 minutos.
+
+
+    El token se devuelve como una cadena en la `asyncResult.value` propiedad.
+
+
+    Podrá pasar tanto el token como un identificador de datos adjuntos o de elementos a un sistema de terceros. El sistema de terceros usa el token como autorización del portador para llamar a los servicios Web de Exchange (EWS) o a las operaciones [GetAttachment](https://docs.microsoft.com/exchange/client-developer/web-service-reference/getattachment-operation) o [GetItem](https://docs.microsoft.com/exchange/client-developer/web-service-reference/getitem-operation) para devolver datos adjuntos o un elemento. Por ejemplo, puede crear un servicio remoto para [obtener datos adjuntos del elemento seleccionado](https://docs.microsoft.com/office/dev/add-ins/outlook/get-attachments-of-an-outlook-item) .<!-- -->.
+
+
+    La llamada al `getCallbackTokenAsync` método en el modo de lectura requiere un nivel de permiso mínimo de `ReadItem`<!-- -->.
+
+
+    Para llamar al `getCallbackTokenAsync` método en el modo de redacción es necesario que haya guardado el elemento. El `saveAsync` método requiere un nivel de permisos mínimo de `ReadWriteItem`<!-- -->.
+
+
+    **Importante**: para obtener instrucciones sobre los escenarios de delegación o compartidos, consulte el artículo [delegados de acceso](https://docs.microsoft.com/office/dev/add-ins/outlook/delegate-access) .
+
+
+    \[[Conjunto de API: todos admiten el modo de lectura; El buzón 1,3 ha lanzado la compatibilidad con el modo redacción](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: "**<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`\n\n**<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: redacción o lectura\n\n**Errores**:\n\n- `HTTPRequestFailure`<!-- -->: Error en la solicitud. Compruebe el objeto de diagnóstico para ver el código de error HTTP.\n\n- `InternalServerError`<!-- -->: El servidor de Exchange devolvió un error. Compruebe el objeto de diagnóstico para obtener más información.\n\n- `NetworkError`<!-- -->: El usuario ya no está conectado a la red. Compruebe la conexión de red y vuelva a intentarlo.\n\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/85-tokens-and-service-calls/basic-rest-cors.yaml\nOffice.context.mailbox.getCallbackTokenAsync({ isRest: true }, function (result) {\n    var ewsId = Office.context.mailbox.item.itemId;\n    var token = result.value;\n    var restId = Office.context.mailbox.convertToRestId(ewsId, Office.MailboxEnums.RestVersion.v2_0);\n    var getMessageUrl = Office.context.mailbox.restUrl + '/v2.0/me/messages/' + restId;\n            \n    var xhr = new XMLHttpRequest();\n    xhr.open('GET', getMessageUrl);\n    xhr.setRequestHeader(\"Authorization\", \"Bearer \" + token);\n    xhr.onload = function (e) {\n        console.log(this.response);\n    }\n    xhr.send();\n});\n```"
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getCallbackTokenAsync(callback: (asyncResult: Office.AsyncResult<string>) => void, userContext?: any): void;'
+    parameters:
+    - id: callback
+      description: Cuando el método finaliza, la función que se pasa en el parámetro callback se llama con un único parámetro de tipo `Office.AsyncResult`<!-- -->. El token se devuelve como una cadena en la `asyncResult.value` propiedad. Si se produjo un error, las propiedades `asyncResult.error` y `asyncResult.diagnostics` pueden proporcionar información adicional.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
+    - id: userContext
+      description: Opcional. Cualquier dato de estado que se pasa al método asincrónico.
+      type: any
+    return:
+      type: void
+      description: ''
+- name: getUserIdentityTokenAsync(callback, userContext)
+  uid: outlook!Office.Mailbox#getUserIdentityTokenAsync:member(1)
+  package: outlook!
+  fullName: getUserIdentityTokenAsync(callback, userContext)
+  summary: >-
+    Obtiene un token que identifica al usuario y al complemento de Office.
+
+
+    El token se devuelve como una cadena en la `asyncResult.value` propiedad.
+  remarks: >-
+    **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+
+
+    **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: redacción o lectura
+
+
+    El `getUserIdentityTokenAsync` método devuelve un token que puede usar para identificar y [autenticar el complemento y el usuario con un sistema de terceros](https://docs.microsoft.com/office/dev/add-ins/outlook/authentication) .<!-- -->.
+
+
+    **Errores**:
+
+
+    - `HTTPRequestFailure`<!-- -->: Error en la solicitud. Compruebe el objeto de diagnóstico para ver el código de error HTTP.
+
+
+    - `InternalServerError`<!-- -->: El servidor de Exchange devolvió un error. Compruebe el objeto de diagnóstico para obtener más información.
+
+
+    - `NetworkError`<!-- -->: El usuario ya no está conectado a la red. Compruebe la conexión de red y vuelva a intentarlo.
+
+
+    #### <a name="examples"></a>Ejemplos
+
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/85-tokens-and-service-calls/user-identity-token.yaml
+
+    Office.context.mailbox.getUserIdentityTokenAsync(function (result) {
+        if (result.status !== Office.AsyncResultStatus.Succeeded) {
+            console.error(`Token retrieval failed with message: ${result.error.message}`);
+        } else {
+            console.log(result.value);
+        }
+    });
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getUserIdentityTokenAsync(callback: (asyncResult: Office.AsyncResult<string>) => void, userContext?: any): void;'
+    parameters:
+    - id: callback
+      description: Cuando el método finaliza, la función que se pasa en el parámetro callback se llama con un único parámetro de tipo `Office.AsyncResult`<!-- -->. El token se devuelve como una cadena en la `asyncResult.value` propiedad. Si se produjo un error, las propiedades `asyncResult.error` y `asyncResult.diagnostics` pueden proporcionar información adicional.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
+    - id: userContext
+      description: Opcional. Cualquier dato de estado que se pasa al método asincrónico.
+      type: any
+    return:
+      type: void
+      description: ''
+- name: makeEwsRequestAsync(data, callback, userContext)
+  uid: outlook!Office.Mailbox#makeEwsRequestAsync:member(1)
+  package: outlook!
+  fullName: makeEwsRequestAsync(data, callback, userContext)
+  summary: >-
+    Realiza una solicitud asincrónica a un servicio de servicios web Exchange (EWS) en el servidor Exchange que hospeda el buzón del usuario.
+
+
+    En estos casos, los complementos tendrían que usar las API de REST para obtener acceso al buzón del usuario en su lugar.
+
+
+    El método `makeEwsRequestAsync` envía una solicitud de EWS en nombre del complemento a Exchange.
+
+
+    No puede solicitar elementos asociados de las carpetas con el método `makeEwsRequestAsync`.
+
+
+    La solicitud XML debe especificar la codificación UTF-8: `\<?xml version="1.0" encoding="utf-8"?\>`<!-- -->.
+
+
+    El complemento debe tener `ReadWriteMailbox` permiso para usar el `makeEwsRequestAsync` método. Para obtener información sobre cómo usar el `ReadWriteMailbox` permiso y las operaciones de EWS a las que puede llamar con el `makeEwsRequestAsync` método, vea [especificar permisos para el acceso de los complementos de correo al buzón del usuario](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) .<!-- -->.
+
+
+    El resultado XML de la llamada EWS se proporciona como cadena en la propiedad `asyncResult.value`. Si el resultado supera 1 MB de tamaño, se devuelve un mensaje de error en su lugar.
+
+
+    **Nota**: este método no se admite en los siguientes escenarios:
+
+
+    - En Outlook en iOS o Android.
+
+
+    - Cuando el complemento se carga en un buzón de gmail.
+
+
+    **Nota**: el administrador del servidor debe `OAuthAuthentication` establecer `true` en el directorio EWS del servidor de acceso de cliente para permitir que el `makeEwsRequestAsync` método realice las solicitudes de EWS.
+
+
+    *Diferencias de versión*
+
+
+    Cuando se usa el `makeEwsRequestAsync` método en las aplicaciones de correo que se ejecutan en versiones de Outlook anteriores a la versión 15.0.4535.1004, se debe establecer el valor de codificación en ISO-8859-1.
+
+
+    `<?xml version="1.0" encoding="iso-8859-1"?>`
+
+
+    No es necesario establecer el valor de codificación si la aplicación de correo se ejecuta en Outlook en la web. Puede determinar si su aplicación de correo se está ejecutando en Outlook o en Outlook en la web con la `mailbox.diagnostics.hostName` propiedad. Puede determinar qué versión de Outlook se está ejecutando mediante la `mailbox.diagnostics.hostVersion` propiedad.
+  remarks: >-
+    **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadWriteMailbox`
+
+
+    **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: redacción o lectura
+
+
+    #### <a name="examples"></a>Ejemplos
+
+
+    ```javascript
+
+    function getSubjectRequest(id) {
+        // Return a GetItem operation request for the subject of the specified item.
+        var request =
+            '<?xml version="1.0" encoding="utf-8"?>' +
+            '<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"' +
+            '               xmlns:xsd="http://www.w3.org/2001/XMLSchema"' +
+            '               xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"' +
+            '               xmlns:t="http://schemas.microsoft.com/exchange/services/2006/types">' +
+            '  <soap:Header>' +
+            '    <RequestServerVersion Version="Exchange2013" xmlns="http://schemas.microsoft.com/exchange/services/2006/types" soap:mustUnderstand="0" />' +
+            '  </soap:Header>' +
+            '  <soap:Body>' +
+            '    <GetItem xmlns="http://schemas.microsoft.com/exchange/services/2006/messages">' +
+            '      <ItemShape>' +
+            '        <t:BaseShape>IdOnly</t:BaseShape>' +
+            '        <t:AdditionalProperties>' +
+            '            <t:FieldURI FieldURI="item:Subject"/>' +
+            '        </t:AdditionalProperties>' +
+            '      </ItemShape>' +
+            '      <ItemIds><t:ItemId Id="' + id + '"/></ItemIds>' +
+            '    </GetItem>' +
+            '  </soap:Body>' +
+            '</soap:Envelope>';
+
+        return request;
+    }
+
+
+    function sendRequest() {
+        // Create a local variable that contains the mailbox.
+        Office.context.mailbox.makeEwsRequestAsync(
+            getSubjectRequest(mailbox.item.itemId), callback);
+    }
+
+
+    function callback(asyncResult)  {
+        var result = asyncResult.value;
+        var context = asyncResult.asyncContext;
+
+        // Process the returned response here.
+    }
+
+    ```
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/85-tokens-and-service-calls/make-ews-request-async.yaml
+
+    var ewsId = Office.context.mailbox.item.itemId;
+
+    var request = '<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:m="http://schemas.microsoft.com/exchange/services/2006/messages" xmlns:t="http://schemas.microsoft.com/exchange/services/2006/types" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">' +
+        '  <soap:Header><t:RequestServerVersion Version="Exchange2013" /></soap:Header>' +
+        '  <soap:Body>' +
+        '    <m:GetItem>' +
+        '      <m:ItemShape>' +
+        '        <t:BaseShape>IdOnly</t:BaseShape>' +
+        '      </m:ItemShape >' +
+        '      <m:ItemIds>' +
+        '        <t:ItemId Id="' + ewsId + '" />' +
+        '      </m:ItemIds>' +
+        '    </m:GetItem>' +
+        '  </soap:Body>' +
+        '</soap:Envelope>';
+
+    Office.context.mailbox.makeEwsRequestAsync(request, function (result) {
+        console.log(result);
+    });
+
+    ```
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/85-tokens-and-service-calls/send-message-using-make-ews-request-async.yaml
+
+    var request = '<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:m="http://schemas.microsoft.com/exchange/services/2006/messages" xmlns:t="http://schemas.microsoft.com/exchange/services/2006/types" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">'+
+        '  <soap:Header><t:RequestServerVersion Version="Exchange2010" /></soap:Header>'+
+        '  <soap:Body>'+
+        '    <m:CreateItem MessageDisposition="SendAndSaveCopy">'+
+        '      <m:SavedItemFolderId><t:DistinguishedFolderId Id="sentitems" /></m:SavedItemFolderId>'+
+        '      <m:Items>'+
+        '        <t:Message>'+
+        '          <t:Subject>Hello, Outlook!</t:Subject>'+
+        '          <t:Body BodyType="HTML">This message was sent from a ScriptLab code sample, used from ' + Office.context.mailbox.diagnostics.hostName + ', version ' + Office.context.mailbox.diagnostics.hostVersion + '!</t:Body>'+
+        '          <t:ToRecipients>'+
+        '            <t:Mailbox><t:EmailAddress>' + Office.context.mailbox.userProfile.emailAddress + '</t:EmailAddress></t:Mailbox>'+
+        '          </t:ToRecipients>'+
+        '        </t:Message>'+
+        '      </m:Items>'+
+        '    </m:CreateItem>'+
+        '  </soap:Body>'+
+        '</soap:Envelope>';
+
+    Office.context.mailbox.makeEwsRequestAsync(request, function (result) {
+        console.log(result);
+    });
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'makeEwsRequestAsync(data: any, callback: (asyncResult: Office.AsyncResult<string>) => void, userContext?: any): void;'
+    parameters:
+    - id: data
+      description: La solicitud de EWS.
+      type: any
+    - id: callback
+      description: Cuando el método finaliza, la función que se pasa en el parámetro callback se llama con un único parámetro de tipo `Office.AsyncResult`<!-- -->. La `value` propiedad del resultado es el XML de la solicitud de EWS proporcionada como una cadena. Si el resultado supera 1 MB de tamaño, se devuelve un mensaje de error en su lugar.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
+    - id: userContext
+      description: Opcional. Cualquier dato de estado que se pasa al método asincrónico.
+      type: any
+    return:
+      type: void
+      description: ''
+metadata:
+  ms.openlocfilehash: 32c43f8e7ca259b4e2930b855b03a70ff730b134
+  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.translationtype: MT
+  ms.contentlocale: es-ES
+  ms.lasthandoff: 11/18/2020
+  ms.locfileid: "49150536"
