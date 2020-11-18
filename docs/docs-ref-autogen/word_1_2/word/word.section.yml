@@ -1,415 +1,275 @@
-### YamlMime:UniversalReference
-items:
-  - uid: 'word!Word.Section:class'
-    summary: |-
-      Representa una sección de un documento de Word.
-
-      \[[Conjunto de API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
-    name: Word.Section
-    fullName: Word.Section
-    langs:
-      - typeScript
-    type: class
-    extends:
-      - 'office!OfficeExtension.ClientObject:class'
-    package: word!
-    children:
-      - 'word!Word.Section#body:member'
-      - 'word!Word.Section#context:member'
-      - 'word!Word.Section#getFooter:member(1)'
-      - 'word!Word.Section#getFooter:member(2)'
-      - 'word!Word.Section#getHeader:member(1)'
-      - 'word!Word.Section#getHeader:member(2)'
-      - 'word!Word.Section#load:member(1)'
-      - 'word!Word.Section#load:member(2)'
-      - 'word!Word.Section#load:member(3)'
-      - 'word!Word.Section#set:member(1)'
-      - 'word!Word.Section#set:member(2)'
-      - 'word!Word.Section#toJSON:member(1)'
-      - 'word!Word.Section#track:member(1)'
-      - 'word!Word.Section#untrack:member(1)'
-  - uid: 'word!Word.Section#body:member'
-    summary: |-
-      Obtiene el objeto de cuerpo de la sección. Esto no incluye el encabezado o pie de página y otros metadatos de la sección. Solo lectura.
-
-      \[[Conjunto de API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
-    name: body
-    fullName: body
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'readonly body: Word.Body;'
-      return:
-        type:
-          - 'word!Word.Body:class'
-  - uid: 'word!Word.Section#context:member'
-    summary: Contexto de la solicitud asociado al objeto. Esto conecta el proceso del complemento con el proceso de la aplicación host de Office.
-    name: context
-    fullName: context
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'context: RequestContext;'
-      return:
-        type:
-          - 'word!Word.RequestContext:class'
-  - uid: 'word!Word.Section#getFooter:member(1)'
-    summary: |-
-      Obtiene uno de los pies de página de la sección.
-
-      \[[Conjunto de API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
-    name: getFooter(type)
-    fullName: getFooter(type)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'getFooter(type: Word.HeaderFooterType): Word.Body;'
-      return:
-        type:
-          - 'word!Word.Body:class'
-        description: |-
+### YamlMime:TSType
+name: Word.Section
+uid: word!Word.Section:class
+package: word!
+fullName: Word.Section
+summary: >-
+  Representa una sección de un documento de Word.
 
 
-          #### <a name="examples"></a>Ejemplos
-
-          ```typescript
-          // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/word/25-paragraph/insert-header-and-footer.yaml
-          await Word.run(async (context) => {
-            context.document.sections.getFirst().getFooter("Primary")
-              .insertParagraph("This is a footer", "End");
-
-            await context.sync();
-          });
-          ```
-      parameters:
-        - id: type
-          description: 'Obligatorio. Tipo de pie de página que se va a devolver. Este valor puede ser: "Primary", "FirstPage" o "EvenPages".'
-          type:
-            - 'word!Word.HeaderFooterType:enum'
-  - uid: 'word!Word.Section#getFooter:member(2)'
-    summary: |-
-      Obtiene uno de los pies de página de la sección.
-
-      \[[Conjunto de API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
-    name: getFooter(typeString)
-    fullName: getFooter(typeString)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'getFooter(typeString: "Primary" | "FirstPage" | "EvenPages"): Word.Body;'
-      return:
-        type:
-          - 'word!Word.Body:class'
-        description: |-
+  \[[Conjunto de API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+remarks: ''
+isPreview: false
+isDeprecated: false
+type: class
+properties:
+- name: body
+  uid: word!Word.Section#body:member
+  package: word!
+  fullName: body
+  summary: >-
+    Obtiene el objeto de cuerpo de la sección. Esto no incluye el encabezado o pie de página y otros metadatos de la sección. Solo lectura.
 
 
-          #### <a name="examples"></a>Ejemplos
-
-          ```javascript
-          // Run a batch operation against the Word object model.
-          Word.run(function (context) {
-              
-              // Create a proxy sectionsCollection object.
-              var mySections = context.document.sections;
-              
-              // Queue a command to load the sections.
-              context.load(mySections, 'body/style');
-              
-              // Synchronize the document state by executing the queued commands, 
-              // and return a promise to indicate task completion.
-              return context.sync().then(function () {
-                  
-                  // Create a proxy object the primary footer of the first section. 
-                  // Note that the footer is a body object.
-                  var myFooter = mySections.items[0].getFooter("primary");
-                  
-                  // Queue a command to insert text at the end of the footer.
-                  myFooter.insertText("This is a footer.", Word.InsertLocation.end);
-                  
-                  // Queue a command to wrap the header in a content control.
-                  myFooter.insertContentControl();
-                                        
-                  // Synchronize the document state by executing the queued commands, 
-                  // and return a promise to indicate task completion.
-                  return context.sync().then(function () {
-                      console.log("Added a footer to the first section.");
-                  });                    
-              });  
-          })
-          .catch(function (error) {
-              console.log('Error: ' + JSON.stringify(error));
-              if (error instanceof OfficeExtension.Error) {
-                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
-              }
-          });
-          ```
-      parameters:
-        - id: typeString
-          description: 'Obligatorio. Tipo de pie de página que se va a devolver. Este valor puede ser: "Primary", "FirstPage" o "EvenPages".'
-          type:
-            - '"Primary" | "FirstPage" | "EvenPages"'
-  - uid: 'word!Word.Section#getHeader:member(1)'
-    summary: |-
-      Obtiene uno de los encabezados de la sección.
-
-      \[[Conjunto de API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
-    name: getHeader(type)
-    fullName: getHeader(type)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'getHeader(type: Word.HeaderFooterType): Word.Body;'
-      return:
-        type:
-          - 'word!Word.Body:class'
-        description: |-
+    \[[Conjunto de API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly body: Word.Body;'
+    return:
+      type: <xref uid="word!Word.Body:class" />
+- name: context
+  uid: word!Word.Section#context:member
+  package: word!
+  fullName: context
+  summary: Contexto de la solicitud asociado al objeto. Esto conecta el proceso del complemento con el proceso de la aplicación host de Office.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type: <xref uid="word!Word.RequestContext:class" />
+methods:
+- name: getFooter(type)
+  uid: word!Word.Section#getFooter:member(1)
+  package: word!
+  fullName: getFooter(type)
+  summary: >-
+    Obtiene uno de los pies de página de la sección.
 
 
-          #### <a name="examples"></a>Ejemplos
-
-          ```typescript
-          // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/word/25-paragraph/insert-header-and-footer.yaml
-          await Word.run(async (context) => {
-            context.document.sections.getFirst().getHeader("Primary")
-              .insertParagraph("This is a header", "End");
-
-            await context.sync();
-          });
-          ```
-      parameters:
-        - id: type
-          description: 'Necesario. Tipo de encabezado que se va a devolver. Este valor puede ser: "Primary", "FirstPage" o "EvenPages".'
-          type:
-            - 'word!Word.HeaderFooterType:enum'
-  - uid: 'word!Word.Section#getHeader:member(2)'
-    summary: |-
-      Obtiene uno de los encabezados de la sección.
-
-      \[[Conjunto de API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
-    name: getHeader(typeString)
-    fullName: getHeader(typeString)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'getHeader(typeString: "Primary" | "FirstPage" | "EvenPages"): Word.Body;'
-      return:
-        type:
-          - 'word!Word.Body:class'
-        description: |-
+    \[[Conjunto de API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getFooter(type: Word.HeaderFooterType): Word.Body;'
+    parameters:
+    - id: type
+      description: 'Necesario. Tipo de pie de página que se va a devolver. Este valor puede ser: "Primary", "FirstPage" o "EvenPages".'
+      type: <xref uid="word!Word.HeaderFooterType:enum" />
+    return:
+      type: <xref uid="word!Word.Body:class" />
+      description: "\n\n#### <a name=\"examples\"></a>Ejemplos\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/word/25-paragraph/insert-header-and-footer.yaml\nawait Word.run(async (context) => {\n  context.document.sections.getFirst().getFooter(\"Primary\")\n    .insertParagraph(\"This is a footer\", \"End\");\n\n  await context.sync();\n});\n```"
+- name: getFooter(typeString)
+  uid: word!Word.Section#getFooter:member(2)
+  package: word!
+  fullName: getFooter(typeString)
+  summary: >-
+    Obtiene uno de los pies de página de la sección.
 
 
-          #### <a name="examples"></a>Ejemplos
+    \[[Conjunto de API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getFooter(typeString: "Primary" | "FirstPage" | "EvenPages"): Word.Body;'
+    parameters:
+    - id: typeString
+      description: 'Necesario. Tipo de pie de página que se va a devolver. Este valor puede ser: "Primary", "FirstPage" o "EvenPages".'
+      type: "\"Primary\" | \"FirstPage\" | \"EvenPages\""
+    return:
+      type: <xref uid="word!Word.Body:class" />
+      description: "\n\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\n// Run a batch operation against the Word object model.\nWord.run(function (context) {\n    \n    // Create a proxy sectionsCollection object.\n    var mySections = context.document.sections;\n    \n    // Queue a command to load the sections.\n    context.load(mySections, 'body/style');\n    \n    // Synchronize the document state by executing the queued commands, \n    // and return a promise to indicate task completion.\n    return context.sync().then(function () {\n        \n        // Create a proxy object the primary footer of the first section. \n        // Note that the footer is a body object.\n        var myFooter = mySections.items[0].getFooter(\"primary\");\n        \n        // Queue a command to insert text at the end of the footer.\n        myFooter.insertText(\"This is a footer.\", Word.InsertLocation.end);\n        \n        // Queue a command to wrap the header in a content control.\n        myFooter.insertContentControl();\n                              \n        // Synchronize the document state by executing the queued commands, \n        // and return a promise to indicate task completion.\n        return context.sync().then(function () {\n            console.log(\"Added a footer to the first section.\");\n        });                    \n    });  \n})\n.catch(function (error) {\n    console.log('Error: ' + JSON.stringify(error));\n    if (error instanceof OfficeExtension.Error) {\n        console.log('Debug info: ' + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- name: getHeader(type)
+  uid: word!Word.Section#getHeader:member(1)
+  package: word!
+  fullName: getHeader(type)
+  summary: >-
+    Obtiene uno de los encabezados de la sección.
 
-          ```javascript
-          // Run a batch operation against the Word object model.
-          Word.run(function (context) {
-              
-              // Create a proxy sectionsCollection object.
-              var mySections = context.document.sections;
-              
-              // Queue a command to load the sections.
-              context.load(mySections, 'body/style');
-              
-              // Synchronize the document state by executing the queued commands, 
-              // and return a promise to indicate task completion.
-              return context.sync().then(function () {
-                  
-                  // Create a proxy object the primary header of the first section. 
-                  // Note that the header is a body object.
-                  var myHeader = mySections.items[0].getHeader("primary");
-                  
-                  // Queue a command to insert text at the end of the header.
-                  myHeader.insertText("This is a header.", Word.InsertLocation.end);
-                  
-                  // Queue a command to wrap the header in a content control.
-                  myHeader.insertContentControl();
-                                        
-                  // Synchronize the document state by executing the queued commands, 
-                  // and return a promise to indicate task completion.
-                  return context.sync().then(function () {
-                      console.log("Added a header to the first section.");
-                  });                    
-              });  
-          })
-          .catch(function (error) {
-              console.log('Error: ' + JSON.stringify(error));
-              if (error instanceof OfficeExtension.Error) {
-                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
-              }
-          });
-          ```
-      parameters:
-        - id: typeString
-          description: 'Necesario. Tipo de encabezado que se va a devolver. Este valor puede ser: "Primary", "FirstPage" o "EvenPages".'
-          type:
-            - '"Primary" | "FirstPage" | "EvenPages"'
-  - uid: 'word!Word.Section#load:member(1)'
-    summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar a `context.sync()` antes de leer las propiedades.
-    name: load(options)
-    fullName: load(options)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'load(options?: Word.Interfaces.SectionLoadOptions): Word.Section;'
-      return:
-        type:
-          - 'word!Word.Section:class'
-        description: ''
-      parameters:
-        - id: options
-          description: Proporciona opciones para las propiedades del objeto que se va a cargar.
-          type:
-            - 'word!Word.Interfaces.SectionLoadOptions:interface'
-  - uid: 'word!Word.Section#load:member(2)'
-    summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar a `context.sync()` antes de leer las propiedades.
-    name: load(propertyNames)
-    fullName: load(propertyNames)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'load(propertyNames?: string | string[]): Word.Section;'
-      return:
-        type:
-          - 'word!Word.Section:class'
-        description: ''
-      parameters:
-        - id: propertyNames
-          description: Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades que se van a cargar.
-          type:
-            - 'string | string[]'
-  - uid: 'word!Word.Section#load:member(3)'
-    summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar a `context.sync()` antes de leer las propiedades.
-    name: load(propertyNamesAndPaths)
-    fullName: load(propertyNamesAndPaths)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: |-
-        load(propertyNamesAndPaths?: {
+
+    \[[Conjunto de API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getHeader(type: Word.HeaderFooterType): Word.Body;'
+    parameters:
+    - id: type
+      description: 'Necesario. Tipo de encabezado que se va a devolver. Este valor puede ser: "Primary", "FirstPage" o "EvenPages".'
+      type: <xref uid="word!Word.HeaderFooterType:enum" />
+    return:
+      type: <xref uid="word!Word.Body:class" />
+      description: "\n\n#### <a name=\"examples\"></a>Ejemplos\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/word/25-paragraph/insert-header-and-footer.yaml\nawait Word.run(async (context) => {\n  context.document.sections.getFirst().getHeader(\"Primary\")\n    .insertParagraph(\"This is a header\", \"End\");\n\n  await context.sync();\n});\n```"
+- name: getHeader(typeString)
+  uid: word!Word.Section#getHeader:member(2)
+  package: word!
+  fullName: getHeader(typeString)
+  summary: >-
+    Obtiene uno de los encabezados de la sección.
+
+
+    \[[Conjunto de API: WordApi 1,1](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getHeader(typeString: "Primary" | "FirstPage" | "EvenPages"): Word.Body;'
+    parameters:
+    - id: typeString
+      description: 'Necesario. Tipo de encabezado que se va a devolver. Este valor puede ser: "Primary", "FirstPage" o "EvenPages".'
+      type: "\"Primary\" | \"FirstPage\" | \"EvenPages\""
+    return:
+      type: <xref uid="word!Word.Body:class" />
+      description: "\n\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\n// Run a batch operation against the Word object model.\nWord.run(function (context) {\n    \n    // Create a proxy sectionsCollection object.\n    var mySections = context.document.sections;\n    \n    // Queue a command to load the sections.\n    context.load(mySections, 'body/style');\n    \n    // Synchronize the document state by executing the queued commands, \n    // and return a promise to indicate task completion.\n    return context.sync().then(function () {\n        \n        // Create a proxy object the primary header of the first section. \n        // Note that the header is a body object.\n        var myHeader = mySections.items[0].getHeader(\"primary\");\n        \n        // Queue a command to insert text at the end of the header.\n        myHeader.insertText(\"This is a header.\", Word.InsertLocation.end);\n        \n        // Queue a command to wrap the header in a content control.\n        myHeader.insertContentControl();\n                              \n        // Synchronize the document state by executing the queued commands, \n        // and return a promise to indicate task completion.\n        return context.sync().then(function () {\n            console.log(\"Added a header to the first section.\");\n        });                    \n    });  \n})\n.catch(function (error) {\n    console.log('Error: ' + JSON.stringify(error));\n    if (error instanceof OfficeExtension.Error) {\n        console.log('Debug info: ' + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- name: load(options)
+  uid: word!Word.Section#load:member(1)
+  package: word!
+  fullName: load(options)
+  summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar a `context.sync()` antes de leer las propiedades.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(options?: Word.Interfaces.SectionLoadOptions): Word.Section;'
+    parameters:
+    - id: options
+      description: Proporciona opciones para las propiedades del objeto que se va a cargar.
+      type: <xref uid="word!Word.Interfaces.SectionLoadOptions:interface" />
+    return:
+      type: <xref uid="word!Word.Section:class" />
+      description: ''
+- name: load(propertyNames)
+  uid: word!Word.Section#load:member(2)
+  package: word!
+  fullName: load(propertyNames)
+  summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar a `context.sync()` antes de leer las propiedades.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Word.Section;'
+    parameters:
+    - id: propertyNames
+      description: Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades que se van a cargar.
+      type: string | string[]
+    return:
+      type: <xref uid="word!Word.Section:class" />
+      description: ''
+- name: load(propertyNamesAndPaths)
+  uid: word!Word.Section#load:member(3)
+  package: word!
+  fullName: load(propertyNamesAndPaths)
+  summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar a `context.sync()` antes de leer las propiedades.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: >-
+      load(propertyNamesAndPaths?: {
+                  select?: string;
+                  expand?: string;
+              }): Word.Section;
+    parameters:
+    - id: propertyNamesAndPaths
+      description: '`propertyNamesAndPaths.select` es una cadena delimitada por comas que especifica las propiedades que se van a cargar y `propertyNamesAndPaths.expand` es una cadena delimitada por comas que especifica las propiedades de navegación que se deben cargar.'
+      type: >-
+        {
                     select?: string;
                     expand?: string;
-                }): Word.Section;
-      return:
-        type:
-          - 'word!Word.Section:class'
-        description: ''
-      parameters:
-        - id: propertyNamesAndPaths
-          description: '`propertyNamesAndPaths.select`es una cadena delimitada por comas que especifica las propiedades que se van a cargar y `propertyNamesAndPaths.expand` es una cadena delimitada por comas que especifica las propiedades de navegación que se deben cargar.'
-          type:
-            - |-
-              {
-                          select?: string;
-                          expand?: string;
-                      }
-  - uid: 'word!Word.Section#set:member(1)'
-    summary: Establece varias propiedades de un objeto al mismo tiempo. Puede pasar un objeto sin formato con las propiedades apropiadas o cualquier otro objeto de la API del mismo tipo.
-    remarks: |-
-      Este método tiene la siguiente firma adicional:
+                }
+    return:
+      type: <xref uid="word!Word.Section:class" />
+      description: ''
+- name: set(properties, options)
+  uid: word!Word.Section#set:member(1)
+  package: word!
+  fullName: set(properties, options)
+  summary: Establece varias propiedades de un objeto al mismo tiempo. Puede pasar un objeto sin formato con las propiedades apropiadas o cualquier otro objeto de la API del mismo tipo.
+  remarks: >-
+    Este método tiene la siguiente firma adicional:
 
-      `set(properties: Word.Section): void`
-    name: 'set(properties, options)'
-    fullName: 'set(properties, options)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'set(properties: Interfaces.SectionUpdateData, options?: OfficeExtension.UpdateOptions): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: properties
-          description: Objeto de JavaScript con propiedades que se estructuran de forma isomórfico a las propiedades del objeto en el que se llama al método.
-          type:
-            - 'word!Word.Interfaces.SectionUpdateData:interface'
-        - id: options
-          description: Proporciona una opción para suprimir errores si el objeto Properties intenta establecer propiedades de solo lectura.
-          type:
-            - 'office!OfficeExtension.UpdateOptions:interface'
-  - uid: 'word!Word.Section#set:member(2)'
-    summary: 'Establece varias propiedades en el objeto al mismo tiempo, basándose en un objeto cargado existente.'
-    name: set(properties)
-    fullName: set(properties)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'set(properties: Word.Section): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: properties
-          description: ''
-          type:
-            - 'word!Word.Section:class'
-  - uid: 'word!Word.Section#toJSON:member(1)'
-    summary: 'Reemplaza el `toJSON()` método JavaScript para proporcionar un resultado más útil cuando se pasa un objeto API a`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama al `toJSON` método del objeto que se le pasa.) Mientras que el objeto Word. Section original es un objeto API, el `toJSON` método devuelve un objeto JavaScript sin formato (escrito como`Word.Interfaces.SectionData`<!-- -->) que contiene copias rasas de las propiedades secundarias cargadas del objeto original.'
-    name: toJSON()
-    fullName: toJSON()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'toJSON(): Word.Interfaces.SectionData;'
-      return:
-        type:
-          - 'word!Word.Interfaces.SectionData:interface'
-        description: ''
-  - uid: 'word!Word.Section#track:member(1)'
-    summary: 'Realiza un seguimiento del objeto de ajuste automático según cambios adyacentes en el documento. Esta llamada es una abreviatura de`context.trackedObjects.add(thisObject)`<!-- -->. Si usa este objeto a través `.sync` de llamadas y fuera de la ejecución secuencial de un lote ". Run", y obtiene un error "InvalidObjectPath" al establecer una propiedad o invocar un método en el objeto, es necesario que haya agregado el objeto a la colección de objetos con seguimiento cuando se creó el objeto por primera vez.'
-    name: track()
-    fullName: track()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'track(): Word.Section;'
-      return:
-        type:
-          - 'word!Word.Section:class'
-        description: ''
-  - uid: 'word!Word.Section#untrack:member(1)'
-    summary: 'Libere la memoria asociada a este objeto, si se ha realizado un seguimiento de él anteriormente. Esta llamada es una forma abreviada de`context.trackedObjects.remove(thisObject)`<!-- -->. Tener muchos objetos marcados ralentiza la aplicación host, así que debe recordar liberar los objetos que agregue cuando haya terminado con ellos. Tendrá que llamar `context.sync()` antes de que la liberación de memoria surta efecto.'
-    name: untrack()
-    fullName: untrack()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'untrack(): Word.Section;'
-      return:
-        type:
-          - 'word!Word.Section:class'
-        description: ''
-references:
-  - uid: 'office!OfficeExtension.ClientObject:class'
-    name: OfficeExtension.ClientObject
-  - uid: 'word!Word.Body:class'
-    name: Word.Body
-  - uid: 'word!Word.RequestContext:class'
-    name: RequestContext
-  - uid: 'word!Word.HeaderFooterType:enum'
-    name: Word.HeaderFooterType
-  - uid: 'word!Word.Section:class'
-    name: Word.Section
-  - uid: 'word!Word.Interfaces.SectionLoadOptions:interface'
-    name: Word.Interfaces.SectionLoadOptions
-  - uid: 'word!Word.Interfaces.SectionUpdateData:interface'
-    name: Interfaces.SectionUpdateData
-  - uid: 'office!OfficeExtension.UpdateOptions:interface'
-    name: OfficeExtension.UpdateOptions
-  - uid: 'word!Word.Interfaces.SectionData:interface'
-    name: Word.Interfaces.SectionData
+
+    `set(properties: Word.Section): void`
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'set(properties: Interfaces.SectionUpdateData, options?: OfficeExtension.UpdateOptions): void;'
+    parameters:
+    - id: properties
+      description: Objeto de JavaScript con propiedades que se estructuran de forma isomórfico a las propiedades del objeto en el que se llama al método.
+      type: <xref uid="word!Word.Interfaces.SectionUpdateData:interface" />
+    - id: options
+      description: Proporciona una opción para suprimir errores si el objeto Properties intenta establecer propiedades de solo lectura.
+      type: <xref uid="office!OfficeExtension.UpdateOptions:interface" />
+    return:
+      type: void
+      description: ''
+- name: set(properties)
+  uid: word!Word.Section#set:member(2)
+  package: word!
+  fullName: set(properties)
+  summary: Establece varias propiedades en el objeto al mismo tiempo, basándose en un objeto cargado existente.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'set(properties: Word.Section): void;'
+    parameters:
+    - id: properties
+      description: ''
+      type: <xref uid="word!Word.Section:class" />
+    return:
+      type: void
+      description: ''
+- name: toJSON()
+  uid: word!Word.Section#toJSON:member(1)
+  package: word!
+  fullName: toJSON()
+  summary: Reemplaza el `toJSON()` método JavaScript para proporcionar un resultado más útil cuando se pasa un objeto API a `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama al `toJSON` método del objeto que se le pasa.) Mientras que el objeto Word. Section original es un objeto API, el `toJSON` método devuelve un objeto JavaScript sin formato (escrito como `Word.Interfaces.SectionData`<!-- -->) que contiene copias rasas de las propiedades secundarias cargadas del objeto original.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'toJSON(): Word.Interfaces.SectionData;'
+    return:
+      type: <xref uid="word!Word.Interfaces.SectionData:interface" />
+      description: ''
+- name: track()
+  uid: word!Word.Section#track:member(1)
+  package: word!
+  fullName: track()
+  summary: Realiza un seguimiento del objeto de ajuste automático según cambios adyacentes en el documento. Esta llamada es una abreviatura de `context.trackedObjects.add(thisObject)`<!-- -->. Si usa este objeto a través `.sync` de llamadas y fuera de la ejecución secuencial de un lote ". Run", y obtiene un error "InvalidObjectPath" al establecer una propiedad o invocar un método en el objeto, es necesario que haya agregado el objeto a la colección de objetos con seguimiento cuando se creó el objeto por primera vez.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'track(): Word.Section;'
+    return:
+      type: <xref uid="word!Word.Section:class" />
+      description: ''
+- name: untrack()
+  uid: word!Word.Section#untrack:member(1)
+  package: word!
+  fullName: untrack()
+  summary: Libere la memoria asociada a este objeto, si se ha realizado un seguimiento de él anteriormente. Esta llamada es una forma abreviada de `context.trackedObjects.remove(thisObject)`<!-- -->. Tener muchos objetos marcados ralentiza la aplicación host, así que debe recordar liberar los objetos que agregue cuando haya terminado con ellos. Tendrá que llamar `context.sync()` antes de que la liberación de memoria surta efecto.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'untrack(): Word.Section;'
+    return:
+      type: <xref uid="word!Word.Section:class" />
+      description: ''
+extends: <xref uid="office!OfficeExtension.ClientObject:class" />
+metadata:
+  ms.openlocfilehash: 51bc0b0514fefbd103d806e4c7cac095830f5f16
+  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.translationtype: MT
+  ms.contentlocale: es-ES
+  ms.lasthandoff: 11/18/2020
+  ms.locfileid: "49149682"
