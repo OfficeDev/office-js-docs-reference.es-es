@@ -1,135 +1,138 @@
-### YamlMime:UniversalReference
-items:
-  - uid: 'outlook!Office.AttachmentDetails:interface'
-    summary: |-
-      Representa datos adjuntos en un elemento del servidor. Solo modo Lectura.
+### YamlMime:TSType
+name: Office.AttachmentDetails
+uid: outlook!Office.AttachmentDetails:interface
+package: outlook!
+fullName: Office.AttachmentDetails
+summary: >-
+  Representa datos adjuntos en un elemento del servidor. Solo modo Lectura.
 
-      Una matriz de `AttachmentDetails` objetos se devuelve como la propiedad Attachments de un elemento de cita o mensaje.
 
-      \[[Conjunto de API: buzón de correo 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-    remarks: |-
-      ** <!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+  Una matriz de `AttachmentDetails` objetos se devuelve como la propiedad Attachments de un elemento de cita o mensaje.
 
-      ** <!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: lectura
 
-      #### <a name="examples"></a>Ejemplos
+  \[[Conjunto de API: buzón de correo 1,1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+remarks: >-
+  **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
 
-      ```javascript
-      // The following code builds an HTML string with details
-      // of all attachments on the current item.
-      var item = Office.context.mailbox.item;
-      var outputString = "";
 
-      if (item.attachments.length > 0) {
-          for (i = 0 ; i < item.attachments.length ; i++) {
-              var attachment = item.attachments[i];
-              outputString += "<BR>" + i + ". Name: ";
-              outputString += attachment.name;
-              outputString += "<BR>ID: " + attachment.id;
-              outputString += "<BR>contentType: " + attachment.contentType;
-              outputString += "<BR>size: " + attachment.size;
-              outputString += "<BR>attachmentType: " + attachment.attachmentType;
-              outputString += "<BR>isInline: " + attachment.isInline;
-          }
+  **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: lectura
+
+
+  #### <a name="examples"></a>Ejemplos
+
+
+  ```javascript
+
+  // The following code builds an HTML string with details
+
+  // of all attachments on the current item.
+
+  var item = Office.context.mailbox.item;
+
+  var outputString = "";
+
+
+  if (item.attachments.length > 0) {
+      for (i = 0 ; i < item.attachments.length ; i++) {
+          var attachment = item.attachments[i];
+          outputString += "<BR>" + i + ". Name: ";
+          outputString += attachment.name;
+          outputString += "<BR>ID: " + attachment.id;
+          outputString += "<BR>contentType: " + attachment.contentType;
+          outputString += "<BR>size: " + attachment.size;
+          outputString += "<BR>attachmentType: " + attachment.attachmentType;
+          outputString += "<BR>isInline: " + attachment.isInline;
       }
+  }
 
-      console.log(outputString);
-      ```
-    name: Office.AttachmentDetails
-    fullName: Office.AttachmentDetails
-    langs:
-      - typeScript
-    type: interface
-    package: outlook!
-    children:
-      - 'outlook!Office.AttachmentDetails#attachmentType:member'
-      - 'outlook!Office.AttachmentDetails#contentType:member'
-      - 'outlook!Office.AttachmentDetails#id:member'
-      - 'outlook!Office.AttachmentDetails#isInline:member'
-      - 'outlook!Office.AttachmentDetails#name:member'
-      - 'outlook!Office.AttachmentDetails#size:member'
-  - uid: 'outlook!Office.AttachmentDetails#attachmentType:member'
-    summary: Obtiene un valor que indica el tipo de los datos adjuntos.
-    name: attachmentType
-    fullName: attachmentType
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'attachmentType: MailboxEnums.AttachmentType | string;'
-      return:
-        type:
-          - 'outlook!Office.AttachmentDetails#attachmentType~0:complex'
-  - uid: 'outlook!Office.AttachmentDetails#contentType:member'
-    summary: Obtiene el tipo de contenido MIME de los datos adjuntos.
-    name: contentType
-    fullName: contentType
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'contentType: string;'
-      return:
-        type:
-          - string
-  - uid: 'outlook!Office.AttachmentDetails#id:member'
-    summary: 'Obtiene el identificador de datos de adjuntos de Exchange de los datos adjuntos. Sin embargo, si el tipo de datos adjuntos es`MailboxEnums.AttachmentType.Cloud`<!-- -->, se devuelve una dirección URL para el archivo.'
-    name: id
-    fullName: id
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'id: string;'
-      return:
-        type:
-          - string
-  - uid: 'outlook!Office.AttachmentDetails#isInline:member'
-    summary: Obtiene un valor que indica si se deben mostrar los datos adjuntos en el cuerpo del elemento.
-    name: isInline
-    fullName: isInline
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'isInline: boolean;'
-      return:
-        type:
-          - boolean
-  - uid: 'outlook!Office.AttachmentDetails#name:member'
-    summary: |-
-      Obtiene el nombre de los datos adjuntos
 
-      **Importante**: para los elementos de mensaje o cita que estaban adjuntos mediante la función de arrastrar y colocar o "Adjuntar elemento", `name` incluye una extensión de archivo en Outlook en Mac, pero excluye la extensión en la web o Windows.
-    name: name
-    fullName: name
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'name: string;'
-      return:
-        type:
-          - string
-  - uid: 'outlook!Office.AttachmentDetails#size:member'
-    summary: Obtiene el tamaño de los datos adjuntos en bytes.
-    name: size
-    fullName: size
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'size: number;'
-      return:
-        type:
-          - number
-references:
-  - uid: 'outlook!Office.AttachmentDetails#attachmentType~0:complex'
-    name: MailboxEnums.AttachmentType | string
-    fullName: Office.MailboxEnums.AttachmentType | string
-    spec.typeScript:
-      - uid: 'outlook!Office.MailboxEnums.AttachmentType:enum'
-        name: MailboxEnums.AttachmentType
-        fullName: Office.MailboxEnums.AttachmentType
-      - name: ' | string'
-        fullName: ' | string'
+  console.log(outputString);
+
+  ```
+isPreview: false
+isDeprecated: false
+type: interface
+properties:
+- name: attachmentType
+  uid: outlook!Office.AttachmentDetails#attachmentType:member
+  package: outlook!
+  fullName: attachmentType
+  summary: Obtiene un valor que indica el tipo de los datos adjuntos.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'attachmentType: MailboxEnums.AttachmentType | string;'
+    return:
+      type: <xref uid="outlook!Office.MailboxEnums.AttachmentType:enum" /> | string
+- name: contentType
+  uid: outlook!Office.AttachmentDetails#contentType:member
+  package: outlook!
+  fullName: contentType
+  summary: Obtiene el tipo de contenido MIME de los datos adjuntos.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'contentType: string;'
+    return:
+      type: string
+- name: id
+  uid: outlook!Office.AttachmentDetails#id:member
+  package: outlook!
+  fullName: id
+  summary: Obtiene el identificador de datos de adjuntos de Exchange de los datos adjuntos. Sin embargo, si el tipo de datos adjuntos es `MailboxEnums.AttachmentType.Cloud`<!-- -->, se devuelve una dirección URL para el archivo.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'id: string;'
+    return:
+      type: string
+- name: isInline
+  uid: outlook!Office.AttachmentDetails#isInline:member
+  package: outlook!
+  fullName: isInline
+  summary: Obtiene un valor que indica si se deben mostrar los datos adjuntos en el cuerpo del elemento.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'isInline: boolean;'
+    return:
+      type: boolean
+- name: name
+  uid: outlook!Office.AttachmentDetails#name:member
+  package: outlook!
+  fullName: name
+  summary: >-
+    Obtiene el nombre de los datos adjuntos
+
+
+    **Importante**: para los elementos de mensaje o cita que estaban adjuntos mediante la función de arrastrar y colocar o "Adjuntar elemento", `name` incluye una extensión de archivo en Outlook en Mac, pero excluye la extensión en la web o Windows.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'name: string;'
+    return:
+      type: string
+- name: size
+  uid: outlook!Office.AttachmentDetails#size:member
+  package: outlook!
+  fullName: size
+  summary: Obtiene el tamaño de los datos adjuntos en bytes.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'size: number;'
+    return:
+      type: number
+metadata:
+  ms.openlocfilehash: a77152961a03abe3dff324793d42d15d9546452a
+  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.translationtype: MT
+  ms.contentlocale: es-ES
+  ms.lasthandoff: 11/18/2020
+  ms.locfileid: "49193295"

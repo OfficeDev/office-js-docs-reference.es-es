@@ -1,300 +1,224 @@
-### YamlMime:UniversalReference
-items:
-  - uid: 'word!Word.Setting:class'
-    summary: |-
-      Representa una configuración del complemento.
-
-      \[[Conjunto de API: versión beta de WordApi (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
-    isPreview: true
-    name: Word.Setting
-    fullName: Word.Setting
-    langs:
-      - typeScript
-    type: class
-    extends:
-      - 'office!OfficeExtension.ClientObject:class'
-    package: word!
-    children:
-      - 'word!Word.Setting#context:member'
-      - 'word!Word.Setting#delete:member(1)'
-      - 'word!Word.Setting#key:member'
-      - 'word!Word.Setting#load:member(1)'
-      - 'word!Word.Setting#load:member(2)'
-      - 'word!Word.Setting#load:member(3)'
-      - 'word!Word.Setting#set:member(1)'
-      - 'word!Word.Setting#set:member(2)'
-      - 'word!Word.Setting#toJSON:member(1)'
-      - 'word!Word.Setting#track:member(1)'
-      - 'word!Word.Setting#untrack:member(1)'
-      - 'word!Word.Setting#value:member'
-  - uid: 'word!Word.Setting#context:member'
-    summary: Contexto de la solicitud asociado al objeto. Esto conecta el proceso del complemento con el proceso de la aplicación host de Office.
-    isPreview: true
-    name: context
-    fullName: context
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'context: RequestContext;'
-      return:
-        type:
-          - 'word!Word.RequestContext:class'
-  - uid: 'word!Word.Setting#delete:member(1)'
-    summary: |-
-      Elimina la configuración.
-
-      \[[Conjunto de API: versión beta de WordApi (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
-    isPreview: true
-    name: delete()
-    fullName: delete()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'delete(): void;'
-      return:
-        type:
-          - void
-        description: |-
+### YamlMime:TSType
+name: Word.Setting
+uid: word!Word.Setting:class
+package: word!
+fullName: Word.Setting
+summary: >-
+  Representa una configuración del complemento.
 
 
-          #### <a name="examples"></a>Ejemplos
+  \[[Conjunto de API: versión beta de WordApi (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+remarks: ''
+isPreview: true
+isDeprecated: false
+type: class
+properties:
+- name: context
+  uid: word!Word.Setting#context:member
+  package: word!
+  fullName: context
+  summary: Contexto de la solicitud asociado al objeto. Esto conecta el proceso del complemento con el proceso de la aplicación host de Office.
+  remarks: ''
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type: <xref uid="word!Word.RequestContext:class" />
+- name: key
+  uid: word!Word.Setting#key:member
+  package: word!
+  fullName: key
+  summary: >-
+    Obtiene la clave de la configuración. Solo lectura.
 
-          ```javascript
-          // Run a batch operation against the Word object model.
-          Word.run(function (context) {
 
-              // Queue commands add a setting.
-              var settings = context.document.settings;
-              var startMonth = settings.add('startMonth', { month: 'March', year: 1998 });
+    \[[Conjunto de API: versión beta de WordApi (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+  remarks: ''
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'readonly key: string;'
+    return:
+      type: string
+- name: value
+  uid: word!Word.Setting#value:member
+  package: word!
+  fullName: value
+  summary: >-
+    Obtiene o establece el valor de la configuración.
 
-              // Queue a command to get the count of settings.
-              var count = settings.getCount();
 
-              // Synchronize the document state by executing the queued commands, 
-              // and return a promise to indicate task completion.
-              return context.sync().then(function () {
-                  console.log(count.value);
+    \[[Conjunto de API: versión beta de WordApi (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+  remarks: ''
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'value: any;'
+    return:
+      type: any
+methods:
+- name: delete()
+  uid: word!Word.Setting#delete:member(1)
+  package: word!
+  fullName: delete()
+  summary: >-
+    Elimina la configuración.
 
-                  // Queue a command to delete the setting.
-                  startMonth.delete();
 
-                  // Queue a command to get the new count of settings.
-                  count = settings.getCount();
-              })
-
-              // Synchronize the document state by executing the queued commands, 
-              // and return a promise to indicate task completion.
-              .then(context.sync)
-              .then(function () {
-                  console.log(count.value);
-              });
-          })
-          .catch(function (error) {
-              console.log('Error: ' + JSON.stringify(error));
-              if (error instanceof OfficeExtension.Error) {
-                  console.log('Debug info: ' + JSON.stringify(error.debugInfo));
-              }
-          });
-          ```
-  - uid: 'word!Word.Setting#key:member'
-    summary: |-
-      Obtiene la clave de la configuración. Solo lectura.
-
-      \[[Conjunto de API: versión beta de WordApi (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
-    isPreview: true
-    name: key
-    fullName: key
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'readonly key: string;'
-      return:
-        type:
-          - string
-  - uid: 'word!Word.Setting#load:member(1)'
-    summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar a `context.sync()` antes de leer las propiedades.
-    isPreview: true
-    name: load(options)
-    fullName: load(options)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'load(options?: Word.Interfaces.SettingLoadOptions): Word.Setting;'
-      return:
-        type:
-          - 'word!Word.Setting:class'
-        description: ''
-      parameters:
-        - id: options
-          description: Proporciona opciones para las propiedades del objeto que se va a cargar.
-          type:
-            - 'word!Word.Interfaces.SettingLoadOptions:interface'
-  - uid: 'word!Word.Setting#load:member(2)'
-    summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar a `context.sync()` antes de leer las propiedades.
-    isPreview: true
-    name: load(propertyNames)
-    fullName: load(propertyNames)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'load(propertyNames?: string | string[]): Word.Setting;'
-      return:
-        type:
-          - 'word!Word.Setting:class'
-        description: ''
-      parameters:
-        - id: propertyNames
-          description: Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades que se van a cargar.
-          type:
-            - 'string | string[]'
-  - uid: 'word!Word.Setting#load:member(3)'
-    summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar a `context.sync()` antes de leer las propiedades.
-    isPreview: true
-    name: load(propertyNamesAndPaths)
-    fullName: load(propertyNamesAndPaths)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: |-
-        load(propertyNamesAndPaths?: {
+    \[[Conjunto de API: versión beta de WordApi (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
+  remarks: ''
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'delete(): void;'
+    return:
+      type: void
+      description: "\n\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\n// Run a batch operation against the Word object model.\nWord.run(function (context) {\n\n    // Queue commands add a setting.\n    var settings = context.document.settings;\n    var startMonth = settings.add('startMonth', { month: 'March', year: 1998 });\n\n    // Queue a command to get the count of settings.\n    var count = settings.getCount();\n\n    // Synchronize the document state by executing the queued commands, \n    // and return a promise to indicate task completion.\n    return context.sync().then(function () {\n        console.log(count.value);\n\n        // Queue a command to delete the setting.\n        startMonth.delete();\n\n        // Queue a command to get the new count of settings.\n        count = settings.getCount();\n    })\n\n    // Synchronize the document state by executing the queued commands, \n    // and return a promise to indicate task completion.\n    .then(context.sync)\n    .then(function () {\n        console.log(count.value);\n    });\n})\n.catch(function (error) {\n    console.log('Error: ' + JSON.stringify(error));\n    if (error instanceof OfficeExtension.Error) {\n        console.log('Debug info: ' + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- name: load(options)
+  uid: word!Word.Setting#load:member(1)
+  package: word!
+  fullName: load(options)
+  summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar a `context.sync()` antes de leer las propiedades.
+  remarks: ''
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'load(options?: Word.Interfaces.SettingLoadOptions): Word.Setting;'
+    parameters:
+    - id: options
+      description: Proporciona opciones para las propiedades del objeto que se va a cargar.
+      type: <xref uid="word!Word.Interfaces.SettingLoadOptions:interface" />
+    return:
+      type: <xref uid="word!Word.Setting:class" />
+      description: ''
+- name: load(propertyNames)
+  uid: word!Word.Setting#load:member(2)
+  package: word!
+  fullName: load(propertyNames)
+  summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar a `context.sync()` antes de leer las propiedades.
+  remarks: ''
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Word.Setting;'
+    parameters:
+    - id: propertyNames
+      description: Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades que se van a cargar.
+      type: string | string[]
+    return:
+      type: <xref uid="word!Word.Setting:class" />
+      description: ''
+- name: load(propertyNamesAndPaths)
+  uid: word!Word.Setting#load:member(3)
+  package: word!
+  fullName: load(propertyNamesAndPaths)
+  summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar a `context.sync()` antes de leer las propiedades.
+  remarks: ''
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: >-
+      load(propertyNamesAndPaths?: {
+                  select?: string;
+                  expand?: string;
+              }): Word.Setting;
+    parameters:
+    - id: propertyNamesAndPaths
+      description: '`propertyNamesAndPaths.select` es una cadena delimitada por comas que especifica las propiedades que se van a cargar y `propertyNamesAndPaths.expand` es una cadena delimitada por comas que especifica las propiedades de navegación que se deben cargar.'
+      type: >-
+        {
                     select?: string;
                     expand?: string;
-                }): Word.Setting;
-      return:
-        type:
-          - 'word!Word.Setting:class'
-        description: ''
-      parameters:
-        - id: propertyNamesAndPaths
-          description: '`propertyNamesAndPaths.select`es una cadena delimitada por comas que especifica las propiedades que se van a cargar y `propertyNamesAndPaths.expand` es una cadena delimitada por comas que especifica las propiedades de navegación que se deben cargar.'
-          type:
-            - |-
-              {
-                          select?: string;
-                          expand?: string;
-                      }
-  - uid: 'word!Word.Setting#set:member(1)'
-    summary: Establece varias propiedades de un objeto al mismo tiempo. Puede pasar un objeto sin formato con las propiedades apropiadas o cualquier otro objeto de la API del mismo tipo.
-    remarks: |-
-      Este método tiene la siguiente firma adicional:
+                }
+    return:
+      type: <xref uid="word!Word.Setting:class" />
+      description: ''
+- name: set(properties, options)
+  uid: word!Word.Setting#set:member(1)
+  package: word!
+  fullName: set(properties, options)
+  summary: Establece varias propiedades de un objeto al mismo tiempo. Puede pasar un objeto sin formato con las propiedades apropiadas o cualquier otro objeto de la API del mismo tipo.
+  remarks: >-
+    Este método tiene la siguiente firma adicional:
 
-      `set(properties: Word.Setting): void`
-    isPreview: true
-    name: 'set(properties, options)'
-    fullName: 'set(properties, options)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'set(properties: Interfaces.SettingUpdateData, options?: OfficeExtension.UpdateOptions): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: properties
-          description: Objeto de JavaScript con propiedades que se estructuran de forma isomórfico a las propiedades del objeto en el que se llama al método.
-          type:
-            - 'word!Word.Interfaces.SettingUpdateData:interface'
-        - id: options
-          description: Proporciona una opción para suprimir errores si el objeto Properties intenta establecer propiedades de solo lectura.
-          type:
-            - 'office!OfficeExtension.UpdateOptions:interface'
-  - uid: 'word!Word.Setting#set:member(2)'
-    summary: 'Establece varias propiedades en el objeto al mismo tiempo, basándose en un objeto cargado existente.'
-    isPreview: true
-    name: set(properties)
-    fullName: set(properties)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'set(properties: Word.Setting): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: properties
-          description: ''
-          type:
-            - 'word!Word.Setting:class'
-  - uid: 'word!Word.Setting#toJSON:member(1)'
-    summary: 'Reemplaza el `toJSON()` método JavaScript para proporcionar un resultado más útil cuando se pasa un objeto API a`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama al `toJSON` método del objeto que se le pasa.) Mientras que el objeto Word. Setting original es un objeto API, el `toJSON` método devuelve un objeto JavaScript sin formato (escrito como`Word.Interfaces.SettingData`<!-- -->) que contiene copias rasas de las propiedades secundarias cargadas del objeto original.'
-    isPreview: true
-    name: toJSON()
-    fullName: toJSON()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'toJSON(): Word.Interfaces.SettingData;'
-      return:
-        type:
-          - 'word!Word.Interfaces.SettingData:interface'
-        description: ''
-  - uid: 'word!Word.Setting#track:member(1)'
-    summary: 'Realiza un seguimiento del objeto de ajuste automático según cambios adyacentes en el documento. Esta llamada es una abreviatura de`context.trackedObjects.add(thisObject)`<!-- -->. Si usa este objeto a través `.sync` de llamadas y fuera de la ejecución secuencial de un lote ". Run", y obtiene un error "InvalidObjectPath" al establecer una propiedad o invocar un método en el objeto, es necesario que haya agregado el objeto a la colección de objetos con seguimiento cuando se creó el objeto por primera vez.'
-    isPreview: true
-    name: track()
-    fullName: track()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'track(): Word.Setting;'
-      return:
-        type:
-          - 'word!Word.Setting:class'
-        description: ''
-  - uid: 'word!Word.Setting#untrack:member(1)'
-    summary: 'Libere la memoria asociada a este objeto, si se ha realizado un seguimiento de él anteriormente. Esta llamada es una forma abreviada de`context.trackedObjects.remove(thisObject)`<!-- -->. Tener muchos objetos marcados ralentiza la aplicación host, así que debe recordar liberar los objetos que agregue cuando haya terminado con ellos. Tendrá que llamar `context.sync()` antes de que la liberación de memoria surta efecto.'
-    isPreview: true
-    name: untrack()
-    fullName: untrack()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'untrack(): Word.Setting;'
-      return:
-        type:
-          - 'word!Word.Setting:class'
-        description: ''
-  - uid: 'word!Word.Setting#value:member'
-    summary: |-
-      Obtiene o establece el valor de la configuración.
 
-      \[[Conjunto de API: versión beta de WordApi (solo vista previa)](/office/dev/add-ins/reference/requirement-sets/word-api-requirement-sets)\]
-    isPreview: true
-    name: value
-    fullName: value
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'value: any;'
-      return:
-        type:
-          - any
-references:
-  - uid: 'office!OfficeExtension.ClientObject:class'
-    name: OfficeExtension.ClientObject
-  - uid: 'word!Word.RequestContext:class'
-    name: RequestContext
-  - uid: 'word!Word.Setting:class'
-    name: Word.Setting
-  - uid: 'word!Word.Interfaces.SettingLoadOptions:interface'
-    name: Word.Interfaces.SettingLoadOptions
-  - uid: 'word!Word.Interfaces.SettingUpdateData:interface'
-    name: Interfaces.SettingUpdateData
-  - uid: 'office!OfficeExtension.UpdateOptions:interface'
-    name: OfficeExtension.UpdateOptions
-  - uid: 'word!Word.Interfaces.SettingData:interface'
-    name: Word.Interfaces.SettingData
+    `set(properties: Word.Setting): void`
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'set(properties: Interfaces.SettingUpdateData, options?: OfficeExtension.UpdateOptions): void;'
+    parameters:
+    - id: properties
+      description: Objeto de JavaScript con propiedades que se estructuran de forma isomórfico a las propiedades del objeto en el que se llama al método.
+      type: <xref uid="word!Word.Interfaces.SettingUpdateData:interface" />
+    - id: options
+      description: Proporciona una opción para suprimir errores si el objeto Properties intenta establecer propiedades de solo lectura.
+      type: <xref uid="office!OfficeExtension.UpdateOptions:interface" />
+    return:
+      type: void
+      description: ''
+- name: set(properties)
+  uid: word!Word.Setting#set:member(2)
+  package: word!
+  fullName: set(properties)
+  summary: Establece varias propiedades en el objeto al mismo tiempo, basándose en un objeto cargado existente.
+  remarks: ''
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'set(properties: Word.Setting): void;'
+    parameters:
+    - id: properties
+      description: ''
+      type: <xref uid="word!Word.Setting:class" />
+    return:
+      type: void
+      description: ''
+- name: toJSON()
+  uid: word!Word.Setting#toJSON:member(1)
+  package: word!
+  fullName: toJSON()
+  summary: Reemplaza el `toJSON()` método JavaScript para proporcionar un resultado más útil cuando se pasa un objeto API a `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama al `toJSON` método del objeto que se le pasa.) Mientras que el objeto Word. Setting original es un objeto API, el `toJSON` método devuelve un objeto JavaScript sin formato (escrito como `Word.Interfaces.SettingData`<!-- -->) que contiene copias rasas de las propiedades secundarias cargadas del objeto original.
+  remarks: ''
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'toJSON(): Word.Interfaces.SettingData;'
+    return:
+      type: <xref uid="word!Word.Interfaces.SettingData:interface" />
+      description: ''
+- name: track()
+  uid: word!Word.Setting#track:member(1)
+  package: word!
+  fullName: track()
+  summary: Realiza un seguimiento del objeto de ajuste automático según cambios adyacentes en el documento. Esta llamada es una abreviatura de `context.trackedObjects.add(thisObject)`<!-- -->. Si usa este objeto a través `.sync` de llamadas y fuera de la ejecución secuencial de un lote ". Run", y obtiene un error "InvalidObjectPath" al establecer una propiedad o invocar un método en el objeto, es necesario que haya agregado el objeto a la colección de objetos con seguimiento cuando se creó el objeto por primera vez.
+  remarks: ''
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'track(): Word.Setting;'
+    return:
+      type: <xref uid="word!Word.Setting:class" />
+      description: ''
+- name: untrack()
+  uid: word!Word.Setting#untrack:member(1)
+  package: word!
+  fullName: untrack()
+  summary: Libere la memoria asociada a este objeto, si se ha realizado un seguimiento de él anteriormente. Esta llamada es una forma abreviada de `context.trackedObjects.remove(thisObject)`<!-- -->. Tener muchos objetos marcados ralentiza la aplicación host, así que debe recordar liberar los objetos que agregue cuando haya terminado con ellos. Tendrá que llamar `context.sync()` antes de que la liberación de memoria surta efecto.
+  remarks: ''
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'untrack(): Word.Setting;'
+    return:
+      type: <xref uid="word!Word.Setting:class" />
+      description: ''
+extends: <xref uid="office!OfficeExtension.ClientObject:class" />
+metadata:
+  ms.openlocfilehash: a889d05704178d550c3825987a9dfc3ec0e35cde
+  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.translationtype: MT
+  ms.contentlocale: es-ES
+  ms.lasthandoff: 11/18/2020
+  ms.locfileid: "49192770"
