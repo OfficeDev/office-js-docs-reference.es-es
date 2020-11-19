@@ -1,85 +1,79 @@
-### YamlMime:UniversalReference
-items:
-  - uid: 'outlook!Office.From:interface'
-    summary: |-
-      Proporciona un método para obtener el valor de de un mensaje en un complemento de Outlook.
+### YamlMime:TSType
+name: Office.From
+uid: outlook!Office.From:interface
+package: outlook!
+fullName: Office.From
+summary: >-
+  Proporciona un método para obtener el valor de de un mensaje en un complemento de Outlook.
 
-      \[[Conjunto de API: buzón de correo 1,7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-    remarks: |-
-      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)** :`ReadItem`
 
-      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)** : redacción
-    name: Office.From
-    fullName: Office.From
-    langs:
-      - typeScript
-    type: interface
-    package: outlook!
-    children:
-      - 'outlook!Office.From#getAsync:member(1)'
-  - uid: 'outlook!Office.From#getAsync:member(1)'
-    summary: |-
-      Obtiene el valor de from de un mensaje.
+  \[[Conjunto de API: buzón de correo 1,7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+remarks: >-
+  **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
 
-      El `getAsync` método inicia una llamada asincrónica al servidor de Exchange para obtener el valor de un mensaje.
 
-      El valor de from del elemento se proporciona como [EmailAddressDetails](xref:outlook!Office.EmailAddressDetails:interface) en la `asyncResult.value` propiedad.
+  **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: redacción
+isPreview: false
+isDeprecated: false
+type: interface
+methods:
+- name: getAsync(options, callback)
+  uid: outlook!Office.From#getAsync:member(1)
+  package: outlook!
+  fullName: getAsync(options, callback)
+  summary: >-
+    Obtiene el valor de from de un mensaje.
 
-      \[[Conjunto de API: buzón de correo 1,7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-    remarks: |-
-      **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)** :`ReadItem`
 
-      **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)** : redacción
+    El `getAsync` método inicia una llamada asincrónica al servidor de Exchange para obtener el valor de un mensaje.
 
-      #### <a name="examples"></a>Ejemplos
 
-      ```javascript
-      // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/30-recipients-and-attendees/get-from-message-compose.yaml
-      Office.context.mailbox.item.from.getAsync(function(asyncResult) {
-        if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
-          var msgFrom = asyncResult.value;
-          console.log("Message from: " + msgFrom.displayName + " (" + msgFrom.emailAddress + ")");
-        } else {
-          console.error(asyncResult.error);
-        }
-      });
-      ```
-    name: 'getAsync(options, callback)'
-    fullName: 'getAsync(options, callback)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'getAsync(options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<EmailAddressDetails>) => void): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: options
-          description: 'Opcional. Un objeto literal que contiene una o más de las siguientes propiedades. `asyncContext`<!-- -->: Los desarrolladores pueden proporcionar cualquier objeto al que quieran tener acceso en el método de devolución de llamada.'
-          type:
-            - 'office!Office.AsyncContextOptions:interface'
-        - id: callback
-          description: 'Opcional. Cuando el método finaliza, la función que se pasa en el `callback` parámetro se llama con un único parámetro, `asyncResult`<!-- -->, que es un `Office.AsyncResult` objeto. La `value` propiedad del resultado es el valor from del elemento, como un `EmailAddressDetails` objeto.'
-          type:
-            - 'outlook!Office.From#getAsync~0:complex'
-references:
-  - uid: 'office!Office.AsyncContextOptions:interface'
-    name: Office.AsyncContextOptions
-  - uid: 'outlook!Office.From#getAsync~0:complex'
-    name: '(asyncResult: Office.AsyncResult<EmailAddressDetails>) => void'
-    fullName: '(asyncResult: Office.AsyncResult<Office.EmailAddressDetails>) => void'
-    spec.typeScript:
-      - name: '(asyncResult: '
-        fullName: '(asyncResult: '
-      - uid: 'office!Office.AsyncResult:interface'
-        name: Office.AsyncResult
-        fullName: Office.AsyncResult
-      - name: <
-        fullName: <
-      - uid: 'outlook!Office.EmailAddressDetails:interface'
-        name: EmailAddressDetails
-        fullName: Office.EmailAddressDetails
-      - name: '>) => void'
-        fullName: '>) => void'
+    El valor de from del elemento se proporciona como [EmailAddressDetails](xref:outlook!Office.EmailAddressDetails:interface) en la `asyncResult.value` propiedad.
+
+
+    \[[Conjunto de API: buzón de correo 1,7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **<!-- --> [Nivel de permisos mínimo](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions)**:`ReadItem`
+
+
+    **<!-- --> [Modo de Outlook aplicable](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points)**: redacción
+
+
+    #### <a name="examples"></a>Ejemplos
+
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/outlook/30-recipients-and-attendees/get-from-message-compose.yaml
+
+    Office.context.mailbox.item.from.getAsync(function(asyncResult) {
+      if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+        var msgFrom = asyncResult.value;
+        console.log("Message from: " + msgFrom.displayName + " (" + msgFrom.emailAddress + ")");
+      } else {
+        console.error(asyncResult.error);
+      }
+    });
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getAsync(options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<EmailAddressDetails>) => void): void;'
+    parameters:
+    - id: options
+      description: 'Opcional. Un objeto literal que contiene una o más de las siguientes propiedades. `asyncContext`<!-- -->: Los desarrolladores pueden proporcionar cualquier objeto al que quieran tener acceso en el método de devolución de llamada.'
+      type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: Opcional. Cuando el método finaliza, la función que se pasa en el `callback` parámetro se llama con un único parámetro, `asyncResult`<!-- -->, que es un `Office.AsyncResult` objeto. La `value` propiedad del resultado es el valor from del elemento, como un `EmailAddressDetails` objeto.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="outlook!Office.EmailAddressDetails:interface" />&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+metadata:
+  ms.openlocfilehash: e1bf3e34641b0ae227310fd74522bfff6eeec9b6
+  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.translationtype: MT
+  ms.contentlocale: es-ES
+  ms.lasthandoff: 11/18/2020
+  ms.locfileid: "49211176"
