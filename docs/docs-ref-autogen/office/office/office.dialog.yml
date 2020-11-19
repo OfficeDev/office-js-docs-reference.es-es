@@ -1,103 +1,102 @@
-### YamlMime:UniversalReference
-items:
-  - uid: 'office!Office.Dialog:interface'
-    summary: Objeto que se devuelve cuando `UI.displayDialogAsync` se llama a. Expone métodos para registrar controladores de eventos y cerrar el cuadro de diálogo.
-    remarks: '**Conjunto de requisitos**: [DialogAPI](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/dialog-api-requirement-sets)'
-    name: Office.Dialog
-    fullName: Office.Dialog
-    langs:
-      - typeScript
-    type: interface
-    package: office!
-    children:
-      - 'office!Office.Dialog#addEventHandler:member(1)'
-      - 'office!Office.Dialog#close:member(1)'
-      - 'office!Office.Dialog#messageChild:member(1)'
-      - 'office!Office.Dialog#sendMessage:member(1)'
-  - uid: 'office!Office.Dialog#addEventHandler:member(1)'
-    summary: |-
-      Registra un controlador de eventos. Los dos eventos compatibles son:
+### YamlMime:TSType
+name: Office.Dialog
+uid: office!Office.Dialog:interface
+package: office!
+fullName: Office.Dialog
+summary: Objeto que se devuelve cuando `UI.displayDialogAsync` se llama a. Expone métodos para registrar controladores de eventos y cerrar el cuadro de diálogo.
+remarks: '**Conjunto de requisitos**: [DialogAPI](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/dialog-api-requirement-sets)'
+isPreview: false
+isDeprecated: false
+type: interface
+methods:
+- name: addEventHandler(eventType, handler)
+  uid: office!Office.Dialog#addEventHandler:member(1)
+  package: office!
+  fullName: addEventHandler(eventType, handler)
+  summary: >-
+    Registra un controlador de eventos. Los dos eventos compatibles son:
 
-      - DialogMessageReceived. Se desencadena cuando el cuadro de diálogo envía un mensaje a su elemento principal.
 
-      - DialogEventReceived. Se desencadena cuando el cuadro de diálogo se ha cerrado o descargado.
-    name: 'addEventHandler(eventType, handler)'
-    fullName: 'addEventHandler(eventType, handler)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'addEventHandler(eventType: Office.EventType, handler: (args: {message: string | boolean} | {error: number}) => void): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: eventType
-          description: Debe ser DialogMessageReceived o DialogEventReceived.
-          type:
-            - 'office!Office.EventType:enum'
-        - id: handler
-          description: 'Una función que acepta un objeto con una `message` propiedad, si eventType es DialogMessageReceived, o un objeto con una `error` propiedad, si eventType es DialogEventReceived.'
-          type:
-            - '(args: {message: string | boolean} | {error: number}) => void'
-  - uid: 'office!Office.Dialog#close:member(1)'
-    summary: Llamado desde una página principal para cerrar el cuadro de diálogo correspondiente.
-    name: close()
-    fullName: close()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'close(): void;'
-      return:
-        type:
-          - void
-        description: ''
-  - uid: 'office!Office.Dialog#messageChild:member(1)'
-    summary: 'Entrega un mensaje desde la página host, como un panel de tareas o un archivo de funciones sin interfaz de usuario, a un cuadro de diálogo que se abrió desde la página.'
-    remarks: |-
-      **Hosts**: Excel, Outlook (conjunto de requisitos mínimos: buzón de correo 1,9), PowerPoint y Word
+    - DialogMessageReceived. Se desencadena cuando el cuadro de diálogo envía un mensaje a su elemento principal.
 
-      **Conjuntos de requisitos**:
 
-      - [DialogAPI 1,2](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/dialog-api-requirement-sets)
+    - DialogEventReceived. Se desencadena cuando el cuadro de diálogo se ha cerrado o descargado.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'addEventHandler(eventType: Office.EventType, handler: (args: {message: string | boolean} | {error: number}) => void): void;'
+    parameters:
+    - id: eventType
+      description: Debe ser DialogMessageReceived o DialogEventReceived.
+      type: <xref uid="office!Office.EventType:enum" />
+    - id: handler
+      description: Una función que acepta un objeto con una `message` propiedad, si eventType es DialogMessageReceived, o un objeto con una `error` propiedad, si eventType es DialogEventReceived.
+      type: '(args: {message: string | boolean} | {error: number}) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: close()
+  uid: office!Office.Dialog#close:member(1)
+  package: office!
+  fullName: close()
+  summary: Llamado desde una página principal para cerrar el cuadro de diálogo correspondiente.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'close(): void;'
+    return:
+      type: void
+      description: ''
+- name: messageChild(message)
+  uid: office!Office.Dialog#messageChild:member(1)
+  package: office!
+  fullName: messageChild(message)
+  summary: Entrega un mensaje desde la página host, como un panel de tareas o un archivo de funciones sin interfaz de usuario, a un cuadro de diálogo que se abrió desde la página.
+  remarks: >-
+    **Hosts**: Excel, Outlook (conjunto de requisitos mínimos: buzón de correo 1,9), PowerPoint y Word
 
-      - [Mailbox 1.9](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)
-    name: messageChild(message)
-    fullName: messageChild(message)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'messageChild(message: string): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: message
-          description: 'Acepta un mensaje de la página host para entregar en el cuadro de diálogo. Se puede enviar todo lo que se pueda serializar a una cadena, incluidos JSON y XML.'
-          type:
-            - string
-  - uid: 'office!Office.Dialog#sendMessage:member(1)'
-    summary: SOLO PARA USO INTERNO. NO LLAME AL CÓDIGO.
-    name: sendMessage(name)
-    fullName: sendMessage(name)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'sendMessage(name: string): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: name
-          description: ''
-          type:
-            - string
-references:
-  - uid: 'office!Office.EventType:enum'
-    name: Office.EventType
+
+    **Conjuntos de requisitos**:
+
+
+    - [DialogAPI 1,2](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/dialog-api-requirement-sets)
+
+
+    - [Mailbox 1.9](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'messageChild(message: string): void;'
+    parameters:
+    - id: message
+      description: Acepta un mensaje de la página host para entregar en el cuadro de diálogo. Se puede enviar todo lo que se pueda serializar a una cadena, incluidos JSON y XML.
+      type: string
+    return:
+      type: void
+      description: ''
+- name: sendMessage(name)
+  uid: office!Office.Dialog#sendMessage:member(1)
+  package: office!
+  fullName: sendMessage(name)
+  summary: SOLO PARA USO INTERNO. NO LLAME AL CÓDIGO.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'sendMessage(name: string): void;'
+    parameters:
+    - id: name
+      description: ''
+      type: string
+    return:
+      type: void
+      description: ''
+metadata:
+  ms.openlocfilehash: c007533112e45e4ffec29b45883add8161532d6c
+  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.translationtype: MT
+  ms.contentlocale: es-ES
+  ms.lasthandoff: 11/18/2020
+  ms.locfileid: "49183372"
