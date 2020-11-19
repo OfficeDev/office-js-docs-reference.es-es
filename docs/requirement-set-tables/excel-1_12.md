@@ -2,8 +2,8 @@
 |:---|:---|:---|
 |[ChartAxisTitle](/javascript/api/excel/excel.chartaxistitle)|[textOrientation](/javascript/api/excel/excel.chartaxistitle#textorientation)|Especifica el ángulo al que está orientado el texto para el título del eje del gráfico.|
 |[ChartSeries](/javascript/api/excel/excel.chartseries)|[getDimensionValues (dimensión: Excel. ChartSeriesDimension)](/javascript/api/excel/excel.chartseries#getdimensionvalues-dimension-)|Obtiene los valores de una única dimensión de la serie del gráfico.|
-|[Comment](/javascript/api/excel/excel.comment)|[contentType](/javascript/api/excel/excel.comment#contenttype)|Obtiene el tipo de contenido del comentario.|
-|[CommentAddedEventArgs](/javascript/api/excel/excel.commentaddedeventargs)|[commentDetails](/javascript/api/excel/excel.commentaddedeventargs#commentdetails)|Obtenga la matriz CommentDetail que contiene el identificador de comentario y los identificadores de sus respuestas relacionadas.|
+|[Comentario](/javascript/api/excel/excel.comment)|[contentType](/javascript/api/excel/excel.comment#contenttype)|Obtiene el tipo de contenido del comentario.|
+|[CommentAddedEventArgs](/javascript/api/excel/excel.commentaddedeventargs)|[commentDetails](/javascript/api/excel/excel.commentaddedeventargs#commentdetails)|Obtiene la `CommentDetail` matriz que contiene el identificador de comentario y los identificadores de sus respuestas relacionadas.|
 ||[source](/javascript/api/excel/excel.commentaddedeventargs#source)|Especifica el origen del evento.|
 ||[type](/javascript/api/excel/excel.commentaddedeventargs#type)|Obtiene el tipo del evento.|
 ||[worksheetId](/javascript/api/excel/excel.commentaddedeventargs#worksheetid)|Obtiene el identificador de la hoja de cálculo en la que se produjo el evento.|
@@ -15,7 +15,7 @@
 |[CommentCollection](/javascript/api/excel/excel.commentcollection)|[onAdded](/javascript/api/excel/excel.commentcollection#onadded)|Se produce cuando se agregan los comentarios.|
 ||[onChanged](/javascript/api/excel/excel.commentcollection#onchanged)|Se produce cuando se cambian los comentarios o las respuestas de una colección de comentarios, incluso cuando se eliminan las respuestas.|
 ||[onDeleted](/javascript/api/excel/excel.commentcollection#ondeleted)|Se produce cuando se eliminan comentarios en la colección de comentarios.|
-|[CommentDeletedEventArgs](/javascript/api/excel/excel.commentdeletedeventargs)|[commentDetails](/javascript/api/excel/excel.commentdeletedeventargs#commentdetails)|Obtenga la matriz CommentDetail que contiene el identificador de comentario y los identificadores de sus respuestas relacionadas.|
+|[CommentDeletedEventArgs](/javascript/api/excel/excel.commentdeletedeventargs)|[commentDetails](/javascript/api/excel/excel.commentdeletedeventargs#commentdetails)|Obtiene la `CommentDetail` matriz que contiene el identificador de comentario y los identificadores de sus respuestas relacionadas.|
 ||[source](/javascript/api/excel/excel.commentdeletedeventargs#source)|Especifica el origen del evento.|
 ||[type](/javascript/api/excel/excel.commentdeletedeventargs#type)|Obtiene el tipo del evento.|
 ||[worksheetId](/javascript/api/excel/excel.commentdeletedeventargs#worksheetid)|Obtiene el identificador de la hoja de cálculo en la que se produjo el evento.|
@@ -47,7 +47,7 @@
 ||[condition](/javascript/api/excel/excel.pivotlabelfilter#condition)|Especifica la condición del filtro, que define los criterios de filtrado necesarios.|
 ||[exclusivas](/javascript/api/excel/excel.pivotlabelfilter#exclusive)|Si es true, Filter *excluye* los elementos que cumplen los criterios.|
 ||[lowerBound](/javascript/api/excel/excel.pivotlabelfilter#lowerbound)|Límite inferior del intervalo para la condición de filtro between.|
-||[substring](/javascript/api/excel/excel.pivotlabelfilter#substring)|Subcadena que se usa `BeginsWith` para `EndsWith` `Contains` las condiciones de filtro, y.|
+||[subcadena](/javascript/api/excel/excel.pivotlabelfilter#substring)|Subcadena que se usa `BeginsWith` para `EndsWith` `Contains` las condiciones de filtro, y.|
 ||[upperBound](/javascript/api/excel/excel.pivotlabelfilter#upperbound)|Límite superior del intervalo para la condición de filtro between.|
 |[PivotManualFilter](/javascript/api/excel/excel.pivotmanualfilter)|[selectedItems](/javascript/api/excel/excel.pivotmanualfilter#selecteditems)|Lista de elementos seleccionados que se va a filtrar manualmente.|
 |[PivotTable](/javascript/api/excel/excel.pivottable)|[allowMultipleFiltersPerField](/javascript/api/excel/excel.pivottable#allowmultiplefiltersperfield)|Especifica si la tabla dinámica permite la aplicación de varios filtros dinámicos en un campo dinámico dado en la tabla.|
@@ -80,7 +80,7 @@
 ||[getRangeAreasOrNullObjectBySheet (Key: String)](/javascript/api/excel/excel.workbookrangeareas#getrangeareasornullobjectbysheet-key-)|Devuelve el `RangeAreas` objeto basándose en el nombre de la hoja de cálculo o el identificador de la colección.|
 ||[direcciones](/javascript/api/excel/excel.workbookrangeareas#addresses)|Devuelve una matriz de direcciones en estilo a1.|
 ||[areas](/javascript/api/excel/excel.workbookrangeareas#areas)|Devuelve el `RangeAreasCollection` objeto.|
-||[intervalos](/javascript/api/excel/excel.workbookrangeareas#ranges)|Devuelve los rangos que componen este objeto en un `RangeCollection` objeto.|
+||[intervalos](/javascript/api/excel/excel.workbookrangeareas#ranges)|Devuelve los rangos que componen este objeto en un  `RangeCollection`   objeto.|
 |[Worksheet](/javascript/api/excel/excel.worksheet)|[customProperties](/javascript/api/excel/excel.worksheet#customproperties)|Obtiene una colección de propiedades personalizadas en el nivel de hoja de cálculo.|
 |[WorksheetCustomProperty](/javascript/api/excel/excel.worksheetcustomproperty)|[delete()](/javascript/api/excel/excel.worksheetcustomproperty#delete--)|Elimina la propiedad personalizada.|
 ||[key](/javascript/api/excel/excel.worksheetcustomproperty#key)|Obtiene la clave de la propiedad personalizada.|
