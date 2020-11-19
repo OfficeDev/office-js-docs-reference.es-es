@@ -1,147 +1,120 @@
-### YamlMime:UniversalReference
-items:
-  - uid: 'office!Office.Auth:interface'
-    summary: 'El espacio de nombres de autenticación de Office `Office.context.auth`<!-- -->, proporciona un método que permite a la aplicación cliente de Office obtener un token de acceso a la aplicación web del complemento. Indirectamente, esto habilita el complemento para que tenga acceso a los datos del usuario que ha iniciado sesión en Microsoft Graph, sin que el usuario inicie sesión por segunda vez.'
-    name: Office.Auth
-    fullName: Office.Auth
-    langs:
-      - typeScript
-    type: interface
-    package: office!
-    children:
-      - 'office!Office.Auth#getAccessToken:member(1)'
-      - 'office!Office.Auth#getAccessTokenAsync:member(1)'
-      - 'office!Office.Auth#getAccessTokenAsync:member(2)'
-  - uid: 'office!Office.Auth#getAccessToken:member(1)'
-    summary: 'Llama al punto de conexión de Azure Active Directory V 2.0 para obtener acceso a un token para la aplicación de web del complemento. Permite que los complementos identifiquen a los usuarios. El código del lado servidor puede usar este token para obtener acceso a Microsoft Graph para la aplicación web del complemento mediante el [flujo de OAuth "en nombre de"](https://docs.microsoft.com/azure/active-directory/develop/active-directory-v2-protocols-oauth-on-behalf-of)<!-- -->. Esta API requiere una configuración de inicio de sesión único que relacione el complemento con una aplicación de Azure. Los usuarios de Office inician sesión con cuentas de la organización y cuentas de Microsoft. Microsoft Azure devuelve tokens destinados a ambos tipos de cuentas de usuario para tener acceso a recursos en Microsoft Graph.'
-    remarks: |-
-      **Hosts**: Excel, OneNote, Outlook, PowerPoint y Word
+### YamlMime:TSType
+name: Office.Auth
+uid: office!Office.Auth:interface
+package: office!
+fullName: Office.Auth
+summary: El espacio de nombres de autenticación de Office `Office.context.auth`<!-- -->, proporciona un método que permite a la aplicación cliente de Office obtener un token de acceso a la aplicación web del complemento. Indirectamente, esto habilita el complemento para que tenga acceso a los datos del usuario que ha iniciado sesión en Microsoft Graph, sin que el usuario inicie sesión por segunda vez.
+remarks: ''
+isPreview: false
+isDeprecated: false
+type: interface
+methods:
+- name: getAccessToken(options)
+  uid: office!Office.Auth#getAccessToken:member(1)
+  package: office!
+  fullName: getAccessToken(options)
+  summary: Llama al punto de conexión de Azure Active Directory V 2.0 para obtener acceso a un token para la aplicación de web del complemento. Permite que los complementos identifiquen a los usuarios. El código del lado servidor puede usar este token para obtener acceso a Microsoft Graph para la aplicación web del complemento mediante el [flujo de OAuth "en nombre de"](https://docs.microsoft.com/azure/active-directory/develop/active-directory-v2-protocols-oauth-on-behalf-of)<!-- -->. Esta API requiere una configuración de inicio de sesión único que relacione el complemento con una aplicación de Azure. Los usuarios de Office inician sesión con cuentas de la organización y cuentas de Microsoft. Microsoft Azure devuelve tokens destinados a ambos tipos de cuentas de usuario para tener acceso a recursos en Microsoft Graph.
+  remarks: >-
+    **Hosts**: Excel, OneNote, Outlook, PowerPoint y Word
 
-      **Importante**: en Outlook, esta API no es compatible Si el complemento se carga en un buzón de correo de Outlook.com o gmail.
 
-      **Conjunto de requisitos**: [IdentityAPI](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/identity-api-requirement-sets)
-    name: getAccessToken(options)
-    fullName: getAccessToken(options)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'getAccessToken(options?: AuthOptions): Promise<string>;'
-      return:
-        type:
-          - 'office!Office.Auth#getAccessToken~0:complex'
-        description: Promesa del token de acceso.
-      parameters:
-        - id: options
-          description: Opcional. Acepta un `AuthOptions` objeto para definir los comportamientos de inicio de sesión.
-          type:
-            - 'office!Office.AuthOptions:interface'
-  - uid: 'office!Office.Auth#getAccessTokenAsync:member(1)'
-    summary: 'Llama al punto de conexión de Azure Active Directory V 2.0 para obtener acceso a un token para la aplicación de web del complemento. Permite que los complementos identifiquen a los usuarios. El código del lado servidor puede usar este token para obtener acceso a Microsoft Graph para la aplicación web del complemento mediante el [flujo de OAuth "en nombre de"](https://docs.microsoft.com/azure/active-directory/develop/active-directory-v2-protocols-oauth-on-behalf-of)<!-- -->.'
-    remarks: |-
-      **Hosts**: Excel, OneNote, Outlook, PowerPoint y Word
+    **Importante**: en Outlook, esta API no es compatible Si el complemento se carga en un buzón de correo de Outlook.com o gmail.
 
-      **Conjunto de requisitos**: [IdentityAPI](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/identity-api-requirement-sets)
 
-      Esta API requiere una configuración de inicio de sesión único que relacione el complemento con una aplicación de Azure. Los usuarios de Office inician sesión con cuentas de la organización y cuentas de Microsoft. Microsoft Azure devuelve tokens destinados a ambos tipos de cuentas de usuario para tener acceso a recursos en Microsoft Graph.
+    **Conjunto de requisitos**: [IdentityAPI](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/identity-api-requirement-sets)
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getAccessToken(options?: AuthOptions): Promise<string>;'
+    parameters:
+    - id: options
+      description: Opcional. Acepta un `AuthOptions` objeto para definir los comportamientos de inicio de sesión.
+      type: <xref uid="office!Office.AuthOptions:interface" />
+    return:
+      type: Promise&lt;string&gt;
+      description: Promesa del token de acceso.
+- name: getAccessTokenAsync(options, callback)
+  uid: office!Office.Auth#getAccessTokenAsync:member(1)
+  package: office!
+  fullName: getAccessTokenAsync(options, callback)
+  summary: Llama al punto de conexión de Azure Active Directory V 2.0 para obtener acceso a un token para la aplicación de web del complemento. Permite que los complementos identifiquen a los usuarios. El código del lado servidor puede usar este token para obtener acceso a Microsoft Graph para la aplicación web del complemento mediante el [flujo de OAuth "en nombre de"](https://docs.microsoft.com/azure/active-directory/develop/active-directory-v2-protocols-oauth-on-behalf-of)<!-- -->.
+  remarks: >-
+    **Hosts**: Excel, OneNote, Outlook, PowerPoint y Word
 
-      #### <a name="examples"></a>Ejemplos
 
-      ```javascript
-      Office.context.auth.getAccessTokenAsync(function(result) {
-          if (result.status === "succeeded") {
-              var token = result.value;
-              // ...
-          } else {
-              console.log("Error obtaining token", result.error);
-          }
-      });
-      ```
-    deprecated:
-      content: |-
-        Use Office.auth.getAccessToken instead.
+    **Conjunto de requisitos**: [IdentityAPI](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/identity-api-requirement-sets)
 
-        \*\*Important\*\*: In Outlook, this API is not supported if the add-in is loaded in an Outlook.com or Gmail mailbox.
-    name: 'getAccessTokenAsync(options, callback)'
-    fullName: 'getAccessTokenAsync(options, callback)'
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'getAccessTokenAsync(options?: AuthOptions, callback?: (result: AsyncResult<string>) => void): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: options
-          description: Opcional. Acepta un `AuthOptions` objeto para definir los comportamientos de inicio de sesión.
-          type:
-            - 'office!Office.AuthOptions:interface'
-        - id: callback
-          description: 'Opcional. Acepta un método de respuesta que puede analizar el token para el identificador del usuario o utilizar el token en el flujo "en nombre de" para obtener acceso a Microsoft Graph. Si `AsyncResult.status` es "Succeeded", `AsyncResult.value` es la versión de AAD v sin formato. Token de acceso con formato 2.0.'
-          type:
-            - 'office!Office.Auth#getAccessTokenAsync~0:complex'
-  - uid: 'office!Office.Auth#getAccessTokenAsync:member(2)'
-    summary: 'Llama al punto de conexión de Azure Active Directory V 2.0 para obtener acceso a un token para la aplicación de web del complemento. Permite que los complementos identifiquen a los usuarios. El código del lado servidor puede usar este token para obtener acceso a Microsoft Graph para la aplicación web del complemento mediante el [flujo de OAuth "en nombre de"](https://docs.microsoft.com/azure/active-directory/develop/active-directory-v2-protocols-oauth-on-behalf-of)<!-- -->.'
-    remarks: |-
-      **Hosts**: Excel, OneNote, Outlook, PowerPoint y Word
 
-      **Conjunto de requisitos**: [IdentityAPI](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/identity-api-requirement-sets)
+    Esta API requiere una configuración de inicio de sesión único que relacione el complemento con una aplicación de Azure. Los usuarios de Office inician sesión con cuentas de la organización y cuentas de Microsoft. Microsoft Azure devuelve tokens destinados a ambos tipos de cuentas de usuario para tener acceso a recursos en Microsoft Graph.
 
-      Esta API requiere una configuración de inicio de sesión único que relacione el complemento con una aplicación de Azure. Los usuarios de Office inician sesión con cuentas de la organización y cuentas de Microsoft. Microsoft Azure devuelve tokens destinados a ambos tipos de cuentas de usuario para tener acceso a recursos en Microsoft Graph.
-    deprecated:
-      content: |-
-        Use `Office.auth.getAccessToken` instead.
 
-        \*\*Important\*\*: In Outlook, this API is not supported if the add-in is loaded in an Outlook.com or Gmail mailbox.
-    name: getAccessTokenAsync(callback)
-    fullName: getAccessTokenAsync(callback)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'getAccessTokenAsync(callback?: (result: AsyncResult<string>) => void): void;'
-      return:
-        type:
-          - void
-        description: ''
-      parameters:
-        - id: callback
-          description: 'Opcional. Acepta un método de respuesta que puede analizar el token para el identificador del usuario o utilizar el token en el flujo "en nombre de" para obtener acceso a Microsoft Graph. Si `AsyncResult.status` es "Succeeded", `AsyncResult.value` es la versión de AAD v sin formato. Token de acceso con formato 2.0.'
-          type:
-            - 'office!Office.Auth#getAccessTokenAsync~1:complex'
-references:
-  - uid: 'office!Office.Auth#getAccessToken~0:complex'
-    name: Promise<string>
-    fullName: Promise<string>
-    spec.typeScript:
-      - uid: '!Promise:interface'
-        name: Promise
-        fullName: Promise
-      - name: <string>
-        fullName: <string>
-  - uid: 'office!Office.AuthOptions:interface'
-    name: AuthOptions
-  - uid: 'office!Office.Auth#getAccessTokenAsync~0:complex'
-    name: '(result: AsyncResult<string>) => void'
-    fullName: '(result: Office.AsyncResult<string>) => void'
-    spec.typeScript:
-      - name: '(result: '
-        fullName: '(result: '
-      - uid: 'office!Office.AsyncResult:interface'
-        name: AsyncResult
-        fullName: Office.AsyncResult
-      - name: <string>) => void
-        fullName: <string>) => void
-  - uid: 'office!Office.Auth#getAccessTokenAsync~1:complex'
-    name: '(result: AsyncResult<string>) => void'
-    fullName: '(result: Office.AsyncResult<string>) => void'
-    spec.typeScript:
-      - name: '(result: '
-        fullName: '(result: '
-      - uid: 'office!Office.AsyncResult:interface'
-        name: AsyncResult
-        fullName: Office.AsyncResult
-      - name: <string>) => void
-        fullName: <string>) => void
+    #### <a name="examples"></a>Ejemplos
+
+
+    ```javascript
+
+    Office.context.auth.getAccessTokenAsync(function(result) {
+        if (result.status === "succeeded") {
+            var token = result.value;
+            // ...
+        } else {
+            console.log("Error obtaining token", result.error);
+        }
+    });
+
+    ```
+  isPreview: false
+  isDeprecated: true
+  customDeprecatedMessage: >-
+    Use Office.auth.getAccessToken instead.
+
+
+    \*\*Important\*\*: In Outlook, this API is not supported if the add-in is loaded in an Outlook.com or Gmail mailbox.
+  syntax:
+    content: 'getAccessTokenAsync(options?: AuthOptions, callback?: (result: AsyncResult<string>) => void): void;'
+    parameters:
+    - id: options
+      description: Opcional. Acepta un `AuthOptions` objeto para definir los comportamientos de inicio de sesión.
+      type: <xref uid="office!Office.AuthOptions:interface" />
+    - id: callback
+      description: Opcional. Acepta un método de respuesta que puede analizar el token para el identificador del usuario o utilizar el token en el flujo "en nombre de" para obtener acceso a Microsoft Graph. Si `AsyncResult.status` es "Succeeded", `AsyncResult.value` es la versión de AAD v sin formato. Token de acceso con formato 2.0.
+      type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: getAccessTokenAsync(callback)
+  uid: office!Office.Auth#getAccessTokenAsync:member(2)
+  package: office!
+  fullName: getAccessTokenAsync(callback)
+  summary: Llama al punto de conexión de Azure Active Directory V 2.0 para obtener acceso a un token para la aplicación de web del complemento. Permite que los complementos identifiquen a los usuarios. El código del lado servidor puede usar este token para obtener acceso a Microsoft Graph para la aplicación web del complemento mediante el [flujo de OAuth "en nombre de"](https://docs.microsoft.com/azure/active-directory/develop/active-directory-v2-protocols-oauth-on-behalf-of)<!-- -->.
+  remarks: >-
+    **Hosts**: Excel, OneNote, Outlook, PowerPoint y Word
+
+
+    **Conjunto de requisitos**: [IdentityAPI](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/identity-api-requirement-sets)
+
+
+    Esta API requiere una configuración de inicio de sesión único que relacione el complemento con una aplicación de Azure. Los usuarios de Office inician sesión con cuentas de la organización y cuentas de Microsoft. Microsoft Azure devuelve tokens destinados a ambos tipos de cuentas de usuario para tener acceso a recursos en Microsoft Graph.
+  isPreview: false
+  isDeprecated: true
+  customDeprecatedMessage: >-
+    Use `Office.auth.getAccessToken` instead.
+
+
+    \*\*Important\*\*: In Outlook, this API is not supported if the add-in is loaded in an Outlook.com or Gmail mailbox.
+  syntax:
+    content: 'getAccessTokenAsync(callback?: (result: AsyncResult<string>) => void): void;'
+    parameters:
+    - id: callback
+      description: Opcional. Acepta un método de respuesta que puede analizar el token para el identificador del usuario o utilizar el token en el flujo "en nombre de" para obtener acceso a Microsoft Graph. Si `AsyncResult.status` es "Succeeded", `AsyncResult.value` es la versión de AAD v sin formato. Token de acceso con formato 2.0.
+      type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+metadata:
+  ms.openlocfilehash: f358cf8605650d9d78c052c49a6b257c762e92d6
+  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.translationtype: MT
+  ms.contentlocale: es-ES
+  ms.lasthandoff: 11/18/2020
+  ms.locfileid: "49329702"
