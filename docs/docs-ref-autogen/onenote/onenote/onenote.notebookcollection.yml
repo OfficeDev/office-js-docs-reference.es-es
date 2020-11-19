@@ -1,334 +1,227 @@
-### YamlMime:UniversalReference
-items:
-  - uid: 'onenote!OneNote.NotebookCollection:class'
-    summary: |-
-      Representa una colección de blocs de notas.
-
-      \[[Conjunto de API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: OneNote.NotebookCollection
-    fullName: OneNote.NotebookCollection
-    langs:
-      - typeScript
-    type: class
-    extends:
-      - 'office!OfficeExtension.ClientObject:class'
-    package: onenote!
-    children:
-      - 'onenote!OneNote.NotebookCollection#context:member'
-      - 'onenote!OneNote.NotebookCollection#count:member'
-      - 'onenote!OneNote.NotebookCollection#getByName:member(1)'
-      - 'onenote!OneNote.NotebookCollection#getItem:member(1)'
-      - 'onenote!OneNote.NotebookCollection#getItemAt:member(1)'
-      - 'onenote!OneNote.NotebookCollection#items:member'
-      - 'onenote!OneNote.NotebookCollection#load:member(1)'
-      - 'onenote!OneNote.NotebookCollection#load:member(2)'
-      - 'onenote!OneNote.NotebookCollection#load:member(3)'
-      - 'onenote!OneNote.NotebookCollection#toJSON:member(1)'
-      - 'onenote!OneNote.NotebookCollection#track:member(1)'
-      - 'onenote!OneNote.NotebookCollection#untrack:member(1)'
-  - uid: 'onenote!OneNote.NotebookCollection#context:member'
-    summary: Contexto de la solicitud asociado al objeto. Esto conecta el proceso del complemento con el proceso de la aplicación host de Office.
-    name: context
-    fullName: context
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'context: RequestContext;'
-      return:
-        type:
-          - 'onenote!OneNote.RequestContext:class'
-  - uid: 'onenote!OneNote.NotebookCollection#count:member'
-    summary: |-
-      Devuelve el número de blocs de notas de una colección. Solo lectura.
-
-      \[[Conjunto de API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: count
-    fullName: count
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'readonly count: number;'
-      return:
-        type:
-          - number
-  - uid: 'onenote!OneNote.NotebookCollection#getByName:member(1)'
-    summary: |-
-      Obtiene la colección de blocs de notas con el nombre especificado que están abiertos en la instancia de la aplicación.
-
-      \[[Conjunto de API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: getByName(name)
-    fullName: getByName(name)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'getByName(name: string): OneNote.NotebookCollection;'
-      return:
-        type:
-          - 'onenote!OneNote.NotebookCollection:class'
-        description: |-
+### YamlMime:TSType
+name: OneNote.NotebookCollection
+uid: onenote!OneNote.NotebookCollection:class
+package: onenote!
+fullName: OneNote.NotebookCollection
+summary: >-
+  Representa una colección de blocs de notas.
 
 
-          #### <a name="examples"></a>Ejemplos
-
-          ```javascript
-          OneNote.run(function (context) {
-
-              // Get the notebooks that are open in the application instance and have the specified name.
-              var notebooks = context.application.notebooks.getByName("Homework");
-
-              // Queue a command to load the notebooks. 
-              // For best performance, request specific properties.           
-              notebooks.load("id,name");
-
-              // Run the queued commands, and return a promise to indicate task completion.
-              return context.sync()
-                  .then(function () {
-
-                      // Iterate through the collection or access items individually by index,
-                      // for example: notebooks.items[0]
-                      if (notebooks.items.length > 0) {
-                          console.log("Notebook name: " + notebooks.items[0].name);
-                          console.log("Notebook ID: " + notebooks.items[0].id);
-                      }
-                          
-                  });
-          })
-          .catch(function(error) {
-              console.log("Error: " + error);
-              if (error instanceof OfficeExtension.Error) {
-                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
-              }
-          });
-          ```
-      parameters:
-        - id: name
-          description: El nombre del bloc de notas.
-          type:
-            - string
-  - uid: 'onenote!OneNote.NotebookCollection#getItem:member(1)'
-    summary: |-
-      Obtiene un bloc de notas por ID o por su índice en la colección. Solo lectura.
-
-      \[[Conjunto de API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: getItem(index)
-    fullName: getItem(index)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'getItem(index: number | string): OneNote.Notebook;'
-      return:
-        type:
-          - 'onenote!OneNote.Notebook:class'
-        description: ''
-      parameters:
-        - id: index
-          description: 'El id. del bloc de notas, o bien la ubicación del índice del bloc de notas en la colección.'
-          type:
-            - number | string
-  - uid: 'onenote!OneNote.NotebookCollection#getItemAt:member(1)'
-    summary: |-
-      Obtiene un bloc de notas según su posición en la colección.
-
-      \[[Conjunto de API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
-    name: getItemAt(index)
-    fullName: getItemAt(index)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'getItemAt(index: number): OneNote.Notebook;'
-      return:
-        type:
-          - 'onenote!OneNote.Notebook:class'
-        description: ''
-      parameters:
-        - id: index
-          description: Valor de índice del objeto que se va a recuperar. Indizado con cero.
-          type:
-            - number
-  - uid: 'onenote!OneNote.NotebookCollection#items:member'
-    summary: Obtiene los elementos secundarios cargados en esta colección.
-    name: items
-    fullName: items
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'readonly items: OneNote.Notebook[];'
-      return:
-        type:
-          - 'onenote!OneNote.NotebookCollection#items~0:complex'
-  - uid: 'onenote!OneNote.NotebookCollection#load:member(1)'
-    summary: 'Pone en cola un comando para cargar las propiedades especificadas del objeto. Antes de leer las propiedades, debe llamar a "context.sync()".'
-    remarks: |-
-      Además de esta firma, este método tiene las siguientes firmas:
-
-      `load(option?: string | string[]): OneNote.NotebookCollection`-Donde opción es una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades que se van a cargar.
-
-      `load(option?: { select?: string; expand?: string; }): OneNote.NotebookCollection`-Where opción. Select es una cadena delimitada por comas que especifica las propiedades que se van a cargar y Options. Expand es una cadena delimitada por comas que especifica las propiedades de navegación que se deben cargar.
-
-      `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): OneNote.NotebookCollection`-Solo disponible en tipos de colección. Es similar a la firma anterior. Option. Top especifica el número máximo de elementos de colección que se pueden incluir en el resultado. La opción. SKIP especifica el número de elementos que se deben omitir y que no se incluyen en el resultado. Si se especifica Option. Top, el conjunto de resultados se iniciará después de omitir el número especificado de elementos.
-    name: load(option)
-    fullName: load(option)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'load(option?: OneNote.Interfaces.NotebookCollectionLoadOptions & OneNote.Interfaces.CollectionLoadOptions): OneNote.NotebookCollection;'
-      return:
-        type:
-          - 'onenote!OneNote.NotebookCollection:class'
-        description: ''
-      parameters:
-        - id: option
-          description: ''
-          type:
-            - 'onenote!OneNote.NotebookCollection#load~0:complex'
-  - uid: 'onenote!OneNote.NotebookCollection#load:member(2)'
-    summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar a `context.sync()` antes de leer las propiedades.
-    name: load(propertyNames)
-    fullName: load(propertyNames)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'load(propertyNames?: string | string[]): OneNote.NotebookCollection;'
-      return:
-        type:
-          - 'onenote!OneNote.NotebookCollection:class'
-        description: |-
+  \[[Conjunto de API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+remarks: ''
+isPreview: false
+isDeprecated: false
+type: class
+properties:
+- name: context
+  uid: onenote!OneNote.NotebookCollection#context:member
+  package: onenote!
+  fullName: context
+  summary: Contexto de la solicitud asociado al objeto. Esto conecta el proceso del complemento con el proceso de la aplicación host de Office.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type: <xref uid="onenote!OneNote.RequestContext:class" />
+- name: count
+  uid: onenote!OneNote.NotebookCollection#count:member
+  package: onenote!
+  fullName: count
+  summary: >-
+    Devuelve el número de blocs de notas de una colección. Solo lectura.
 
 
-          #### <a name="examples"></a>Ejemplos
+    \[[Conjunto de API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly count: number;'
+    return:
+      type: number
+- name: items
+  uid: onenote!OneNote.NotebookCollection#items:member
+  package: onenote!
+  fullName: items
+  summary: Obtiene los elementos secundarios cargados en esta colección.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly items: OneNote.Notebook[];'
+    return:
+      type: <xref uid="onenote!OneNote.Notebook:class" />[]
+methods:
+- name: getByName(name)
+  uid: onenote!OneNote.NotebookCollection#getByName:member(1)
+  package: onenote!
+  fullName: getByName(name)
+  summary: >-
+    Obtiene la colección de blocs de notas con el nombre especificado que están abiertos en la instancia de la aplicación.
 
-          ```javascript
-          OneNote.run(function (context) {
 
-              // Get the notebooks that are open in the application instance and have the specified name.
-              var notebooks = context.application.notebooks.getByName("Homework");
+    \[[Conjunto de API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getByName(name: string): OneNote.NotebookCollection;'
+    parameters:
+    - id: name
+      description: El nombre del bloc de notas.
+      type: string
+    return:
+      type: <xref uid="onenote!OneNote.NotebookCollection:class" />
+      description: "\n\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nOneNote.run(function (context) {\n\n    // Get the notebooks that are open in the application instance and have the specified name.\n    var notebooks = context.application.notebooks.getByName(\"Homework\");\n\n    // Queue a command to load the notebooks. \n    // For best performance, request specific properties.           \n    notebooks.load(\"id,name\");\n\n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function () {\n\n            // Iterate through the collection or access items individually by index,\n            // for example: notebooks.items[0]\n            if (notebooks.items.length > 0) {\n                console.log(\"Notebook name: \" + notebooks.items[0].name);\n                console.log(\"Notebook ID: \" + notebooks.items[0].id);\n            }\n                \n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- name: getItem(index)
+  uid: onenote!OneNote.NotebookCollection#getItem:member(1)
+  package: onenote!
+  fullName: getItem(index)
+  summary: >-
+    Obtiene un bloc de notas por ID o por su índice en la colección. Solo lectura.
 
-              // Queue a command to load the notebooks. 
-              // For best performance, request specific properties.           
-              notebooks.load("id");
 
-              // Run the queued commands, and return a promise to indicate task completion.
-              return context.sync()
-                  .then(function () {
+    \[[Conjunto de API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getItem(index: number | string): OneNote.Notebook;'
+    parameters:
+    - id: index
+      description: El id. del bloc de notas, o bien la ubicación del índice del bloc de notas en la colección.
+      type: number | string
+    return:
+      type: <xref uid="onenote!OneNote.Notebook:class" />
+      description: ''
+- name: getItemAt(index)
+  uid: onenote!OneNote.NotebookCollection#getItemAt:member(1)
+  package: onenote!
+  fullName: getItemAt(index)
+  summary: >-
+    Obtiene un bloc de notas según su posición en la colección.
 
-                      // Iterate through the collection or access items individually by index, 
-                      // for example: notebooks.items[0]
-                      $.each(notebooks.items, function(index, notebook) {
-                          notebook.addSection("Biology");
-                          notebook.addSection("Spanish");
-                          notebook.addSection("Computer Science");
-                      });
-                      
-                      return context.sync();
-                  });
-          })
-          .catch(function(error) {
-              console.log("Error: " + error);
-              if (error instanceof OfficeExtension.Error) {
-                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
-              }
-          });
-          ```
-      parameters:
-        - id: propertyNames
-          description: Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades que se van a cargar.
-          type:
-            - 'string | string[]'
-  - uid: 'onenote!OneNote.NotebookCollection#load:member(3)'
-    name: load(option)
-    fullName: load(option)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'load(option?: OfficeExtension.LoadOption): OneNote.NotebookCollection;'
-      return:
-        type:
-          - 'onenote!OneNote.NotebookCollection:class'
-        description: ''
-      parameters:
-        - id: option
-          description: ''
-          type:
-            - 'office!OfficeExtension.LoadOption:interface'
-  - uid: 'onenote!OneNote.NotebookCollection#toJSON:member(1)'
-    summary: 'Reemplaza el `toJSON()` método JavaScript para proporcionar un resultado más útil cuando se pasa un objeto API a`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama al `toJSON` método del objeto que se le pasa.) Mientras que el `OneNote.NotebookCollection` objeto original es un objeto API, el `toJSON` método devuelve un objeto JavaScript sin formato (escrito como`OneNote.Interfaces.NotebookCollectionData`<!-- -->) que contiene una matriz "items" con copias rasas de las propiedades cargadas de los elementos de la colección.'
-    name: toJSON()
-    fullName: toJSON()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'toJSON(): OneNote.Interfaces.NotebookCollectionData;'
-      return:
-        type:
-          - 'onenote!OneNote.Interfaces.NotebookCollectionData:interface'
-        description: ''
-  - uid: 'onenote!OneNote.NotebookCollection#track:member(1)'
-    summary: 'Realiza un seguimiento del objeto de ajuste automático según cambios adyacentes en el documento. Esta llamada es una forma abreviada de context.trackedObjects.add(thisObject). Si usa este objeto en llamadas ".sync" y fuera de la ejecución secuencial de un lote de ".run", y obtiene un error "InvalidObjectPath" al establecer una propiedad o invocar un método en el objeto, debería haber agregado el objeto a la colección de objetos de la que realiza un seguimiento cuando se creó el objeto.'
-    name: track()
-    fullName: track()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'track(): OneNote.NotebookCollection;'
-      return:
-        type:
-          - 'onenote!OneNote.NotebookCollection:class'
-        description: ''
-  - uid: 'onenote!OneNote.NotebookCollection#untrack:member(1)'
-    summary: 'Libere la memoria asociada a este objeto, si se ha realizado un seguimiento de él anteriormente. Esta llamada es una forma abreviada de context.trackedObjects.remove(thisObject). Tener muchos objetos marcados ralentiza la aplicación host, así que debe recordar liberar los objetos que agregue cuando haya terminado con ellos. Debe llamar a "context.sync()" antes de que surta efecto la liberación de memoria.'
-    name: untrack()
-    fullName: untrack()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'untrack(): OneNote.NotebookCollection;'
-      return:
-        type:
-          - 'onenote!OneNote.NotebookCollection:class'
-        description: ''
-references:
-  - uid: 'office!OfficeExtension.ClientObject:class'
-    name: OfficeExtension.ClientObject
-  - uid: 'onenote!OneNote.RequestContext:class'
-    name: RequestContext
-  - uid: 'onenote!OneNote.NotebookCollection:class'
-    name: OneNote.NotebookCollection
-  - uid: 'onenote!OneNote.Notebook:class'
-    name: OneNote.Notebook
-  - uid: 'onenote!OneNote.NotebookCollection#items~0:complex'
-    name: 'OneNote.Notebook[]'
-    fullName: 'OneNote.Notebook[]'
-    spec.typeScript:
-      - uid: 'onenote!OneNote.Notebook:class'
-        name: OneNote.Notebook
-        fullName: OneNote.Notebook
-      - name: '[]'
-        fullName: '[]'
-  - uid: 'onenote!OneNote.NotebookCollection#load~0:complex'
-    name: OneNote.Interfaces.NotebookCollectionLoadOptions & OneNote.Interfaces.CollectionLoadOptions
-    fullName: OneNote.Interfaces.NotebookCollectionLoadOptions & OneNote.Interfaces.CollectionLoadOptions
-    spec.typeScript:
-      - uid: 'onenote!OneNote.Interfaces.NotebookCollectionLoadOptions:interface'
-        name: OneNote.Interfaces.NotebookCollectionLoadOptions
-        fullName: OneNote.Interfaces.NotebookCollectionLoadOptions
-      - name: ' & '
-        fullName: ' & '
-      - uid: 'onenote!OneNote.Interfaces.CollectionLoadOptions:interface'
-        name: OneNote.Interfaces.CollectionLoadOptions
-        fullName: OneNote.Interfaces.CollectionLoadOptions
-  - uid: 'office!OfficeExtension.LoadOption:interface'
-    name: OfficeExtension.LoadOption
-  - uid: 'onenote!OneNote.Interfaces.NotebookCollectionData:interface'
-    name: OneNote.Interfaces.NotebookCollectionData
+
+    \[[Conjunto de API: OneNoteApi 1,1](/office/dev/add-ins/reference/requirement-sets/onenote-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getItemAt(index: number): OneNote.Notebook;'
+    parameters:
+    - id: index
+      description: Valor de índice del objeto que se va a recuperar. Indizado con cero.
+      type: number
+    return:
+      type: <xref uid="onenote!OneNote.Notebook:class" />
+      description: ''
+- name: load(option)
+  uid: onenote!OneNote.NotebookCollection#load:member(1)
+  package: onenote!
+  fullName: load(option)
+  summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Antes de leer las propiedades, debe llamar a "context.sync()".
+  remarks: >-
+    Además de esta firma, este método tiene las siguientes firmas:
+
+
+    `load(option?: string | string[]): OneNote.NotebookCollection` -Donde opción es una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades que se van a cargar.
+
+
+    `load(option?: { select?: string; expand?: string; }): OneNote.NotebookCollection` -Where opción. Select es una cadena delimitada por comas que especifica las propiedades que se van a cargar y Options. Expand es una cadena delimitada por comas que especifica las propiedades de navegación que se deben cargar.
+
+
+    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): OneNote.NotebookCollection` -Solo disponible en tipos de colección. Es similar a la firma anterior. Option. Top especifica el número máximo de elementos de colección que se pueden incluir en el resultado. La opción. SKIP especifica el número de elementos que se deben omitir y que no se incluyen en el resultado. Si se especifica Option. Top, el conjunto de resultados se iniciará después de omitir el número especificado de elementos.
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(option?: OneNote.Interfaces.NotebookCollectionLoadOptions & OneNote.Interfaces.CollectionLoadOptions): OneNote.NotebookCollection;'
+    parameters:
+    - id: option
+      description: ''
+      type: <xref uid="onenote!OneNote.Interfaces.NotebookCollectionLoadOptions:interface" /> & <xref uid="onenote!OneNote.Interfaces.CollectionLoadOptions:interface" />
+    return:
+      type: <xref uid="onenote!OneNote.NotebookCollection:class" />
+      description: ''
+- name: load(propertyNames)
+  uid: onenote!OneNote.NotebookCollection#load:member(2)
+  package: onenote!
+  fullName: load(propertyNames)
+  summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar a `context.sync()` antes de leer las propiedades.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNames?: string | string[]): OneNote.NotebookCollection;'
+    parameters:
+    - id: propertyNames
+      description: Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades que se van a cargar.
+      type: string | string[]
+    return:
+      type: <xref uid="onenote!OneNote.NotebookCollection:class" />
+      description: "\n\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nOneNote.run(function (context) {\n\n    // Get the notebooks that are open in the application instance and have the specified name.\n    var notebooks = context.application.notebooks.getByName(\"Homework\");\n\n    // Queue a command to load the notebooks. \n    // For best performance, request specific properties.           \n    notebooks.load(\"id\");\n\n    // Run the queued commands, and return a promise to indicate task completion.\n    return context.sync()\n        .then(function () {\n\n            // Iterate through the collection or access items individually by index, \n            // for example: notebooks.items[0]\n            $.each(notebooks.items, function(index, notebook) {\n                notebook.addSection(\"Biology\");\n                notebook.addSection(\"Spanish\");\n                notebook.addSection(\"Computer Science\");\n            });\n            \n            return context.sync();\n        });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- name: load(option)
+  uid: onenote!OneNote.NotebookCollection#load:member(3)
+  package: onenote!
+  fullName: load(option)
+  summary: ''
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(option?: OfficeExtension.LoadOption): OneNote.NotebookCollection;'
+    parameters:
+    - id: option
+      description: ''
+      type: <xref uid="office!OfficeExtension.LoadOption:interface" />
+    return:
+      type: <xref uid="onenote!OneNote.NotebookCollection:class" />
+      description: ''
+- name: toJSON()
+  uid: onenote!OneNote.NotebookCollection#toJSON:member(1)
+  package: onenote!
+  fullName: toJSON()
+  summary: Reemplaza el `toJSON()` método JavaScript para proporcionar un resultado más útil cuando se pasa un objeto API a `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama al `toJSON` método del objeto que se le pasa.) Mientras que el `OneNote.NotebookCollection` objeto original es un objeto API, el `toJSON` método devuelve un objeto JavaScript sin formato (escrito como `OneNote.Interfaces.NotebookCollectionData`<!-- -->) que contiene una matriz "items" con copias rasas de las propiedades cargadas de los elementos de la colección.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'toJSON(): OneNote.Interfaces.NotebookCollectionData;'
+    return:
+      type: <xref uid="onenote!OneNote.Interfaces.NotebookCollectionData:interface" />
+      description: ''
+- name: track()
+  uid: onenote!OneNote.NotebookCollection#track:member(1)
+  package: onenote!
+  fullName: track()
+  summary: Realiza un seguimiento del objeto de ajuste automático según cambios adyacentes en el documento. Esta llamada es una forma abreviada de context.trackedObjects.add(thisObject). Si usa este objeto en llamadas ".sync" y fuera de la ejecución secuencial de un lote de ".run", y obtiene un error "InvalidObjectPath" al establecer una propiedad o invocar un método en el objeto, debería haber agregado el objeto a la colección de objetos de la que realiza un seguimiento cuando se creó el objeto.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'track(): OneNote.NotebookCollection;'
+    return:
+      type: <xref uid="onenote!OneNote.NotebookCollection:class" />
+      description: ''
+- name: untrack()
+  uid: onenote!OneNote.NotebookCollection#untrack:member(1)
+  package: onenote!
+  fullName: untrack()
+  summary: Libere la memoria asociada a este objeto, si se ha realizado un seguimiento de él anteriormente. Esta llamada es una forma abreviada de context.trackedObjects.remove(thisObject). Tener muchos objetos marcados ralentiza la aplicación host, así que debe recordar liberar los objetos que agregue cuando haya terminado con ellos. Debe llamar a "context.sync()" antes de que surta efecto la liberación de memoria.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'untrack(): OneNote.NotebookCollection;'
+    return:
+      type: <xref uid="onenote!OneNote.NotebookCollection:class" />
+      description: ''
+extends: <xref uid="office!OfficeExtension.ClientObject:class" />
+metadata:
+  ms.openlocfilehash: 27e100dc0a15751d5504a1dd2bcb4784889448ae
+  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.translationtype: MT
+  ms.contentlocale: es-ES
+  ms.lasthandoff: 11/18/2020
+  ms.locfileid: "49319193"
