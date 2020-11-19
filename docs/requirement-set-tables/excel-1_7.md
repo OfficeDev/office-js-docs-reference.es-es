@@ -223,8 +223,8 @@
 ||[type](/javascript/api/excel/excel.worksheetdeletedeventargs#type)|Obtiene el tipo del evento.|
 ||[worksheetId](/javascript/api/excel/excel.worksheetdeletedeventargs#worksheetid)|Obtiene el identificador de la hoja de cálculo que se ha eliminado del libro.|
 |[WorksheetFreezePanes](/javascript/api/excel/excel.worksheetfreezepanes)|[freezeAt (frozenRange: cadena de rango \| )](/javascript/api/excel/excel.worksheetfreezepanes#freezeat-frozenrange-)|Establece las celdas inmovilizadas en la vista de la hoja de cálculo activa.|
-||[freezeColumns (Count?: Number)](/javascript/api/excel/excel.worksheetfreezepanes#freezecolumns-count-)|Inmoviliza la primera o primeras columnas de la hoja de cálculo en su lugar.|
-||[freezeRows (Count?: Number)](/javascript/api/excel/excel.worksheetfreezepanes#freezerows-count-)|Inmovilizar la fila o filas superiores de la hoja de cálculo en su lugar.|
+||[freezeColumns (Count?: Number)](/javascript/api/excel/excel.worksheetfreezepanes#freezecolumns-count-)|Inmovilizar la primera columna o columnas de la hoja de cálculo en su lugar.|
+||[freezeRows (Count?: Number)](/javascript/api/excel/excel.worksheetfreezepanes#freezerows-count-)|Inmovilizar la fila superior o filas de la hoja de cálculo en su lugar.|
 ||[getLocation()](/javascript/api/excel/excel.worksheetfreezepanes#getlocation--)|Obtiene un rango que describe las celdas bloqueadas en la vista de hoja de cálculo activa.|
 ||[getLocationOrNullObject()](/javascript/api/excel/excel.worksheetfreezepanes#getlocationornullobject--)|Obtiene un rango que describe las celdas bloqueadas en la vista de hoja de cálculo activa.|
 ||[unfreeze ()](/javascript/api/excel/excel.worksheetfreezepanes#unfreeze--)|Elimina todos los paneles inmovilizados de la hoja de cálculo.|
