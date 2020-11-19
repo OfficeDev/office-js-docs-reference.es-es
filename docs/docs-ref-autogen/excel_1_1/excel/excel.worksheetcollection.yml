@@ -1,267 +1,171 @@
-### YamlMime:UniversalReference
-items:
-  - uid: 'excel!Excel.WorksheetCollection:class'
-    summary: |-
-      Representa una colección de objetos de hoja de cálculo que forman parte del libro.
-
-      \[[Conjunto de API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-    name: Excel.WorksheetCollection
-    fullName: Excel.WorksheetCollection
-    langs:
-      - typeScript
-    type: class
-    extends:
-      - 'office!OfficeExtension.ClientObject:class'
-    package: excel!
-    children:
-      - 'excel!Excel.WorksheetCollection#add:member(1)'
-      - 'excel!Excel.WorksheetCollection#context:member'
-      - 'excel!Excel.WorksheetCollection#getActiveWorksheet:member(1)'
-      - 'excel!Excel.WorksheetCollection#getItem:member(1)'
-      - 'excel!Excel.WorksheetCollection#items:member'
-      - 'excel!Excel.WorksheetCollection#load:member(1)'
-      - 'excel!Excel.WorksheetCollection#load:member(2)'
-      - 'excel!Excel.WorksheetCollection#load:member(3)'
-      - 'excel!Excel.WorksheetCollection#toJSON:member(1)'
-  - uid: 'excel!Excel.WorksheetCollection#add:member(1)'
-    summary: |-
-      Agrega una nueva hoja al libro. La hoja de cálculo se agregará al final de las hojas de cálculo existentes. Si desea activar la hoja de cálculo recién agregada, llame en ella a ".activate().
-
-      \[[Conjunto de API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-    name: add(name)
-    fullName: add(name)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'add(name?: string): Excel.Worksheet;'
-      return:
-        type:
-          - 'excel!Excel.Worksheet:class'
-        description: |-
+### YamlMime:TSType
+name: Excel.WorksheetCollection
+uid: excel!Excel.WorksheetCollection:class
+package: excel!
+fullName: Excel.WorksheetCollection
+summary: >-
+  Representa una colección de objetos de hoja de cálculo que forman parte del libro.
 
 
-          #### <a name="examples"></a>Ejemplos
-
-          ```javascript
-          Excel.run(function (ctx) { 
-              var wSheetName = 'Sample Name';
-              var worksheet = ctx.workbook.worksheets.add(wSheetName);
-              worksheet.load('name');
-              return ctx.sync().then(function() {
-                  console.log(worksheet.name);
-              });
-          }).catch(function(error) {
-              console.log("Error: " + error);
-              if (error instanceof OfficeExtension.Error) {
-                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
-              }
-          });
-          ```
-      parameters:
-        - id: name
-          description: 'Opcional. Nombre de la hoja de cálculo que se va a agregar. Si se especifica, el nombre debe ser único. Si no se especifica, Excel determina el nombre de la nueva hoja de cálculo.'
-          type:
-            - string
-  - uid: 'excel!Excel.WorksheetCollection#context:member'
-    summary: Contexto de la solicitud asociado al objeto. Esto conecta el proceso del complemento con el proceso de la aplicación host de Office.
-    name: context
-    fullName: context
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'context: RequestContext;'
-      return:
-        type:
-          - 'excel!Excel.RequestContext:class'
-  - uid: 'excel!Excel.WorksheetCollection#getActiveWorksheet:member(1)'
-    summary: |-
-      Obtiene la hoja de cálculo activa del libro.
-
-      \[[Conjunto de API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-    name: getActiveWorksheet()
-    fullName: getActiveWorksheet()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'getActiveWorksheet(): Excel.Worksheet;'
-      return:
-        type:
-          - 'excel!Excel.Worksheet:class'
-        description: |-
+  \[[Conjunto de API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+remarks: ''
+isPreview: false
+isDeprecated: false
+type: class
+properties:
+- name: context
+  uid: excel!Excel.WorksheetCollection#context:member
+  package: excel!
+  fullName: context
+  summary: Contexto de la solicitud asociado al objeto. Esto conecta el proceso del complemento con el proceso de la aplicación host de Office.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type: <xref uid="excel!Excel.RequestContext:class" />
+- name: items
+  uid: excel!Excel.WorksheetCollection#items:member
+  package: excel!
+  fullName: items
+  summary: Obtiene los elementos secundarios cargados en esta colección.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly items: Excel.Worksheet[];'
+    return:
+      type: <xref uid="excel!Excel.Worksheet:class" />[]
+methods:
+- name: add(name)
+  uid: excel!Excel.WorksheetCollection#add:member(1)
+  package: excel!
+  fullName: add(name)
+  summary: >-
+    Agrega una nueva hoja al libro. La hoja de cálculo se agregará al final de las hojas de cálculo existentes. Si desea activar la hoja de cálculo recién agregada, llame en ella a ".activate().
 
 
-          #### <a name="examples"></a>Ejemplos
-
-          ```javascript
-          Excel.run(function (ctx) {  
-              var activeWorksheet = ctx.workbook.worksheets.getActiveWorksheet();
-              activeWorksheet.load('name');
-              return ctx.sync().then(function() {
-                      console.log(activeWorksheet.name);
-              });
-          }).catch(function(error) {
-              console.log("Error: " + error);
-              if (error instanceof OfficeExtension.Error) {
-                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
-              }
-          });
-          ```
-  - uid: 'excel!Excel.WorksheetCollection#getItem:member(1)'
-    summary: |-
-      Obtiene un objeto de hoja de cálculo mediante su nombre o identificador.
-
-      \[[Conjunto de API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-    name: getItem(key)
-    fullName: getItem(key)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'getItem(key: string): Excel.Worksheet;'
-      return:
-        type:
-          - 'excel!Excel.Worksheet:class'
-        description: ''
-      parameters:
-        - id: key
-          description: Nombre o identificador de la hoja de cálculo.
-          type:
-            - string
-  - uid: 'excel!Excel.WorksheetCollection#items:member'
-    summary: Obtiene los elementos secundarios cargados en esta colección.
-    name: items
-    fullName: items
-    langs:
-      - typeScript
-    type: property
-    syntax:
-      content: 'readonly items: Excel.Worksheet[];'
-      return:
-        type:
-          - 'excel!Excel.WorksheetCollection#items~0:complex'
-  - uid: 'excel!Excel.WorksheetCollection#load:member(1)'
-    summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar a `context.sync()` antes de leer las propiedades.
-    name: load(options)
-    fullName: load(options)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'load(options?: Excel.Interfaces.WorksheetCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.WorksheetCollection;'
-      return:
-        type:
-          - 'excel!Excel.WorksheetCollection:class'
-        description: ''
-      parameters:
-        - id: options
-          description: Proporciona opciones para las propiedades del objeto que se va a cargar.
-          type:
-            - 'excel!Excel.WorksheetCollection#load~0:complex'
-  - uid: 'excel!Excel.WorksheetCollection#load:member(2)'
-    summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar a `context.sync()` antes de leer las propiedades.
-    name: load(propertyNames)
-    fullName: load(propertyNames)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'load(propertyNames?: string | string[]): Excel.WorksheetCollection;'
-      return:
-        type:
-          - 'excel!Excel.WorksheetCollection:class'
-        description: |-
+    \[[Conjunto de API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'add(name?: string): Excel.Worksheet;'
+    parameters:
+    - id: name
+      description: Opcional. Nombre de la hoja de cálculo que se va a agregar. Si se especifica, el nombre debe ser único. Si no se especifica, Excel determina el nombre de la nueva hoja de cálculo.
+      type: string
+    return:
+      type: <xref uid="excel!Excel.Worksheet:class" />
+      description: "\n\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nExcel.run(function (ctx) { \n    var wSheetName = 'Sample Name';\n    var worksheet = ctx.workbook.worksheets.add(wSheetName);\n    worksheet.load('name');\n    return ctx.sync().then(function() {\n        console.log(worksheet.name);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- name: getActiveWorksheet()
+  uid: excel!Excel.WorksheetCollection#getActiveWorksheet:member(1)
+  package: excel!
+  fullName: getActiveWorksheet()
+  summary: >-
+    Obtiene la hoja de cálculo activa del libro.
 
 
-          #### <a name="examples"></a>Ejemplos
+    \[[Conjunto de API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getActiveWorksheet(): Excel.Worksheet;'
+    return:
+      type: <xref uid="excel!Excel.Worksheet:class" />
+      description: "\n\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nExcel.run(function (ctx) {  \n    var activeWorksheet = ctx.workbook.worksheets.getActiveWorksheet();\n    activeWorksheet.load('name');\n    return ctx.sync().then(function() {\n            console.log(activeWorksheet.name);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- name: getItem(key)
+  uid: excel!Excel.WorksheetCollection#getItem:member(1)
+  package: excel!
+  fullName: getItem(key)
+  summary: >-
+    Obtiene un objeto de hoja de cálculo mediante su nombre o identificador.
 
-          ```javascript
-          Excel.run(function (ctx) { 
-              var worksheets = ctx.workbook.worksheets;
-              worksheets.load('items');
-              return ctx.sync().then(function() {
-                  for (var i = 0; i < worksheets.items.length; i++)
-                  {
-                      console.log(worksheets.items[i].name);
-                      console.log(worksheets.items[i].index);
-                  }
-              });
-          }).catch(function(error) {
-              console.log("Error: " + error);
-              if (error instanceof OfficeExtension.Error) {
-                  console.log("Debug info: " + JSON.stringify(error.debugInfo));
-              }
-          });
-          ```
-      parameters:
-        - id: propertyNames
-          description: Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades que se van a cargar.
-          type:
-            - 'string | string[]'
-  - uid: 'excel!Excel.WorksheetCollection#load:member(3)'
-    summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar a `context.sync()` antes de leer las propiedades.
-    name: load(propertyNamesAndPaths)
-    fullName: load(propertyNamesAndPaths)
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'load(propertyNamesAndPaths?: OfficeExtension.LoadOption): Excel.WorksheetCollection;'
-      return:
-        type:
-          - 'excel!Excel.WorksheetCollection:class'
-        description: ''
-      parameters:
-        - id: propertyNamesAndPaths
-          description: '`propertyNamesAndPaths.select`es una cadena delimitada por comas que especifica las propiedades que se van a cargar y `propertyNamesAndPaths.expand` es una cadena delimitada por comas que especifica las propiedades de navegación que se deben cargar.'
-          type:
-            - 'office!OfficeExtension.LoadOption:interface'
-  - uid: 'excel!Excel.WorksheetCollection#toJSON:member(1)'
-    summary: 'Reemplaza el `toJSON()` método JavaScript para proporcionar un resultado más útil cuando se pasa un objeto API a`JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama al `toJSON` método del objeto que se le pasa.) Mientras que el `Excel.WorksheetCollection` objeto original es un objeto API, el `toJSON` método devuelve un objeto JavaScript sin formato (escrito como`Excel.Interfaces.WorksheetCollectionData`<!-- -->) que contiene una matriz "items" con copias rasas de las propiedades cargadas de los elementos de la colección.'
-    name: toJSON()
-    fullName: toJSON()
-    langs:
-      - typeScript
-    type: method
-    syntax:
-      content: 'toJSON(): Excel.Interfaces.WorksheetCollectionData;'
-      return:
-        type:
-          - 'excel!Excel.Interfaces.WorksheetCollectionData:interface'
-        description: ''
-references:
-  - uid: 'office!OfficeExtension.ClientObject:class'
-    name: OfficeExtension.ClientObject
-  - uid: 'excel!Excel.Worksheet:class'
-    name: Excel.Worksheet
-  - uid: 'excel!Excel.RequestContext:class'
-    name: RequestContext
-  - uid: 'excel!Excel.WorksheetCollection#items~0:complex'
-    name: 'Excel.Worksheet[]'
-    fullName: 'Excel.Worksheet[]'
-    spec.typeScript:
-      - uid: 'excel!Excel.Worksheet:class'
-        name: Excel.Worksheet
-        fullName: Excel.Worksheet
-      - name: '[]'
-        fullName: '[]'
-  - uid: 'excel!Excel.WorksheetCollection:class'
-    name: Excel.WorksheetCollection
-  - uid: 'excel!Excel.WorksheetCollection#load~0:complex'
-    name: Excel.Interfaces.WorksheetCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions
-    fullName: Excel.Interfaces.WorksheetCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions
-    spec.typeScript:
-      - uid: 'excel!Excel.Interfaces.WorksheetCollectionLoadOptions:interface'
-        name: Excel.Interfaces.WorksheetCollectionLoadOptions
-        fullName: Excel.Interfaces.WorksheetCollectionLoadOptions
-      - name: ' & '
-        fullName: ' & '
-      - uid: 'excel!Excel.Interfaces.CollectionLoadOptions:interface'
-        name: Excel.Interfaces.CollectionLoadOptions
-        fullName: Excel.Interfaces.CollectionLoadOptions
-  - uid: 'office!OfficeExtension.LoadOption:interface'
-    name: OfficeExtension.LoadOption
-  - uid: 'excel!Excel.Interfaces.WorksheetCollectionData:interface'
-    name: Excel.Interfaces.WorksheetCollectionData
+
+    \[[Conjunto de API: ExcelApi 1,1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getItem(key: string): Excel.Worksheet;'
+    parameters:
+    - id: key
+      description: Nombre o identificador de la hoja de cálculo.
+      type: string
+    return:
+      type: <xref uid="excel!Excel.Worksheet:class" />
+      description: ''
+- name: load(options)
+  uid: excel!Excel.WorksheetCollection#load:member(1)
+  package: excel!
+  fullName: load(options)
+  summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar a `context.sync()` antes de leer las propiedades.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(options?: Excel.Interfaces.WorksheetCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.WorksheetCollection;'
+    parameters:
+    - id: options
+      description: Proporciona opciones para las propiedades del objeto que se va a cargar.
+      type: <xref uid="excel!Excel.Interfaces.WorksheetCollectionLoadOptions:interface" /> & <xref uid="excel!Excel.Interfaces.CollectionLoadOptions:interface" />
+    return:
+      type: <xref uid="excel!Excel.WorksheetCollection:class" />
+      description: ''
+- name: load(propertyNames)
+  uid: excel!Excel.WorksheetCollection#load:member(2)
+  package: excel!
+  fullName: load(propertyNames)
+  summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar a `context.sync()` antes de leer las propiedades.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.WorksheetCollection;'
+    parameters:
+    - id: propertyNames
+      description: Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades que se van a cargar.
+      type: string | string[]
+    return:
+      type: <xref uid="excel!Excel.WorksheetCollection:class" />
+      description: "\n\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nExcel.run(function (ctx) { \n    var worksheets = ctx.workbook.worksheets;\n    worksheets.load('items');\n    return ctx.sync().then(function() {\n        for (var i = 0; i < worksheets.items.length; i++)\n        {\n            console.log(worksheets.items[i].name);\n            console.log(worksheets.items[i].index);\n        }\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- name: load(propertyNamesAndPaths)
+  uid: excel!Excel.WorksheetCollection#load:member(3)
+  package: excel!
+  fullName: load(propertyNamesAndPaths)
+  summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar a `context.sync()` antes de leer las propiedades.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNamesAndPaths?: OfficeExtension.LoadOption): Excel.WorksheetCollection;'
+    parameters:
+    - id: propertyNamesAndPaths
+      description: '`propertyNamesAndPaths.select` es una cadena delimitada por comas que especifica las propiedades que se van a cargar y `propertyNamesAndPaths.expand` es una cadena delimitada por comas que especifica las propiedades de navegación que se deben cargar.'
+      type: <xref uid="office!OfficeExtension.LoadOption:interface" />
+    return:
+      type: <xref uid="excel!Excel.WorksheetCollection:class" />
+      description: ''
+- name: toJSON()
+  uid: excel!Excel.WorksheetCollection#toJSON:member(1)
+  package: excel!
+  fullName: toJSON()
+  summary: Reemplaza el `toJSON()` método JavaScript para proporcionar un resultado más útil cuando se pasa un objeto API a `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama al `toJSON` método del objeto que se le pasa.) Mientras que el `Excel.WorksheetCollection` objeto original es un objeto API, el `toJSON` método devuelve un objeto JavaScript sin formato (escrito como `Excel.Interfaces.WorksheetCollectionData`<!-- -->) que contiene una matriz "items" con copias rasas de las propiedades cargadas de los elementos de la colección.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'toJSON(): Excel.Interfaces.WorksheetCollectionData;'
+    return:
+      type: <xref uid="excel!Excel.Interfaces.WorksheetCollectionData:interface" />
+      description: ''
+extends: <xref uid="office!OfficeExtension.ClientObject:class" />
+metadata:
+  ms.openlocfilehash: 18ca44576b2e272e07b3ae9c20d56401ea07f252
+  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.translationtype: MT
+  ms.contentlocale: es-ES
+  ms.lasthandoff: 11/18/2020
+  ms.locfileid: "49167273"
