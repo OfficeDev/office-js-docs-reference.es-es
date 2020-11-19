@@ -280,7 +280,7 @@
 |[RangeFill](/javascript/api/excel/excel.rangefill)|[pattern](/javascript/api/excel/excel.rangefill#pattern)|Modelo de un intervalo.|
 ||[patternColor](/javascript/api/excel/excel.rangefill#patterncolor)|El código de color HTML que representa el color del patrón de intervalo, de la forma #RRGGBB (por ejemplo, "FFA500") o como un color HTML con nombre (por ejemplo, "naranja").|
 ||[patternTintAndShade](/javascript/api/excel/excel.rangefill#patterntintandshade)|Especifica un doble que aclara u oscurece un color de trama para el relleno de rango, el valor está comprendido entre-1 (más oscuro) y 1 (más brillante), con 0 para el color original.|
-||[tintAndShade](/javascript/api/excel/excel.rangefill#tintandshade)|Especifica un doble que aclara u oscurece un color para el relleno de rango, el valor está comprendido entre-1 (más oscuro) y 1 (más brillante), con 0 para el color original.|
+||[tintAndShade](/javascript/api/excel/excel.rangefill#tintandshade)|Especifica un valor Double que aclara u oscurece un color para el relleno de rango.|
 |[RangeFont](/javascript/api/excel/excel.rangefont)|[strikethrough](/javascript/api/excel/excel.rangefont#strikethrough)|Especifica el estado de tachado de la fuente.|
 ||[subscript](/javascript/api/excel/excel.rangefont#subscript)|Especifica el estado de subíndice de la fuente.|
 ||[superscript](/javascript/api/excel/excel.rangefont#superscript)|Especifica el estado de superíndice de la fuente.|
