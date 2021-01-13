@@ -1,0 +1,2 @@
+| Clase | Campos | Descripción |
+|:---|:---|:---|
