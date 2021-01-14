@@ -8,12 +8,12 @@ ms.author: o365devx
 ms.prod: non-product-specific
 localization_priority: Priority
 ms.date: 12/01/2020
-ms.openlocfilehash: 3f57487cb210f1f11d6fdbbab2ed970e0db95344
-ms.sourcegitcommit: 551d760f6b9e7ff22afdaf6ce8e0b2863946596d
+ms.openlocfilehash: 6f3b8b51283953cf2e8174085e814e76c666ed8d
+ms.sourcegitcommit: ea1cebaadbb80867d3532be384e412fd13868190
 ms.translationtype: HT
 ms.contentlocale: es-ES
-ms.lasthandoff: 12/04/2020
-ms.locfileid: "49570447"
+ms.lasthandoff: 01/13/2021
+ms.locfileid: "49840142"
 ---
 # <a name="office-add-ins-javascript-api-reference"></a>Referencia de la API de JavaScript de complementos de Office
 
@@ -134,6 +134,7 @@ La siguiente es una lista de las API para las [aplicaciones host de Office compa
             <ul>
                 <li><a style="font-size: 1rem;" href="/javascript/api/powerpoint?view=powerpoint-js-preview">PowerPointApi Preview</a></li>
                 <li><a style="font-size: 1rem;" href="/javascript/api/powerpoint?view=powerpoint-js-1.1">PowerPointApi 1.1</a></li>
+                <li><a style="font-size: 1rem;" href="/javascript/api/powerpoint?view=powerpoint-js-1.2">PowerPointApi 1.2</a></li>
                 <li><a style="font-size: 1rem;" href="/javascript/api/office?view=powerpoint-js-preview">API comunes</a></li>
             </ul>
         </div>
