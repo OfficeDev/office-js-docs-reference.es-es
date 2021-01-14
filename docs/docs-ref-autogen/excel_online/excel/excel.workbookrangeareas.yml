@@ -7,7 +7,7 @@ summary: >-
   Representa una colección de uno o más rangos rectangulares en varias hojas de cálculo.
 
 
-  \[[Conjunto de API: ExcelApi 1,12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  \[[Conjunto de API: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
 remarks: ''
 isPreview: false
 isDeprecated: false
@@ -18,10 +18,10 @@ properties:
   package: excel!
   fullName: addresses
   summary: >-
-    Devuelve una matriz de direcciones en estilo a1. El valor de dirección contendrá el nombre de la hoja de cálculo para cada bloque rectangular de celdas (por ejemplo, "Hoja1! A1: B4, Hoja1! D1: D4 "). Solo lectura.
+    Devuelve una matriz de direcciones en estilo A1. El valor de dirección contendrá el nombre de la hoja de cálculo para cada bloque rectangular de celdas (por ejemplo, "Sheet1! A1:B4, Sheet1! D1:D4"). Solo lectura.
 
 
-    \[[Conjunto de API: ExcelApi 1,12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Conjunto de API: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -34,10 +34,10 @@ properties:
   package: excel!
   fullName: areas
   summary: >-
-    Devuelve el `RangeAreasCollection` objeto. Cada `RangeAreas` objeto de la colección representa uno o más rangos de rectángulo en una hoja de cálculo.
+    Devuelve el `RangeAreasCollection` objeto. Cada `RangeAreas` objeto de la colección representa uno o más rangos rectángulos en una hoja de cálculo.
 
 
-    \[[Conjunto de API: ExcelApi 1,12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Conjunto de API: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -45,12 +45,12 @@ properties:
     content: 'readonly areas: Excel.RangeAreasCollection;'
     return:
       type: <xref uid="excel!Excel.RangeAreasCollection:class" />
-      description: "\n\n#### <a name=\"examples\"></a>Ejemplos\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/master/samples/excel/42-range/direct-precedents.yaml\nawait Excel.run(async (context) => {\n  // Precedents are cells referenced by the formula in a cell.\n  let range = context.workbook.getActiveCell();\n  let directPrecedents = range.getDirectPrecedents();\n  range.load(\"address\");\n  directPrecedents.areas.load(\"address\");\n  await context.sync();\n\n  console.log(`Direct precedent cells of ${range.address}:`);\n\n  // Use the direct precedents API to loop through precedents of the active cell. \n  for (var i = 0; i < directPrecedents.areas.items.length; i++) {\n    // Highlight and console the address of each precedent cell.\n    directPrecedents.areas.items[i].format.fill.color = \"Yellow\";\n    console.log(`  ${directPrecedents.areas.items[i].address}`);\n  }\n  await context.sync();\n});\n```"
+      description: "\n\n#### <a name=\"examples\"></a>Ejemplos\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/42-range/direct-precedents.yaml\nawait Excel.run(async (context) => {\n  // Precedents are cells referenced by the formula in a cell.\n  let range = context.workbook.getActiveCell();\n  let directPrecedents = range.getDirectPrecedents();\n  range.load(\"address\");\n  directPrecedents.areas.load(\"address\");\n  await context.sync();\n\n  console.log(`Direct precedent cells of ${range.address}:`);\n\n  // Use the direct precedents API to loop through precedents of the active cell. \n  for (var i = 0; i < directPrecedents.areas.items.length; i++) {\n    // Highlight and console the address of each precedent cell.\n    directPrecedents.areas.items[i].format.fill.color = \"Yellow\";\n    console.log(`  ${directPrecedents.areas.items[i].address}`);\n  }\n  await context.sync();\n});\n```"
 - name: context
   uid: excel!Excel.WorkbookRangeAreas#context:member
   package: excel!
   fullName: context
-  summary: Contexto de la solicitud asociado al objeto. Esto conecta el proceso del complemento con el proceso de la aplicación host de Office.
+  summary: Contexto de solicitud asociado al objeto. Esto conecta el proceso del complemento con el proceso de la aplicación host de Office.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -63,10 +63,10 @@ properties:
   package: excel!
   fullName: ranges
   summary: >-
-    Devuelve los rangos que componen este objeto en un `RangeCollection` objeto.
+    Devuelve intervalos que conforman este objeto en un `RangeCollection` objeto.
 
 
-    \[[Conjunto de API: ExcelApi 1,12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Conjunto de API: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -80,10 +80,10 @@ methods:
   package: excel!
   fullName: getRangeAreasBySheet(key)
   summary: >-
-    Devuelve el `RangeAreas` objeto basándose en el identificador de la hoja de cálculo o el nombre de la colección.
+    Devuelve el `RangeAreas` objeto basándose en el identificador o el nombre de la hoja de cálculo de la colección.
 
 
-    \[[Conjunto de API: ExcelApi 1,12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Conjunto de API: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -101,10 +101,10 @@ methods:
   package: excel!
   fullName: getRangeAreasOrNullObjectBySheet(key)
   summary: >-
-    Devuelve el `RangeAreas` objeto basándose en el nombre de la hoja de cálculo o el identificador de la colección. Si la hoja de cálculo no existe, devolverá un objeto NULL.
+    Devuelve el `RangeAreas` objeto basándose en el nombre o el identificador de la hoja de cálculo de la colección. Si la hoja de cálculo no existe, devolverá un objeto NULL.
 
 
-    \[[Conjunto de API: ExcelApi 1,12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Conjunto de API: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -129,7 +129,7 @@ methods:
     content: 'load(options?: Excel.Interfaces.WorkbookRangeAreasLoadOptions): Excel.WorkbookRangeAreas;'
     parameters:
     - id: options
-      description: Proporciona opciones para las propiedades del objeto que se va a cargar.
+      description: Proporciona opciones para las propiedades del objeto que se cargarán.
       type: <xref uid="excel!Excel.Interfaces.WorkbookRangeAreasLoadOptions:interface" />
     return:
       type: <xref uid="excel!Excel.WorkbookRangeAreas:class" />
@@ -146,7 +146,7 @@ methods:
     content: 'load(propertyNames?: string | string[]): Excel.WorkbookRangeAreas;'
     parameters:
     - id: propertyNames
-      description: Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades que se van a cargar.
+      description: Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades que se cargarán.
       type: string | string[]
     return:
       type: <xref uid="excel!Excel.WorkbookRangeAreas:class" />
@@ -167,7 +167,7 @@ methods:
               }): Excel.WorkbookRangeAreas;
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` es una cadena delimitada por comas que especifica las propiedades que se van a cargar y `propertyNamesAndPaths.expand` es una cadena delimitada por comas que especifica las propiedades de navegación que se deben cargar.'
+      description: '`propertyNamesAndPaths.select` es una cadena delimitada por comas que especifica las propiedades que se cargarán y es una cadena delimitada por comas que especifica las propiedades de navegación que `propertyNamesAndPaths.expand` se cargarán.'
       type: >-
         {
                     select?: string;
@@ -180,7 +180,7 @@ methods:
   uid: excel!Excel.WorkbookRangeAreas#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: Reemplaza el `toJSON()` método JavaScript para proporcionar un resultado más útil cuando se pasa un objeto API a `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama al `toJSON` método del objeto que se le pasa.) Mientras que el objeto Excel. WorkbookRangeAreas original es un objeto API, el `toJSON` método devuelve un objeto JavaScript sin formato (escrito como `Excel.Interfaces.WorkbookRangeAreasData`<!-- -->) que contiene copias rasas de las propiedades secundarias cargadas del objeto original.
+  summary: Invalida el método JavaScript `toJSON()` para proporcionar resultados más útiles cuando se pasa un objeto api a `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama `toJSON` al método del objeto que se le pasa). Mientras que el objeto Excel.WorkbookRangeAreas original es un objeto API, el método devuelve un objeto JavaScript sin formato `toJSON` (con el tipo `Excel.Interfaces.WorkbookRangeAreasData`<!-- -->) que contiene copias superficiales de las propiedades secundarias cargadas del objeto original.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -193,7 +193,7 @@ methods:
   uid: excel!Excel.WorkbookRangeAreas#track:member(1)
   package: excel!
   fullName: track()
-  summary: Realiza un seguimiento del objeto de ajuste automático según cambios adyacentes en el documento. Esta llamada es una abreviatura de `context.trackedObjects.add(thisObject)`<!-- -->. Si usa este objeto a través `.sync` de llamadas y fuera de la ejecución secuencial de un lote ". Run", y obtiene un error "InvalidObjectPath" al establecer una propiedad o invocar un método en el objeto, es necesario que haya agregado el objeto a la colección de objetos con seguimiento cuando se creó el objeto por primera vez.
+  summary: Realiza un seguimiento del objeto de ajuste automático según cambios adyacentes en el documento. Esta llamada es una forma abreviada para `context.trackedObjects.add(thisObject)`<!-- -->. Si usa este objeto entre llamadas y fuera de la ejecución secuencial de un lote ".run" y obtiene un error "InvalidObjectPath" al establecer una propiedad o invocar un método en el objeto, debe haber agregado el objeto a la colección de objetos de seguimiento cuando se creó el objeto por primera `.sync` vez.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -206,7 +206,7 @@ methods:
   uid: excel!Excel.WorkbookRangeAreas#untrack:member(1)
   package: excel!
   fullName: untrack()
-  summary: Libere la memoria asociada a este objeto, si se ha realizado un seguimiento de él anteriormente. Esta llamada es una forma abreviada de `context.trackedObjects.remove(thisObject)`<!-- -->. Tener muchos objetos marcados ralentiza la aplicación host, así que debe recordar liberar los objetos que agregue cuando haya terminado con ellos. Tendrá que llamar `context.sync()` antes de que la liberación de memoria surta efecto.
+  summary: Libere la memoria asociada a este objeto, si se ha realizado un seguimiento de él anteriormente. Esta llamada es abreviada para `context.trackedObjects.remove(thisObject)`<!-- -->. Tener muchos objetos marcados ralentiza la aplicación host, así que debe recordar liberar los objetos que agregue cuando haya terminado con ellos. Deberá llamar antes de `context.sync()` que la versión de memoria entre en vigor.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -217,9 +217,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 6603e5d6d3ae3bbba385d444ce8d2d1ee12f8eca
-  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.openlocfilehash: d637af879d92b432ed7fa728a8c2422c5b0ec970
+  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
   ms.translationtype: MT
   ms.contentlocale: es-ES
-  ms.lasthandoff: 11/18/2020
-  ms.locfileid: "49136956"
+  ms.lasthandoff: 01/13/2021
+  ms.locfileid: "49856432"
