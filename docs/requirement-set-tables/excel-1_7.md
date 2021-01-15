@@ -1,9 +1,9 @@
-| Class | Campos | Descripción |
+| Clase | Campos | Descripción |
 |:---|:---|:---|
 |[Chart](/javascript/api/excel/excel.chart)|[chartType](/javascript/api/excel/excel.chart#charttype)|Especifica el tipo de gráfico.|
 ||[id](/javascript/api/excel/excel.chart#id)|Identificador único del gráfico.|
 ||[showAllFieldButtons](/javascript/api/excel/excel.chart#showallfieldbuttons)|Especifica si se van a mostrar todos los botones de campo en un gráfico dinámico.|
-|[ChartAreaFormat](/javascript/api/excel/excel.chartareaformat)|[border](/javascript/api/excel/excel.chartareaformat#border)|Representa el formato de borde del área del gráfico, que incluye color, LineStyle y weight.|
+|[ChartAreaFormat](/javascript/api/excel/excel.chartareaformat)|[fronteriza](/javascript/api/excel/excel.chartareaformat#border)|Representa el formato de borde del área del gráfico, que incluye color, LineStyle y weight.|
 |[ChartAxes](/javascript/api/excel/excel.chartaxes)|[getItem (tipo: Excel. ChartAxisType, Group?: Excel. ChartAxisGroup)](/javascript/api/excel/excel.chartaxes#getitem-type--group-)|Devuelve el eje específico identificado por tipo y grupo.|
 |[ChartAxis](/javascript/api/excel/excel.chartaxis)|[baseTimeUnit](/javascript/api/excel/excel.chartaxis#basetimeunit)|Especifica la unidad base del eje de categorías especificado.|
 ||[categoryType](/javascript/api/excel/excel.chartaxis#categorytype)|Especifica el tipo de eje de categorías.|
@@ -18,7 +18,7 @@
 ||[height](/javascript/api/excel/excel.chartaxis#height)|Especifica el alto, en puntos, del eje del gráfico.|
 ||[left](/javascript/api/excel/excel.chartaxis#left)|Especifica la distancia, en puntos, desde el borde izquierdo del eje a la izquierda del área del gráfico.|
 ||[top](/javascript/api/excel/excel.chartaxis#top)|Especifica la distancia, en puntos, desde el borde superior del eje hasta la parte superior del área del gráfico.|
-||[type](/javascript/api/excel/excel.chartaxis#type)|Especifica el tipo de eje.|
+||[tipo](/javascript/api/excel/excel.chartaxis#type)|Especifica el tipo de eje.|
 ||[width](/javascript/api/excel/excel.chartaxis#width)|Especifica el ancho, en puntos, del eje del gráfico.|
 ||[reversePlotOrder](/javascript/api/excel/excel.chartaxis#reverseplotorder)|Especifica si Excel traza los puntos de datos desde el último hasta el primero.|
 ||[scaleType](/javascript/api/excel/excel.chartaxis#scaletype)|Especifica el tipo de escala del eje de valores.|
@@ -59,7 +59,7 @@
 ||[markerSize](/javascript/api/excel/excel.chartpoint#markersize)|Representa el tamaño del marcador de punto de datos.|
 ||[markerStyle](/javascript/api/excel/excel.chartpoint#markerstyle)|Representa el estilo de marcador de un punto de datos del gráfico.|
 ||[dataLabel](/javascript/api/excel/excel.chartpoint#datalabel)|Devuelve la etiqueta de datos de un punto del gráfico.|
-|[ChartPointFormat](/javascript/api/excel/excel.chartpointformat)|[border](/javascript/api/excel/excel.chartpointformat#border)|Representa el formato de borde de un punto de datos del gráfico, que incluye información sobre el color, el estilo y el grosor.|
+|[ChartPointFormat](/javascript/api/excel/excel.chartpointformat)|[fronteriza](/javascript/api/excel/excel.chartpointformat#border)|Representa el formato de borde de un punto de datos del gráfico, que incluye información sobre el color, el estilo y el grosor.|
 |[ChartSeries](/javascript/api/excel/excel.chartseries)|[chartType](/javascript/api/excel/excel.chartseries#charttype)|Representa el tipo de gráfico de una serie.|
 ||[delete()](/javascript/api/excel/excel.chartseries#delete--)|Elimina la serie del gráfico.|
 ||[doughnutHoleSize](/javascript/api/excel/excel.chartseries#doughnutholesize)|Representa el tamaño del agujero de los anillos de una serie de gráfico.|
@@ -89,14 +89,14 @@
 ||[textOrientation](/javascript/api/excel/excel.charttitle#textorientation)|Especifica el ángulo al que está orientado el texto para el título del gráfico.|
 ||[top](/javascript/api/excel/excel.charttitle#top)|Especifica la distancia, en puntos, desde el borde superior del título del gráfico hasta la parte superior del área del gráfico.|
 ||[verticalAlignment](/javascript/api/excel/excel.charttitle#verticalalignment)|Especifica la alineación vertical del título del gráfico.|
-|[ChartTitleFormat](/javascript/api/excel/excel.charttitleformat)|[border](/javascript/api/excel/excel.charttitleformat#border)|Representa el formato de borde del título del gráfico, que incluye color, LineStyle y weight.|
+|[ChartTitleFormat](/javascript/api/excel/excel.charttitleformat)|[fronteriza](/javascript/api/excel/excel.charttitleformat#border)|Representa el formato de borde del título del gráfico, que incluye color, LineStyle y weight.|
 |[ChartTrendline](/javascript/api/excel/excel.charttrendline)|[delete()](/javascript/api/excel/excel.charttrendline#delete--)|Elimina el objeto de la línea de tendencia.|
 ||[CEPT](/javascript/api/excel/excel.charttrendline#intercept)|Representa el valor de la intersección de la línea de tendencia.|
 ||[movingAveragePeriod](/javascript/api/excel/excel.charttrendline#movingaverageperiod)|Representa el período de una tendencia de un gráfico.|
 ||[name](/javascript/api/excel/excel.charttrendline#name)|Representa el nombre de la línea de tendencia.|
 ||[polynomialOrder](/javascript/api/excel/excel.charttrendline#polynomialorder)|Representa el orden de una tendencia de gráfico.|
 ||[format](/javascript/api/excel/excel.charttrendline#format)|Representa el formato de línea de tendencia de un gráfico.|
-||[type](/javascript/api/excel/excel.charttrendline#type)|Representa el tipo de línea de tendencia de un gráfico.|
+||[tipo](/javascript/api/excel/excel.charttrendline#type)|Representa el tipo de línea de tendencia de un gráfico.|
 |[ChartTrendlineCollection](/javascript/api/excel/excel.charttrendlinecollection)|[Add (Type?: Excel. ChartTrendlineType)](/javascript/api/excel/excel.charttrendlinecollection#add-type-)|Agrega una nueva línea de tendencia a la colección de líneas de tendencia.|
 ||[getCount()](/javascript/api/excel/excel.charttrendlinecollection#getcount--)|Devuelve el número de líneas de tendencia de la colección.|
 ||[getItem(index: number)](/javascript/api/excel/excel.charttrendlinecollection#getitem-index-)|Obtiene el objeto de línea de tendencia por el índice, que es el orden de introducción en la matriz de elementos.|
@@ -104,7 +104,7 @@
 |[ChartTrendlineFormat](/javascript/api/excel/excel.charttrendlineformat)|[line](/javascript/api/excel/excel.charttrendlineformat#line)|Indica el formato de línea de gráfico.|
 |[CustomProperty](/javascript/api/excel/excel.customproperty)|[delete()](/javascript/api/excel/excel.customproperty#delete--)|Elimina la propiedad personalizada.|
 ||[key](/javascript/api/excel/excel.customproperty#key)|Clave de la propiedad personalizada.|
-||[type](/javascript/api/excel/excel.customproperty#type)|Tipo del valor que se usa para la propiedad personalizada.|
+||[tipo](/javascript/api/excel/excel.customproperty#type)|Tipo del valor que se usa para la propiedad personalizada.|
 ||[value](/javascript/api/excel/excel.customproperty#value)|Valor de la propiedad personalizada.|
 |[CustomPropertyCollection](/javascript/api/excel/excel.custompropertycollection)|[Add (Key: String, Value: any)](/javascript/api/excel/excel.custompropertycollection#add-key--value-)|Crea una nueva propiedad personalizada o establece una existente.|
 ||[deleteAll ()](/javascript/api/excel/excel.custompropertycollection#deleteall--)|Elimina todas las propiedades personalizadas de la colección.|
@@ -139,8 +139,8 @@
 ||[showCard ()](/javascript/api/excel/excel.range#showcard--)|Muestra la tarjeta de una celda activa si tiene contenido de valor enriquecido.|
 ||[estilo](/javascript/api/excel/excel.range#style)|Representa el estilo del rango actual.|
 |[RangeFormat](/javascript/api/excel/excel.rangeformat)|[textOrientation](/javascript/api/excel/excel.rangeformat#textorientation)|Orientación del texto de todas las celdas dentro del rango.|
-||[useStandardHeight](/javascript/api/excel/excel.rangeformat#usestandardheight)|Determina si la altura de la fila del objeto Range es igual a la altura estándar de la hoja.|
-||[useStandardWidth](/javascript/api/excel/excel.rangeformat#usestandardwidth)|Especifica si el ancho de columna del objeto Range es igual al ancho estándar de la hoja.|
+||[useStandardHeight](/javascript/api/excel/excel.rangeformat#usestandardheight)|Determina si el alto de fila del `Range` objeto es igual al alto estándar de la hoja.|
+||[useStandardWidth](/javascript/api/excel/excel.rangeformat#usestandardwidth)|Especifica si el ancho de columna del `Range` objeto es igual al ancho estándar de la hoja.|
 |[RangeHyperlink](/javascript/api/excel/excel.rangehyperlink)|[address](/javascript/api/excel/excel.rangehyperlink#address)|Representa la dirección url de destino del hipervínculo.|
 ||[documentReference](/javascript/api/excel/excel.rangehyperlink#documentreference)|Representa el destino de referencia de documento para el hipervínculo.|
 ||[Pantalla](/javascript/api/excel/excel.rangehyperlink#screentip)|Representa la cadena que se muestra al mantener el puntero sobre el hipervínculo.|
@@ -176,13 +176,13 @@
 ||[changeType](/javascript/api/excel/excel.tablechangedeventargs#changetype)|Obtiene el tipo de cambio que representa cómo se activa el evento cambiado.|
 ||[source](/javascript/api/excel/excel.tablechangedeventargs#source)|Obtiene el origen del evento.|
 ||[tableId](/javascript/api/excel/excel.tablechangedeventargs#tableid)|Obtiene el identificador de la tabla en la que se cambian los datos.|
-||[type](/javascript/api/excel/excel.tablechangedeventargs#type)|Obtiene el tipo del evento.|
+||[tipo](/javascript/api/excel/excel.tablechangedeventargs#type)|Obtiene el tipo del evento.|
 ||[worksheetId](/javascript/api/excel/excel.tablechangedeventargs#worksheetid)|Obtiene el identificador de la hoja de cálculo en la que se cambian los datos.|
 |[TableCollection](/javascript/api/excel/excel.tablecollection)|[onChanged](/javascript/api/excel/excel.tablecollection#onchanged)|Se produce cuando cambian los datos en una tabla de un libro o en una hoja de cálculo.|
 |[TableSelectionChangedEventArgs](/javascript/api/excel/excel.tableselectionchangedeventargs)|[address](/javascript/api/excel/excel.tableselectionchangedeventargs#address)|Obtiene la dirección del intervalo que representa el área seleccionada de la tabla en una hoja de cálculo específica.|
 ||[isInsideTable](/javascript/api/excel/excel.tableselectionchangedeventargs#isinsidetable)|Especifica si la selección está dentro de una tabla, la dirección será inútil si IsInsideTable es false.|
 ||[tableId](/javascript/api/excel/excel.tableselectionchangedeventargs#tableid)|Obtiene el identificador de la tabla en la que se cambia la selección.|
-||[type](/javascript/api/excel/excel.tableselectionchangedeventargs#type)|Obtiene el tipo del evento.|
+||[tipo](/javascript/api/excel/excel.tableselectionchangedeventargs#type)|Obtiene el tipo del evento.|
 ||[worksheetId](/javascript/api/excel/excel.tableselectionchangedeventargs#worksheetid)|Obtiene el identificador de la hoja de cálculo en la que se cambia la selección.|
 |[Workbook](/javascript/api/excel/excel.workbook)|[getActiveCell()](/javascript/api/excel/excel.workbook#getactivecell--)|Obtiene la celda activa del libro.|
 ||[dataConnections](/javascript/api/excel/excel.workbook#dataconnections)|Representa todas las conexiones de datos en el libro.|
@@ -203,24 +203,24 @@
 ||[standardHeight](/javascript/api/excel/excel.worksheet#standardheight)|Devuelve el ancho estándar (predeterminado) de todas las filas de la hoja de cálculo, en puntos.|
 ||[standardWidth](/javascript/api/excel/excel.worksheet#standardwidth)|Especifica el ancho estándar (predeterminado) de todas las columnas de la hoja de cálculo.|
 ||[tabColor](/javascript/api/excel/excel.worksheet#tabcolor)|Color de la pestaña de la hoja de cálculo.|
-|[WorksheetActivatedEventArgs](/javascript/api/excel/excel.worksheetactivatedeventargs)|[type](/javascript/api/excel/excel.worksheetactivatedeventargs#type)|Obtiene el tipo del evento.|
+|[WorksheetActivatedEventArgs](/javascript/api/excel/excel.worksheetactivatedeventargs)|[tipo](/javascript/api/excel/excel.worksheetactivatedeventargs#type)|Obtiene el tipo del evento.|
 ||[worksheetId](/javascript/api/excel/excel.worksheetactivatedeventargs#worksheetid)|Obtiene el identificador de la hoja de cálculo que se ha activado.|
 |[WorksheetAddedEventArgs](/javascript/api/excel/excel.worksheetaddedeventargs)|[source](/javascript/api/excel/excel.worksheetaddedeventargs#source)|Obtiene el origen del evento.|
-||[type](/javascript/api/excel/excel.worksheetaddedeventargs#type)|Obtiene el tipo del evento.|
+||[tipo](/javascript/api/excel/excel.worksheetaddedeventargs#type)|Obtiene el tipo del evento.|
 ||[worksheetId](/javascript/api/excel/excel.worksheetaddedeventargs#worksheetid)|Obtiene el identificador de la hoja de cálculo que se ha añadido al libro.|
 |[WorksheetChangedEventArgs](/javascript/api/excel/excel.worksheetchangedeventargs)|[address](/javascript/api/excel/excel.worksheetchangedeventargs#address)|Obtiene la dirección del intervalo que representa el área que ha cambiado en una hoja de cálculo específica.|
 ||[changeType](/javascript/api/excel/excel.worksheetchangedeventargs#changetype)|Obtiene el tipo de cambio que representa cómo se activa el evento cambiado.|
 ||[source](/javascript/api/excel/excel.worksheetchangedeventargs#source)|Obtiene el origen del evento.|
-||[type](/javascript/api/excel/excel.worksheetchangedeventargs#type)|Obtiene el tipo del evento.|
+||[tipo](/javascript/api/excel/excel.worksheetchangedeventargs#type)|Obtiene el tipo del evento.|
 ||[worksheetId](/javascript/api/excel/excel.worksheetchangedeventargs#worksheetid)|Obtiene el identificador de la hoja de cálculo en la que se cambian los datos.|
 |[WorksheetCollection](/javascript/api/excel/excel.worksheetcollection)|[onActivated](/javascript/api/excel/excel.worksheetcollection#onactivated)|Este evento se produce cuando se activa cualquier hoja de cálculo del libro.|
 ||[onAdded](/javascript/api/excel/excel.worksheetcollection#onadded)|Este evento se produce cuando se agrega una nueva hoja de cálculo al libro.|
 ||[onDeactivated](/javascript/api/excel/excel.worksheetcollection#ondeactivated)|Este evento se produce cuando se desactiva cualquier hoja de cálculo del libro.|
 ||[onDeleted](/javascript/api/excel/excel.worksheetcollection#ondeleted)|Este evento se produce cuando se elimina una hoja de cálculo del libro.|
-|[WorksheetDeactivatedEventArgs](/javascript/api/excel/excel.worksheetdeactivatedeventargs)|[type](/javascript/api/excel/excel.worksheetdeactivatedeventargs#type)|Obtiene el tipo del evento.|
+|[WorksheetDeactivatedEventArgs](/javascript/api/excel/excel.worksheetdeactivatedeventargs)|[tipo](/javascript/api/excel/excel.worksheetdeactivatedeventargs#type)|Obtiene el tipo del evento.|
 ||[worksheetId](/javascript/api/excel/excel.worksheetdeactivatedeventargs#worksheetid)|Obtiene el identificador de la hoja de cálculo que se ha desactivado.|
 |[WorksheetDeletedEventArgs](/javascript/api/excel/excel.worksheetdeletedeventargs)|[source](/javascript/api/excel/excel.worksheetdeletedeventargs#source)|Obtiene el origen del evento.|
-||[type](/javascript/api/excel/excel.worksheetdeletedeventargs#type)|Obtiene el tipo del evento.|
+||[tipo](/javascript/api/excel/excel.worksheetdeletedeventargs#type)|Obtiene el tipo del evento.|
 ||[worksheetId](/javascript/api/excel/excel.worksheetdeletedeventargs#worksheetid)|Obtiene el identificador de la hoja de cálculo que se ha eliminado del libro.|
 |[WorksheetFreezePanes](/javascript/api/excel/excel.worksheetfreezepanes)|[freezeAt (frozenRange: cadena de rango \| )](/javascript/api/excel/excel.worksheetfreezepanes#freezeat-frozenrange-)|Establece las celdas inmovilizadas en la vista de la hoja de cálculo activa.|
 ||[freezeColumns (Count?: Number)](/javascript/api/excel/excel.worksheetfreezepanes#freezecolumns-count-)|Inmovilizar la primera columna o columnas de la hoja de cálculo en su lugar.|
@@ -233,5 +233,5 @@
 ||[allowEditScenarios](/javascript/api/excel/excel.worksheetprotectionoptions#alloweditscenarios)|Representa la opción de protección de la hoja de cálculo que permite editar escenarios.|
 ||[selectionMode](/javascript/api/excel/excel.worksheetprotectionoptions#selectionmode)|Representa la opción de protección de la hoja de cálculo del modo de selección.|
 |[WorksheetSelectionChangedEventArgs](/javascript/api/excel/excel.worksheetselectionchangedeventargs)|[address](/javascript/api/excel/excel.worksheetselectionchangedeventargs#address)|Obtiene la dirección del intervalo que representa el área seleccionada de una hoja de cálculo específica.|
-||[type](/javascript/api/excel/excel.worksheetselectionchangedeventargs#type)|Obtiene el tipo del evento.|
+||[tipo](/javascript/api/excel/excel.worksheetselectionchangedeventargs#type)|Obtiene el tipo del evento.|
 ||[worksheetId](/javascript/api/excel/excel.worksheetselectionchangedeventargs#worksheetid)|Obtiene el identificador de la hoja de cálculo en la que se cambia la selección.|
