@@ -1,22 +1,30 @@
-# <a name="office-javascript-api-reference"></a>Referencia de la API de JavaScript para Office
+# <a name="office-javascript-api-reference"></a>Referencia de la API de JavaScript de Office
 
-Bienvenido al repositorio de documentación de referencia de la API de JavaScript para Office. Para una mejor experiencia, le recomendamos ver este contenido en [docs.microsoft.com](https://docs.microsoft.com/javascript/api/overview/office).
+Bienvenido al repositorio de documentación de referencia de la API de JavaScript de Office. Para una mejor experiencia, le recomendamos ver este contenido en [docs.microsoft.com](https://docs.microsoft.com/javascript/api/overview/office).
 
-> **Nota**: puede encontrar los archivos de origen de la documentación de los conceptos de la API de JavaScript de Office, los inicios rápidos, los tutoriales y las guías de procedimientos en el repositorio de [OfficeDev/Office-js-docs-PR](https://github.com/OfficeDev/office-js-docs-pr) .
+> **Nota:** Puede encontrar los archivos de origen de documentación para conceptos de la API de JavaScript de Office, inicios rápidos, tutoriales y guías de ayuda en el repositorio [OfficeDev/office-js-docs-pr.](https://github.com/OfficeDev/office-js-docs-pr)
 
 ## <a name="give-us-your-feedback"></a>Denos su opinión
 
 Su opinión es importante para nosotros.
 
-* Para informarnos sobre preguntas o problemas que encuentre en los documentos, [envíe un problema](https://github.com/OfficeDev/office-js-docs-reference/issues) en este repositorio. Asegúrese de indicar la versión + número de compilación del cliente que está usando y de proporcionar pasos de reproducción, resultados de la consola y mensajes de error, según corresponda.
+* Para informarnos sobre preguntas o problemas que encuentre en los documentos, [envíe un problema](https://github.com/OfficeDev/office-js-docs-reference/issues) en este repositorio. Asegúrese de que el número de versión + compilación del cliente que está usando y de proporcionar los pasos de repro, los resultados de la consola y los mensajes de error, según corresponda.
 
-* También le damos la bienvenida a sus contribuciones a esta documentación. Para colaborar, bifurcar este repositorio, actualice los archivos según considere necesario y envíe una solicitud de incorporación de cambios con los cambios propuestos. Para obtener información más detallada, consulte [Contribuir a este contenido](Contributing.md).
+* También agradecemos sus contribuciones a esta documentación. Para contribuir, bifurca este repositorio, actualiza los archivos que consideres necesarios y envía una solicitud de extracción con los cambios propuestos. Para obtener información más detallada, consulte [Contribuir a este contenido](Contributing.md).
 
-    > **Importante**: no modifique los archivos de la carpeta [/docs/docs-Ref-autogen](https://github.com/OfficeDev/office-js-docs-reference/tree/master/docs/docs-ref-autogen) de este repositorio. Todos los archivos de la carpeta se generan automáticamente, por lo que no se pueden actualizar a través de la solicitud de extracción. Para solicitar un cambio en cualquiera de los archivos de la carpeta [/docs/docs-Ref-autogen](https://github.com/OfficeDev/office-js-docs-reference/tree/master/docs/docs-ref-autogen) , [envíe un problema](https://github.com/OfficeDev/office-js-docs-reference/issues) en este repositorio. Puede obtener más información sobre cómo se ejecutan las herramientas en [este repositorio.](https://github.com/OfficeDev/office-js-docs-reference/blob/master/DocumentationToolingNotes.md)
+    > **IMPORTANTE:** No modifique archivos dentro de la [carpeta /docs/docs-ref-autogen](https://github.com/OfficeDev/office-js-docs-reference/tree/master/docs/docs-ref-autogen) de este repositorio. Todos los archivos de esa carpeta se generan automáticamente, por lo que no es posible actualizarlos mediante la solicitud de extracción. Para solicitar un cambio en cualquiera de los archivos de la carpeta [/docs/docs-ref-autogen,](https://github.com/OfficeDev/office-js-docs-reference/tree/master/docs/docs-ref-autogen) envíe un problema [en](https://github.com/OfficeDev/office-js-docs-reference/issues) este repositorio. Puede obtener más información sobre cómo las herramientas de este [repositorio](https://github.com/OfficeDev/office-js-docs-reference/blob/master/DocumentationToolingNotes.md)aquí.
 
 * Para enviarnos comentarios sobre su experiencia de programación, lo que le gustaría ver en versiones futuras o ejemplos de código, escriba sus sugerencias e ideas en [Office Developer Platform UserVoice](https://officespdev.uservoice.com/).
+
+## <a name="join-the-microsoft-365-developer-program"></a>Unirse al programa de desarrolladores de Microsoft 365
+Obtenga un espacio aislado gratuito, herramientas y otros recursos que necesita para crear soluciones para la plataforma de Microsoft 365.
+- [Espacio aislado gratuito para desarrolladores](https://developer.microsoft.com/microsoft-365/dev-program#Subscription) Obtenga una suscripción gratuita y renovable de 90 días a Microsoft 365 E5 Developer.
+- [Paquetes de datos de ejemplo](https://developer.microsoft.com/microsoft-365/dev-program#Sample) Configure automáticamente el espacio aislado mediante la instalación de datos de usuario y contenido que le ayudarán a crear sus soluciones.
+- [Acceso a expertos](https://developer.microsoft.com/microsoft-365/dev-program#Experts) Obtenga acceso a los eventos de la comunidad para obtener información de los expertos de Microsoft 365.
+- [Recomendaciones personalizadas](https://developer.microsoft.com/microsoft-365/dev-program#Recommendations) Busque recursos para desarrolladores rápidamente desde el panel personalizado.
+
 
 ## <a name="microsoft-open-source-code-of-conduct"></a>Código de conducta de código abierto de Microsoft
 
 Este proyecto ha adoptado el [Código de conducta de código abierto de Microsoft](https://opensource.microsoft.com/codeofconduct/).
-Para obtener más información, consulte las preguntas más [frecuentes sobre el código de conducta](https://opensource.microsoft.com/codeofconduct/faq/)o póngase en contacto con [opencode@microsoft.com](mailto:opencode@microsoft.com) con otras preguntas o comentarios.
+Para obtener más información, consulte [las](https://opensource.microsoft.com/codeofconduct/faq/)preguntas más frecuentes sobre el Código de conducta o póngase en [contacto opencode@microsoft.com](mailto:opencode@microsoft.com) con cualquier otra pregunta o comentario.
