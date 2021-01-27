@@ -184,6 +184,22 @@ properties:
     content: 'readonly onFormatChanged: OfficeExtension.EventHandlers<Excel.WorksheetFormatChangedEventArgs>;'
     return:
       type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.WorksheetFormatChangedEventArgs:interface" />&gt;
+- name: onFormulaChanged
+  uid: excel!Excel.WorksheetCollection#onFormulaChanged:member
+  package: excel!
+  fullName: onFormulaChanged
+  summary: >-
+    Se produce cuando se cambian una o más fórmulas en cualquier hoja de cálculo de esta colección. Este evento es para cuando cambia la fórmula en sí, no el valor de datos resultante del cálculo de la fórmula.
+
+
+    \[[Conjunto de API: ExcelApi BETA (SOLO VISTA PREVIA)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'readonly onFormulaChanged: OfficeExtension.EventHandlers<Excel.WorksheetFormulaChangedEventArgs>;'
+    return:
+      type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.WorksheetFormulaChangedEventArgs:interface" />&gt;
 - name: onRowHiddenChanged
   uid: excel!Excel.WorksheetCollection#onRowHiddenChanged:member
   package: excel!
@@ -289,13 +305,13 @@ methods:
     content: 'addFromBase64(base64File: string, sheetNamesToInsert?: string[], positionType?: Excel.WorksheetPositionType, relativeTo?: Worksheet | string): OfficeExtension.ClientResult<string[]>;'
     parameters:
     - id: base64File
-      description: Obligatorio. Cadena codificada en base64 que representa el archivo de libro de origen.
+      description: Necesario. Cadena codificada en base64 que representa el archivo de libro de origen.
       type: string
     - id: sheetNamesToInsert
       description: Opcional. Nombres de hojas de cálculo individuales que se insertarán. De forma predeterminada, se insertan todas las hojas de cálculo del libro de origen.
       type: string[]
     - id: positionType
-      description: Opcional. Lugar en el que se insertarán las nuevas hojas de cálculo en el libro actual. Vea Excel.WorksheetPositionType para obtener más información. El valor predeterminado es "Inicio".
+      description: Opcional. Lugar en el que se insertarán las nuevas hojas de cálculo en el libro actual. Vea Excel.WorksheetPositionType para obtener más información. El valor predeterminado es "Start".
       type: <xref uid="excel!Excel.WorksheetPositionType:enum" />
     - id: relativeTo
       description: Opcional. Hoja de cálculo del libro actual a la que se hace referencia para el parámetro positionType. El valor predeterminado es null y, en función de positionType, insertará hojas de cálculo al principio o al final del libro actual.
@@ -322,13 +338,13 @@ methods:
     content: 'addFromBase64(base64File: string, sheetNamesToInsert?: string[], positionTypeString?: "None" | "Before" | "After" | "Beginning" | "End", relativeTo?: Worksheet | string): OfficeExtension.ClientResult<string[]>;'
     parameters:
     - id: base64File
-      description: Obligatorio. Cadena codificada en base64 que representa el archivo de libro de origen.
+      description: Necesario. Cadena codificada en base64 que representa el archivo de libro de origen.
       type: string
     - id: sheetNamesToInsert
       description: Opcional. Nombres de hojas de cálculo individuales que se insertarán. De forma predeterminada, se insertan todas las hojas de cálculo del libro de origen.
       type: string[]
     - id: positionTypeString
-      description: Opcional. Lugar en el que se insertarán las nuevas hojas de cálculo en el libro actual. Vea Excel.WorksheetPositionType para obtener más información. El valor predeterminado es "Inicio".
+      description: Opcional. Lugar en el que se insertarán las nuevas hojas de cálculo en el libro actual. Vea Excel.WorksheetPositionType para obtener más información. El valor predeterminado es "Start".
       type: "\"None\" | \"Before\" | \"After\" | \"Beginning\" | \"End\""
     - id: relativeTo
       description: Opcional. Hoja de cálculo del libro actual a la que se hace referencia para el parámetro positionType. El valor predeterminado es null y, en función de positionType, insertará hojas de cálculo al principio o al final del libro actual.
@@ -369,7 +385,7 @@ methods:
     content: 'getCount(visibleOnly?: boolean): OfficeExtension.ClientResult<number>;'
     parameters:
     - id: visibleOnly
-      description: Opcional. Si es true, solo se tienen en cuenta las hojas de cálculo visibles, omitiendo las ocultas.
+      description: Opcional. Si es true, solo tiene en cuenta las hojas de cálculo visibles, omitiendo las ocultas.
       type: boolean
     return:
       type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;number&gt;
@@ -390,7 +406,7 @@ methods:
     content: 'getFirst(visibleOnly?: boolean): Excel.Worksheet;'
     parameters:
     - id: visibleOnly
-      description: Opcional. Si es true, solo se tienen en cuenta las hojas de cálculo visibles, omitiendo las ocultas.
+      description: Opcional. Si es true, solo tiene en cuenta las hojas de cálculo visibles, omitiendo las ocultas.
       type: boolean
     return:
       type: <xref uid="excel!Excel.Worksheet:class" />
@@ -421,7 +437,7 @@ methods:
   package: excel!
   fullName: getItemOrNullObject(key)
   summary: >-
-    Obtiene un objeto de hoja de cálculo mediante su nombre o identificador. Si la hoja de cálculo no existe, devolverá un objeto NULL.
+    Obtiene un objeto de hoja de cálculo mediante su nombre o identificador. Si la hoja de cálculo no existe, esta función devolverá un objeto con `isNullObject` su propiedad establecida en `true`<!-- -->. Para obtener más información, [vea *OrNullObject methods and properties](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[Conjunto de API: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -513,7 +529,7 @@ methods:
   uid: excel!Excel.WorksheetCollection#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: Invalida el método JavaScript `toJSON()` para proporcionar resultados más útiles cuando se pasa un objeto api a `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama `toJSON` al método del objeto que se le pasa). Mientras que el objeto original `Excel.WorksheetCollection` es un objeto API, el método devuelve un objeto JavaScript sin formato `toJSON` (con el tipo `Excel.Interfaces.WorksheetCollectionData`<!-- -->) que contiene una matriz "items" con copias superficiales de las propiedades cargadas de los elementos de la colección.
+  summary: Invalida el método JavaScript `toJSON()` para proporcionar resultados más útiles cuando se pasa un objeto api a `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama `toJSON` al método del objeto que se le pasa). Mientras que el objeto original es un objeto DE API, el método devuelve un objeto JavaScript sin formato `Excel.WorksheetCollection` `toJSON` (especificado como `Excel.Interfaces.WorksheetCollectionData`<!-- -->) que contiene una matriz "items" con copias superficiales de las propiedades cargadas de los elementos de la colección.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -524,9 +540,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 6e173b5561f5a7449831e945832092c47b89e98a
-  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
+  ms.openlocfilehash: 217115c6457c6b3150849309c2eff8be4d1cfe79
+  ms.sourcegitcommit: f229afdd4c2bc820ac799394a77b637fc66e87b4
   ms.translationtype: MT
   ms.contentlocale: es-ES
-  ms.lasthandoff: 01/13/2021
-  ms.locfileid: "49852225"
+  ms.lasthandoff: 01/27/2021
+  ms.locfileid: "49991649"

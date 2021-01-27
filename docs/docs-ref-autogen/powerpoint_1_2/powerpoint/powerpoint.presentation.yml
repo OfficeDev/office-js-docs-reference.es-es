@@ -21,6 +21,22 @@ properties:
     content: 'context: RequestContext;'
     return:
       type: <xref uid="powerpoint!PowerPoint.RequestContext:class" />
+- name: slides
+  uid: powerpoint!PowerPoint.Presentation#slides:member
+  package: powerpoint!
+  fullName: slides
+  summary: >-
+    Devuelve una colección ordenada de diapositivas de la presentación.
+
+
+    \[[Conjunto de API: PowerPointApi 1.2](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly slides: PowerPoint.SlideCollection;'
+    return:
+      type: <xref uid="powerpoint!PowerPoint.SlideCollection:class" />
 - name: title
   uid: powerpoint!PowerPoint.Presentation#title:member
   package: powerpoint!
@@ -34,6 +50,30 @@ properties:
     return:
       type: string
 methods:
+- name: insertSlidesFromBase64(base64File, options)
+  uid: powerpoint!PowerPoint.Presentation#insertSlidesFromBase64:member(1)
+  package: powerpoint!
+  fullName: insertSlidesFromBase64(base64File, options)
+  summary: >-
+    Inserta las diapositivas especificadas de una presentación en la presentación actual.
+
+
+    \[[Conjunto de API: PowerPointApi 1.2](/office/dev/add-ins/reference/requirement-sets/powerpoint-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'insertSlidesFromBase64(base64File: string, options?: PowerPoint.InsertSlideOptions): void;'
+    parameters:
+    - id: base64File
+      description: Cadena codificada en base64 que representa el archivo de presentación de origen.
+      type: string
+    - id: options
+      description: Las opciones que definen las diapositivas que se insertarán, dónde irán las nuevas diapositivas y qué formato de presentación se usará.
+      type: <xref uid="powerpoint!PowerPoint.InsertSlideOptions:interface" />
+    return:
+      type: void
+      description: "\n\n#### <a name=\"examples\"></a>Ejemplos\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/powerpoint/preview-apis/insert-slides.yaml\nawait PowerPoint.run(async function(context) {\n    const selectedSlideID = await getSelectedSlideID();\n\n    context.presentation.insertSlidesFromBase64(chosenFileBase64, {\n        formatting: PowerPoint.InsertSlideFormatting.useDestinationTheme,\n        targetSlideId: selectedSlideID + \"#\"\n    });\n    await context.sync();\n});\n```"
 - name: load(options)
   uid: powerpoint!PowerPoint.Presentation#load:member(1)
   package: powerpoint!
@@ -97,7 +137,7 @@ methods:
   uid: powerpoint!PowerPoint.Presentation#toJSON:member(1)
   package: powerpoint!
   fullName: toJSON()
-  summary: Invalida el método JavaScript `toJSON()` para proporcionar resultados más útiles cuando se pasa un objeto api a `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama `toJSON` al método del objeto que se le pasa). Mientras que el objeto PowerPoint.Presentation original es un objeto API, el método devuelve un objeto JavaScript sin formato `toJSON` (con el tipo `PowerPoint.Interfaces.PresentationData`<!-- -->) que contiene copias superficiales de las propiedades secundarias cargadas del objeto original.
+  summary: Invalida el método JavaScript `toJSON()` para proporcionar resultados más útiles cuando se pasa un objeto api a `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama `toJSON` al método del objeto que se le pasa). Mientras que el objeto PowerPoint.Presentation original es un objeto DE API, el método devuelve un objeto JavaScript sin formato `toJSON` (especificado como `PowerPoint.Interfaces.PresentationData`<!-- -->) que contiene copias superficiales de las propiedades secundarias cargadas del objeto original.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -108,9 +148,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 55ad55f2798ed28cdc476951cb98f0afa04a8819
-  ms.sourcegitcommit: ea1cebaadbb80867d3532be384e412fd13868190
+  ms.openlocfilehash: 34550b7c7e698e09bb867014f7c425f5d6f27475
+  ms.sourcegitcommit: f229afdd4c2bc820ac799394a77b637fc66e87b4
   ms.translationtype: MT
   ms.contentlocale: es-ES
-  ms.lasthandoff: 01/13/2021
-  ms.locfileid: "49840836"
+  ms.lasthandoff: 01/27/2021
+  ms.locfileid: "49992104"

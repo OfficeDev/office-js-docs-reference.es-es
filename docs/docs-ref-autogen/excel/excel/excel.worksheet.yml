@@ -4,7 +4,7 @@ uid: excel!Excel.Worksheet:class
 package: excel!
 fullName: Excel.Worksheet
 summary: >-
-  Una hoja de cálculo de Excel es una cuadrícula de celdas. Puede contener datos, tablas, gráficos, etc. Para obtener más información sobre el modelo de objetos de hoja de cálculo, lea [Trabajar con hojas de cálculo mediante la API de JavaScript de Excel](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-worksheets)<!-- -->.
+  Una hoja de cálculo de Excel es una cuadrícula de celdas. Puede contener datos, tablas, gráficos, etc. Para obtener más información sobre el modelo de objetos de hoja de cálculo, lea Trabajar con hojas [de cálculo mediante la API de JavaScript de Excel](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-worksheets)<!-- -->.
 
 
   \[[Conjunto de API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -320,6 +320,22 @@ properties:
     content: 'readonly onFormatChanged: OfficeExtension.EventHandlers<Excel.WorksheetFormatChangedEventArgs>;'
     return:
       type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.WorksheetFormatChangedEventArgs:interface" />&gt;
+- name: onFormulaChanged
+  uid: excel!Excel.Worksheet#onFormulaChanged:member
+  package: excel!
+  fullName: onFormulaChanged
+  summary: >-
+    Se produce cuando se cambian una o más fórmulas en esta hoja de cálculo. Este evento es para cuando cambia la fórmula en sí, no el valor de datos resultante del cálculo de la fórmula.
+
+
+    \[[Conjunto de API: ExcelApi BETA (SOLO VISTA PREVIA)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'readonly onFormulaChanged: OfficeExtension.EventHandlers<Excel.WorksheetFormulaChangedEventArgs>;'
+    return:
+      type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.WorksheetFormulaChangedEventArgs:interface" />&gt;
 - name: onRowHiddenChanged
   uid: excel!Excel.Worksheet#onRowHiddenChanged:member
   package: excel!
@@ -564,7 +580,7 @@ properties:
   package: excel!
   fullName: tabColor
   summary: >-
-    Color de tabulación de la hoja de cálculo. Al recuperar el color de la pestaña, si la hoja de cálculo es invisible, el valor será nulo. Si la hoja de cálculo está visible pero el color de tabulación se establece en automático, se devolverá una cadena vacía. De lo contrario, la propiedad se establecerá en un color, con la forma " 123456" Al establecer el color, use una cadena vacía para establecer un color "automático" o un color real de lo \# contrario.
+    Color de tabulación de la hoja de cálculo. Al recuperar el color de la pestaña, si la hoja de cálculo es invisible, el valor será nulo. Si la hoja de cálculo está visible pero el color de tabulación se establece en automático, se devolverá una cadena vacía. De lo contrario, la propiedad se establecerá en un color, con el formato " 123456" Al establecer el color, use una cadena vacía para establecer un color "automático" o un color real de lo \# contrario.
 
 
     \[[Conjunto de API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -757,7 +773,7 @@ methods:
   package: excel!
   fullName: delete()
   summary: >-
-    Elimina la hoja de cálculo del libro. Tenga en cuenta que si la visibilidad de la hoja de cálculo está establecida en "VeryHidden", se producirá un error en la operación de eliminación con una `InvalidOperation` excepción. Primero debe cambiar su visibilidad a oculta o visible antes de eliminarla.
+    Elimina la hoja de cálculo del libro. Tenga en cuenta que si la visibilidad de la hoja de cálculo se establece en "VeryHidden", se producirá un error en la operación de eliminación con una `InvalidOperation` excepción. Primero debe cambiar su visibilidad a oculta o visible antes de eliminarla.
 
 
     \[[Conjunto de API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -817,7 +833,7 @@ methods:
     return:
       type: <xref uid="excel!Excel.RangeAreas:class" />
       description: >-
-        Un objeto RangeArea, que incluye uno o más intervalos rectangulares, que coincide con los criterios de búsqueda. Si no hay ninguna coincidencia, esta función devolverá un objeto NULL.
+        Un objeto RangeArea, que incluye uno o más intervalos rectangulares, que coincide con los criterios de búsqueda. Si no hay coincidencias, esta función devolverá un objeto con `isNullObject` su propiedad establecida en `true`<!-- -->. Para obtener más información, vea métodos y propiedades de [ \* OrNullObject](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
         #### <a name="examples"></a>Ejemplos
@@ -894,7 +910,7 @@ methods:
   package: excel!
   fullName: getNextOrNullObject(visibleOnly)
   summary: >-
-    Obtiene la hoja de cálculo que sigue a esta. Si no hay ninguna hoja de cálculo que sigue a esta, este método devolverá un objeto NULL.
+    Obtiene la hoja de cálculo que sigue a esta. Si no hay ninguna hoja de cálculo que sigue a esta, este método devolverá un objeto con `isNullObject` su propiedad establecida en `true`<!-- -->. Para obtener más información, [vea *OrNullObject methods and properties](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[Conjunto de API: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1050,7 +1066,7 @@ methods:
   package: excel!
   fullName: getUsedRangeOrNullObject(valuesOnly)
   summary: >-
-    El rango usado es el rango más pequeño que abarque todas las celdas que tengan asignado un valor o un formato. Si toda la hoja está en blanco, esta función devolverá un objeto NULL.
+    El rango usado es el rango más pequeño que abarque todas las celdas que tengan asignado un valor o un formato. Si toda la hoja de cálculo está en blanco, esta función devolverá un objeto con `isNullObject` su propiedad establecida en `true`<!-- -->. Para obtener más información, [vea *OrNullObject methods and properties](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[Conjunto de API: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1232,9 +1248,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: a97fdcf6e4247d09689f105aec02889963a125f9
-  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
+  ms.openlocfilehash: b7f3b4e06e50b3a7d27b2010a07cc6b888de7506
+  ms.sourcegitcommit: f229afdd4c2bc820ac799394a77b637fc66e87b4
   ms.translationtype: MT
   ms.contentlocale: es-ES
-  ms.lasthandoff: 01/13/2021
-  ms.locfileid: "49852211"
+  ms.lasthandoff: 01/27/2021
+  ms.locfileid: "49991677"
