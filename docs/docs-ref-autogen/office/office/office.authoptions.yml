@@ -13,7 +13,7 @@ properties:
   uid: office!Office.AuthOptions#allowConsentPrompt:member
   package: office!
   fullName: allowConsentPrompt
-  summary: Permite a Office obtener un token de acceso en modo silencioso o mediante consentimiento interactivo, si se requiere uno. Valor predeterminado es `false`<!-- -->. Si se establece en `false`<!-- -->, Office intentará obtener un token de acceso de forma silenciosa. Si no lo hace, Office devolverá un error descriptivo. Si se establece en `true`<!-- -->, Office mostrará una interfaz de usuario de consentimiento interactivo después de que no pueda obtener un token de acceso en modo silencioso. El aviso solo permitirá el consentimiento para el ámbito de Perfil de AAD, no para los ámbitos de Microsoft Graph.
+  summary: Permite a Office obtener un token de acceso de forma silenciosa o mediante el consentimiento interactivo, si es necesario. El valor predeterminado es `false`<!-- -->. Si se establece en `false`<!-- -->, Office intentará silenciosamente obtener un token de acceso. Si no lo consigue, Office devolverá un error descriptivo. Si se establece en `true`<!-- -->, Office mostrará una interfaz de usuario interactiva de consentimiento después de que no consiga silenciosamente un token de acceso. La solicitud solo permitirá el consentimiento para el ámbito de perfil de AAD, no para ningún ámbito de Microsoft Graph.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -25,7 +25,7 @@ properties:
   uid: office!Office.AuthOptions#allowSignInPrompt:member
   package: office!
   fullName: allowSignInPrompt
-  summary: Permite a Office obtener un token de acceso proporcionado silenciosamente el consentimiento está presente o Mostrar la interfaz de usuario interactiva para iniciar sesión en el usuario. Valor predeterminado es `false`<!-- -->. Si se establece en `false`<!-- -->, Office intentará obtener un token de acceso de forma silenciosa. Si no lo hace, Office devolverá un error descriptivo. Si se establece en `true`<!-- -->, Office mostrará una interfaz de usuario de inicio de sesión interactivo después de que no pueda obtener un token de acceso en modo silencioso.
+  summary: Permite a Office obtener un token de acceso silenciosamente siempre que el consentimiento esté presente o mostrar la interfaz de usuario interactiva para iniciar sesión en el usuario. El valor predeterminado es `false`<!-- -->. Si se establece en `false`<!-- -->, Office intentará silenciosamente obtener un token de acceso. Si no lo consigue, Office devolverá un error descriptivo. Si se establece en `true`<!-- -->, Office mostrará una interfaz de usuario de inicio de sesión interactiva después de que se produce un error al obtener silenciosamente un token de acceso.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -37,7 +37,7 @@ properties:
   uid: office!Office.AuthOptions#asyncContext:member
   package: office!
   fullName: asyncContext
-  summary: Un elemento de cualquier tipo definido por el usuario que se devuelve, sin cambios, en la `asyncContext` propiedad del `AsyncResult` objeto que se pasa a una devolución de llamada.
+  summary: Elemento definido por el usuario de cualquier tipo que se devuelve, sin cambios, en la propiedad del objeto que se `asyncContext` `AsyncResult` pasa a una devolución de llamada.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -49,7 +49,7 @@ properties:
   uid: office!Office.AuthOptions#authChallenge:member
   package: office!
   fullName: authChallenge
-  summary: Hace que Office solicite al usuario que proporcione el factor adicional cuando el arrendamiento de destino de Microsoft Graph requiere la autenticación multifactor. El valor de cadena identifica el tipo de factor adicional necesario. En la mayoría de los casos, no sabrá en tiempo de desarrollo si el inquilino del usuario requiere un factor adicional o qué debe ser la cadena. Por lo tanto, esta opción se usaría en una llamada de "segunda prueba" de después de que `getAccessToken` Microsoft Graph haya enviado un error que solicite el factor adicional y que contenga la cadena que se debe usar con la `authChallenge` opción.
+  summary: Hace que Office pida al usuario que proporcione el factor adicional cuando el arrendamiento al que se va a dirigir Microsoft Graph requiere autenticación multifactor. El valor de cadena identifica el tipo de factor adicional necesario. En la mayoría de los casos, no sabrá en tiempo de desarrollo si el inquilino del usuario requiere un factor adicional o cuál debe ser la cadena. Por lo tanto, esta opción se usaría en una llamada de "segundo intento" después de que Microsoft Graph haya enviado un error solicitando el factor adicional y que contiene la cadena que se debe usar con `getAccessToken` la `authChallenge` opción.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -61,7 +61,11 @@ properties:
   uid: office!Office.AuthOptions#forceAddAccount:member
   package: office!
   fullName: forceAddAccount
-  summary: Pregunta al usuario si desea agregar su cuenta de Office (o cambiarla, si ya se ha agregado). Valor predeterminado es `false`<!-- -->.
+  summary: >-
+    Solicita al usuario que agregue su cuenta de Office (o que cambie a ella, si ya se ha agregado). El valor predeterminado es `false`<!-- -->.
+
+
+    **Advertencia:** `forceAddAccount` ha quedado en desuso. `allowSignInPrompt`Úselo en su lugar.
   remarks: ''
   isPreview: false
   isDeprecated: true
@@ -74,7 +78,11 @@ properties:
   uid: office!Office.AuthOptions#forceConsent:member
   package: office!
   fullName: forceConsent
-  summary: Hace que Office muestre la experiencia de consentimiento del complemento. Es útil si los permisos de Azure del complemento han cambiado o si se ha revocado el consentimiento del usuario. Valor predeterminado es `false`<!-- -->.
+  summary: >-
+    Hace que Office muestre la experiencia de consentimiento del complemento. Es útil si los permisos de Azure del complemento han cambiado o si se ha revocado el consentimiento del usuario. El valor predeterminado es `false`<!-- -->.
+
+
+    **Advertencia:** `forceConsent` ha quedado en desuso. `allowConsentPrompt`Úselo en su lugar.
   remarks: ''
   isPreview: false
   isDeprecated: true
@@ -87,7 +95,7 @@ properties:
   uid: office!Office.AuthOptions#forMSGraphAccess:member
   package: office!
   fullName: forMSGraphAccess
-  summary: Hace que Office devuelva un error descriptivo cuando el complemento desea tener acceso a Microsoft Graph y el usuario o administrador no ha concedido consentimiento a los ámbitos del gráfico. Valor predeterminado es `false`<!-- -->. Office solo admite el consentimiento de los ámbitos del gráfico cuando un administrador de inquilinos ha implementado el complemento. Esta información no estará disponible durante el desarrollo. Si se establece esta opción para que `true` Office Informe al complemento de antemano (devolviendo un error descriptivo), se producirá un error en el acceso a Graph.
+  summary: Hace que Office devuelva un error descriptivo cuando el complemento desea tener acceso a Microsoft Graph y el usuario o administrador no ha concedido el consentimiento a los ámbitos de Graph. El valor predeterminado es `false`<!-- -->. Office solo admite el consentimiento para los ámbitos de Graph cuando un administrador de inquilinos ha implementado el complemento. Esta información no estará disponible durante el desarrollo. Si se establece esta opción, Office informará de antemano al complemento (devolviendo un error descriptivo) si se produce un error `true` en el acceso a Graph.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -96,9 +104,9 @@ properties:
     return:
       type: boolean
 metadata:
-  ms.openlocfilehash: 622e5b5d59481a8d6984208677307dc21a4de56f
-  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.openlocfilehash: c9a42edfa3f6fe0a2873389520ac6e6bdb093ca8
+  ms.sourcegitcommit: 94ed3108858c111541f7430d7482ea329ad21dbd
   ms.translationtype: MT
   ms.contentlocale: es-ES
-  ms.lasthandoff: 11/18/2020
-  ms.locfileid: "49251636"
+  ms.lasthandoff: 02/03/2021
+  ms.locfileid: "50092021"
