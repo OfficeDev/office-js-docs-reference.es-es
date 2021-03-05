@@ -3,7 +3,7 @@ name: Office.Dialog
 uid: office!Office.Dialog:interface
 package: office!
 fullName: Office.Dialog
-summary: Objeto que se devuelve cuando `UI.displayDialogAsync` se llama a. Expone métodos para registrar controladores de eventos y cerrar el cuadro de diálogo.
+summary: Objeto que se devuelve cuando `UI.displayDialogAsync` se llama. Expone métodos para registrar controladores de eventos y cerrar el cuadro de diálogo.
 remarks: '**Conjunto de requisitos**: [DialogAPI](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/dialog-api-requirement-sets)'
 isPreview: false
 isDeprecated: false
@@ -31,7 +31,7 @@ methods:
       description: Debe ser DialogMessageReceived o DialogEventReceived.
       type: <xref uid="office!Office.EventType:enum" />
     - id: handler
-      description: Una función que acepta un objeto con una `message` propiedad, si eventType es DialogMessageReceived, o un objeto con una `error` propiedad, si eventType es DialogEventReceived.
+      description: Función que acepta un objeto con una propiedad, si eventType es DialogMessageReceived, o un objeto con una propiedad, si `message` `error` eventType es DialogEventReceived.
       type: '(args: {message: string | boolean} | {error: number}) =&gt; void'
     return:
       type: void
@@ -40,7 +40,11 @@ methods:
   uid: office!Office.Dialog#close:member(1)
   package: office!
   fullName: close()
-  summary: Llamado desde una página principal para cerrar el cuadro de diálogo correspondiente.
+  summary: >-
+    Llamado desde una página principal para cerrar el cuadro de diálogo correspondiente.
+
+
+    Este método es asincrónico. No toma un parámetro de devolución de llamada y no devuelve un objeto Promise, por lo que no se puede esperar con la palabra clave `await` o la `then` función. Consulta este procedimiento recomendado para obtener más información: [Abrir otro cuadro de diálogo inmediatamente después de cerrar uno](https://docs.microsoft.com/office/dev/add-ins/develop/dialog-best-practices#opening-another-dialog-immediately-after-closing-one)
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -53,15 +57,15 @@ methods:
   uid: office!Office.Dialog#messageChild:member(1)
   package: office!
   fullName: messageChild(message)
-  summary: Entrega un mensaje desde la página host, como un panel de tareas o un archivo de funciones sin interfaz de usuario, a un cuadro de diálogo que se abrió desde la página.
+  summary: Entrega un mensaje de la página host, como un panel de tareas o un archivo de función sin interfaz de usuario, a un cuadro de diálogo que se abrió desde la página.
   remarks: >-
-    **Hosts**: Excel, Outlook (conjunto de requisitos mínimos: buzón de correo 1,9), PowerPoint y Word
+    **Hosts**: Excel, Outlook (conjunto de requisitos mínimos: Buzón 1.9), PowerPoint, Word
 
 
     **Conjuntos de requisitos**:
 
 
-    - [DialogAPI 1,2](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/dialog-api-requirement-sets)
+    - [DialogAPI 1.2](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/dialog-api-requirement-sets)
 
 
     - [Mailbox 1.9](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)
@@ -71,7 +75,7 @@ methods:
     content: 'messageChild(message: string): void;'
     parameters:
     - id: message
-      description: Acepta un mensaje de la página host para entregar en el cuadro de diálogo. Se puede enviar todo lo que se pueda serializar a una cadena, incluidos JSON y XML.
+      description: Acepta un mensaje de la página host para entregarlo al cuadro de diálogo. Se puede enviar cualquier cosa que se pueda serializar en una cadena, incluidos JSON y XML.
       type: string
     return:
       type: void
@@ -80,7 +84,7 @@ methods:
   uid: office!Office.Dialog#sendMessage:member(1)
   package: office!
   fullName: sendMessage(name)
-  summary: SOLO PARA USO INTERNO. NO LLAME AL CÓDIGO.
+  summary: SOLO PARA USO INTERNO. NO LLAME EN EL CÓDIGO.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -94,9 +98,9 @@ methods:
       type: void
       description: ''
 metadata:
-  ms.openlocfilehash: c007533112e45e4ffec29b45883add8161532d6c
-  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.openlocfilehash: f328302115888d80b8d95f5b7d97d4331e0cc2b1
+  ms.sourcegitcommit: f55d2bbeba2a20abb522cbf742e727b82bcf73ee
   ms.translationtype: MT
   ms.contentlocale: es-ES
-  ms.lasthandoff: 11/18/2020
-  ms.locfileid: "49183372"
+  ms.lasthandoff: 03/05/2021
+  ms.locfileid: "50463388"
