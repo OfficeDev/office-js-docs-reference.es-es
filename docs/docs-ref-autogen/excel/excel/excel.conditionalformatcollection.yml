@@ -43,7 +43,7 @@ methods:
   package: excel!
   fullName: add(type)
   summary: >-
-    Agrega un nuevo formato condicional a la colección en la prioridad primera/superior.
+    Agrega un nuevo formato condicional a la colección con la prioridad primera o superior.
 
 
     \[[Conjunto de API: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -54,7 +54,7 @@ methods:
     content: 'add(type: Excel.ConditionalFormatType): Excel.ConditionalFormat;'
     parameters:
     - id: type
-      description: El tipo de formato condicional que se va a agregar. Vea Excel.ConditionalFormatType para obtener más información.
+      description: El tipo de formato condicional que se va a agregar. Vea `Excel.ConditionalFormatType` para más información.
       type: <xref uid="excel!Excel.ConditionalFormatType:enum" />
     return:
       type: <xref uid="excel!Excel.ConditionalFormat:class" />
@@ -64,7 +64,7 @@ methods:
   package: excel!
   fullName: add(typeString)
   summary: >-
-    Agrega un nuevo formato condicional a la colección en la prioridad primera/superior.
+    Agrega un nuevo formato condicional a la colección con la prioridad primera o superior.
 
 
     \[[Conjunto de API: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -75,7 +75,7 @@ methods:
     content: 'add(typeString: "Custom" | "DataBar" | "ColorScale" | "IconSet" | "TopBottom" | "PresetCriteria" | "ContainsText" | "CellValue"): Excel.ConditionalFormat;'
     parameters:
     - id: typeString
-      description: El tipo de formato condicional que se va a agregar. Vea Excel.ConditionalFormatType para obtener más información.
+      description: El tipo de formato condicional que se va a agregar. Vea `Excel.ConditionalFormatType` para más información.
       type: "\"Custom\" | \"DataBar\" | \"ColorScale\" | \"IconSet\" | \"TopBottom\" | \"PresetCriteria\" | \"ContainsText\" | \"CellValue\""
     return:
       type: <xref uid="excel!Excel.ConditionalFormat:class" />
@@ -130,12 +130,12 @@ methods:
     content: 'getItem(id: string): Excel.ConditionalFormat;'
     parameters:
     - id: id
-      description: Identificador del formato condicional.
+      description: El identificador del formato condicional.
       type: string
     return:
       type: <xref uid="excel!Excel.ConditionalFormat:class" />
       description: >-
-        Objeto De formato condicional.
+        Objeto de formato condicional.
 
 
         #### <a name="examples"></a>Ejemplos
@@ -181,6 +181,27 @@ methods:
     return:
       type: <xref uid="excel!Excel.ConditionalFormat:class" />
       description: "\n\n#### <a name=\"examples\"></a>Ejemplos\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/14-conditional-formatting/conditional-formatting-basic.yaml\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n    const worksheetRange = sheet.getRange();\n    worksheetRange.conditionalFormats.load(\"type\");\n\n    await context.sync();\n\n    let cfRangePairs: { cf: Excel.ConditionalFormat, range: Excel.Range }[] = [];\n    worksheetRange.conditionalFormats.items.forEach(item => {\n        cfRangePairs.push({\n            cf: item,\n            range: item.getRange().load(\"address\")\n        });\n    });\n\n    await context.sync();\n\n    if (cfRangePairs.length > 0) {\n        cfRangePairs.forEach(item => {\n            console.log(item.cf.type);\n        });\n    } else {\n        console.log(\"No conditional formats applied.\");\n    }\n});\n```"
+- name: getItemOrNullObject(id)
+  uid: excel!Excel.ConditionalFormatCollection#getItemOrNullObject:member(1)
+  package: excel!
+  fullName: getItemOrNullObject(id)
+  summary: >-
+    Devuelve un formato condicional identificado por su identificador. Si el objeto de formato condicional no existe, esta función devolverá un objeto con su `isNullObject` propiedad establecida en `true`<!-- -->. Para obtener más información, [vea *OrNullObject methods and properties](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
+
+
+    \[[Conjunto de API: ExcelApi BETA (SOLO VISTA PREVIA)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'getItemOrNullObject(id: string): Excel.ConditionalFormat;'
+    parameters:
+    - id: id
+      description: El identificador del formato condicional
+      type: string
+    return:
+      type: <xref uid="excel!Excel.ConditionalFormat:class" />
+      description: ''
 - name: load(options)
   uid: excel!Excel.ConditionalFormatCollection#load:member(1)
   package: excel!
@@ -236,7 +257,7 @@ methods:
   uid: excel!Excel.ConditionalFormatCollection#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: Invalida el método JavaScript `toJSON()` para proporcionar resultados más útiles cuando se pasa un objeto api a `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama `toJSON` al método del objeto que se le pasa). Mientras que el objeto original `Excel.ConditionalFormatCollection` es un objeto API, el método devuelve un objeto JavaScript sin formato `toJSON` (con el tipo `Excel.Interfaces.ConditionalFormatCollectionData`<!-- -->) que contiene una matriz "items" con copias superficiales de las propiedades cargadas de los elementos de la colección.
+  summary: Invalida el método JavaScript para proporcionar resultados más útiles cuando se pasa un objeto API a `toJSON()``JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama `toJSON` al método del objeto que se pasa a él). Mientras que el objeto original es un objeto API, el método devuelve un objeto JavaScript sin formato `Excel.ConditionalFormatCollection` `toJSON` (se escribe como `Excel.Interfaces.ConditionalFormatCollectionData`<!-- -->) que contiene una matriz "items" con copias superficiales de las propiedades cargadas de los elementos de la colección.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -247,9 +268,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 24fd27a229cd782a068aed69098d3975203da76d
-  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
+  ms.openlocfilehash: f4c99e36e2edf9239655f38f1bb120a82c118fef
+  ms.sourcegitcommit: 276e655472f82435a4b1227fbbb2feb687b659c0
   ms.translationtype: MT
   ms.contentlocale: es-ES
-  ms.lasthandoff: 01/13/2021
-  ms.locfileid: "49851280"
+  ms.lasthandoff: 03/08/2021
+  ms.locfileid: "50539776"
