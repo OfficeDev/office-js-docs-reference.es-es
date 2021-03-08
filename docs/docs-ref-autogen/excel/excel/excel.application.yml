@@ -34,10 +34,10 @@ properties:
   package: excel!
   fullName: calculationMode
   summary: >-
-    Devuelve el modo de cálculo usado en el libro, tal como lo definen las constantes de Excel.CalculationMode. Los valores posibles son: `Automatic`<!-- -->, donde Excel controla la actualización; `AutomaticExceptTables`<!-- -->, donde Excel controla la actualización pero omite los cambios en las tablas; `Manual`<!-- -->, donde el cálculo se realiza cuando el usuario lo solicita.
+    Devuelve el modo de cálculo usado en el libro, tal como lo definen las constantes en `Excel.CalculationMode`<!-- -->. Los valores posibles son: `Automatic`<!-- -->, donde Excel controla el recálculo; `AutomaticExceptTables`<!-- -->, donde Excel controla el recálculo pero omite los cambios en las tablas; `Manual`<!-- -->, donde el cálculo se realiza cuando el usuario lo solicita.
 
 
-    \[[Conjunto de API: ExcelApi 1.1 para obtener, 1.8 para establecer](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Conjunto de API: ExcelApi 1.1 para get, 1.8 para set](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -50,7 +50,7 @@ properties:
   package: excel!
   fullName: calculationState
   summary: >-
-    Devuelve el estado del cálculo de la aplicación. Para obtener más información, vea Excel.CalculationState.
+    Devuelve el estado del cálculo de la aplicación. Vea `Excel.CalculationState` para más información.
 
 
     \[[Conjunto de API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -94,7 +94,7 @@ properties:
   package: excel!
   fullName: decimalSeparator
   summary: >-
-    Obtiene la cadena usada como separador decimal para valores numéricos. Esto se basa en la configuración local de Excel.
+    Obtiene la cadena usada como separador decimal para valores numéricos. Esto se basa en la configuración de Excel local.
 
 
     \[[Conjunto de API: ExcelApi 1.11](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -111,7 +111,7 @@ properties:
   package: excel!
   fullName: iterativeCalculation
   summary: >-
-    Devuelve la configuración de cálculo iterativo. En Excel en Windows y Mac, la configuración se aplicará a la aplicación de Excel. En Excel en la Web y otras plataformas, la configuración se aplicará al libro activo.
+    Devuelve la configuración del cálculo iterativo. En Excel en Windows y Mac, la configuración se aplicará a la aplicación de Excel. En Excel en la web y otras plataformas, la configuración se aplicará al libro activo.
 
 
     \[[Conjunto de API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -127,7 +127,7 @@ properties:
   package: excel!
   fullName: thousandsSeparator
   summary: >-
-    Obtiene la cadena usada para separar grupos de dígitos a la izquierda del decimal para valores numéricos. Esto se basa en la configuración local de Excel.
+    Obtiene la cadena usada para separar grupos de dígitos a la izquierda del decimal para los valores numéricos. Esto se basa en la configuración de Excel local.
 
 
     \[[Conjunto de API: ExcelApi 1.11](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -171,7 +171,7 @@ methods:
     content: 'calculate(calculationType: Excel.CalculationType): void;'
     parameters:
     - id: calculationType
-      description: Especifica el tipo de cálculo que se va a usar. Vea Excel.CalculationType para obtener más información.
+      description: Especifica el tipo de cálculo que se va a usar. Vea `Excel.CalculationType` para más información.
       type: <xref uid="excel!Excel.CalculationType:enum" />
     return:
       type: void
@@ -192,7 +192,7 @@ methods:
     content: 'calculate(calculationTypeString: "Recalculate" | "Full" | "FullRebuild"): void;'
     parameters:
     - id: calculationTypeString
-      description: Especifica el tipo de cálculo que se va a usar. Vea Excel.CalculationType para obtener más información.
+      description: Especifica el tipo de cálculo que se va a usar. Vea `Excel.CalculationType` para más información.
       type: "\"Recalculate\" | \"Full\" | \"FullRebuild\""
     return:
       type: void
@@ -260,7 +260,7 @@ methods:
   uid: excel!Excel.Application#set:member(1)
   package: excel!
   fullName: set(properties, options)
-  summary: Establece varias propiedades de un objeto al mismo tiempo. Puede pasar un objeto sin formato con las propiedades apropiadas u otro objeto API del mismo tipo.
+  summary: Establece varias propiedades de un objeto al mismo tiempo. Puede pasar un objeto sin formato con las propiedades adecuadas u otro objeto API del mismo tipo.
   remarks: >-
     Este método tiene la siguiente firma adicional:
 
@@ -272,7 +272,7 @@ methods:
     content: 'set(properties: Interfaces.ApplicationUpdateData, options?: OfficeExtension.UpdateOptions): void;'
     parameters:
     - id: properties
-      description: Un objeto JavaScript con propiedades estructuradas isomórficamente en las propiedades del objeto en el que se llama al método.
+      description: Un objeto JavaScript con propiedades que se estructuran isomórficamente en las propiedades del objeto en el que se llama al método.
       type: <xref uid="excel!Excel.Interfaces.ApplicationUpdateData:interface" />
     - id: options
       description: Proporciona una opción para suprimir errores si el objeto properties intenta establecer propiedades de solo lectura.
@@ -302,7 +302,7 @@ methods:
   package: excel!
   fullName: suspendApiCalculationUntilNextSync()
   summary: >-
-    Suspende el cálculo hasta que se llama al siguiente "context.sync()". Una vez establecido, será responsabilidad del desarrollador actualizar el libro para asegurarse de que se propaguen las dependencias.
+    Suspende el cálculo hasta que se `context.sync()` llame al siguiente. Una vez establecido, será responsabilidad del desarrollador actualizar el libro para asegurarse de que se propaguen las dependencias.
 
 
     \[[Conjunto de API: ExcelApi 1.6](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -319,7 +319,7 @@ methods:
   package: excel!
   fullName: suspendScreenUpdatingUntilNextSync()
   summary: >-
-    Suspende la actualización de pantalla hasta que se llama `context.sync()` a la siguiente.
+    Suspende la actualización de pantalla hasta que se `context.sync()` llame a la siguiente.
 
 
     *Nota**: No llames `suspendScreenUpdatingUntilNextSync` repetidamente (por ejemplo, en un bucle). Las llamadas repetidas harán que la ventana de Excel parpadee.
@@ -338,7 +338,7 @@ methods:
   uid: excel!Excel.Application#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: Invalida el método JavaScript `toJSON()` para proporcionar resultados más útiles cuando se pasa un objeto api a `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama `toJSON` al método del objeto que se le pasa). Mientras que el objeto Excel.Application original es un objeto API, el método devuelve un objeto JavaScript sin formato `toJSON` (especificado como `Excel.Interfaces.ApplicationData`<!-- -->) que contiene copias superficiales de las propiedades secundarias cargadas del objeto original.
+  summary: Invalida el método JavaScript para proporcionar resultados más útiles cuando se pasa un objeto API a `toJSON()``JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama `toJSON` al método del objeto que se pasa a él). Mientras que el objeto Excel.Application original es un objeto API, el método devuelve un objeto JavaScript sin formato (con el tipo `toJSON` como `Excel.Interfaces.ApplicationData`<!-- -->) que contiene copias superficiales de las propiedades secundarias cargadas del objeto original.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -349,9 +349,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 889634c8a1cbbb9db4e320257eca11a824ffefad
-  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
+  ms.openlocfilehash: 73861d42743b6e6285a656267ee85fa8ab7dd291
+  ms.sourcegitcommit: 276e655472f82435a4b1227fbbb2feb687b659c0
   ms.translationtype: MT
   ms.contentlocale: es-ES
-  ms.lasthandoff: 01/13/2021
-  ms.locfileid: "49850328"
+  ms.lasthandoff: 03/08/2021
+  ms.locfileid: "50533995"
