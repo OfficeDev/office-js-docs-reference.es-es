@@ -4,7 +4,7 @@ uid: excel!Excel.CommentReplyCollection:class
 package: excel!
 fullName: Excel.CommentReplyCollection
 summary: >-
-  Representa una colección de objetos de respuesta de comentario que forman parte del comentario.
+  Representa una colección de objetos de respuesta de comentarios que forman parte del comentario.
 
 
   \[[Conjunto de API: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -43,7 +43,7 @@ methods:
   package: excel!
   fullName: add(content, contentType)
   summary: >-
-    Crea una respuesta comentario por comentario.
+    Crea una respuesta de comentario para un comentario.
 
 
     \[[Conjunto de API: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -54,10 +54,10 @@ methods:
     content: 'add(content: CommentRichContent | string, contentType?: Excel.ContentType): Excel.CommentReply;'
     parameters:
     - id: content
-      description: 'El contenido del comentario. Puede ser una cadena o Interface CommentRichContent (por ejemplo, para comentarios con menciones). \[Conjunto de api: ExcelApi 1.10 para la cadena, 1.11 para el objeto CommentRichContent\]'
+      description: 'El contenido del comentario. Puede ser una cadena o un `CommentRichContent` objeto (por ejemplo, para comentarios con menciones). \[Conjunto de api: ExcelApi 1.10 para la cadena, 1.11 para el objeto CommentRichContent\]'
       type: <xref uid="excel!Excel.CommentRichContent:interface" /> | string
     - id: contentType
-      description: 'Opcional. Tipo de contenido contenido en el comentario. El valor predeterminado es enum `ContentType.Plain`<!-- -->. \[Conjunto de api: ExcelApi 1.10 para Enum ContentType.Plain, 1.11 para Enum ContentType.Mention\]'
+      description: 'Opcional. El tipo de contenido contenido en el comentario. El valor predeterminado es enumeración `ContentType.Plain`<!-- -->. \[Conjunto de api: ExcelApi 1.10 para Enum ContentType.Plain, 1.11 para Enum ContentType.Mention\]'
       type: <xref uid="excel!Excel.ContentType:enum" />
     return:
       type: <xref uid="excel!Excel.CommentReply:class" />
@@ -67,7 +67,7 @@ methods:
   package: excel!
   fullName: add(content, contentTypeString)
   summary: >-
-    Crea una respuesta comentario por comentario.
+    Crea una respuesta de comentario para un comentario.
 
 
     \[[Conjunto de API: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -78,10 +78,10 @@ methods:
     content: 'add(content: CommentRichContent | string, contentTypeString?: "Plain" | "Mention"): Excel.CommentReply;'
     parameters:
     - id: content
-      description: 'El contenido del comentario. Puede ser una cadena o Interface CommentRichContent (por ejemplo, para comentarios con menciones). \[Conjunto de api: ExcelApi 1.10 para la cadena, 1.11 para el objeto CommentRichContent\]'
+      description: 'El contenido del comentario. Puede ser una cadena o un `CommentRichContent` objeto (por ejemplo, para comentarios con menciones). \[Conjunto de api: ExcelApi 1.10 para la cadena, 1.11 para el objeto CommentRichContent\]'
       type: <xref uid="excel!Excel.CommentRichContent:interface" /> | string
     - id: contentTypeString
-      description: 'Opcional. Tipo de contenido contenido en el comentario. El valor predeterminado es enum `ContentType.Plain`<!-- -->. \[Conjunto de api: ExcelApi 1.10 para Enum ContentType.Plain, 1.11 para Enum ContentType.Mention\]'
+      description: 'Opcional. El tipo de contenido contenido en el comentario. El valor predeterminado es enumeración `ContentType.Plain`<!-- -->. \[Conjunto de api: ExcelApi 1.10 para Enum ContentType.Plain, 1.11 para Enum ContentType.Mention\]'
       type: "\"Plain\" | \"Mention\""
     return:
       type: <xref uid="excel!Excel.CommentReply:class" />
@@ -119,7 +119,7 @@ methods:
     content: 'getItem(commentReplyId: string): Excel.CommentReply;'
     parameters:
     - id: commentReplyId
-      description: Identificador de la respuesta del comentario.
+      description: Identificador de la respuesta de comentario.
       type: string
     return:
       type: <xref uid="excel!Excel.CommentReply:class" />
@@ -140,8 +140,29 @@ methods:
     content: 'getItemAt(index: number): Excel.CommentReply;'
     parameters:
     - id: index
-      description: Valor de índice de la respuesta del comentario que se va a recuperar. La colección usa indización basada en cero.
+      description: Valor de índice de la respuesta de comentario que se va a recuperar. La colección usa indización basada en cero.
       type: number
+    return:
+      type: <xref uid="excel!Excel.CommentReply:class" />
+      description: ''
+- name: getItemOrNullObject(commentReplyId)
+  uid: excel!Excel.CommentReplyCollection#getItemOrNullObject:member(1)
+  package: excel!
+  fullName: getItemOrNullObject(commentReplyId)
+  summary: >-
+    Devuelve una respuesta de comentario identificada por su Id. Si el objeto de respuesta de comentario no existe, esta función devolverá un objeto con su `isNullObject` propiedad establecida en `true`<!-- -->. Para obtener más información, [vea *OrNullObject methods and properties](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
+
+
+    \[[Conjunto de API: ExcelApi BETA (SOLO VISTA PREVIA)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'getItemOrNullObject(commentReplyId: string): Excel.CommentReply;'
+    parameters:
+    - id: commentReplyId
+      description: El identificador de la respuesta de comentario
+      type: string
     return:
       type: <xref uid="excel!Excel.CommentReply:class" />
       description: ''
@@ -200,7 +221,7 @@ methods:
   uid: excel!Excel.CommentReplyCollection#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: Invalida el método JavaScript `toJSON()` para proporcionar resultados más útiles cuando se pasa un objeto api a `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama `toJSON` al método del objeto que se le pasa). Mientras que el objeto original `Excel.CommentReplyCollection` es un objeto API, el método devuelve un objeto JavaScript sin formato `toJSON` (con el tipo `Excel.Interfaces.CommentReplyCollectionData`<!-- -->) que contiene una matriz "items" con copias superficiales de las propiedades cargadas de los elementos de la colección.
+  summary: Invalida el método JavaScript para proporcionar resultados más útiles cuando se pasa un objeto API a `toJSON()``JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama `toJSON` al método del objeto que se pasa a él). Mientras que el objeto original es un objeto API, el método devuelve un objeto JavaScript sin formato `Excel.CommentReplyCollection` `toJSON` (se escribe como `Excel.Interfaces.CommentReplyCollectionData`<!-- -->) que contiene una matriz "items" con copias superficiales de las propiedades cargadas de los elementos de la colección.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -211,9 +232,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: aaac2a24a89c95829723a69eb70047fe8e38ba15
-  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
+  ms.openlocfilehash: f9605106e7cc7145e6dbc2e4b0f14d7c9824a841
+  ms.sourcegitcommit: 276e655472f82435a4b1227fbbb2feb687b659c0
   ms.translationtype: MT
   ms.contentlocale: es-ES
-  ms.lasthandoff: 01/13/2021
-  ms.locfileid: "49850839"
+  ms.lasthandoff: 03/08/2021
+  ms.locfileid: "50538810"

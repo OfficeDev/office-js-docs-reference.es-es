@@ -111,7 +111,7 @@ properties:
   package: excel!
   fullName: id
   summary: >-
-    Especifica el identificador de respuesta del comentario.
+    Especifica el identificador de respuesta de comentario.
 
 
     \[[Conjunto de API: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -143,7 +143,7 @@ properties:
   package: excel!
   fullName: resolved
   summary: >-
-    Estado de respuesta del comentario. Un valor de "true" significa que la respuesta está en el estado resuelto.
+    Estado de respuesta del comentario. Un valor de `true` significa que la respuesta está en estado resuelto.
 
 
     \[[Conjunto de API: ExcelApi 1.11](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -159,7 +159,7 @@ properties:
   package: excel!
   fullName: richContent
   summary: >-
-    Contenido de comentarios enriquecidos (por ejemplo, menciones en comentarios). Esta cadena no está pensada para mostrarse a los usuarios finales. El complemento solo debe usarlo para analizar contenido de comentarios enriquecidos.
+    Contenido de comentario enriquecido (por ejemplo, menciones en comentarios). Esta cadena no está pensada para mostrarse a los usuarios finales. El complemento solo debe usarlo para analizar contenido de comentarios enriquecidos.
 
 
     \[[Conjunto de API: ExcelApi 1.11](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -171,12 +171,12 @@ properties:
     return:
       type: string
 methods:
-- name: assignTask(email)
+- name: assignTask(assignee)
   uid: excel!Excel.CommentReply#assignTask:member(1)
   package: excel!
-  fullName: assignTask(email)
+  fullName: assignTask(assignee)
   summary: >-
-    Asigna la tarea adjunta al comentario al usuario determinado como único usuario al que se asigna. Si no hay ninguna tarea, se creará una.
+    Asigna la tarea adjunta al comentario al usuario dado como único destinatario. Si no hay ninguna tarea, se creará una.
 
 
     \[[Conjunto de API: ExcelApi BETA (SOLO VISTA PREVIA)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -184,13 +184,13 @@ methods:
   isPreview: true
   isDeprecated: false
   syntax:
-    content: 'assignTask(email: string): Excel.Task;'
+    content: 'assignTask(assignee: Identity): Excel.DocumentTask;'
     parameters:
-    - id: email
-      description: La dirección de correo electrónico del usuario a la que asignar la tarea.
-      type: string
+    - id: assignee
+      description: Información de identidad de usuario del usuario del usuario.
+      type: <xref uid="excel!Excel.Identity:interface" />
     return:
-      type: <xref uid="excel!Excel.Task:class" />
+      type: <xref uid="excel!Excel.DocumentTask:class" />
       description: ''
 - name: delete()
   uid: excel!Excel.CommentReply#delete:member(1)
@@ -248,7 +248,7 @@ methods:
   package: excel!
   fullName: getTask()
   summary: >-
-    Obtiene la tarea asociada a este comentario. Si no hay ninguna tarea para el hilo de comentarios, se produce una excepción ItemNotFound.
+    Obtiene la tarea asociada con el subproceso de la respuesta de este comentario. Si no hay ninguna tarea para el subproceso de comentario, se produce `ItemNotFound` una excepción.
 
 
     \[[Conjunto de API: ExcelApi BETA (SOLO VISTA PREVIA)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -256,16 +256,16 @@ methods:
   isPreview: true
   isDeprecated: false
   syntax:
-    content: 'getTask(): Excel.Task;'
+    content: 'getTask(): Excel.DocumentTask;'
     return:
-      type: <xref uid="excel!Excel.Task:class" />
+      type: <xref uid="excel!Excel.DocumentTask:class" />
       description: ''
 - name: getTaskOrNullObject()
   uid: excel!Excel.CommentReply#getTaskOrNullObject:member(1)
   package: excel!
   fullName: getTaskOrNullObject()
   summary: >-
-    Obtiene la tarea asociada a este comentario. Si no hay ninguna tarea para el hilo de comentarios, esta función devolverá un objeto con `isNullObject` su propiedad establecida en `true`<!-- -->. Para obtener más información, [vea *OrNullObject methods and properties](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
+    Obtiene la tarea asociada con el subproceso de la respuesta de este comentario. Si no hay ninguna tarea para el subproceso de comentario, esta función devolverá un objeto con su `isNullObject` propiedad establecida en `true`<!-- -->. Para obtener más información, [vea *OrNullObject methods and properties](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[Conjunto de API: ExcelApi BETA (SOLO VISTA PREVIA)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -273,9 +273,9 @@ methods:
   isPreview: true
   isDeprecated: false
   syntax:
-    content: 'getTaskOrNullObject(): Excel.Task;'
+    content: 'getTaskOrNullObject(): Excel.DocumentTask;'
     return:
-      type: <xref uid="excel!Excel.Task:class" />
+      type: <xref uid="excel!Excel.DocumentTask:class" />
       description: ''
 - name: load(options)
   uid: excel!Excel.CommentReply#load:member(1)
@@ -340,7 +340,7 @@ methods:
   uid: excel!Excel.CommentReply#set:member(1)
   package: excel!
   fullName: set(properties, options)
-  summary: Establece varias propiedades de un objeto al mismo tiempo. Puede pasar un objeto sin formato con las propiedades apropiadas u otro objeto API del mismo tipo.
+  summary: Establece varias propiedades de un objeto al mismo tiempo. Puede pasar un objeto sin formato con las propiedades adecuadas u otro objeto API del mismo tipo.
   remarks: >-
     Este método tiene la siguiente firma adicional:
 
@@ -352,7 +352,7 @@ methods:
     content: 'set(properties: Interfaces.CommentReplyUpdateData, options?: OfficeExtension.UpdateOptions): void;'
     parameters:
     - id: properties
-      description: Un objeto JavaScript con propiedades estructuradas isomórficamente en las propiedades del objeto en el que se llama al método.
+      description: Un objeto JavaScript con propiedades que se estructuran isomórficamente en las propiedades del objeto en el que se llama al método.
       type: <xref uid="excel!Excel.Interfaces.CommentReplyUpdateData:interface" />
     - id: options
       description: Proporciona una opción para suprimir errores si el objeto properties intenta establecer propiedades de solo lectura.
@@ -381,7 +381,7 @@ methods:
   uid: excel!Excel.CommentReply#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: Invalida el método JavaScript `toJSON()` para proporcionar resultados más útiles cuando se pasa un objeto api a `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama `toJSON` al método del objeto que se le pasa). Mientras que el objeto Excel.CommentReply original es un objeto API, el método devuelve un objeto JavaScript sin formato `toJSON` (con el tipo `Excel.Interfaces.CommentReplyData`<!-- -->) que contiene copias superficiales de las propiedades secundarias cargadas del objeto original.
+  summary: Invalida el método JavaScript para proporcionar resultados más útiles cuando se pasa un objeto API a `toJSON()``JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama `toJSON` al método del objeto que se pasa a él). Mientras que el objeto Excel.CommentReply original es un objeto API, el método devuelve un objeto JavaScript sin formato `toJSON` (con el tipo como `Excel.Interfaces.CommentReplyData`<!-- -->) que contiene copias superficiales de las propiedades secundarias cargadas del objeto original.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -413,9 +413,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 35fb3c136ed527f3f44a3ae8a35297201967db05
-  ms.sourcegitcommit: f229afdd4c2bc820ac799394a77b637fc66e87b4
+  ms.openlocfilehash: ff5ba44251a06565527f37b89feb2ea543574f46
+  ms.sourcegitcommit: 276e655472f82435a4b1227fbbb2feb687b659c0
   ms.translationtype: MT
   ms.contentlocale: es-ES
-  ms.lasthandoff: 01/27/2021
-  ms.locfileid: "49991796"
+  ms.lasthandoff: 03/08/2021
+  ms.locfileid: "50538817"

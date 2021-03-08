@@ -4,7 +4,7 @@ uid: excel!Excel.AutoFilter:class
 package: excel!
 fullName: Excel.AutoFilter
 summary: >-
-  Representa el objeto AutoFilter . Autofiltro convierte los valores de la columna de Excel en filtros específicos basados en el contenido de la celda.
+  Representa el `AutoFilter` objeto. AutoFilter convierte los valores de la columna de Excel en filtros específicos en función del contenido de la celda.
 
 
   \[[Conjunto de API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -62,7 +62,7 @@ properties:
   package: excel!
   fullName: isDataFiltered
   summary: >-
-    Especifica si autofiltro tiene criterios de filtro.
+    Especifica si el Autofiltro tiene criterios de filtro.
 
 
     \[[Conjunto de API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -101,6 +101,27 @@ methods:
     return:
       type: void
       description: "\n\n#### <a name=\"examples\"></a>Ejemplos\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/54-worksheet/worksheet-auto-filter.yaml\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getActiveWorksheet();\n    const farmData = sheet.getUsedRange();\n\n    // This filter will only show the rows with the top 25% of values in column 3.\n    sheet.autoFilter.apply(farmData, 3, { criterion1: \"25\", filterOn: Excel.FilterOn.topPercent });\n    await context.sync();\n});\n```"
+- name: clearColumnCriteria(columnIndex)
+  uid: excel!Excel.AutoFilter#clearColumnCriteria:member(1)
+  package: excel!
+  fullName: clearColumnCriteria(columnIndex)
+  summary: >-
+    Borra los criterios de filtro de AutoFilter.
+
+
+    \[[Conjunto de API: ExcelApi BETA (SOLO VISTA PREVIA)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'clearColumnCriteria(columnIndex: number): void;'
+    parameters:
+    - id: columnIndex
+      description: Índice de columna basado en cero, que representa qué filtro de columna debe borrarse. Si no se admite el valor de índice (por ejemplo, si el valor es un número negativo o si el valor es mayor que el número de columnas disponibles en el intervalo), se producirá una `InvalidArgument` excepción.
+      type: number
+    return:
+      type: void
+      description: ''
 - name: clearCriteria()
   uid: excel!Excel.AutoFilter#clearCriteria:member(1)
   package: excel!
@@ -123,7 +144,7 @@ methods:
   package: excel!
   fullName: getRange()
   summary: >-
-    Devuelve un objeto Range que representa el intervalo al que se aplica el objeto AutoFilter.
+    Devuelve el objeto que representa el intervalo al que se aplica `Range` el Autofiltro.
 
 
     \[[Conjunto de API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -140,7 +161,7 @@ methods:
   package: excel!
   fullName: getRangeOrNullObject()
   summary: >-
-    Devuelve el `Range` objeto que representa el intervalo al que se aplica el `AutoFilter` objeto. Si no hay ningún objeto asociado con el objeto `Range``AutoFilter`<!-- -->, a continuación, este método devuelve un objeto con su `isNullObject` propiedad establecida en `true`<!-- -->. Para obtener más información, [vea *OrNullObject methods and properties](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
+    Devuelve el objeto que representa el intervalo al que se aplica `Range` el Autofiltro. Si no hay ningún `Range` objeto asociado al AutoFiltro, este método devuelve un objeto con su `isNullObject` propiedad establecida en `true`<!-- -->. Para obtener más información, [vea *OrNullObject methods and properties](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[Conjunto de API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -249,7 +270,7 @@ methods:
   uid: excel!Excel.AutoFilter#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: Invalida el método JavaScript `toJSON()` para proporcionar resultados más útiles cuando se pasa un objeto api a `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama `toJSON` al método del objeto que se le pasa). Mientras que el objeto Excel.AutoFilter original es un objeto API, el método devuelve un objeto JavaScript sin formato `toJSON` (especificado como `Excel.Interfaces.AutoFilterData`<!-- -->) que contiene copias superficiales de las propiedades secundarias cargadas del objeto original.
+  summary: Invalida el método JavaScript para proporcionar resultados más útiles cuando se pasa un objeto API a `toJSON()``JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama `toJSON` al método del objeto que se pasa a él). Mientras que el objeto Excel.AutoFilter original es un objeto API, el método devuelve un objeto JavaScript sin formato (con el tipo `toJSON` como `Excel.Interfaces.AutoFilterData`<!-- -->) que contiene copias superficiales de las propiedades secundarias cargadas del objeto original.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -260,9 +281,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 0007599fa27b2247c73798735f0d34b67192811a
-  ms.sourcegitcommit: f229afdd4c2bc820ac799394a77b637fc66e87b4
+  ms.openlocfilehash: ce09c071d21c03ad8c48d68beb3ef0f5d22f4e58
+  ms.sourcegitcommit: 276e655472f82435a4b1227fbbb2feb687b659c0
   ms.translationtype: MT
   ms.contentlocale: es-ES
-  ms.lasthandoff: 01/27/2021
-  ms.locfileid: "49991845"
+  ms.lasthandoff: 03/08/2021
+  ms.locfileid: "50537991"
