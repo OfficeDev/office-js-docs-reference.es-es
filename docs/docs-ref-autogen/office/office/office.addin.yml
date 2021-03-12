@@ -3,7 +3,7 @@ name: Office.Addin
 uid: office!Office.Addin:interface
 package: office!
 fullName: Office.Addin
-summary: Representa la funcionalidad de nivel de complemento para operar o configurar diversos aspectos del complemento.
+summary: Representa la funcionalidad de nivel de complemento para operar o configurar varios aspectos del complemento.
 remarks: ''
 isPreview: false
 isDeprecated: false
@@ -13,7 +13,7 @@ methods:
   uid: office!Office.Addin#getStartupBehavior:member(1)
   package: office!
   fullName: getStartupBehavior()
-  summary: Obtiene el comportamiento de inicio actual para el complemento.
+  summary: Obtiene el comportamiento de inicio actual del complemento.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -34,7 +34,7 @@ methods:
     content: 'hide(): Promise<void>;'
     return:
       type: Promise&lt;void&gt;
-      description: Promesa que se resuelve cuando se oculta la interfaz de usuario.
+      description: Una promesa que se resuelve cuando se oculta la interfaz de usuario.
 - name: onVisibilityModeChanged(listener)
   uid: office!Office.Addin#onVisibilityModeChanged:member(1)
   package: office!
@@ -47,19 +47,19 @@ methods:
     content: >-
       onVisibilityModeChanged(
                   listener: (message: VisibilityModeChangedMessage) => void,
-              ): Promise<RemoveEventListener>;
+              ): Promise<() => Promise<void>>;
     parameters:
     - id: listener
-      description: La función de detector a la que se llama cuando se emite el evento. Esta función toma un mensaje para el componente receptor.
+      description: Función de escucha a la que se llama cuando se emite el evento. Esta función toma un mensaje para el componente de recepción.
       type: '(message: <xref uid="office!Office.VisibilityModeChangedMessage:interface" />) =&gt; void'
     return:
-      type: Promise&lt;<xref uid="office!Office.RemoveEventListener:type" />&gt;
-      description: Promesa que se resuelve en una función cuando se agrega la escucha. El `RemoveEventListener` tipo se define con `type RemoveEventListener = () => Promise<void>`<!-- -->. Al llamarlo se quita la escucha.
+      type: Promise&lt;() =&gt; Promise&lt;void&gt;&gt;
+      description: Una promesa que se resuelve en una función cuando se agrega el agente de escucha. Al llamarlo se quita el agente de escucha.
 - name: setStartupBehavior(behavior)
   uid: office!Office.Addin#setStartupBehavior:member(1)
   package: office!
   fullName: setStartupBehavior(behavior)
-  summary: Establece el comportamiento de inicio del complemento para cuando se abre el documento la próxima vez.
+  summary: Establece el comportamiento de inicio del complemento para cuando se abra el documento la próxima vez.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -84,11 +84,11 @@ methods:
     content: 'showAsTaskpane(): Promise<void>;'
     return:
       type: Promise&lt;void&gt;
-      description: Promesa que se resuelve cuando se muestra la interfaz de usuario.
+      description: Una promesa que se resuelve cuando se muestra la interfaz de usuario.
 metadata:
-  ms.openlocfilehash: 05d535750f27d0923865f6a3aae0938c7e7edc39
-  ms.sourcegitcommit: 50d278a47f7095ea4453a3564f739eb5ad499a76
+  ms.openlocfilehash: 94ff2bcc2fd5938657d80d2f13601318027016bc
+  ms.sourcegitcommit: 0649842a034c42b1c1ec0b56c5ac3144ff51a849
   ms.translationtype: MT
   ms.contentlocale: es-ES
-  ms.lasthandoff: 11/25/2020
-  ms.locfileid: "49420744"
+  ms.lasthandoff: 03/12/2021
+  ms.locfileid: "50756406"
