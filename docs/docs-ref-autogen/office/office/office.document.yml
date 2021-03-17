@@ -4,7 +4,7 @@ uid: office!Office.Document:interface
 package: office!
 fullName: Office.Document
 summary: Una clase abstracta que representa el documento con el que interactúa el complemento.
-remarks: '**Hosts**: Excel, PowerPoint, Project y Word'
+remarks: '**Hosts**: Excel, PowerPoint, Project, Word'
 isPreview: false
 isDeprecated: false
 type: interface
@@ -14,7 +14,7 @@ properties:
   package: office!
   fullName: bindings
   summary: Obtiene un objeto que proporciona acceso a los enlaces que se han definido en el documento.
-  remarks: "No se crea una instancia del objeto Document directamente en el script. Si desea llamar a miembros del objeto Document para que interactúen con la hoja de cálculo o el documento actual, use `Office.context.document` en el script.\n\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nfunction displayAllBindings() {\n    Office.context.document.bindings.getAllAsync(function (asyncResult) {\n        var bindingString = '';\n        for (var i in asyncResult.value) {\n            bindingString += asyncResult.value[i].id + '\\n';\n        }\n        write('Existing bindings: ' + bindingString);\n    });\n}\n\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
+  remarks: "No crea una instancia del objeto Document directamente en el script. Si desea llamar a miembros del objeto Document para que interactúen con la hoja de cálculo o el documento actual, use `Office.context.document` en el script.\n\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nfunction displayAllBindings() {\n    Office.context.document.bindings.getAllAsync(function (asyncResult) {\n        var bindingString = '';\n        for (var i in asyncResult.value) {\n            bindingString += asyncResult.value[i].id + '\\n';\n        }\n        write('Existing bindings: ' + bindingString);\n    });\n}\n\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -63,7 +63,7 @@ properties:
   uid: office!Office.Document#url:member
   package: office!
   fullName: url
-  summary: Obtiene la dirección URL del documento que se encuentra abierto actualmente en la aplicación host. Devuelve NULL si la dirección URL no está disponible.
+  summary: Obtiene la dirección URL del documento que se encuentra abierto actualmente en la aplicación host. Devuelve null si la dirección URL no está disponible.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -77,7 +77,7 @@ methods:
   uid: office!Office.Document#addHandlerAsync:member(1)
   package: office!
   fullName: addHandlerAsync(eventType, handler, options, callback)
-  summary: Agrega un controlador de eventos para un evento de objeto de documento.
+  summary: Agrega un controlador de eventos para un evento de objeto Document.
   remarks: >-
     **Conjunto de requisitos**: [DocumentEvents](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#documentevents)
 
@@ -89,16 +89,16 @@ methods:
     content: 'addHandlerAsync(eventType: Office.EventType, handler: any, options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<void>) => void): void;'
     parameters:
     - id: eventType
-      description: Para un evento de objeto Document, el parámetro eventType se puede especificar como `Office.EventType.Document.SelectionChanged` o `Office.EventType.Document.ActiveViewChanged`<!-- -->o el valor de texto correspondiente de esta enumeración.
+      description: Para un evento de objeto Document, el parámetro eventType se puede especificar como `Office.EventType.Document.SelectionChanged` o `Office.EventType.Document.ActiveViewChanged`<!-- -->, o el valor de texto correspondiente de esta enumeración.
       type: <xref uid="office!Office.EventType:enum" />
     - id: handler
-      description: La función del controlador de eventos que se va a agregar, cuyo único parámetro es de tipo [Office.DocumentSelectionChangedEventArgs](xref:office!Office.DocumentSelectionChangedEventArgs:interface)<!-- -->. Obligatorio.
+      description: Función de controlador de eventos que se va a agregar, cuyo único parámetro es de tipo [Office.DocumentSelectionChangedEventArgs](xref:office!Office.DocumentSelectionChangedEventArgs:interface)<!-- -->. Obligatorio.
       type: any
     - id: options
-      description: Proporciona una opción para conservar los datos de contexto de cualquier tipo, sin cambios, para su uso en una devolución de llamada.
+      description: Proporciona una opción para conservar datos de contexto de cualquier tipo, sin cambios, para su uso en una devolución de llamada.
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: Opcional. Una función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office. asyncResult](xref:office!Office.AsyncResult:interface)<!-- -->.
+      description: Opcional. Función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office.AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -107,7 +107,7 @@ methods:
   uid: office!Office.Document#addHandlerAsync:member(2)
   package: office!
   fullName: addHandlerAsync(eventType, handler, callback)
-  summary: Agrega un controlador de eventos para un evento de objeto de documento.
+  summary: Agrega un controlador de eventos para un evento de objeto Document.
   remarks: "**Conjunto de requisitos**: [DocumentEvents](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#documentevents)\n\nPuede agregar varios controladores de eventos para el eventType especificado siempre que el nombre de cada función de controlador de eventos sea único.\n\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\n// The following example adds an event handler for the SelectionChanged event of a document\nfunction addSelectionChangedEventHandler() {\n    Office.context.document.addHandlerAsync(Office.EventType.DocumentSelectionChanged, MyHandler);\n}\n\nfunction MyHandler(eventArgs) {\n    write('Event raised: ' + eventArgs.type);\n    doSomethingWithDocument(eventArgs.document);\n}\n\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```\n```javascript\n// The following code example adds a handler for the ResourceSelectionChanged event.\n// When the resource selection changes in the document, it gets the GUID of the selected resource.\n// The example assumes your add-in has a reference to the jQuery library and that the\n// following page control is defined in the content div in the page body:\n// <span id=\"message\"></span>\n\n(function () {\n    \"use strict\";\n\n    // The initialize function must be run each time a new page is loaded.\n    Office.initialize = function (reason) {\n        $(document).ready(function () {\n\n            // After the DOM is loaded, add-in-specific code can run.\n            Office.context.document.addHandlerAsync(\n                Office.EventType.ResourceSelectionChanged,\n                getResourceGuid);\n        });\n    };\n\n    // Get the GUID of the selected resource and display it in the add-in.\n    function getResourceGuid() {\n        Office.context.document.getSelectedResourceAsync(\n            function (result) {\n                if (result.status === Office.AsyncResultStatus.Failed) {\n                    onError(result.error);\n                }\n                else {\n                    $('#message').html(result.value);\n                }\n            }\n        );\n    }\n\n    function onError(error) {\n        $('#message').html(error.name + ' ' + error.code + ': ' + error.message);\n    }\n})();\n\n// For a complete code sample that shows how to use a ResourceSelectionChanged\n// event handler in a Project add-in, see \"Create your first task pane add-in\n// for Project 2013 by using a text editor.\"\n// https://docs.microsoft.com/office/dev/add-ins/project/create-your-first-task-pane-add-in-for-project-by-using-a-text-editor\n```\n```javascript\n// The following code example adds a handler for the TaskSelectionChanged event.\n// When the task selection changes in the document, it gets the GUID of the\n// selected task.\n// The example assumes your add-in has a reference to the jQuery library and that\n// the following page control is defined in the content div in the page body:\n// <span id=\"message\"></span>\n\n(function () {\n    \"use strict\";\n\n    // The initialize function must be run each time a new page is loaded.\n    Office.initialize = function (reason) {\n        $(document).ready(function () {\n\n            // After the DOM is loaded, add-in-specific code can run.\n            Office.context.document.addHandlerAsync(\n                Office.EventType.TaskSelectionChanged,\n                getTaskGuid);\n            getTaskGuid();\n        });\n    };\n\n    // Get the GUID of the selected task and display it in the add-in.\n    function getTaskGuid() {\n        Office.context.document.getSelectedTaskAsync(\n            function (result) {\n                if (result.status === Office.AsyncResultStatus.Failed) {\n                    onError(result.error);\n                }\n                else {\n                    $('#message').html(result.value);\n                }\n            }\n        );\n    }\n\n    function onError(error) {\n        $('#message').html(error.name + ' ' + error.code + ': ' + error.message);\n    }\n})();\n```\n```javascript\n// The following code example adds a handler for the ViewSelectionChanged\n// event. When the active view changes, it gets the name and type of the active view.\n// The example assumes your add-in has a reference to the jQuery library and that\n// the following page control is defined in the content div in the page body:\n// <span id=\"message\"></span>\n\n(function () {\n    \"use strict\";\n\n    // The initialize function must be run each time a new page is loaded.\n    Office.initialize = function (reason) {\n        $(document).ready(function () {\n\n            // After the DOM is loaded, add-in-specific code can run.\n            Office.context.document.addHandlerAsync(\n                Office.EventType.ViewSelectionChanged,\n                getActiveView);\n            getActiveView();\n        });\n    };\n\n    // Get the name and type of the active view and display it in the add-in.\n    function getActiveView() {\n        Office.context.document.getSelectedViewAsync(\n            function (result) {\n                if (result.status === Office.AsyncResultStatus.Failed) {\n                    onError(result.error);\n                }\n                else {\n                    var output = String.format(\n                        'View name: {0}<br/>View type: {1}',\n                        result.value.viewName, result.value.viewType);\n                    $('#message').html(output);\n                }\n            }\n        );\n    }\n\n    function onError(error) {\n        $('#message').html(error.name + ' ' + error.code + ': ' + error.message);\n    }\n})();\n\n// For an example that shows how to use a ViewSelectionChanged event handler in a\n// Project add-in, see \"Create your first task pane add-in for Project 2013 by\n// using a text editor.\"\n// https://docs.microsoft.com/office/dev/add-ins/project/create-your-first-task-pane-add-in-for-project-by-using-a-text-editor\n```\n```javascript\n// The following code example uses addHandlerAsync to add an event handler for the ViewSelectionChanged event.\n// When the active view changes, the handler checks the view type. It enables a button if the view is a resource\n// view and disables the button if it isn't a resource view. Choosing the button gets the GUID of the selected\n// resource and displays it in the add-in.\n// The example assumes that your add-in has a reference to the jQuery library and that the following page controls\n// are defined in the content div in the page body:\n// <input id=\"get-info\" type=\"button\" value=\"Get info\" disabled=\"disabled\" /><br />\n// <span id=\"message\"></span>\n\n(function () {\n    \"use strict\";\n\n    // The initialize function must be run each time a new page is loaded.\n    Office.initialize = function (reason) {\n        $(document).ready(function () {\n\n            // After the DOM is loaded, add-in-specific code can run.\n            // Add a ViewSelectionChanged event handler.\n            Office.context.document.addHandlerAsync(\n                Office.EventType.ViewSelectionChanged,\n                getActiveView);\n            $('#get-info').click(getResourceGuid);\n\n            // This example calls the handler on page load to get the active view\n            // of the default page.\n            getActiveView();\n        });\n    };\n\n    // Activate the button based on the active view type of the document.\n    // This is the ViewSelectionChanged event handler.\n    function getActiveView() {\n        Office.context.document.getSelectedViewAsync(\n            function (result) {\n                if (result.status === Office.AsyncResultStatus.Failed) {\n                    onError(result.error);\n                }\n                else {\n                    var viewType = result.value.viewType;\n                    if (viewType == 6 ||   // ResourceForm\n                        viewType == 7 ||   // ResourceSheet\n                        viewType == 8 ||   // ResourceGraph\n                        viewType == 15) {  // ResourceUsage\n                        $('#get-info').removeAttr('disabled');\n                    }\n                    else {\n                        $('#get-info').attr('disabled', 'disabled');\n                    }\n                    var output = String.format(\n                        'View name: {0}<br/>View type: {1}',\n                        result.value.viewName, viewType);\n                    $('#message').html(output);\n                }\n            }\n        );\n    }\n\n    // Get the GUID of the currently selected resource and display it in the add-in.\n    function getResourceGuid() {\n        Office.context.document.getSelectedResourceAsync(\n            function (result) {\n                if (result.status === Office.AsyncResultStatus.Failed) {\n                    onError(result.error);\n                }\n                else {\n                    $('#message').html('Resource GUID: ' + result.value);\n                }\n            }\n        );\n    }\n\n    function onError(error) {\n        $('#message').html(error.name + ' ' + error.code + ': ' + error.message);\n    }\n})();\n\n// For a complete code sample that shows how to use a ViewSelectionChanged event handler in a Project add-in,\n// see \"Create your first task pane add-in for Project by using a text editor.\"\n// https://docs.microsoft.com/office/dev/add-ins/project/create-your-first-task-pane-add-in-for-project-by-using-a-text-editor\n```"
   isPreview: false
   isDeprecated: false
@@ -115,13 +115,13 @@ methods:
     content: 'addHandlerAsync(eventType: Office.EventType, handler: any, callback?: (result: AsyncResult<void>) => void): void;'
     parameters:
     - id: eventType
-      description: Para un evento de objeto Document, el parámetro eventType se puede especificar como `Office.EventType.Document.SelectionChanged` o `Office.EventType.Document.ActiveViewChanged`<!-- -->o el valor de texto correspondiente de esta enumeración.
+      description: Para un evento de objeto Document, el parámetro eventType se puede especificar como `Office.EventType.Document.SelectionChanged` o `Office.EventType.Document.ActiveViewChanged`<!-- -->, o el valor de texto correspondiente de esta enumeración.
       type: <xref uid="office!Office.EventType:enum" />
     - id: handler
-      description: La función del controlador de eventos que se va a agregar, cuyo único parámetro es de tipo [Office.DocumentSelectionChangedEventArgs](xref:office!Office.DocumentSelectionChangedEventArgs:interface)<!-- -->. Obligatorio.
+      description: Función de controlador de eventos que se va a agregar, cuyo único parámetro es de tipo [Office.DocumentSelectionChangedEventArgs](xref:office!Office.DocumentSelectionChangedEventArgs:interface)<!-- -->. Obligatorio.
       type: any
     - id: callback
-      description: Opcional. Una función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office. asyncResult](xref:office!Office.AsyncResult:interface)<!-- -->.
+      description: Opcional. Función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office.AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -142,10 +142,10 @@ methods:
     content: 'getActiveViewAsync(options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<"edit" | "read">) => void): void;'
     parameters:
     - id: options
-      description: Proporciona una opción para conservar los datos de contexto de cualquier tipo, sin cambios, para su uso en una devolución de llamada.
+      description: Proporciona una opción para conservar datos de contexto de cualquier tipo, sin cambios, para su uso en una devolución de llamada.
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: Opcional. Una función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office. asyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propiedad del resultado es el estado de la vista actual de la presentación. El valor devuelto puede ser "Edit" o "Read". "Editar" corresponde a cualquiera de las vistas en las que puede editar diapositivas, como la vista normal o de esquema. "lectura" corresponde a la presentación con diapositivas o a la vista de lectura.
+      description: Opcional. Función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office.AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La propiedad del resultado es el estado de la vista `value` actual de la presentación. El valor devuelto puede ser "editar" o "leer". "editar" corresponde a cualquiera de las vistas en las que puede editar diapositivas, como Normal o Vista de esquema. "lectura" corresponde a presentación con diapositivas o vista de lectura.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;"edit" | "read"&gt;) =&gt; void'
     return:
       type: void
@@ -186,7 +186,7 @@ methods:
     content: 'getActiveViewAsync(callback?: (result: AsyncResult<"edit" | "read">) => void): void;'
     parameters:
     - id: callback
-      description: Opcional. Una función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office. asyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propiedad del resultado es el estado de la vista actual de la presentación. El valor devuelto puede ser "Edit" o "Read". "Editar" corresponde a cualquiera de las vistas en las que puede editar diapositivas, como la vista normal o de esquema. "lectura" corresponde a la presentación con diapositivas o a la vista de lectura.
+      description: Opcional. Función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office.AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La propiedad del resultado es el estado de la vista `value` actual de la presentación. El valor devuelto puede ser "editar" o "leer". "editar" corresponde a cualquiera de las vistas en las que puede editar diapositivas, como Normal o Vista de esquema. "lectura" corresponde a presentación con diapositivas o vista de lectura.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;"edit" | "read"&gt;) =&gt; void'
     return:
       type: void
@@ -195,8 +195,8 @@ methods:
   uid: office!Office.Document#getFileAsync:member(1)
   package: office!
   fullName: getFileAsync(fileType, options, callback)
-  summary: Devuelve el archivo de documento entero en segmentos de hasta 4194304 bytes (4 MB). Para los complementos en iPad, el segmento de archivos se admite hasta 65536 (64 KB). Tenga en cuenta que, si especifica un tamaño del segmento del archivo superior al límite permitido, se producirá el error "Error interno".
-  remarks: "**Conjuntos de requisitos**:\n\n- [CompressedFile](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#compressedfile) (cuando se usa `Office.FileType.Compressed`<!-- -->)\n\n- [Archivo](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#file)\n\n- [TextFile](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textfile) (cuando se usa `Office.FileType.Text`<!-- -->)\n\nPara los complementos que se ejecutan en aplicaciones host de Office distintas de Office en iPad, el `getFileAsync` método admite la obtención de archivos en segmentos de hasta 4194304 bytes (4 MB). Para complementos que se ejecutan en aplicaciones de Office en iPad, el `getFileAsync` método admite la obtención de archivos en segmentos de hasta 65536 (64 KB).\n\nEl `fileType` parámetro se puede especificar mediante los valores de texto o la enumeración [Office. filetype](xref:office!Office.FileType:enum) . Pero los valores posibles varían según el host:\n\n*FileTypes compatible, por plataforma* <table> <tr><th> </th><th> Office en Windows </th><th> Office en la web </th><th> Office en iPad </th><th> Office en Mac </th></tr> <tr><td><strong> Microsoft </strong></td><td> `Compressed`<!-- -->, `Pdf`<!-- -->, `Text` </td><td> `Compressed`<!-- -->, `Pdf` </td><td> </td><td> `Compressed`<!-- -->, `Pdf`<!-- -->, `Text` </td></tr> <tr><td><strong> PowerPoint </strong></td><td> `Compressed`<!-- -->, `Pdf` </td><td> `Compressed`<!-- -->, `Pdf` </td><td> `Compressed`<!-- -->, `Pdf` </td><td> `Compressed`<!-- -->, `Pdf` </td></tr> <tr><td><strong> Palabra </strong></td><td> `Compressed`<!-- -->, `Pdf`<!-- -->, `Text` </td><td> `Compressed`<!-- -->, `Pdf`<!-- -->, `Text` </td><td> `Compressed` </td><td> `Compressed`<!-- -->, `Pdf`<!-- -->, `Text` </td></tr> </table>\n\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\n// The following example gets the document in Office Open XML (\"compressed\") format in 65536 bytes (64 KB) slices.\n// Note: The implementation of app.showNotification in this example is from the Visual Studio template for Office Add-ins.\nfunction getDocumentAsCompressed() {\n    Office.context.document.getFileAsync(Office.FileType.Compressed, { sliceSize: 65536 /*64 KB*/ }, \n        function (result) {\n            if (result.status == \"succeeded\") {\n                // If the getFileAsync call succeeded, then\n                // result.value will return a valid File Object.\n                var myFile = result.value;\n                var sliceCount = myFile.sliceCount;\n                var slicesReceived = 0, gotAllSlices = true, docdataSlices = [];\n                app.showNotification(\"File size:\" + myFile.size + \" #Slices: \" + sliceCount);\n\n                // Get the file slices.\n                getSliceAsync(myFile, 0, sliceCount, gotAllSlices, docdataSlices, slicesReceived);\n            }\n            else {\n                app.showNotification(\"Error:\", result.error.message);\n            }\n    });\n}\n\nfunction getSliceAsync(file, nextSlice, sliceCount, gotAllSlices, docdataSlices, slicesReceived) {\n    file.getSliceAsync(nextSlice, function (sliceResult) {\n        if (sliceResult.status == \"succeeded\") {\n            if (!gotAllSlices) { // Failed to get all slices, no need to continue.\n                return;\n            }\n\n            // Got one slice, store it in a temporary array.\n            // (Or you can do something else, such as\n            // send it to a third-party server.)\n            docdataSlices[sliceResult.value.index] = sliceResult.value.data;\n            if (++slicesReceived == sliceCount) {\n              // All slices have been received.\n              file.closeAsync();\n              onGotAllSlices(docdataSlices);\n            }\n            else {\n                getSliceAsync(file, ++nextSlice, sliceCount, gotAllSlices, docdataSlices, slicesReceived);\n            }\n        }\n            else {\n                gotAllSlices = false;\n                file.closeAsync();\n                app.showNotification(\"getSliceAsync Error:\", sliceResult.error.message);\n            }\n    });\n}\n\nfunction onGotAllSlices(docdataSlices) {\n    var docdata = [];\n    for (var i = 0; i < docdataSlices.length; i++) {\n        docdata = docdata.concat(docdataSlices[i]);\n    }\n\n    var fileContent = new String();\n    for (var j = 0; j < docdata.length; j++) {\n        fileContent += String.fromCharCode(docdata[j]);\n    }\n\n    // Now all the file content is stored in 'fileContent' variable,\n    // you can do something with it, such as print, fax...\n}\n\n// The following example gets the document in PDF format.\nOffice.context.document.getFileAsync(Office.FileType.Pdf,\n    function(result) {\n        if (result.status == \"succeeded\") {\n            var myFile = result.value;\n            var sliceCount = myFile.sliceCount;\n            app.showNotification(\"File size:\" + myFile.size + \" #Slices: \" + sliceCount);\n            // Now, you can call getSliceAsync to download the files,\n            // as described in the previous code segment (compressed format).\n            \n            myFile.closeAsync();\n        }\n        else {\n            app.showNotification(\"Error:\", result.error.message);\n        }\n}\n);\n```"
+  summary: Devuelve el archivo de documento entero en segmentos de hasta 4194304 bytes (4 MB). Para complementos en iPad, el segmento de archivos se admite hasta 65536 (64 KB). Tenga en cuenta que, si especifica un tamaño del segmento del archivo superior al límite permitido, se producirá el error "Error interno".
+  remarks: "**Conjuntos de requisitos**:\n\n- [CompressedFile](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#compressedfile) (al usar `Office.FileType.Compressed`<!-- -->)\n\n- [Archivo](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#file)\n\n- [TextFile](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textfile) (al usar `Office.FileType.Text`<!-- -->)\n\nPara complementos que se ejecutan en aplicaciones host de Office que no son Office en iPad, el método admite la obtención de archivos en segmentos de hasta `getFileAsync` 4194304 bytes (4 MB). Para complementos que se ejecutan en aplicaciones de Office en iPad, el método admite la obtención de archivos en segmentos de hasta `getFileAsync` 65536 (64 KB).\n\nEl `fileType` parámetro se puede especificar mediante la enumeración [Office.FileType](xref:office!Office.FileType:enum) o los valores de texto. Pero los valores posibles varían con el host:\n\n*FileTypes compatibles, por plataforma* <table> <tr><th> </th><th> Office en Windows </th><th> Office en la Web </th><th> Office en iPad </th><th> Office en Mac </th></tr> <tr><td><strong> Excel </strong></td><td> `Compressed`<!-- -->, `Pdf`<!-- -->, `Text` </td><td> `Compressed`<!-- -->, `Pdf` </td><td> </td><td> `Compressed`<!-- -->, `Pdf`<!-- -->, `Text` </td></tr> <tr><td><strong> PowerPoint </strong></td><td> `Compressed`<!-- -->, `Pdf` </td><td> `Compressed`<!-- -->, `Pdf` </td><td> `Compressed`<!-- -->, `Pdf` </td><td> `Compressed`<!-- -->, `Pdf` </td></tr> <tr><td><strong> Word </strong></td><td> `Compressed`<!-- -->, `Pdf`<!-- -->, `Text` </td><td> `Compressed`<!-- -->, `Pdf`<!-- -->, `Text` </td><td> `Compressed` </td><td> `Compressed`<!-- -->, `Pdf`<!-- -->, `Text` </td></tr> </table>\n\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\n// The following example gets the document in Office Open XML (\"compressed\") format in 65536 bytes (64 KB) slices.\n// Note: The implementation of app.showNotification in this example is from the Visual Studio template for Office Add-ins.\nfunction getDocumentAsCompressed() {\n    Office.context.document.getFileAsync(Office.FileType.Compressed, { sliceSize: 65536 /*64 KB*/ }, \n        function (result) {\n            if (result.status == \"succeeded\") {\n                // If the getFileAsync call succeeded, then\n                // result.value will return a valid File Object.\n                var myFile = result.value;\n                var sliceCount = myFile.sliceCount;\n                var slicesReceived = 0, gotAllSlices = true, docdataSlices = [];\n                app.showNotification(\"File size:\" + myFile.size + \" #Slices: \" + sliceCount);\n\n                // Get the file slices.\n                getSliceAsync(myFile, 0, sliceCount, gotAllSlices, docdataSlices, slicesReceived);\n            }\n            else {\n                app.showNotification(\"Error:\", result.error.message);\n            }\n    });\n}\n\nfunction getSliceAsync(file, nextSlice, sliceCount, gotAllSlices, docdataSlices, slicesReceived) {\n    file.getSliceAsync(nextSlice, function (sliceResult) {\n        if (sliceResult.status == \"succeeded\") {\n            if (!gotAllSlices) { // Failed to get all slices, no need to continue.\n                return;\n            }\n\n            // Got one slice, store it in a temporary array.\n            // (Or you can do something else, such as\n            // send it to a third-party server.)\n            docdataSlices[sliceResult.value.index] = sliceResult.value.data;\n            if (++slicesReceived == sliceCount) {\n              // All slices have been received.\n              file.closeAsync();\n              onGotAllSlices(docdataSlices);\n            }\n            else {\n                getSliceAsync(file, ++nextSlice, sliceCount, gotAllSlices, docdataSlices, slicesReceived);\n            }\n        }\n            else {\n                gotAllSlices = false;\n                file.closeAsync();\n                app.showNotification(\"getSliceAsync Error:\", sliceResult.error.message);\n            }\n    });\n}\n\nfunction onGotAllSlices(docdataSlices) {\n    var docdata = [];\n    for (var i = 0; i < docdataSlices.length; i++) {\n        docdata = docdata.concat(docdataSlices[i]);\n    }\n\n    var fileContent = new String();\n    for (var j = 0; j < docdata.length; j++) {\n        fileContent += String.fromCharCode(docdata[j]);\n    }\n\n    // Now all the file content is stored in 'fileContent' variable,\n    // you can do something with it, such as print, fax...\n}\n\n// The following example gets the document in PDF format.\nOffice.context.document.getFileAsync(Office.FileType.Pdf,\n    function(result) {\n        if (result.status == \"succeeded\") {\n            var myFile = result.value;\n            var sliceCount = myFile.sliceCount;\n            app.showNotification(\"File size:\" + myFile.size + \" #Slices: \" + sliceCount);\n            // Now, you can call getSliceAsync to download the files,\n            // as described in the previous code segment (compressed format).\n            \n            myFile.closeAsync();\n        }\n        else {\n            app.showNotification(\"Error:\", result.error.message);\n        }\n}\n);\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -206,10 +206,10 @@ methods:
       description: El formato en el que se devolverá el archivo
       type: <xref uid="office!Office.FileType:enum" />
     - id: options
-      description: Proporciona opciones para establecer el tamaño de las divisiones en las que se dividirá el documento.
+      description: Proporciona opciones para establecer el tamaño de los segmentos en los que se dividirá el documento.
       type: <xref uid="office!Office.GetFileOptions:interface" />
     - id: callback
-      description: Opcional. Una función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office. asyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propiedad del resultado es el objeto de archivo.
+      description: Opcional. Función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office.AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propiedad del resultado es el objeto File.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="office!Office.File:interface" />&gt;) =&gt; void'
     return:
       type: void
@@ -218,27 +218,27 @@ methods:
   uid: office!Office.Document#getFileAsync:member(2)
   package: office!
   fullName: getFileAsync(fileType, callback)
-  summary: Devuelve el archivo de documento entero en segmentos de hasta 4194304 bytes (4 MB). Para los complementos en iPad, el segmento de archivos se admite hasta 65536 (64 KB). Tenga en cuenta que, si especifica un tamaño del segmento del archivo superior al límite permitido, se producirá el error "Error interno".
+  summary: Devuelve el archivo de documento entero en segmentos de hasta 4194304 bytes (4 MB). Para complementos en iPad, el segmento de archivos se admite hasta 65536 (64 KB). Tenga en cuenta que, si especifica un tamaño del segmento del archivo superior al límite permitido, se producirá el error "Error interno".
   remarks: >-
     **Conjuntos de requisitos**:
 
 
-    - [CompressedFile](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#compressedfile) (cuando se usa `Office.FileType.Compressed`<!-- -->)
+    - [CompressedFile](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#compressedfile) (al usar `Office.FileType.Compressed`<!-- -->)
 
 
     - [Archivo](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#file)
 
 
-    - [TextFile](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textfile) (cuando se usa `Office.FileType.Text`<!-- -->)
+    - [TextFile](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textfile) (al usar `Office.FileType.Text`<!-- -->)
 
 
-    Para los complementos que se ejecutan en aplicaciones host de Office distintas de Office en iPad, el `getFileAsync` método admite la obtención de archivos en segmentos de hasta 4194304 bytes (4 MB). Para complementos que se ejecutan en aplicaciones de Office en iPad, el `getFileAsync` método admite la obtención de archivos en segmentos de hasta 65536 (64 KB).
+    Para complementos que se ejecutan en aplicaciones host de Office que no son Office en iPad, el método admite la obtención de archivos en segmentos de hasta `getFileAsync` 4194304 bytes (4 MB). Para complementos que se ejecutan en aplicaciones de Office en iPad, el método admite la obtención de archivos en segmentos de hasta `getFileAsync` 65536 (64 KB).
 
 
-    El `fileType` parámetro se puede especificar mediante los valores de texto o la enumeración [Office. filetype](xref:office!Office.FileType:enum) . Pero los valores posibles varían según el host:
+    El `fileType` parámetro se puede especificar mediante la enumeración [Office.FileType](xref:office!Office.FileType:enum) o los valores de texto. Pero los valores posibles varían con el host:
 
 
-    *FileTypes compatible, por plataforma* <table> <tr><th> </th><th> Office en Windows </th><th> Office en la web </th><th> Office en iPad </th><th> Office en Mac </th></tr> <tr><td><strong> Microsoft </strong></td><td> `Compressed`<!-- -->, `Pdf`<!-- -->, `Text` </td><td> `Compressed`<!-- -->, `Pdf` </td><td> </td><td> `Compressed`<!-- -->, `Pdf`<!-- -->, `Text` </td></tr> <tr><td><strong> PowerPoint </strong></td><td> `Compressed`<!-- -->, `Pdf` </td><td> `Compressed`<!-- -->, `Pdf` </td><td> `Compressed`<!-- -->, `Pdf` </td><td> `Compressed`<!-- -->, `Pdf` </td></tr> <tr><td><strong> Palabra </strong></td><td> `Compressed`<!-- -->, `Pdf`<!-- -->, `Text` </td><td> `Compressed`<!-- -->, `Pdf`<!-- -->, `Text` </td><td> `Compressed` </td><td> `Compressed`<!-- -->, `Pdf`<!-- -->, `Text` </td></tr> </table>
+    *FileTypes compatibles, por plataforma* <table> <tr><th> </th><th> Office en Windows </th><th> Office en la Web </th><th> Office en iPad </th><th> Office en Mac </th></tr> <tr><td><strong> Excel </strong></td><td> `Compressed`<!-- -->, `Pdf`<!-- -->, `Text` </td><td> `Compressed`<!-- -->, `Pdf` </td><td> </td><td> `Compressed`<!-- -->, `Pdf`<!-- -->, `Text` </td></tr> <tr><td><strong> PowerPoint </strong></td><td> `Compressed`<!-- -->, `Pdf` </td><td> `Compressed`<!-- -->, `Pdf` </td><td> `Compressed`<!-- -->, `Pdf` </td><td> `Compressed`<!-- -->, `Pdf` </td></tr> <tr><td><strong> Word </strong></td><td> `Compressed`<!-- -->, `Pdf`<!-- -->, `Text` </td><td> `Compressed`<!-- -->, `Pdf`<!-- -->, `Text` </td><td> `Compressed` </td><td> `Compressed`<!-- -->, `Pdf`<!-- -->, `Text` </td></tr> </table>
   isPreview: false
   isDeprecated: false
   syntax:
@@ -248,7 +248,7 @@ methods:
       description: El formato en el que se devolverá el archivo
       type: <xref uid="office!Office.FileType:enum" />
     - id: callback
-      description: Opcional. Una función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office. asyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propiedad del resultado es el objeto de archivo.
+      description: Opcional. Función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office.AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propiedad del resultado es el objeto File.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="office!Office.File:interface" />&gt;) =&gt; void'
     return:
       type: void
@@ -259,20 +259,20 @@ methods:
   fullName: getFilePropertiesAsync(options, callback)
   summary: Obtiene las propiedades de archivo del documento actual.
   remarks: >-
-    **Conjuntos de requisitos**: [no está en un conjunto](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#methods-that-arent-part-of-a-requirement-set)
+    **Conjuntos de** [requisitos: no en un conjunto](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#methods-that-arent-part-of-a-requirement-set)
 
 
-    Obtiene la dirección URL del archivo con la propiedad URL `asyncResult.value.url`<!-- -->.
+    Obtiene la dirección URL del archivo con la propiedad url `asyncResult.value.url`<!-- -->.
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'getFilePropertiesAsync(options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<Office.FileProperties>) => void): void;'
     parameters:
     - id: options
-      description: Proporciona una opción para conservar los datos de contexto de cualquier tipo, sin cambios, para su uso en una devolución de llamada.
+      description: Proporciona una opción para conservar datos de contexto de cualquier tipo, sin cambios, para su uso en una devolución de llamada.
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: Una función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office. asyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propiedad del resultado son las propiedades del archivo (con la dirección URL que se encuentra en `asyncResult.value.url`<!-- -->).
+      description: Función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office.AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propiedad del resultado es las propiedades del archivo (con la dirección URL encontrada en `asyncResult.value.url`<!-- -->).
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="office!Office.FileProperties:interface" />&gt;) =&gt; void'
     return:
       type: void
@@ -283,10 +283,10 @@ methods:
   fullName: getFilePropertiesAsync(callback)
   summary: Obtiene las propiedades de archivo del documento actual.
   remarks: >-
-    **Conjuntos de requisitos**: [no está en un conjunto](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#methods-that-arent-part-of-a-requirement-set)
+    **Conjuntos de** [requisitos: no en un conjunto](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#methods-that-arent-part-of-a-requirement-set)
 
 
-    Obtiene la dirección URL del archivo con la propiedad URL `asyncResult.value.url`<!-- -->.
+    Obtiene la dirección URL del archivo con la propiedad url `asyncResult.value.url`<!-- -->.
 
 
     #### <a name="examples"></a>Ejemplos
@@ -324,7 +324,7 @@ methods:
     content: 'getFilePropertiesAsync(callback?: (result: AsyncResult<Office.FileProperties>) => void): void;'
     parameters:
     - id: callback
-      description: Una función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office. asyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propiedad del resultado son las propiedades del archivo (con la dirección URL que se encuentra en `asyncResult.value.url`<!-- -->).
+      description: Función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office.AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propiedad del resultado es las propiedades del archivo (con la dirección URL encontrada en `asyncResult.value.url`<!-- -->).
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="office!Office.FileProperties:interface" />&gt;) =&gt; void'
     return:
       type: void
@@ -334,10 +334,10 @@ methods:
   package: office!
   fullName: getMaxResourceIndexAsync(options, callback)
   summary: >-
-    Solo documentos de proyecto. Obtiene el índice máximo de la colección de recursos del proyecto actual.
+    Solo documentos de proyecto. Obtener el índice máximo de la colección de recursos en el proyecto actual.
 
 
-    **Importante**: esta API solo funciona en el proyecto 2016 en el escritorio de Windows.
+    **Importante:** Esta API solo funciona en Project 2016 en el escritorio de Windows.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -345,10 +345,10 @@ methods:
     content: 'getMaxResourceIndexAsync(options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<number>) => void): void;'
     parameters:
     - id: options
-      description: Proporciona una opción para conservar los datos de contexto de cualquier tipo, sin cambios, para su uso en una devolución de llamada.
+      description: Proporciona una opción para conservar datos de contexto de cualquier tipo, sin cambios, para su uso en una devolución de llamada.
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: Opcional. Una función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office. asyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propiedad del resultado es el número de índice más alto de la colección de recursos del proyecto actual.
+      description: Opcional. Función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office.AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La propiedad del resultado es el número de índice más alto de la colección de recursos `value` del proyecto actual.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;number&gt;) =&gt; void'
     return:
       type: void
@@ -358,10 +358,10 @@ methods:
   package: office!
   fullName: getMaxResourceIndexAsync(callback)
   summary: >-
-    Solo documentos de proyecto. Obtiene el índice máximo de la colección de recursos del proyecto actual.
+    Solo documentos de proyecto. Obtener el índice máximo de la colección de recursos en el proyecto actual.
 
 
-    **Importante**: esta API solo funciona en el proyecto 2016 en el escritorio de Windows.
+    **Importante:** Esta API solo funciona en Project 2016 en el escritorio de Windows.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -369,7 +369,7 @@ methods:
     content: 'getMaxResourceIndexAsync(callback?: (result: AsyncResult<number>) => void): void;'
     parameters:
     - id: callback
-      description: Opcional. Una función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office. asyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propiedad del resultado es el número de índice más alto de la colección de recursos del proyecto actual.
+      description: Opcional. Función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office.AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La propiedad del resultado es el número de índice más alto de la colección de recursos `value` del proyecto actual.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;number&gt;) =&gt; void'
     return:
       type: void
@@ -379,10 +379,10 @@ methods:
   package: office!
   fullName: getMaxTaskIndexAsync(options, callback)
   summary: >-
-    Solo documentos de proyecto. Obtiene el índice máximo de la colección de tareas del proyecto actual.
+    Solo documentos de proyecto. Obtener el índice máximo de la colección de tareas en el proyecto actual.
 
 
-    **Importante**: esta API solo funciona en el proyecto 2016 en el escritorio de Windows.
+    **Importante:** Esta API solo funciona en Project 2016 en el escritorio de Windows.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -390,10 +390,10 @@ methods:
     content: 'getMaxTaskIndexAsync(options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<number>) => void): void;'
     parameters:
     - id: options
-      description: Proporciona una opción para conservar los datos de contexto de cualquier tipo, sin cambios, para su uso en una devolución de llamada.
+      description: Proporciona una opción para conservar datos de contexto de cualquier tipo, sin cambios, para su uso en una devolución de llamada.
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: Opcional. Una función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office. asyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propiedad del resultado es el número de índice más alto de la colección de tareas del proyecto actual.
+      description: Opcional. Función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office.AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La propiedad del resultado es el número de índice más alto de la colección de tareas `value` del proyecto actual.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;number&gt;) =&gt; void'
     return:
       type: void
@@ -403,10 +403,10 @@ methods:
   package: office!
   fullName: getMaxTaskIndexAsync(callback)
   summary: >-
-    Solo documentos de proyecto. Obtiene el índice máximo de la colección de tareas del proyecto actual.
+    Solo documentos de proyecto. Obtener el índice máximo de la colección de tareas en el proyecto actual.
 
 
-    **Importante**: esta API solo funciona en el proyecto 2016 en el escritorio de Windows.
+    **Importante:** Esta API solo funciona en Project 2016 en el escritorio de Windows.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -414,7 +414,7 @@ methods:
     content: 'getMaxTaskIndexAsync(callback?: (result: AsyncResult<number>) => void): void;'
     parameters:
     - id: callback
-      description: Opcional. Una función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office. asyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propiedad del resultado es el número de índice más alto de la colección de tareas del proyecto actual.
+      description: Opcional. Función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office.AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La propiedad del resultado es el número de índice más alto de la colección de tareas `value` del proyecto actual.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;number&gt;) =&gt; void'
     return:
       type: void
@@ -423,7 +423,7 @@ methods:
   uid: office!Office.Document#getProjectFieldAsync:member(1)
   package: office!
   fullName: getProjectFieldAsync(fieldId, options, callback)
-  summary: Solo documentos de proyecto. Obtener campo de proyecto (p. ej. ProjectWebAccessURL).
+  summary: Solo documentos de proyecto. Obtener campo Project (Ex. ProjectWebAccessURL).
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -434,10 +434,10 @@ methods:
       description: Campos de nivel de proyecto.
       type: number
     - id: options
-      description: Proporciona una opción para conservar los datos de contexto de cualquier tipo, sin cambios, para su uso en una devolución de llamada.
+      description: Proporciona una opción para conservar datos de contexto de cualquier tipo, sin cambios, para su uso en una devolución de llamada.
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: Opcional. Una función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office. asyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propiedad del resultado contiene la `fieldValue` propiedad, que representa el valor del campo especificado.
+      description: Opcional. Función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office.AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propiedad del resultado contiene la `fieldValue` propiedad, que representa el valor del campo especificado.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;any&gt;) =&gt; void'
     return:
       type: void
@@ -446,7 +446,7 @@ methods:
   uid: office!Office.Document#getProjectFieldAsync:member(2)
   package: office!
   fullName: getProjectFieldAsync(fieldId, callback)
-  summary: Solo documentos de proyecto. Obtener campo de proyecto (p. ej. ProjectWebAccessURL).
+  summary: Solo documentos de proyecto. Obtener campo Project (Ex. ProjectWebAccessURL).
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -457,7 +457,7 @@ methods:
       description: Campos de nivel de proyecto.
       type: number
     - id: callback
-      description: Opcional. Una función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office. asyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propiedad del resultado contiene la `fieldValue` propiedad, que representa el valor del campo especificado.
+      description: Opcional. Función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office.AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propiedad del resultado contiene la `fieldValue` propiedad, que representa el valor del campo especificado.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;any&gt;) =&gt; void'
     return:
       type: void
@@ -467,10 +467,10 @@ methods:
   package: office!
   fullName: getResourceByIndexAsync(resourceIndex, options, callback)
   summary: >-
-    Solo documentos de proyecto. Obtiene el GUID del recurso que tiene el índice especificado en la colección de recursos.
+    Solo documentos de proyecto. Obtenga el GUID del recurso que tiene el índice especificado en la colección de recursos.
 
 
-    **Importante**: esta API solo funciona en el proyecto 2016 en el escritorio de Windows.
+    **Importante:** Esta API solo funciona en Project 2016 en el escritorio de Windows.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -481,10 +481,10 @@ methods:
       description: Índice del recurso en la colección de recursos del proyecto.
       type: number
     - id: options
-      description: Proporciona una opción para conservar los datos de contexto de cualquier tipo, sin cambios, para su uso en una devolución de llamada.
+      description: Proporciona una opción para conservar datos de contexto de cualquier tipo, sin cambios, para su uso en una devolución de llamada.
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: Opcional. Una función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office. asyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propiedad del resultado es el GUID del recurso como una cadena.
+      description: Opcional. Función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office.AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propiedad del resultado es el GUID del recurso como una cadena.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
     return:
       type: void
@@ -494,10 +494,10 @@ methods:
   package: office!
   fullName: getResourceByIndexAsync(resourceIndex, callback)
   summary: >-
-    Solo documentos de proyecto. Obtiene el GUID del recurso que tiene el índice especificado en la colección de recursos.
+    Solo documentos de proyecto. Obtenga el GUID del recurso que tiene el índice especificado en la colección de recursos.
 
 
-    **Importante**: esta API solo funciona en el proyecto 2016 en el escritorio de Windows.
+    **Importante:** Esta API solo funciona en Project 2016 en el escritorio de Windows.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -508,7 +508,7 @@ methods:
       description: Índice del recurso en la colección de recursos del proyecto.
       type: number
     - id: callback
-      description: Opcional. Una función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office. asyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propiedad del resultado es el GUID del recurso como una cadena.
+      description: Opcional. Función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office.AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propiedad del resultado es el GUID del recurso como una cadena.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
     return:
       type: void
@@ -517,7 +517,7 @@ methods:
   uid: office!Office.Document#getResourceFieldAsync:member(1)
   package: office!
   fullName: getResourceFieldAsync(resourceId, fieldId, options, callback)
-  summary: Solo documentos de proyecto. Obtener campo de recurso para el identificador de recurso proporcionado. (por ejemplo,. ResourceName)
+  summary: Solo documentos de proyecto. Obtener campo de recurso para el id. de recurso proporcionado. (Ex.ResourceName)
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -525,16 +525,16 @@ methods:
     content: 'getResourceFieldAsync(resourceId: string, fieldId: number, options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<string>) => void): void;'
     parameters:
     - id: resourceId
-      description: Puede ser una cadena o un valor del identificador de recurso.
+      description: Una cadena o un valor del id. de recurso.
       type: string
     - id: fieldId
       description: Campos de recursos.
       type: number
     - id: options
-      description: Proporciona una opción para conservar los datos de contexto de cualquier tipo, sin cambios, para su uso en una devolución de llamada.
+      description: Proporciona una opción para conservar datos de contexto de cualquier tipo, sin cambios, para su uso en una devolución de llamada.
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: Opcional. Una función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office. asyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propiedad del resultado es el GUID del recurso como una cadena.
+      description: Opcional. Función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office.AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propiedad del resultado es el GUID del recurso como una cadena.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
     return:
       type: void
@@ -543,7 +543,7 @@ methods:
   uid: office!Office.Document#getResourceFieldAsync:member(2)
   package: office!
   fullName: getResourceFieldAsync(resourceId, fieldId, callback)
-  summary: Solo documentos de proyecto. Obtener campo de recurso para el identificador de recurso proporcionado. (por ejemplo,. ResourceName)
+  summary: Solo documentos de proyecto. Obtener campo de recurso para el id. de recurso proporcionado. (Ex.ResourceName)
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -551,13 +551,13 @@ methods:
     content: 'getResourceFieldAsync(resourceId: string, fieldId: number, callback?: (result: AsyncResult<string>) => void): void;'
     parameters:
     - id: resourceId
-      description: Puede ser una cadena o un valor del identificador de recurso.
+      description: Una cadena o un valor del id. de recurso.
       type: string
     - id: fieldId
       description: Campos de recursos.
       type: number
     - id: callback
-      description: Opcional. Una función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office. asyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propiedad del resultado es el GUID del recurso como una cadena.
+      description: Opcional. Función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office.AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propiedad del resultado es el GUID del recurso como una cadena.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
     return:
       type: void
@@ -567,20 +567,20 @@ methods:
   package: office!
   fullName: getSelectedDataAsync(coercionType, options, callback)
   summary: Lee los datos incluidos en la selección actual del documento.
-  remarks: "**Conjuntos de requisitos**:\n\n- [HtmlCoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#htmlcoercion) (cuando se usa `Office.CoercionType.Html`<!-- -->)\n\n- [MatrixCoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#matrixcoercion) (cuando se usa `Office.CoercionType.Matrix`<!-- -->)\n\n- [OoxmlCoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#ooxmlcoercion) (cuando se usa `Office.CoercionType.Ooxml`<!-- -->)\n\n- [Selección](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#selection)\n\n- [TableCoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#tablecoercion) (cuando se usa `Office.CoercionType.Table`<!-- -->)\n\n- [TextCoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textcoercion) (cuando se usa `Office.CoercionType.Text`<!-- -->)\n\nEn la función de devolución de llamada que se pasa al método getSelectedDataAsync, puede usar las propiedades del objeto AsyncResult para devolver la siguiente información.\n\n<table> <tr> <th>Propiedad</th> <th>Usar para...</th> </tr> <tr> <td>AsyncResult.value</td> <td>Devuelve siempre undefined porque no hay ningún objeto o dato que recuperar.</td> </tr> <tr> <td>AsyncResult. status</td> <td>Determinar si la operación se ha completado correctamente o no.</td> </tr> <tr> <td>AsyncResult.error</td> <td>Tener acceso a un objeto Error que proporcione información sobre el error si no se ha completado correctamente la operación.</td> </tr> <tr> <td>AsyncResult.asyncContext</td> <td>Un elemento de cualquier tipo definido por el usuario que se devuelve en el objeto AsyncResult sin sufrir modificaciones.</td> </tr> </table>\n\nLos valores posibles para el parámetro [Office. CoercionType](xref:office!Office.CoercionType:enum) varían en función del host.\n\n<table> <tr> <th>Host</th> <th>coercionType admitido</th> </tr> <tr> <td>Excel, PowerPoint, Project y Word</td> <td>`Office.CoercionType.Text` cadena</td> </tr> <tr> <td>Excel y Word</td> <td>`Office.CoercionType.Matrix` (matriz de matrices)</td> </tr> <tr> <td>Excel y Word</td> <td>`Office.CoercionType.Table` (Objeto TableData)</td> </tr> <tr> <td>Word</td> <td>`Office.CoercionType.Html`</td> </tr> <tr> <td>Word</td> <td>`Office.CoercionType.Ooxml` (Office Open XML)</td> </tr> <tr> <td>PowerPoint en la web y Windows</td> <td>`Office.CoercionType.SlideRange`</td> </tr> <tr> <td>Excel, PowerPoint y Word</td> <td>`Office.CoercionType.XmlSvg`</td> </tr> </table>\n\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\n// The following example uses the getSelectedDataAsync method of the Document object to retrieve the\n// user's current selection as text, and then display it in the add-in's page.\n\n// Display the user's current selection.\nfunction showSelection() {\n    Office.context.document.getSelectedDataAsync(\n        \"text\",                        // coercionType\n        {valueFormat: \"unformatted\",   // valueFormat\n        filterType: \"all\"},            // filterType\n        function (result) {            // callback\n            var dataValue; \n            dataValue = result.value;\n            write('Selected data is: ' + dataValue);\n        });\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```\n```javascript\n// To read the value of the current selection, you need to write a callback function that reads the selection.\n// The following example shows how to:\n// 1. Pass an anonymous callback function that reads the value of the current selection\n//    to the callback parameter of the getSelectedDataAsync method.\n// 2. Read the selection as text, unformatted, and not filtered.\n// 3. Display the value on the add-in's page.\nfunction getText() {\n    Office.context.document.getSelectedDataAsync(Office.CoercionType.Text, \n        { valueFormat: \"unformatted\", filterType: \"all\" },\n        function (asyncResult) {\n            var error = asyncResult.error;\n            if (asyncResult.status === Office.AsyncResultStatus.Failed) {\n                write(error.name + \": \" + error.message);\n            } \n            else {\n                // Get selected data.\n                var dataValue = asyncResult.value; \n                write('Selected data is ' + dataValue);\n            }            \n        });\n}\n\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```\n```javascript\n// The following code example gets the values of the selected cells. It uses the optional\n// asyncContext parameter to pass some text to the callback function.\n// The example assumes your add-in has a reference to the jQuery library and that the\n// following page controls are defined in the content div in the page body:\n// <input id=\"get-info\" type=\"button\" value=\"Get info\" /><br />\n// <span id=\"message\"></span>\n\n(function () {\n    \"use strict\";\n\n    // The initialize function must be run each time a new page is loaded.\n    Office.initialize = function (reason) {\n        $(document).ready(function () {\n\n            // After the DOM is loaded, add-in-specific code can run.\n            $('#get-info').click(getSelectedText);\n        });\n    };\n\n    // Get the text from the selected cells in the document, and display it in the add-in.\n    function getSelectedText() {\n        Office.context.document.getSelectedDataAsync(\n            Office.CoercionType.Text,\n            {asyncContext: 'Some related info'},\n            function (result) {\n                if (result.status === Office.AsyncResultStatus.Failed) {\n                    onError(result.error);\n                }\n                else {\n                    var output = String.format(\n                        'Selected text: {0}<br/>Passed info: {1}',\n                        result.value, result.asyncContext);\n                    $('#message').html(output);\n                }\n            }\n        );\n    }\n\n    function onError(error) {\n        $('#message').html(error.name + ' ' + error.code + ': ' + error.message);\n    }\n})();\n```"
+  remarks: "**Conjuntos de requisitos**:\n\n- [HtmlCoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#htmlcoercion) (al usar `Office.CoercionType.Html`<!-- -->)\n\n- [MatrixCoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#matrixcoercion) (al usar `Office.CoercionType.Matrix`<!-- -->)\n\n- [OoxmlCoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#ooxmlcoercion) (al usar `Office.CoercionType.Ooxml`<!-- -->)\n\n- [Selección](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#selection)\n\n- [TableCoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#tablecoercion) (al usar `Office.CoercionType.Table`<!-- -->)\n\n- [TextCoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textcoercion) (al usar `Office.CoercionType.Text`<!-- -->)\n\nEn la función de devolución de llamada que se pasa al método getSelectedDataAsync, puedes usar las propiedades del objeto AsyncResult para devolver la siguiente información.\n\n<table> <tr> <th>Propiedad</th> <th>Usar para...</th> </tr> <tr> <td>AsyncResult.value</td> <td>Devuelve siempre undefined porque no hay ningún objeto o dato que recuperar.</td> </tr> <tr> <td>AsyncResult.status</td> <td>Determinar si la operación se ha completado correctamente o no.</td> </tr> <tr> <td>AsyncResult.error</td> <td>Tener acceso a un objeto Error que proporcione información sobre el error si no se ha completado correctamente la operación.</td> </tr> <tr> <td>AsyncResult.asyncContext</td> <td>Un elemento de cualquier tipo definido por el usuario que se devuelve en el objeto AsyncResult sin sufrir modificaciones.</td> </tr> </table>\n\nLos valores posibles para [el parámetro Office.CoercionType](xref:office!Office.CoercionType:enum) varían según el host.\n\n<table> <tr> <th>Host</th> <th>coercionType admitido</th> </tr> <tr> <td>Excel, PowerPoint, Project y Word</td> <td>`Office.CoercionType.Text` (cadena)</td> </tr> <tr> <td>Excel y Word</td> <td>`Office.CoercionType.Matrix` (matriz de matrices)</td> </tr> <tr> <td>Excel y Word</td> <td>`Office.CoercionType.Table` (objeto TableData)</td> </tr> <tr> <td>Word</td> <td>`Office.CoercionType.Html`</td> </tr> <tr> <td>Word</td> <td>`Office.CoercionType.Ooxml` (Office Open XML)</td> </tr> <tr> <td>PowerPoint en la web y Windows</td> <td>`Office.CoercionType.SlideRange`</td> </tr> <tr> <td>Excel, PowerPoint y Word</td> <td>`Office.CoercionType.XmlSvg`</td> </tr> </table>\n\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\n// The following example uses the getSelectedDataAsync method of the Document object to retrieve the\n// user's current selection as text, and then display it in the add-in's page.\n\n// Display the user's current selection.\nfunction showSelection() {\n    Office.context.document.getSelectedDataAsync(\n        \"text\",                        // coercionType\n        {valueFormat: \"unformatted\",   // valueFormat\n        filterType: \"all\"},            // filterType\n        function (result) {            // callback\n            var dataValue; \n            dataValue = result.value;\n            write('Selected data is: ' + dataValue);\n        });\n}\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```\n```javascript\n// To read the value of the current selection, you need to write a callback function that reads the selection.\n// The following example shows how to:\n// 1. Pass an anonymous callback function that reads the value of the current selection\n//    to the callback parameter of the getSelectedDataAsync method.\n// 2. Read the selection as text, unformatted, and not filtered.\n// 3. Display the value on the add-in's page.\nfunction getText() {\n    Office.context.document.getSelectedDataAsync(Office.CoercionType.Text, \n        { valueFormat: \"unformatted\", filterType: \"all\" },\n        function (asyncResult) {\n            var error = asyncResult.error;\n            if (asyncResult.status === Office.AsyncResultStatus.Failed) {\n                write(error.name + \": \" + error.message);\n            } \n            else {\n                // Get selected data.\n                var dataValue = asyncResult.value; \n                write('Selected data is ' + dataValue);\n            }            \n        });\n}\n\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n```\n```javascript\n// The following code example gets the values of the selected cells. It uses the optional\n// asyncContext parameter to pass some text to the callback function.\n// The example assumes your add-in has a reference to the jQuery library and that the\n// following page controls are defined in the content div in the page body:\n// <input id=\"get-info\" type=\"button\" value=\"Get info\" /><br />\n// <span id=\"message\"></span>\n\n(function () {\n    \"use strict\";\n\n    // The initialize function must be run each time a new page is loaded.\n    Office.initialize = function (reason) {\n        $(document).ready(function () {\n\n            // After the DOM is loaded, add-in-specific code can run.\n            $('#get-info').click(getSelectedText);\n        });\n    };\n\n    // Get the text from the selected cells in the document, and display it in the add-in.\n    function getSelectedText() {\n        Office.context.document.getSelectedDataAsync(\n            Office.CoercionType.Text,\n            {asyncContext: 'Some related info'},\n            function (result) {\n                if (result.status === Office.AsyncResultStatus.Failed) {\n                    onError(result.error);\n                }\n                else {\n                    var output = String.format(\n                        'Selected text: {0}<br/>Passed info: {1}',\n                        result.value, result.asyncContext);\n                    $('#message').html(output);\n                }\n            }\n        );\n    }\n\n    function onError(error) {\n        $('#message').html(error.name + ' ' + error.code + ': ' + error.message);\n    }\n})();\n```"
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'getSelectedDataAsync<T>(coercionType: Office.CoercionType, options?: GetSelectedDataOptions, callback?: (result: AsyncResult<T>) => void): void;'
     parameters:
     - id: coercionType
-      description: El tipo de la estructura de datos que se debe devolver. Vea la sección Comentarios para los tipos de coerción admitidos por cada host.
+      description: El tipo de la estructura de datos que se debe devolver. Consulte la sección de comentarios para los tipos de coerción admitidos por cada host.
       type: <xref uid="office!Office.CoercionType:enum" />
     - id: options
       description: Proporciona opciones para personalizar qué datos se devuelven y cómo se les da formato.
       type: <xref uid="office!Office.GetSelectedDataOptions:interface" />
     - id: callback
-      description: Opcional. Una función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office. asyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propiedad del resultado son los datos de la selección actual. Esto se devuelve en el formato o la estructura de datos que especificó con el parámetro coercionType. (Vea la sección de comentarios para más información sobre la coerción de datos).
+      description: Opcional. Función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office.AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propiedad del resultado son los datos de la selección actual. Esto se devuelve en la estructura de datos o formato especificado con el parámetro coercionType. (Vea la sección de comentarios para más información sobre la coerción de datos).
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;T&gt;) =&gt; void'
     return:
       type: void
@@ -594,44 +594,44 @@ methods:
     **Conjuntos de requisitos**:
 
 
-    - [HtmlCoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#htmlcoercion) (cuando se usa `Office.CoercionType.Html`<!-- -->)
+    - [HtmlCoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#htmlcoercion) (al usar `Office.CoercionType.Html`<!-- -->)
 
 
-    - [MatrixCoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#matrixcoercion) (cuando se usa `Office.CoercionType.Matrix`<!-- -->)
+    - [MatrixCoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#matrixcoercion) (al usar `Office.CoercionType.Matrix`<!-- -->)
 
 
-    - [OoxmlCoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#ooxmlcoercion) (cuando se usa `Office.CoercionType.Ooxml`<!-- -->)
+    - [OoxmlCoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#ooxmlcoercion) (al usar `Office.CoercionType.Ooxml`<!-- -->)
 
 
     - [Selección](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#selection)
 
 
-    - [TableCoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#tablecoercion) (cuando se usa `Office.CoercionType.Table`<!-- -->)
+    - [TableCoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#tablecoercion) (al usar `Office.CoercionType.Table`<!-- -->)
 
 
-    - [TextCoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textcoercion) (cuando se usa `Office.CoercionType.Text`<!-- -->)
+    - [TextCoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textcoercion) (al usar `Office.CoercionType.Text`<!-- -->)
 
 
-    En la función de devolución de llamada que se pasa al método getSelectedDataAsync, puede usar las propiedades del objeto AsyncResult para devolver la siguiente información.
+    En la función de devolución de llamada que se pasa al método getSelectedDataAsync, puedes usar las propiedades del objeto AsyncResult para devolver la siguiente información.
 
 
-    <table> <tr> <th>Propiedad</th> <th>Usar para...</th> </tr> <tr> <td>AsyncResult.value</td> <td>Devuelve siempre undefined porque no hay ningún objeto o dato que recuperar.</td> </tr> <tr> <td>AsyncResult. status</td> <td>Determinar si la operación se ha completado correctamente o no.</td> </tr> <tr> <td>AsyncResult.error</td> <td>Tener acceso a un objeto Error que proporcione información sobre el error si no se ha completado correctamente la operación.</td> </tr> <tr> <td>AsyncResult.asyncContext</td> <td>Un elemento de cualquier tipo definido por el usuario que se devuelve en el objeto AsyncResult sin sufrir modificaciones.</td> </tr> </table>
+    <table> <tr> <th>Propiedad</th> <th>Usar para...</th> </tr> <tr> <td>AsyncResult.value</td> <td>Devuelve siempre undefined porque no hay ningún objeto o dato que recuperar.</td> </tr> <tr> <td>AsyncResult.status</td> <td>Determinar si la operación se ha completado correctamente o no.</td> </tr> <tr> <td>AsyncResult.error</td> <td>Tener acceso a un objeto Error que proporcione información sobre el error si no se ha completado correctamente la operación.</td> </tr> <tr> <td>AsyncResult.asyncContext</td> <td>Un elemento de cualquier tipo definido por el usuario que se devuelve en el objeto AsyncResult sin sufrir modificaciones.</td> </tr> </table>
 
 
-    Los valores posibles para el parámetro [Office. CoercionType](xref:office!Office.CoercionType:enum) varían en función del host.
+    Los valores posibles para [el parámetro Office.CoercionType](xref:office!Office.CoercionType:enum) varían según el host.
 
 
-    <table> <tr> <th>Host</th> <th>coercionType admitido</th> </tr> <tr> <td>Excel, PowerPoint, Project y Word</td> <td>`Office.CoercionType.Text` cadena</td> </tr> <tr> <td>Excel y Word</td> <td>`Office.CoercionType.Matrix` (matriz de matrices)</td> </tr> <tr> <td>Excel y Word</td> <td>`Office.CoercionType.Table` (Objeto TableData)</td> </tr> <tr> <td>Word</td> <td>`Office.CoercionType.Html`</td> </tr> <tr> <td>Word</td> <td>`Office.CoercionType.Ooxml` (Office Open XML)</td> </tr> <tr> <td>PowerPoint en la web y Windows</td> <td>`Office.CoercionType.SlideRange`</td> </tr> <tr> <td>Excel, PowerPoint y Word</td> <td>`Office.CoercionType.XmlSvg`</td> </tr> </table>
+    <table> <tr> <th>Host</th> <th>coercionType admitido</th> </tr> <tr> <td>Excel, PowerPoint, Project y Word</td> <td>`Office.CoercionType.Text` (cadena)</td> </tr> <tr> <td>Excel y Word</td> <td>`Office.CoercionType.Matrix` (matriz de matrices)</td> </tr> <tr> <td>Excel y Word</td> <td>`Office.CoercionType.Table` (objeto TableData)</td> </tr> <tr> <td>Word</td> <td>`Office.CoercionType.Html`</td> </tr> <tr> <td>Word</td> <td>`Office.CoercionType.Ooxml` (Office Open XML)</td> </tr> <tr> <td>PowerPoint en la web y Windows</td> <td>`Office.CoercionType.SlideRange`</td> </tr> <tr> <td>Excel, PowerPoint y Word</td> <td>`Office.CoercionType.XmlSvg`</td> </tr> </table>
   isPreview: false
   isDeprecated: false
   syntax:
     content: 'getSelectedDataAsync<T>(coercionType: Office.CoercionType, callback?: (result: AsyncResult<T>) => void): void;'
     parameters:
     - id: coercionType
-      description: El tipo de la estructura de datos que se debe devolver. Vea la sección Comentarios para los tipos de coerción admitidos por cada host.
+      description: El tipo de la estructura de datos que se debe devolver. Consulte la sección de comentarios para los tipos de coerción admitidos por cada host.
       type: <xref uid="office!Office.CoercionType:enum" />
     - id: callback
-      description: Opcional. Una función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office. asyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propiedad del resultado son los datos de la selección actual. Esto se devuelve en el formato o la estructura de datos que especificó con el parámetro coercionType. (Vea la sección de comentarios para más información sobre la coerción de datos).
+      description: Opcional. Función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office.AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propiedad del resultado son los datos de la selección actual. Esto se devuelve en la estructura de datos o formato especificado con el parámetro coercionType. (Vea la sección de comentarios para más información sobre la coerción de datos).
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;T&gt;) =&gt; void'
     return:
       type: void
@@ -640,7 +640,7 @@ methods:
   uid: office!Office.Document#getSelectedResourceAsync:member(1)
   package: office!
   fullName: getSelectedResourceAsync(options, callback)
-  summary: Solo documentos de proyecto. Obtener el identificador del recurso seleccionado actualmente.
+  summary: Solo documentos de proyecto. Obtener el identificador del recurso seleccionado actual.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -648,10 +648,10 @@ methods:
     content: 'getSelectedResourceAsync(options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<string>) => void): void;'
     parameters:
     - id: options
-      description: Proporciona una opción para conservar los datos de contexto de cualquier tipo, sin cambios, para su uso en una devolución de llamada.
+      description: Proporciona una opción para conservar datos de contexto de cualquier tipo, sin cambios, para su uso en una devolución de llamada.
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: Opcional. Una función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office. asyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propiedad del resultado es el GUID del recurso como una cadena.
+      description: Opcional. Función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office.AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propiedad del resultado es el GUID del recurso como una cadena.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
     return:
       type: void
@@ -660,7 +660,7 @@ methods:
   uid: office!Office.Document#getSelectedResourceAsync:member(2)
   package: office!
   fullName: getSelectedResourceAsync(callback)
-  summary: Solo documentos de proyecto. Obtener el identificador del recurso seleccionado actualmente.
+  summary: Solo documentos de proyecto. Obtener el identificador del recurso seleccionado actual.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -668,7 +668,7 @@ methods:
     content: 'getSelectedResourceAsync(callback?: (result: AsyncResult<string>) => void): void;'
     parameters:
     - id: callback
-      description: Opcional. Una función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office. asyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propiedad del resultado es el GUID del recurso como una cadena.
+      description: Opcional. Función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office.AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propiedad del resultado es el GUID del recurso como una cadena.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
     return:
       type: void
@@ -677,7 +677,7 @@ methods:
   uid: office!Office.Document#getSelectedTaskAsync:member(1)
   package: office!
   fullName: getSelectedTaskAsync(options, callback)
-  summary: Solo documentos de proyecto. Obtener el identificador de la tarea seleccionada actualmente.
+  summary: Solo documentos de proyecto. Obtener el identificador de tarea seleccionado.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -685,10 +685,10 @@ methods:
     content: 'getSelectedTaskAsync(options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<string>) => void): void;'
     parameters:
     - id: options
-      description: Proporciona una opción para conservar los datos de contexto de cualquier tipo, sin cambios, para su uso en una devolución de llamada.
+      description: Proporciona una opción para conservar datos de contexto de cualquier tipo, sin cambios, para su uso en una devolución de llamada.
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: Opcional. Una función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office. asyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propiedad del resultado es el GUID del recurso como una cadena.
+      description: Opcional. Función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office.AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propiedad del resultado es el GUID del recurso como una cadena.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
     return:
       type: void
@@ -697,7 +697,7 @@ methods:
   uid: office!Office.Document#getSelectedTaskAsync:member(2)
   package: office!
   fullName: getSelectedTaskAsync(callback)
-  summary: Solo documentos de proyecto. Obtener el identificador de la tarea seleccionada actualmente.
+  summary: Solo documentos de proyecto. Obtener el identificador de tarea seleccionado.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -705,7 +705,7 @@ methods:
     content: 'getSelectedTaskAsync(callback?: (result: AsyncResult<string>) => void): void;'
     parameters:
     - id: callback
-      description: Opcional. Una función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office. asyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propiedad del resultado es el GUID del recurso como una cadena.
+      description: Opcional. Función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office.AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propiedad del resultado es el GUID del recurso como una cadena.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
     return:
       type: void
@@ -714,7 +714,7 @@ methods:
   uid: office!Office.Document#getSelectedViewAsync:member(1)
   package: office!
   fullName: getSelectedViewAsync(options, callback)
-  summary: Solo documentos de proyecto. Obtener el tipo de vista seleccionado actual (por ejemplo, Gantt) y nombre de vista.
+  summary: Solo documentos de proyecto. Obtener el tipo de vista seleccionado actual (Ex. Gantt) y View Name.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -722,10 +722,10 @@ methods:
     content: 'getSelectedViewAsync(options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<any>) => void): void;'
     parameters:
     - id: options
-      description: Proporciona una opción para conservar los datos de contexto de cualquier tipo, sin cambios, para su uso en una devolución de llamada.
+      description: Proporciona una opción para conservar datos de contexto de cualquier tipo, sin cambios, para su uso en una devolución de llamada.
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: 'Opcional. Una función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office. asyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propiedad del resultado contiene las siguientes propiedades: `viewName` -el nombre de la vista, como una constante ProjectViewTypes. `viewType` : El tipo de vista, como valor entero de una constante ProjectViewTypes.'
+      description: 'Opcional. Función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office.AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propiedad del resultado contiene las siguientes propiedades: - El nombre de la `viewName` vista, como una constante ProjectViewTypes. `viewType` - Tipo de vista, como el valor entero de una constante ProjectViewTypes.'
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;any&gt;) =&gt; void'
     return:
       type: void
@@ -734,7 +734,7 @@ methods:
   uid: office!Office.Document#getSelectedViewAsync:member(2)
   package: office!
   fullName: getSelectedViewAsync(callback)
-  summary: Solo documentos de proyecto. Obtener el tipo de vista seleccionado actual (por ejemplo, Gantt) y nombre de vista.
+  summary: Solo documentos de proyecto. Obtener el tipo de vista seleccionado actual (Ex. Gantt) y View Name.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -742,7 +742,7 @@ methods:
     content: 'getSelectedViewAsync(callback?: (result: AsyncResult<any>) => void): void;'
     parameters:
     - id: callback
-      description: 'Opcional. Una función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office. asyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propiedad del resultado contiene las siguientes propiedades: `viewName` -el nombre de la vista, como una constante ProjectViewTypes. `viewType` : El tipo de vista, como valor entero de una constante ProjectViewTypes.'
+      description: 'Opcional. Función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office.AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propiedad del resultado contiene las siguientes propiedades: - El nombre de la `viewName` vista, como una constante ProjectViewTypes. `viewType` - Tipo de vista, como el valor entero de una constante ProjectViewTypes.'
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;any&gt;) =&gt; void'
     return:
       type: void
@@ -751,7 +751,7 @@ methods:
   uid: office!Office.Document#getTaskAsync:member(1)
   package: office!
   fullName: getTaskAsync(taskId, options, callback)
-  summary: Solo documentos de proyecto. Obtener el nombre de la tarea, el identificador de la tarea de WSS y ResourceNames para el taskId determinado.
+  summary: Solo documentos de proyecto. Obtenga el nombre de tarea, WSS de tarea y ResourceNames para determinado taskId.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -759,13 +759,13 @@ methods:
     content: 'getTaskAsync(taskId: string, options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<any>) => void): void;'
     parameters:
     - id: taskId
-      description: Puede ser una cadena o un valor del identificador de tarea.
+      description: Una cadena o un valor del identificador de tarea.
       type: string
     - id: options
-      description: Proporciona una opción para conservar los datos de contexto de cualquier tipo, sin cambios, para su uso en una devolución de llamada.
+      description: Proporciona una opción para conservar datos de contexto de cualquier tipo, sin cambios, para su uso en una devolución de llamada.
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: 'Opcional. Una función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office. asyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propiedad del resultado contiene las siguientes propiedades: `taskName` el nombre de la tarea. `wssTaskId` : El identificador de la tarea en la lista de tareas sincronizadas de SharePoint. Si el proyecto no está sincronizado con una lista de tareas de SharePoint, el valor es 0. `resourceNames` : Lista separada por comas de los nombres de los recursos asignados a la tarea.'
+      description: 'Opcional. Función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office.AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propiedad del resultado contiene las siguientes propiedades: - El nombre de la `taskName` tarea. `wssTaskId` - El identificador de la tarea en la lista de tareas sincronizadas de SharePoint. Si el proyecto no está sincronizado con una lista de tareas de SharePoint, el valor es 0. `resourceNames` - Lista separada por comas de los nombres de los recursos asignados a la tarea.'
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;any&gt;) =&gt; void'
     return:
       type: void
@@ -774,7 +774,7 @@ methods:
   uid: office!Office.Document#getTaskAsync:member(2)
   package: office!
   fullName: getTaskAsync(taskId, callback)
-  summary: Solo documentos de proyecto. Obtener el nombre de la tarea, el identificador de la tarea de WSS y ResourceNames para el taskId determinado.
+  summary: Solo documentos de proyecto. Obtenga el nombre de tarea, WSS de tarea y ResourceNames para determinado taskId.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -782,10 +782,10 @@ methods:
     content: 'getTaskAsync(taskId: string, callback?: (result: AsyncResult<any>) => void): void;'
     parameters:
     - id: taskId
-      description: Puede ser una cadena o un valor del identificador de tarea.
+      description: Una cadena o un valor del identificador de tarea.
       type: string
     - id: callback
-      description: 'Opcional. Una función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office. asyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propiedad del resultado contiene las siguientes propiedades: `taskName` el nombre de la tarea. `wssTaskId` : El identificador de la tarea en la lista de tareas sincronizadas de SharePoint. Si el proyecto no está sincronizado con una lista de tareas de SharePoint, el valor es 0. `resourceNames` : Lista separada por comas de los nombres de los recursos asignados a la tarea.'
+      description: 'Opcional. Función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office.AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propiedad del resultado contiene las siguientes propiedades: - El nombre de la `taskName` tarea. `wssTaskId` - El identificador de la tarea en la lista de tareas sincronizadas de SharePoint. Si el proyecto no está sincronizado con una lista de tareas de SharePoint, el valor es 0. `resourceNames` - Lista separada por comas de los nombres de los recursos asignados a la tarea.'
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;any&gt;) =&gt; void'
     return:
       type: void
@@ -798,7 +798,7 @@ methods:
     Solo documentos de proyecto. Obtiene el GUID de la tarea que tiene el índice especificado en la colección de tareas.
 
 
-    **Importante**: esta API solo funciona en el proyecto 2016 en el escritorio de Windows.
+    **Importante:** Esta API solo funciona en Project 2016 en el escritorio de Windows.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -809,10 +809,10 @@ methods:
       description: Índice de la tarea en la colección de tareas del proyecto.
       type: number
     - id: options
-      description: Proporciona una opción para conservar los datos de contexto de cualquier tipo, sin cambios, para su uso en una devolución de llamada.
+      description: Proporciona una opción para conservar datos de contexto de cualquier tipo, sin cambios, para su uso en una devolución de llamada.
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: Opcional. Una función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office. asyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propiedad del resultado es el GUID de la tarea como una cadena.
+      description: Opcional. Función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office.AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propiedad del resultado es el GUID de la tarea como una cadena.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
     return:
       type: void
@@ -825,7 +825,7 @@ methods:
     Solo documentos de proyecto. Obtiene el GUID de la tarea que tiene el índice especificado en la colección de tareas.
 
 
-    **Importante**: esta API solo funciona en el proyecto 2016 en el escritorio de Windows.
+    **Importante:** Esta API solo funciona en Project 2016 en el escritorio de Windows.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -836,7 +836,7 @@ methods:
       description: Índice de la tarea en la colección de tareas del proyecto.
       type: number
     - id: callback
-      description: Opcional. Una función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office. asyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propiedad del resultado es el GUID de la tarea como una cadena.
+      description: Opcional. Función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office.AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propiedad del resultado es el GUID de la tarea como una cadena.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
     return:
       type: void
@@ -845,7 +845,7 @@ methods:
   uid: office!Office.Document#getTaskFieldAsync:member(1)
   package: office!
   fullName: getTaskFieldAsync(taskId, fieldId, options, callback)
-  summary: Solo documentos de proyecto. Obtener campo de tarea para el identificador de tarea proporcionado. (p. ej. StartDate).
+  summary: Solo documentos de proyecto. Obtener campo de tarea para el identificador de tarea proporcionado. (Ex. StartDate).
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -853,16 +853,16 @@ methods:
     content: 'getTaskFieldAsync(taskId: string, fieldId: number, options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<any>) => void): void;'
     parameters:
     - id: taskId
-      description: Puede ser una cadena o un valor del identificador de tarea.
+      description: Una cadena o un valor del identificador de tarea.
       type: string
     - id: fieldId
       description: Campos de tarea.
       type: number
     - id: options
-      description: Proporciona una opción para conservar los datos de contexto de cualquier tipo, sin cambios, para su uso en una devolución de llamada.
+      description: Proporciona una opción para conservar datos de contexto de cualquier tipo, sin cambios, para su uso en una devolución de llamada.
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: Opcional. Una función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office. asyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propiedad del resultado contiene la `fieldValue` propiedad, que representa el valor del campo especificado.
+      description: Opcional. Función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office.AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propiedad del resultado contiene la `fieldValue` propiedad, que representa el valor del campo especificado.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;any&gt;) =&gt; void'
     return:
       type: void
@@ -871,7 +871,7 @@ methods:
   uid: office!Office.Document#getTaskFieldAsync:member(2)
   package: office!
   fullName: getTaskFieldAsync(taskId, fieldId, callback)
-  summary: Solo documentos de proyecto. Obtener campo de tarea para el identificador de tarea proporcionado. (p. ej. StartDate).
+  summary: Solo documentos de proyecto. Obtener campo de tarea para el identificador de tarea proporcionado. (Ex. StartDate).
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -879,13 +879,13 @@ methods:
     content: 'getTaskFieldAsync(taskId: string, fieldId: number, callback?: (result: AsyncResult<any>) => void): void;'
     parameters:
     - id: taskId
-      description: Puede ser una cadena o un valor del identificador de tarea.
+      description: Una cadena o un valor del identificador de tarea.
       type: string
     - id: fieldId
       description: Campos de tarea.
       type: number
     - id: callback
-      description: Opcional. Una función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office. asyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propiedad del resultado contiene la `fieldValue` propiedad, que representa el valor del campo especificado.
+      description: Opcional. Función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office.AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propiedad del resultado contiene la `fieldValue` propiedad, que representa el valor del campo especificado.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;any&gt;) =&gt; void'
     return:
       type: void
@@ -894,7 +894,7 @@ methods:
   uid: office!Office.Document#getWSSUrlAsync:member(1)
   package: office!
   fullName: getWSSUrlAsync(options, callback)
-  summary: Solo documentos de proyecto. Obtener la dirección URL de WSS y el nombre de lista de la lista de tareas, la MPP también se sincroniza.
+  summary: Solo documentos de proyecto. Obtenga la WSS url y el nombre de la lista de tareas, el MPP también está sincronizado.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -902,10 +902,10 @@ methods:
     content: 'getWSSUrlAsync(options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<any>) => void): void;'
     parameters:
     - id: options
-      description: Proporciona una opción para conservar los datos de contexto de cualquier tipo, sin cambios, para su uso en una devolución de llamada.
+      description: Proporciona una opción para conservar datos de contexto de cualquier tipo, sin cambios, para su uso en una devolución de llamada.
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: 'Opcional. Una función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office. asyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propiedad del resultado contiene las siguientes propiedades: `listName` -el nombre de la lista de tareas sincronizadas de SharePoint. `serverUrl` : la dirección URL de la lista sincronizada de tareas de SharePoint.'
+      description: 'Opcional. Función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office.AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propiedad del resultado contiene las siguientes propiedades: - el nombre de la lista de tareas `listName` sincronizadas de SharePoint. `serverUrl` - la dirección URL de la lista de tareas sincronizadas de SharePoint.'
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;any&gt;) =&gt; void'
     return:
       type: void
@@ -914,7 +914,7 @@ methods:
   uid: office!Office.Document#getWSSUrlAsync:member(2)
   package: office!
   fullName: getWSSUrlAsync(callback)
-  summary: Solo documentos de proyecto. Obtener la dirección URL de WSS y el nombre de lista de la lista de tareas, la MPP también se sincroniza.
+  summary: Solo documentos de proyecto. Obtenga la WSS url y el nombre de la lista de tareas, el MPP también está sincronizado.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -922,7 +922,7 @@ methods:
     content: 'getWSSUrlAsync(callback?: (result: AsyncResult<any>) => void): void;'
     parameters:
     - id: callback
-      description: 'Opcional. Una función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office. asyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propiedad del resultado contiene las siguientes propiedades: `listName` -el nombre de la lista de tareas sincronizadas de SharePoint. `serverUrl` : la dirección URL de la lista sincronizada de tareas de SharePoint.'
+      description: 'Opcional. Función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office.AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propiedad del resultado contiene las siguientes propiedades: - el nombre de la lista de tareas `listName` sincronizadas de SharePoint. `serverUrl` - la dirección URL de la lista de tareas sincronizadas de SharePoint.'
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;any&gt;) =&gt; void'
     return:
       type: void
@@ -933,13 +933,13 @@ methods:
   fullName: goToByIdAsync(id, goToType, options, callback)
   summary: Va al objeto o la ubicación que se haya especificado en el documento.
   remarks: >-
-    **Conjunto de requisitos**: [no está en un conjunto](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#methods-that-arent-part-of-a-requirement-set)
+    **Conjunto de** [requisitos: no en un conjunto](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#methods-that-arent-part-of-a-requirement-set)
 
 
     PowerPoint no admite el método goToByIdAsync en vistas maestras.
 
 
-    El comportamiento causado por la opción selectionMode varía en función del host:
+    El comportamiento causado por la opción selectionMode varía según el host:
 
 
     En Excel: `Office.SelectionMode.Selected` selecciona todo el contenido del enlace o elemento con nombre. Office.SelectionMode.None: para los enlaces de texto, se selecciona la celda; para enlaces de matrices, los enlaces de tablas y los elementos con nombre, se selecciona la primera celda de datos (no la primera celda de la fila de encabezado de las tablas).
@@ -961,10 +961,10 @@ methods:
       description: El tipo de ubicación a la que dirigirse.
       type: <xref uid="office!Office.GoToType:enum" />
     - id: options
-      description: Proporciona opciones para decidir si se debe seleccionar la ubicación a la que se va a navegar.
+      description: Proporciona opciones para seleccionar la ubicación a la que se ha navegado.
       type: <xref uid="office!Office.GoToByIdOptions:interface" />
     - id: callback
-      description: Opcional. Una función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office. asyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propiedad del resultado es la vista actual.
+      description: Opcional. Función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office.AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propiedad del resultado es la vista actual.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;any&gt;) =&gt; void'
     return:
       type: void
@@ -975,13 +975,13 @@ methods:
   fullName: goToByIdAsync(id, goToType, callback)
   summary: Va al objeto o la ubicación que se haya especificado en el documento.
   remarks: >-
-    **Conjunto de requisitos**: [no está en un conjunto](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#methods-that-arent-part-of-a-requirement-set)
+    **Conjunto de** [requisitos: no en un conjunto](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#methods-that-arent-part-of-a-requirement-set)
 
 
     PowerPoint no admite el método goToByIdAsync en vistas maestras.
 
 
-    El comportamiento causado por la opción selectionMode varía en función del host:
+    El comportamiento causado por la opción selectionMode varía según el host:
 
 
     En Excel: `Office.SelectionMode.Selected` selecciona todo el contenido del enlace o elemento con nombre. Office.SelectionMode.None: para los enlaces de texto, se selecciona la celda; para enlaces de matrices, los enlaces de tablas y los elementos con nombre, se selecciona la primera celda de datos (no la primera celda de la fila de encabezado de las tablas).
@@ -1141,7 +1141,7 @@ methods:
       description: El tipo de ubicación a la que dirigirse.
       type: <xref uid="office!Office.GoToType:enum" />
     - id: callback
-      description: Opcional. Una función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office. asyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propiedad del resultado es la vista actual.
+      description: Opcional. Función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office.AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La `value` propiedad del resultado es la vista actual.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;any&gt;) =&gt; void'
     return:
       type: void
@@ -1158,13 +1158,13 @@ methods:
     content: 'removeHandlerAsync(eventType: Office.EventType, options?: RemoveHandlerOptions, callback?: (result: AsyncResult<void>) => void): void;'
     parameters:
     - id: eventType
-      description: El tipo de evento. Para el documento puede ser ' Document. SelectionChanged ' o ' Document. ActiveViewChanged '.
+      description: El tipo de evento. Para el documento puede ser 'Document.SelectionChanged' o 'Document.ActiveViewChanged'.
       type: <xref uid="office!Office.EventType:enum" />
     - id: options
-      description: Proporciona opciones para determinar qué controlador o controladores de eventos se quitan.
+      description: Proporciona opciones para determinar qué controladores o controladores de eventos se quitan.
       type: <xref uid="office!Office.RemoveHandlerOptions:interface" />
     - id: callback
-      description: Opcional. Una función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office. asyncResult](xref:office!Office.AsyncResult:interface)<!-- -->.
+      description: Opcional. Función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office.AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -1274,10 +1274,10 @@ methods:
     content: 'removeHandlerAsync(eventType: Office.EventType, callback?: (result: AsyncResult<void>) => void): void;'
     parameters:
     - id: eventType
-      description: El tipo de evento. Para el documento puede ser ' Document. SelectionChanged ' o ' Document. ActiveViewChanged '.
+      description: El tipo de evento. Para el documento puede ser 'Document.SelectionChanged' o 'Document.ActiveViewChanged'.
       type: <xref uid="office!Office.EventType:enum" />
     - id: callback
-      description: Opcional. Una función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office. asyncResult](xref:office!Office.AsyncResult:interface)<!-- -->.
+      description: Opcional. Función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office.AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -1290,7 +1290,7 @@ methods:
     Solo documentos de proyecto. Establezca el campo de recurso para el identificador de recurso especificado.
 
 
-    **Importante**: esta API solo funciona en el proyecto 2016 en el escritorio de Windows.
+    **Importante:** Esta API solo funciona en Project 2016 en el escritorio de Windows.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -1298,7 +1298,7 @@ methods:
     content: 'setResourceFieldAsync(resourceId: string, fieldId: number, fieldValue: string | number | boolean | object, options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<void>) => void): void;'
     parameters:
     - id: resourceId
-      description: Puede ser una cadena o un valor del identificador de recurso.
+      description: Una cadena o un valor del id. de recurso.
       type: string
     - id: fieldId
       description: Campos de recursos.
@@ -1307,10 +1307,10 @@ methods:
       description: Valor del campo de destino.
       type: string | number | boolean | object
     - id: options
-      description: Proporciona una opción para conservar los datos de contexto de cualquier tipo, sin cambios, para su uso en una devolución de llamada.
+      description: Proporciona una opción para conservar datos de contexto de cualquier tipo, sin cambios, para su uso en una devolución de llamada.
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: Opcional. Una función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office. asyncResult](xref:office!Office.AsyncResult:interface)<!-- -->.
+      description: Opcional. Función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office.AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -1323,7 +1323,7 @@ methods:
     Solo documentos de proyecto. Establezca el campo de recurso para el identificador de recurso especificado.
 
 
-    **Importante**: esta API solo funciona en el proyecto 2016 en el escritorio de Windows.
+    **Importante:** Esta API solo funciona en Project 2016 en el escritorio de Windows.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -1331,7 +1331,7 @@ methods:
     content: 'setResourceFieldAsync(resourceId: string, fieldId: number, fieldValue: string | number | boolean | object, callback?: (result: AsyncResult<void>) => void): void;'
     parameters:
     - id: resourceId
-      description: Puede ser una cadena o un valor del identificador de recurso.
+      description: Una cadena o un valor del id. de recurso.
       type: string
     - id: fieldId
       description: Campos de recursos.
@@ -1340,7 +1340,7 @@ methods:
       description: Valor del campo de destino.
       type: string | number | boolean | object
     - id: callback
-      description: Opcional. Una función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office. asyncResult](xref:office!Office.AsyncResult:interface)<!-- -->.
+      description: Opcional. Función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office.AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -1350,7 +1350,7 @@ methods:
   package: office!
   fullName: setSelectedDataAsync(data, options, callback)
   summary: Escribe los datos especificados en la selección actual.
-  remarks: "**Conjuntos de requisitos**:\n\n- [HtmlCoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#htmlcoercion)<!-- -->, (al usar `Office.CoercionType.Html`<!-- -->)\n\n- [ImageCoercion 1,1](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/image-coercion-requirement-sets) (cuando se usa `Office.CoercionType.Image`<!-- -->)\n\n- [MatrixCoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#matrixcoercion) (cuando se usa `Office.CoercionType.Matrix`<!-- -->)\n\n- [OoxmlCoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#ooxmlcoercion) (cuando se usa `Office.CoercionType.Ooxml`<!-- -->)\n\n- [Selección](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#selection)\n\n- [TableCoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#tablecoercion) (cuando se usa `Office.CoercionType.Table`<!-- -->)\n\n- [TextCoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textcoercion) (cuando se usa `Office.CoercionType.Text`<!-- -->)\n\n- [ImageCoercion 1,2](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/image-coercion-requirement-sets#imagecoercion-12) (cuando se usa `Office.CoercionType.XmlSvg`<!-- -->)\n\n**Comportamientos específicos de la aplicación**\n\nAl escribir datos en una selección, se aplican las siguientes acciones específicas de la aplicación.\n\n<table> <tr> <td>Word</td> <td>Si no hay ninguna selección y el punto de inserción está en una ubicación válida, el especificado `data` se inserta en el punto de inserción.</td> <td>Si `data` es una cadena, se inserta el texto especificado.</td> </tr> <tr> <td></td> <td></td> <td>Si `data` es una matriz de matrices (\"Matrix\") o un objeto TableData, se inserta una tabla de Word nueva.</td> </tr> <tr> <td></td> <td></td> <td>Si `data` es HTML, se inserta el HTML especificado. (**Importante**: Si alguno de los HTML insertados no es válido, Word no generará un error. Word insertará tantos elementos HTML como pueda y omitirá datos no válidos.</td> </tr> <tr> <td></td> <td></td> <td>Si `data` es Office Open XML, se inserta el XML especificado.</td> </tr> <tr> <td></td> <td></td> <td>Si `data` es una secuencia de imágenes codificada en Base64, se inserta la imagen especificada.</td> </tr> <tr> <td></td> <td>Si hay una selección</td> <td>Se reemplazará con el especificado `data` siguiendo las mismas reglas descritas anteriormente.</td> </tr> <tr> <td></td> <td>Insertar imágenes</td> <td>Las imágenes insertadas se colocan en línea. Los parámetros imageLeft e imageTop se ignoran. La relación de aspecto de la imagen siempre está bloqueada. Si solo se indica uno de los parámetros imageWidth e imageHeight, el otro valor se escalará automáticamente para conservar la relación de aspecto original.</td> </tr>\n\n<tr> <td>Excel</td> <td>Si se selecciona una sola celda</td> <td>Si `data` es una cadena, se inserta el texto especificado como valor de la celda actual.</td> </tr> <tr> <td></td> <td></td> <td>Si `data` es una matriz de matrices (\"Matrix\"), se inserta el conjunto de filas y columnas especificado, si no se sobrescribirán otros datos de las celdas circundantes.</td> </tr> <tr> <td></td> <td></td> <td>Si `data` es un objeto TableData, se inserta una tabla de Excel nueva con el conjunto de filas y encabezados especificado, si no se sobrescribirán otros datos de las celdas circundantes.</td> </tr> <tr> <td></td> <td>Si se seleccionan varias celdas</td> <td>If the shape does not match the shape of `data`<!-- -->, se devuelve un error.</td> </tr> <tr> <td></td> <td></td> <td>If the shape of the selection exactly matches the shape of `data`<!-- -->, los valores de las celdas seleccionadas se actualizan en función de los valores de `data`<!-- -->.</td> </tr> <tr> <td></td> <td>Insertar imágenes</td> <td>Las imágenes insertadas son flotantes. Los parámetros de posición imageLeft e imageTop dependen de las celdas seleccionadas actualmente. Los valores negativos imageLeft e imageTop están permitidos y es posible que Excel los reajuste para colocar la imagen dentro de una hoja de cálculo. La relación de aspecto de la imagen está bloqueada a menos que se indiquen los parámetros imageWidth e imageHeight. Si solo se indica uno de los parámetros imageWidth e imageHeight, el otro valor se escalará automáticamente para conservar la relación de aspecto original.</td> </tr> <tr> <td></td> <td>Todos los demás casos</td> <td>Se devuelve un error.</td> </tr>\n\n<tr> <td>Excel en la web</td> <td>Además de los comportamientos descritos para Excel, estos límites se aplican al escribir datos en Excel en la Web.</td> <td>El número total de celdas que puede escribir en una hoja de cálculo con el `data` parámetro no puede exceder de 20.000 en una sola llamada a este método.</td> </tr> <tr> <td></td> <td></td> <td>El número de grupos de formato pasados al `cellFormat` parámetro no puede exceder de 100. Un único grupo de formato consta de un conjunto de formato aplicado a un rango de celdas especificado.</td> </tr>\n\n<tr> <td>PowerPoint</td> <td>Insertar imagen</td> <td>Las imágenes insertadas son flotantes. Los parámetros de posición imageLeft e imageTop son opcionales, pero si se proporcionan, ambos deben estar presentes. Si solo se proporciona un valor, se ignorará. Los valores negativos imageLeft e imageTop están permitidos y pueden colocar una imagen fuera de una diapositiva. Si no se indica ningún parámetro opcional y la diapositiva tiene un marcador de posición, la imagen reemplazará el marcador de la diapositiva. La relación de aspecto de la imagen se bloqueará a menos que se indiquen los parámetros imageWidth e imageHeight. Si solo se indica uno de los parámetros imageWidth e imageHeight, el otro valor se escalará automáticamente para conservar la relación de aspecto original.</td> </tr> </table>\n\n**Comportamientos específicos del tipo**\n\n<table> <tr> <td>`Office.CoercionType.XmlSvg`</td> <td>(Solo en Excel): en las compilaciones de Excel entre 16.0.11526.10000 y 16.0.12309.10000, hay un límite de tamaño de 64 KB para las inserciones SVG.</td> </tr> </table>\n\n**Hosts**\n\nLos valores posibles para el parámetro [Office. CoercionType](xref:office!Office.CoercionType:enum) varían en función del host.\n\n<table> <tr> <th>Host</th> <th>coercionType admitido</th> </tr> <tr> <td>Excel, PowerPoint, Project y Word</td> <td>`Office.CoercionType.Text` cadena</td> </tr> <tr> <td>Excel y Word</td> <td>`Office.CoercionType.Matrix` (matriz de matrices)</td> </tr> <tr> <td>Excel y Word</td> <td>`Office.CoercionType.Table` (Objeto TableData)</td> </tr> <tr> <td>Word</td> <td>`Office.CoercionType.Html`</td> </tr> <tr> <td>Word</td> <td>`Office.CoercionType.Ooxml` (Office Open XML)</td> </tr> <tr> <td>PowerPoint en la web y Windows</td> <td>`Office.CoercionType.SlideRange`</td> </tr> <tr> <td>Excel, PowerPoint y Word</td> <td>`Office.CoercionType.XmlSvg`</td> </tr> </table>\n\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\n// The following example sets the selected text or cell to \"Hello World!\", \n// and if that fails, displays the value of the error.message property.\nfunction writeText() {\n    Office.context.document.setSelectedDataAsync(\"Hello World!\",\n        function (asyncResult) {\n            var error = asyncResult.error;\n            if (asyncResult.status === Office.AsyncResultStatus.Failed){\n                write(error.name + \": \" + error.message);\n            }\n        });\n}\n\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n\n// Specifying the optional coercionType parameter lets you specify the kind of data you want to write\n// to a selection. The following example writes data as an array of three rows of two columns, \n// specifying the coercionType as `Matrix` for that data structure, and if that fails, \n// displays the value of the error.message property.\nfunction writeMatrix() {\n    Office.context.document.setSelectedDataAsync(\n        [[\"Red\", \"Rojo\"], [\"Green\", \"Verde\"], [\"Blue\", \"Azul\"]],\n        {coercionType: Office.CoercionType.Matrix}\n        function (asyncResult) {\n            var error = asyncResult.error;\n            if (asyncResult.status === Office.AsyncResultStatus.Failed){\n                write(error.name + \": \" + error.message);\n            }\n        });\n}\n\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n\n// The following example writes data as a one column table with a header and four rows, \n// specifying the coercionType as `Table` for that data structure, and if that fails, \n// displays the value of the error.message property.\nfunction writeTable() {\n    // Build table.\n    var myTable = new Office.TableData();\n    myTable.headers = [[\"Cities\"]];\n    myTable.rows = [['Berlin'], ['Roma'], ['Tokyo'], ['Seattle']];\n\n    // Write table.\n    Office.context.document.setSelectedDataAsync(myTable, {coercionType: Office.CoercionType.Table},\n        function (result) {\n            var error = result.error\n            if (result.status === Office.AsyncResultStatus.Failed) {\n                write(error.name + \": \" + error.message);\n            }\n    });\n}\n\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n\n// In Word if you want to write HTML to the selection, you can specify the coercionType parameter as `Html`\n// as shown in the following example, which uses HTML <b> tags to make \"Hello\" bold.\nfunction writeHtmlData() {\n    Office.context.document.setSelectedDataAsync(\n        \"<b>Hello</b> World!\", {coercionType: Office.CoercionType.Html}, function (asyncResult) {\n            if (asyncResult.status === Office.AsyncResultStatus.Failed) {\n                write('Error: ' + asyncResult.error.message);\n            }\n    });\n}\n\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n\n// In Word, PowerPoint, or Excel, if you want to write an image to the selection, you can specify the coercionType\n// parameter as `Image` as shown in the following example. Note that imageLeft and imageTop are ignored by Word.\nfunction insertPictureAtSelection(base64EncodedImageStr) {\n\n    Office.context.document.setSelectedDataAsync(base64EncodedImageStr, {\n        coercionType: Office.CoercionType.Image,\n        imageLeft: 50,\n        imageTop: 50,\n        imageWidth: 100,\n        imageHeight: 100\n    },\n    function (asyncResult) {\n        if (asyncResult.status === Office.AsyncResultStatus.Failed) {\n            console.log(\"Action failed with error: \" + asyncResult.error.message);\n        }\n    });\n}\n\n// In Word, PowerPoint, or Excel, if you want to write an scalable vector graphic (SVG) to the selection, you can specify the \n// coercionType parameter as `XmlSvg` as shown in the following example. Note that imageLeft and imageTop are ignored by Word.\nfunction insertSvgAtSelection(base64EncodedImageStr) {\n    Office.context.document.setSelectedDataAsync(getImageAsBase64String(), {\n        coercionType: Office.CoercionType.XmlSvg,\n        imageLeft: 50,\n        imageTop: 50,\n        imageWidth: 400\n    },\n        function (asyncResult) {\n            if (asyncResult.status === Office.AsyncResultStatus.Failed) {\n                console.log(asyncResult.error.message);\n            }\n        });\n}\n```"
+  remarks: "**Conjuntos de requisitos**:\n\n- [HtmlCoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#htmlcoercion)<!-- -->, (al usar `Office.CoercionType.Html`<!-- -->)\n\n- [ImageCoercion 1.1](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/image-coercion-requirement-sets) (al usar `Office.CoercionType.Image`<!-- -->)\n\n- [MatrixCoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#matrixcoercion) (al usar `Office.CoercionType.Matrix`<!-- -->)\n\n- [OoxmlCoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#ooxmlcoercion) (al usar `Office.CoercionType.Ooxml`<!-- -->)\n\n- [Selección](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#selection)\n\n- [TableCoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#tablecoercion) (al usar `Office.CoercionType.Table`<!-- -->)\n\n- [TextCoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textcoercion) (al usar `Office.CoercionType.Text`<!-- -->)\n\n- [ImageCoercion 1.2](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/image-coercion-requirement-sets#imagecoercion-12) (al usar `Office.CoercionType.XmlSvg`<!-- -->)\n\n**Comportamientos específicos de la aplicación**\n\nLas siguientes acciones específicas de la aplicación se aplican al escribir datos en una selección.\n\n<table> <tr> <td>Word</td> <td>Si no hay ninguna selección y el punto de inserción está en una ubicación válida, el especificado se inserta `data` en el punto de inserción</td> <td>Si `data` es una cadena, se inserta el texto especificado.</td> </tr> <tr> <td></td> <td></td> <td>Si `data` es una matriz de matrices (\"matriz\") o un objeto TableData, se inserta una nueva tabla de Word.</td> </tr> <tr> <td></td> <td></td> <td>Si `data` es HTML, se inserta el HTML especificado. (**Importante:** si cualquiera de los HTML que inserte no es válido, Word no producirá un error. Word insertará tanto html como pueda y omitirá los datos no válidos).</td> </tr> <tr> <td></td> <td></td> <td>Si `data` es Office Open XML, se inserta el XML especificado.</td> </tr> <tr> <td></td> <td></td> <td>Si `data` es un flujo de imagen codificado en base64, se inserta la imagen especificada.</td> </tr> <tr> <td></td> <td>Si hay una selección</td> <td>Se reemplazará con las reglas especificadas `data` siguiendo las mismas reglas anteriores.</td> </tr> <tr> <td></td> <td>Insertar imágenes</td> <td>Las imágenes insertadas se colocan en línea. Los parámetros imageLeft e imageTop se ignoran. La relación de aspecto de la imagen siempre está bloqueada. Si solo se indica uno de los parámetros imageWidth e imageHeight, el otro valor se escalará automáticamente para conservar la relación de aspecto original.</td> </tr>\n\n<tr> <td>Excel</td> <td>Si se selecciona una sola celda</td> <td>Si `data` es una cadena, el texto especificado se inserta como el valor de la celda actual.</td> </tr> <tr> <td></td> <td></td> <td>If `data` is an array of arrays (\"matrix\"), the specified set of rows and columns are inserted, if no other data in surrounding cells will be overwritten.</td> </tr> <tr> <td></td> <td></td> <td>Si es un objeto TableData, se inserta una nueva tabla de Excel con el conjunto especificado de filas y encabezados, si no se sobrescribirán otros datos en las celdas `data` circundantes.</td> </tr> <tr> <td></td> <td>Si se seleccionan varias celdas</td> <td>If the shape does not match the shape of `data`<!-- -->, se devuelve un error.</td> </tr> <tr> <td></td> <td></td> <td>If the shape of the selection exactly matches the shape of `data`<!-- -->, los valores de las celdas seleccionadas se actualizan en función de los valores de `data`<!-- -->.</td> </tr> <tr> <td></td> <td>Insertar imágenes</td> <td>Las imágenes insertadas son flotantes. Los parámetros de posición imageLeft e imageTop dependen de las celdas seleccionadas actualmente. Los valores negativos imageLeft e imageTop están permitidos y es posible que Excel los reajuste para colocar la imagen dentro de una hoja de cálculo. La relación de aspecto de la imagen está bloqueada a menos que se indiquen los parámetros imageWidth e imageHeight. Si solo se indica uno de los parámetros imageWidth e imageHeight, el otro valor se escalará automáticamente para conservar la relación de aspecto original.</td> </tr> <tr> <td></td> <td>Todos los demás casos</td> <td>Se devuelve un error.</td> </tr>\n\n<tr> <td>Excel en la web</td> <td>Además de los comportamientos descritos anteriormente para Excel, estos límites se aplican al escribir datos en Excel en la web</td> <td>El número total de celdas que puede escribir en una hoja de cálculo con el parámetro no puede superar `data` las 20 000 en una sola llamada a este método.</td> </tr> <tr> <td></td> <td></td> <td>El número de grupos de formato que se pasan al `cellFormat` parámetro no puede superar los 100. Un único grupo de formato consta de un conjunto de formato aplicado a un rango de celdas especificado.</td> </tr>\n\n<tr> <td>PowerPoint</td> <td>Insertar imagen</td> <td>Las imágenes insertadas son flotantes. Los parámetros imageLeft y imageTop de posición son opcionales, pero si se proporcionan, ambos deben estar presentes. Si solo se proporciona un valor, se ignorará. Los valores negativos imageLeft e imageTop están permitidos y pueden colocar una imagen fuera de una diapositiva. Si no se indica ningún parámetro opcional y la diapositiva tiene un marcador de posición, la imagen reemplazará el marcador de la diapositiva. La relación de aspecto de la imagen se bloqueará a menos que se indiquen los parámetros imageWidth e imageHeight. Si solo se indica uno de los parámetros imageWidth e imageHeight, el otro valor se escalará automáticamente para conservar la relación de aspecto original.</td> </tr> </table>\n\n**Hosts**\n\nLos valores posibles para [el parámetro Office.CoercionType](xref:office!Office.CoercionType:enum) varían según el host.\n\n<table> <tr> <th>Host</th> <th>coercionType admitido</th> </tr> <tr> <td>Excel, PowerPoint, Project y Word</td> <td>`Office.CoercionType.Text` (cadena)</td> </tr> <tr> <td>Excel y Word</td> <td>`Office.CoercionType.Matrix` (matriz de matrices)</td> </tr> <tr> <td>Excel y Word</td> <td>`Office.CoercionType.Table` (objeto TableData)</td> </tr> <tr> <td>Word</td> <td>`Office.CoercionType.Html`</td> </tr> <tr> <td>Word</td> <td>`Office.CoercionType.Ooxml` (Office Open XML)</td> </tr> <tr> <td>PowerPoint en la web y Windows</td> <td>`Office.CoercionType.SlideRange`</td> </tr> <tr> <td>Excel, PowerPoint y Word</td> <td>`Office.CoercionType.XmlSvg`</td> </tr> </table>\n\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\n// The following example sets the selected text or cell to \"Hello World!\", \n// and if that fails, displays the value of the error.message property.\nfunction writeText() {\n    Office.context.document.setSelectedDataAsync(\"Hello World!\",\n        function (asyncResult) {\n            var error = asyncResult.error;\n            if (asyncResult.status === Office.AsyncResultStatus.Failed){\n                write(error.name + \": \" + error.message);\n            }\n        });\n}\n\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n\n// Specifying the optional coercionType parameter lets you specify the kind of data you want to write\n// to a selection. The following example writes data as an array of three rows of two columns, \n// specifying the coercionType as `Matrix` for that data structure, and if that fails, \n// displays the value of the error.message property.\nfunction writeMatrix() {\n    Office.context.document.setSelectedDataAsync(\n        [[\"Red\", \"Rojo\"], [\"Green\", \"Verde\"], [\"Blue\", \"Azul\"]],\n        {coercionType: Office.CoercionType.Matrix}\n        function (asyncResult) {\n            var error = asyncResult.error;\n            if (asyncResult.status === Office.AsyncResultStatus.Failed){\n                write(error.name + \": \" + error.message);\n            }\n        });\n}\n\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n\n// The following example writes data as a one column table with a header and four rows, \n// specifying the coercionType as `Table` for that data structure, and if that fails, \n// displays the value of the error.message property.\nfunction writeTable() {\n    // Build table.\n    var myTable = new Office.TableData();\n    myTable.headers = [[\"Cities\"]];\n    myTable.rows = [['Berlin'], ['Roma'], ['Tokyo'], ['Seattle']];\n\n    // Write table.\n    Office.context.document.setSelectedDataAsync(myTable, {coercionType: Office.CoercionType.Table},\n        function (result) {\n            var error = result.error\n            if (result.status === Office.AsyncResultStatus.Failed) {\n                write(error.name + \": \" + error.message);\n            }\n    });\n}\n\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n\n// In Word if you want to write HTML to the selection, you can specify the coercionType parameter as `Html`\n// as shown in the following example, which uses HTML <b> tags to make \"Hello\" bold.\nfunction writeHtmlData() {\n    Office.context.document.setSelectedDataAsync(\n        \"<b>Hello</b> World!\", {coercionType: Office.CoercionType.Html}, function (asyncResult) {\n            if (asyncResult.status === Office.AsyncResultStatus.Failed) {\n                write('Error: ' + asyncResult.error.message);\n            }\n    });\n}\n\n// Function that writes to a div with id='message' on the page.\nfunction write(message){\n    document.getElementById('message').innerText += message; \n}\n\n// In Word, PowerPoint, or Excel, if you want to write an image to the selection, you can specify the coercionType\n// parameter as `Image` as shown in the following example. Note that imageLeft and imageTop are ignored by Word.\nfunction insertPictureAtSelection(base64EncodedImageStr) {\n\n    Office.context.document.setSelectedDataAsync(base64EncodedImageStr, {\n        coercionType: Office.CoercionType.Image,\n        imageLeft: 50,\n        imageTop: 50,\n        imageWidth: 100,\n        imageHeight: 100\n    },\n    function (asyncResult) {\n        if (asyncResult.status === Office.AsyncResultStatus.Failed) {\n            console.log(\"Action failed with error: \" + asyncResult.error.message);\n        }\n    });\n}\n\n// In Word, PowerPoint, or Excel, if you want to write an scalable vector graphic (SVG) to the selection, you can specify the \n// coercionType parameter as `XmlSvg` as shown in the following example. Note that imageLeft and imageTop are ignored by Word.\nfunction insertSvgAtSelection(base64EncodedImageStr) {\n    Office.context.document.setSelectedDataAsync(getImageAsBase64String(), {\n        coercionType: Office.CoercionType.XmlSvg,\n        imageLeft: 50,\n        imageTop: 50,\n        imageWidth: 400\n    },\n        function (asyncResult) {\n            if (asyncResult.status === Office.AsyncResultStatus.Failed) {\n                console.log(asyncResult.error.message);\n            }\n        });\n}\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -1358,28 +1358,28 @@ methods:
     parameters:
     - id: data
       description: >-
-        Datos que se van a establecer. Un valor String u [Office. CoercionType](xref:office!Office.CoercionType:enum) , una matriz 2D o un objeto TableData.
+        Los datos que se establecerán. Una cadena o [un valor de Office.CoercionType,](xref:office!Office.CoercionType:enum) una matriz 2d o un objeto TableData.
 
 
-        Si el valor que se ha pasado `data` es:
+        Si el valor pasado `data` es:
 
 
-        - Una string Se insertará texto sin formato o cualquier cosa que pueda convertirse en una string. En Excel, también puede especificar Data como una fórmula válida para agregar esa fórmula a la celda seleccionada. Por ejemplo, al establecer data en "=SUM(A1:A5)", se calculará el total de los valores en el rango especificado. Pero cuando se establece una fórmula en la celda dependiente, después de hacerlo, no se puede leer desde la celda dependiente la fórmula agregada (o cualquier fórmula preexistente). Si se llama al método Document.getSelectedDataAsync en la celda seleccionada para leer sus datos, el método puede devolver solo los datos que se muestran en la celda (el resultado de la fórmula).
+        - Una string Se insertará texto sin formato o cualquier cosa que pueda convertirse en una string. En Excel, también puede especificar datos como una fórmula válida para agregar esa fórmula a la celda seleccionada. Por ejemplo, al establecer data en "=SUM(A1:A5)", se calculará el total de los valores en el rango especificado. Pero cuando se establece una fórmula en la celda dependiente, después de hacerlo, no se puede leer desde la celda dependiente la fórmula agregada (o cualquier fórmula preexistente). Si se llama al método Document.getSelectedDataAsync en la celda seleccionada para leer sus datos, el método puede devolver solo los datos que se muestran en la celda (el resultado de la fórmula).
 
 
-        - Una matriz de matrices ("matriz"): Se insertarán datos tabulares sin encabezados. Por ejemplo, para escribir datos en tres filas de dos columnas, puede pasar una matriz como esta: \[ \[ "R1C1", "R1C2" \] , \[ "R2C1", "R2C2" \] , \[ "R3C1", "R3C2" \] \] . Para escribir una sola columna de tres filas, pase una matriz como esta: \[ \[ "R1C1" \] , \[ "R2C1" \] , \[ "R3C1"\]\]
+        - Una matriz de matrices ("matriz"): Se insertarán datos tabulares sin encabezados. Por ejemplo, para escribir datos en tres filas en dos columnas, puede pasar una matriz como esta: \[ \[ "R1C1", "R1C2" \] , \[ "R2C1", "R2C2" \] , \[ "R3C1", "R3C2" \] \] . Para escribir una sola columna de tres filas, pase una matriz como esta: \[ \[ "R1C1" \] , \[ "R2C1" \] , \[ "R3C1"\]\]
 
 
-        En Excel, también puede especificar Data como una matriz de matrices que contiene fórmulas válidas para agregarlas a las celdas seleccionadas. Por ejemplo, si no se sobrescribirán otros datos, al establecer los datos en \[ \[ "= SUM (a1: A5)", "= Average (a1: A5)", \] \] se agregarán las dos fórmulas a la selección. Igual que cuando se establece una fórmula en una sola celda como "texto", no se pueden leer las fórmulas agregadas (o las fórmulas existentes) después de que se han configurado, solo se pueden leer los resultados de las fórmulas.
+        En Excel, también puede especificar datos como una matriz de matrices que contiene fórmulas válidas para agregarlos a las celdas seleccionadas. Por ejemplo, si no se sobrescribirán otros datos, al establecer los datos en \[ \[ "=SUM(A1:A5)","=AVERAGE(A1:A5)" se agregarán esas dos fórmulas a la \] \] selección. Igual que cuando se establece una fórmula en una sola celda como "texto", no se pueden leer las fórmulas agregadas (o las fórmulas existentes) después de que se han configurado, solo se pueden leer los resultados de las fórmulas.
 
 
-        - Un objeto TableData: Se insertará una tabla con encabezados. En Excel, si especifica fórmulas en el objeto TableData que pasa para el parámetro Data, es posible que no obtenga los resultados esperados debido a la característica "columnas calculadas" de Excel, que duplica automáticamente las fórmulas dentro de una columna. Para solucionar este error cuando desee escribir `data` que contenga fórmulas en una tabla seleccionada, intente especificar los datos como una matriz de matrices (en lugar de un objeto TableData) y especifique la coercionType como Microsoft. Office. Matrix o "Matrix". Sin embargo, esta técnica bloqueará la característica "columnas calculadas" solo cuando se cumpla una de las siguientes condiciones: (1) escribe en todas las celdas de la columna o (2) ya hay al menos dos fórmulas diferentes en la columna.
+        - Un objeto TableData: Se insertará una tabla con encabezados. En Excel, si especifica fórmulas en el objeto TableData que pasa para el parámetro data, es posible que no obtenga los resultados esperados debido a la característica "columnas calculadas" de Excel, que duplica automáticamente las fórmulas dentro de una columna. Para evitar esto cuando desee escribir fórmulas en una tabla seleccionada, intente especificar los datos como una matriz de matrices (en lugar de un objeto TableData) y especifique `data` el coercionType como Microsoft.Office.Matrix o "matrix". Sin embargo, esta técnica bloqueará la característica "columnas calculadas" solo cuando se cumple una de las siguientes condiciones: (1) está escribiendo en todas las celdas de la columna o (2) ya hay al menos dos fórmulas diferentes en la columna.
       type: string | <xref uid="office!Office.TableData:class" /> | any[][]
     - id: options
-      description: Proporciona opciones sobre cómo insertar datos en la selección.
+      description: Proporciona opciones para insertar datos en la selección.
       type: <xref uid="office!Office.SetSelectedDataOptions:interface" />
     - id: callback
-      description: Opcional. Una función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office. asyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La propiedad AsyncResult. Value siempre devuelve undefined porque no hay ningún objeto o dato que recuperar.
+      description: Opcional. Función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office.AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La propiedad AsyncResult.value siempre devuelve undefined porque no hay ningún objeto o datos que recuperar.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -1396,58 +1396,52 @@ methods:
     - [HtmlCoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#htmlcoercion)<!-- -->, (al usar `Office.CoercionType.Html`<!-- -->)
 
 
-    - [ImageCoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/image-coercion-requirement-sets) (cuando se usa `Office.CoercionType.Image`<!-- -->)
+    - [ImageCoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/image-coercion-requirement-sets) (al usar `Office.CoercionType.Image`<!-- -->)
 
 
-    - [MatrixCoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#matrixcoercion) (cuando se usa `Office.CoercionType.Matrix`<!-- -->)
+    - [MatrixCoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#matrixcoercion) (al usar `Office.CoercionType.Matrix`<!-- -->)
 
 
-    - [OoxmlCoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#ooxmlcoercion) (cuando se usa `Office.CoercionType.Ooxml`<!-- -->)
+    - [OoxmlCoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#ooxmlcoercion) (al usar `Office.CoercionType.Ooxml`<!-- -->)
 
 
     - [Selección](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#selection)
 
 
-    - [TableCoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#tablecoercion) (cuando se usa `Office.CoercionType.Table`<!-- -->)
+    - [TableCoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#tablecoercion) (al usar `Office.CoercionType.Table`<!-- -->)
 
 
-    - [TextCoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textcoercion) (cuando se usa `Office.CoercionType.Text`<!-- -->)
+    - [TextCoercion](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/office-add-in-requirement-sets#textcoercion) (al usar `Office.CoercionType.Text`<!-- -->)
 
 
-    - [ImageCoercion 1,2](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/image-coercion-requirement-sets#imagecoercion-12) (cuando se usa `Office.CoercionType.XmlSvg`<!-- -->)
+    - [ImageCoercion 1.2](https://docs.microsoft.com/office/dev/add-ins/reference/requirement-sets/image-coercion-requirement-sets#imagecoercion-12) (al usar `Office.CoercionType.XmlSvg`<!-- -->)
 
 
     **Comportamientos específicos de la aplicación**
 
 
-    Al escribir datos en una selección, se aplican las siguientes acciones específicas de la aplicación.
+    Las siguientes acciones específicas de la aplicación se aplican al escribir datos en una selección.
 
 
-    <table> <tr> <td>Word</td> <td>Si no hay ninguna selección y el punto de inserción está en una ubicación válida, el especificado `data` se inserta en el punto de inserción.</td> <td>Si `data` es una cadena, se inserta el texto especificado.</td> </tr> <tr> <td></td> <td></td> <td>Si `data` es una matriz de matrices ("Matrix") o un objeto TableData, se inserta una tabla de Word nueva.</td> </tr> <tr> <td></td> <td></td> <td>Si `data` es HTML, se inserta el HTML especificado. (**Importante**: Si alguno de los HTML insertados no es válido, Word no generará un error. Word insertará tantos elementos HTML como pueda y omitirá datos no válidos.</td> </tr> <tr> <td></td> <td></td> <td>Si `data` es Office Open XML, se inserta el XML especificado.</td> </tr> <tr> <td></td> <td></td> <td>Si `data` es una secuencia de imágenes codificada en Base64, se inserta la imagen especificada.</td></tr></td> </tr> <tr> <td></td> <td>Si hay una selección</td> <td>Se reemplazará con el especificado `data` siguiendo las mismas reglas descritas anteriormente.</td> </tr> <tr> <td></td> <td>Insertar imágenes</td> <td>Las imágenes insertadas se colocan en línea. Los parámetros imageLeft e imageTop se ignoran. La relación de aspecto de la imagen siempre está bloqueada. Si solo se indica uno de los parámetros imageWidth e imageHeight, el otro valor se escalará automáticamente para conservar la relación de aspecto original.</td> </tr>
+    <table> <tr> <td>Word</td> <td>Si no hay ninguna selección y el punto de inserción está en una ubicación válida, el especificado se inserta `data` en el punto de inserción</td> <td>Si `data` es una cadena, se inserta el texto especificado.</td> </tr> <tr> <td></td> <td></td> <td>Si `data` es una matriz de matrices ("matriz") o un objeto TableData, se inserta una nueva tabla de Word.</td> </tr> <tr> <td></td> <td></td> <td>Si `data` es HTML, se inserta el HTML especificado. (**Importante:** si cualquiera de los HTML que inserte no es válido, Word no producirá un error. Word insertará tanto html como pueda y omitirá los datos no válidos).</td> </tr> <tr> <td></td> <td></td> <td>Si `data` es Office Open XML, se inserta el XML especificado.</td> </tr> <tr> <td></td> <td></td> <td>Si `data` es un flujo de imagen codificado en base64, se inserta la imagen especificada.</td></tr></td> </tr> <tr> <td></td> <td>Si hay una selección</td> <td>Se reemplazará con las reglas especificadas `data` siguiendo las mismas reglas anteriores.</td> </tr> <tr> <td></td> <td>Insertar imágenes</td> <td>Las imágenes insertadas se colocan en línea. Los parámetros imageLeft e imageTop se ignoran. La relación de aspecto de la imagen siempre está bloqueada. Si solo se indica uno de los parámetros imageWidth e imageHeight, el otro valor se escalará automáticamente para conservar la relación de aspecto original.</td> </tr>
 
 
-    <tr> <td>Excel</td> <td>Si se selecciona una sola celda</td> <td>Si `data` es una cadena, se inserta el texto especificado como valor de la celda actual.</td> </tr> <tr> <td></td> <td></td> <td>Si `data` es una matriz de matrices ("Matrix"), se inserta el conjunto de filas y columnas especificado, si no se sobrescribirán otros datos de las celdas circundantes.</td> </tr> <tr> <td></td> <td></td> <td>Si `data` es un objeto TableData, se inserta una tabla de Excel nueva con el conjunto de filas y encabezados especificado, si no se sobrescribirán otros datos de las celdas circundantes.</td> </tr> <tr> <td></td> <td>Si se seleccionan varias celdas</td><td>If the shape does not match the shape of `data`<!-- -->, se devuelve un error.</td> </tr> <tr> <td></td> <td></td> <td>If the shape of the selection exactly matches the shape of `data`<!-- -->, los valores de las celdas seleccionadas se actualizan en función de los valores de `data`<!-- -->.</td> </tr> <tr> <td></td> <td>Insertar imágenes</td> <td>Las imágenes insertadas son flotantes. Los parámetros de posición imageLeft e imageTop dependen de las celdas seleccionadas actualmente. Los valores negativos imageLeft e imageTop están permitidos y es posible que Excel los reajuste para colocar la imagen dentro de una hoja de cálculo. La relación de aspecto de la imagen está bloqueada a menos que se indiquen los parámetros imageWidth e imageHeight. Si solo se indica uno de los parámetros imageWidth e imageHeight, el otro valor se escalará automáticamente para conservar la relación de aspecto original.</td> </tr> <tr> <td></td> <td>Todos los demás casos</td> <td>Se devuelve un error.</td> </tr>
+    <tr> <td>Excel</td> <td>Si se selecciona una sola celda</td> <td>Si `data` es una cadena, el texto especificado se inserta como el valor de la celda actual.</td> </tr> <tr> <td></td> <td></td> <td>If `data` is an array of arrays ("matrix"), the specified set of rows and columns are inserted, if no other data in surrounding cells will be overwritten.</td> </tr> <tr> <td></td> <td></td> <td>Si es un objeto TableData, se inserta una nueva tabla de Excel con el conjunto especificado de filas y encabezados, si no se sobrescribirán otros datos en las celdas `data` circundantes.</td> </tr> <tr> <td></td> <td>Si se seleccionan varias celdas</td><td>If the shape does not match the shape of `data`<!-- -->, se devuelve un error.</td> </tr> <tr> <td></td> <td></td> <td>If the shape of the selection exactly matches the shape of `data`<!-- -->, los valores de las celdas seleccionadas se actualizan en función de los valores de `data`<!-- -->.</td> </tr> <tr> <td></td> <td>Insertar imágenes</td> <td>Las imágenes insertadas son flotantes. Los parámetros de posición imageLeft e imageTop dependen de las celdas seleccionadas actualmente. Los valores negativos imageLeft e imageTop están permitidos y es posible que Excel los reajuste para colocar la imagen dentro de una hoja de cálculo. La relación de aspecto de la imagen está bloqueada a menos que se indiquen los parámetros imageWidth e imageHeight. Si solo se indica uno de los parámetros imageWidth e imageHeight, el otro valor se escalará automáticamente para conservar la relación de aspecto original.</td> </tr> <tr> <td></td> <td>Todos los demás casos</td> <td>Se devuelve un error.</td> </tr>
 
 
-    <tr> <td>Excel en la web</td> <td>Además de los comportamientos descritos para Excel, estos límites se aplican al escribir datos en Excel en la Web.</td> <td>El número total de celdas que puede escribir en una hoja de cálculo con el `data` parámetro no puede exceder de 20.000 en una sola llamada a este método.</td> </tr> <tr> <td></td> <td></td> <td>El número de grupos de formato pasados al `cellFormat` parámetro no puede exceder de 100. Un único grupo de formato consta de un conjunto de formato aplicado a un rango de celdas especificado.</td> </tr>
+    <tr> <td>Excel en la web</td> <td>Además de los comportamientos descritos anteriormente para Excel, estos límites se aplican al escribir datos en Excel en la web</td> <td>El número total de celdas que puede escribir en una hoja de cálculo con el parámetro no puede superar `data` las 20 000 en una sola llamada a este método.</td> </tr> <tr> <td></td> <td></td> <td>El número de grupos de formato que se pasan al `cellFormat` parámetro no puede superar los 100. Un único grupo de formato consta de un conjunto de formato aplicado a un rango de celdas especificado.</td> </tr>
 
 
-    <tr> <td>PowerPoint</td> <td>Insertar imagen</td> <td>Las imágenes insertadas son flotantes. Los parámetros de posición imageLeft e imageTop son opcionales, pero si se proporcionan, ambos deben estar presentes. Si solo se proporciona un valor, se ignorará. Los valores negativos imageLeft e imageTop están permitidos y pueden colocar una imagen fuera de una diapositiva. Si no se indica ningún parámetro opcional y la diapositiva tiene un marcador de posición, la imagen reemplazará el marcador de la diapositiva. La relación de aspecto de la imagen se bloqueará a menos que se indiquen los parámetros imageWidth e imageHeight. Si solo se indica uno de los parámetros imageWidth e imageHeight, el otro valor se escalará automáticamente para conservar la relación de aspecto original.</td> </tr> </table>
-
-
-    **Comportamientos específicos del tipo**
-
-
-    <table> <tr> <td>`Office.CoercionType.XmlSvg`</td> <td>(Solo en Excel): hay una limitación de tamaño de 64 KB para las inserciones SVG a partir de la compilación 16.0.11526.10000.</td> </tr> </table>
+    <tr> <td>PowerPoint</td> <td>Insertar imagen</td> <td>Las imágenes insertadas son flotantes. Los parámetros imageLeft y imageTop de posición son opcionales, pero si se proporcionan, ambos deben estar presentes. Si solo se proporciona un valor, se ignorará. Los valores negativos imageLeft e imageTop están permitidos y pueden colocar una imagen fuera de una diapositiva. Si no se indica ningún parámetro opcional y la diapositiva tiene un marcador de posición, la imagen reemplazará el marcador de la diapositiva. La relación de aspecto de la imagen se bloqueará a menos que se indiquen los parámetros imageWidth e imageHeight. Si solo se indica uno de los parámetros imageWidth e imageHeight, el otro valor se escalará automáticamente para conservar la relación de aspecto original.</td> </tr> </table>
 
 
     **Hosts**
 
 
-    Los valores posibles para el parámetro [Office. CoercionType](xref:office!Office.CoercionType:enum) varían en función del host.
+    Los valores posibles para [el parámetro Office.CoercionType](xref:office!Office.CoercionType:enum) varían según el host.
 
 
-    <table> <tr> <th>Host</th> <th>coercionType admitido</th> </tr> <tr> <td>Excel, PowerPoint, Project y Word</td> <td>`Office.CoercionType.Text` cadena</td> </tr> <tr> <td>Excel y Word</td> <td>`Office.CoercionType.Matrix` (matriz de matrices)</td> </tr> <tr> <td>Excel y Word</td> <td>`Office.CoercionType.Table` (Objeto TableData)</td> </tr> <tr> <td>Word</td> <td>`Office.CoercionType.Html`</td> </tr> <tr> <td>Word</td> <td>`Office.CoercionType.Ooxml` (Office Open XML)</td> </tr> <tr> <td>PowerPoint en la web y Windows</td> <td>`Office.CoercionType.SlideRange`</td> </tr> <tr> <td>Excel, PowerPoint y Word</td> <td>`Office.CoercionType.XmlSvg`</td> </tr> </table>
+    <table> <tr> <th>Host</th> <th>coercionType admitido</th> </tr> <tr> <td>Excel, PowerPoint, Project y Word</td> <td>`Office.CoercionType.Text` (cadena)</td> </tr> <tr> <td>Excel y Word</td> <td>`Office.CoercionType.Matrix` (matriz de matrices)</td> </tr> <tr> <td>Excel y Word</td> <td>`Office.CoercionType.Table` (objeto TableData)</td> </tr> <tr> <td>Word</td> <td>`Office.CoercionType.Html`</td> </tr> <tr> <td>Word</td> <td>`Office.CoercionType.Ooxml` (Office Open XML)</td> </tr> <tr> <td>PowerPoint en la web y Windows</td> <td>`Office.CoercionType.SlideRange`</td> </tr> <tr> <td>Excel, PowerPoint y Word</td> <td>`Office.CoercionType.XmlSvg`</td> </tr> </table>
   isPreview: false
   isDeprecated: false
   syntax:
@@ -1455,25 +1449,25 @@ methods:
     parameters:
     - id: data
       description: >-
-        Datos que se van a establecer. Un valor String u [Office. CoercionType](xref:office!Office.CoercionType:enum) , una matriz 2D o un objeto TableData.
+        Los datos que se establecerán. Una cadena o [un valor de Office.CoercionType,](xref:office!Office.CoercionType:enum) una matriz 2d o un objeto TableData.
 
 
-        Si el valor que se ha pasado `data` es:
+        Si el valor pasado `data` es:
 
 
-        - Una string Se insertará texto sin formato o cualquier cosa que pueda convertirse en una string. En Excel, también puede especificar Data como una fórmula válida para agregar esa fórmula a la celda seleccionada. Por ejemplo, al establecer data en "=SUM(A1:A5)", se calculará el total de los valores en el rango especificado. Pero cuando se establece una fórmula en la celda dependiente, después de hacerlo, no se puede leer desde la celda dependiente la fórmula agregada (o cualquier fórmula preexistente). Si se llama al método Document.getSelectedDataAsync en la celda seleccionada para leer sus datos, el método puede devolver solo los datos que se muestran en la celda (el resultado de la fórmula).
+        - Una string Se insertará texto sin formato o cualquier cosa que pueda convertirse en una string. En Excel, también puede especificar datos como una fórmula válida para agregar esa fórmula a la celda seleccionada. Por ejemplo, al establecer data en "=SUM(A1:A5)", se calculará el total de los valores en el rango especificado. Pero cuando se establece una fórmula en la celda dependiente, después de hacerlo, no se puede leer desde la celda dependiente la fórmula agregada (o cualquier fórmula preexistente). Si se llama al método Document.getSelectedDataAsync en la celda seleccionada para leer sus datos, el método puede devolver solo los datos que se muestran en la celda (el resultado de la fórmula).
 
 
-        - Una matriz de matrices ("matriz"): Se insertarán datos tabulares sin encabezados. Por ejemplo, para escribir datos en tres filas de dos columnas, puede pasar una matriz como esta: \[ \[ "R1C1", "R1C2" \] , \[ "R2C1", "R2C2" \] , \[ "R3C1", "R3C2" \] \] . Para escribir una sola columna de tres filas, pase una matriz como esta: \[ \[ "R1C1" \] , \[ "R2C1" \] , \[ "R3C1"\]\]
+        - Una matriz de matrices ("matriz"): Se insertarán datos tabulares sin encabezados. Por ejemplo, para escribir datos en tres filas en dos columnas, puede pasar una matriz como esta: \[ \[ "R1C1", "R1C2" \] , \[ "R2C1", "R2C2" \] , \[ "R3C1", "R3C2" \] \] . Para escribir una sola columna de tres filas, pase una matriz como esta: \[ \[ "R1C1" \] , \[ "R2C1" \] , \[ "R3C1"\]\]
 
 
-        En Excel, también puede especificar Data como una matriz de matrices que contiene fórmulas válidas para agregarlas a las celdas seleccionadas. Por ejemplo, si no se sobrescribirán otros datos, al establecer los datos en \[ \[ "= SUM (a1: A5)", "= Average (a1: A5)", \] \] se agregarán las dos fórmulas a la selección. Igual que cuando se establece una fórmula en una sola celda como "texto", no se pueden leer las fórmulas agregadas (o las fórmulas existentes) después de que se han configurado, solo se pueden leer los resultados de las fórmulas.
+        En Excel, también puede especificar datos como una matriz de matrices que contiene fórmulas válidas para agregarlos a las celdas seleccionadas. Por ejemplo, si no se sobrescribirán otros datos, al establecer los datos en \[ \[ "=SUM(A1:A5)","=AVERAGE(A1:A5)" se agregarán esas dos fórmulas a la \] \] selección. Igual que cuando se establece una fórmula en una sola celda como "texto", no se pueden leer las fórmulas agregadas (o las fórmulas existentes) después de que se han configurado, solo se pueden leer los resultados de las fórmulas.
 
 
-        - Un objeto TableData: Se insertará una tabla con encabezados. En Excel, si especifica fórmulas en el objeto TableData que pasa para el parámetro Data, es posible que no obtenga los resultados esperados debido a la característica "columnas calculadas" de Excel, que duplica automáticamente las fórmulas dentro de una columna. Para solucionar este error cuando desee escribir `data` que contenga fórmulas en una tabla seleccionada, intente especificar los datos como una matriz de matrices (en lugar de un objeto TableData) y especifique la coercionType como Microsoft. Office. Matrix o "Matrix". Sin embargo, esta técnica bloqueará la característica "columnas calculadas" solo cuando se cumpla una de las siguientes condiciones: (1) escribe en todas las celdas de la columna o (2) ya hay al menos dos fórmulas diferentes en la columna.
+        - Un objeto TableData: Se insertará una tabla con encabezados. En Excel, si especifica fórmulas en el objeto TableData que pasa para el parámetro data, es posible que no obtenga los resultados esperados debido a la característica "columnas calculadas" de Excel, que duplica automáticamente las fórmulas dentro de una columna. Para evitar esto cuando desee escribir fórmulas en una tabla seleccionada, intente especificar los datos como una matriz de matrices (en lugar de un objeto TableData) y especifique `data` el coercionType como Microsoft.Office.Matrix o "matrix". Sin embargo, esta técnica bloqueará la característica "columnas calculadas" solo cuando se cumple una de las siguientes condiciones: (1) está escribiendo en todas las celdas de la columna o (2) ya hay al menos dos fórmulas diferentes en la columna.
       type: string | <xref uid="office!Office.TableData:class" /> | any[][]
     - id: callback
-      description: Opcional. Una función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office. asyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La propiedad AsyncResult. Value siempre devuelve undefined porque no hay ningún objeto o dato que recuperar.
+      description: Opcional. Función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office.AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->. La propiedad AsyncResult.value siempre devuelve undefined porque no hay ningún objeto o datos que recuperar.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -1483,10 +1477,10 @@ methods:
   package: office!
   fullName: setTaskFieldAsync(taskId, fieldId, fieldValue, options, callback)
   summary: >-
-    Solo documentos de proyecto. Establece el campo de tarea para el identificador de tarea especificado.
+    Solo documentos de proyecto. Establecer campo de tarea para el identificador de tarea especificado.
 
 
-    **Importante**: esta API solo funciona en el proyecto 2016 en el escritorio de Windows.
+    **Importante:** Esta API solo funciona en Project 2016 en el escritorio de Windows.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -1494,7 +1488,7 @@ methods:
     content: 'setTaskFieldAsync(taskId: string, fieldId: number, fieldValue: string | number | boolean | object, options?: Office.AsyncContextOptions, callback?: (result: AsyncResult<void>) => void): void;'
     parameters:
     - id: taskId
-      description: Puede ser una cadena o un valor del identificador de tarea.
+      description: Una cadena o un valor del identificador de tarea.
       type: string
     - id: fieldId
       description: Campos de tarea.
@@ -1503,10 +1497,10 @@ methods:
       description: Valor del campo de destino.
       type: string | number | boolean | object
     - id: options
-      description: Proporciona una opción para conservar los datos de contexto de cualquier tipo, sin cambios, para su uso en una devolución de llamada.
+      description: Proporciona una opción para conservar datos de contexto de cualquier tipo, sin cambios, para su uso en una devolución de llamada.
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: Opcional. Una función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office. asyncResult](xref:office!Office.AsyncResult:interface)<!-- -->.
+      description: Opcional. Función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office.AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -1516,10 +1510,10 @@ methods:
   package: office!
   fullName: setTaskFieldAsync(taskId, fieldId, fieldValue, callback)
   summary: >-
-    Solo documentos de proyecto. Establece el campo de tarea para el identificador de tarea especificado.
+    Solo documentos de proyecto. Establecer campo de tarea para el identificador de tarea especificado.
 
 
-    **Importante**: esta API solo funciona en el proyecto 2016 en el escritorio de Windows.
+    **Importante:** Esta API solo funciona en Project 2016 en el escritorio de Windows.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -1527,7 +1521,7 @@ methods:
     content: 'setTaskFieldAsync(taskId: string, fieldId: number, fieldValue: string | number | boolean | object, callback?: (result: AsyncResult<void>) => void): void;'
     parameters:
     - id: taskId
-      description: Puede ser una cadena o un valor del identificador de tarea.
+      description: Una cadena o un valor del identificador de tarea.
       type: string
     - id: fieldId
       description: Campos de tarea.
@@ -1536,15 +1530,15 @@ methods:
       description: Valor del campo de destino.
       type: string | number | boolean | object
     - id: callback
-      description: Opcional. Una función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office. asyncResult](xref:office!Office.AsyncResult:interface)<!-- -->.
+      description: Opcional. Función que se invoca cuando se devuelve la devolución de llamada, cuyo único parámetro es de tipo [Office.AsyncResult](xref:office!Office.AsyncResult:interface)<!-- -->.
       type: '(result: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
       description: "\n\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\n// The following code example calls getSelectedTaskAsync to get the GUID of the task that's\n// currently selected in a task view. Then it sets two task field values by calling\n// setTaskFieldAsync recursively.\n// The getSelectedTaskAsync method used in the example requires that a task view\n// (for example, Task Usage) is the active view and that a task is selected. See the\n// addHandlerAsync method for an example that activates a button based on the active view type.\n// The example assumes your add-in has a reference to the jQuery library and that the\n// following page controls are defined in the content div in the page body:\n// <input id=\"set-info\" type=\"button\" value=\"Set info\" /><br />\n// <span id=\"message\"></span>\n\n(function () {\n    \"use strict\";\n\n    // The initialize function must be run each time a new page is loaded.\n    Office.initialize = function (reason) {\n        $(document).ready(function () {\n            \n            // After the DOM is loaded, add-in-specific code can run.\n            app.initialize();\n            $('#set-info').click(setTaskInfo);\n        });\n    };\n\n    // Get the GUID of the task, and then get the task fields.\n    function setTaskInfo() {\n        getTaskGuid().then(\n            function (data) {\n                setTaskFields(data);\n            }\n        );\n    }\n\n    // Get the GUID of the selected task.\n    function getTaskGuid() {\n        var defer = $.Deferred();\n        Office.context.document.getSelectedTaskAsync(\n            function (result) {\n                if (result.status === Office.AsyncResultStatus.Failed) {\n                    onError(result.error);\n                }\n                else {\n                    defer.resolve(result.value);\n                }\n            }\n        );\n        return defer.promise();\n    }\n\n    // Set the specified fields for the selected task.\n    function setTaskFields(taskGuid) {\n        var targetFields = [Office.ProjectTaskFields.Active, Office.ProjectTaskFields.Notes];\n        var fieldValues = [true, 'Notes for the task.'];\n\n        // Set the field value. If the call is successful, set the next field.\n        for (var i = 0; i < targetFields.length; i++) {\n            Office.context.document.setTaskFieldAsync(\n                taskGuid,\n                targetFields[i],\n                fieldValues[i],\n                function (result) {\n                    if (result.status === Office.AsyncResultStatus.Succeeded) {\n                        i++;\n                    }\n                    else {\n                        onError(result.error);\n                    }\n                }\n            );\n        }\n        $('#message').html('Field values set');\n    }\n\n    function onError(error) {\n        app.showNotification(error.name + ' ' + error.code + ': ' + error.message);\n    }\n})();\n```"
 metadata:
-  ms.openlocfilehash: 2a56c1459ba92f4cc0062babd1a613bbbd51928f
-  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.openlocfilehash: 03b1040947c78b5ca754d75ae2fd5c77162138db
+  ms.sourcegitcommit: fe39bc3f2ccca2834584e2aa7eb14ce6beb0b638
   ms.translationtype: MT
   ms.contentlocale: es-ES
-  ms.lasthandoff: 11/18/2020
-  ms.locfileid: "49143543"
+  ms.lasthandoff: 03/17/2021
+  ms.locfileid: "50837461"
