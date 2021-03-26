@@ -4,10 +4,10 @@ uid: outlook!Office.AppointmentCompose:interface
 package: outlook!
 fullName: Office.AppointmentCompose
 summary: >-
-  El modo de organizador de citas [de Office.context.mailbox.item](xref:outlook!Office.Item:interface)<!-- -->.
+  El modo organizador de citas [de Office.context.mailbox.item](xref:outlook!Office.Item:interface)<!-- -->.
 
 
-  **Importante:** Se trata de un objeto interno de Outlook, que no se expone directamente a través de interfaces existentes. Debe tratar esto como un modo de `Office.context.mailbox.item`<!-- -->. Consulte la página [Modelo de](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/requirement-set-1.7/office.context.mailbox.item) objetos para obtener más información.
+  **Importante:** Se trata de un objeto interno de Outlook, que no se expone directamente a través de interfaces existentes. Debe tratar esto como un modo de `Office.context.mailbox.item`<!-- -->. Consulte la página [Modelo de objetos](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/requirement-set-1.7/office.context.mailbox.item) para obtener más información.
 
 
   Interfaces primarias:
@@ -30,9 +30,9 @@ properties:
     Obtiene un objeto que proporciona métodos para manipular el cuerpo de un elemento.
 
 
-    \[[Conjunto de API: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Conjunto de API: Buzón 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    **[Nivel de permiso mínimo:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+    **[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
 
 
     **[Modo de Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Organizador de citas
@@ -75,15 +75,15 @@ properties:
     Obtiene o establece la fecha y la hora de finalización de la cita.
 
 
-    La propiedad es un objeto Time expresado como un valor de fecha y hora `end` utc (Hora universal coordinada). [](xref:outlook!Office.Time:interface) Puede usar el método para convertir el valor de la propiedad en la fecha y hora `convertToLocalClientTime` `end` locales del cliente.
+    La propiedad es un objeto Time expresado como un valor de fecha y hora `end` universal coordinada [](xref:outlook!Office.Time:interface) (UTC). Puede usar el método para convertir el valor de la propiedad a la fecha y hora `convertToLocalClientTime` `end` local del cliente.
 
 
     Si usa el método `Time.setAsync` para establecer la hora de finalización, use el método `convertToUtcClientTime` para convertir la hora local del cliente en un valor UTC para el servidor.
 
 
-    **Importante:** En el cliente de Windows, no puede usar esta propiedad para actualizar el final de una periodicidad.
+    **Importante:** En el cliente de Windows, no puedes usar esta propiedad para actualizar el final de una periodicidad.
   remarks: >-
-    **[Nivel de permisos mínimo:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+    **[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
 
 
     **[Modo de Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Organizador de citas
@@ -168,7 +168,7 @@ properties:
 
     La propiedad `itemType` devuelve uno de los valores de enumeración de `ItemType`, lo que indica si la instancia del objeto `item` es un mensaje o una cita.
   remarks: >-
-    **[Nivel de permiso mínimo:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+    **[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
 
 
     **[Modo de Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Organizador de citas
@@ -196,7 +196,7 @@ properties:
   fullName: location
   summary: Obtiene o establece la ubicación de una cita. La `location` propiedad devuelve un objeto [Location](xref:outlook!Office.Location:interface) que proporciona métodos que se usan para obtener y establecer la ubicación de la cita.
   remarks: >-
-    **[Nivel de permiso mínimo:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+    **[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
 
 
     **[Modo de Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Organizador de citas
@@ -262,8 +262,8 @@ properties:
     Obtiene los mensajes de notificación de un elemento.
 
 
-    \[[Conjunto de API: Mailbox 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
-  remarks: "**[Nivel de permiso mínimo:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`\n\n**[Modo de Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Organizador de citas\n\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/35-notifications/add-getall-remove.yaml\nvar id = $(\"#notificationId\").val();\nvar details =\n  {\n    type: \"progressIndicator\",\n    message: \"Progress indicator with id = \" + id\n  };\nOffice.context.mailbox.item.notificationMessages.addAsync(id, details, handleResult);\n```\n```javascript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/35-notifications/add-getall-remove.yaml\nvar id = $(\"#notificationId\").val();\nvar details =\n  {\n    type: \"informationalMessage\",\n    message: \"Non-persistent informational notification message with id = \" + id,\n    icon: \"icon1\",\n    persistent: false\n  };\nOffice.context.mailbox.item.notificationMessages.addAsync(id, details, handleResult);\n```\n```javascript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/35-notifications/add-getall-remove.yaml\nvar id = $(\"#notificationId\").val();\nvar details =\n  {\n    type: \"informationalMessage\",\n    message: \"Persistent informational notification message with id = \" + id,\n    icon: \"icon1\",\n    persistent: true\n  };\nOffice.context.mailbox.item.notificationMessages.addAsync(id, details, handleResult);\n```\n```javascript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/35-notifications/add-getall-remove.yaml\nOffice.context.mailbox.item.notificationMessages.getAllAsync(handleResult);          \n```\n```javascript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/35-notifications/add-getall-remove.yaml\nvar id = $(\"#notificationId\").val();\nOffice.context.mailbox.item.notificationMessages.replaceAsync(\n  id,\n  {\n    type: \"informationalMessage\",\n    message: \"Notification message with id = \" + id + \" has been replaced with an informational message.\",\n    icon: \"icon2\",\n    persistent: false\n  },\n  handleResult);\n```\n```javascript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/35-notifications/add-getall-remove.yaml\nvar id = $(\"#notificationId\").val();\nOffice.context.mailbox.item.notificationMessages.removeAsync(id, handleResult);\n```"
+    \[[Conjunto de API: Buzón 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: "**[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`\n\n**[Modo de Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Organizador de citas\n\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/35-notifications/add-getall-remove.yaml\nvar id = $(\"#notificationId\").val();\nvar details =\n  {\n    type: \"progressIndicator\",\n    message: \"Progress indicator with id = \" + id\n  };\nOffice.context.mailbox.item.notificationMessages.addAsync(id, details, handleResult);\n```\n```javascript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/35-notifications/add-getall-remove.yaml\nvar id = $(\"#notificationId\").val();\nvar details =\n  {\n    type: \"informationalMessage\",\n    message: \"Non-persistent informational notification message with id = \" + id,\n    icon: \"icon1\",\n    persistent: false\n  };\nOffice.context.mailbox.item.notificationMessages.addAsync(id, details, handleResult);\n```\n```javascript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/35-notifications/add-getall-remove.yaml\nvar id = $(\"#notificationId\").val();\nvar details =\n  {\n    type: \"informationalMessage\",\n    message: \"Persistent informational notification message with id = \" + id,\n    icon: \"icon1\",\n    persistent: true\n  };\nOffice.context.mailbox.item.notificationMessages.addAsync(id, details, handleResult);\n```\n```javascript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/35-notifications/add-getall-remove.yaml\nOffice.context.mailbox.item.notificationMessages.getAllAsync(handleResult);          \n```\n```javascript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/35-notifications/add-getall-remove.yaml\nvar id = $(\"#notificationId\").val();\nOffice.context.mailbox.item.notificationMessages.replaceAsync(\n  id,\n  {\n    type: \"informationalMessage\",\n    message: \"Notification message with id = \" + id + \" has been replaced with an informational message.\",\n    icon: \"icon2\",\n    persistent: false\n  },\n  handleResult);\n```\n```javascript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/35-notifications/add-getall-remove.yaml\nvar id = $(\"#notificationId\").val();\nOffice.context.mailbox.item.notificationMessages.removeAsync(id, handleResult);\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -278,9 +278,9 @@ properties:
     Proporciona acceso a los asistentes opcionales de un evento. El tipo de objeto y el nivel de acceso dependen del modo del elemento actual.
 
 
-    La propiedad `optionalAttendees` devuelve un objeto `Recipients` que proporciona métodos para obtener o actualizar los asistentes opcionales a una reunión. Sin embargo, en función del cliente o la plataforma (es decir, Windows, Mac, etc.), pueden aplicarse límites en la cantidad de destinatarios que puedes obtener o actualizar. Vea el [objeto Recipients](xref:outlook!Office.Recipients:interface) para obtener más información.
+    La propiedad `optionalAttendees` devuelve un objeto `Recipients` que proporciona métodos para obtener o actualizar los asistentes opcionales a una reunión. Sin embargo, según el cliente o la plataforma (es decir, Windows, Mac, etc.), pueden aplicarse límites en el número de destinatarios que puedes obtener o actualizar. Vea el [objeto Recipients](xref:outlook!Office.Recipients:interface) para obtener más información.
   remarks: >-
-    **[Nivel de permisos mínimo:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+    **[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
 
 
     **[Modo de Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Organizador de citas
@@ -363,9 +363,9 @@ properties:
     La `organizer` propiedad devuelve un objeto [Organizer](xref:outlook!Office.Organizer:interface) que proporciona un método para obtener el valor del organizador.
 
 
-    \[[Conjunto de API: Mailbox 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Conjunto de API: Buzón 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    **[Nivel de permisos mínimo:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+    **[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
 
 
     **[Modo de Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Organizador de citas
@@ -402,18 +402,18 @@ properties:
     Obtiene o establece el patrón de periodicidad de una cita.
 
 
-    La propiedad devuelve un objeto de periodicidad para las citas periódicas o las solicitudes de reuniones si un elemento es una serie o `recurrence` una instancia de una serie. `null` se devuelve para citas únicas y solicitudes de reunión de citas únicas.
+    La propiedad devuelve un objeto de periodicidad para citas periódicas o solicitudes de reuniones si un elemento es una serie o una `recurrence` instancia de una serie. `null` se devuelve para citas únicas y solicitudes de reunión de citas únicas.
 
 
-    **Nota:** las solicitudes de reunión tienen `itemClass` un valor de `IPM.Schedule.Meeting.Request`<!-- -->.
+    **Nota:** Las solicitudes de reunión tienen `itemClass` un valor de `IPM.Schedule.Meeting.Request`<!-- -->.
 
 
-    **Nota:** Si el objeto de periodicidad es nulo, esto indica que el objeto es una sola cita o una solicitud de reunión de una sola cita y NO una parte de una serie.
+    **Nota:** Si el objeto de periodicidad es null, esto indica que el objeto es una sola cita o una solicitud de reunión de una sola cita y NO una parte de una serie.
 
 
-    \[[Conjunto de API: Mailbox 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Conjunto de API: Buzón 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    **[Nivel de permiso mínimo:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+    **[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
 
 
     **[Modo de Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Organizador de citas
@@ -508,9 +508,9 @@ properties:
     Proporciona acceso a los asistentes necesarios de un evento. El tipo de objeto y el nivel de acceso dependen del modo del elemento actual.
 
 
-    La propiedad `requiredAttendees` devuelve un objeto `Recipients` que proporciona métodos para obtener o actualizar los asistentes obligatorios a una reunión. Sin embargo, en función del cliente o la plataforma (es decir, Windows, Mac, etc.), pueden aplicarse límites en la cantidad de destinatarios que puedes obtener o actualizar. Vea el [objeto Recipients](xref:outlook!Office.Recipients:interface) para obtener más información.
+    La propiedad `requiredAttendees` devuelve un objeto `Recipients` que proporciona métodos para obtener o actualizar los asistentes obligatorios a una reunión. Sin embargo, según el cliente o la plataforma (es decir, Windows, Mac, etc.), pueden aplicarse límites en el número de destinatarios que puedes obtener o actualizar. Vea el [objeto Recipients](xref:outlook!Office.Recipients:interface) para obtener más información.
   remarks: >-
-    **[Nivel de permisos mínimo:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+    **[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
 
 
     **[Modo de Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Organizador de citas
@@ -591,18 +591,18 @@ properties:
     Obtiene el identificador de la serie a la que pertenece una instancia.
 
 
-    En los clientes de Outlook en la Web y de escritorio, la propiedad devuelve el identificador de servicios Web Exchange (EWS) del elemento primario (serie) al que `seriesId` pertenece este elemento. Sin embargo, en iOS y Android, seriesId devuelve el id. de REST del elemento primario.
+    En outlook en los clientes web y de escritorio, la propiedad devuelve el identificador de servicios web de Exchange (EWS) del elemento primario (serie) al que `seriesId` pertenece este elemento. Sin embargo, en iOS y Android, seriesId devuelve el id. de REST del elemento primario.
 
 
-    **Nota:** El identificador devuelto por la propiedad es el mismo que el identificador de elemento `seriesId` de servicios Web Exchange. La `seriesId` propiedad no es idéntica a los id. de Outlook usados por la API de REST de Outlook. Antes de realizar llamadas a la API de REST con este valor, debe convertirse con `Office.context.mailbox.convertToRestId`<!-- -->. Para obtener más información, [vea Usar las API de REST de Outlook desde un complemento de Outlook](https://docs.microsoft.com/office/dev/add-ins/outlook/use-rest-api)<!-- -->.
+    **Nota:** El identificador devuelto por la propiedad es el mismo que el identificador de elemento `seriesId` de Exchange Web Services. La `seriesId` propiedad no es idéntica a los id. de Outlook usados por la API de REST de Outlook. Antes de realizar llamadas a la API de REST con este valor, debe convertirse con `Office.context.mailbox.convertToRestId`<!-- -->. Para obtener más información, vea [Usar las API de REST de Outlook desde un complemento de Outlook](https://docs.microsoft.com/office/dev/add-ins/outlook/use-rest-api)<!-- -->.
 
 
-    La propiedad devuelve los elementos que no tienen elementos primarios, como citas individuales, elementos de serie o solicitudes de reunión, y devuelve cualquier otro elemento que no sea una solicitud `seriesId` `null` de `undefined` reunión.
+    La propiedad devuelve para los elementos que no tienen elementos primarios como citas individuales, elementos de serie o solicitudes de reunión y devuelve para cualquier otro elemento que no sea una solicitud `seriesId` `null` de `undefined` reunión.
 
 
-    \[[Conjunto de API: Mailbox 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Conjunto de API: Buzón 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    **[Nivel de permiso mínimo:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+    **[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
 
 
     **[Modo de Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Organizador de citas
@@ -641,7 +641,7 @@ properties:
     Obtiene o establece la fecha y la hora de inicio de la cita.
 
 
-    La propiedad es un objeto Time expresado como un valor de fecha y hora utc `start` (Hora universal [](xref:outlook!Office.Time:interface) coordinada). Puede usar el método para convertir el valor en la fecha y hora `convertToLocalClientTime` locales del cliente.
+    La propiedad es un objeto Time expresado como un valor de fecha y hora `start` universal coordinada [](xref:outlook!Office.Time:interface) (UTC). Puede usar el método para convertir el valor en la fecha y hora `convertToLocalClientTime` local del cliente.
 
 
     Si usa el método `Time.setAsync` para establecer la hora de inicio, use el método `convertToUtcClientTime` para convertir la hora local del cliente en un valor UTC para el servidor.
@@ -649,7 +649,7 @@ properties:
 
     **Importante:** En el cliente de Windows, no puedes usar esta propiedad para actualizar el inicio de una periodicidad.
   remarks: >-
-    **[Nivel de permisos mínimo:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+    **[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
 
 
     **[Modo de Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Organizador de citas
@@ -708,7 +708,7 @@ properties:
 
     La propiedad `subject` devuelve un objeto `Subject` que proporciona métodos para obtener y establecer el asunto.
   remarks: >-
-    **[Nivel de permiso mínimo:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+    **[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
 
 
     **[Modo de Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Organizador de citas
@@ -770,24 +770,24 @@ methods:
     **Importante:** En las compilaciones recientes de Outlook en Windows, se introdujo un error que anexa incorrectamente un encabezado a esta acción (ya sea mediante esta API o la interfaz de usuario `Authorization: Bearer` de Outlook). Para evitar este problema, puede intentar usar la API introducida con el conjunto de `addFileAttachmentFromBase64` requisitos 1.8.
 
 
-    \[[Conjunto de API: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Conjunto de API: Buzón 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    **[Nivel de permiso mínimo:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
+    **[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
 
 
     **[Modo de Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Organizador de citas
 
 
-    **Errores:**
+    **Errores**:
 
 
     - `AttachmentSizeExceeded`<!-- -->: los datos adjuntos son más grandes de lo permitido.
 
 
-    - `FileTypeNotSupported`<!-- -->: los datos adjuntos tienen una extensión que no está permitida.
+    - `FileTypeNotSupported`<!-- -->: Los datos adjuntos tienen una extensión que no está permitida.
 
 
-    - `NumberOfAttachmentsExceeded`<!-- -->: el mensaje o la cita tiene demasiados datos adjuntos.
+    - `NumberOfAttachmentsExceeded`<!-- -->: El mensaje o la cita tiene demasiados datos adjuntos.
 
 
     #### <a name="examples"></a>Ejemplos
@@ -838,7 +838,7 @@ methods:
       description: El nombre de los datos adjuntos que se muestra mientras estos se cargan. La longitud máxima es de 255 caracteres.
       type: string
     - id: options
-      description: 'Opcional. Un objeto literal que contiene una o más de las siguientes propiedades. `asyncContext`<!-- -->: los desarrolladores pueden proporcionar cualquier objeto al que deseen acceder en el método de devolución de llamada. `isInline`<!-- -->: si es true, indica que los datos adjuntos se mostrarán en línea en el cuerpo del mensaje y no deben mostrarse en la lista de datos adjuntos.'
+      description: 'Opcional. Un objeto literal que contiene una o más de las siguientes propiedades. `asyncContext`<!-- -->: Los desarrolladores pueden proporcionar cualquier objeto al que deseen tener acceso en el método de devolución de llamada. `isInline`<!-- -->: Si es true, indica que los datos adjuntos se mostrarán en línea en el cuerpo del mensaje y no deben mostrarse en la lista de datos adjuntos.'
       type: '<xref uid="office!Office.AsyncContextOptions:interface" /> & { isInline: boolean }'
     - id: callback
       description: Opcional. Cuando se completa el método, se llama a la función pasada en `callback` el parámetro con un único parámetro de tipo `Office.AsyncResult`<!-- -->. Si se realiza correctamente, se proporcionará el identificador de los datos adjuntos en la propiedad `asyncResult.value`. Si se produce un error en la carga de los datos adjuntos, el objeto `asyncResult` contendrá un objeto `Error` que proporciona una descripción del error.
@@ -854,12 +854,12 @@ methods:
     Agrega un controlador de eventos para un evento admitido. **Nota:** Los eventos solo están disponibles con el panel de tareas.
 
 
-    Consulte la sección eventos del modelo [de objetos item](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/requirement-set-1.7/office.context.mailbox.item#events) para ver los eventos admitidos.
+    Consulte la sección Eventos del modelo de [objetos Item](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/requirement-set-1.7/office.context.mailbox.item#events) para ver los eventos admitidos.
 
 
-    \[[Conjunto de API: Mailbox 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Conjunto de API: Buzón 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    **[Nivel de permisos mínimo:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+    **[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
 
 
     **[Modo de Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Organizador de citas
@@ -894,10 +894,10 @@ methods:
       description: La función que va a controlar el evento. La función debe aceptar un único parámetro, que es un literal de objeto. La propiedad type del parámetro coincidirá con `eventType` el parámetro pasado a `addHandlerAsync`<!-- -->.
       type: any
     - id: options
-      description: 'Opcional. Un objeto literal que contiene una o más de las siguientes propiedades. `asyncContext`<!-- -->: los desarrolladores pueden proporcionar cualquier objeto al que deseen acceder en el método de devolución de llamada.'
+      description: 'Opcional. Un objeto literal que contiene una o más de las siguientes propiedades. `asyncContext`<!-- -->: Los desarrolladores pueden proporcionar cualquier objeto al que deseen tener acceso en el método de devolución de llamada.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: Opcional. Cuando se completa el método, se llama a la función que se ha pasado en `callback` el parámetro con un único parámetro. `asyncResult`<!-- -->, que es un `Office.AsyncResult` objeto.
+      description: Opcional. Cuando se completa el método, se llama a la función pasada en `callback` el parámetro con un único parámetro, `asyncResult`<!-- -->, que es un `Office.AsyncResult` objeto.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -919,18 +919,18 @@ methods:
     Si el complemento de Office se ejecuta en Outlook en la Web, el método `addItemAttachmentAsync` puede adjuntar elementos a otros elementos distintos del que quiere editar. No obstante, esta acción no es compatible y no se recomienda.
 
 
-    \[[Conjunto de API: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Conjunto de API: Buzón 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    **[Nivel de permiso mínimo:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
+    **[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
 
 
     **[Modo de Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Organizador de citas
 
 
-    **Errores:**
+    **Errores**:
 
 
-    - `NumberOfAttachmentsExceeded`<!-- -->: el mensaje o la cita tiene demasiados datos adjuntos.
+    - `NumberOfAttachmentsExceeded`<!-- -->: El mensaje o la cita tiene demasiados datos adjuntos.
 
 
     #### <a name="examples"></a>Ejemplos
@@ -987,7 +987,7 @@ methods:
       description: El nombre de los datos adjuntos que se muestra mientras estos se cargan. La longitud máxima es de 255 caracteres.
       type: string
     - id: options
-      description: 'Opcional. Un objeto literal que contiene una o más de las siguientes propiedades. `asyncContext`<!-- -->: los desarrolladores pueden proporcionar cualquier objeto al que deseen acceder en el método de devolución de llamada.'
+      description: 'Opcional. Un objeto literal que contiene una o más de las siguientes propiedades. `asyncContext`<!-- -->: Los desarrolladores pueden proporcionar cualquier objeto al que deseen tener acceso en el método de devolución de llamada.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
       description: Opcional. Cuando se completa el método, se llama a la función pasada en el parámetro de devolución de llamada con un único parámetro de tipo `Office.AsyncResult`<!-- -->. Si se realiza correctamente, se proporcionará el identificador de los datos adjuntos en la propiedad `asyncResult.value`. Si se produce un error al agregar los datos adjuntos, el objeto `asyncResult` contendrá un objeto `Error` que proporciona una descripción del error.
@@ -1000,21 +1000,21 @@ methods:
   package: outlook!
   fullName: close()
   summary: >-
-    Cierra el elemento actual que se está componenndo
+    Cierra el elemento actual que se va a componer
 
 
-    Los comportamientos del `close` método dependen del estado actual del elemento que se va a componer. Si el elemento tiene cambios sin guardar, el cliente solicita al usuario que guarde, descarte o cierre la acción.
+    Los comportamientos del `close` método dependen del estado actual del elemento que se va a componer. Si el elemento tiene cambios no guardados, el cliente pide al usuario que guarde, descarte o cierre la acción.
 
 
     En el cliente de escritorio de Outlook, si el mensaje es una respuesta directa, el método `close` no tiene ningún efecto.
 
 
-    **Nota:** En Outlook en la Web, si el elemento es una cita y se ha guardado previamente con `saveAsync`<!-- -->, se pide al usuario que guarde, descarte o cancele incluso si no se han producido cambios desde la última vez que se guardó el elemento.
+    **Nota:** En Outlook en la web, si el elemento es una cita y se ha guardado previamente con `saveAsync`<!-- -->, se pide al usuario que guarde, descarte o cancele incluso si no se han producido cambios desde la última vez que se guardó el elemento.
 
 
-    \[[Conjunto de API: Mailbox 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Conjunto de API: Buzón 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    **[Nivel de permisos mínimo:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`Restricted`
+    **[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`Restricted`
 
 
     **[Modo de Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Organizador de citas
@@ -1048,12 +1048,12 @@ methods:
     Si no hay ninguna selección, pero el cursor está en el cuerpo o el asunto, el método devuelve una cadena vacía para los datos seleccionados. Si se selecciona un campo que no sea el cuerpo o el asunto, el método devuelve el error `InvalidSelection`.
 
 
-    Para obtener acceso a los datos seleccionados desde el método de devolución de llamada, llame `asyncResult.value.data`<!-- -->. Para obtener acceso `source` a la propiedad de la que proviene la selección, llame `asyncResult.value.sourceProperty`<!-- -->, que será `body` o `subject`<!-- -->.
+    Para obtener acceso a los datos seleccionados desde el método de devolución de llamada, llame `asyncResult.value.data`<!-- -->. Para obtener acceso `source` a la propiedad de la que procede la selección, llame a `asyncResult.value.sourceProperty`<!-- -->, que será `body` o `subject`<!-- -->.
 
 
-    \[[Conjunto de API: Mailbox 1.2](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Conjunto de API: Buzón 1.2](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    **[Nivel de permiso mínimo:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+    **[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
 
 
     **[Modo de Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Organizador de citas
@@ -1088,7 +1088,7 @@ methods:
       description: Solicita un formato para los datos. If `Text`<!-- -->, el método devuelve el texto sin formato como una cadena, quitando las etiquetas HTML presentes. If `HTML`<!-- -->, el método devuelve el texto seleccionado, ya sea texto sin formato o HTML.
       type: <xref uid="office!Office.CoercionType:enum" /> | string
     - id: options
-      description: 'Un objeto literal que contiene una o más de las siguientes propiedades. `asyncContext`<!-- -->: los desarrolladores pueden proporcionar cualquier objeto al que deseen acceder en el método de devolución de llamada.'
+      description: 'Un objeto literal que contiene una o más de las siguientes propiedades. `asyncContext`<!-- -->: Los desarrolladores pueden proporcionar cualquier objeto al que deseen tener acceso en el método de devolución de llamada.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
       description: Cuando se completa el método, se llama a la función pasada en `callback` el parámetro con un único parámetro de tipo `Office.AsyncResult`<!-- -->.
@@ -1107,12 +1107,12 @@ methods:
     Si no hay ninguna selección, pero el cursor está en el cuerpo o el asunto, el método devuelve una cadena vacía para los datos seleccionados. Si se selecciona un campo que no sea el cuerpo o el asunto, el método devuelve el error `InvalidSelection`.
 
 
-    Para obtener acceso a los datos seleccionados desde el método de devolución de llamada, llame `asyncResult.value.data`<!-- -->. Para obtener acceso `source` a la propiedad de la que proviene la selección, llame `asyncResult.value.sourceProperty`<!-- -->, que será `body` o `subject`<!-- -->.
+    Para obtener acceso a los datos seleccionados desde el método de devolución de llamada, llame `asyncResult.value.data`<!-- -->. Para obtener acceso `source` a la propiedad de la que procede la selección, llame a `asyncResult.value.sourceProperty`<!-- -->, que será `body` o `subject`<!-- -->.
 
 
-    \[[Conjunto de API: Mailbox 1.2](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Conjunto de API: Buzón 1.2](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    **[Nivel de permiso mínimo:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+    **[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
 
 
     **[Modo de Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Organizador de citas
@@ -1162,7 +1162,7 @@ methods:
 
 
     Las propiedades personalizadas se proporcionan como un objeto `CustomProperties` en la propiedad `asyncResult.value`. Este objeto puede usarse para obtener, establecer y quitar las propiedades personalizadas del elemento, así como para guardar los cambios en la propiedad personalizada que se vuelve a establecer en el servidor.
-  remarks: "**[Nivel de permiso mínimo:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`\n\n**[Modo de Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Organizador de citas\n\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\n// The following example shows how to use the loadCustomPropertiesAsync method\n// to asynchronously load custom properties that are specific to the current item.\n// The example also shows how to use the saveAsync method to save these properties\n// back to the server. After loading the custom properties, the example uses the\n// get method to read the custom property myProp, the set method to write the\n// custom property otherProp, and then finally calls the saveAsync method to save\n// the custom properties.\nOffice.initialize = function () {\n    // Checks for the DOM to load using the jQuery ready function.\n    $(document).ready(function () {\n        // After the DOM is loaded, add-in-specific code can run.\n        var mailbox = Office.context.mailbox;\n        mailbox.item.loadCustomPropertiesAsync(customPropsCallback);\n    });\n};\n\nfunction customPropsCallback(asyncResult) {\n    var customProps = asyncResult.value;\n    var myProp = customProps.get(\"myProp\");\n\n    customProps.set(\"otherProp\", \"value\");\n    customProps.saveAsync(saveCallback);\n}\n\nfunction saveCallback(asyncResult) {\n}\n```\n```javascript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/15-item-custom-properties/load-set-get-save.yaml\nOffice.context.mailbox.item.loadCustomPropertiesAsync(function (result) {\n  if (result.status === Office.AsyncResultStatus.Succeeded) {\n    console.log(\"Loaded following custom properties:\");\n    customProps = result.value;\n    var dataKey = Object.keys(customProps)[0];\n    var data = customProps[dataKey];\n    for (var propertyName in data)\n    {\n      var propertyValue = data[propertyName];\n      console.log(`${propertyName}: ${propertyValue}`);\n    }              \n  }\n  else {\n    console.error(`loadCustomPropertiesAsync failed with message ${result.error.message}`);\n  }\n});\n```"
+  remarks: "**[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`\n\n**[Modo de Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Organizador de citas\n\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\n// The following example shows how to use the loadCustomPropertiesAsync method\n// to asynchronously load custom properties that are specific to the current item.\n// The example also shows how to use the saveAsync method to save these properties\n// back to the server. After loading the custom properties, the example uses the\n// get method to read the custom property myProp, the set method to write the\n// custom property otherProp, and then finally calls the saveAsync method to save\n// the custom properties.\nOffice.initialize = function () {\n    // Checks for the DOM to load using the jQuery ready function.\n    $(document).ready(function () {\n        // After the DOM is loaded, add-in-specific code can run.\n        var mailbox = Office.context.mailbox;\n        mailbox.item.loadCustomPropertiesAsync(customPropsCallback);\n    });\n};\n\nfunction customPropsCallback(asyncResult) {\n    var customProps = asyncResult.value;\n    var myProp = customProps.get(\"myProp\");\n\n    customProps.set(\"otherProp\", \"value\");\n    customProps.saveAsync(saveCallback);\n}\n\nfunction saveCallback(asyncResult) {\n}\n```\n```javascript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/15-item-custom-properties/load-set-get-save.yaml\nOffice.context.mailbox.item.loadCustomPropertiesAsync(function (result) {\n  if (result.status === Office.AsyncResultStatus.Succeeded) {\n    console.log(\"Loaded following custom properties:\");\n    customProps = result.value;\n    var dataKey = Object.keys(customProps)[0];\n    var data = customProps[dataKey];\n    for (var propertyName in data)\n    {\n      var propertyValue = data[propertyName];\n      console.log(`${propertyName}: ${propertyValue}`);\n    }              \n  }\n  else {\n    console.error(`loadCustomPropertiesAsync failed with message ${result.error.message}`);\n  }\n});\n```"
   isPreview: false
   isDeprecated: false
   syntax:
@@ -1185,18 +1185,18 @@ methods:
     Quita los datos adjuntos de un mensaje o cita.
 
 
-    El método `removeAttachmentAsync` quita del elemento los datos adjuntos con el identificador especificado. Como práctica recomendada, debe usar el identificador de datos adjuntos para quitar datos adjuntos solo si la misma aplicación de correo ha agregado los datos adjuntos en la misma sesión. En Outlook en la Web y dispositivos móviles, el identificador de datos adjuntos solo es válido en la misma sesión. Una sesión se ha terminado cuando el usuario cierra la aplicación o si el usuario comienza a redactar un formulario en línea, a continuación, se abre el formulario para continuar en una ventana independiente.
+    El método `removeAttachmentAsync` quita del elemento los datos adjuntos con el identificador especificado. Como práctica recomendada, debe usar el identificador de datos adjuntos para quitar datos adjuntos solo si la misma aplicación de correo ha agregado los datos adjuntos en la misma sesión. En Outlook en la Web y dispositivos móviles, el identificador de datos adjuntos solo es válido en la misma sesión. Una sesión se ha terminado cuando el usuario cierra la aplicación o si el usuario empieza a redactar un formulario en línea, a continuación, sale el formulario para continuar en una ventana independiente.
 
 
-    \[[Conjunto de API: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Conjunto de API: Buzón 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    **[Nivel de permiso mínimo:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
+    **[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
 
 
     **[Modo de Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Organizador de citas
 
 
-    **Errores:**
+    **Errores**:
 
 
     - `InvalidAttachmentId`<!-- -->: el identificador de datos adjuntos no existe.
@@ -1244,10 +1244,10 @@ methods:
     content: 'removeAttachmentAsync(attachmentId: string, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: attachmentId
-      description: El identificador de los datos adjuntos para quitar. La longitud máxima de la cadena `attachmentId` es de 200 caracteres en Outlook en la Web y en Windows.
+      description: El identificador de los datos adjuntos para quitar. La longitud máxima de cadena es `attachmentId` de 200 caracteres en Outlook en la web y en Windows.
       type: string
     - id: options
-      description: 'Opcional. Un objeto literal que contiene una o más de las siguientes propiedades. `asyncContext`<!-- -->: los desarrolladores pueden proporcionar cualquier objeto al que deseen acceder en el método de devolución de llamada.'
+      description: 'Opcional. Un objeto literal que contiene una o más de las siguientes propiedades. `asyncContext`<!-- -->: Los desarrolladores pueden proporcionar cualquier objeto al que deseen tener acceso en el método de devolución de llamada.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
       description: Opcional. Cuando se completa el método, se llama a la función pasada en `callback` el parámetro con un único parámetro de tipo `Office.AsyncResult`<!-- -->. Si se produce un error en la eliminación de los datos adjuntos, la propiedad `asyncResult.error` contendrá un código de error con el motivo del error.
@@ -1263,12 +1263,12 @@ methods:
     Elimina el controlador de eventos de un tpo de evento admitido. **Nota:** Los eventos solo están disponibles con el panel de tareas.
 
 
-    Consulte la sección eventos del modelo [de objetos item](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/requirement-set-1.7/office.context.mailbox.item#events) para ver los eventos admitidos.
+    Consulte la sección Eventos del modelo de [objetos Item](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/requirement-set-1.7/office.context.mailbox.item#events) para ver los eventos admitidos.
 
 
-    \[[Conjunto de API: Mailbox 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Conjunto de API: Buzón 1.7](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    **[Nivel de permiso mínimo:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+    **[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
 
 
     **[Modo de Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Organizador de citas
@@ -1281,10 +1281,10 @@ methods:
       description: El evento que debe revocar el controlador.
       type: <xref uid="office!Office.EventType:enum" /> | string
     - id: options
-      description: 'Opcional. Un objeto literal que contiene una o más de las siguientes propiedades. `asyncContext`<!-- -->: los desarrolladores pueden proporcionar cualquier objeto al que deseen acceder en el método de devolución de llamada.'
+      description: 'Opcional. Un objeto literal que contiene una o más de las siguientes propiedades. `asyncContext`<!-- -->: Los desarrolladores pueden proporcionar cualquier objeto al que deseen tener acceso en el método de devolución de llamada.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
-      description: Opcional. Cuando se completa el método, se llama a la función que se ha pasado en `callback` el parámetro con un único parámetro. `asyncResult`<!-- -->, que es un `Office.AsyncResult` objeto.
+      description: Opcional. Cuando se completa el método, se llama a la función pasada en `callback` el parámetro con un único parámetro, `asyncResult`<!-- -->, que es un `Office.AsyncResult` objeto.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
     return:
       type: void
@@ -1297,27 +1297,27 @@ methods:
     Guarda un elemento de forma asincrónica.
 
 
-    Cuando se invoca, este método guarda el mensaje actual como borrador y devuelve el identificador de elemento a través del método de devolución de llamada. En el modo en línea de Outlook o en Outlook en la web, el elemento se guarda en el servidor. En modo en caché de Outlook, se guarda el elemento en la caché local.
+    Cuando se invoca, este método guarda el mensaje actual como borrador y devuelve el identificador de elemento mediante el método de devolución de llamada. En el modo en línea de Outlook o en Outlook en la web, el elemento se guarda en el servidor. En modo en caché de Outlook, se guarda el elemento en la caché local.
 
 
     Dado que las citas no tienen ningún estado de borrador, si se llama a `saveAsync` en una cita en modo de redacción, el elemento se guardará como una cita normal en el calendario del usuario. Para las citas nuevas que todavía no se han guardado, no se enviará ninguna invitación. Si se guarda una cita existente, se enviará una actualización a los asistentes agregados o eliminados.
 
 
-    **Nota:** Si el complemento llama a un elemento en modo de redacción para obtener un identificador de elemento para usarlo con EWS o la API de REST, tenga en cuenta que cuando Outlook está en modo en caché, puede tardar algún tiempo antes de que el elemento se sincronice realmente con el `saveAsync` servidor. Hasta que se sincronice el elemento, el uso del identificador de elemento devolverá un error.
+    **Nota:** Si el complemento llama a un elemento en modo de redacción para obtener un identificador de elemento que se usará con EWS o la API de REST, tenga en cuenta que cuando Outlook está en modo caché, puede tardar algún tiempo antes de que el elemento se sincronice realmente con el `saveAsync` servidor. Hasta que el elemento se sincronice, el uso del identificador del elemento devolverá un error.
 
 
-    **Nota:** En Outlook para Mac, solo la compilación 16.35.308 o posterior admite guardar una reunión. De lo contrario, `saveAsync` se produce un error en el método cuando se llama desde una reunión en modo de redacción. Para obtener una solución alternativa, vea No se puede guardar una reunión como borrador [en Outlook para Mac mediante la API de Office JS](https://support.microsoft.com/help/4505745)<!-- -->.
+    **Nota:** En Outlook en Mac, solo la compilación 16.35.308 o posterior admite guardar una reunión. De lo contrario, `saveAsync` se produce un error en el método cuando se llama desde una reunión en modo de redacción. Para obtener una solución alternativa, vea [Cannot save a meeting as a draft in Outlook for Mac by using Office JS API](https://support.microsoft.com/help/4505745)<!-- -->.
 
 
-    \[[Conjunto de API: Mailbox 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Conjunto de API: Buzón 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    **[Nivel de permiso mínimo:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
+    **[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
 
 
     **[Modo de Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Organizador de citas
 
 
-    **Errores:**
+    **Errores**:
 
 
     - `InvalidAttachmentId`<!-- -->: el identificador de datos adjuntos no existe.
@@ -1346,7 +1346,7 @@ methods:
     content: 'saveAsync(options: Office.AsyncContextOptions, callback: (asyncResult: Office.AsyncResult<string>) => void): void;'
     parameters:
     - id: options
-      description: 'Un objeto literal que contiene una o más de las siguientes propiedades. `asyncContext`<!-- -->: los desarrolladores pueden proporcionar cualquier objeto al que deseen acceder en el método de devolución de llamada.'
+      description: 'Un objeto literal que contiene una o más de las siguientes propiedades. `asyncContext`<!-- -->: Los desarrolladores pueden proporcionar cualquier objeto al que deseen tener acceso en el método de devolución de llamada.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
       description: Cuando se completa el método, se llama a la función pasada en `callback` el parámetro con un único parámetro de tipo `Office.AsyncResult`<!-- -->.
@@ -1362,27 +1362,27 @@ methods:
     Guarda un elemento de forma asincrónica.
 
 
-    Cuando se invoca, este método guarda el mensaje actual como borrador y devuelve el identificador de elemento a través del método de devolución de llamada. En el modo en línea de Outlook o en Outlook en la web, el elemento se guarda en el servidor. En modo en caché de Outlook, se guarda el elemento en la caché local.
+    Cuando se invoca, este método guarda el mensaje actual como borrador y devuelve el identificador de elemento mediante el método de devolución de llamada. En el modo en línea de Outlook o en Outlook en la web, el elemento se guarda en el servidor. En modo en caché de Outlook, se guarda el elemento en la caché local.
 
 
     Dado que las citas no tienen ningún estado de borrador, si se llama a `saveAsync` en una cita en modo de redacción, el elemento se guardará como una cita normal en el calendario del usuario. Para las citas nuevas que todavía no se han guardado, no se enviará ninguna invitación. Si se guarda una cita existente, se enviará una actualización a los asistentes agregados o eliminados.
 
 
-    **Nota:** Si el complemento llama a un elemento en modo de redacción para obtener un identificador de elemento para usarlo con EWS o la API de REST, tenga en cuenta que cuando Outlook está en modo en caché, puede tardar algún tiempo antes de que el elemento se sincronice realmente con el `saveAsync` servidor. Hasta que se sincronice el elemento, el uso del identificador de elemento devolverá un error.
+    **Nota:** Si el complemento llama a un elemento en modo de redacción para obtener un identificador de elemento que se usará con EWS o la API de REST, tenga en cuenta que cuando Outlook está en modo caché, puede tardar algún tiempo antes de que el elemento se sincronice realmente con el `saveAsync` servidor. Hasta que el elemento se sincronice, el uso del identificador del elemento devolverá un error.
 
 
-    **Nota:** En Outlook para Mac, solo la compilación 16.35.308 o posterior admite guardar una reunión. De lo contrario, `saveAsync` se produce un error en el método cuando se llama desde una reunión en modo redacción. Para obtener una solución alternativa, vea No se puede guardar una reunión [como borrador en Outlook para Mac mediante la API de Office JS](https://support.microsoft.com/help/4505745)<!-- -->.
+    **Nota:** En Outlook en Mac, solo la compilación 16.35.308 o posterior admite guardar una reunión. De lo contrario, `saveAsync` se produce un error en el método cuando se llama desde una reunión en modo de redacción. Para obtener una solución alternativa, vea [Cannot save a meeting as a draft in Outlook for Mac by using Office JS API](https://support.microsoft.com/help/4505745)<!-- -->.
 
 
-    \[[Conjunto de API: Mailbox 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Conjunto de API: Buzón 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    **[Nivel de permiso mínimo:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
+    **[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
 
 
     **[Modo de Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Organizador de citas
 
 
-    **Errores:**
+    **Errores**:
 
 
     - `InvalidAttachmentId`<!-- -->: el identificador de datos adjuntos no existe.
@@ -1420,7 +1420,7 @@ methods:
     content: 'saveAsync(callback: (asyncResult: Office.AsyncResult<string>) => void): void;'
     parameters:
     - id: callback
-      description: Cuando se completa el método, se llama a la función que se pasa en el parámetro de devolución de llamada con un único parámetro de tipo `Office.AsyncResult`<!-- -->.
+      description: Cuando se completa el método, se llama a la función pasada en el parámetro de devolución de llamada con un único parámetro de tipo `Office.AsyncResult`<!-- -->.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
     return:
       type: void
@@ -1436,15 +1436,15 @@ methods:
     El método `setSelectedDataAsync` inserta la cadena especificada en la posición del cursor en el asunto o el cuerpo del elemento, o si se selecciona texto en el editor, reemplaza el texto seleccionado. Si el cursor no está en el cuerpo o el campo del asunto, se devuelve un error. Después de la inserción, el cursor se coloca al final del contenido insertado.
 
 
-    \[[Conjunto de API: Mailbox 1.2](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Conjunto de API: Buzón 1.2](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    **[Nivel de permisos mínimo:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
+    **[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
 
 
     **[Modo de Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Organizador de citas
 
 
-    **Errores:**
+    **Errores**:
 
 
     - `InvalidAttachmentId`<!-- -->: el identificador de datos adjuntos no existe.
@@ -1487,7 +1487,7 @@ methods:
       description: Datos que se van a insertar. Los datos no deben superar 1.000.000 de caracteres. Si se pasan más de 1.000.000 de caracteres, se produce una excepción `ArgumentOutOfRange`.
       type: string
     - id: options
-      description: 'Opcional. Un objeto literal que contiene una o más de las siguientes propiedades. `asyncContext`<!-- -->: los desarrolladores pueden proporcionar cualquier objeto al que deseen acceder en el método de devolución de llamada. `coercionType`<!-- -->: si el texto, el estilo actual se aplica en Outlook en la Web y Windows. Si el campo es un editor de HTML, se insertan solo los datos de texto, aunque los datos sean HTML. Si html y el campo admiten HTML (el asunto no), el estilo actual se aplica en Outlook en la Web y el estilo predeterminado se aplica en Outlook en clientes de escritorio. Si el campo es un campo de texto, se devuelve un error `InvalidDataFormat`. Si `coercionType` no está establecido, el resultado depende del campo: si el campo es HTML, se usa HTML; si el campo es texto, se usa texto sin formato.'
+      description: 'Opcional. Un objeto literal que contiene una o más de las siguientes propiedades. `asyncContext`<!-- -->: Los desarrolladores pueden proporcionar cualquier objeto al que deseen tener acceso en el método de devolución de llamada. `coercionType`<!-- -->: si el texto, el estilo actual se aplica en Outlook en la web y Windows. Si el campo es un editor de HTML, se insertan solo los datos de texto, aunque los datos sean HTML. Si html y el campo admiten HTML (el asunto no lo hace), el estilo actual se aplica en Outlook en la web y el estilo predeterminado se aplica en Outlook en clientes de escritorio. Si el campo es un campo de texto, se devuelve un error `InvalidDataFormat`. Si `coercionType` no está establecido, el resultado depende del campo: si el campo es HTML, se usa HTML; si el campo es texto, se usa texto sin formato.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" /> & <xref uid="outlook!Office.CoercionTypeOptions:interface" />
     - id: callback
       description: Opcional. Cuando se completa el método, se llama a la función pasada en `callback` el parámetro con un único parámetro de tipo `Office.AsyncResult`<!-- -->.
@@ -1497,9 +1497,9 @@ methods:
       description: ''
 extends: <xref uid="outlook!Office.Appointment:interface" />
 metadata:
-  ms.openlocfilehash: ed1c5dca0e3358537b3b09da7e61cbbc16b75a9c
-  ms.sourcegitcommit: 9dba9247601805ad821e7a7260ac418e566786b7
+  ms.openlocfilehash: 6d3c1bba6d24fbb6f7d9dd1f13c669254eb8e7ce
+  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
   ms.translationtype: MT
   ms.contentlocale: es-ES
-  ms.lasthandoff: 02/10/2021
-  ms.locfileid: "50173191"
+  ms.lasthandoff: 03/26/2021
+  ms.locfileid: "51224904"
