@@ -4,7 +4,7 @@ uid: excel!Excel.Worksheet:class
 package: excel!
 fullName: Excel.Worksheet
 summary: >-
-  Una hoja de cálculo de Excel es una cuadrícula de celdas. Puede contener datos, tablas, gráficos, etc. Para obtener más información sobre el modelo de objetos de hoja de cálculo, lea [Trabajar con hojas de cálculo mediante la API de JavaScript de Excel](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-worksheets)<!-- -->.
+  Una hoja de cálculo de Excel es una cuadrícula de celdas. Puede contener datos, tablas, gráficos, etc. Para obtener más información sobre el modelo de objetos de hoja de cálculo, lea [Trabajar con hojas de cálculo con la API de JavaScript de Excel](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-worksheets)<!-- -->.
 
 
   \[[Conjunto de API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -161,7 +161,7 @@ properties:
   package: excel!
   fullName: onSelectionChanged
   summary: >-
-    Se produce cuando cambia la selección en una hoja de cálculo específica.
+    Se produce cuando la selección cambia en una hoja de cálculo específica.
 
 
     \[[Conjunto de API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -261,7 +261,7 @@ properties:
   package: excel!
   fullName: tabColor
   summary: >-
-    Color de tabulación de la hoja de cálculo. Al recuperar el color de la pestaña, si la hoja de cálculo es invisible, el valor será nulo. Si la hoja de cálculo está visible pero el color de tabulación se establece en automático, se devolverá una cadena vacía. De lo contrario, la propiedad se establecerá en un color, con la forma " 123456" Al establecer el color, use una cadena vacía para establecer un color "automático" o un color real de lo \# contrario.
+    Color de pestaña de la hoja de cálculo. Al recuperar el color de la pestaña, si la hoja de cálculo es invisible, el valor será null. Si la hoja de cálculo está visible pero el color de la pestaña está establecido en automático, se devolverá una cadena vacía. De lo contrario, la propiedad se establecerá en un color, con la forma " 123456" Al establecer el color, use una cadena vacía para establecer un color "automático" o un color real de lo \# contrario.
 
 
     \[[Conjunto de API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -339,7 +339,7 @@ methods:
     content: 'calculate(markAllDirty: boolean): void;'
     parameters:
     - id: markAllDirty
-      description: True, para marcar todo como desnuciado.
+      description: True, para marcar todo como sucio.
       type: boolean
     return:
       type: void
@@ -360,7 +360,7 @@ methods:
     content: 'copy(positionType?: Excel.WorksheetPositionType, relativeTo?: Excel.Worksheet): Excel.Worksheet;'
     parameters:
     - id: positionType
-      description: Ubicación del libro donde se colocará la hoja de cálculo recién creada. El valor predeterminado es "None", que inserta la hoja de cálculo al principio de la hoja de cálculo.
+      description: Ubicación del libro para colocar la hoja de cálculo recién creada. El valor predeterminado es "None", que inserta la hoja de cálculo al principio de la hoja de cálculo.
       type: <xref uid="excel!Excel.WorksheetPositionType:enum" />
     - id: relativeTo
       description: Hoja de cálculo existente que determina la posición de la hoja de cálculo recién creada. Esto solo es necesario si `positionType` es "Before" o "After".
@@ -368,7 +368,7 @@ methods:
     return:
       type: <xref uid="excel!Excel.Worksheet:class" />
       description: >-
-        Hoja de cálculo recién creada.
+        La hoja de cálculo recién creada.
 
 
         #### <a name="examples"></a>Ejemplos
@@ -409,20 +409,20 @@ methods:
     content: 'copy(positionTypeString?: "None" | "Before" | "After" | "Beginning" | "End", relativeTo?: Excel.Worksheet): Excel.Worksheet;'
     parameters:
     - id: positionTypeString
-      description: Ubicación del libro donde se colocará la hoja de cálculo recién creada. El valor predeterminado es "None", que inserta la hoja de cálculo al principio de la hoja de cálculo.
+      description: Ubicación del libro para colocar la hoja de cálculo recién creada. El valor predeterminado es "None", que inserta la hoja de cálculo al principio de la hoja de cálculo.
       type: "\"None\" | \"Before\" | \"After\" | \"Beginning\" | \"End\""
     - id: relativeTo
       description: Hoja de cálculo existente que determina la posición de la hoja de cálculo recién creada. Esto solo es necesario si `positionType` es "Before" o "After".
       type: <xref uid="excel!Excel.Worksheet:class" />
     return:
       type: <xref uid="excel!Excel.Worksheet:class" />
-      description: Hoja de cálculo recién creada.
+      description: La hoja de cálculo recién creada.
 - name: delete()
   uid: excel!Excel.Worksheet#delete:member(1)
   package: excel!
   fullName: delete()
   summary: >-
-    Elimina la hoja de cálculo del libro. Tenga en cuenta que si la visibilidad de la hoja de cálculo está establecida en "VeryHidden", se producirá un error en la operación de eliminación con una `InvalidOperation` excepción. Primero debe cambiar su visibilidad a oculta o visible antes de eliminarla.
+    Elimina la hoja de cálculo del libro. Tenga en cuenta que si la visibilidad de la hoja de cálculo está establecida en "VeryHidden", la operación de eliminación producirá un error con una `InvalidOperation` excepción. Primero debe cambiar su visibilidad a oculta o visible antes de eliminarla.
 
 
     \[[Conjunto de API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -439,7 +439,7 @@ methods:
   package: excel!
   fullName: getCell(row, column)
   summary: >-
-    Obtiene el objeto de intervalo que contiene la celda en función de los números de fila y columna. La celda puede estar fuera de los límites de su rango primario, siempre y cuando permanezca dentro de la cuadrícula de la hoja de cálculo.
+    Obtiene el objeto de intervalo que contiene la celda en función de los números de fila y columna. La celda puede estar fuera de los límites de su intervalo primario, siempre que permanezca dentro de la cuadrícula de la hoja de cálculo.
 
 
     \[[Conjunto de API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -463,7 +463,7 @@ methods:
   package: excel!
   fullName: getNext(visibleOnly)
   summary: >-
-    Obtiene la hoja de cálculo que sigue a esta. Si no hay ninguna hoja de cálculo que sigue a esta, este método producirá un error.
+    Obtiene la hoja de cálculo que sigue a esta. Si no hay hojas de cálculo siguientes a esta, este método producirá un error.
 
 
     \[[Conjunto de API: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -474,7 +474,7 @@ methods:
     content: 'getNext(visibleOnly?: boolean): Excel.Worksheet;'
     parameters:
     - id: visibleOnly
-      description: Opcional. Si es true, solo se tienen en cuenta las hojas de cálculo visibles, omitiendo las ocultas.
+      description: Opcional. Si es true, solo tiene en cuenta las hojas de cálculo visibles, omitiendo las ocultas.
       type: boolean
     return:
       type: <xref uid="excel!Excel.Worksheet:class" />
@@ -484,7 +484,7 @@ methods:
   package: excel!
   fullName: getNextOrNullObject(visibleOnly)
   summary: >-
-    Obtiene la hoja de cálculo que sigue a esta. Si no hay ninguna hoja de cálculo que sigue a esta, este método devolverá un objeto NULL.
+    Obtiene la hoja de cálculo que sigue a esta. Si no hay hojas de cálculo siguientes a esta, este método devolverá un objeto null.
 
 
     \[[Conjunto de API: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -495,7 +495,7 @@ methods:
     content: 'getNextOrNullObject(visibleOnly?: boolean): Excel.Worksheet;'
     parameters:
     - id: visibleOnly
-      description: Opcional. Si es true, solo se tienen en cuenta las hojas de cálculo visibles, omitiendo las ocultas.
+      description: Opcional. Si es true, solo tiene en cuenta las hojas de cálculo visibles, omitiendo las ocultas.
       type: boolean
     return:
       type: <xref uid="excel!Excel.Worksheet:class" />
@@ -516,7 +516,7 @@ methods:
     content: 'getPrevious(visibleOnly?: boolean): Excel.Worksheet;'
     parameters:
     - id: visibleOnly
-      description: Opcional. Si es true, solo se tienen en cuenta las hojas de cálculo visibles, omitiendo las ocultas.
+      description: Opcional. Si es true, solo tiene en cuenta las hojas de cálculo visibles, omitiendo las ocultas.
       type: boolean
     return:
       type: <xref uid="excel!Excel.Worksheet:class" />
@@ -537,7 +537,7 @@ methods:
     content: 'getPreviousOrNullObject(visibleOnly?: boolean): Excel.Worksheet;'
     parameters:
     - id: visibleOnly
-      description: Opcional. Si es true, solo se tienen en cuenta las hojas de cálculo visibles, omitiendo las ocultas.
+      description: Opcional. Si es true, solo tiene en cuenta las hojas de cálculo visibles, omitiendo las ocultas.
       type: boolean
     return:
       type: <xref uid="excel!Excel.Worksheet:class" />
@@ -547,7 +547,7 @@ methods:
   package: excel!
   fullName: getRange(address)
   summary: >-
-    Obtiene el objeto de rango, que representa un único bloque rectangular de celdas, especificado por la dirección o el nombre.
+    Obtiene el objeto range, que representa un único bloque rectangular de celdas, especificado por la dirección o el nombre.
 
 
     \[[Conjunto de API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -558,7 +558,7 @@ methods:
     content: 'getRange(address?: string): Excel.Range;'
     parameters:
     - id: address
-      description: Opcional. Cadena que representa la dirección o el nombre del intervalo. Por ejemplo, "A1:B2". Si no se especifica, se devuelve todo el intervalo de la hoja de cálculo.
+      description: Opcional. La cadena que representa la dirección o el nombre del intervalo. Por ejemplo, "A1:B2". Si no se especifica, se devuelve todo el intervalo de la hoja de cálculo.
       type: string
     return:
       type: <xref uid="excel!Excel.Range:class" />
@@ -579,16 +579,16 @@ methods:
     content: 'getRangeByIndexes(startRow: number, startColumn: number, rowCount: number, columnCount: number): Excel.Range;'
     parameters:
     - id: startRow
-      description: Fila De inicio (indizada con cero).
+      description: Fila Inicio (indizado cero).
       type: number
     - id: startColumn
-      description: Columna Inicio (indizada con cero).
+      description: Columna Inicio (indizado cero).
       type: number
     - id: rowCount
-      description: Número de filas que se incluirán en el intervalo.
+      description: Número de filas que se van a incluir en el intervalo.
       type: number
     - id: columnCount
-      description: Número de columnas que se incluirán en el intervalo.
+      description: Número de columnas que se van a incluir en el intervalo.
       type: number
     return:
       type: <xref uid="excel!Excel.Range:class" />
@@ -609,7 +609,7 @@ methods:
     content: 'getUsedRange(valuesOnly?: boolean): Excel.Range;'
     parameters:
     - id: valuesOnly
-      description: 'Opcional. Si es true, solo considera las celdas con valores como celdas usadas (ignorando el formato). \[Conjunto de api: ExcelApi 1.2\]'
+      description: 'Opcional. Si es true, solo considera celdas con valores como celdas usadas (ignorando el formato). \[Conjunto de api: ExcelApi 1.2\]'
       type: boolean
     return:
       type: <xref uid="excel!Excel.Range:class" />
@@ -698,7 +698,7 @@ methods:
   uid: excel!Excel.Worksheet#set:member(1)
   package: excel!
   fullName: set(properties, options)
-  summary: Establece varias propiedades de un objeto al mismo tiempo. Puede pasar un objeto sin formato con las propiedades apropiadas u otro objeto API del mismo tipo.
+  summary: Establece varias propiedades de un objeto al mismo tiempo. Puede pasar un objeto sin formato con las propiedades adecuadas u otro objeto API del mismo tipo.
   remarks: >-
     Este método tiene la siguiente firma adicional:
 
@@ -710,7 +710,7 @@ methods:
     content: 'set(properties: Interfaces.WorksheetUpdateData, options?: OfficeExtension.UpdateOptions): void;'
     parameters:
     - id: properties
-      description: Un objeto JavaScript con propiedades estructuradas isomórficamente en las propiedades del objeto en el que se llama al método.
+      description: Un objeto JavaScript con propiedades que se estructuran isomórficamente en las propiedades del objeto en el que se llama al método.
       type: <xref uid="excel!Excel.Interfaces.WorksheetUpdateData:interface" />
     - id: options
       description: Proporciona una opción para suprimir errores si el objeto properties intenta establecer propiedades de solo lectura.
@@ -739,7 +739,7 @@ methods:
   uid: excel!Excel.Worksheet#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: Invalida el método JavaScript `toJSON()` para proporcionar resultados más útiles cuando se pasa un objeto api a `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama `toJSON` al método del objeto que se le pasa). Mientras que el objeto Excel.Worksheet original es un objeto DE API, el método devuelve un objeto JavaScript sin formato `toJSON` (especificado como `Excel.Interfaces.WorksheetData`<!-- -->) que contiene copias superficiales de las propiedades secundarias cargadas del objeto original.
+  summary: Invalida el método JavaScript para proporcionar resultados más útiles cuando se pasa un objeto API a `toJSON()``JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama `toJSON` al método del objeto que se pasa a él). Mientras que el objeto Excel.Worksheet original es un objeto API, el método devuelve un objeto JavaScript sin formato (con el tipo `toJSON` como `Excel.Interfaces.WorksheetData`<!-- -->) que contiene copias superficiales de las propiedades secundarias cargadas del objeto original.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -750,9 +750,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: e44f8e7aa64d9d3994800ad1d371e1637b2a25df
-  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
+  ms.openlocfilehash: 9fe97c0d3e692196705821072c0885d8f6b169f8
+  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
   ms.translationtype: MT
   ms.contentlocale: es-ES
-  ms.lasthandoff: 01/13/2021
-  ms.locfileid: "49854787"
+  ms.lasthandoff: 03/26/2021
+  ms.locfileid: "51257433"
