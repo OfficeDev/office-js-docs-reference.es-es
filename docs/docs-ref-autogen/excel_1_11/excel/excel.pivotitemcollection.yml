@@ -4,10 +4,10 @@ uid: excel!Excel.PivotItemCollection:class
 package: excel!
 fullName: Excel.PivotItemCollection
 summary: >-
-  Representa una colección de todos los PivotItems relacionados con su campo dinámico primario.
+  Representa una colección de todos los pivotitems relacionados con su pivotfield primario.
 
 
-  \[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  \[[Conjunto de API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
 remarks: ''
 isPreview: false
 isDeprecated: false
@@ -17,7 +17,7 @@ properties:
   uid: excel!Excel.PivotItemCollection#context:member
   package: excel!
   fullName: context
-  summary: Contexto de la solicitud asociado al objeto. Esto conecta el proceso del complemento con el proceso de la aplicación host de Office.
+  summary: Contexto de solicitud asociado al objeto. Esto conecta el proceso del complemento con el proceso de la aplicación host de Office.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -43,10 +43,10 @@ methods:
   package: excel!
   fullName: getCount()
   summary: >-
-    Obtiene el número de PivotItems de la colección.
+    Obtiene el número de pivotitems de la colección.
 
 
-    \[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Conjunto de API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -60,10 +60,10 @@ methods:
   package: excel!
   fullName: getItem(name)
   summary: >-
-    Obtiene un PivotItem por su nombre o identificador.
+    Obtiene un objeto PivotItem por su nombre o identificador.
 
 
-    \[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Conjunto de API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -71,7 +71,7 @@ methods:
     content: 'getItem(name: string): Excel.PivotItem;'
     parameters:
     - id: name
-      description: Nombre del PivotItem que se va a recuperar.
+      description: Nombre del objeto PivotItem que se va a recuperar.
       type: string
     return:
       type: <xref uid="excel!Excel.PivotItem:class" />
@@ -81,10 +81,10 @@ methods:
   package: excel!
   fullName: getItemOrNullObject(name)
   summary: >-
-    Obtiene un PivotItem por nombre. Si el PivotItem no existe, se devolverá un objeto null.
+    Obtiene un objeto PivotItem por su nombre. Si el objeto PivotItem no existe, devolverá un objeto null.
 
 
-    \[[Conjunto de API: ExcelApi 1,8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+    \[[Conjunto de API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -92,7 +92,7 @@ methods:
     content: 'getItemOrNullObject(name: string): Excel.PivotItem;'
     parameters:
     - id: name
-      description: Nombre del PivotItem que se va a recuperar.
+      description: Nombre del objeto PivotItem que se va a recuperar.
       type: string
     return:
       type: <xref uid="excel!Excel.PivotItem:class" />
@@ -109,7 +109,7 @@ methods:
     content: 'load(options?: Excel.Interfaces.PivotItemCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.PivotItemCollection;'
     parameters:
     - id: options
-      description: Proporciona opciones para las propiedades del objeto que se va a cargar.
+      description: Proporciona opciones para las propiedades del objeto que se cargarán.
       type: <xref uid="excel!Excel.Interfaces.PivotItemCollectionLoadOptions:interface" /> & <xref uid="excel!Excel.Interfaces.CollectionLoadOptions:interface" />
     return:
       type: <xref uid="excel!Excel.PivotItemCollection:class" />
@@ -126,7 +126,7 @@ methods:
     content: 'load(propertyNames?: string | string[]): Excel.PivotItemCollection;'
     parameters:
     - id: propertyNames
-      description: Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades que se van a cargar.
+      description: Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades que se cargarán.
       type: string | string[]
     return:
       type: <xref uid="excel!Excel.PivotItemCollection:class" />
@@ -143,7 +143,7 @@ methods:
     content: 'load(propertyNamesAndPaths?: OfficeExtension.LoadOption): Excel.PivotItemCollection;'
     parameters:
     - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` es una cadena delimitada por comas que especifica las propiedades que se van a cargar y `propertyNamesAndPaths.expand` es una cadena delimitada por comas que especifica las propiedades de navegación que se deben cargar.'
+      description: '`propertyNamesAndPaths.select` es una cadena delimitada por comas que especifica las propiedades que se cargarán y es una cadena delimitada por comas que especifica las propiedades de navegación que `propertyNamesAndPaths.expand` se cargarán.'
       type: <xref uid="office!OfficeExtension.LoadOption:interface" />
     return:
       type: <xref uid="excel!Excel.PivotItemCollection:class" />
@@ -152,7 +152,7 @@ methods:
   uid: excel!Excel.PivotItemCollection#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: Reemplaza el `toJSON()` método JavaScript para proporcionar un resultado más útil cuando se pasa un objeto API a `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama al `toJSON` método del objeto que se le pasa.) Mientras que el `Excel.PivotItemCollection` objeto original es un objeto API, el `toJSON` método devuelve un objeto JavaScript sin formato (escrito como `Excel.Interfaces.PivotItemCollectionData`<!-- -->) que contiene una matriz "items" con copias rasas de las propiedades cargadas de los elementos de la colección.
+  summary: Invalida el método JavaScript para proporcionar resultados más útiles cuando se pasa un objeto API a `toJSON()``JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama `toJSON` al método del objeto que se pasa a él). Mientras que el objeto original es un objeto API, el método devuelve un objeto JavaScript sin formato `Excel.PivotItemCollection` `toJSON` (se escribe como `Excel.Interfaces.PivotItemCollectionData`<!-- -->) que contiene una matriz "items" con copias superficiales de las propiedades cargadas de los elementos de la colección.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -163,9 +163,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 403646b8e47c3c24d1eb28f4c3fcdea658c6f839
-  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.openlocfilehash: 71d8ada261fe9b331dd0e48a4054f2a8c8bbcf94
+  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
   ms.translationtype: MT
   ms.contentlocale: es-ES
-  ms.lasthandoff: 11/18/2020
-  ms.locfileid: "49229827"
+  ms.lasthandoff: 03/26/2021
+  ms.locfileid: "51264488"
