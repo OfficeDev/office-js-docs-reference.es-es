@@ -87,7 +87,7 @@ functions:
 - name: Visio.run(batch)
   uid: visio!Visio.run:function(1)
   package: visio!
-  summary: Ejecuta un script de proceso por lotes que realiza acciones en el modelo de objetos de Visio, utilizando un nuevo contexto de solicitud. Cuando se resuelve la promesa, se publicarán todos los objetos controlados que se asignaron automáticamente durante la ejecución.
+  summary: Ejecuta un script por lotes que realiza acciones en el modelo de objetos de Visio con un nuevo contexto de solicitud. Cuando se resuelva la promesa, se liberarán los objetos de seguimiento que se asignaron automáticamente durante la ejecución.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -95,7 +95,7 @@ functions:
     content: 'export function run<T>(batch: (context: Visio.RequestContext) => Promise<T>): Promise<T>;'
     parameters:
     - id: batch
-      description: Una función que toma Visio. RequestContext y devuelve una promesa (normalmente, solo el resultado de "context. Sync ()"). El parámetro context facilita las solicitudes a la aplicación de Visio. Dado que el complemento de Office y la aplicación Visio se ejecutan en dos procesos diferentes, el contexto de la solicitud es necesario para obtener acceso al modelo de objetos de Visio desde el complemento.
+      description: Función que toma un Visio.RequestContext y devuelve una promesa (normalmente, solo el resultado de "context.sync()"). El parámetro context facilita las solicitudes a la aplicación de Visio. Dado que el complemento de Office y la aplicación visio se ejecutan en dos procesos diferentes, el contexto de solicitud es necesario para obtener acceso al modelo de objetos de Visio desde el complemento.
       type: '(context: <xref uid="visio!Visio.RequestContext:class" />) =&gt; Promise&lt;T&gt;'
     return:
       type: Promise&lt;T&gt;
@@ -103,7 +103,7 @@ functions:
 - name: Visio.run(object, batch)
   uid: visio!Visio.run:function(2)
   package: visio!
-  summary: Ejecuta un script de proceso por lotes que realiza acciones en el modelo de objetos de Visio mediante el contexto de solicitud de un objeto API creado anteriormente.
+  summary: Ejecuta un script por lotes que realiza acciones en el modelo de objetos de Visio, usando el contexto de solicitud de un objeto API creado anteriormente.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -111,10 +111,10 @@ functions:
     content: 'export function run<T>(object: OfficeExtension.ClientObject | OfficeExtension.EmbeddedSession, batch: (context: Visio.RequestContext) => Promise<T>): Promise<T>;'
     parameters:
     - id: object
-      description: Un objeto API creado anteriormente. El lote usará el mismo contexto de solicitud que el objeto pasado, lo que significa que los cambios aplicados al objeto se seleccionarán "context. Sync ()".
+      description: Un objeto API creado anteriormente. El lote usará el mismo contexto de solicitud que el objeto pasado, lo que significa que cualquier cambio que se aplique al objeto será recogido por "context.sync()".
       type: <xref uid="office!OfficeExtension.ClientObject:class" /> | <xref uid="office!OfficeExtension.EmbeddedSession:class" />
     - id: batch
-      description: Una función que toma Visio. RequestContext y devuelve una promesa (normalmente, solo el resultado de "context. Sync ()"). Cuando se resuelve la promesa, se publicarán todos los objetos controlados que se asignaron automáticamente durante la ejecución.
+      description: Función que toma un Visio.RequestContext y devuelve una promesa (normalmente, solo el resultado de "context.sync()"). Cuando se resuelva la promesa, se liberarán los objetos de seguimiento que se asignaron automáticamente durante la ejecución.
       type: '(context: <xref uid="visio!Visio.RequestContext:class" />) =&gt; Promise&lt;T&gt;'
     return:
       type: Promise&lt;T&gt;
@@ -122,7 +122,7 @@ functions:
 - name: Visio.run(objects, batch)
   uid: visio!Visio.run:function(3)
   package: visio!
-  summary: Ejecuta un script de proceso por lotes que realiza acciones en el modelo de objetos de Visio mediante el contexto de la solicitud de los objetos de la API creados anteriormente.
+  summary: Ejecuta un script por lotes que realiza acciones en el modelo de objetos de Visio, mediante el contexto de solicitud de objetos de API creados anteriormente.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -130,10 +130,10 @@ functions:
     content: 'export function run<T>(objects: OfficeExtension.ClientObject[], batch: (context: Visio.RequestContext) => Promise<T>): Promise<T>;'
     parameters:
     - id: objects
-      description: Una matriz de objetos API creados previamente. La matriz se validará para asegurarse de que todos los objetos comparten el mismo contexto. El lote usará este contexto de solicitud compartida, lo que significa que los cambios aplicados a estos objetos se seleccionarán "context. Sync ()".
+      description: Una matriz de objetos api creados anteriormente. La matriz se validará para asegurarse de que todos los objetos comparten el mismo contexto. El lote usará este contexto de solicitud compartida, lo que significa que cualquier cambio aplicado a estos objetos lo recogerá "context.sync()".
       type: <xref uid="office!OfficeExtension.ClientObject:class" />[]
     - id: batch
-      description: Una función que toma Visio. RequestContext y devuelve una promesa (normalmente, solo el resultado de "context. Sync ()"). Cuando se resuelve la promesa, se publicarán todos los objetos controlados que se asignaron automáticamente durante la ejecución.
+      description: Función que toma un Visio.RequestContext y devuelve una promesa (normalmente, solo el resultado de "context.sync()"). Cuando se resuelva la promesa, se liberarán los objetos de seguimiento que se asignaron automáticamente durante la ejecución.
       type: '(context: <xref uid="visio!Visio.RequestContext:class" />) =&gt; Promise&lt;T&gt;'
     return:
       type: Promise&lt;T&gt;
@@ -141,7 +141,7 @@ functions:
 - name: Visio.run(contextObject, batch)
   uid: visio!Visio.run:function(4)
   package: visio!
-  summary: Ejecuta un script de proceso por lotes que realiza acciones en el modelo de objetos de Visio, mediante el RequestContext de un objeto creado anteriormente. Cuando se resuelve la promesa, se publicarán todos los objetos controlados que se asignaron automáticamente durante la ejecución.
+  summary: Ejecuta un script por lotes que realiza acciones en el modelo de objetos de Visio, mediante el RequestContext de un objeto creado anteriormente. Cuando se resuelva la promesa, se liberarán los objetos de seguimiento que se asignaron automáticamente durante la ejecución.
   remarks: >-
     Además de esta firma, el método también tiene las siguientes firmas:
 
@@ -159,18 +159,18 @@ functions:
     content: 'export function run<T>(contextObject: OfficeExtension.ClientRequestContext, batch: (context: Visio.RequestContext) => Promise<T>): Promise<T>;'
     parameters:
     - id: contextObject
-      description: Visio. RequestContext creado previamente. Este contexto se volverá a usar en la función batch (en lugar de crear un nuevo contexto). Esto significa que el lote podrá seleccionar los cambios realizados en los objetos de la API existentes, si dichos objetos se derivan de este mismo contexto.
+      description: Visio.RequestContext creado anteriormente. La función batch volverá a usar este contexto (en lugar de crear un nuevo contexto). Esto significa que el lote podrá recoger los cambios realizados en objetos de API existentes, si dichos objetos se derivaron de este mismo contexto.
       type: <xref uid="office!OfficeExtension.ClientRequestContext:class" />
     - id: batch
-      description: Una función que toma un RequestContext y devuelve una promesa (normalmente, solo el resultado de "context. Sync ()"). El parámetro context facilita las solicitudes a la aplicación de Visio. Dado que el complemento de Office y la aplicación Visio se ejecutan en dos procesos diferentes, se necesita RequestContext para obtener acceso al modelo de objetos de Visio desde el complemento.
+      description: Función que toma un RequestContext y devuelve una promesa (normalmente, solo el resultado de "context.sync()"). El parámetro context facilita las solicitudes a la aplicación de Visio. Dado que el complemento de Office y la aplicación de Visio se ejecutan en dos procesos diferentes, RequestContext es necesario para obtener acceso al modelo de objetos de Visio desde el complemento.
       type: '(context: <xref uid="visio!Visio.RequestContext:class" />) =&gt; Promise&lt;T&gt;'
     return:
       type: Promise&lt;T&gt;
       description: ''
 metadata:
-  ms.openlocfilehash: 628e9290512b94ba1e9d8aefd6a1fa556297a078
-  ms.sourcegitcommit: 3bab97ab3b91da7cca497f6fc895408a76bd8b46
+  ms.openlocfilehash: 160a87f9afd1fc59da3c920487e71135a46c79a0
+  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
   ms.translationtype: MT
   ms.contentlocale: es-ES
-  ms.lasthandoff: 11/18/2020
-  ms.locfileid: "49142829"
+  ms.lasthandoff: 03/26/2021
+  ms.locfileid: "51277368"
