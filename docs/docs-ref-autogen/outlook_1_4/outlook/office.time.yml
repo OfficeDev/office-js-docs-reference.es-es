@@ -4,12 +4,12 @@ uid: outlook!Office.Time:interface
 package: outlook!
 fullName: Office.Time
 summary: >-
-  El `Time` objeto se devuelve como la propiedad de inicio o finalización de una cita en modo de redacción.
+  El `Time` objeto se devuelve como la propiedad start o end de una cita en modo de redacción.
 
 
-  \[[Conjunto de API: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  \[[Conjunto de API: Buzón 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
 remarks: >-
-  **[Nivel de permiso mínimo:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+  **[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
 
 
   **[Modo de Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Redacción
@@ -25,12 +25,12 @@ methods:
     Obtiene la hora de inicio o finalización de una cita.
 
 
-    La fecha y la hora se proporcionan como `Date` un objeto en la `asyncResult.value` propiedad. El valor se encuentra en la hora UTC (hora universal coordinada). Puede convertir la hora UTC a la hora del cliente local mediante el `convertToLocalClientTime` método.
+    La fecha y hora se proporciona como `Date` un objeto en la `asyncResult.value` propiedad. El valor se encuentra en la hora UTC (hora universal coordinada). Puede convertir la hora UTC a la hora del cliente local mediante el `convertToLocalClientTime` método.
 
 
-    \[[Conjunto de API: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Conjunto de API: Buzón 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    **[Nivel de permiso mínimo:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+    **[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
 
 
     **[Modo de Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Redacción
@@ -40,7 +40,7 @@ methods:
     content: 'getAsync(options: Office.AsyncContextOptions, callback: (asyncResult: Office.AsyncResult<Date>) => void): void;'
     parameters:
     - id: options
-      description: 'Un objeto literal que contiene una o más de las siguientes propiedades. `asyncContext`<!-- -->: los desarrolladores pueden proporcionar cualquier objeto al que deseen acceder en el método de devolución de llamada.'
+      description: 'Un objeto literal que contiene una o más de las siguientes propiedades. `asyncContext`<!-- -->: Los desarrolladores pueden proporcionar cualquier objeto al que deseen tener acceso en el método de devolución de llamada.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
       description: Cuando se completa el método, se llama a la función pasada en `callback` el parámetro con un único parámetro de tipo `Office.AsyncResult`<!-- -->. La `value` propiedad del resultado es un `Date` objeto.
@@ -56,12 +56,12 @@ methods:
     Obtiene la hora de inicio o finalización de una cita.
 
 
-    La fecha y la hora se proporcionan como `Date` un objeto en la `asyncResult.value` propiedad. El valor se encuentra en la hora UTC (hora universal coordinada). Puede convertir la hora UTC a la hora del cliente local mediante el `convertToLocalClientTime` método.
+    La fecha y hora se proporciona como `Date` un objeto en la `asyncResult.value` propiedad. El valor se encuentra en la hora UTC (hora universal coordinada). Puede convertir la hora UTC a la hora del cliente local mediante el `convertToLocalClientTime` método.
 
 
-    \[[Conjunto de API: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Conjunto de API: Buzón 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    **[Nivel de permiso mínimo:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+    **[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
 
 
     **[Modo de Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Redacción
@@ -89,7 +89,7 @@ methods:
     content: 'getAsync(callback: (asyncResult: Office.AsyncResult<Date>) => void): void;'
     parameters:
     - id: callback
-      description: Cuando se completa el método, se llama a la función que se pasa en el parámetro de devolución de llamada con un único parámetro de tipo `Office.AsyncResult`<!-- -->. La `value` propiedad del resultado es un `Date` objeto.
+      description: Cuando se completa el método, se llama a la función pasada en el parámetro de devolución de llamada con un único parámetro de tipo `Office.AsyncResult`<!-- -->. La `value` propiedad del resultado es un `Date` objeto.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;Date&gt;) =&gt; void'
     return:
       type: void
@@ -102,27 +102,27 @@ methods:
     Establece la hora de inicio o finalización de una cita.
 
 
-    Si se llama al método en la propiedad start, la propiedad se ajustará para mantener la duración de la cita como `setAsync` `end` se estableció anteriormente. Si se llama al método `setAsync` en la propiedad `end`, la duración de la cita se extenderá hasta la nueva hora de finalización.
+    Si se llama al método en la propiedad start, la propiedad se ajustará para mantener la duración de la `setAsync` `end` cita como se estableció anteriormente. Si se llama al método `setAsync` en la propiedad `end`, la duración de la cita se extenderá hasta la nueva hora de finalización.
 
 
     La hora debe especificarse conforme al sistema UTC. Puede obtener la hora UTC correcta con el método `convertToUtcClientTime`.
 
 
-    **Importante:** En el cliente de Windows, no puede usar esta función para actualizar el inicio o el final de una periodicidad.
+    **Importante:** En el cliente de Windows, no puedes usar esta función para actualizar el inicio o el final de una periodicidad.
 
 
-    \[[Conjunto de API: Mailbox 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+    \[[Conjunto de API: Buzón 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
   remarks: >-
-    **[Nivel de permiso mínimo:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
+    **[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
 
 
     **[Modo de Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Redacción
 
 
-    **Errores:**
+    **Errores**:
 
 
-    - `InvalidEndTime`<!-- -->: la hora de finalización de la cita es anterior a la hora de inicio de la cita.
+    - `InvalidEndTime`<!-- -->: la hora de finalización de la cita es antes de la hora de inicio de la cita.
 
 
     #### <a name="examples"></a>Ejemplos
@@ -197,7 +197,7 @@ methods:
       description: Un objeto date-time en Hora universal coordinada (UTC).
       type: Date
     - id: options
-      description: 'Opcional. Un objeto literal que contiene una o más de las siguientes propiedades. `asyncContext`<!-- -->: los desarrolladores pueden proporcionar cualquier objeto al que deseen acceder en el método de devolución de llamada.'
+      description: 'Opcional. Un objeto literal que contiene una o más de las siguientes propiedades. `asyncContext`<!-- -->: Los desarrolladores pueden proporcionar cualquier objeto al que deseen tener acceso en el método de devolución de llamada.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
       description: Opcional. Cuando se completa el método, se llama a la función pasada en `callback` el parámetro con un único parámetro de tipo `Office.AsyncResult`<!-- -->. Si al establecer la fecha y la hora se produce un error, la propiedad `asyncResult.error` contendrá un código de error.
@@ -206,9 +206,9 @@ methods:
       type: void
       description: ''
 metadata:
-  ms.openlocfilehash: 2a8c23152849591736cb0802711df7a011cbf5d7
-  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
+  ms.openlocfilehash: 5a3d71ca79bd9357f073d4175430343eadc697d1
+  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
   ms.translationtype: MT
   ms.contentlocale: es-ES
-  ms.lasthandoff: 01/13/2021
-  ms.locfileid: "49860982"
+  ms.lasthandoff: 03/26/2021
+  ms.locfileid: "51319778"
