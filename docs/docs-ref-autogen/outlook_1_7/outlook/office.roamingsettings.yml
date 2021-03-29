@@ -4,10 +4,10 @@ uid: outlook!Office.RoamingSettings:interface
 package: outlook!
 fullName: Office.RoamingSettings
 summary: >-
-  La configuración creada mediante los métodos del objeto `RoamingSettings` se guarda por complemento y por usuario. Es decir, solo están disponibles para el complemento que los creó y solo desde el buzón del usuario en el que se guardaron.
+  La configuración creada mediante los métodos del objeto `RoamingSettings` se guarda por complemento y por usuario. Es decir, solo están disponibles para el complemento que los creó y solo desde el buzón del usuario en el que se guardan.
 
 
-  Aunque la API de complementos de Outlook limita el acceso a esta configuración solo al complemento que los creó, esta configuración no debe considerarse almacenamiento seguro. Se puede tener acceso mediante Servicios Web Exchange o la biblioteca MAPI extendida. No debe usarse para almacenar información confidencial como credenciales de usuario o tokens de seguridad.
+  Aunque la API del complemento de Outlook limita el acceso a estas opciones solo al complemento que los creó, esta configuración no debe considerarse almacenamiento seguro. Se puede tener acceso mediante Servicios Web Exchange o la biblioteca MAPI extendida. No debe usarse para almacenar información confidencial como credenciales de usuario o tokens de seguridad.
 
 
   El nombre de una configuración es una cadena, mientras que el valor puede ser String, Number, Boolean, Null, Object o Array.
@@ -16,18 +16,18 @@ summary: >-
   Se puede tener acceso al objeto `RoamingSettings` mediante la propiedad `roamingSettings` del espacio de nombres `Office.context`.
 
 
-  **Importante:**
+  **Importante**:
 
 
-  - El objeto se inicializa desde el almacenamiento persistente solo cuando el complemento `RoamingSettings` se carga por primera vez. Para los paneles de tareas, esto significa que solo se inicializa cuando se abre el panel de tareas por primera vez. Si el panel de tareas navega a otra página o vuelve a cargar la página actual, el objeto en memoria se restablece a sus valores iniciales, incluso si el complemento tiene cambios persistentes. Los cambios persistentes no estarán disponibles hasta que el panel de tareas (o elemento en el caso de complementos sin interfaz de usuario) se cierre y vuelva a abrir.
+  - El objeto se inicializa desde el almacenamiento persistente solo cuando se carga por `RoamingSettings` primera vez el complemento. Para los paneles de tareas, esto significa que solo se inicializa cuando se abre por primera vez el panel de tareas. Si el panel de tareas navega a otra página o vuelve a cargar la página actual, el objeto en memoria se restablece a sus valores iniciales, incluso si el complemento ha persistente los cambios. Los cambios persistentes no estarán disponibles hasta que el panel de tareas (o elemento en el caso de complementos sin interfaz de usuario) se cierre y se vuelva a abrir.
 
 
-  - Cuando se establece y se guarda a través de Outlook en Windows o Mac, esta configuración se refleja en Outlook en la Web solo después de una actualización del explorador.
+  - Cuando se establece y se guarda a través de Outlook en Windows o Mac, esta configuración se refleja en Outlook en la web solo después de una actualización del explorador.
 remarks: >-
-  **[Nivel de permiso mínimo:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`Restricted`
+  **[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`Restricted`
 
 
-  **[Modo de Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Redacción o lectura
+  **[Modo de Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** redacción o lectura
 isPreview: false
 isDeprecated: false
 type: interface
@@ -38,10 +38,10 @@ methods:
   fullName: get(name)
   summary: Recupera la configuración especificada.
   remarks: >-
-    **[Nivel de permiso mínimo:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`Restricted`
+    **[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`Restricted`
 
 
-    **[Modo de Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Redacción o lectura
+    **[Modo de Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** redacción o lectura
 
 
     #### <a name="examples"></a>Ejemplos
@@ -70,17 +70,17 @@ methods:
       type: string
     return:
       type: any
-      description: 'Tipo: Matriz \| de objetos \| booleanos de número de \| \| cadena'
+      description: 'Tipo: String \| Number \| Boolean Object \| \| Array'
 - name: remove(name)
   uid: outlook!Office.RoamingSettings#remove:member(1)
   package: outlook!
   fullName: remove(name)
   summary: Quita la configuración especificada
   remarks: >-
-    **[Nivel de permiso mínimo:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`Restricted`
+    **[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`Restricted`
 
 
-    **[Modo de Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Redacción o lectura
+    **[Modo de Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** redacción o lectura
   isPreview: false
   isDeprecated: false
   syntax:
@@ -100,12 +100,12 @@ methods:
     Guarda la configuración.
 
 
-    Cualquier configuración guardada anteriormente por un complemento se carga cuando se inicializa, por lo que durante la duración de la sesión solo puede usar el conjunto y obtener métodos para trabajar con la copia en memoria del paquete de propiedades de configuración. Si desea conservar la configuración para que esté disponible la próxima vez que se use el complemento, use el método saveAsync.
+    Cualquier configuración guardada anteriormente por un complemento se carga cuando se inicializa, por lo que durante la duración de la sesión solo puede usar el conjunto y obtener métodos para trabajar con la copia en memoria del paquete de propiedades de configuración. Cuando quieras conservar la configuración para que estén disponibles la próxima vez que se use el complemento, usa el método saveAsync.
   remarks: >-
-    **[Nivel de permiso mínimo:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`Restricted`
+    **[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`Restricted`
 
 
-    **[Modo de Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Redacción o lectura
+    **[Modo de Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** redacción o lectura
 
 
     #### <a name="examples"></a>Ejemplos
@@ -148,15 +148,15 @@ methods:
     El método crea una nueva configuración del nombre especificado si aún no existe o establece una configuración existente `set` del nombre especificado. El valor se almacena en el documento como la representación JSON serializada del tipo de datos correspondiente.
 
 
-    Hay disponible un máximo de 32 KB para la configuración de cada complemento.
+    Un máximo de 32 KB está disponible para la configuración de cada complemento.
 
 
     Los cambios realizados en la configuración mediante la función set no se guardarán en el servidor hasta que se `saveAsync` llame a la función.
   remarks: >-
-    **[Nivel de permiso mínimo:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`Restricted`
+    **[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`Restricted`
 
 
-    **[Modo de Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Redacción o lectura
+    **[Modo de Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** redacción o lectura
 
 
     #### <a name="examples"></a>Ejemplos
@@ -190,9 +190,9 @@ methods:
       type: void
       description: ''
 metadata:
-  ms.openlocfilehash: 69b3d5f346602c741f64b0e013b6615cc0cefcbe
-  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
+  ms.openlocfilehash: 988cefdfe1d01f2fa4b6f345b70014b3f31fd344
+  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
   ms.translationtype: MT
   ms.contentlocale: es-ES
-  ms.lasthandoff: 01/13/2021
-  ms.locfileid: "49861136"
+  ms.lasthandoff: 03/26/2021
+  ms.locfileid: "51339231"
