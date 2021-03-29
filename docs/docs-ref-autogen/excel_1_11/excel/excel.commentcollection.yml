@@ -43,7 +43,7 @@ methods:
   package: excel!
   fullName: add(cellAddress, content, contentType)
   summary: >-
-    Crea un nuevo comentario con el contenido específico de la celda. Se `InvalidArgument` produce un error si el rango proporcionado es mayor que una celda.
+    Crea un nuevo comentario con el contenido específico de la celda. Se `InvalidArgument` produce un error si el intervalo proporcionado es mayor que una celda.
 
 
     \[[Conjunto de API: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -54,13 +54,13 @@ methods:
     content: 'add(cellAddress: Range | string, content: CommentRichContent | string, contentType?: Excel.ContentType): Excel.Comment;'
     parameters:
     - id: cellAddress
-      description: Celda a la que se agrega el comentario. Puede ser un objeto Range o una cadena. Si es una cadena, debe contener la dirección completa, incluido el nombre de la hoja. Se `InvalidArgument` produce un error si el rango proporcionado es mayor que una celda.
+      description: Celda a la que se agrega el comentario. Puede ser un objeto Range o una cadena. Si es una cadena, debe contener la dirección completa, incluido el nombre de la hoja. Se `InvalidArgument` produce un error si el intervalo proporcionado es mayor que una celda.
       type: <xref uid="excel!Excel.Range:class" /> | string
     - id: content
       description: 'El contenido del comentario. Puede ser una cadena o un objeto CommentRichContent. Las cadenas se usan para texto sin formato. Los objetos CommentRichContent permiten otras características de comentario, como menciones. \[Conjunto de api: ExcelApi 1.10 para la cadena, 1.11 para el objeto CommentRichContent\]'
       type: <xref uid="excel!Excel.CommentRichContent:interface" /> | string
     - id: contentType
-      description: 'Opcional. Tipo de contenido contenido en el comentario. El valor predeterminado es enum `ContentType.Plain`<!-- -->. \[Conjunto de api: ExcelApi 1.10 para Enum ContentType.Plain, 1.11 para Enum ContentType.Mention\]'
+      description: 'Opcional. El tipo de contenido contenido en el comentario. El valor predeterminado es enumeración `ContentType.Plain`<!-- -->. \[Conjunto de api: ExcelApi 1.10 para Enum ContentType.Plain, 1.11 para Enum ContentType.Mention\]'
       type: <xref uid="excel!Excel.ContentType:enum" />
     return:
       type: <xref uid="excel!Excel.Comment:class" />
@@ -70,7 +70,7 @@ methods:
   package: excel!
   fullName: add(cellAddress, content, contentTypeString)
   summary: >-
-    Crea un nuevo comentario con el contenido específico de la celda. Se `InvalidArgument` produce un error si el rango proporcionado es mayor que una celda.
+    Crea un nuevo comentario con el contenido específico de la celda. Se `InvalidArgument` produce un error si el intervalo proporcionado es mayor que una celda.
 
 
     \[[Conjunto de API: ExcelApi 1.10](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -81,13 +81,13 @@ methods:
     content: 'add(cellAddress: Range | string, content: CommentRichContent | string, contentTypeString?: "Plain" | "Mention"): Excel.Comment;'
     parameters:
     - id: cellAddress
-      description: Celda a la que se agrega el comentario. Puede ser un objeto Range o una cadena. Si es una cadena, debe contener la dirección completa, incluido el nombre de la hoja. Se `InvalidArgument` produce un error si el rango proporcionado es mayor que una celda.
+      description: Celda a la que se agrega el comentario. Puede ser un objeto Range o una cadena. Si es una cadena, debe contener la dirección completa, incluido el nombre de la hoja. Se `InvalidArgument` produce un error si el intervalo proporcionado es mayor que una celda.
       type: <xref uid="excel!Excel.Range:class" /> | string
     - id: content
       description: 'El contenido del comentario. Puede ser una cadena o un objeto CommentRichContent. Las cadenas se usan para texto sin formato. Los objetos CommentRichContent permiten otras características de comentario, como menciones. \[Conjunto de api: ExcelApi 1.10 para la cadena, 1.11 para el objeto CommentRichContent\]'
       type: <xref uid="excel!Excel.CommentRichContent:interface" /> | string
     - id: contentTypeString
-      description: 'Opcional. Tipo de contenido contenido en el comentario. El valor predeterminado es enum `ContentType.Plain`<!-- -->. \[Conjunto de api: ExcelApi 1.10 para Enum ContentType.Plain, 1.11 para Enum ContentType.Mention\]'
+      description: 'Opcional. El tipo de contenido contenido en el comentario. El valor predeterminado es enumeración `ContentType.Plain`<!-- -->. \[Conjunto de api: ExcelApi 1.10 para Enum ContentType.Plain, 1.11 para Enum ContentType.Mention\]'
       type: "\"Plain\" | \"Mention\""
     return:
       type: <xref uid="excel!Excel.Comment:class" />
@@ -167,7 +167,7 @@ methods:
     content: 'getItemByCell(cellAddress: Range | string): Excel.Comment;'
     parameters:
     - id: cellAddress
-      description: Celda en la que se encuentra el comentario. Puede ser un objeto Range o una cadena. Si es una cadena, debe contener la dirección completa, incluido el nombre de la hoja. Se `InvalidArgument` produce un error si el rango proporcionado es mayor que una celda.
+      description: Celda en la que se encuentra el comentario. Puede ser un objeto Range o una cadena. Si es una cadena, debe contener la dirección completa, incluido el nombre de la hoja. Se `InvalidArgument` produce un error si el intervalo proporcionado es mayor que una celda.
       type: <xref uid="excel!Excel.Range:class" /> | string
     return:
       type: <xref uid="excel!Excel.Comment:class" />
@@ -248,7 +248,7 @@ methods:
   uid: excel!Excel.CommentCollection#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: Invalida el método JavaScript `toJSON()` para proporcionar resultados más útiles cuando se pasa un objeto api a `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama `toJSON` al método del objeto que se le pasa). Mientras que el objeto original `Excel.CommentCollection` es un objeto API, el método devuelve un objeto JavaScript sin formato `toJSON` (con el tipo `Excel.Interfaces.CommentCollectionData`<!-- -->) que contiene una matriz "items" con copias superficiales de las propiedades cargadas de los elementos de la colección.
+  summary: Invalida el método JavaScript para proporcionar resultados más útiles cuando se pasa un objeto API a `toJSON()``JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama `toJSON` al método del objeto que se pasa a él). Mientras que el objeto original es un objeto API, el método devuelve un objeto JavaScript sin formato `Excel.CommentCollection` `toJSON` (se escribe como `Excel.Interfaces.CommentCollectionData`<!-- -->) que contiene una matriz "items" con copias superficiales de las propiedades cargadas de los elementos de la colección.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -259,9 +259,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 054ad7f5f383d0976d84ba4916ebd2e47c63f396
-  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
+  ms.openlocfilehash: 30aeea0a1187cbaab0c98fd4ed1e64120d5b997c
+  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
   ms.translationtype: MT
   ms.contentlocale: es-ES
-  ms.lasthandoff: 01/13/2021
-  ms.locfileid: "49851497"
+  ms.lasthandoff: 03/26/2021
+  ms.locfileid: "51304110"
