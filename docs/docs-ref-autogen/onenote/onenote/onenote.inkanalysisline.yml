@@ -89,7 +89,7 @@ methods:
     `load(option?: { select?: string; expand?: string; }): OneNote.InkAnalysisLine` - Donde option.select es una cadena delimitada por comas que especifica las propiedades que se cargarán y options.expand es una cadena delimitada por comas que especifica las propiedades de navegación que se cargarán.
 
 
-    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): OneNote.InkAnalysisLine` - Solo disponible en tipos de colección. Es similar a la firma anterior. Option.top especifica el número máximo de elementos de colección que se pueden incluir en el resultado. Option.skip especifica el número de elementos que se van a omitir y que no se incluyen en el resultado. Si se especifica option.top, el conjunto de resultados se iniciará después de omitir el número especificado de elementos.
+    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): OneNote.InkAnalysisLine` - Solo disponible en tipos de colección. Es similar a la firma anterior. Option.top especifica el número máximo de elementos de colección que se pueden incluir en el resultado. Option.skip especifica el número de elementos que se van a omitir y que no se incluyen en el resultado. Si option.top se especifica, el conjunto de resultados se iniciará después de omitir el número especificado de elementos.
   isPreview: false
   isDeprecated: false
   syntax:
@@ -118,28 +118,20 @@ methods:
     return:
       type: <xref uid="onenote!OneNote.InkAnalysisLine:class" />
       description: "\n\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nOneNote.run(function (ctx) {        \n    var app = ctx.application;\n    \n    // Gets the active page.\n    var page = app.getActivePage();\n    page.load('inkAnalysisOrNull/paragraphs/lines/words');\n    \n    return ctx.sync()\n        .then(function() {\n            var inkParagraphs = page.inkAnalysisOrNull.paragraphs;\n            $.each(inkParagraphs.items, function(i, inkParagraph) {\n                var inkLines = inkParagraph.lines;\n                $.each(inkLines.items, function(j, inkLine) {\n                    // Word counts in a line.\n                    console.log(inkLine.words.items.length);\n                })\n            })\n        })\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n}); \n```"
-- name: load(option)
+- name: load(propertyNamesAndPaths)
   uid: onenote!OneNote.InkAnalysisLine#load:member(3)
   package: onenote!
-  fullName: load(option)
-  summary: ''
+  fullName: load(propertyNamesAndPaths)
+  summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar a `context.sync()` antes de leer las propiedades.
   remarks: ''
   isPreview: false
   isDeprecated: false
   syntax:
-    content: >-
-      load(option?: {
-                  select?: string;
-                  expand?: string;
-              }): OneNote.InkAnalysisLine;
+    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): OneNote.InkAnalysisLine;'
     parameters:
-    - id: option
-      description: ''
-      type: >-
-        {
-                    select?: string;
-                    expand?: string;
-                }
+    - id: propertyNamesAndPaths
+      description: Donde propertyNamesAndPaths.select es una cadena delimitada por comas que especifica las propiedades que se cargarán y propertyNamesAndPaths.expand es una cadena delimitada por comas que especifica las propiedades de navegación que se cargarán.
+      type: '{ select?: string; expand?: string; }'
     return:
       type: <xref uid="onenote!OneNote.InkAnalysisLine:class" />
       description: ''
@@ -225,9 +217,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 629821adb7896d0d60feb523b1ad4115a81e2175
-  ms.sourcegitcommit: 276e655472f82435a4b1227fbbb2feb687b659c0
+  ms.openlocfilehash: 18789d8a2548bd7c66ea13f010ab6c8275daf509
+  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
   ms.translationtype: MT
   ms.contentlocale: es-ES
-  ms.lasthandoff: 03/08/2021
-  ms.locfileid: "50538096"
+  ms.lasthandoff: 03/26/2021
+  ms.locfileid: "51329284"
