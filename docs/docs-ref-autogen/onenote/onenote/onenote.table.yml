@@ -268,7 +268,7 @@ methods:
     `load(option?: { select?: string; expand?: string; }): OneNote.Table` - Donde option.select es una cadena delimitada por comas que especifica las propiedades que se cargarán y options.expand es una cadena delimitada por comas que especifica las propiedades de navegación que se cargarán.
 
 
-    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): OneNote.Table` - Solo disponible en tipos de colección. Es similar a la firma anterior. Option.top especifica el número máximo de elementos de colección que se pueden incluir en el resultado. Option.skip especifica el número de elementos que se van a omitir y que no se incluyen en el resultado. Si se especifica option.top, el conjunto de resultados se iniciará después de omitir el número especificado de elementos.
+    `load(option?: { select?: string; expand?: string; top?: number; skip?: number }): OneNote.Table` - Solo disponible en tipos de colección. Es similar a la firma anterior. Option.top especifica el número máximo de elementos de colección que se pueden incluir en el resultado. Option.skip especifica el número de elementos que se van a omitir y que no se incluyen en el resultado. Si option.top se especifica, el conjunto de resultados se iniciará después de omitir el número especificado de elementos.
   isPreview: false
   isDeprecated: false
   syntax:
@@ -297,28 +297,20 @@ methods:
     return:
       type: <xref uid="onenote!OneNote.Table:class" />
       description: "\n\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nOneNote.run(function(ctx) {\n    var app = ctx.application;\n    var outline = app.getActiveOutline();\n    \n    // Queue a command to load outline.paragraphs and their types.\n    ctx.load(outline, \"paragraphs/type\");\n    \n    // Run the queued commands, and return a promise to indicate task completion.\n    return ctx.sync().then(function () {\n        var paragraphs = outline.paragraphs;\n        \n        // For each table, log properties.\n        for (var i = 0; i < paragraphs.items.length; i++) {\n            var paragraph = paragraphs.items[i];\n            if (paragraph.type == \"Table\") {\n                var table = paragraph.table;\n                ctx.load(table);\n                return ctx.sync().then(function() {\n                    console.log(\"Table Id: \" + table.id);\n                    console.log(\"Row Count: \" + table.rowCount);\n                    console.log(\"Column Count: \" + table.columnCount);\n                    return ctx.sync();\n                });\n            }\n        }\n    });\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\nOneNote.run(function(ctx) {\n    var app = ctx.application;\n    var outline = app.getActiveOutline();\n    \n    // Queue a command to load outline.paragraphs and their types.\n    ctx.load(outline, \"paragraphs, paragraphs/type\");\n    \n    // Run the queued commands, and return a promise to indicate task completion.\n    return ctx.sync().then(function () {\n        var paragraphs = outline.paragraphs;\n        \n        // for each table, log its paragraph id.\n        for (var i = 0; i < paragraphs.items.length; i++) {\n            var paragraph = paragraphs.items[i];\n            if (paragraph.type == \"Table\") {\n                var table = paragraph.table;\n                ctx.load(table, \"paragraph/id, rows/id\");\n                return ctx.sync().then(function() {\n                    console.log(\"Paragraph Id: \" + table.paragraph.id);\n                    var rows = table.rows;\n                    \n                    // for each rows in the table, log row index and id.\n                    for (var i = 0; i < rows.items.length; i++) {\n                        console.log(\"Row \" + i + \" Id: \" + rows.items[i].id);\n                    }\n                    return ctx.sync();\n                });\n            }\n        }\n    })\n})\n.catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
-- name: load(option)
+- name: load(propertyNamesAndPaths)
   uid: onenote!OneNote.Table#load:member(3)
   package: onenote!
-  fullName: load(option)
-  summary: ''
+  fullName: load(propertyNamesAndPaths)
+  summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar a `context.sync()` antes de leer las propiedades.
   remarks: ''
   isPreview: false
   isDeprecated: false
   syntax:
-    content: >-
-      load(option?: {
-                  select?: string;
-                  expand?: string;
-              }): OneNote.Table;
+    content: 'load(propertyNamesAndPaths?: { select?: string; expand?: string; }): OneNote.Table;'
     parameters:
-    - id: option
-      description: ''
-      type: >-
-        {
-                    select?: string;
-                    expand?: string;
-                }
+    - id: propertyNamesAndPaths
+      description: Donde propertyNamesAndPaths.select es una cadena delimitada por comas que especifica las propiedades que se cargarán y propertyNamesAndPaths.expand es una cadena delimitada por comas que especifica las propiedades de navegación que se cargarán.
+      type: '{ select?: string; expand?: string; }'
     return:
       type: <xref uid="onenote!OneNote.Table:class" />
       description: ''
@@ -425,9 +417,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: eca2855810086386e8f905cf7100827f202c60c6
-  ms.sourcegitcommit: 276e655472f82435a4b1227fbbb2feb687b659c0
+  ms.openlocfilehash: bbb3297ff5b74db5277d007a51244cd409cbc710
+  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
   ms.translationtype: MT
   ms.contentlocale: es-ES
-  ms.lasthandoff: 03/08/2021
-  ms.locfileid: "50533980"
+  ms.lasthandoff: 03/26/2021
+  ms.locfileid: "51358497"
