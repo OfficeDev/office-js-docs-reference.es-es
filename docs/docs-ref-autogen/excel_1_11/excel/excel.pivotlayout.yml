@@ -78,7 +78,7 @@ properties:
   package: excel!
   fullName: preserveFormatting
   summary: >-
-    Especifica si se conserva el formato cuando el informe se actualiza o se vuelve a calcular mediante operaciones como la tabla dinámica, la ordenación o el cambio de elementos de campo de página.
+    Especifica si el formato se conserva cuando el informe se actualiza o se vuelve a calcular mediante operaciones como la rotación, ordenación o cambio de elementos de campo de página.
 
 
     \[[Conjunto de API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -94,7 +94,7 @@ properties:
   package: excel!
   fullName: showColumnGrandTotals
   summary: >-
-    Especifica si el informe de tabla dinámica muestra los totales totales de las columnas.
+    Especifica si el informe de tabla dinámica muestra los totales de las columnas.
 
 
     \[[Conjunto de API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -110,7 +110,7 @@ properties:
   package: excel!
   fullName: showRowGrandTotals
   summary: >-
-    Especifica si el informe de tabla dinámica muestra los totales totales de las filas.
+    Especifica si el informe de tabla dinámica muestra los totales de las filas.
 
 
     \[[Conjunto de API: ExcelApi 1.8](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -188,7 +188,7 @@ methods:
     content: 'getDataHierarchy(cell: Range | string): Excel.DataPivotHierarchy;'
     parameters:
     - id: cell
-      description: Una sola celda dentro del cuerpo de datos de la tabla dinámica.
+      description: Una sola celda dentro del cuerpo de datos de tabla dinámica.
       type: <xref uid="excel!Excel.Range:class" /> | string
     return:
       type: <xref uid="excel!Excel.DataPivotHierarchy:class" />
@@ -226,14 +226,14 @@ methods:
     content: 'getPivotItems(axis: Excel.PivotAxis, cell: Range | string): Excel.PivotItemCollection;'
     parameters:
     - id: axis
-      description: Eje desde el que se obtienen los objetos PivotItem. Debe ser "fila" o "columna".
+      description: Eje desde el que se obtienen los pivotitems. Debe ser "fila" o "columna".
       type: <xref uid="excel!Excel.PivotAxis:enum" />
     - id: cell
       description: Una sola celda dentro del cuerpo de datos de la tabla dinámica.
       type: <xref uid="excel!Excel.Range:class" /> | string
     return:
       type: <xref uid="excel!Excel.PivotItemCollection:class" />
-      description: PivotItemCollection de los objetos PivotItem que se usan para calcular los valores de la fila especificada.
+      description: PivotItemCollection de los PivotItems que se usan para calcular los valores de la fila especificada.
 - name: getPivotItems(axisString, cell)
   uid: excel!Excel.PivotLayout#getPivotItems:member(2)
   package: excel!
@@ -250,14 +250,14 @@ methods:
     content: 'getPivotItems(axisString: "Unknown" | "Row" | "Column" | "Data" | "Filter", cell: Range | string): Excel.PivotItemCollection;'
     parameters:
     - id: axisString
-      description: Eje desde el que se obtienen los objetos PivotItem. Debe ser "fila" o "columna".
+      description: Eje desde el que se obtienen los pivotitems. Debe ser "fila" o "columna".
       type: "\"Unknown\" | \"Row\" | \"Column\" | \"Data\" | \"Filter\""
     - id: cell
       description: Una sola celda dentro del cuerpo de datos de la tabla dinámica.
       type: <xref uid="excel!Excel.Range:class" /> | string
     return:
       type: <xref uid="excel!Excel.PivotItemCollection:class" />
-      description: PivotItemCollection de los objetos PivotItem que se usan para calcular los valores de la fila especificada.
+      description: PivotItemCollection de los PivotItems que se usan para calcular los valores de la fila especificada.
 - name: getRange()
   uid: excel!Excel.PivotLayout#getRange:member(1)
   package: excel!
@@ -355,7 +355,7 @@ methods:
   uid: excel!Excel.PivotLayout#set:member(1)
   package: excel!
   fullName: set(properties, options)
-  summary: Establece varias propiedades de un objeto al mismo tiempo. Puede pasar un objeto sin formato con las propiedades apropiadas u otro objeto API del mismo tipo.
+  summary: Establece varias propiedades de un objeto al mismo tiempo. Puede pasar un objeto sin formato con las propiedades adecuadas u otro objeto API del mismo tipo.
   remarks: >-
     Este método tiene la siguiente firma adicional:
 
@@ -367,7 +367,7 @@ methods:
     content: 'set(properties: Interfaces.PivotLayoutUpdateData, options?: OfficeExtension.UpdateOptions): void;'
     parameters:
     - id: properties
-      description: Un objeto JavaScript con propiedades estructuradas isomórficamente en las propiedades del objeto en el que se llama al método.
+      description: Un objeto JavaScript con propiedades que se estructuran isomórficamente en las propiedades del objeto en el que se llama al método.
       type: <xref uid="excel!Excel.Interfaces.PivotLayoutUpdateData:interface" />
     - id: options
       description: Proporciona una opción para suprimir errores si el objeto properties intenta establecer propiedades de solo lectura.
@@ -408,10 +408,10 @@ methods:
     content: 'setAutoSortOnCell(cell: Range | string, sortBy: Excel.SortBy): void;'
     parameters:
     - id: cell
-      description: Una sola celda para usar obtiene los criterios de aplicación del sistema automático.
+      description: Una sola celda para usar obtiene los criterios de la aplicación de autosort.
       type: <xref uid="excel!Excel.Range:class" /> | string
     - id: sortBy
-      description: Dirección de la ordenación.
+      description: La dirección de la ordenación.
       type: <xref uid="excel!Excel.SortBy:enum" />
     return:
       type: void
@@ -432,10 +432,10 @@ methods:
     content: 'setAutoSortOnCell(cell: Range | string, sortByString: "Ascending" | "Descending"): void;'
     parameters:
     - id: cell
-      description: Una sola celda para usar obtiene los criterios de aplicación del sistema automático.
+      description: Una sola celda para usar obtiene los criterios de la aplicación de autosort.
       type: <xref uid="excel!Excel.Range:class" /> | string
     - id: sortByString
-      description: Dirección de la ordenación.
+      description: La dirección de la ordenación.
       type: "\"Ascending\" | \"Descending\""
     return:
       type: void
@@ -444,7 +444,7 @@ methods:
   uid: excel!Excel.PivotLayout#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: Invalida el método JavaScript `toJSON()` para proporcionar resultados más útiles cuando se pasa un objeto api a `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama `toJSON` al método del objeto que se le pasa). Mientras que el objeto Excel.PivotLayout original es un objeto DE API, el método devuelve un objeto JavaScript sin formato `toJSON` (especificado como `Excel.Interfaces.PivotLayoutData`<!-- -->) que contiene copias superficiales de las propiedades secundarias cargadas del objeto original.
+  summary: Invalida el método JavaScript para proporcionar resultados más útiles cuando se pasa un objeto API a `toJSON()``JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama `toJSON` al método del objeto que se pasa a él). Mientras que el objeto Excel.PivotLayout original es un objeto API, el método devuelve un objeto JavaScript sin formato `toJSON` (con el tipo como `Excel.Interfaces.PivotLayoutData`<!-- -->) que contiene copias superficiales de las propiedades secundarias cargadas del objeto original.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -455,9 +455,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 9b5728c42bdf16e41eadbbb4a8ac961b343297a7
-  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
+  ms.openlocfilehash: b46618593387be8c83ab944d21d0ad8d7774019b
+  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
   ms.translationtype: MT
   ms.contentlocale: es-ES
-  ms.lasthandoff: 01/13/2021
-  ms.locfileid: "49854143"
+  ms.lasthandoff: 03/26/2021
+  ms.locfileid: "51366647"
