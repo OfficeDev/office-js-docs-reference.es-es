@@ -4,7 +4,7 @@ uid: excel!Excel.NamedItem:class
 package: excel!
 fullName: Excel.NamedItem
 summary: >-
-  Representa un nombre definido para un rango de celdas o un valor. Los nombres pueden ser objetos primitivos con nombre (como se ve en el tipo siguiente), objeto de intervalo o una referencia a un rango. Este objeto puede usarse para obtener un objeto de rango asociado a nombres.
+  Representa un nombre definido para un rango de celdas o un valor. Los nombres pueden ser objetos con nombre primitivos (como se ve en el tipo siguiente), objeto range o una referencia a un intervalo. Este objeto puede usarse para obtener un objeto de rango asociado a nombres.
 
 
   \[[Conjunto de API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -78,7 +78,7 @@ properties:
   package: excel!
   fullName: type
   summary: >-
-    Especifica el tipo del valor devuelto por la fórmula del nombre. Vea Excel.NamedItemType para obtener más información.
+    Especifica el tipo del valor devuelto por la fórmula del nombre. Vea `Excel.NamedItemType` para más información.
 
 
     \[[Conjunto de API: ExcelApi 1.1 para String,Integer,Double,Boolean,Range,Error; 1.7 para Array](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -142,7 +142,7 @@ properties:
   package: excel!
   fullName: worksheetOrNullObject
   summary: >-
-    Devuelve la hoja de cálculo que tiene como ámbito el elemento con nombre. Devuelve un objeto NULL si el ámbito del elemento es el libro.
+    Devuelve la hoja de cálculo a la que está ámbito el elemento con nombre. Si el elemento está en el ámbito del libro en su lugar, esta función devolverá un objeto con su `isNullObject` propiedad establecida en `true`<!-- -->. Para obtener más información, [vea *OrNullObject methods and properties](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[Conjunto de API: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -193,7 +193,7 @@ methods:
   package: excel!
   fullName: getRangeOrNullObject()
   summary: >-
-    Devuelve el objeto de rango asociado al nombre. Devuelve un objeto NULL si el tipo de elemento con nombre no es un rango.
+    Devuelve el objeto de rango asociado al nombre. Si el tipo del elemento con nombre no es un intervalo, esta función devolverá un objeto con su `isNullObject` propiedad establecida en `true`<!-- -->. Para obtener más información, [vea *OrNullObject methods and properties](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[Conjunto de API: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -268,7 +268,7 @@ methods:
   uid: excel!Excel.NamedItem#set:member(1)
   package: excel!
   fullName: set(properties, options)
-  summary: Establece varias propiedades de un objeto al mismo tiempo. Puede pasar un objeto sin formato con las propiedades apropiadas u otro objeto API del mismo tipo.
+  summary: Establece varias propiedades de un objeto al mismo tiempo. Puede pasar un objeto sin formato con las propiedades adecuadas u otro objeto API del mismo tipo.
   remarks: >-
     Este método tiene la siguiente firma adicional:
 
@@ -280,7 +280,7 @@ methods:
     content: 'set(properties: Interfaces.NamedItemUpdateData, options?: OfficeExtension.UpdateOptions): void;'
     parameters:
     - id: properties
-      description: Un objeto JavaScript con propiedades estructuradas isomórficamente en las propiedades del objeto en el que se llama al método.
+      description: Un objeto JavaScript con propiedades que se estructuran isomórficamente en las propiedades del objeto en el que se llama al método.
       type: <xref uid="excel!Excel.Interfaces.NamedItemUpdateData:interface" />
     - id: options
       description: Proporciona una opción para suprimir errores si el objeto properties intenta establecer propiedades de solo lectura.
@@ -309,7 +309,7 @@ methods:
   uid: excel!Excel.NamedItem#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: Invalida el método JavaScript `toJSON()` para proporcionar resultados más útiles cuando se pasa un objeto api a `JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama `toJSON` al método del objeto que se le pasa). Mientras que el objeto Excel.NamedItem original es un objeto API, el método devuelve un objeto JavaScript sin formato `toJSON` (especificado como `Excel.Interfaces.NamedItemData`<!-- -->) que contiene copias superficiales de las propiedades secundarias cargadas del objeto original.
+  summary: Invalida el método JavaScript para proporcionar resultados más útiles cuando se pasa un objeto API a `toJSON()``JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama `toJSON` al método del objeto que se pasa a él). Mientras que el objeto Excel.NamedItem original es un objeto API, el método devuelve un objeto JavaScript sin formato `toJSON` (con el tipo como `Excel.Interfaces.NamedItemData`<!-- -->) que contiene copias superficiales de las propiedades secundarias cargadas del objeto original.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -320,9 +320,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: cd34077dbfb56b44dc34c1f601931c8ba0d9db31
-  ms.sourcegitcommit: d14ccd5d21286fdad1d3451f3ac745c603d9400d
+  ms.openlocfilehash: 8e6b0d528adb60bde0a22d42a1beed51a0c28bb5
+  ms.sourcegitcommit: ce09743deb2fc2a879cd63f96c8ff11ec84a42b2
   ms.translationtype: MT
   ms.contentlocale: es-ES
-  ms.lasthandoff: 01/13/2021
-  ms.locfileid: "49853569"
+  ms.lasthandoff: 04/02/2021
+  ms.locfileid: "51523591"
