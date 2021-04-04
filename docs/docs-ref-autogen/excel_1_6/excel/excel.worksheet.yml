@@ -128,7 +128,7 @@ properties:
   package: excel!
   fullName: protection
   summary: >-
-    Devuelve el objeto de protección de hoja de una hoja de cálculo.
+    Devuelve el objeto de protección de hoja para una hoja de cálculo.
 
 
     \[[Conjunto de API: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -233,7 +233,7 @@ methods:
   package: excel!
   fullName: getCell(row, column)
   summary: >-
-    Obtiene el objeto de intervalo que contiene la celda en función de los números de fila y columna. La celda puede estar fuera de los límites de su intervalo primario, siempre que permanezca dentro de la cuadrícula de la hoja de cálculo.
+    Obtiene el `Range` objeto que contiene la celda única en función de los números de fila y columna. La celda puede estar fuera de los límites de su intervalo primario, siempre que permanezca dentro de la cuadrícula de la hoja de cálculo.
 
 
     \[[Conjunto de API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -247,7 +247,7 @@ methods:
       description: Número de fila de la celda que se va a recuperar. Indizado con cero.
       type: number
     - id: column
-      description: Número de columna de la celda que se va a recuperar. Indexado con cero.
+      description: Número de columna de la celda que se va a recuperar. Indizado con cero.
       type: number
     return:
       type: <xref uid="excel!Excel.Range:class" />
@@ -268,7 +268,7 @@ methods:
     content: 'getNext(visibleOnly?: boolean): Excel.Worksheet;'
     parameters:
     - id: visibleOnly
-      description: Opcional. Si es true, solo tiene en cuenta las hojas de cálculo visibles, omitiendo las ocultas.
+      description: Opcional. If `true`<!-- -->, solo tiene en cuenta las hojas de cálculo visibles, omitiendo las ocultas.
       type: boolean
     return:
       type: <xref uid="excel!Excel.Worksheet:class" />
@@ -278,7 +278,7 @@ methods:
   package: excel!
   fullName: getNextOrNullObject(visibleOnly)
   summary: >-
-    Obtiene la hoja de cálculo que sigue a esta. Si no hay hojas de cálculo siguientes a esta, este método devolverá un objeto null.
+    Obtiene la hoja de cálculo que sigue a esta. Si no hay hojas de cálculo siguientes a esta, este método devolverá un objeto con su `isNullObject` propiedad establecida en `true`<!-- -->. Para obtener más información, [vea *OrNullObject methods and properties](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[Conjunto de API: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -289,7 +289,7 @@ methods:
     content: 'getNextOrNullObject(visibleOnly?: boolean): Excel.Worksheet;'
     parameters:
     - id: visibleOnly
-      description: Opcional. Si es true, solo tiene en cuenta las hojas de cálculo visibles, omitiendo las ocultas.
+      description: Opcional. If `true`<!-- -->, solo tiene en cuenta las hojas de cálculo visibles, omitiendo las ocultas.
       type: boolean
     return:
       type: <xref uid="excel!Excel.Worksheet:class" />
@@ -310,7 +310,7 @@ methods:
     content: 'getPrevious(visibleOnly?: boolean): Excel.Worksheet;'
     parameters:
     - id: visibleOnly
-      description: Opcional. Si es true, solo tiene en cuenta las hojas de cálculo visibles, omitiendo las ocultas.
+      description: Opcional. If `true`<!-- -->, solo tiene en cuenta las hojas de cálculo visibles, omitiendo las ocultas.
       type: boolean
     return:
       type: <xref uid="excel!Excel.Worksheet:class" />
@@ -320,7 +320,7 @@ methods:
   package: excel!
   fullName: getPreviousOrNullObject(visibleOnly)
   summary: >-
-    Obtiene la hoja de cálculo que precede a esta. Si no hay hojas de cálculo anteriores, este método devolverá un objeto null.
+    Obtiene la hoja de cálculo que precede a esta. Si no hay hojas de cálculo anteriores, este método devolverá un objeto con su `isNullObject` propiedad establecida en `true`<!-- -->. Para obtener más información, [vea *OrNullObject methods and properties](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[Conjunto de API: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -331,7 +331,7 @@ methods:
     content: 'getPreviousOrNullObject(visibleOnly?: boolean): Excel.Worksheet;'
     parameters:
     - id: visibleOnly
-      description: Opcional. Si es true, solo tiene en cuenta las hojas de cálculo visibles, omitiendo las ocultas.
+      description: Opcional. If `true`<!-- -->, solo tiene en cuenta las hojas de cálculo visibles, omitiendo las ocultas.
       type: boolean
     return:
       type: <xref uid="excel!Excel.Worksheet:class" />
@@ -341,7 +341,7 @@ methods:
   package: excel!
   fullName: getRange(address)
   summary: >-
-    Obtiene el objeto range, que representa un único bloque rectangular de celdas, especificado por la dirección o el nombre.
+    Obtiene el `Range` objeto, que representa un único bloque rectangular de celdas, especificado por la dirección o el nombre.
 
 
     \[[Conjunto de API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -373,7 +373,7 @@ methods:
     content: 'getUsedRange(valuesOnly?: boolean): Excel.Range;'
     parameters:
     - id: valuesOnly
-      description: 'Opcional. Si es true, solo considera celdas con valores como celdas usadas (ignorando el formato). \[Conjunto de api: ExcelApi 1.2\]'
+      description: 'Opcional. If `true`<!-- -->, considera solo celdas con valores como celdas usadas (ignorando el formato). \[Conjunto de api: ExcelApi 1.2\]'
       type: boolean
     return:
       type: <xref uid="excel!Excel.Range:class" />
@@ -383,7 +383,7 @@ methods:
   package: excel!
   fullName: getUsedRangeOrNullObject(valuesOnly)
   summary: >-
-    El rango usado es el rango más pequeño que abarque todas las celdas que tengan asignado un valor o un formato. Si toda la hoja está en blanco, esta función devolverá un objeto NULL.
+    El rango usado es el rango más pequeño que abarque todas las celdas que tengan asignado un valor o un formato. Si toda la hoja de cálculo está en blanco, esta función devolverá un objeto con su `isNullObject` propiedad establecida en `true`<!-- -->. Para obtener más información, [vea *OrNullObject methods and properties](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
 
 
     \[[Conjunto de API: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -514,9 +514,9 @@ methods:
       description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: 06d2f5841d09f58609e3fda1bb5f4233e7a6bc42
-  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
+  ms.openlocfilehash: 31061698bdad183ecfca4f14c0da8b0bf77a5b1d
+  ms.sourcegitcommit: ce09743deb2fc2a879cd63f96c8ff11ec84a42b2
   ms.translationtype: MT
   ms.contentlocale: es-ES
-  ms.lasthandoff: 03/26/2021
-  ms.locfileid: "51362424"
+  ms.lasthandoff: 04/02/2021
+  ms.locfileid: "51555022"
