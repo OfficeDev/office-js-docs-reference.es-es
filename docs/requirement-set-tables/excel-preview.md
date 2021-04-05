@@ -11,7 +11,7 @@
 |[CommentReplyCollection](/javascript/api/excel/excel.commentreplycollection)|[getItemOrNullObject(commentReplyId: string)](/javascript/api/excel/excel.commentreplycollection#getitemornullobject-commentreplyid-)|Devuelve una respuesta de comentario identificada por su Id.|
 |[ConditionalFormatCollection](/javascript/api/excel/excel.conditionalformatcollection)|[getItemOrNullObject(id: string)](/javascript/api/excel/excel.conditionalformatcollection#getitemornullobject-id-)|Devuelve un formato condicional identificado por su identificador.|
 |[DocumentTask](/javascript/api/excel/excel.documenttask)|[percentComplete](/javascript/api/excel/excel.documenttask#percentcomplete)|Especifica el porcentaje de finalización de la tarea.|
-||[priority](/javascript/api/excel/excel.documenttask#priority)|Especifica la prioridad de la tarea.|
+||[prioridad](/javascript/api/excel/excel.documenttask#priority)|Especifica la prioridad de la tarea.|
 ||[assignees](/javascript/api/excel/excel.documenttask#assignees)|Devuelve una colección de usuarios asignados de la tarea.|
 ||[cambios](/javascript/api/excel/excel.documenttask#changes)|Obtiene los registros de cambios de la tarea.|
 ||[comment](/javascript/api/excel/excel.documenttask#comment)|Obtiene el comentario asociado a la tarea.|
@@ -30,7 +30,7 @@
 ||[dueDateTime](/javascript/api/excel/excel.documenttaskchange#duedatetime)|Representa la fecha y hora de vencimiento de la tarea, en la zona horaria UTC.|
 ||[id](/javascript/api/excel/excel.documenttaskchange#id)|Id. del registro de cambio de tarea.|
 ||[percentComplete](/javascript/api/excel/excel.documenttaskchange#percentcomplete)|Representa el porcentaje de finalización de la tarea.|
-||[priority](/javascript/api/excel/excel.documenttaskchange#priority)|Representa la prioridad de la tarea.|
+||[prioridad](/javascript/api/excel/excel.documenttaskchange#priority)|Representa la prioridad de la tarea.|
 ||[startDateTime](/javascript/api/excel/excel.documenttaskchange#startdatetime)|Representa la fecha y hora de inicio de la tarea, en la zona horaria UTC.|
 ||[title](/javascript/api/excel/excel.documenttaskchange#title)|Representa el título de la tarea.|
 ||[type](/javascript/api/excel/excel.documenttaskchange#type)|Representa el tipo de acción del registro de cambio de tarea.|
@@ -77,19 +77,7 @@
 ||[getItemOrNullObject(key: number)](/javascript/api/excel/excel.linkeddatatypecollection#getitemornullobject-key-)|Obtiene un tipo de datos vinculado por identificador.|
 ||[items](/javascript/api/excel/excel.linkeddatatypecollection#items)|Obtiene los elementos secundarios cargados en esta colección.|
 ||[requestRefreshAll()](/javascript/api/excel/excel.linkeddatatypecollection#requestrefreshall--)|Realiza una solicitud para actualizar todos los tipos de datos vinculados de la colección.|
-|[NamedSheetView](/javascript/api/excel/excel.namedsheetview)|[activate()](/javascript/api/excel/excel.namedsheetview#activate--)|Activa esta vista de hoja.|
-||[delete()](/javascript/api/excel/excel.namedsheetview#delete--)|Quita la vista de hoja de la hoja de cálculo.|
-||[duplicate(name?: string)](/javascript/api/excel/excel.namedsheetview#duplicate-name-)|Crea una copia de esta vista de hoja.|
-||[name](/javascript/api/excel/excel.namedsheetview#name)|Obtiene o establece el nombre de la vista de hoja.|
-|[NamedSheetViewCollection](/javascript/api/excel/excel.namedsheetviewcollection)|[add(name: string)](/javascript/api/excel/excel.namedsheetviewcollection#add-name-)|Crea una nueva vista de hoja con el nombre especificado.|
-||[enterTemporary()](/javascript/api/excel/excel.namedsheetviewcollection#entertemporary--)|Crea y activa una nueva vista de hoja temporal.|
-||[exit()](/javascript/api/excel/excel.namedsheetviewcollection#exit--)|Sale de la vista de hoja activa actualmente.|
-||[getActive()](/javascript/api/excel/excel.namedsheetviewcollection#getactive--)|Obtiene la vista de hoja activa actualmente de la hoja de cálculo.|
-||[getCount()](/javascript/api/excel/excel.namedsheetviewcollection#getcount--)|Obtiene el número de vistas de hoja en esta hoja de cálculo.|
-||[getItem(key: string)](/javascript/api/excel/excel.namedsheetviewcollection#getitem-key-)|Obtiene una vista de hoja con su nombre.|
-||[getItemAt(index: number)](/javascript/api/excel/excel.namedsheetviewcollection#getitemat-index-)|Obtiene una vista de hoja por su índice en la colección.|
-||[getItemOrNullObject(key: string)](/javascript/api/excel/excel.namedsheetviewcollection#getitemornullobject-key-)|Obtiene una vista de hoja con su nombre.|
-||[items](/javascript/api/excel/excel.namedsheetviewcollection#items)|Obtiene los elementos secundarios cargados en esta colección.|
+|[NamedSheetViewCollection](/javascript/api/excel/excel.namedsheetviewcollection)|[getItemOrNullObject(key: string)](/javascript/api/excel/excel.namedsheetviewcollection#getitemornullobject-key-)|Obtiene una vista de hoja con su nombre.|
 |[PivotLayout](/javascript/api/excel/excel.pivotlayout)|[altTextDescription](/javascript/api/excel/excel.pivotlayout#alttextdescription)|La descripción de texto alternativo de la tabla dinámica.|
 ||[altTextTitle](/javascript/api/excel/excel.pivotlayout#alttexttitle)|El título de texto alternativo de la tabla dinámica.|
 ||[displayBlankLineAfterEachItem(display: boolean)](/javascript/api/excel/excel.pivotlayout#displayblanklineaftereachitem-display-)|Establece si se va a mostrar una línea en blanco después de cada elemento.|
@@ -104,10 +92,8 @@
 |[PivotTableScopedCollection](/javascript/api/excel/excel.pivottablescopedcollection)|[getFirstOrNullObject()](/javascript/api/excel/excel.pivottablescopedcollection#getfirstornullobject--)|Obtiene la primera tabla dinámica de la colección.|
 |[Range](/javascript/api/excel/excel.range)|[getDependents()](/javascript/api/excel/excel.range#getdependents--)|Devuelve un objeto que representa el rango que contiene todos los dependientes de una celda en la misma hoja de cálculo `WorkbookRangeAreas` o en varias hojas de cálculo.|
 ||[getDirectDependents()](/javascript/api/excel/excel.range#getdirectdependents--)|Devuelve un objeto que representa el rango que contiene todos los dependientes directos de una celda en la misma hoja de cálculo `WorkbookRangeAreas` o en varias hojas de cálculo.|
-||[getExtendedRange(direction: Excel.KeyboardDirection, activeCell?: Range \| string)](/javascript/api/excel/excel.range#getextendedrange-direction--activecell-)|Devuelve un objeto range que incluye el intervalo actual y hasta el borde del intervalo, en función de la dirección proporcionada.|
 ||[getMergedAreasOrNullObject()](/javascript/api/excel/excel.range#getmergedareasornullobject--)|Devuelve un objeto RangeAreas que representa las áreas combinadas de este rango.|
 ||[getPrecedents()](/javascript/api/excel/excel.range#getprecedents--)|Devuelve un objeto que representa el rango que contiene todos los precedentes de una celda en la misma hoja de cálculo `WorkbookRangeAreas` o en varias hojas de cálculo.|
-||[getRangeEdge(direction: Excel.KeyboardDirection, activeCell?: Range \| string)](/javascript/api/excel/excel.range#getrangeedge-direction--activecell-)|Devuelve un objeto range que es la celda perimetral de la región de datos que corresponde a la dirección proporcionada.|
 |[RefreshModeChangedEventArgs](/javascript/api/excel/excel.refreshmodechangedeventargs)|[refreshMode](/javascript/api/excel/excel.refreshmodechangedeventargs#refreshmode)|Modo de actualización del tipo de datos vinculado.|
 ||[serviceId](/javascript/api/excel/excel.refreshmodechangedeventargs#serviceid)|Identificador único del objeto cuyo modo de actualización se ha cambiado.|
 ||[source](/javascript/api/excel/excel.refreshmodechangedeventargs#source)|Obtiene el origen del evento.|
@@ -126,7 +112,6 @@
 |[Table](/javascript/api/excel/excel.table)|[clearStyle()](/javascript/api/excel/excel.table#clearstyle--)|Cambia la tabla para usar el estilo de tabla predeterminado.|
 ||[onFiltered](/javascript/api/excel/excel.table#onfiltered)|Se produce cuando se aplica un filtro en una tabla específica.|
 ||[tableStyle](/javascript/api/excel/excel.table#tablestyle)|Estilo aplicado a la tabla.|
-||[resize(newRange: Range \| string)](/javascript/api/excel/excel.table#resize-newrange-)|Cambie el tamaño de la tabla al nuevo intervalo.|
 ||[setStyle(style: string \| TableStyle \| BuiltInTableStyle)](/javascript/api/excel/excel.table#setstyle-style-)|Establece el estilo aplicado a la tabla.|
 |[TableCollection](/javascript/api/excel/excel.tablecollection)|[onFiltered](/javascript/api/excel/excel.tablecollection#onfiltered)|Se produce cuando se aplica un filtro en cualquier tabla de un libro o una hoja de cálculo.|
 |[TableFilteredEventArgs](/javascript/api/excel/excel.tablefilteredeventargs)|[tableId](/javascript/api/excel/excel.tablefilteredeventargs#tableid)|Obtiene el identificador de la tabla en la que se aplica el filtro.|
@@ -140,9 +125,9 @@
 ||[showPivotFieldList](/javascript/api/excel/excel.workbook#showpivotfieldlist)|Especifica si el panel de lista de campos de la tabla dinámica se muestra en el nivel del libro.|
 ||[use1904DateSystem](/javascript/api/excel/excel.workbook#use1904datesystem)|True si el libro usa el sistema de fechas 1904.|
 |[WorkbookActivatedEventArgs](/javascript/api/excel/excel.workbookactivatedeventargs)|[type](/javascript/api/excel/excel.workbookactivatedeventargs#type)|Obtiene el tipo del evento.|
-|[Worksheet](/javascript/api/excel/excel.worksheet)|[namedSheetViews](/javascript/api/excel/excel.worksheet#namedsheetviews)|Devuelve una colección de vistas de hoja que están presentes en la hoja de cálculo.|
-||[onFiltered](/javascript/api/excel/excel.worksheet#onfiltered)|Se produce cuando se aplica un filtro en una hoja de cálculo específica.|
+|[Worksheet](/javascript/api/excel/excel.worksheet)|[onFiltered](/javascript/api/excel/excel.worksheet#onfiltered)|Se produce cuando se aplica un filtro en una hoja de cálculo específica.|
 ||[onFormulaChanged](/javascript/api/excel/excel.worksheet#onformulachanged)|Se produce cuando se cambian una o más fórmulas en esta hoja de cálculo.|
+||[tabId](/javascript/api/excel/excel.worksheet#tabid)|Devuelve un valor que representa esta hoja de cálculo que Puede leer Open Office XML.|
 ||[tareas](/javascript/api/excel/excel.worksheet#tasks)|Devuelve una colección de tareas que están presentes en la hoja de cálculo.|
 |[WorksheetCollection](/javascript/api/excel/excel.worksheetcollection)|[addFromBase64(base64File: string, sheetNamesToInsert?: string[], positionType?: Excel.WorksheetPositionType, relativeTo?: Worksheet \| string)](/javascript/api/excel/excel.worksheetcollection#addfrombase64-base64file--sheetnamestoinsert--positiontype--relativeto-)|Inserta las hojas de cálculo especificadas de un libro en el libro actual.|
 ||[onFiltered](/javascript/api/excel/excel.worksheetcollection#onfiltered)|Se produce cuando se aplica cualquier filtro de hoja de cálculo al libro.|
