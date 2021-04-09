@@ -65,14 +65,48 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'getAsync(coercionType: Office.CoercionType | string, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
+    content: 'getAsync(coercionType: Office.CoercionType | string, options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
     parameters:
     - id: coercionType
       description: El formato del cuerpo devuelto.
       type: <xref uid="office!Office.CoercionType:enum" /> | string
     - id: options
-      description: 'Opcional. Literal de objeto que contiene una o varias de las propiedades siguientes: `asyncContext`<!-- -->: Los desarrolladores pueden proporcionar cualquier objeto al que deseen tener acceso en el método de devolución de llamada.'
+      description: 'Literal de objeto que contiene una o varias de las propiedades siguientes: `asyncContext`<!-- -->: Los desarrolladores pueden proporcionar cualquier objeto al que deseen tener acceso en el método de devolución de llamada.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: Opcional. Cuando se completa el método, se llama a la función pasada en el `callback` parámetro con un único parámetro de tipo Office.AsyncResult. El cuerpo se proporciona en el formato solicitado en la `asyncResult.value` propiedad.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: getAsync(coercionType, callback)
+  uid: outlook!Office.Body#getAsync:member(2)
+  package: outlook!
+  fullName: getAsync(coercionType, callback)
+  summary: >-
+    Devuelve el cuerpo actual en un formato especificado.
+
+
+    Este método devuelve todo el cuerpo actual en el formato especificado por `coercionType`<!-- -->.
+
+
+    Al trabajar con cuerpos con formato HTML, es importante tener en cuenta que los `Body.getAsync` métodos and `Body.setAsync` no son idempotent. El valor devuelto del método no será necesariamente exactamente el mismo que el que se pasó `getAsync` en el `setAsync` método anteriormente. El cliente puede modificar el valor pasado para que se `setAsync` represente de forma eficaz con su motor de representación.
+
+
+    \[[Conjunto de API: Buzón 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Modo de Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** redacción o lectura
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getAsync(coercionType: Office.CoercionType | string, callback?: (asyncResult: Office.AsyncResult<string>) => void): void;'
+    parameters:
+    - id: coercionType
+      description: El formato del cuerpo devuelto.
+      type: <xref uid="office!Office.CoercionType:enum" /> | string
     - id: callback
       description: Opcional. Cuando se completa el método, se llama a la función pasada en el `callback` parámetro con un único parámetro de tipo Office.AsyncResult. El cuerpo se proporciona en el formato solicitado en la `asyncResult.value` propiedad.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;string&gt;) =&gt; void'
@@ -112,11 +146,36 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'getTypeAsync(options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<Office.CoercionType>) => void): void;'
+    content: 'getTypeAsync(options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<Office.CoercionType>) => void): void;'
     parameters:
     - id: options
-      description: 'Opcional. Un objeto literal que contiene una o más de las siguientes propiedades. `asyncContext`<!-- -->: Los desarrolladores pueden proporcionar cualquier objeto al que deseen tener acceso en el método de devolución de llamada.'
+      description: 'Un objeto literal que contiene una o más de las siguientes propiedades. `asyncContext`<!-- -->: Los desarrolladores pueden proporcionar cualquier objeto al que deseen tener acceso en el método de devolución de llamada.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: Opcional. Cuando se completa el método, se llama a la función pasada en `callback` el parámetro con un único parámetro de tipo `Office.AsyncResult`<!-- -->. El tipo de contenido se devuelve como uno de los `CoercionType` valores de la `asyncResult.value` propiedad.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="office!Office.CoercionType:enum" />&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: getTypeAsync(callback)
+  uid: outlook!Office.Body#getTypeAsync:member(2)
+  package: outlook!
+  fullName: getTypeAsync(callback)
+  summary: >-
+    Obtiene un valor que indica si el contenido tiene formato de texto o HTML.
+
+
+    \[[Conjunto de API: Buzón 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Modo de Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Redacción
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getTypeAsync(callback?: (asyncResult: Office.AsyncResult<Office.CoercionType>) => void): void;'
+    parameters:
     - id: callback
       description: Opcional. Cuando se completa el método, se llama a la función pasada en `callback` el parámetro con un único parámetro de tipo `Office.AsyncResult`<!-- -->. El tipo de contenido se devuelve como uno de los `CoercionType` valores de la `asyncResult.value` propiedad.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="office!Office.CoercionType:enum" />&gt;) =&gt; void'
@@ -171,14 +230,57 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'prependAsync(data: string, options?: Office.AsyncContextOptions & CoercionTypeOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    content: 'prependAsync(data: string, options: Office.AsyncContextOptions & CoercionTypeOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: data
       description: Cadena que se debe insertar al principio del cuerpo. La cadena está limitada a 1 000 000 caracteres.
       type: string
     - id: options
-      description: 'Opcional. Un objeto literal que contiene una o más de las siguientes propiedades. `asyncContext`<!-- -->: Los desarrolladores pueden proporcionar cualquier objeto al que deseen tener acceso en el método de devolución de llamada. `coercionType`<!-- -->: el formato deseado para el cuerpo. La cadena del parámetro `data` se convertirá a este formato.'
+      description: 'Un objeto literal que contiene una o más de las siguientes propiedades. `asyncContext`<!-- -->: Los desarrolladores pueden proporcionar cualquier objeto al que deseen tener acceso en el método de devolución de llamada. `coercionType`<!-- -->: el formato deseado para el cuerpo. La cadena del parámetro `data` se convertirá a este formato.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" /> & <xref uid="outlook!Office.CoercionTypeOptions:interface" />
+    - id: callback
+      description: Opcional. Cuando se completa el método, se llama a la función pasada en `callback` el parámetro con un único parámetro de tipo `Office.AsyncResult`<!-- -->. Cualquier error que se detecte se proporcionará en la propiedad `asyncResult.error`.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: prependAsync(data, callback)
+  uid: outlook!Office.Body#prependAsync:member(2)
+  package: outlook!
+  fullName: prependAsync(data, callback)
+  summary: >-
+    Agrega el contenido especificado al principio del cuerpo del elemento.
+
+
+    El método `prependAsync` inserta la cadena especificada al principio del cuerpo del elemento. Después de la inserción, el cursor se devuelve a su lugar original, en relación con el contenido insertado.
+
+
+    Al trabajar con cuerpos con formato HTML, es importante tener en cuenta que el cliente puede modificar el valor pasado para que se represente de forma eficaz con su motor `prependAsync` de representación. Esto significa que el valor devuelto de una llamada posterior al método no necesariamente contendrá exactamente el valor que se pasó `Body.getAsync` en el `prependAsync` método anteriormente.
+
+
+    Al incluir vínculos en el marcado HTML, puede deshabilitar la vista previa de vínculos en línea estableciendo el `id` atributo en el delimitador (<!-- -->&lt;<!-- -->a<!-- -->&gt;<!-- -->) a "LPNoLP" (vea la **sección Ejemplos** de una muestra).
+
+
+    \[[Conjunto de API: Buzón 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
+
+
+    **[Modo de Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Redacción
+
+
+    **Errores**:
+
+
+    - `DataExceedsMaximumSize`<!-- -->: el parámetro data tiene más de 1.000.000 caracteres.
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'prependAsync(data: string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: data
+      description: Cadena que se debe insertar al principio del cuerpo. La cadena está limitada a 1 000 000 caracteres.
+      type: string
     - id: callback
       description: Opcional. Cuando se completa el método, se llama a la función pasada en `callback` el parámetro con un único parámetro de tipo `Office.AsyncResult`<!-- -->. Cualquier error que se detecte se proporcionará en la propiedad `asyncResult.error`.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
@@ -249,14 +351,57 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'setAsync(data: string, options?: Office.AsyncContextOptions & CoercionTypeOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    content: 'setAsync(data: string, options: Office.AsyncContextOptions & CoercionTypeOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: data
       description: La cadena que reemplazará el cuerpo existente. La cadena está limitada a 1 000 000 de caracteres.
       type: string
     - id: options
-      description: 'Opcional. Un objeto literal que contiene una o más de las siguientes propiedades. `asyncContext`<!-- -->: Los desarrolladores pueden proporcionar cualquier objeto al que deseen tener acceso en el método de devolución de llamada. `coercionType`<!-- -->: el formato deseado para el cuerpo. La cadena del parámetro `data` se convertirá a este formato.'
+      description: 'Un objeto literal que contiene una o más de las siguientes propiedades. `asyncContext`<!-- -->: Los desarrolladores pueden proporcionar cualquier objeto al que deseen tener acceso en el método de devolución de llamada. `coercionType`<!-- -->: el formato deseado para el cuerpo. La cadena del parámetro `data` se convertirá a este formato.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" /> & <xref uid="outlook!Office.CoercionTypeOptions:interface" />
+    - id: callback
+      description: Opcional. Cuando se completa el método, se llama a la función pasada en el `callback` parámetro con un único parámetro de tipo Office.AsyncResult. Cualquier error que se detecte se proporcionará en la propiedad `asyncResult.error`.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: setAsync(data, callback)
+  uid: outlook!Office.Body#setAsync:member(2)
+  package: outlook!
+  fullName: setAsync(data, callback)
+  summary: >-
+    Reemplaza todo el cuerpo con el texto especificado.
+
+
+    Al trabajar con cuerpos con formato HTML, es importante tener en cuenta que los `Body.getAsync` métodos and `Body.setAsync` no son idempotent. El valor devuelto del método no será necesariamente exactamente el mismo que el que se pasó `getAsync` en el `setAsync` método anteriormente. El cliente puede modificar el valor pasado para que se `setAsync` represente de forma eficaz con su motor de representación.
+
+
+    Al incluir vínculos en el marcado HTML, puede deshabilitar la vista previa de vínculos en línea estableciendo el `id` atributo en el delimitador (<!-- -->&lt;<!-- -->a<!-- -->&gt;<!-- -->) a "LPNoLP" (vea la **sección Ejemplos** de una muestra).
+
+
+    \[[Conjunto de API: Buzón 1.3](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
+
+
+    **[Modo de Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Redacción
+
+
+    **Errores**:
+
+
+    - `DataExceedsMaximumSize`<!-- -->: el parámetro data tiene más de 1.000.000 caracteres.
+
+
+    - `InvalidFormatError`<!-- -->: el `options.coercionType` parámetro se establece en y el cuerpo del mensaje está en texto sin `Office.CoercionType.Html` formato.
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'setAsync(data: string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: data
+      description: La cadena que reemplazará el cuerpo existente. La cadena está limitada a 1 000 000 de caracteres.
+      type: string
     - id: callback
       description: Opcional. Cuando se completa el método, se llama a la función pasada en el `callback` parámetro con un único parámetro de tipo Office.AsyncResult. Cualquier error que se detecte se proporcionará en la propiedad `asyncResult.error`.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
@@ -311,13 +456,13 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'setSelectedDataAsync(data: string, options?: Office.AsyncContextOptions & CoercionTypeOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    content: 'setSelectedDataAsync(data: string, options: Office.AsyncContextOptions & CoercionTypeOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: data
       description: La cadena que reemplazará el cuerpo existente. La cadena está limitada a 1 000 000 de caracteres.
       type: string
     - id: options
-      description: 'Opcional. Un objeto literal que contiene una o más de las siguientes propiedades. `asyncContext`<!-- -->: Los desarrolladores pueden proporcionar cualquier objeto al que deseen tener acceso en el método de devolución de llamada. `coercionType`<!-- -->: el formato deseado para el cuerpo. La cadena del parámetro `data` se convertirá a este formato.'
+      description: 'Un objeto literal que contiene una o más de las siguientes propiedades. `asyncContext`<!-- -->: Los desarrolladores pueden proporcionar cualquier objeto al que deseen tener acceso en el método de devolución de llamada. `coercionType`<!-- -->: el formato deseado para el cuerpo. La cadena del parámetro `data` se convertirá a este formato.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" /> & <xref uid="outlook!Office.CoercionTypeOptions:interface" />
     - id: callback
       description: Opcional. Cuando se completa el método, se llama a la función pasada en `callback` el parámetro con un único parámetro de tipo `Office.AsyncResult`<!-- -->. Cualquier error que se detecte se proporcionará en la propiedad `asyncResult.error`.
@@ -325,10 +470,53 @@ methods:
     return:
       type: void
       description: ''
+- name: setSelectedDataAsync(data, callback)
+  uid: outlook!Office.Body#setSelectedDataAsync:member(2)
+  package: outlook!
+  fullName: setSelectedDataAsync(data, callback)
+  summary: >-
+    Reemplaza la selección que se ha realizado en el cuerpo por el texto especificado.
+
+
+    El método `setSelectedDataAsync` inserta la cadena especificada en la ubicación del cursor en el cuerpo del elemento o, si el texto se selecciona en el editor, reemplaza el texto seleccionado. Si nuca se ha colocado el cursor en el cuerpo del elemento, o si dicho cuerpo perdió enfoque en la interfaz de usuario, la cadena se insertará en la parte superior del contenido del cuerpo. Después de la inserción, el cursor se coloca al final del contenido insertado.
+
+
+    Al incluir vínculos en el marcado HTML, puede deshabilitar la vista previa de vínculos en línea estableciendo el atributo id en el delimitador (<!-- -->&lt;<!-- -->a<!-- -->&gt;<!-- -->) a "LPNoLP" (vea la **sección Ejemplos** de una muestra).
+
+
+    \[[Conjunto de API: Buzón 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
+
+
+    **[Modo de Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Redacción
+
+
+    **Errores**:
+
+
+    - `DataExceedsMaximumSize`<!-- -->: El `data` parámetro tiene más de 1.000.000 caracteres.
+
+
+    - `InvalidFormatError`<!-- -->: el `options.coercionType` parámetro se establece en y el cuerpo del mensaje está en texto sin `Office.CoercionType.Html` formato.
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'setSelectedDataAsync(data: string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: data
+      description: La cadena que reemplazará el cuerpo existente. La cadena está limitada a 1 000 000 de caracteres.
+      type: string
+    - id: callback
+      description: Opcional. Cuando se completa el método, se llama a la función pasada en `callback` el parámetro con un único parámetro de tipo `Office.AsyncResult`<!-- -->. Cualquier error que se detecte se proporcionará en la propiedad `asyncResult.error`.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
 metadata:
-  ms.openlocfilehash: 5ed6680aca28e42b518e68f648ff9e3e0dfed26d
-  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
+  ms.openlocfilehash: 4ad1ad4470f3059cac183fd6525eefca45216377
+  ms.sourcegitcommit: d0f7e3d564e90cdff464157440c36ad19fa526f0
   ms.translationtype: MT
   ms.contentlocale: es-ES
-  ms.lasthandoff: 03/26/2021
-  ms.locfileid: "51358322"
+  ms.lasthandoff: 04/09/2021
+  ms.locfileid: "51658632"
