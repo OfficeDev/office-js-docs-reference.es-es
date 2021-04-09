@@ -312,7 +312,7 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'addHandlerAsync(eventType: Office.EventType | string, handler: (type: Office.EventType) => void, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    content: 'addHandlerAsync(eventType: Office.EventType | string, handler: (type: Office.EventType) => void, options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: eventType
       description: El evento que debe invocar el controlador.
@@ -321,8 +321,42 @@ methods:
       description: La función que va a controlar el evento. La función debe aceptar un único parámetro, que es un literal de objeto. La propiedad type del parámetro coincidirá con `eventType` el parámetro pasado a `addHandlerAsync`<!-- -->.
       type: '(type: <xref uid="office!Office.EventType:enum" />) =&gt; void'
     - id: options
-      description: Opcional. Proporciona una opción para conservar datos de contexto de cualquier tipo, sin cambios, para su uso en una devolución de llamada.
+      description: Proporciona una opción para conservar datos de contexto de cualquier tipo, sin cambios, para su uso en una devolución de llamada.
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: Opcional. Cuando se completa el método, se llama a la función pasada en `callback` el parámetro con un único parámetro de tipo `Office.AsyncResult`<!-- -->.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: addHandlerAsync(eventType, handler, callback)
+  uid: outlook!Office.Mailbox#addHandlerAsync:member(2)
+  package: outlook!
+  fullName: addHandlerAsync(eventType, handler, callback)
+  summary: >-
+    Agrega un controlador de eventos para un evento admitido. **Nota:** Los eventos solo están disponibles con el panel de tareas.
+
+
+    Consulte la sección Eventos del modelo de [objetos mailbox](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/preview-requirement-set/office.context.mailbox#events) para obtener información sobre los eventos admitidos.
+
+
+    \[[Conjunto de API: Buzón 1.5](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Modo de Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** redacción o lectura
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'addHandlerAsync(eventType: Office.EventType | string, handler: (type: Office.EventType) => void, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: eventType
+      description: El evento que debe invocar el controlador.
+      type: <xref uid="office!Office.EventType:enum" /> | string
+    - id: handler
+      description: La función que va a controlar el evento. La función debe aceptar un único parámetro, que es un literal de objeto. La propiedad type del parámetro coincidirá con `eventType` el parámetro pasado a `addHandlerAsync`<!-- -->.
+      type: '(type: <xref uid="office!Office.EventType:enum" />) =&gt; void'
     - id: callback
       description: Opcional. Cuando se completa el método, se llama a la función pasada en `callback` el parámetro con un único parámetro de tipo `Office.AsyncResult`<!-- -->.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
@@ -606,14 +640,57 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'displayAppointmentFormAsync(itemId: string, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    content: 'displayAppointmentFormAsync(itemId: string, options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: itemId
       description: Identificador de los servicios web de Exchange (EWS) para una cita de calendario existente.
       type: string
     - id: options
-      description: 'Opcional. Un objeto literal que contiene una o más de las siguientes propiedades. `asyncContext`<!-- -->: Los desarrolladores pueden proporcionar cualquier objeto al que deseen tener acceso en el método de devolución de llamada.'
+      description: 'Un objeto literal que contiene una o más de las siguientes propiedades. `asyncContext`<!-- -->: Los desarrolladores pueden proporcionar cualquier objeto al que deseen tener acceso en el método de devolución de llamada.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: Opcional. Cuando se completa el método, se llama a la función pasada en `callback` el parámetro con un único parámetro, `asyncResult`<!-- -->, que es un `Office.AsyncResult` objeto.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: displayAppointmentFormAsync(itemId, callback)
+  uid: outlook!Office.Mailbox#displayAppointmentFormAsync:member(2)
+  package: outlook!
+  fullName: displayAppointmentFormAsync(itemId, callback)
+  summary: >-
+    Muestra una cita de calendario existente.
+
+
+    El método `displayAppointmentFormAsync` abre una cita de calendario existente en una nueva ventana del escritorio o en un cuadro de diálogo en los dispositivos móviles.
+
+
+    En Outlook en Mac, puede usar este método para mostrar una sola cita que no forma parte de una serie periódica o la cita maestra de una serie periódica. Sin embargo, no puede mostrar una instancia de la serie porque no puede tener acceso a las propiedades (incluido el identificador de elemento) de instancias de una serie periódica.
+
+
+    En Outlook en la web, este método abre el formulario especificado solo si el cuerpo del formulario es menor o igual que 32K caracteres.
+
+
+    Si el identificador de elemento especificado no identifica una cita existente, se abre un panel en blanco en el equipo o dispositivo cliente y no se devuelve ningún mensaje de error.
+
+
+    **Nota:** Este método no es compatible con Outlook en iOS o Android.
+
+
+    \[[Conjunto de API: Buzón 1.9](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Modo de Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** redacción o lectura
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'displayAppointmentFormAsync(itemId: string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: itemId
+      description: Identificador de los servicios web de Exchange (EWS) para una cita de calendario existente.
+      type: string
     - id: callback
       description: Opcional. Cuando se completa el método, se llama a la función pasada en `callback` el parámetro con un único parámetro, `asyncResult`<!-- -->, que es un `Office.AsyncResult` objeto.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
@@ -724,14 +801,57 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'displayMessageFormAsync(itemId: string, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    content: 'displayMessageFormAsync(itemId: string, options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: itemId
       description: Identificador de los servicios web de Exchange (EWS) para un mensaje existente.
       type: string
     - id: options
-      description: 'Opcional. Un objeto literal que contiene una o más de las siguientes propiedades. `asyncContext`<!-- -->: Los desarrolladores pueden proporcionar cualquier objeto al que deseen tener acceso en el método de devolución de llamada.'
+      description: 'Un objeto literal que contiene una o más de las siguientes propiedades. `asyncContext`<!-- -->: Los desarrolladores pueden proporcionar cualquier objeto al que deseen tener acceso en el método de devolución de llamada.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: Opcional. Cuando se completa el método, se llama a la función pasada en `callback` el parámetro con un único parámetro, `asyncResult`<!-- -->, que es un `Office.AsyncResult` objeto.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: displayMessageFormAsync(itemId, callback)
+  uid: outlook!Office.Mailbox#displayMessageFormAsync:member(2)
+  package: outlook!
+  fullName: displayMessageFormAsync(itemId, callback)
+  summary: >-
+    Muestra un mensaje existente.
+
+
+    El método `displayMessageFormAsync` abre un mensaje existente en una nueva ventana del escritorio o en un cuadro de diálogo en los dispositivos móviles.
+
+
+    En Outlook en la web, este método abre el formulario especificado solo si el cuerpo del formulario es menor o igual que 32K caracteres.
+
+
+    Si el identificador de elemento especificado no identifica un mensaje existente, no se mostrará ningún mensaje en el equipo cliente y no se devolverá ningún mensaje de error.
+
+
+    No use el `displayMessageForm` método or con un `displayMessageFormAsync` itemId que representa una cita. Use el método or para mostrar una cita `displayAppointmentForm` existente o para mostrar un formulario para crear una nueva `displayAppointmentFormAsync` `displayNewAppointmentForm` `displayNewAppointmentFormAsync` cita.
+
+
+    **Nota:** Este método no es compatible con Outlook en iOS o Android.
+
+
+    \[[Conjunto de API: Buzón 1.9](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Modo de Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** redacción o lectura
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'displayMessageFormAsync(itemId: string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: itemId
+      description: Identificador de los servicios web de Exchange (EWS) para un mensaje existente.
+      type: string
     - id: callback
       description: Opcional. Cuando se completa el método, se llama a la función pasada en `callback` el parámetro con un único parámetro, `asyncResult`<!-- -->, que es un `Office.AsyncResult` objeto.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
@@ -872,14 +992,57 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'displayNewAppointmentFormAsync(parameters: AppointmentForm, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    content: 'displayNewAppointmentFormAsync(parameters: AppointmentForm, options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: parameters
       description: Una `AppointmentForm` descripción de la nueva cita. Todas las propiedades son opcionales.
       type: <xref uid="outlook!Office.AppointmentForm:interface" />
     - id: options
-      description: 'Opcional. Un objeto literal que contiene una o más de las siguientes propiedades. `asyncContext`<!-- -->: Los desarrolladores pueden proporcionar cualquier objeto al que deseen tener acceso en el método de devolución de llamada.'
+      description: 'Un objeto literal que contiene una o más de las siguientes propiedades. `asyncContext`<!-- -->: Los desarrolladores pueden proporcionar cualquier objeto al que deseen tener acceso en el método de devolución de llamada.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: Opcional. Cuando se completa el método, se llama a la función pasada en `callback` el parámetro con un único parámetro, `asyncResult`<!-- -->, que es un `Office.AsyncResult` objeto.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: displayNewAppointmentFormAsync(parameters, callback)
+  uid: outlook!Office.Mailbox#displayNewAppointmentFormAsync:member(2)
+  package: outlook!
+  fullName: displayNewAppointmentFormAsync(parameters, callback)
+  summary: >-
+    Muestra un formulario para crear una cita de calendario.
+
+
+    El método `displayNewAppointmentFormAsync` abre un formulario que permite al usuario crear una nueva cita o reunión. Si se especifican parámetros, los campos de formulario de cita se rellenan automáticamente con el contenido de los parámetros.
+
+
+    En Outlook en la web, este método siempre muestra un formulario con un campo de asistentes. Si no especifica ningún asistente como argumento de entrada, el método muestra un formulario con un botón **Guardar**. Si ha especificado asistentes, el formulario incluirá a los asistentes y un botón **Enviar**.
+
+
+    En el cliente enriquecido de Outlook y Outlook RT, si especifica los asistentes o recursos en el `requiredAttendees`<!-- -->, `optionalAttendees`<!-- -->, o `resources` parámetro, este método muestra un formulario de reunión con un **botón Enviar.** Si no especifica ningún destinatario, este método muestra un formulario de cita con un **botón Guardar &amp;** cerrar.
+
+
+    Si cualquiera de los parámetros supera los límites de tamaño especificados o si se especifica un nombre de parámetro desconocido, se genera una excepción.
+
+
+    **Nota:** Este método no es compatible con Outlook en iOS o Android.
+
+
+    \[[Conjunto de API: Buzón 1.9](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Modo de Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** lectura
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'displayNewAppointmentFormAsync(parameters: AppointmentForm, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: parameters
+      description: Una `AppointmentForm` descripción de la nueva cita. Todas las propiedades son opcionales.
+      type: <xref uid="outlook!Office.AppointmentForm:interface" />
     - id: callback
       description: Opcional. Cuando se completa el método, se llama a la función pasada en `callback` el parámetro con un único parámetro, `asyncResult`<!-- -->, que es un `Office.AsyncResult` objeto.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
@@ -1033,7 +1196,7 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'displayNewMessageFormAsync(parameters: any, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    content: 'displayNewMessageFormAsync(parameters: any, options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: parameters
       description: >-
@@ -1073,8 +1236,76 @@ methods:
         `attachments.itemId`<!-- -->: Solo se usa si type está establecido en item. El identificador de elemento EWS del correo electrónico existente que desea adjuntar al nuevo mensaje. Se trata de una cadena de hasta 100 caracteres.
       type: any
     - id: options
-      description: 'Opcional. Un objeto literal que contiene una o más de las siguientes propiedades. `asyncContext`<!-- -->: Los desarrolladores pueden proporcionar cualquier objeto al que deseen tener acceso en el método de devolución de llamada.'
+      description: 'Un objeto literal que contiene una o más de las siguientes propiedades. `asyncContext`<!-- -->: Los desarrolladores pueden proporcionar cualquier objeto al que deseen tener acceso en el método de devolución de llamada.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: Opcional. Cuando se completa el método, se llama a la función pasada en `callback` el parámetro con un único parámetro, `asyncResult`<!-- -->, que es un `Office.AsyncResult` objeto.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: displayNewMessageFormAsync(parameters, callback)
+  uid: outlook!Office.Mailbox#displayNewMessageFormAsync:member(2)
+  package: outlook!
+  fullName: displayNewMessageFormAsync(parameters, callback)
+  summary: >-
+    Muestra un formulario para crear un mensaje nuevo.
+
+
+    El `displayNewMessageFormAsync` método abre un formulario que permite al usuario crear un nuevo mensaje. Si se especifican parámetros, los campos del formulario de mensaje se rellenan automáticamente con el contenido de los parámetros.
+
+
+    Si cualquiera de los parámetros supera los límites de tamaño especificados o si se especifica un nombre de parámetro desconocido, se genera una excepción.
+
+
+    \[[Conjunto de API: Buzón 1.9](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Modo de Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** lectura
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'displayNewMessageFormAsync(parameters: any, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: parameters
+      description: >-
+        Diccionario que contiene todos los valores que se rellenarán para el usuario en el nuevo formulario. Todos los parámetros son opcionales.
+
+
+        `toRecipients`<!-- -->: una matriz de cadenas que contienen las direcciones de correo electrónico o una matriz que contiene un [objeto EmailAddressDetails](xref:outlook!Office.EmailAddressDetails:interface) para cada uno de los destinatarios de la **línea Para.** La matriz está limitada a un máximo de 100 entradas.
+
+
+        `ccRecipients`<!-- -->: una matriz de cadenas que contienen las direcciones de correo electrónico o una matriz que contiene un [objeto EmailAddressDetails](xref:outlook!Office.EmailAddressDetails:interface) para cada uno de los destinatarios de la **línea Cc.** La matriz está limitada a un máximo de 100 entradas.
+
+
+        `bccRecipients`<!-- -->: una matriz de cadenas que contienen las direcciones de correo electrónico o una matriz que contiene un [objeto EmailAddressDetails](xref:outlook!Office.EmailAddressDetails:interface) para cada uno de los destinatarios de la línea **CCO.** La matriz está limitada a un máximo de 100 entradas.
+
+
+        `subject`<!-- -->: cadena que contiene el asunto del mensaje. La cadena está limitada a un máximo de 255 caracteres.
+
+
+        `htmlBody`<!-- -->: el cuerpo HTML del mensaje. El contenido del cuerpo está limitado a un tamaño máximo de 32 KB.
+
+
+        `attachments`<!-- -->: una matriz de objetos JSON que son datos adjuntos de archivos o elementos.
+
+
+        `attachments.type`<!-- -->: indica el tipo de datos adjuntos. Debe ser un archivo para un archivo adjunto o un elemento para los datos adjuntos de un elemento.
+
+
+        `attachments.name`<!-- -->: una cadena que contiene el nombre de los datos adjuntos, de hasta 255 caracteres de longitud.
+
+
+        `attachments.url`<!-- -->: Solo se usa si el tipo está establecido en archivo. El URI de la ubicación del archivo.
+
+
+        `attachments.isInline`<!-- -->: Solo se usa si el tipo está establecido en archivo. Si es true, indica que los datos adjuntos se mostrarán en línea en el cuerpo del mensaje y no deben mostrarse en la lista de datos adjuntos.
+
+
+        `attachments.itemId`<!-- -->: Solo se usa si type está establecido en item. El identificador de elemento EWS del correo electrónico existente que desea adjuntar al nuevo mensaje. Se trata de una cadena de hasta 100 caracteres.
+      type: any
     - id: callback
       description: Opcional. Cuando se completa el método, se llama a la función pasada en `callback` el parámetro con un único parámetro, `asyncResult`<!-- -->, que es un `Office.AsyncResult` objeto.
       type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
@@ -1490,13 +1721,13 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'removeHandlerAsync(eventType: Office.EventType | string, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    content: 'removeHandlerAsync(eventType: Office.EventType | string, options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: eventType
       description: El evento que debe revocar el controlador.
       type: <xref uid="office!Office.EventType:enum" /> | string
     - id: options
-      description: Opcional. Proporciona una opción para conservar datos de contexto de cualquier tipo, sin cambios, para su uso en una devolución de llamada.
+      description: Proporciona una opción para conservar datos de contexto de cualquier tipo, sin cambios, para su uso en una devolución de llamada.
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
       description: Opcional. Cuando se completa el método, se llama a la función pasada en `callback` el parámetro con un único parámetro de tipo `Office.AsyncResult`<!-- -->.
@@ -1504,10 +1735,41 @@ methods:
     return:
       type: void
       description: ''
+- name: removeHandlerAsync(eventType, callback)
+  uid: outlook!Office.Mailbox#removeHandlerAsync:member(2)
+  package: outlook!
+  fullName: removeHandlerAsync(eventType, callback)
+  summary: >-
+    Elimina el controlador de eventos de un tpo de evento admitido. **Nota:** Los eventos solo están disponibles con el panel de tareas.
+
+
+    Consulte la sección Eventos del modelo de [objetos mailbox](https://docs.microsoft.com/office/dev/add-ins/reference/objectmodel/preview-requirement-set/office.context.mailbox#events) para obtener información sobre los eventos admitidos.
+
+
+    \[[Conjunto de API: Buzón 1.5](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Modo de Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** redacción o lectura
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'removeHandlerAsync(eventType: Office.EventType | string, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: eventType
+      description: El evento que debe revocar el controlador.
+      type: <xref uid="office!Office.EventType:enum" /> | string
+    - id: callback
+      description: Opcional. Cuando se completa el método, se llama a la función pasada en `callback` el parámetro con un único parámetro de tipo `Office.AsyncResult`<!-- -->.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
 metadata:
-  ms.openlocfilehash: 784bb1b11fb280799fbeac9ce1cf77270dc9cbb5
-  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
+  ms.openlocfilehash: 3f6a5e1420427e2593cd5c709c64068c45717555
+  ms.sourcegitcommit: d0f7e3d564e90cdff464157440c36ad19fa526f0
   ms.translationtype: MT
   ms.contentlocale: es-ES
-  ms.lasthandoff: 03/26/2021
-  ms.locfileid: "51224974"
+  ms.lasthandoff: 04/09/2021
+  ms.locfileid: "51659349"
