@@ -191,13 +191,13 @@ methods:
   isPreview: false
   isDeprecated: false
   syntax:
-    content: 'setAsync(dateTime: Date, options?: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    content: 'setAsync(dateTime: Date, options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
     parameters:
     - id: dateTime
       description: Un objeto date-time en Hora universal coordinada (UTC).
       type: Date
     - id: options
-      description: 'Opcional. Un objeto literal que contiene una o más de las siguientes propiedades. `asyncContext`<!-- -->: Los desarrolladores pueden proporcionar cualquier objeto al que deseen tener acceso en el método de devolución de llamada.'
+      description: 'Un objeto literal que contiene una o más de las siguientes propiedades. `asyncContext`<!-- -->: Los desarrolladores pueden proporcionar cualquier objeto al que deseen tener acceso en el método de devolución de llamada.'
       type: <xref uid="office!Office.AsyncContextOptions:interface" />
     - id: callback
       description: Opcional. Cuando se completa el método, se llama a la función pasada en `callback` el parámetro con un único parámetro de tipo `Office.AsyncResult`<!-- -->. Si al establecer la fecha y la hora se produce un error, la propiedad `asyncResult.error` contendrá un código de error.
@@ -205,10 +205,53 @@ methods:
     return:
       type: void
       description: ''
+- name: setAsync(dateTime, callback)
+  uid: outlook!Office.Time#setAsync:member(2)
+  package: outlook!
+  fullName: setAsync(dateTime, callback)
+  summary: >-
+    Establece la hora de inicio o finalización de una cita.
+
+
+    Si se llama al método en la propiedad start, la propiedad se ajustará para mantener la duración de la `setAsync` `end` cita como se estableció anteriormente. Si se llama al método `setAsync` en la propiedad `end`, la duración de la cita se extenderá hasta la nueva hora de finalización.
+
+
+    La hora debe especificarse conforme al sistema UTC. Puede obtener la hora UTC correcta con el método `convertToUtcClientTime`.
+
+
+    **Importante:** En el cliente de Windows, no puedes usar esta función para actualizar el inicio o el final de una periodicidad.
+
+
+    \[[Conjunto de API: Buzón 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
+
+
+    **[Modo de Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Redacción
+
+
+    **Errores**:
+
+
+    - `InvalidEndTime`<!-- -->: la hora de finalización de la cita es antes de la hora de inicio de la cita.
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'setAsync(dateTime: Date, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: dateTime
+      description: Un objeto date-time en Hora universal coordinada (UTC).
+      type: Date
+    - id: callback
+      description: Opcional. Cuando se completa el método, se llama a la función pasada en `callback` el parámetro con un único parámetro de tipo `Office.AsyncResult`<!-- -->. Si al establecer la fecha y la hora se produce un error, la propiedad `asyncResult.error` contendrá un código de error.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
 metadata:
-  ms.openlocfilehash: 5a3d71ca79bd9357f073d4175430343eadc697d1
-  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
+  ms.openlocfilehash: 5e283e8dabe220dacaeebb63e68fe9ecc627f27a
+  ms.sourcegitcommit: d0f7e3d564e90cdff464157440c36ad19fa526f0
   ms.translationtype: MT
   ms.contentlocale: es-ES
-  ms.lasthandoff: 03/26/2021
-  ms.locfileid: "51292222"
+  ms.lasthandoff: 04/09/2021
+  ms.locfileid: "51660081"
