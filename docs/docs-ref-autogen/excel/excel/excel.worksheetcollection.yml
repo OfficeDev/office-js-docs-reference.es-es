@@ -37,6 +37,281 @@ properties:
     content: 'readonly items: Excel.Worksheet[];'
     return:
       type: <xref uid="excel!Excel.Worksheet:class" />[]
+methods:
+- name: add(name)
+  uid: excel!Excel.WorksheetCollection#add:member(1)
+  package: excel!
+  fullName: add(name)
+  summary: >-
+    Agrega una nueva hoja al libro. La hoja de cálculo se agregará al final de las hojas de cálculo existentes. Si desea activar la hoja de cálculo recién agregada, `.activate()` llámela.
+
+
+    \[[Conjunto de API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'add(name?: string): Excel.Worksheet;'
+    parameters:
+    - id: name
+      description: Opcional. Nombre de la hoja de cálculo que se va a agregar. Si se especifica, el nombre debe ser único. Si no se especifica, Excel determina el nombre de la nueva hoja de cálculo.
+      type: string
+    return:
+      type: <xref uid="excel!Excel.Worksheet:class" />
+      description: "\n\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nExcel.run(function (ctx) { \n    var wSheetName = 'Sample Name';\n    var worksheet = ctx.workbook.worksheets.add(wSheetName);\n    worksheet.load('name');\n    return ctx.sync().then(function() {\n        console.log(worksheet.name);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- name: addFromBase64(base64File, sheetNamesToInsert, positionType, relativeTo)
+  uid: excel!Excel.WorksheetCollection#addFromBase64:member(1)
+  package: excel!
+  fullName: addFromBase64(base64File, sheetNamesToInsert, positionType, relativeTo)
+  summary: >-
+    Inserta las hojas de cálculo especificadas de un libro en el libro actual.
+
+
+    *Nota**: Actualmente, esta API solo es compatible con Office en Windows y Mac. Y ha quedado en desuso, use en `Workbook.insertWorksheetFromBase64` su lugar.
+
+
+    \[[Conjunto de API: ExcelApi BETA (SOLO VISTA PREVIA)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: true
+  isDeprecated: false
+  syntax:
+    content: 'addFromBase64(base64File: string, sheetNamesToInsert?: string[], positionType?: Excel.WorksheetPositionType, relativeTo?: Worksheet | string): OfficeExtension.ClientResult<string[]>;'
+    parameters:
+    - id: base64File
+      description: Obligatorio. La cadena codificada en base64 que representa el archivo de libro de origen.
+      type: string
+    - id: sheetNamesToInsert
+      description: Opcional. Los nombres de las hojas de cálculo individuales que se insertarán. De forma predeterminada, se insertan todas las hojas de cálculo del libro de origen.
+      type: string[]
+    - id: positionType
+      description: Opcional. Donde en el libro actual se insertarán las nuevas hojas de cálculo. Vea `Excel.WorksheetPositionType` para más información. El valor predeterminado es "Inicio".
+      type: <xref uid="excel!Excel.WorksheetPositionType:enum" />
+    - id: relativeTo
+      description: Opcional. Hoja de cálculo del libro actual al que se hace referencia para el `positionType` parámetro. El valor `null` predeterminado es y, en función de `positionType`<!-- -->, insertará hojas de cálculo al principio o al final del libro actual.
+      type: <xref uid="excel!Excel.Worksheet:class" /> | string
+    return:
+      type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;string[]&gt;
+      description: Una matriz de IDs correspondientes a cada hoja de cálculo recién insertada.
+- name: addFromBase64(base64File, sheetNamesToInsert, positionTypeString, relativeTo)
+  uid: excel!Excel.WorksheetCollection#addFromBase64:member(2)
+  package: excel!
+  fullName: addFromBase64(base64File, sheetNamesToInsert, positionTypeString, relativeTo)
+  summary: >-
+    Inserta las hojas de cálculo especificadas de un libro en el libro actual.
+
+
+    *Nota**: Actualmente, esta API solo es compatible con Office en Windows y Mac. Y ha quedado en desuso, use en `Workbook.insertWorksheetFromBase64` su lugar.
+
+
+    \[[Conjunto de API: ExcelApi BETA (SOLO VISTA PREVIA)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'addFromBase64(base64File: string, sheetNamesToInsert?: string[], positionTypeString?: "None" | "Before" | "After" | "Beginning" | "End", relativeTo?: Worksheet | string): OfficeExtension.ClientResult<string[]>;'
+    parameters:
+    - id: base64File
+      description: Obligatorio. La cadena codificada en base64 que representa el archivo de libro de origen.
+      type: string
+    - id: sheetNamesToInsert
+      description: Opcional. Los nombres de las hojas de cálculo individuales que se insertarán. De forma predeterminada, se insertan todas las hojas de cálculo del libro de origen.
+      type: string[]
+    - id: positionTypeString
+      description: Opcional. Donde en el libro actual se insertarán las nuevas hojas de cálculo. Vea `Excel.WorksheetPositionType` para más información. El valor predeterminado es "Inicio".
+      type: "\"None\" | \"Before\" | \"After\" | \"Beginning\" | \"End\""
+    - id: relativeTo
+      description: Opcional. Hoja de cálculo del libro actual al que se hace referencia para el `positionType` parámetro. El valor `null` predeterminado es y, en función de `positionType`<!-- -->, insertará hojas de cálculo al principio o al final del libro actual.
+      type: <xref uid="excel!Excel.Worksheet:class" /> | string
+    return:
+      type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;string[]&gt;
+      description: Una matriz de IDs correspondientes a cada hoja de cálculo recién insertada.
+- name: getActiveWorksheet()
+  uid: excel!Excel.WorksheetCollection#getActiveWorksheet:member(1)
+  package: excel!
+  fullName: getActiveWorksheet()
+  summary: >-
+    Obtiene la hoja de cálculo activa del libro.
+
+
+    \[[Conjunto de API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getActiveWorksheet(): Excel.Worksheet;'
+    return:
+      type: <xref uid="excel!Excel.Worksheet:class" />
+      description: "\n\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nExcel.run(function (ctx) {  \n    var activeWorksheet = ctx.workbook.worksheets.getActiveWorksheet();\n    activeWorksheet.load('name');\n    return ctx.sync().then(function() {\n            console.log(activeWorksheet.name);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- name: getCount(visibleOnly)
+  uid: excel!Excel.WorksheetCollection#getCount:member(1)
+  package: excel!
+  fullName: getCount(visibleOnly)
+  summary: >-
+    Obtiene el número de hojas de cálculo de la colección.
+
+
+    \[[Conjunto de API: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getCount(visibleOnly?: boolean): OfficeExtension.ClientResult<number>;'
+    parameters:
+    - id: visibleOnly
+      description: Opcional. If `true`<!-- -->, solo tiene en cuenta las hojas de cálculo visibles, omitiendo las ocultas.
+      type: boolean
+    return:
+      type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;number&gt;
+      description: ''
+- name: getFirst(visibleOnly)
+  uid: excel!Excel.WorksheetCollection#getFirst:member(1)
+  package: excel!
+  fullName: getFirst(visibleOnly)
+  summary: >-
+    Obtiene la primera hoja de cálculo de la colección.
+
+
+    \[[Conjunto de API: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getFirst(visibleOnly?: boolean): Excel.Worksheet;'
+    parameters:
+    - id: visibleOnly
+      description: Opcional. If `true`<!-- -->, solo tiene en cuenta las hojas de cálculo visibles, omitiendo las ocultas.
+      type: boolean
+    return:
+      type: <xref uid="excel!Excel.Worksheet:class" />
+      description: "\n\n#### <a name=\"examples\"></a>Ejemplos\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/54-worksheet/reference-worksheets-by-relative-position.yaml\nawait Excel.run(async (context) => {\n    const sheets = context.workbook.worksheets;\n\n    // We don't want to include the default worksheet that was created\n    // when the workbook was created, so our \"firstSheet\" will be the one\n    // after the literal first. Note chaining of navigation methods.\n    const firstSheet = sheets.getFirst().getNext();\n    const lastSheet = sheets.getLast();\n    const firstTaxRateRange = firstSheet.getRange(\"B2\");\n    const lastTaxRateRange = lastSheet.getRange(\"B2\");\n\n    firstSheet.load(\"name\");\n    lastSheet.load(\"name\");\n    firstTaxRateRange.load(\"text\");\n    lastTaxRateRange.load(\"text\");\n\n    await context.sync();\n\n    let firstYear = firstSheet.name.substr(5, 4);\n    let lastYear = lastSheet.name.substr(5, 4);\n    console.log(`Tax Rate change from ${firstYear} to ${lastYear}`, `Tax rate for ${firstYear}: ${firstTaxRateRange.text[0][0]}\\nTax rate for ${lastYear}: ${lastTaxRateRange.text[0][0]}`)\n\n    await context.sync();\n});\n```"
+- name: getItem(key)
+  uid: excel!Excel.WorksheetCollection#getItem:member(1)
+  package: excel!
+  fullName: getItem(key)
+  summary: >-
+    Obtiene un objeto de hoja de cálculo mediante su nombre o identificador.
+
+
+    \[[Conjunto de API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getItem(key: string): Excel.Worksheet;'
+    parameters:
+    - id: key
+      description: Nombre o identificador de la hoja de cálculo.
+      type: string
+    return:
+      type: <xref uid="excel!Excel.Worksheet:class" />
+      description: ''
+- name: getItemOrNullObject(key)
+  uid: excel!Excel.WorksheetCollection#getItemOrNullObject:member(1)
+  package: excel!
+  fullName: getItemOrNullObject(key)
+  summary: >-
+    Obtiene un objeto de hoja de cálculo mediante su nombre o identificador. Si la hoja de cálculo no existe, esta función devolverá un objeto con su `isNullObject` propiedad establecida en `true`<!-- -->. Para obtener más información, [vea *OrNullObject methods and properties](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
+
+
+    \[[Conjunto de API: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getItemOrNullObject(key: string): Excel.Worksheet;'
+    parameters:
+    - id: key
+      description: Nombre o identificador de la hoja de cálculo.
+      type: string
+    return:
+      type: <xref uid="excel!Excel.Worksheet:class" />
+      description: ''
+- name: getLast(visibleOnly)
+  uid: excel!Excel.WorksheetCollection#getLast:member(1)
+  package: excel!
+  fullName: getLast(visibleOnly)
+  summary: >-
+    Obtiene la última hoja de cálculo de la colección.
+
+
+    \[[Conjunto de API: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getLast(visibleOnly?: boolean): Excel.Worksheet;'
+    parameters:
+    - id: visibleOnly
+      description: Opcional. If `true`<!-- -->, solo tiene en cuenta las hojas de cálculo visibles, omitiendo las ocultas.
+      type: boolean
+    return:
+      type: <xref uid="excel!Excel.Worksheet:class" />
+      description: "\n\n#### <a name=\"examples\"></a>Ejemplos\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/54-worksheet/reference-worksheets-by-relative-position.yaml\nawait Excel.run(async (context) => {\n    const sheets = context.workbook.worksheets;\n\n    // We don't want to include the default worksheet that was created\n    // when the workbook was created, so our \"firstSheet\" will be the one\n    // after the literal first. Note chaining of navigation methods.\n    const firstSheet = sheets.getFirst().getNext();\n    const lastSheet = sheets.getLast();\n    const firstTaxRateRange = firstSheet.getRange(\"B2\");\n    const lastTaxRateRange = lastSheet.getRange(\"B2\");\n\n    firstSheet.load(\"name\");\n    lastSheet.load(\"name\");\n    firstTaxRateRange.load(\"text\");\n    lastTaxRateRange.load(\"text\");\n\n    await context.sync();\n\n    let firstYear = firstSheet.name.substr(5, 4);\n    let lastYear = lastSheet.name.substr(5, 4);\n    console.log(`Tax Rate change from ${firstYear} to ${lastYear}`, `Tax rate for ${firstYear}: ${firstTaxRateRange.text[0][0]}\\nTax rate for ${lastYear}: ${lastTaxRateRange.text[0][0]}`)\n\n    await context.sync();\n});\n```"
+- name: load(options)
+  uid: excel!Excel.WorksheetCollection#load:member(1)
+  package: excel!
+  fullName: load(options)
+  summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar a `context.sync()` antes de leer las propiedades.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(options?: Excel.Interfaces.WorksheetCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.WorksheetCollection;'
+    parameters:
+    - id: options
+      description: Proporciona opciones para las propiedades del objeto que se cargarán.
+      type: <xref uid="excel!Excel.Interfaces.WorksheetCollectionLoadOptions:interface" /> & <xref uid="excel!Excel.Interfaces.CollectionLoadOptions:interface" />
+    return:
+      type: <xref uid="excel!Excel.WorksheetCollection:class" />
+      description: ''
+- name: load(propertyNames)
+  uid: excel!Excel.WorksheetCollection#load:member(2)
+  package: excel!
+  fullName: load(propertyNames)
+  summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar a `context.sync()` antes de leer las propiedades.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.WorksheetCollection;'
+    parameters:
+    - id: propertyNames
+      description: Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades que se cargarán.
+      type: string | string[]
+    return:
+      type: <xref uid="excel!Excel.WorksheetCollection:class" />
+      description: "\n\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nExcel.run(function (ctx) { \n    var worksheets = ctx.workbook.worksheets;\n    worksheets.load('items');\n    return ctx.sync().then(function() {\n        for (var i = 0; i < worksheets.items.length; i++)\n        {\n            console.log(worksheets.items[i].name);\n            console.log(worksheets.items[i].index);\n        }\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- name: load(propertyNamesAndPaths)
+  uid: excel!Excel.WorksheetCollection#load:member(3)
+  package: excel!
+  fullName: load(propertyNamesAndPaths)
+  summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar a `context.sync()` antes de leer las propiedades.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNamesAndPaths?: OfficeExtension.LoadOption): Excel.WorksheetCollection;'
+    parameters:
+    - id: propertyNamesAndPaths
+      description: '`propertyNamesAndPaths.select` es una cadena delimitada por comas que especifica las propiedades que se cargarán y es una cadena delimitada por comas que especifica las propiedades de navegación que `propertyNamesAndPaths.expand` se cargarán.'
+      type: <xref uid="office!OfficeExtension.LoadOption:interface" />
+    return:
+      type: <xref uid="excel!Excel.WorksheetCollection:class" />
+      description: ''
+- name: toJSON()
+  uid: excel!Excel.WorksheetCollection#toJSON:member(1)
+  package: excel!
+  fullName: toJSON()
+  summary: Invalida el método JavaScript para proporcionar resultados más útiles cuando se pasa un objeto API a `toJSON()``JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama `toJSON` al método del objeto que se pasa a él). Mientras que el objeto original es un objeto API, el método devuelve un objeto JavaScript sin formato `Excel.WorksheetCollection` `toJSON` (se escribe como `Excel.Interfaces.WorksheetCollectionData`<!-- -->) que contiene una matriz "items" con copias superficiales de las propiedades cargadas de los elementos de la colección.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'toJSON(): Excel.Interfaces.WorksheetCollectionData;'
+    return:
+      type: <xref uid="excel!Excel.Interfaces.WorksheetCollectionData:interface" />
+      description: ''
+events:
 - name: onActivated
   uid: excel!Excel.WorksheetCollection#onActivated:member
   package: excel!
@@ -264,285 +539,11 @@ properties:
     content: 'readonly onSingleClicked: OfficeExtension.EventHandlers<Excel.WorksheetSingleClickedEventArgs>;'
     return:
       type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.WorksheetSingleClickedEventArgs:interface" />&gt;
-methods:
-- name: add(name)
-  uid: excel!Excel.WorksheetCollection#add:member(1)
-  package: excel!
-  fullName: add(name)
-  summary: >-
-    Agrega una nueva hoja al libro. La hoja de cálculo se agregará al final de las hojas de cálculo existentes. Si desea activar la hoja de cálculo recién agregada, `.activate()` llámela.
-
-
-    \[[Conjunto de API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'add(name?: string): Excel.Worksheet;'
-    parameters:
-    - id: name
-      description: Opcional. Nombre de la hoja de cálculo que se va a agregar. Si se especifica, el nombre debe ser único. Si no se especifica, Excel determina el nombre de la nueva hoja de cálculo.
-      type: string
-    return:
-      type: <xref uid="excel!Excel.Worksheet:class" />
-      description: "\n\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nExcel.run(function (ctx) { \n    var wSheetName = 'Sample Name';\n    var worksheet = ctx.workbook.worksheets.add(wSheetName);\n    worksheet.load('name');\n    return ctx.sync().then(function() {\n        console.log(worksheet.name);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
-- name: addFromBase64(base64File, sheetNamesToInsert, positionType, relativeTo)
-  uid: excel!Excel.WorksheetCollection#addFromBase64:member(1)
-  package: excel!
-  fullName: addFromBase64(base64File, sheetNamesToInsert, positionType, relativeTo)
-  summary: >-
-    Inserta las hojas de cálculo especificadas de un libro en el libro actual.
-
-
-    *Nota**: Actualmente, esta API solo es compatible con Office en Windows y Mac. Y ha quedado en desuso, use en `Workbook.insertWorksheetFromBase64` su lugar.
-
-
-    \[[Conjunto de API: ExcelApi BETA (SOLO VISTA PREVIA)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
-  isPreview: true
-  isDeprecated: false
-  syntax:
-    content: 'addFromBase64(base64File: string, sheetNamesToInsert?: string[], positionType?: Excel.WorksheetPositionType, relativeTo?: Worksheet | string): OfficeExtension.ClientResult<string[]>;'
-    parameters:
-    - id: base64File
-      description: Necesario. La cadena codificada en base64 que representa el archivo de libro de origen.
-      type: string
-    - id: sheetNamesToInsert
-      description: Opcional. Los nombres de las hojas de cálculo individuales que se insertarán. De forma predeterminada, se insertan todas las hojas de cálculo del libro de origen.
-      type: string[]
-    - id: positionType
-      description: Opcional. Donde en el libro actual se insertarán las nuevas hojas de cálculo. Vea `Excel.WorksheetPositionType` para más información. El valor predeterminado es "Inicio".
-      type: <xref uid="excel!Excel.WorksheetPositionType:enum" />
-    - id: relativeTo
-      description: Opcional. Hoja de cálculo del libro actual al que se hace referencia para el `positionType` parámetro. El valor `null` predeterminado es y, en función de `positionType`<!-- -->, insertará hojas de cálculo al principio o al final del libro actual.
-      type: <xref uid="excel!Excel.Worksheet:class" /> | string
-    return:
-      type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;string[]&gt;
-      description: Una matriz de IDs correspondientes a cada hoja de cálculo recién insertada.
-- name: addFromBase64(base64File, sheetNamesToInsert, positionTypeString, relativeTo)
-  uid: excel!Excel.WorksheetCollection#addFromBase64:member(2)
-  package: excel!
-  fullName: addFromBase64(base64File, sheetNamesToInsert, positionTypeString, relativeTo)
-  summary: >-
-    Inserta las hojas de cálculo especificadas de un libro en el libro actual.
-
-
-    *Nota**: Actualmente, esta API solo es compatible con Office en Windows y Mac. Y ha quedado en desuso, use en `Workbook.insertWorksheetFromBase64` su lugar.
-
-
-    \[[Conjunto de API: ExcelApi BETA (SOLO VISTA PREVIA)](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'addFromBase64(base64File: string, sheetNamesToInsert?: string[], positionTypeString?: "None" | "Before" | "After" | "Beginning" | "End", relativeTo?: Worksheet | string): OfficeExtension.ClientResult<string[]>;'
-    parameters:
-    - id: base64File
-      description: Necesario. La cadena codificada en base64 que representa el archivo de libro de origen.
-      type: string
-    - id: sheetNamesToInsert
-      description: Opcional. Los nombres de las hojas de cálculo individuales que se insertarán. De forma predeterminada, se insertan todas las hojas de cálculo del libro de origen.
-      type: string[]
-    - id: positionTypeString
-      description: Opcional. Donde en el libro actual se insertarán las nuevas hojas de cálculo. Vea `Excel.WorksheetPositionType` para más información. El valor predeterminado es "Inicio".
-      type: "\"None\" | \"Before\" | \"After\" | \"Beginning\" | \"End\""
-    - id: relativeTo
-      description: Opcional. Hoja de cálculo del libro actual al que se hace referencia para el `positionType` parámetro. El valor `null` predeterminado es y, en función de `positionType`<!-- -->, insertará hojas de cálculo al principio o al final del libro actual.
-      type: <xref uid="excel!Excel.Worksheet:class" /> | string
-    return:
-      type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;string[]&gt;
-      description: Una matriz de IDs correspondientes a cada hoja de cálculo recién insertada.
-- name: getActiveWorksheet()
-  uid: excel!Excel.WorksheetCollection#getActiveWorksheet:member(1)
-  package: excel!
-  fullName: getActiveWorksheet()
-  summary: >-
-    Obtiene la hoja de cálculo activa del libro.
-
-
-    \[[Conjunto de API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'getActiveWorksheet(): Excel.Worksheet;'
-    return:
-      type: <xref uid="excel!Excel.Worksheet:class" />
-      description: "\n\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nExcel.run(function (ctx) {  \n    var activeWorksheet = ctx.workbook.worksheets.getActiveWorksheet();\n    activeWorksheet.load('name');\n    return ctx.sync().then(function() {\n            console.log(activeWorksheet.name);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
-- name: getCount(visibleOnly)
-  uid: excel!Excel.WorksheetCollection#getCount:member(1)
-  package: excel!
-  fullName: getCount(visibleOnly)
-  summary: >-
-    Obtiene el número de hojas de cálculo de la colección.
-
-
-    \[[Conjunto de API: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'getCount(visibleOnly?: boolean): OfficeExtension.ClientResult<number>;'
-    parameters:
-    - id: visibleOnly
-      description: Opcional. If `true`<!-- -->, solo tiene en cuenta las hojas de cálculo visibles, omitiendo las ocultas.
-      type: boolean
-    return:
-      type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;number&gt;
-      description: ''
-- name: getFirst(visibleOnly)
-  uid: excel!Excel.WorksheetCollection#getFirst:member(1)
-  package: excel!
-  fullName: getFirst(visibleOnly)
-  summary: >-
-    Obtiene la primera hoja de cálculo de la colección.
-
-
-    \[[Conjunto de API: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'getFirst(visibleOnly?: boolean): Excel.Worksheet;'
-    parameters:
-    - id: visibleOnly
-      description: Opcional. If `true`<!-- -->, solo tiene en cuenta las hojas de cálculo visibles, omitiendo las ocultas.
-      type: boolean
-    return:
-      type: <xref uid="excel!Excel.Worksheet:class" />
-      description: "\n\n#### <a name=\"examples\"></a>Ejemplos\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/54-worksheet/reference-worksheets-by-relative-position.yaml\nawait Excel.run(async (context) => {\n    const sheets = context.workbook.worksheets;\n\n    // We don't want to include the default worksheet that was created\n    // when the workbook was created, so our \"firstSheet\" will be the one\n    // after the literal first. Note chaining of navigation methods.\n    const firstSheet = sheets.getFirst().getNext();\n    const lastSheet = sheets.getLast();\n    const firstTaxRateRange = firstSheet.getRange(\"B2\");\n    const lastTaxRateRange = lastSheet.getRange(\"B2\");\n\n    firstSheet.load(\"name\");\n    lastSheet.load(\"name\");\n    firstTaxRateRange.load(\"text\");\n    lastTaxRateRange.load(\"text\");\n\n    await context.sync();\n\n    let firstYear = firstSheet.name.substr(5, 4);\n    let lastYear = lastSheet.name.substr(5, 4);\n    console.log(`Tax Rate change from ${firstYear} to ${lastYear}`, `Tax rate for ${firstYear}: ${firstTaxRateRange.text[0][0]}\\nTax rate for ${lastYear}: ${lastTaxRateRange.text[0][0]}`)\n\n    await context.sync();\n});\n```"
-- name: getItem(key)
-  uid: excel!Excel.WorksheetCollection#getItem:member(1)
-  package: excel!
-  fullName: getItem(key)
-  summary: >-
-    Obtiene un objeto de hoja de cálculo mediante su nombre o identificador.
-
-
-    \[[Conjunto de API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'getItem(key: string): Excel.Worksheet;'
-    parameters:
-    - id: key
-      description: Nombre o identificador de la hoja de cálculo.
-      type: string
-    return:
-      type: <xref uid="excel!Excel.Worksheet:class" />
-      description: ''
-- name: getItemOrNullObject(key)
-  uid: excel!Excel.WorksheetCollection#getItemOrNullObject:member(1)
-  package: excel!
-  fullName: getItemOrNullObject(key)
-  summary: >-
-    Obtiene un objeto de hoja de cálculo mediante su nombre o identificador. Si la hoja de cálculo no existe, esta función devolverá un objeto con su `isNullObject` propiedad establecida en `true`<!-- -->. Para obtener más información, [vea *OrNullObject methods and properties](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
-
-
-    \[[Conjunto de API: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'getItemOrNullObject(key: string): Excel.Worksheet;'
-    parameters:
-    - id: key
-      description: Nombre o identificador de la hoja de cálculo.
-      type: string
-    return:
-      type: <xref uid="excel!Excel.Worksheet:class" />
-      description: ''
-- name: getLast(visibleOnly)
-  uid: excel!Excel.WorksheetCollection#getLast:member(1)
-  package: excel!
-  fullName: getLast(visibleOnly)
-  summary: >-
-    Obtiene la última hoja de cálculo de la colección.
-
-
-    \[[Conjunto de API: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
-  remarks: ''
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'getLast(visibleOnly?: boolean): Excel.Worksheet;'
-    parameters:
-    - id: visibleOnly
-      description: Opcional. If `true`<!-- -->, solo tiene en cuenta las hojas de cálculo visibles, omitiendo las ocultas.
-      type: boolean
-    return:
-      type: <xref uid="excel!Excel.Worksheet:class" />
-      description: "\n\n#### <a name=\"examples\"></a>Ejemplos\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/54-worksheet/reference-worksheets-by-relative-position.yaml\nawait Excel.run(async (context) => {\n    const sheets = context.workbook.worksheets;\n\n    // We don't want to include the default worksheet that was created\n    // when the workbook was created, so our \"firstSheet\" will be the one\n    // after the literal first. Note chaining of navigation methods.\n    const firstSheet = sheets.getFirst().getNext();\n    const lastSheet = sheets.getLast();\n    const firstTaxRateRange = firstSheet.getRange(\"B2\");\n    const lastTaxRateRange = lastSheet.getRange(\"B2\");\n\n    firstSheet.load(\"name\");\n    lastSheet.load(\"name\");\n    firstTaxRateRange.load(\"text\");\n    lastTaxRateRange.load(\"text\");\n\n    await context.sync();\n\n    let firstYear = firstSheet.name.substr(5, 4);\n    let lastYear = lastSheet.name.substr(5, 4);\n    console.log(`Tax Rate change from ${firstYear} to ${lastYear}`, `Tax rate for ${firstYear}: ${firstTaxRateRange.text[0][0]}\\nTax rate for ${lastYear}: ${lastTaxRateRange.text[0][0]}`)\n\n    await context.sync();\n});\n```"
-- name: load(options)
-  uid: excel!Excel.WorksheetCollection#load:member(1)
-  package: excel!
-  fullName: load(options)
-  summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar a `context.sync()` antes de leer las propiedades.
-  remarks: ''
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'load(options?: Excel.Interfaces.WorksheetCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.WorksheetCollection;'
-    parameters:
-    - id: options
-      description: Proporciona opciones para las propiedades del objeto que se cargarán.
-      type: <xref uid="excel!Excel.Interfaces.WorksheetCollectionLoadOptions:interface" /> & <xref uid="excel!Excel.Interfaces.CollectionLoadOptions:interface" />
-    return:
-      type: <xref uid="excel!Excel.WorksheetCollection:class" />
-      description: ''
-- name: load(propertyNames)
-  uid: excel!Excel.WorksheetCollection#load:member(2)
-  package: excel!
-  fullName: load(propertyNames)
-  summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar a `context.sync()` antes de leer las propiedades.
-  remarks: ''
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'load(propertyNames?: string | string[]): Excel.WorksheetCollection;'
-    parameters:
-    - id: propertyNames
-      description: Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades que se cargarán.
-      type: string | string[]
-    return:
-      type: <xref uid="excel!Excel.WorksheetCollection:class" />
-      description: "\n\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nExcel.run(function (ctx) { \n    var worksheets = ctx.workbook.worksheets;\n    worksheets.load('items');\n    return ctx.sync().then(function() {\n        for (var i = 0; i < worksheets.items.length; i++)\n        {\n            console.log(worksheets.items[i].name);\n            console.log(worksheets.items[i].index);\n        }\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
-- name: load(propertyNamesAndPaths)
-  uid: excel!Excel.WorksheetCollection#load:member(3)
-  package: excel!
-  fullName: load(propertyNamesAndPaths)
-  summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar a `context.sync()` antes de leer las propiedades.
-  remarks: ''
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'load(propertyNamesAndPaths?: OfficeExtension.LoadOption): Excel.WorksheetCollection;'
-    parameters:
-    - id: propertyNamesAndPaths
-      description: '`propertyNamesAndPaths.select` es una cadena delimitada por comas que especifica las propiedades que se cargarán y es una cadena delimitada por comas que especifica las propiedades de navegación que `propertyNamesAndPaths.expand` se cargarán.'
-      type: <xref uid="office!OfficeExtension.LoadOption:interface" />
-    return:
-      type: <xref uid="excel!Excel.WorksheetCollection:class" />
-      description: ''
-- name: toJSON()
-  uid: excel!Excel.WorksheetCollection#toJSON:member(1)
-  package: excel!
-  fullName: toJSON()
-  summary: Invalida el método JavaScript para proporcionar resultados más útiles cuando se pasa un objeto API a `toJSON()``JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama `toJSON` al método del objeto que se pasa a él). Mientras que el objeto original es un objeto API, el método devuelve un objeto JavaScript sin formato `Excel.WorksheetCollection` `toJSON` (se escribe como `Excel.Interfaces.WorksheetCollectionData`<!-- -->) que contiene una matriz "items" con copias superficiales de las propiedades cargadas de los elementos de la colección.
-  remarks: ''
-  isPreview: false
-  isDeprecated: false
-  syntax:
-    content: 'toJSON(): Excel.Interfaces.WorksheetCollectionData;'
-    return:
-      type: <xref uid="excel!Excel.Interfaces.WorksheetCollectionData:interface" />
-      description: ''
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: e388a79f455ba40b471f85a57cb07375c454a2d7
-  ms.sourcegitcommit: a8a86cfcaff5ad7dacc653d63502c76b1fedbebe
+  ms.openlocfilehash: 48eb59bca52919cd761aca137a2a02b4d9df186c
+  ms.sourcegitcommit: 3b6cd632df196ae7bf2a1d192e2b60edc82b9e9c
   ms.translationtype: MT
   ms.contentlocale: es-ES
-  ms.lasthandoff: 03/26/2021
-  ms.locfileid: "51271026"
+  ms.lasthandoff: 04/14/2021
+  ms.locfileid: "51754077"
