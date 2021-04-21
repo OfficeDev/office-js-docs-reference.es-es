@@ -55,7 +55,11 @@
 ||[clear()](/javascript/api/excel/excel.identitycollection#clear--)|Quita todas las identidades de usuario de la colección.|
 ||[getCount()](/javascript/api/excel/excel.identitycollection#getcount--)|Obtiene el número de objetos de la colección.|
 ||[getItemAt(index: number)](/javascript/api/excel/excel.identitycollection#getitemat-index-)|Obtiene una identidad de usuario de documento mediante su índice en la colección.|
+||[items](/javascript/api/excel/excel.identitycollection#items)|Obtiene los elementos secundarios cargados en esta colección.|
 ||[remove(assignee: Identity)](/javascript/api/excel/excel.identitycollection#remove-assignee-)|Quita una identidad de usuario de la colección.|
+|[IdentityEntity](/javascript/api/excel/excel.identityentity)|[displayName](/javascript/api/excel/excel.identityentity#displayname)|Representa el nombre para mostrar del usuario.|
+||[email](/javascript/api/excel/excel.identityentity#email)|Representa la dirección de correo del usuario|
+||[id](/javascript/api/excel/excel.identityentity#id)|Representa el identificador único del usuario.|
 |[InsertWorksheetOptions](/javascript/api/excel/excel.insertworksheetoptions)|[positionType](/javascript/api/excel/excel.insertworksheetoptions#positiontype)|Posición de inserción, en el libro actual, de las nuevas hojas de cálculo.|
 ||[relativeTo](/javascript/api/excel/excel.insertworksheetoptions#relativeto)|Hoja de cálculo del libro actual al que se hace referencia para el `WorksheetPositionType` parámetro.|
 ||[sheetNamesToInsert](/javascript/api/excel/excel.insertworksheetoptions#sheetnamestoinsert)|Los nombres de las hojas de cálculo individuales que se insertarán.|
@@ -129,6 +133,7 @@
 ||[onFormulaChanged](/javascript/api/excel/excel.worksheet#onformulachanged)|Se produce cuando se cambian una o más fórmulas en esta hoja de cálculo.|
 ||[tabId](/javascript/api/excel/excel.worksheet#tabid)|Devuelve un valor que representa esta hoja de cálculo que Puede leer Open Office XML.|
 ||[tareas](/javascript/api/excel/excel.worksheet#tasks)|Devuelve una colección de tareas que están presentes en la hoja de cálculo.|
+|[WorksheetChangedEventArgs](/javascript/api/excel/excel.worksheetchangedeventargs)|[triggerSource](/javascript/api/excel/excel.worksheetchangedeventargs#triggersource)|Representa el origen del desencadenador del evento.|
 |[WorksheetCollection](/javascript/api/excel/excel.worksheetcollection)|[addFromBase64(base64File: string, sheetNamesToInsert?: string[], positionType?: Excel.WorksheetPositionType, relativeTo?: Worksheet \| string)](/javascript/api/excel/excel.worksheetcollection#addfrombase64-base64file--sheetnamestoinsert--positiontype--relativeto-)|Inserta las hojas de cálculo especificadas de un libro en el libro actual.|
 ||[onFiltered](/javascript/api/excel/excel.worksheetcollection#onfiltered)|Se produce cuando se aplica cualquier filtro de hoja de cálculo al libro.|
 ||[onFormulaChanged](/javascript/api/excel/excel.worksheetcollection#onformulachanged)|Se produce cuando se cambian una o más fórmulas en cualquier hoja de cálculo de esta colección.|
