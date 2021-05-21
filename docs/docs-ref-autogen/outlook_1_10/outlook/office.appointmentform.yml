@@ -1,0 +1,265 @@
+### YamlMime:TSType
+name: Office.AppointmentForm
+uid: outlook!Office.AppointmentForm:interface
+package: outlook!
+fullName: Office.AppointmentForm
+summary: El `AppointmentForm` objeto se usa para obtener acceso a la cita seleccionada actualmente.
+remarks: >-
+  **[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`Restricted`
+
+
+  **[Modo Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Redacción o lectura
+isPreview: false
+isDeprecated: false
+type: interface
+properties:
+- name: body
+  uid: outlook!Office.AppointmentForm#body:member
+  package: outlook!
+  fullName: body
+  summary: >-
+    Obtiene un objeto que proporciona métodos para manipular el cuerpo de un elemento.
+
+
+    \[[Conjunto de API: Buzón 1.1](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Modo Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Redacción o lectura
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'body: Body | string;'
+    return:
+      type: <xref uid="outlook!Office.Body:interface" /> | string
+- name: end
+  uid: outlook!Office.AppointmentForm#end:member
+  package: outlook!
+  fullName: end
+  summary: >-
+    Obtiene o establece la fecha y la hora de finalización de la cita.
+
+
+    La propiedad `end` se expresa como un valor de fecha y hora de la hora universal coordinada (UTC). Puede usar el método para convertir el valor de la propiedad a la fecha y hora `convertToLocalClientTime` `end` local del cliente.
+
+
+    *Modo de lectura*
+
+
+    La propiedad `end` devuelve un objeto `Date`.
+
+
+    *Modo de redacción*
+
+
+    La propiedad `end` devuelve un objeto `Time`.
+
+
+    Si usa el método `Time.setAsync` para establecer la hora de finalización, use el método `convertToUtcClientTime` para convertir la hora local del cliente en un valor UTC para el servidor.
+  remarks: >-
+    **[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Modo Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Redacción o lectura
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'end: Time | Date;'
+    return:
+      type: <xref uid="outlook!Office.Time:interface" /> | Date
+- name: location
+  uid: outlook!Office.AppointmentForm#location:member
+  package: outlook!
+  fullName: location
+  summary: >-
+    Obtiene o establece la ubicación de una cita.
+
+
+    *Modo de lectura*
+
+
+    La propiedad `location` devuelve una cadena que contiene la ubicación de la cita.
+
+
+    *Modo de redacción*
+
+
+    La propiedad `location` devuelve un objeto `Location` que proporciona métodos para obtener y establecer la ubicación de la cita.
+  remarks: >-
+    **[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Modo Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Redacción o lectura
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'location: Location | string;'
+    return:
+      type: <xref uid="outlook!Office.Location:interface" /> | string
+- name: optionalAttendees
+  uid: outlook!Office.AppointmentForm#optionalAttendees:member
+  package: outlook!
+  fullName: optionalAttendees
+  summary: >-
+    Proporciona acceso a los asistentes opcionales de un evento. El tipo de objeto y el nivel de acceso dependen del modo del elemento actual.
+
+
+    *Modo Lectura*
+
+
+    La `optionalAttendees` propiedad devuelve una matriz que contiene un objeto [EmailAddressDetails](xref:outlook!Office.EmailAddressDetails:interface) para cada asistente opcional a la reunión. Límites de tamaño de colección:
+
+
+    - Windows: 500 miembros
+
+
+    - Mac: 100 miembros
+
+
+    - Other: No limit
+
+
+    *Modo Redacción*
+
+
+    La propiedad `optionalAttendees` devuelve un objeto `Recipients` que proporciona métodos para obtener o actualizar los asistentes opcionales a una reunión. Sin embargo, según el cliente o la plataforma (es decir, Windows, Mac, etc.), pueden aplicarse límites en el número de destinatarios que puede obtener o actualizar. Vea el [objeto Recipients](xref:outlook!Office.Recipients:interface) para obtener más información.
+  remarks: >-
+    **[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Modo Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Redacción o lectura
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'optionalAttendees: Recipients[] | EmailAddressDetails[];'
+    return:
+      type: <xref uid="outlook!Office.Recipients:interface" />[] | <xref uid="outlook!Office.EmailAddressDetails:interface" />[]
+- name: requiredAttendees
+  uid: outlook!Office.AppointmentForm#requiredAttendees:member
+  package: outlook!
+  fullName: requiredAttendees
+  summary: >-
+    Proporciona acceso a los asistentes necesarios de un evento. El tipo de objeto y el nivel de acceso dependen del modo del elemento actual.
+
+
+    *Modo Lectura*
+
+
+    La `requiredAttendees` propiedad devuelve una matriz que contiene un objeto [EmailAddressDetails](xref:outlook!Office.EmailAddressDetails:interface) para cada asistente necesario a la reunión. Límites de tamaño de colección:
+
+
+    - Windows: 500 miembros
+
+
+    - Mac: 100 miembros
+
+
+    - Other: No limit
+
+
+    *Modo Redacción*
+
+
+    La propiedad `requiredAttendees` devuelve un objeto `Recipients` que proporciona métodos para obtener o actualizar los asistentes obligatorios a una reunión. Sin embargo, según el cliente o la plataforma (es decir, Windows, Mac, etc.), pueden aplicarse límites en el número de destinatarios que puede obtener o actualizar. Vea el [objeto Recipients](xref:outlook!Office.Recipients:interface) para obtener más información.
+  remarks: >-
+    **[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Modo Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Redacción o lectura
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'requiredAttendees: Recipients[] | EmailAddressDetails[];'
+    return:
+      type: <xref uid="outlook!Office.Recipients:interface" />[] | <xref uid="outlook!Office.EmailAddressDetails:interface" />[]
+- name: resources
+  uid: outlook!Office.AppointmentForm#resources:member
+  package: outlook!
+  fullName: resources
+  summary: Proporciona acceso a los recursos de un evento. Devuelve una matriz de cadenas que contienen los recursos necesarios para la cita.
+  remarks: >-
+    **[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Modo Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Redacción o lectura
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'resources: string[];'
+    return:
+      type: string[]
+- name: start
+  uid: outlook!Office.AppointmentForm#start:member
+  package: outlook!
+  fullName: start
+  summary: >-
+    Obtiene o establece la fecha y la hora de inicio de la cita.
+
+
+    La propiedad `start` se expresa como un valor de fecha y hora de la hora universal coordinada (UTC). Puede usar el método para convertir el valor en la fecha y hora `convertToLocalClientTime` local del cliente.
+
+
+    *Modo de lectura*
+
+
+    La propiedad `start` devuelve un objeto `Date`.
+
+
+    *Modo de redacción*
+
+
+    La propiedad `start` devuelve un objeto `Time`.
+
+
+    Si usa el método `Time.setAsync` para establecer la hora de inicio, use el método `convertToUtcClientTime` para convertir la hora local del cliente en un valor UTC para el servidor.
+  remarks: >-
+    **[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Modo Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Redacción o lectura
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'start: Time | Date;'
+    return:
+      type: <xref uid="outlook!Office.Time:interface" /> | Date
+- name: subject
+  uid: outlook!Office.AppointmentForm#subject:member
+  package: outlook!
+  fullName: subject
+  summary: >-
+    Obtiene o establece la descripción que se muestra en el campo de asunto de un elemento.
+
+
+    La propiedad `subject` obtiene o establece el asunto completo del elemento, como lo ha enviado el servidor de correo electrónico.
+
+
+    *Modo de lectura*
+
+
+    La propiedad `subject` devuelve una cadena. Use la `normalizedSubject` propiedad para obtener el asunto menos los prefijos iniciales como RE: y FW:.
+
+
+    *Modo de redacción*
+
+
+    La propiedad `subject` devuelve un objeto `Subject` que proporciona métodos para obtener y establecer el asunto.
+  remarks: >-
+    **[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Modo Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Redacción o lectura
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'subject: Subject | string;'
+    return:
+      type: <xref uid="outlook!Office.Subject:interface" /> | string
+metadata:
+  ms.openlocfilehash: ae7066510f295df2a2cc54c116e7a7e39dbb74da
+  ms.sourcegitcommit: fc08f53e68f6acec0b6de81691ac5920f3974ed4
+  ms.translationtype: MT
+  ms.contentlocale: es-ES
+  ms.lasthandoff: 05/21/2021
+  ms.locfileid: "52591877"

@@ -1,0 +1,301 @@
+### YamlMime:TSType
+name: Office.EnhancedLocation
+uid: outlook!Office.EnhancedLocation:interface
+package: outlook!
+fullName: Office.EnhancedLocation
+summary: >-
+  Representa el conjunto de ubicaciones de una cita.
+
+
+  \[[Conjunto de API: Buzón 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+remarks: >-
+  **[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+  **[Modo Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Redacción o lectura
+isPreview: false
+isDeprecated: false
+type: interface
+methods:
+- name: addAsync(locationIdentifiers, options, callback)
+  uid: outlook!Office.EnhancedLocation#addAsync:member(1)
+  package: outlook!
+  fullName: addAsync(locationIdentifiers, options, callback)
+  summary: >-
+    Se agrega al conjunto de ubicaciones asociadas con la cita.
+
+
+    \[[Conjunto de API: Buzón 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
+
+
+    **[Modo Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Redacción
+
+
+    **Errores**:
+
+
+    - `InvalidFormatError`<!-- -->: el formato del objeto de datos especificado no es válido.
+
+
+    #### <a name="examples"></a>Ejemplos
+
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/90-other-item-apis/get-add-remove-enhancedlocation-appointment.yaml
+
+    var locations = [
+      {
+        id: "Contoso",
+        type: Office.MailboxEnums.LocationType.Custom
+      },
+      {
+        id: "room500@test.com",
+        type: Office.MailboxEnums.LocationType.Room
+      }
+    ];
+
+    Office.context.mailbox.item.enhancedLocation.addAsync(locations, (result) => {
+      if (result.status === Office.AsyncResultStatus.Succeeded) {
+        console.log(`Successfully added locations ${JSON.stringify(locations)}`);
+      } else {
+        console.error(`Failed to add locations. Error message: ${result.error.message}`);
+      }
+    });
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'addAsync(locationIdentifiers: LocationIdentifier[], options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: locationIdentifiers
+      description: Las ubicaciones que se agregarán a la lista actual de ubicaciones.
+      type: <xref uid="outlook!Office.LocationIdentifier:interface" />[]
+    - id: options
+      description: 'Un objeto literal que contiene una o más de las siguientes propiedades. `asyncContext`<!-- -->: Los desarrolladores pueden proporcionar cualquier objeto al que deseen tener acceso en el método de devolución de llamada.'
+      type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: Opcional. Cuando se completa el método, se llama a la función pasada en `callback` el parámetro con un único parámetro, `asyncResult`<!-- -->, que es un `Office.AsyncResult` objeto. Compruebe la `status` propiedad de para determinar si la llamada se ha realizar `asyncResult` correctamente.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: addAsync(locationIdentifiers, callback)
+  uid: outlook!Office.EnhancedLocation#addAsync:member(2)
+  package: outlook!
+  fullName: addAsync(locationIdentifiers, callback)
+  summary: >-
+    Se agrega al conjunto de ubicaciones asociadas con la cita.
+
+
+    \[[Conjunto de API: Buzón 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
+
+
+    **[Modo Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Redacción
+
+
+    **Errores**:
+
+
+    - `InvalidFormatError`<!-- -->: el formato del objeto de datos especificado no es válido.
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'addAsync(locationIdentifiers: LocationIdentifier[], callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: locationIdentifiers
+      description: Las ubicaciones que se agregarán a la lista actual de ubicaciones.
+      type: <xref uid="outlook!Office.LocationIdentifier:interface" />[]
+    - id: callback
+      description: Opcional. Cuando se completa el método, se llama a la función pasada en `callback` el parámetro con un único parámetro, `asyncResult`<!-- -->, que es un `Office.AsyncResult` objeto. Compruebe la `status` propiedad de para determinar si la llamada se ha realizar `asyncResult` correctamente.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: getAsync(options, callback)
+  uid: outlook!Office.EnhancedLocation#getAsync:member(1)
+  package: outlook!
+  fullName: getAsync(options, callback)
+  summary: >-
+    Obtiene el conjunto de ubicaciones asociadas a la cita.
+
+
+    \[[Conjunto de API: Buzón 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Modo Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Redacción o lectura
+
+
+    #### <a name="examples"></a>Ejemplos
+
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/90-other-item-apis/get-add-remove-enhancedlocation-appointment.yaml
+
+    Office.context.mailbox.item.enhancedLocation.getAsync((result) => {
+      if (result.status !== Office.AsyncResultStatus.Succeeded) {
+        console.error(`Failed to get locations. Error message: ${result.error.message}`);
+        return;
+      }
+      var places = result.value;
+      if (places && places.length > 0) {
+        result.value.forEach(function(place) {
+          console.log(`Location: ${place.displayName} (type: ${place.locationIdentifier.type})`);
+          if (place.locationIdentifier.type === Office.MailboxEnums.LocationType.Room) {
+            console.log("Email address: " + place.emailAddress);
+          }
+        });
+      } else {
+        console.log("There are no locations.");
+      }
+    });
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getAsync(options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<LocationDetails[]>) => void): void;'
+    parameters:
+    - id: options
+      description: 'Un objeto literal que contiene una o más de las siguientes propiedades. `asyncContext`<!-- -->: Los desarrolladores pueden proporcionar cualquier objeto al que deseen tener acceso en el método de devolución de llamada.'
+      type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: Opcional. Cuando se completa el método, se llama a la función pasada en `callback` el parámetro con un único parámetro, `asyncResult`<!-- -->, que es un `Office.AsyncResult` objeto.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="outlook!Office.LocationDetails:interface" />[]&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: getAsync(callback)
+  uid: outlook!Office.EnhancedLocation#getAsync:member(2)
+  package: outlook!
+  fullName: getAsync(callback)
+  summary: >-
+    Obtiene el conjunto de ubicaciones asociadas a la cita.
+
+
+    \[[Conjunto de API: Buzón 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
+
+
+    **[Modo Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Redacción o lectura
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getAsync(callback?: (asyncResult: Office.AsyncResult<LocationDetails[]>) => void): void;'
+    parameters:
+    - id: callback
+      description: Opcional. Cuando se completa el método, se llama a la función pasada en `callback` el parámetro con un único parámetro, `asyncResult`<!-- -->, que es un `Office.AsyncResult` objeto.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;<xref uid="outlook!Office.LocationDetails:interface" />[]&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: removeAsync(locationIdentifiers, options, callback)
+  uid: outlook!Office.EnhancedLocation#removeAsync:member(1)
+  package: outlook!
+  fullName: removeAsync(locationIdentifiers, options, callback)
+  summary: >-
+    Quita el conjunto de ubicaciones asociadas a la cita.
+
+
+    Si hay varias ubicaciones con el mismo nombre, se quitarán todas las ubicaciones que coincidan incluso si solo se especificó una en `locationIdentifiers`<!-- -->.
+
+
+    \[[Conjunto de API: Buzón 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
+
+
+    **[Modo Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Redacción
+
+
+    #### <a name="examples"></a>Ejemplos
+
+
+    ```javascript
+
+    // Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/outlook/90-other-item-apis/get-add-remove-enhancedlocation-appointment.yaml
+
+    var locations = [
+      {
+        id: "Contoso",
+        type: Office.MailboxEnums.LocationType.Custom
+      },
+      {
+        id: "room500@test.com",
+        type: Office.MailboxEnums.LocationType.Room
+      }
+    ];
+
+    Office.context.mailbox.item.enhancedLocation.removeAsync(locations, (result) => {
+      if (result.status === Office.AsyncResultStatus.Succeeded) {
+        console.log(`Successfully removed locations ${JSON.stringify(locations)}`);
+      } else {
+        console.error(`Failed to remove locations. Error message: ${result.error.message}`);
+      }
+    });
+
+    ```
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'removeAsync(locationIdentifiers: LocationIdentifier[], options: Office.AsyncContextOptions, callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: locationIdentifiers
+      description: Las ubicaciones que se quitarán de la lista actual de ubicaciones.
+      type: <xref uid="outlook!Office.LocationIdentifier:interface" />[]
+    - id: options
+      description: 'Un objeto literal que contiene una o más de las siguientes propiedades. `asyncContext`<!-- -->: Los desarrolladores pueden proporcionar cualquier objeto al que deseen tener acceso en el método de devolución de llamada.'
+      type: <xref uid="office!Office.AsyncContextOptions:interface" />
+    - id: callback
+      description: Opcional. Cuando se completa el método, se llama a la función pasada en `callback` el parámetro con un único parámetro, `asyncResult`<!-- -->, que es un `Office.AsyncResult` objeto. Compruebe la `status` propiedad de para determinar si la llamada se ha realizar `asyncResult` correctamente.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+- name: removeAsync(locationIdentifiers, callback)
+  uid: outlook!Office.EnhancedLocation#removeAsync:member(2)
+  package: outlook!
+  fullName: removeAsync(locationIdentifiers, callback)
+  summary: >-
+    Quita el conjunto de ubicaciones asociadas a la cita.
+
+
+    Si hay varias ubicaciones con el mismo nombre, se quitarán todas las ubicaciones que coincidan incluso si solo se especificó una en `locationIdentifiers`<!-- -->.
+
+
+    \[[Conjunto de API: Buzón 1.8](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
+  remarks: >-
+    **[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteItem`
+
+
+    **[Modo Outlook aplicable:](https://docs.microsoft.com/office/dev/add-ins/outlook/outlook-add-ins-overview#extension-points) <!-- -->** Redacción
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'removeAsync(locationIdentifiers: LocationIdentifier[], callback?: (asyncResult: Office.AsyncResult<void>) => void): void;'
+    parameters:
+    - id: locationIdentifiers
+      description: Las ubicaciones que se quitarán de la lista actual de ubicaciones.
+      type: <xref uid="outlook!Office.LocationIdentifier:interface" />[]
+    - id: callback
+      description: Opcional. Cuando se completa el método, se llama a la función pasada en `callback` el parámetro con un único parámetro, `asyncResult`<!-- -->, que es un `Office.AsyncResult` objeto. Compruebe la `status` propiedad de para determinar si la llamada se ha realizar `asyncResult` correctamente.
+      type: '(asyncResult: <xref uid="office!Office.AsyncResult:interface" />&lt;void&gt;) =&gt; void'
+    return:
+      type: void
+      description: ''
+metadata:
+  ms.openlocfilehash: 4e00bd0375955a9a15641c8e008f1e1eac81d1ae
+  ms.sourcegitcommit: fc08f53e68f6acec0b6de81691ac5920f3974ed4
+  ms.translationtype: MT
+  ms.contentlocale: es-ES
+  ms.lasthandoff: 05/21/2021
+  ms.locfileid: "52591919"
