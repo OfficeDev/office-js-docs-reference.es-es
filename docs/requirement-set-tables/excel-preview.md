@@ -48,7 +48,7 @@
 |[FormulaChangedEventDetail](/javascript/api/excel/excel.formulachangedeventdetail)|[cellAddress](/javascript/api/excel/excel.formulachangedeventdetail#celladdress)|Dirección de la celda que contiene la fórmula modificada.|
 ||[previousFormula](/javascript/api/excel/excel.formulachangedeventdetail#previousformula)|Representa la fórmula anterior, antes de cambiarla.|
 |[GroupShapeCollection](/javascript/api/excel/excel.groupshapecollection)|[getItemOrNullObject(key: string)](/javascript/api/excel/excel.groupshapecollection#getitemornullobject-key-)|Obtiene una forma con su nombre o identificador.|
-|[Identidad](/javascript/api/excel/excel.identity)|[displayName](/javascript/api/excel/excel.identity#displayname)|Representa el nombre para mostrar del usuario.|
+|[Identity](/javascript/api/excel/excel.identity)|[displayName](/javascript/api/excel/excel.identity#displayname)|Representa el nombre para mostrar del usuario.|
 ||[email](/javascript/api/excel/excel.identity#email)|Representa la dirección de correo del usuario|
 ||[id](/javascript/api/excel/excel.identity#id)|Representa el identificador único del usuario.|
 |[IdentityCollection](/javascript/api/excel/excel.identitycollection)|[add(assignee: Identity)](/javascript/api/excel/excel.identitycollection#add-assignee-)|Agrega una identidad de usuario a la colección.|
@@ -71,7 +71,7 @@
 ||[serviceId](/javascript/api/excel/excel.linkeddatatype#serviceid)|Identificador único del tipo de datos vinculado.|
 ||[supportedRefreshModes](/javascript/api/excel/excel.linkeddatatype#supportedrefreshmodes)|Devuelve una matriz con todos los modos de actualización admitidos por el tipo de datos vinculado.|
 ||[requestRefresh()](/javascript/api/excel/excel.linkeddatatype#requestrefresh--)|Realiza una solicitud para actualizar el tipo de datos vinculado.|
-||[requestSetRefreshMode(refreshMode: Excel.LinkedDataTypeRefreshMode)](/javascript/api/excel/excel.linkeddatatype#requestsetrefreshmode-refreshmode-)|Realiza una solicitud para cambiar el modo de actualización de este tipo de datos vinculado.|
+||[requestSetRefreshMode(refreshMode: Excel. LinkedDataTypeRefreshMode)](/javascript/api/excel/excel.linkeddatatype#requestsetrefreshmode-refreshmode-)|Realiza una solicitud para cambiar el modo de actualización de este tipo de datos vinculado.|
 |[LinkedDataTypeAddedEventArgs](/javascript/api/excel/excel.linkeddatatypeaddedeventargs)|[serviceId](/javascript/api/excel/excel.linkeddatatypeaddedeventargs#serviceid)|El identificador único del nuevo tipo de datos vinculado.|
 ||[source](/javascript/api/excel/excel.linkeddatatypeaddedeventargs#source)|Obtiene el origen del evento.|
 ||[type](/javascript/api/excel/excel.linkeddatatypeaddedeventargs#type)|Obtiene el tipo del evento.|
@@ -122,7 +122,7 @@
 ||[type](/javascript/api/excel/excel.tablefilteredeventargs#type)|Obtiene el tipo del evento.|
 ||[worksheetId](/javascript/api/excel/excel.tablefilteredeventargs#worksheetid)|Obtiene el identificador de la hoja de cálculo que contiene la tabla.|
 |[TableScopedCollection](/javascript/api/excel/excel.tablescopedcollection)|[getItemOrNullObject(key: string)](/javascript/api/excel/excel.tablescopedcollection#getitemornullobject-key-)|Obtener una tabla por nombre o identificador.|
-|[Workbook](/javascript/api/excel/excel.workbook)|[insertWorksheetsFromBase64(base64File: string, options?: Excel.InsertWorksheetOptions)](/javascript/api/excel/excel.workbook#insertworksheetsfrombase64-base64file--options-)|Inserta las hojas de cálculo especificadas de un libro de origen en el libro actual.|
+|[Workbook](/javascript/api/excel/excel.workbook)|[insertWorksheetsFromBase64(base64File: string, options?: Excel. InsertWorksheetOptions)](/javascript/api/excel/excel.workbook#insertworksheetsfrombase64-base64file--options-)|Inserta las hojas de cálculo especificadas de un libro de origen en el libro actual.|
 ||[linkedDataTypes](/javascript/api/excel/excel.workbook#linkeddatatypes)|Devuelve una colección de tipos de datos vinculados que forman parte del libro.|
 ||[onActivated](/javascript/api/excel/excel.workbook#onactivated)|Se produce cuando se activa el libro.|
 ||[tareas](/javascript/api/excel/excel.workbook#tasks)|Devuelve una colección de tareas que están presentes en el libro.|
@@ -131,15 +131,21 @@
 |[WorkbookActivatedEventArgs](/javascript/api/excel/excel.workbookactivatedeventargs)|[type](/javascript/api/excel/excel.workbookactivatedeventargs#type)|Obtiene el tipo del evento.|
 |[Worksheet](/javascript/api/excel/excel.worksheet)|[onFiltered](/javascript/api/excel/excel.worksheet#onfiltered)|Se produce cuando se aplica un filtro en una hoja de cálculo específica.|
 ||[onFormulaChanged](/javascript/api/excel/excel.worksheet#onformulachanged)|Se produce cuando se cambian una o más fórmulas en esta hoja de cálculo.|
-||[tabId](/javascript/api/excel/excel.worksheet#tabid)|Devuelve un valor que representa esta hoja de cálculo que Puede leer Open Office XML.|
+||[onProtectionChanged](/javascript/api/excel/excel.worksheet#onprotectionchanged)|Se produce cuando se cambia el estado de protección de la hoja de cálculo.|
+||[tabId](/javascript/api/excel/excel.worksheet#tabid)|Devuelve un valor que representa esta hoja de cálculo que puede leer Open Office XML.|
 ||[tareas](/javascript/api/excel/excel.worksheet#tasks)|Devuelve una colección de tareas que están presentes en la hoja de cálculo.|
 |[WorksheetChangedEventArgs](/javascript/api/excel/excel.worksheetchangedeventargs)|[triggerSource](/javascript/api/excel/excel.worksheetchangedeventargs#triggersource)|Representa el origen del desencadenador del evento.|
 |[WorksheetCollection](/javascript/api/excel/excel.worksheetcollection)|[addFromBase64(base64File: string, sheetNamesToInsert?: string[], positionType?: Excel.WorksheetPositionType, relativeTo?: Worksheet \| string)](/javascript/api/excel/excel.worksheetcollection#addfrombase64-base64file--sheetnamestoinsert--positiontype--relativeto-)|Inserta las hojas de cálculo especificadas de un libro en el libro actual.|
 ||[onFiltered](/javascript/api/excel/excel.worksheetcollection#onfiltered)|Se produce cuando se aplica cualquier filtro de hoja de cálculo al libro.|
 ||[onFormulaChanged](/javascript/api/excel/excel.worksheetcollection#onformulachanged)|Se produce cuando se cambian una o más fórmulas en cualquier hoja de cálculo de esta colección.|
+||[onProtectionChanged](/javascript/api/excel/excel.worksheetcollection#onprotectionchanged)|Se produce cuando se cambia el estado de protección de la hoja de cálculo.|
 |[WorksheetFilteredEventArgs](/javascript/api/excel/excel.worksheetfilteredeventargs)|[type](/javascript/api/excel/excel.worksheetfilteredeventargs#type)|Obtiene el tipo del evento.|
 ||[worksheetId](/javascript/api/excel/excel.worksheetfilteredeventargs#worksheetid)|Obtiene el identificador de la hoja de cálculo en la que se aplica el filtro.|
 |[WorksheetFormulaChangedEventArgs](/javascript/api/excel/excel.worksheetformulachangedeventargs)|[formulaDetails](/javascript/api/excel/excel.worksheetformulachangedeventargs#formuladetails)|Obtiene una matriz `FormulaChangedEventDetail` de objetos, que contienen los detalles sobre todas las fórmulas modificadas.|
 ||[source](/javascript/api/excel/excel.worksheetformulachangedeventargs#source)|Origen del evento.|
 ||[type](/javascript/api/excel/excel.worksheetformulachangedeventargs#type)|Obtiene el tipo del evento.|
 ||[worksheetId](/javascript/api/excel/excel.worksheetformulachangedeventargs#worksheetid)|Obtiene el identificador de la hoja de cálculo en la que cambió la fórmula.|
+|[WorksheetProtectionChangedEventArgs](/javascript/api/excel/excel.worksheetprotectionchangedeventargs)|[isProtected](/javascript/api/excel/excel.worksheetprotectionchangedeventargs#isprotected)|Obtiene el estado de protección actual de la hoja de cálculo.|
+||[source](/javascript/api/excel/excel.worksheetprotectionchangedeventargs#source)|Origen del evento.|
+||[type](/javascript/api/excel/excel.worksheetprotectionchangedeventargs#type)|Obtiene el tipo del evento.|
+||[worksheetId](/javascript/api/excel/excel.worksheetprotectionchangedeventargs#worksheetid)|Obtiene el identificador de la hoja de cálculo en la que se cambia el estado de protección.|
