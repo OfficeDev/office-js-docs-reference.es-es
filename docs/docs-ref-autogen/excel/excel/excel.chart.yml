@@ -4,7 +4,7 @@ uid: excel!Excel.Chart:class
 package: excel!
 fullName: Excel.Chart
 summary: >-
-  Representa un objeto de gráfico de una hoja de cálculo. Para obtener más información sobre el modelo de objetos de gráfico, vea [Trabajar con gráficos mediante la API de JavaScript de Excel](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-charts)<!-- -->.
+  Representa un objeto de gráfico de una hoja de cálculo. Para obtener más información sobre el modelo de objetos de gráfico, vea [Trabajar con gráficos mediante](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-charts) la API Excel JavaScript<!-- -->.
 
 
   \[[Conjunto de API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -65,7 +65,7 @@ properties:
   uid: excel!Excel.Chart#context:member
   package: excel!
   fullName: context
-  summary: Contexto de solicitud asociado al objeto. Esto conecta el proceso del complemento con el proceso de la aplicación host de Office.
+  summary: Contexto de solicitud asociado al objeto. Esto conecta el proceso del complemento con el Office proceso de la aplicación host.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -304,7 +304,7 @@ properties:
   package: excel!
   fullName: showAllFieldButtons
   summary: >-
-    Especifica si se muestran todos los botones de campo en un gráfico dinámico.
+    Especifica si se muestran todos los botones de campo en un Gráfico dinámico.
 
 
     \[[Conjunto de API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -676,7 +676,7 @@ methods:
   uid: excel!Excel.Chart#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: Invalida el método JavaScript para proporcionar resultados más útiles cuando se pasa un objeto API a `toJSON()``JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama `toJSON` al método del objeto que se pasa a él). Mientras que el objeto Excel.Chart original es un objeto API, el método devuelve un objeto JavaScript sin formato (con el tipo `toJSON` como `Excel.Interfaces.ChartData`<!-- -->) que contiene copias superficiales de las propiedades secundarias cargadas del objeto original.
+  summary: Invalida el método JavaScript para proporcionar resultados más útiles cuando se pasa un objeto API a `toJSON()``JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama `toJSON` al método del objeto que se pasa a él). Mientras que la Excel. El objeto Chart es un objeto API, el método devuelve un objeto JavaScript sin formato `toJSON` (se escribe como`Excel.Interfaces.ChartData`<!-- -->) que contiene copias superficiales de las propiedades secundarias cargadas del objeto original.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -702,7 +702,7 @@ events:
     content: 'readonly onActivated: OfficeExtension.EventHandlers<Excel.ChartActivatedEventArgs>;'
     return:
       type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.ChartActivatedEventArgs:interface" />&gt;
-      description: "\n\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nExcel.run(function (context){\n    var pieChart = context.workbook.worksheets.getActiveWorksheet().charts.getItem(\"Pie\");\n    pieChart.onActivated.add(function (event) {\n        return Excel.run(function (context) {\n            console.log(\"The pie chart is the active chart. ID: \" + event.chartId);\n            return context.sync();\n        });\n    });\n    return context.sync();\n});\n```"
+      description: "\n\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nExcel.run(function (context){\n    var pieChart = context.workbook.worksheets.getActiveWorksheet().charts.getItem(\"Pie\");\n    pieChart.onActivated.add(function (event) {\n        return Excel.run(function (context) {\n            console.log(\"The pie chart is the active chart. ID: \" + event.chartId);\n            return context.sync();\n        });\n    });\n    return context.sync();\n});\n```\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/30-events/events-chart-activated.yaml\nawait Excel.run(async (context) => {\n\n    const pieChart = context.workbook.worksheets.getActiveWorksheet().charts.getItem(\"Pie\");\n\n    // Register the onActivated and onDeactivated event handlers.\n    pieChart.onActivated.add(chartActivated);\n    pieChart.onDeactivated.add(chartDeactivated);\n\n    await context.sync();\n\n    console.log(\"Added handlers for Chart onActivated and onDeactivated events.\");\n});\n```\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/30-events/events-chart-activated.yaml\nasync function chartActivated(event) {\n    await Excel.run(async (context) => {\n        // Retrieve the worksheet.\n        const sheet = context.workbook.worksheets.getActiveWorksheet();\n\n        // Retrieve the activated chart by ID and load the name of the chart. \n        const activatedChart = sheet.charts.getItem(event.chartId);\n        activatedChart.load([\"name\"]);\n        await context.sync();\n\n        // Print out the activated chart's data.\n        console.log(`A chart was activated. ID: ${event.chartId}. Chart name: ${activatedChart.name}.`);\n    });\n}\n```"
 - name: onDeactivated
   uid: excel!Excel.Chart#onDeactivated:member
   package: excel!
@@ -722,9 +722,9 @@ events:
       description: "\n\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nExcel.run(function (context){\n    var pieChart = context.workbook.worksheets.getActiveWorksheet().charts.getItem(\"Pie\");\n    pieChart.onDeactivated.add(function (event) {\n        return Excel.run(function (context) {\n            console.log(\"The pie chart is NOT active.\");\n            return context.sync();\n        });\n    });\n    return context.sync();\n});\n```"
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: aa01c1e1797b984b074e9595905758db2a9d09ce
-  ms.sourcegitcommit: 3b6cd632df196ae7bf2a1d192e2b60edc82b9e9c
+  ms.openlocfilehash: fd7cf613a449a46daba340f7a678f754c3eeb588
+  ms.sourcegitcommit: 319b8cca7d91e51669407633dacc02ea6e4f4338
   ms.translationtype: MT
   ms.contentlocale: es-ES
-  ms.lasthandoff: 04/14/2021
-  ms.locfileid: "51753370"
+  ms.lasthandoff: 06/18/2021
+  ms.locfileid: "53009830"
