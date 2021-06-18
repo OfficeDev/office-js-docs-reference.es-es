@@ -40,10 +40,10 @@ properties:
     - `hostName` (cadena): cadena que representa el nombre de la aplicación host. Debe ser uno de los siguientes valores: `Outlook`<!-- -->, `OutlookWebApp`<!-- -->, `OutlookIOS`<!-- -->, o `OutlookAndroid`<!-- -->. **Nota:** El valor "Outlook" se devuelve para Outlook clientes de escritorio (es decir, Windows y Mac).
 
 
-    - `hostVersion`(cadena): cadena que representa la versión de la aplicación host o la Exchange Server (por ejemplo, "15.0.468.0"). Si el complemento de correo se ejecuta en Outlook en clientes de escritorio o móviles, la propiedad devuelve la versión de la aplicación `hostVersion` host, Outlook. En Outlook web, la propiedad devuelve la versión del Exchange Server.
+    - `hostVersion`(cadena): cadena que representa la versión de la aplicación host o la Exchange Server (por ejemplo, "15.0.468.0"). Si el complemento de correo se ejecuta en Outlook en clientes de escritorio o móviles, la propiedad devuelve la versión de la aplicación `hostVersion` host, Outlook. En Outlook en la Web, la propiedad devuelve la versión del Exchange Server.
 
 
-    - `OWAView`( `MailboxEnums.OWAView` o cadena): enumeración (o literal de cadena) que representa la vista actual de Outlook en la web. Si la aplicación host no está Outlook en la web, el acceso a esta propiedad da como resultado undefined. Outlook en la web tiene tres vistas ( - se muestran cuando la pantalla es estrecha, - se muestra cuando la pantalla es más ancha y - se muestra cuando la pantalla es ancha) que corresponden al ancho de la pantalla y la ventana, y el número de columnas que se pueden `OneColumn` `TwoColumns` `ThreeColumns` mostrar.
+    - `OWAView`( `MailboxEnums.OWAView` o cadena): enumeración (o literal de cadena) que representa la vista actual de Outlook en la Web. Si la aplicación host no está Outlook en la Web, el acceso a esta propiedad da como resultado undefined. Outlook en la Web tiene tres vistas ( - se muestra cuando la pantalla es estrecha, - se muestra cuando la pantalla es más ancha y - se muestra cuando la pantalla es ancha) que corresponden al ancho de la pantalla y la ventana, y el número de columnas que se pueden `OneColumn` `TwoColumns` `ThreeColumns` mostrar.
 
 
     Hay más información en [Office. Diagnósticos](xref:outlook!Office.Diagnostics:interface)<!-- -->.
@@ -148,7 +148,7 @@ properties:
     En el modo de redacción debe llamar al método `saveAsync` antes de poder usar el miembro `restUrl`. La aplicación debe tener `ReadWriteItem` permisos para llamar al `saveAsync` método.
 
 
-    Sin embargo, en escenarios delegados o compartidos, debe usar la propiedad del objeto (introducida en el conjunto de requisitos `targetRestUrl` `SharedProperties` 1.8). Para obtener más información, consulte el [artículo de acceso delegado.](https://docs.microsoft.com/office/dev/add-ins/outlook/delegate-access)
+    Sin embargo, en escenarios compartidos o delegados, debe usar la propiedad del objeto SharedProperties (introducido en el conjunto de requisitos `targetRestUrl` 1.8). [](https://docs.microsoft.com/javascript/api/outlook/office.sharedproperties?view=outlook-js-1.8) Para obtener más información, consulte el [artículo de acceso delegado.](https://docs.microsoft.com/office/dev/add-ins/outlook/delegate-access)
 
 
     \[[Conjunto de API: Buzón 1.5](/office/dev/add-ins/reference/requirement-sets/outlook-api-requirement-sets)\]
@@ -350,10 +350,10 @@ methods:
     Obtiene un diccionario con información de tiempo en el tiempo del cliente local.
 
 
-    Las fechas y horas usadas por una aplicación de correo Outlook en la web o los clientes de escritorio pueden usar diferentes zonas horarias. Outlook la zona horaria del equipo cliente; Outlook en la web usa la zona horaria establecida en el Centro Exchange administración (EAC). Debería tratar los valores de fecha y hora de modo que los valores que aparezcan en la interfaz de usuario sean siempre coherentes con la zona horaria que el usuario espera.
+    Las fechas y horas usadas por una aplicación de correo para Outlook en la Web o clientes de escritorio pueden usar diferentes zonas horarias. Outlook la zona horaria del equipo cliente; Outlook en la Web la zona horaria establecida en el Centro Exchange administración (EAC). Debería tratar los valores de fecha y hora de modo que los valores que aparezcan en la interfaz de usuario sean siempre coherentes con la zona horaria que el usuario espera.
 
 
-    Si la aplicación de correo se ejecuta en Outlook clientes de escritorio, el método devolverá un objeto dictionary con los valores establecidos en la zona horaria del equipo `convertToLocalClientTime` cliente. Si la aplicación de correo se ejecuta en Outlook en la web, el método devolverá un objeto dictionary con los valores establecidos en la zona horaria especificada en `convertToLocalClientTime` el EAC.
+    Si la aplicación de correo se ejecuta en Outlook clientes de escritorio, el método devolverá un objeto dictionary con los valores establecidos en la zona horaria del equipo `convertToLocalClientTime` cliente. Si la aplicación de correo se ejecuta en Outlook en la Web, el método devolverá un objeto dictionary con los valores establecidos en la zona horaria especificada `convertToLocalClientTime` en el EAC.
   remarks: >-
     **[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadItem`
 
@@ -467,7 +467,7 @@ methods:
     En Outlook mac, puede usar este método para mostrar una sola cita que no forma parte de una serie periódica o la cita maestra de una serie periódica. Sin embargo, no puede mostrar una instancia de la serie porque no puede tener acceso a las propiedades (incluido el identificador de elemento) de instancias de una serie periódica.
 
 
-    En Outlook web, este método abre el formulario especificado solo si el cuerpo del formulario es menor o igual que 32K caracteres.
+    En Outlook en la Web, este método abre el formulario especificado solo si el cuerpo del formulario es menor o igual que 32K caracteres.
 
 
     Si el identificador de elemento especificado no identifica una cita existente, se abre un panel en blanco en el equipo o dispositivo cliente y no se devuelve ningún mensaje de error.
@@ -515,7 +515,7 @@ methods:
     El método `displayMessageForm` abre un mensaje existente en una nueva ventana del escritorio o en un cuadro de diálogo en los dispositivos móviles.
 
 
-    En Outlook web, este método abre el formulario especificado solo si el cuerpo del formulario es menor o igual que 32K caracteres.
+    En Outlook en la Web, este método abre el formulario especificado solo si el cuerpo del formulario es menor o igual que 32K caracteres.
 
 
     Si el identificador de elemento especificado no identifica un mensaje existente, no se mostrará ningún mensaje en el equipo cliente y no se devolverá ningún mensaje de error.
@@ -566,7 +566,7 @@ methods:
     El método `displayNewAppointmentForm` abre un formulario que permite al usuario crear una nueva cita o reunión. Si se especifican parámetros, los campos de formulario de cita se rellenan automáticamente con el contenido de los parámetros.
 
 
-    En Outlook web, este método siempre muestra un formulario con un campo de asistentes. Si no especifica ningún asistente como argumento de entrada, el método muestra un formulario con un botón **Guardar**. Si ha especificado asistentes, el formulario incluirá a los asistentes y un botón **Enviar**.
+    En Outlook en la Web, este método siempre muestra un formulario con un campo de asistentes. Si no especifica ningún asistente como argumento de entrada, el método muestra un formulario con un botón **Guardar**. Si ha especificado asistentes, el formulario incluirá a los asistentes y un botón **Enviar**.
 
 
     En el Outlook cliente enriquecido y Outlook RT, si especifica los asistentes o recursos en el`requiredAttendees`<!-- -->, `optionalAttendees`<!-- -->, o `resources` parámetro, este método muestra un formulario de reunión con un **botón Enviar.** Si no especifica ningún destinatario, este método muestra un formulario de cita con un **botón Guardar &amp;** cerrar.
@@ -882,7 +882,7 @@ methods:
     `<?xml version="1.0" encoding="iso-8859-1"?>`
 
 
-    No es necesario establecer el valor de codificación si la aplicación de correo se ejecuta en Outlook en la web. Puedes determinar si la aplicación de correo se está ejecutando en Outlook o Outlook en la web mediante la `mailbox.diagnostics.hostName` propiedad. Puede determinar qué versión de Outlook se está ejecutando mediante la `mailbox.diagnostics.hostVersion` propiedad.
+    No es necesario establecer el valor de codificación si la aplicación de correo se ejecuta en Outlook en la web. Puedes determinar si la aplicación de correo se está ejecutando Outlook o Outlook en la Web mediante la `mailbox.diagnostics.hostName` propiedad. Puede determinar qué versión de Outlook se está ejecutando mediante la `mailbox.diagnostics.hostVersion` propiedad.
   remarks: >-
     **[Nivel mínimo de permisos:](https://docs.microsoft.com/office/dev/add-ins/outlook/understanding-outlook-add-in-permissions) <!-- -->**`ReadWriteMailbox`
 
@@ -1075,9 +1075,9 @@ methods:
       type: void
       description: ''
 metadata:
-  ms.openlocfilehash: 19d5f3f562c6924e602528879fd082bd9995a152
-  ms.sourcegitcommit: 1e0143ae4add09dbe22b0080d22fb25101757fba
+  ms.openlocfilehash: 8c539a8b9544427005978c7eab3fbc08679d1e52
+  ms.sourcegitcommit: 319b8cca7d91e51669407633dacc02ea6e4f4338
   ms.translationtype: MT
   ms.contentlocale: es-ES
-  ms.lasthandoff: 06/11/2021
-  ms.locfileid: "52894940"
+  ms.lasthandoff: 06/18/2021
+  ms.locfileid: "53009879"
