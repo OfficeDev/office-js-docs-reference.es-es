@@ -6,7 +6,7 @@
 |[Chart](/javascript/api/excel/excel.chart)|[categoryLabelLevel](/javascript/api/excel/excel.chart#categorylabellevel)|Especifica una constante de enumeración de nivel de etiqueta de categoría de gráfico, que hace referencia al nivel de las etiquetas de categoría de origen.|
 ||[displayBlanksAs](/javascript/api/excel/excel.chart#displayblanksas)|Especifica la forma en que se trazan las celdas en blanco en un gráfico.|
 ||[plotBy](/javascript/api/excel/excel.chart#plotby)|Especifica la manera en que las columnas o las filas se usan como series de datos en el gráfico.|
-||[plotVisibleOnly](/javascript/api/excel/excel.chart#plotvisibleonly)|True si solo se trazan las celdas visibles.False si se trazan tanto las celdas visibles como las ocultas.|
+||[plotVisibleOnly](/javascript/api/excel/excel.chart#plotvisibleonly)|True si solo se trazan las celdas visibles.|
 ||[onActivated](/javascript/api/excel/excel.chart#onactivated)|Se produce cuando se activa el gráfico.|
 ||[onDeactivated](/javascript/api/excel/excel.chart#ondeactivated)|Se produce cuando se desactiva el gráfico.|
 ||[plotArea](/javascript/api/excel/excel.chart#plotarea)|Representa el área de trazado del gráfico.|
@@ -89,7 +89,7 @@
 ||[dataLabels](/javascript/api/excel/excel.chartseries#datalabels)|Representa una colección de todas las etiquetas de datos de la serie.|
 ||[secondPlotSize](/javascript/api/excel/excel.chartseries#secondplotsize)|Especifica el tamaño de la sección secundaria de un gráfico circular circular o de una barra de gráfico circular, como un porcentaje del tamaño del gráfico circular principal.|
 ||[splitType](/javascript/api/excel/excel.chartseries#splittype)|Especifica la forma en que se dividen las dos secciones de un gráfico circular o de una barra circular.|
-||[varyByCategories](/javascript/api/excel/excel.chartseries#varybycategories)|True si Excel asigna un color o patrón distintos a cada marcador de datos.|
+||[varyByCategories](/javascript/api/excel/excel.chartseries#varybycategories)|True si Excel asigna un color o patrón diferentes a cada marcador de datos.|
 |[ChartTrendline](/javascript/api/excel/excel.charttrendline)|[backwardPeriod](/javascript/api/excel/excel.charttrendline#backwardperiod)|Representa el número de periodos que la línea de tendencia se extiende hacia atrás.|
 ||[forwardPeriod](/javascript/api/excel/excel.charttrendline#forwardperiod)|Representa el número de periodos que la línea de tendencia se extiende hacia delante.|
 ||[etiqueta](/javascript/api/excel/excel.charttrendline#label)|Representa la etiqueta de una línea de tendencia del gráfico.|
@@ -119,12 +119,12 @@
 ||[setToDefault()](/javascript/api/excel/excel.datapivothierarchy#settodefault--)|Restablece DataPivotHierarchy a sus valores predeterminados.|
 ||[showAs](/javascript/api/excel/excel.datapivothierarchy#showas)|Especifica si los datos deben mostrarse como un cálculo de resumen específico.|
 ||[summarizeBy](/javascript/api/excel/excel.datapivothierarchy#summarizeby)|Especifica si se muestran todos los elementos de DataPivotHierarchy.|
-|[DataPivotHierarchyCollection](/javascript/api/excel/excel.datapivothierarchycollection)|[add(pivotHierarchy: Excel.PivotHierarchy)](/javascript/api/excel/excel.datapivothierarchycollection#add-pivothierarchy-)|Agrega PivotHierarchy al eje actual.|
+|[DataPivotHierarchyCollection](/javascript/api/excel/excel.datapivothierarchycollection)|[add(pivotHierarchy: Excel. PivotHierarchy)](/javascript/api/excel/excel.datapivothierarchycollection#add-pivothierarchy-)|Agrega PivotHierarchy al eje actual.|
 ||[getCount()](/javascript/api/excel/excel.datapivothierarchycollection#getcount--)|Obtiene el número de jerarquías dinámicas en la colección.|
 ||[getItem(name: string)](/javascript/api/excel/excel.datapivothierarchycollection#getitem-name-)|Obtiene un DataPivotHierarchy por su nombre o identificador.|
 ||[getItemOrNullObject(name: string)](/javascript/api/excel/excel.datapivothierarchycollection#getitemornullobject-name-)|Obtiene una DataPivotHierarchy por su nombre.|
 ||[items](/javascript/api/excel/excel.datapivothierarchycollection#items)|Obtiene los elementos secundarios cargados en esta colección.|
-||[remove(DataPivotHierarchy: Excel.DataPivotHierarchy)](/javascript/api/excel/excel.datapivothierarchycollection#remove-datapivothierarchy-)|Elimina PivotHierarchy del eje actual.|
+||[remove(DataPivotHierarchy: Excel. DataPivotHierarchy)](/javascript/api/excel/excel.datapivothierarchycollection#remove-datapivothierarchy-)|Elimina PivotHierarchy del eje actual.|
 |[DataValidation](/javascript/api/excel/excel.datavalidation)|[clear()](/javascript/api/excel/excel.datavalidation#clear--)|Borra la validación de datos del rango actual.|
 ||[errorAlert](/javascript/api/excel/excel.datavalidation#erroralert)|Mensaje de error cuando el usuario escribe datos no válidos.|
 ||[ignoreBlanks](/javascript/api/excel/excel.datavalidation#ignoreblanks)|Especifica si la validación de datos se realizará en celdas en blanco.|
@@ -132,17 +132,17 @@
 ||[type](/javascript/api/excel/excel.datavalidation#type)|Tipo de validación de datos, vea `Excel.DataValidationType` para obtener más información.|
 ||[válido](/javascript/api/excel/excel.datavalidation#valid)|Representa si todos los valores de celda son válidos de acuerdo con las reglas de validación de datos.|
 ||[regla](/javascript/api/excel/excel.datavalidation#rule)|Regla de validación de datos que contiene diferentes tipos de criterios de validación de datos.|
-|[DataValidationErrorAlert](/javascript/api/excel/excel.datavalidationerroralert)|[mensaje](/javascript/api/excel/excel.datavalidationerroralert#message)|Representa el mensaje de alerta de error.|
+|[DataValidationErrorAlert](/javascript/api/excel/excel.datavalidationerroralert)|[message](/javascript/api/excel/excel.datavalidationerroralert#message)|Representa el mensaje de alerta de error.|
 ||[showAlert](/javascript/api/excel/excel.datavalidationerroralert#showalert)|Especifica si se va a mostrar un cuadro de diálogo de alerta de error cuando un usuario escribe datos no válidos.|
 ||[estilo](/javascript/api/excel/excel.datavalidationerroralert#style)|El tipo de alerta de validación de datos, consulte `Excel.DataValidationAlertStyle` para obtener más información.|
 ||[title](/javascript/api/excel/excel.datavalidationerroralert#title)|Representa el título del cuadro de diálogo alerta de error.|
-|[DataValidationPrompt](/javascript/api/excel/excel.datavalidationprompt)|[mensaje](/javascript/api/excel/excel.datavalidationprompt#message)|Especifica el mensaje del símbolo del sistema.|
+|[DataValidationPrompt](/javascript/api/excel/excel.datavalidationprompt)|[message](/javascript/api/excel/excel.datavalidationprompt#message)|Especifica el mensaje del símbolo del sistema.|
 ||[showPrompt](/javascript/api/excel/excel.datavalidationprompt#showprompt)|Especifica si se muestra un mensaje cuando un usuario selecciona una celda con validación de datos.|
 ||[title](/javascript/api/excel/excel.datavalidationprompt#title)|Especifica el título del símbolo del sistema.|
 |[DataValidationRule](/javascript/api/excel/excel.datavalidationrule)|[personalizado](/javascript/api/excel/excel.datavalidationrule#custom)|Criterios de validación de datos personalizados.|
 ||[date](/javascript/api/excel/excel.datavalidationrule#date)|Criterios de validación de datos de fecha.|
 ||[decimal](/javascript/api/excel/excel.datavalidationrule#decimal)|Criterios de validación de datos decimales.|
-||[list](/javascript/api/excel/excel.datavalidationrule#list)|Criterios de validación de datos de lista.|
+||[lista](/javascript/api/excel/excel.datavalidationrule#list)|Criterios de validación de datos de lista.|
 ||[textLength](/javascript/api/excel/excel.datavalidationrule#textlength)|Criterios de validación de datos de longitud de texto.|
 ||[time](/javascript/api/excel/excel.datavalidationrule#time)|Criterios de validación de datos de tiempo.|
 ||[wholeNumber](/javascript/api/excel/excel.datavalidationrule#wholenumber)|Criterios de validación de datos de números enteros.|
@@ -155,12 +155,12 @@
 ||[fields](/javascript/api/excel/excel.filterpivothierarchy#fields)|Devuelve los PivotFields asociados con FilterPivotHierarchy.|
 ||[id](/javascript/api/excel/excel.filterpivothierarchy#id)|Id. de FilterPivotHierarchy.|
 ||[setToDefault()](/javascript/api/excel/excel.filterpivothierarchy#settodefault--)|Restablece FilterPivotHierarchy a sus valores predeterminados.|
-|[FilterPivotHierarchyCollection](/javascript/api/excel/excel.filterpivothierarchycollection)|[add(pivotHierarchy: Excel.PivotHierarchy)](/javascript/api/excel/excel.filterpivothierarchycollection#add-pivothierarchy-)|Agrega PivotHierarchy al eje actual.|
+|[FilterPivotHierarchyCollection](/javascript/api/excel/excel.filterpivothierarchycollection)|[add(pivotHierarchy: Excel. PivotHierarchy)](/javascript/api/excel/excel.filterpivothierarchycollection#add-pivothierarchy-)|Agrega PivotHierarchy al eje actual.|
 ||[getCount()](/javascript/api/excel/excel.filterpivothierarchycollection#getcount--)|Obtiene el número de jerarquías dinámicas en la colección.|
 ||[getItem(name: string)](/javascript/api/excel/excel.filterpivothierarchycollection#getitem-name-)|Obtiene un FilterPivotHierarchy por su nombre o identificador.|
 ||[getItemOrNullObject(name: string)](/javascript/api/excel/excel.filterpivothierarchycollection#getitemornullobject-name-)|Obtiene una FilterPivotHierarchy por su nombre.|
 ||[items](/javascript/api/excel/excel.filterpivothierarchycollection#items)|Obtiene los elementos secundarios cargados en esta colección.|
-||[remove(filterPivotHierarchy: Excel.FilterPivotHierarchy)](/javascript/api/excel/excel.filterpivothierarchycollection#remove-filterpivothierarchy-)|Elimina PivotHierarchy del eje actual.|
+||[remove(filterPivotHierarchy: Excel. FilterPivotHierarchy)](/javascript/api/excel/excel.filterpivothierarchycollection#remove-filterpivothierarchy-)|Elimina PivotHierarchy del eje actual.|
 |[ListDataValidation](/javascript/api/excel/excel.listdatavalidation)|[inCellDropDown](/javascript/api/excel/excel.listdatavalidation#incelldropdown)|Especifica si se va a mostrar la lista en una celda desplegable.|
 ||[source](/javascript/api/excel/excel.listdatavalidation#source)|Origen de la lista de validación de datos|
 |[PivotField](/javascript/api/excel/excel.pivotfield)|[name](/javascript/api/excel/excel.pivotfield#name)|Nombre de PivotField.|
@@ -211,12 +211,12 @@
 ||[fields](/javascript/api/excel/excel.rowcolumnpivothierarchy#fields)|Devuelve los PivotFields asociados con la RowColumnPivotHierarchy.|
 ||[id](/javascript/api/excel/excel.rowcolumnpivothierarchy#id)|Id. de RowColumnPivotHierarchy.|
 ||[setToDefault()](/javascript/api/excel/excel.rowcolumnpivothierarchy#settodefault--)|Restablece la RowColumnPivotHierarchy a sus valores predeterminados.|
-|[RowColumnPivotHierarchyCollection](/javascript/api/excel/excel.rowcolumnpivothierarchycollection)|[add(pivotHierarchy: Excel.PivotHierarchy)](/javascript/api/excel/excel.rowcolumnpivothierarchycollection#add-pivothierarchy-)|Agrega PivotHierarchy al eje actual.|
+|[RowColumnPivotHierarchyCollection](/javascript/api/excel/excel.rowcolumnpivothierarchycollection)|[add(pivotHierarchy: Excel. PivotHierarchy)](/javascript/api/excel/excel.rowcolumnpivothierarchycollection#add-pivothierarchy-)|Agrega PivotHierarchy al eje actual.|
 ||[getCount()](/javascript/api/excel/excel.rowcolumnpivothierarchycollection#getcount--)|Obtiene el número de jerarquías dinámicas en la colección.|
 ||[getItem(name: string)](/javascript/api/excel/excel.rowcolumnpivothierarchycollection#getitem-name-)|Obtiene un RowColumnPivotHierarchy por su nombre o identificador.|
 ||[getItemOrNullObject(name: string)](/javascript/api/excel/excel.rowcolumnpivothierarchycollection#getitemornullobject-name-)|Obtiene una RowColumnPivotHierarchy por su nombre.|
 ||[items](/javascript/api/excel/excel.rowcolumnpivothierarchycollection#items)|Obtiene los elementos secundarios cargados en esta colección.|
-||[remove(rowColumnPivotHierarchy: Excel.RowColumnPivotHierarchy)](/javascript/api/excel/excel.rowcolumnpivothierarchycollection#remove-rowcolumnpivothierarchy-)|Elimina PivotHierarchy del eje actual.|
+||[remove(rowColumnPivotHierarchy: Excel. RowColumnPivotHierarchy)](/javascript/api/excel/excel.rowcolumnpivothierarchycollection#remove-rowcolumnpivothierarchy-)|Elimina PivotHierarchy del eje actual.|
 |[Tiempo de ejecución](/javascript/api/excel/excel.runtime)|[enableEvents](/javascript/api/excel/excel.runtime#enableevents)|Alterna los eventos de JavaScript en el panel de tareas o el complemento de contenido actual.|
 |[ShowAsRule](/javascript/api/excel/excel.showasrule)|[baseField](/javascript/api/excel/excel.showasrule#basefield)|El campo dinámico en el que se basa el cálculo, si corresponde `ShowAs` según el `ShowAsCalculation` tipo, de lo contrario `null` .|
 ||[baseItem](/javascript/api/excel/excel.showasrule#baseitem)|Elemento en el que se basa el cálculo, si corresponde `ShowAs` según el `ShowAsCalculation` tipo, de lo contrario `null` .|

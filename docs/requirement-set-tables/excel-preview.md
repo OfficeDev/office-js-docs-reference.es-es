@@ -1,6 +1,8 @@
 | Clase | Campos | Descripción |
 |:---|:---|:---|
 |[AutoFilter](/javascript/api/excel/excel.autofilter)|[clearColumnCriteria(columnIndex: number)](/javascript/api/excel/excel.autofilter#clearcolumncriteria-columnindex-)|Borra los criterios de filtro de AutoFilter.|
+|[ChangeDirectionState](/javascript/api/excel/excel.changedirectionstate)|[deleteShiftDirection](/javascript/api/excel/excel.changedirectionstate#deleteshiftdirection)|Representa la dirección (como hacia arriba o hacia la izquierda) que las celdas restantes cambiarán cuando se elimine una celda o celda.|
+||[insertShiftDirection](/javascript/api/excel/excel.changedirectionstate#insertshiftdirection)|Representa la dirección (por ejemplo, hacia abajo o hacia la derecha) que las celdas existentes cambiarán cuando se inserte una nueva celda o celda.|
 |[Comment](/javascript/api/excel/excel.comment)|[assignTask(assignee: Identity)](/javascript/api/excel/excel.comment#assigntask-assignee-)|Asigna la tarea adjunta al comentario al usuario dado como usuario asignado.|
 ||[getTask()](/javascript/api/excel/excel.comment#gettask--)|Obtiene la tarea asociada a este comentario.|
 ||[getTaskOrNullObject()](/javascript/api/excel/excel.comment#gettaskornullobject--)|Obtiene la tarea asociada a este comentario.|
@@ -45,8 +47,6 @@
 ||[items](/javascript/api/excel/excel.documenttaskcollection#items)|Obtiene los elementos secundarios cargados en esta colección.|
 |[DocumentTaskSchedule](/javascript/api/excel/excel.documenttaskschedule)|[dueDateTime](/javascript/api/excel/excel.documenttaskschedule#duedatetime)|Obtiene la fecha y hora en que vence la tarea.|
 ||[startDateTime](/javascript/api/excel/excel.documenttaskschedule#startdatetime)|Obtiene la fecha y hora en que debe iniciarse la tarea.|
-|[FormulaChangedEventDetail](/javascript/api/excel/excel.formulachangedeventdetail)|[cellAddress](/javascript/api/excel/excel.formulachangedeventdetail#celladdress)|Dirección de la celda que contiene la fórmula modificada.|
-||[previousFormula](/javascript/api/excel/excel.formulachangedeventdetail#previousformula)|Representa la fórmula anterior, antes de cambiarla.|
 |[GroupShapeCollection](/javascript/api/excel/excel.groupshapecollection)|[getItemOrNullObject(key: string)](/javascript/api/excel/excel.groupshapecollection#getitemornullobject-key-)|Obtiene una forma con su nombre o identificador.|
 |[Identity](/javascript/api/excel/excel.identity)|[displayName](/javascript/api/excel/excel.identity#displayname)|Representa el nombre para mostrar del usuario.|
 ||[email](/javascript/api/excel/excel.identity#email)|Representa la dirección de correo del usuario|
@@ -60,9 +60,6 @@
 |[IdentityEntity](/javascript/api/excel/excel.identityentity)|[displayName](/javascript/api/excel/excel.identityentity#displayname)|Representa el nombre para mostrar del usuario.|
 ||[email](/javascript/api/excel/excel.identityentity#email)|Representa la dirección de correo del usuario|
 ||[id](/javascript/api/excel/excel.identityentity#id)|Representa el identificador único del usuario.|
-|[InsertWorksheetOptions](/javascript/api/excel/excel.insertworksheetoptions)|[positionType](/javascript/api/excel/excel.insertworksheetoptions#positiontype)|Posición de inserción, en el libro actual, de las nuevas hojas de cálculo.|
-||[relativeTo](/javascript/api/excel/excel.insertworksheetoptions#relativeto)|Hoja de cálculo del libro actual al que se hace referencia para el `WorksheetPositionType` parámetro.|
-||[sheetNamesToInsert](/javascript/api/excel/excel.insertworksheetoptions#sheetnamestoinsert)|Los nombres de las hojas de cálculo individuales que se insertarán.|
 |[LinkedDataType](/javascript/api/excel/excel.linkeddatatype)|[dataProvider](/javascript/api/excel/excel.linkeddatatype#dataprovider)|Nombre del proveedor de datos para el tipo de datos vinculado.|
 ||[lastRefreshed](/javascript/api/excel/excel.linkeddatatype#lastrefreshed)|Fecha y hora de la zona horaria local desde que se abrió el libro cuando se actualizó por última vez el tipo de datos vinculado.|
 ||[name](/javascript/api/excel/excel.linkeddatatype#name)|Nombre del tipo de datos vinculado.|
@@ -81,22 +78,21 @@
 ||[getItemOrNullObject(key: number)](/javascript/api/excel/excel.linkeddatatypecollection#getitemornullobject-key-)|Obtiene un tipo de datos vinculado por identificador.|
 ||[items](/javascript/api/excel/excel.linkeddatatypecollection#items)|Obtiene los elementos secundarios cargados en esta colección.|
 ||[requestRefreshAll()](/javascript/api/excel/excel.linkeddatatypecollection#requestrefreshall--)|Realiza una solicitud para actualizar todos los tipos de datos vinculados de la colección.|
+|[LinkedWorkbook](/javascript/api/excel/excel.linkedworkbook)|[breakLinks()](/javascript/api/excel/excel.linkedworkbook#breaklinks--)|Realiza una solicitud para romper los vínculos que apuntan al libro vinculado.|
+||[id](/javascript/api/excel/excel.linkedworkbook#id)|Dirección URL original que apunta al libro vinculado.|
+||[refresh()](/javascript/api/excel/excel.linkedworkbook#refresh--)|Realiza una solicitud para actualizar los datos recuperados del libro vinculado.|
+|[LinkedWorkbookCollection](/javascript/api/excel/excel.linkedworkbookcollection)|[breakAllLinks()](/javascript/api/excel/excel.linkedworkbookcollection#breakalllinks--)|Rompe todos los vínculos a los libros vinculados.|
+||[getItem(key: string)](/javascript/api/excel/excel.linkedworkbookcollection#getitem-key-)|Obtiene información sobre un libro vinculado por su dirección URL.|
+||[getItemOrNullObject(key: string)](/javascript/api/excel/excel.linkedworkbookcollection#getitemornullobject-key-)|Obtiene información sobre un libro vinculado por su dirección URL.|
+||[items](/javascript/api/excel/excel.linkedworkbookcollection#items)|Obtiene los elementos secundarios cargados en esta colección.|
+||[refreshAll()](/javascript/api/excel/excel.linkedworkbookcollection#refreshall--)|Realiza una solicitud para actualizar todos los vínculos del libro.|
+||[workbookLinksRefreshMode](/javascript/api/excel/excel.linkedworkbookcollection#workbooklinksrefreshmode)|Representa el modo de actualización de los vínculos del libro.|
 |[NamedSheetViewCollection](/javascript/api/excel/excel.namedsheetviewcollection)|[getItemOrNullObject(key: string)](/javascript/api/excel/excel.namedsheetviewcollection#getitemornullobject-key-)|Obtiene una vista de hoja con su nombre.|
-|[PivotLayout](/javascript/api/excel/excel.pivotlayout)|[altTextDescription](/javascript/api/excel/excel.pivotlayout#alttextdescription)|La descripción de texto alternativo de la tabla dinámica.|
-||[altTextTitle](/javascript/api/excel/excel.pivotlayout#alttexttitle)|El título de texto alternativo de la tabla dinámica.|
-||[displayBlankLineAfterEachItem(display: boolean)](/javascript/api/excel/excel.pivotlayout#displayblanklineaftereachitem-display-)|Establece si se va a mostrar una línea en blanco después de cada elemento.|
-||[emptyCellText](/javascript/api/excel/excel.pivotlayout#emptycelltext)|Texto que se rellena automáticamente en cualquier celda vacía de la tabla dinámica si `fillEmptyCells == true` .|
-||[fillEmptyCells](/javascript/api/excel/excel.pivotlayout#fillemptycells)|Especifica si las celdas vacías de la tabla dinámica deben rellenarse con `emptyCellText` .|
-||[getCell(dataHierarchy: DataPivotHierarchy \| string, rowItems: Array<PivotItem \| string>, columnItems: Array<PivotItem \| string>)](/javascript/api/excel/excel.pivotlayout#getcell-datahierarchy--rowitems--columnitems-)|Obtiene una única celda de la tabla dinámica en función de una jerarquía de datos y de los elementos de fila y columna de sus respectivas jerarquías.|
+|[PivotLayout](/javascript/api/excel/excel.pivotlayout)|[getCell(dataHierarchy: DataPivotHierarchy \| string, rowItems: Array<PivotItem \| string>, columnItems: Array<PivotItem \| string>)](/javascript/api/excel/excel.pivotlayout#getcell-datahierarchy--rowitems--columnitems-)|Obtiene una única celda de la tabla dinámica en función de una jerarquía de datos y de los elementos de fila y columna de sus respectivas jerarquías.|
 ||[pivotStyle](/javascript/api/excel/excel.pivotlayout#pivotstyle)|Estilo aplicado a la tabla dinámica.|
-||[repeatAllItemLabels(repeatLabels: boolean)](/javascript/api/excel/excel.pivotlayout#repeatallitemlabels-repeatlabels-)|Establece el valor "repetir todas las etiquetas de elementos" en todos los campos de la tabla dinámica.|
 ||[setStyle(style: string \| PivotTableStyle \| BuiltInPivotTableStyle)](/javascript/api/excel/excel.pivotlayout#setstyle-style-)|Establece el estilo aplicado a la tabla dinámica.|
-||[showFieldHeaders](/javascript/api/excel/excel.pivotlayout#showfieldheaders)|Especifica si la tabla dinámica muestra encabezados de campo (títulos de campo y listas desplegables de filtro).|
-|[PivotTable](/javascript/api/excel/excel.pivottable)|[refreshOnOpen](/javascript/api/excel/excel.pivottable#refreshonopen)|Especifica si la tabla dinámica se actualiza cuando se abre el libro.|
 |[PivotTableScopedCollection](/javascript/api/excel/excel.pivottablescopedcollection)|[getFirstOrNullObject()](/javascript/api/excel/excel.pivottablescopedcollection#getfirstornullobject--)|Obtiene la primera tabla dinámica de la colección.|
 |[Range](/javascript/api/excel/excel.range)|[getDependents()](/javascript/api/excel/excel.range#getdependents--)|Devuelve un objeto que representa el rango que contiene todos los dependientes de una celda en la misma hoja de cálculo `WorkbookRangeAreas` o en varias hojas de cálculo.|
-||[getDirectDependents()](/javascript/api/excel/excel.range#getdirectdependents--)|Devuelve un objeto que representa el rango que contiene todos los dependientes directos de una celda en la misma hoja de cálculo `WorkbookRangeAreas` o en varias hojas de cálculo.|
-||[getMergedAreasOrNullObject()](/javascript/api/excel/excel.range#getmergedareasornullobject--)|Devuelve un objeto RangeAreas que representa las áreas combinadas de este rango.|
 ||[getPrecedents()](/javascript/api/excel/excel.range#getprecedents--)|Devuelve un objeto que representa el rango que contiene todos los precedentes de una celda en la misma hoja de cálculo `WorkbookRangeAreas` o en varias hojas de cálculo.|
 |[RefreshModeChangedEventArgs](/javascript/api/excel/excel.refreshmodechangedeventargs)|[refreshMode](/javascript/api/excel/excel.refreshmodechangedeventargs#refreshmode)|Modo de actualización del tipo de datos vinculado.|
 ||[serviceId](/javascript/api/excel/excel.refreshmodechangedeventargs#serviceid)|Identificador único del objeto cuyo modo de actualización se ha cambiado.|
@@ -122,29 +118,22 @@
 ||[type](/javascript/api/excel/excel.tablefilteredeventargs#type)|Obtiene el tipo del evento.|
 ||[worksheetId](/javascript/api/excel/excel.tablefilteredeventargs#worksheetid)|Obtiene el identificador de la hoja de cálculo que contiene la tabla.|
 |[TableScopedCollection](/javascript/api/excel/excel.tablescopedcollection)|[getItemOrNullObject(key: string)](/javascript/api/excel/excel.tablescopedcollection#getitemornullobject-key-)|Obtener una tabla por nombre o identificador.|
-|[Workbook](/javascript/api/excel/excel.workbook)|[insertWorksheetsFromBase64(base64File: string, options?: Excel. InsertWorksheetOptions)](/javascript/api/excel/excel.workbook#insertworksheetsfrombase64-base64file--options-)|Inserta las hojas de cálculo especificadas de un libro de origen en el libro actual.|
-||[linkedDataTypes](/javascript/api/excel/excel.workbook#linkeddatatypes)|Devuelve una colección de tipos de datos vinculados que forman parte del libro.|
-||[onActivated](/javascript/api/excel/excel.workbook#onactivated)|Se produce cuando se activa el libro.|
+|[Workbook](/javascript/api/excel/excel.workbook)|[linkedDataTypes](/javascript/api/excel/excel.workbook#linkeddatatypes)|Devuelve una colección de tipos de datos vinculados que forman parte del libro.|
+||[linkedWorkbooks](/javascript/api/excel/excel.workbook#linkedworkbooks)|Devuelve una colección de libros vinculados.|
 ||[tareas](/javascript/api/excel/excel.workbook#tasks)|Devuelve una colección de tareas que están presentes en el libro.|
 ||[showPivotFieldList](/javascript/api/excel/excel.workbook#showpivotfieldlist)|Especifica si el panel de lista de campos de la tabla dinámica se muestra en el nivel del libro.|
 ||[use1904DateSystem](/javascript/api/excel/excel.workbook#use1904datesystem)|True si el libro usa el sistema de fechas 1904.|
-|[WorkbookActivatedEventArgs](/javascript/api/excel/excel.workbookactivatedeventargs)|[type](/javascript/api/excel/excel.workbookactivatedeventargs#type)|Obtiene el tipo del evento.|
 |[Worksheet](/javascript/api/excel/excel.worksheet)|[onFiltered](/javascript/api/excel/excel.worksheet#onfiltered)|Se produce cuando se aplica un filtro en una hoja de cálculo específica.|
-||[onFormulaChanged](/javascript/api/excel/excel.worksheet#onformulachanged)|Se produce cuando se cambian una o más fórmulas en esta hoja de cálculo.|
 ||[onProtectionChanged](/javascript/api/excel/excel.worksheet#onprotectionchanged)|Se produce cuando se cambia el estado de protección de la hoja de cálculo.|
 ||[tabId](/javascript/api/excel/excel.worksheet#tabid)|Devuelve un valor que representa esta hoja de cálculo que puede leer Open Office XML.|
 ||[tareas](/javascript/api/excel/excel.worksheet#tasks)|Devuelve una colección de tareas que están presentes en la hoja de cálculo.|
-|[WorksheetChangedEventArgs](/javascript/api/excel/excel.worksheetchangedeventargs)|[triggerSource](/javascript/api/excel/excel.worksheetchangedeventargs#triggersource)|Representa el origen del desencadenador del evento.|
+|[WorksheetChangedEventArgs](/javascript/api/excel/excel.worksheetchangedeventargs)|[changeDirectionState](/javascript/api/excel/excel.worksheetchangedeventargs#changedirectionstate)|Representa un cambio en la dirección en que las celdas de una hoja de cálculo cambiarán cuando se elimine o inserte una celda o celda.|
+||[triggerSource](/javascript/api/excel/excel.worksheetchangedeventargs#triggersource)|Representa el origen del desencadenador del evento.|
 |[WorksheetCollection](/javascript/api/excel/excel.worksheetcollection)|[addFromBase64(base64File: string, sheetNamesToInsert?: string[], positionType?: Excel.WorksheetPositionType, relativeTo?: Worksheet \| string)](/javascript/api/excel/excel.worksheetcollection#addfrombase64-base64file--sheetnamestoinsert--positiontype--relativeto-)|Inserta las hojas de cálculo especificadas de un libro en el libro actual.|
 ||[onFiltered](/javascript/api/excel/excel.worksheetcollection#onfiltered)|Se produce cuando se aplica cualquier filtro de hoja de cálculo al libro.|
-||[onFormulaChanged](/javascript/api/excel/excel.worksheetcollection#onformulachanged)|Se produce cuando se cambian una o más fórmulas en cualquier hoja de cálculo de esta colección.|
 ||[onProtectionChanged](/javascript/api/excel/excel.worksheetcollection#onprotectionchanged)|Se produce cuando se cambia el estado de protección de la hoja de cálculo.|
 |[WorksheetFilteredEventArgs](/javascript/api/excel/excel.worksheetfilteredeventargs)|[type](/javascript/api/excel/excel.worksheetfilteredeventargs#type)|Obtiene el tipo del evento.|
 ||[worksheetId](/javascript/api/excel/excel.worksheetfilteredeventargs#worksheetid)|Obtiene el identificador de la hoja de cálculo en la que se aplica el filtro.|
-|[WorksheetFormulaChangedEventArgs](/javascript/api/excel/excel.worksheetformulachangedeventargs)|[formulaDetails](/javascript/api/excel/excel.worksheetformulachangedeventargs#formuladetails)|Obtiene una matriz `FormulaChangedEventDetail` de objetos, que contienen los detalles sobre todas las fórmulas modificadas.|
-||[source](/javascript/api/excel/excel.worksheetformulachangedeventargs#source)|Origen del evento.|
-||[type](/javascript/api/excel/excel.worksheetformulachangedeventargs#type)|Obtiene el tipo del evento.|
-||[worksheetId](/javascript/api/excel/excel.worksheetformulachangedeventargs#worksheetid)|Obtiene el identificador de la hoja de cálculo en la que cambió la fórmula.|
 |[WorksheetProtectionChangedEventArgs](/javascript/api/excel/excel.worksheetprotectionchangedeventargs)|[isProtected](/javascript/api/excel/excel.worksheetprotectionchangedeventargs#isprotected)|Obtiene el estado de protección actual de la hoja de cálculo.|
 ||[source](/javascript/api/excel/excel.worksheetprotectionchangedeventargs#source)|Origen del evento.|
 ||[type](/javascript/api/excel/excel.worksheetprotectionchangedeventargs#type)|Obtiene el tipo del evento.|
