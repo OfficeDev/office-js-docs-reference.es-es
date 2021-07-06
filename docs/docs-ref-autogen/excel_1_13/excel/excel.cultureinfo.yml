@@ -1,0 +1,157 @@
+### YamlMime:TSType
+name: Excel.CultureInfo
+uid: excel!Excel.CultureInfo:class
+package: excel!
+fullName: Excel.CultureInfo
+summary: >-
+  Proporciona información basada en la configuración de referencia cultural del sistema actual. Esto incluye los nombres de referencia cultural, el formato de número y otras configuraciones culturalmente dependientes.
+
+
+  \[[Conjunto de API: ExcelApi 1.11](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+remarks: ''
+isPreview: false
+isDeprecated: false
+type: class
+properties:
+- name: context
+  uid: excel!Excel.CultureInfo#context:member
+  package: excel!
+  fullName: context
+  summary: Contexto de solicitud asociado al objeto. Esto conecta el proceso del complemento con el Office proceso de la aplicación host.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type: <xref uid="excel!Excel.RequestContext:class" />
+- name: datetimeFormat
+  uid: excel!Excel.CultureInfo#datetimeFormat:member
+  package: excel!
+  fullName: datetimeFormat
+  summary: >-
+    Define el formato culturalmente adecuado para mostrar fecha y hora. Esto se basa en la configuración de referencia cultural del sistema actual.
+
+
+    \[[Conjunto de API: ExcelApi 1.12](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly datetimeFormat: Excel.DatetimeFormatInfo;'
+    return:
+      type: <xref uid="excel!Excel.DatetimeFormatInfo:class" />
+      description: "\n\n#### <a name=\"examples\"></a>Ejemplos\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/50-workbook/culture-info-date-time.yaml\nawait Excel.run(async (context) => {\n  context.application.cultureInfo.datetimeFormat.load([\n    \"longDatePattern\",\n    \"shortDatePattern\",\n    \"dateSeparator\",\n    \"longTimePattern\",\n    \"timeSeparator\"\n  ]);\n  await context.sync();\n\n  // Use the cultural settings API to retrieve the user's system date and time settings.\n  const systemLongDatePattern = context.application.cultureInfo.datetimeFormat.longDatePattern;\n  const systemShortDatePattern = context.application.cultureInfo.datetimeFormat.shortDatePattern;\n  const systemDateSeparator = context.application.cultureInfo.datetimeFormat.dateSeparator;\n  const systemLongTimePattern = context.application.cultureInfo.datetimeFormat.longTimePattern;\n  const systemTimeSeparator = context.application.cultureInfo.datetimeFormat.timeSeparator;\n\n  // Write the date and time settings in your table. \n  const sheet = context.workbook.worksheets.getActiveWorksheet();\n  const dateTimeData = sheet.getRange(\"A2:B6\");\n  dateTimeData.values = [\n    [\"Long date\", systemLongDatePattern], \n    [\"Short date\", systemShortDatePattern], \n    [\"Date separator\", systemDateSeparator], \n    [\"Long time format\", systemLongTimePattern],\n    [\"Time separator\", systemTimeSeparator]\n  ];\n\n  sheet.tables\n    .getItemAt(0)\n    .getRange()\n    .format.autofitColumns();\n\n  await context.sync();\n});\n```"
+- name: name
+  uid: excel!Excel.CultureInfo#name:member
+  package: excel!
+  fullName: name
+  summary: >-
+    Obtiene el nombre de la referencia cultural con el formato languagecode2-country/regioncode2 (por ejemplo, "zh-cn" o "en-us"). Esto se basa en la configuración actual del sistema.
+
+
+    \[[Conjunto de API: ExcelApi 1.11](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly name: string;'
+    return:
+      type: string
+- name: numberFormat
+  uid: excel!Excel.CultureInfo#numberFormat:member
+  package: excel!
+  fullName: numberFormat
+  summary: >-
+    Define el formato culturalmente adecuado para mostrar números. Esto se basa en la configuración de referencia cultural del sistema actual.
+
+
+    \[[Conjunto de API: ExcelApi 1.11](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly numberFormat: Excel.NumberFormatInfo;'
+    return:
+      type: <xref uid="excel!Excel.NumberFormatInfo:class" />
+methods:
+- name: load(options)
+  uid: excel!Excel.CultureInfo#load:member(1)
+  package: excel!
+  fullName: load(options)
+  summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar a `context.sync()` antes de leer las propiedades.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(options?: Excel.Interfaces.CultureInfoLoadOptions): Excel.CultureInfo;'
+    parameters:
+    - id: options
+      description: Proporciona opciones para las propiedades del objeto que se cargarán.
+      type: <xref uid="excel!Excel.Interfaces.CultureInfoLoadOptions:interface" />
+    return:
+      type: <xref uid="excel!Excel.CultureInfo:class" />
+      description: ''
+- name: load(propertyNames)
+  uid: excel!Excel.CultureInfo#load:member(2)
+  package: excel!
+  fullName: load(propertyNames)
+  summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar a `context.sync()` antes de leer las propiedades.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.CultureInfo;'
+    parameters:
+    - id: propertyNames
+      description: Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades que se cargarán.
+      type: string | string[]
+    return:
+      type: <xref uid="excel!Excel.CultureInfo:class" />
+      description: ''
+- name: load(propertyNamesAndPaths)
+  uid: excel!Excel.CultureInfo#load:member(3)
+  package: excel!
+  fullName: load(propertyNamesAndPaths)
+  summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar a `context.sync()` antes de leer las propiedades.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: >-
+      load(propertyNamesAndPaths?: {
+                  select?: string;
+                  expand?: string;
+              }): Excel.CultureInfo;
+    parameters:
+    - id: propertyNamesAndPaths
+      description: '`propertyNamesAndPaths.select` es una cadena delimitada por comas que especifica las propiedades que se cargarán y es una cadena delimitada por comas que especifica las propiedades de navegación que `propertyNamesAndPaths.expand` se cargarán.'
+      type: >-
+        {
+                    select?: string;
+                    expand?: string;
+                }
+    return:
+      type: <xref uid="excel!Excel.CultureInfo:class" />
+      description: ''
+- name: toJSON()
+  uid: excel!Excel.CultureInfo#toJSON:member(1)
+  package: excel!
+  fullName: toJSON()
+  summary: Invalida el método JavaScript para proporcionar resultados más útiles cuando se pasa un objeto API a `toJSON()``JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama `toJSON` al método del objeto que se pasa a él). Mientras que la Excel. El objeto CultureInfo es un objeto API, el método devuelve un objeto JavaScript sin formato `toJSON` (se escribe como`Excel.Interfaces.CultureInfoData`<!-- -->) que contiene copias superficiales de las propiedades secundarias cargadas del objeto original.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'toJSON(): Excel.Interfaces.CultureInfoData;'
+    return:
+      type: <xref uid="excel!Excel.Interfaces.CultureInfoData:interface" />
+      description: ''
+extends: <xref uid="office!OfficeExtension.ClientObject:class" />
+metadata:
+  ms.openlocfilehash: a926a8e94fd7e7eacbbac541ada5c8449e4aee71
+  ms.sourcegitcommit: 1f63896cdaa3b8ac3bfcb506161116a564538837
+  ms.translationtype: MT
+  ms.contentlocale: es-ES
+  ms.lasthandoff: 07/02/2021
+  ms.locfileid: "53264210"
