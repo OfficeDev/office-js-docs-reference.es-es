@@ -4,7 +4,7 @@ uid: excel!Excel.Worksheet:class
 package: excel!
 fullName: Excel.Worksheet
 summary: >-
-  Una hoja de cálculo de Excel es una cuadrícula de celdas. Puede contener datos, tablas, gráficos, etc. Para obtener más información sobre el modelo de objetos de hoja de cálculo, lea [Trabajar con hojas de cálculo con la API de JavaScript de Excel](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-worksheets)<!-- -->.
+  Una hoja de cálculo de Excel es una cuadrícula de celdas. Puede contener datos, tablas, gráficos, etc. Para obtener más información sobre el modelo de objetos de hoja de cálculo, lea Trabajar con hojas de cálculo mediante la API Excel [JavaScript](https://docs.microsoft.com/office/dev/add-ins/excel/excel-add-ins-worksheets)<!-- -->.
 
 
   \[[Conjunto de API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -66,7 +66,7 @@ properties:
   uid: excel!Excel.Worksheet#context:member
   package: excel!
   fullName: context
-  summary: Contexto de solicitud asociado al objeto. Esto conecta el proceso del complemento con el proceso de la aplicación host de Office.
+  summary: Contexto de solicitud asociado al objeto. Esto conecta el proceso del complemento con el Office proceso de la aplicación host.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -96,7 +96,7 @@ properties:
   package: excel!
   fullName: enableCalculation
   summary: >-
-    Determina si Excel debe volver a calcular la hoja de cálculo cuando sea necesario. True si Excel vuelve a calcular la hoja de cálculo cuando sea necesario. False si Excel no actualiza la hoja.
+    Determina si Excel debe volver a calcular la hoja de cálculo cuando sea necesario. True si Excel actualiza la hoja de cálculo cuando sea necesario. False si Excel no actualiza la hoja.
 
 
     \[[Conjunto de API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -666,7 +666,7 @@ methods:
   package: excel!
   fullName: getNext(visibleOnly)
   summary: >-
-    Obtiene la hoja de cálculo que sigue a esta. Si no hay hojas de cálculo siguientes a esta, este método producirá un error.
+    Obtiene la siguiente hoja de cálculo. Si no hay ninguna hoja de cálculo que siga a esta, este método producirá un error.
 
 
     \[[Conjunto de API: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -708,7 +708,7 @@ methods:
   package: excel!
   fullName: getPrevious(visibleOnly)
   summary: >-
-    Obtiene la hoja de cálculo que precede a esta. Si no hay hojas de cálculo anteriores, este método producirá un error.
+    Obtiene la hoja de cálculo anterior. Si no hay ninguna hoja de cálculo anterior, este método producirá un error.
 
 
     \[[Conjunto de API: ExcelApi 1.5](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
@@ -1014,7 +1014,7 @@ methods:
   uid: excel!Excel.Worksheet#toJSON:member(1)
   package: excel!
   fullName: toJSON()
-  summary: Invalida el método JavaScript para proporcionar resultados más útiles cuando se pasa un objeto API a `toJSON()``JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama `toJSON` al método del objeto que se pasa a él). Mientras que el objeto Excel.Worksheet original es un objeto API, el método devuelve un objeto JavaScript sin formato (con el tipo `toJSON` como `Excel.Interfaces.WorksheetData`<!-- -->) que contiene copias superficiales de las propiedades secundarias cargadas del objeto original.
+  summary: Invalida el método JavaScript para proporcionar resultados más útiles cuando se pasa un objeto API a `toJSON()``JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama `toJSON` al método del objeto que se pasa a él). Mientras que la Excel. Worksheet (objeto) es un objeto API, el método devuelve un objeto `toJSON` JavaScript sin formato (se escribe como`Excel.Interfaces.WorksheetData`<!-- -->) que contiene copias superficiales de las propiedades secundarias cargadas del objeto original.
   remarks: ''
   isPreview: false
   isDeprecated: false
@@ -1125,6 +1125,23 @@ events:
     content: 'readonly onFormatChanged: OfficeExtension.EventHandlers<Excel.WorksheetFormatChangedEventArgs>;'
     return:
       type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.WorksheetFormatChangedEventArgs:interface" />&gt;
+- name: onFormulaChanged
+  uid: excel!Excel.Worksheet#onFormulaChanged:member
+  package: excel!
+  fullName: onFormulaChanged
+  summary: >-
+    Se produce cuando se cambian una o más fórmulas en esta hoja de cálculo. Este evento es para cuando cambia la fórmula en sí, no el valor de datos resultante del cálculo de la fórmula.
+
+
+    \[[Conjunto de API: ExcelApi 1.13](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly onFormulaChanged: OfficeExtension.EventHandlers<Excel.WorksheetFormulaChangedEventArgs>;'
+    return:
+      type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.WorksheetFormulaChangedEventArgs:interface" />&gt;
+      description: "\n\n#### <a name=\"examples\"></a>Ejemplos\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/30-events/events-formula-changed.yaml\nawait Excel.run(async (context) => {\n  // Retrieve the worksheet named \"Sample\".\n  let sheet = context.workbook.worksheets.getItem(\"Sample\");\n  \n  // Register the formula changed event handler for this worksheet.\n  sheet.onFormulaChanged.add(formulaChangeHandler);\n  await context.sync();\n  \n  console.log(\"Registered a formula changed event handler for this worksheet.\");\n});\n```\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/30-events/events-formula-changed.yaml\nasync function formulaChangeHandler(event: Excel.WorksheetFormulaChangedEventArgs) {\n  await Excel.run(async (context) => {\n    // Retrieve details about the formula change event.\n    const cellAddress = event.formulaDetails[0].cellAddress;\n    const previousFormula = event.formulaDetails[0].previousFormula;\n    const source = event.source;\n    \n    // Print out the change event details.\n    console.log(\n      `The formula in cell ${cellAddress} changed. \n      The previous formula was: ${previousFormula}. \n      The source of the change was: ${source}.`\n    );\n  });\n}\n```"
 - name: onRowHiddenChanged
   uid: excel!Excel.Worksheet#onRowHiddenChanged:member
   package: excel!
@@ -1201,9 +1218,9 @@ events:
       description: "\n\n#### <a name=\"examples\"></a>Ejemplos\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/30-events/event-worksheet-single-click.yaml\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getActiveWorksheet();\n    sheet.onSingleClicked.add((event) => {\n        return Excel.run((context) => {\n            console.log(`Click detected at ${event.address} (pixel offset from upper-left cell corner: ${event.offsetX}, ${event.offsetY})`);\n            return context.sync();\n        });\n    });\n\n    console.log(\"The worksheet click handler is registered.\");\n\n    await context.sync();\n});\n```"
 extends: <xref uid="office!OfficeExtension.ClientObject:class" />
 metadata:
-  ms.openlocfilehash: af964e1d8c226888097174c67fdc4adc4f9075b9
-  ms.sourcegitcommit: 3b6cd632df196ae7bf2a1d192e2b60edc82b9e9c
+  ms.openlocfilehash: e8137f21408d35929adf0d95bdf8ed58a91d0f49
+  ms.sourcegitcommit: 418408d346cc899183d6d6a74161ba2ad58bd39d
   ms.translationtype: MT
   ms.contentlocale: es-ES
-  ms.lasthandoff: 04/14/2021
-  ms.locfileid: "51754028"
+  ms.lasthandoff: 07/02/2021
+  ms.locfileid: "53278352"

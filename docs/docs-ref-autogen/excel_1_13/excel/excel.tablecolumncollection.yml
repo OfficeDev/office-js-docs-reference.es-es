@@ -1,0 +1,235 @@
+### YamlMime:TSType
+name: Excel.TableColumnCollection
+uid: excel!Excel.TableColumnCollection:class
+package: excel!
+fullName: Excel.TableColumnCollection
+summary: >-
+  Representa una colección de todas las columnas que forman parte de la tabla.
+
+
+  \[[Conjunto de API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+remarks: ''
+isPreview: false
+isDeprecated: false
+type: class
+properties:
+- name: context
+  uid: excel!Excel.TableColumnCollection#context:member
+  package: excel!
+  fullName: context
+  summary: Contexto de solicitud asociado al objeto. Esto conecta el proceso del complemento con el Office proceso de la aplicación host.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type: <xref uid="excel!Excel.RequestContext:class" />
+- name: count
+  uid: excel!Excel.TableColumnCollection#count:member
+  package: excel!
+  fullName: count
+  summary: >-
+    Devuelve el número de columnas de la tabla.
+
+
+    \[[Conjunto de API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly count: number;'
+    return:
+      type: number
+- name: items
+  uid: excel!Excel.TableColumnCollection#items:member
+  package: excel!
+  fullName: items
+  summary: Obtiene los elementos secundarios cargados en esta colección.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly items: Excel.TableColumn[];'
+    return:
+      type: <xref uid="excel!Excel.TableColumn:class" />[]
+methods:
+- name: add(index, values, name)
+  uid: excel!Excel.TableColumnCollection#add:member(1)
+  package: excel!
+  fullName: add(index, values, name)
+  summary: >-
+    Agrega una nueva columna a la tabla.
+
+
+    \[[Conjunto de API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets) requiere un índice menor que el recuento total de columnas; 1.4 permite que index sea opcional (nulo o -1) y anexará una columna al final; 1.4 permite el parámetro name en el momento de la creación. \]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'add(index?: number, values?: Array<Array<boolean | string | number>> | boolean | string | number, name?: string): Excel.TableColumn;'
+    parameters:
+    - id: index
+      description: Opcional. Especifica la posición relativa de la nueva columna. Si es NULL o -1, la columna se agrega al final. Las columnas con un índice más alto se desplazarán a un lado. Indizado con cero.
+      type: number
+    - id: values
+      description: Opcional. Matriz 2D de valores sin formato de la columna de tabla.
+      type: Array&lt;Array&lt;boolean | string | number&gt;&gt; | boolean | string | number
+    - id: name
+      description: Opcional. Especifica el nombre de la nueva columna. If `null`<!-- -->, se usará el nombre predeterminado.
+      type: string
+    return:
+      type: <xref uid="excel!Excel.TableColumn:class" />
+      description: "\n\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nExcel.run(function (ctx) { \n    var tables = ctx.workbook.tables;\n    var values = [[\"Sample\"], [\"Values\"], [\"For\"], [\"New\"], [\"Column\"]];\n    var column = tables.getItem(\"Table1\").columns.add(null, values);\n    column.load('name');\n    return ctx.sync().then(function() {\n        console.log(column.name);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- name: getCount()
+  uid: excel!Excel.TableColumnCollection#getCount:member(1)
+  package: excel!
+  fullName: getCount()
+  summary: >-
+    Obtiene el número de columnas de la tabla.
+
+
+    \[[Conjunto de API: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getCount(): OfficeExtension.ClientResult<number>;'
+    return:
+      type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;number&gt;
+      description: ''
+- name: getItem(key)
+  uid: excel!Excel.TableColumnCollection#getItem:member(1)
+  package: excel!
+  fullName: getItem(key)
+  summary: >-
+    Obtiene un objeto de columna por nombre o identificador.
+
+
+    \[[Conjunto de API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getItem(key: number | string): Excel.TableColumn;'
+    parameters:
+    - id: key
+      description: Nombre o identificador de columna.
+      type: number | string
+    return:
+      type: <xref uid="excel!Excel.TableColumn:class" />
+      description: "\n\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nExcel.run(function (ctx) { \n    var tableColumn = ctx.workbook.tables.getItem('Table1').columns.getItem(0);\n    tableColumn.load('name');\n    return ctx.sync().then(function() {\n            console.log(tableColumn.name);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- name: getItemAt(index)
+  uid: excel!Excel.TableColumnCollection#getItemAt:member(1)
+  package: excel!
+  fullName: getItemAt(index)
+  summary: >-
+    Obtiene una columna en función de su posición en la colección.
+
+
+    \[[Conjunto de API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getItemAt(index: number): Excel.TableColumn;'
+    parameters:
+    - id: index
+      description: Valor de índice del objeto que se va a recuperar. Indizado con cero.
+      type: number
+    return:
+      type: <xref uid="excel!Excel.TableColumn:class" />
+      description: "\n\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nExcel.run(function (ctx) { \n    var tableColumn = ctx.workbook.tables.getItem['Table1'].columns.getItemAt(0);\n    tableColumn.load('name');\n    return ctx.sync().then(function() {\n            console.log(tableColumn.name);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- name: getItemOrNullObject(key)
+  uid: excel!Excel.TableColumnCollection#getItemOrNullObject:member(1)
+  package: excel!
+  fullName: getItemOrNullObject(key)
+  summary: >-
+    Obtiene un objeto de columna por nombre o identificador. Si la columna no existe, esta función devolverá un objeto con su `isNullObject` propiedad establecida en `true`<!-- -->. Para obtener más información, [vea *OrNullObject methods and properties](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
+
+
+    \[[Conjunto de API: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getItemOrNullObject(key: number | string): Excel.TableColumn;'
+    parameters:
+    - id: key
+      description: Nombre o identificador de columna.
+      type: number | string
+    return:
+      type: <xref uid="excel!Excel.TableColumn:class" />
+      description: ''
+- name: load(options)
+  uid: excel!Excel.TableColumnCollection#load:member(1)
+  package: excel!
+  fullName: load(options)
+  summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar a `context.sync()` antes de leer las propiedades.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(options?: Excel.Interfaces.TableColumnCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.TableColumnCollection;'
+    parameters:
+    - id: options
+      description: Proporciona opciones para las propiedades del objeto que se cargarán.
+      type: <xref uid="excel!Excel.Interfaces.TableColumnCollectionLoadOptions:interface" /> & <xref uid="excel!Excel.Interfaces.CollectionLoadOptions:interface" />
+    return:
+      type: <xref uid="excel!Excel.TableColumnCollection:class" />
+      description: ''
+- name: load(propertyNames)
+  uid: excel!Excel.TableColumnCollection#load:member(2)
+  package: excel!
+  fullName: load(propertyNames)
+  summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar a `context.sync()` antes de leer las propiedades.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.TableColumnCollection;'
+    parameters:
+    - id: propertyNames
+      description: Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades que se cargarán.
+      type: string | string[]
+    return:
+      type: <xref uid="excel!Excel.TableColumnCollection:class" />
+      description: "\n\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nExcel.run(function (ctx) { \n    var tableColumns = ctx.workbook.tables.getItem('Table1').columns;\n    tableColumns.load('items');\n    return ctx.sync().then(function() {\n        console.log(\"tableColumns Count: \" + tableColumns.count);\n        for (var i = 0; i < tableColumns.items.length; i++) {\n            console.log(tableColumns.items[i].name);\n        }\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- name: load(propertyNamesAndPaths)
+  uid: excel!Excel.TableColumnCollection#load:member(3)
+  package: excel!
+  fullName: load(propertyNamesAndPaths)
+  summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar a `context.sync()` antes de leer las propiedades.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNamesAndPaths?: OfficeExtension.LoadOption): Excel.TableColumnCollection;'
+    parameters:
+    - id: propertyNamesAndPaths
+      description: '`propertyNamesAndPaths.select` es una cadena delimitada por comas que especifica las propiedades que se cargarán y es una cadena delimitada por comas que especifica las propiedades de navegación que `propertyNamesAndPaths.expand` se cargarán.'
+      type: <xref uid="office!OfficeExtension.LoadOption:interface" />
+    return:
+      type: <xref uid="excel!Excel.TableColumnCollection:class" />
+      description: ''
+- name: toJSON()
+  uid: excel!Excel.TableColumnCollection#toJSON:member(1)
+  package: excel!
+  fullName: toJSON()
+  summary: Invalida el método JavaScript para proporcionar resultados más útiles cuando se pasa un objeto API a `toJSON()``JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama `toJSON` al método del objeto que se pasa a él). Mientras que el objeto original es un objeto API, el método devuelve un objeto JavaScript sin formato `Excel.TableColumnCollection` `toJSON` (se escribe como `Excel.Interfaces.TableColumnCollectionData`<!-- -->) que contiene una matriz "items" con copias superficiales de las propiedades cargadas de los elementos de la colección.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'toJSON(): Excel.Interfaces.TableColumnCollectionData;'
+    return:
+      type: <xref uid="excel!Excel.Interfaces.TableColumnCollectionData:interface" />
+      description: ''
+extends: <xref uid="office!OfficeExtension.ClientObject:class" />
+metadata:
+  ms.openlocfilehash: 60dcc0f710c617cd2735df41284f74bf485e9822
+  ms.sourcegitcommit: 1f63896cdaa3b8ac3bfcb506161116a564538837
+  ms.translationtype: MT
+  ms.contentlocale: es-ES
+  ms.lasthandoff: 07/02/2021
+  ms.locfileid: "53263688"
