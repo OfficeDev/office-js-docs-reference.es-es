@@ -1,7 +1,7 @@
 | Clase | Campos | Descripción |
 |:---|:---|:---|
 |[ChartAxisTitle](/javascript/api/excel/excel.chartaxistitle)|[textOrientation](/javascript/api/excel/excel.chartaxistitle#textorientation)|Especifica el ángulo al que está orientado el texto para el título del eje del gráfico.|
-|[ChartSeries](/javascript/api/excel/excel.chartseries)|[getDimensionValues(dimension: Excel.ChartSeriesDimension)](/javascript/api/excel/excel.chartseries#getdimensionvalues-dimension-)|Obtiene los valores de una sola dimensión de la serie de gráficos.|
+|[ChartSeries](/javascript/api/excel/excel.chartseries)|[getDimensionValues(dimension: Excel. ChartSeriesDimension)](/javascript/api/excel/excel.chartseries#getdimensionvalues-dimension-)|Obtiene los valores de una sola dimensión de la serie de gráficos.|
 |[Comment](/javascript/api/excel/excel.comment)|[contentType](/javascript/api/excel/excel.comment#contenttype)|Obtiene el tipo de contenido del comentario.|
 |[CommentAddedEventArgs](/javascript/api/excel/excel.commentaddedeventargs)|[commentDetails](/javascript/api/excel/excel.commentaddedeventargs#commentdetails)|Obtiene la matriz que contiene el identificador de comentario y los identificadores `CommentDetail` de sus respuestas relacionadas.|
 ||[source](/javascript/api/excel/excel.commentaddedeventargs#source)|Especifica el origen del evento.|
@@ -34,11 +34,11 @@
 ||[lowerBound](/javascript/api/excel/excel.pivotdatefilter#lowerbound)|Límite inferior del intervalo para la `between` condición de filtro.|
 ||[upperBound](/javascript/api/excel/excel.pivotdatefilter#upperbound)|Límite superior del intervalo para la `between` condición de filtro.|
 ||[wholeDays](/javascript/api/excel/excel.pivotdatefilter#wholedays)|For , y las condiciones de filtro, indica si se deben realizar comparaciones `equals` `before` como días `after` `between` enteros.|
-|[PivotField](/javascript/api/excel/excel.pivotfield)|[applyFilter(filter: Excel.PivotFilters)](/javascript/api/excel/excel.pivotfield#applyfilter-filter-)|Establece uno o varios de los filtros dinámicos actuales del campo y los aplica al campo.|
+|[PivotField](/javascript/api/excel/excel.pivotfield)|[applyFilter(filter: Excel. PivotFilters)](/javascript/api/excel/excel.pivotfield#applyfilter-filter-)|Establece uno o varios de los filtros dinámicos actuales del campo y los aplica al campo.|
 ||[clearAllFilters()](/javascript/api/excel/excel.pivotfield#clearallfilters--)|Borra todos los criterios de todos los filtros del campo.|
-||[clearFilter(filterType: Excel.PivotFilterType)](/javascript/api/excel/excel.pivotfield#clearfilter-filtertype-)|Borra todos los criterios existentes del filtro del campo del tipo especificado (si se aplica uno actualmente).|
+||[clearFilter(filterType: Excel. PivotFilterType)](/javascript/api/excel/excel.pivotfield#clearfilter-filtertype-)|Borra todos los criterios existentes del filtro del campo del tipo especificado (si se aplica uno actualmente).|
 ||[getFilters()](/javascript/api/excel/excel.pivotfield#getfilters--)|Obtiene todos los filtros aplicados actualmente en el campo.|
-||[isFiltered(filterType?: Excel.PivotFilterType)](/javascript/api/excel/excel.pivotfield#isfiltered-filtertype-)|Comprueba si hay filtros aplicados en el campo.|
+||[isFiltered(filterType?: Excel. PivotFilterType)](/javascript/api/excel/excel.pivotfield#isfiltered-filtertype-)|Comprueba si hay filtros aplicados en el campo.|
 |[PivotFilters](/javascript/api/excel/excel.pivotfilters)|[dateFilter](/javascript/api/excel/excel.pivotfilters#datefilter)|El filtro de fecha aplicado actualmente del campo dinámico.|
 ||[labelFilter](/javascript/api/excel/excel.pivotfilters#labelfilter)|El filtro de etiquetas aplicado actualmente del Campo dinámico.|
 ||[manualFilter](/javascript/api/excel/excel.pivotfilters#manualfilter)|El filtro manual del campo dinámico aplicado actualmente.|
@@ -80,7 +80,7 @@
 ||[getRangeAreasOrNullObjectBySheet(key: string)](/javascript/api/excel/excel.workbookrangeareas#getrangeareasornullobjectbysheet-key-)|Devuelve el `RangeAreas` objeto basado en el nombre de la hoja de cálculo o el identificador de la colección.|
 ||[direcciones](/javascript/api/excel/excel.workbookrangeareas#addresses)|Devuelve una matriz de direcciones al estilo A1.|
 ||[areas](/javascript/api/excel/excel.workbookrangeareas#areas)|Devuelve el `RangeAreasCollection` objeto.|
-||[intervalos](/javascript/api/excel/excel.workbookrangeareas#ranges)|Devuelve intervalos que componen este objeto en un  `RangeCollection`   objeto.|
+||[intervalos](/javascript/api/excel/excel.workbookrangeareas#ranges)|Devuelve intervalos que componen este objeto en un `RangeCollection` objeto.|
 |[Worksheet](/javascript/api/excel/excel.worksheet)|[customProperties](/javascript/api/excel/excel.worksheet#customproperties)|Obtiene una colección de propiedades personalizadas a nivel de hoja de cálculo.|
 |[WorksheetCustomProperty](/javascript/api/excel/excel.worksheetcustomproperty)|[delete()](/javascript/api/excel/excel.worksheetcustomproperty#delete--)|Elimina la propiedad personalizada.|
 ||[key](/javascript/api/excel/excel.worksheetcustomproperty#key)|Obtiene la clave de la propiedad personalizada.|
