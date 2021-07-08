@@ -1,0 +1,93 @@
+### YamlMime:TSType
+name: Excel.ChartFill
+uid: excel!Excel.ChartFill:class
+package: excel!
+fullName: Excel.ChartFill
+summary: >-
+  Representa el formato de relleno para un elemento de gráfico.
+
+
+  \[[Conjunto de API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+remarks: ''
+isPreview: false
+isDeprecated: false
+type: class
+properties:
+- name: context
+  uid: excel!Excel.ChartFill#context:member
+  package: excel!
+  fullName: context
+  summary: Contexto de solicitud asociado al objeto. Esto conecta el proceso del complemento con el Office proceso de la aplicación host.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type: <xref uid="excel!Excel.RequestContext:class" />
+methods:
+- name: clear()
+  uid: excel!Excel.ChartFill#clear:member(1)
+  package: excel!
+  fullName: clear()
+  summary: >-
+    Borra el color de relleno de un elemento de gráfico.
+
+
+    \[[Conjunto de API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'clear(): void;'
+    return:
+      type: void
+      description: "\n\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\n// Clear the line format of the major Gridlines on value axis of the Chart named \"Chart1\"\nExcel.run(function (ctx) { \n    var gridlines = ctx.workbook.worksheets.getItem(\"Sheet1\").charts.getItem(\"Chart1\").axes.valueAxis.majorGridlines;\n    gridlines.format.line.clear();\n    return ctx.sync().then(function() {\n            console.log(\"Chart Major Gridlines Format Cleared\");\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- name: setSolidColor(color)
+  uid: excel!Excel.ChartFill#setSolidColor:member(1)
+  package: excel!
+  fullName: setSolidColor(color)
+  summary: >-
+    Establece el formato de relleno de un elemento de gráfico en un color uniforme.
+
+
+    \[[Conjunto de API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'setSolidColor(color: string): void;'
+    parameters:
+    - id: color
+      description: Código de color HTML que representa el color del fondo, con el formato \# RRGGBB (por ejemplo, "FFA500") o como un color HTML con nombre (por ejemplo, "naranja").
+      type: string
+    return:
+      type: void
+      description: "\n\n#### <a name=\"examples\"></a>Ejemplos\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/10-chart/chart-point.yaml\nawait Excel.run(async (context) => {\n    const sheet = context.workbook.worksheets.getItem(\"Sample\");\n\n    let pointsCollection = sheet.charts.getItemAt(0).series.getItemAt(0).points;\n    let point = pointsCollection.getItemAt(2);\n\n    // Set color for chart point.\n    point.format.fill.setSolidColor('red');\n\n    await context.sync();        \n});\n```"
+- name: toJSON()
+  uid: excel!Excel.ChartFill#toJSON:member(1)
+  package: excel!
+  fullName: toJSON()
+  summary: Invalida el método JavaScript para proporcionar resultados más útiles cuando se pasa un objeto API a `toJSON()``JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama `toJSON` al método del objeto que se pasa a él). Mientras que la Excel. ChartFill (objeto) es un objeto API, `toJSON` el método devuelve un objeto JavaScript sin formato (se escribe como`Excel.Interfaces.ChartFillData`<!-- -->) que contiene copias superficiales de las propiedades secundarias cargadas del objeto original.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: >-
+      toJSON(): {
+                  [key: string]: string;
+              };
+    return:
+      type: >-
+        {
+                    [key: string]: string;
+                }
+      description: ''
+extends: <xref uid="office!OfficeExtension.ClientObject:class" />
+metadata:
+  ms.openlocfilehash: 72983d4b060b2712f4388c45fd1cf3a78d0f02dc
+  ms.sourcegitcommit: 1f63896cdaa3b8ac3bfcb506161116a564538837
+  ms.translationtype: MT
+  ms.contentlocale: es-ES
+  ms.lasthandoff: 07/02/2021
+  ms.locfileid: "53274975"

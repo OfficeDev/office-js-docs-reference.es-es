@@ -1,0 +1,282 @@
+### YamlMime:TSType
+name: Excel.TableCollection
+uid: excel!Excel.TableCollection:class
+package: excel!
+fullName: Excel.TableCollection
+summary: >-
+  Representa una colección de todas las tablas que forman parte del libro o la hoja de cálculo, dependiendo de cómo se haya alcanzado.
+
+
+  \[[Conjunto de API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+remarks: ''
+isPreview: false
+isDeprecated: false
+type: class
+properties:
+- name: context
+  uid: excel!Excel.TableCollection#context:member
+  package: excel!
+  fullName: context
+  summary: Contexto de solicitud asociado al objeto. Esto conecta el proceso del complemento con el Office proceso de la aplicación host.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type: <xref uid="excel!Excel.RequestContext:class" />
+- name: count
+  uid: excel!Excel.TableCollection#count:member
+  package: excel!
+  fullName: count
+  summary: >-
+    Devuelve el número de tablas del libro.
+
+
+    \[[Conjunto de API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly count: number;'
+    return:
+      type: number
+- name: items
+  uid: excel!Excel.TableCollection#items:member
+  package: excel!
+  fullName: items
+  summary: Obtiene los elementos secundarios cargados en esta colección.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly items: Excel.Table[];'
+    return:
+      type: <xref uid="excel!Excel.Table:class" />[]
+methods:
+- name: add(address, hasHeaders)
+  uid: excel!Excel.TableCollection#add:member(1)
+  package: excel!
+  fullName: add(address, hasHeaders)
+  summary: >-
+    Crear una tabla. El objeto de rango o la dirección de origen determinan la hoja de cálculo a la que se agregará la tabla. Si no se puede agregar la tabla (por ejemplo, porque la dirección no es válida o porque la tabla se superpondría con otra tabla), se producirá un error.
+
+
+    \[[Conjunto de API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'add(address: Range | string, hasHeaders: boolean): Excel.Table;'
+    parameters:
+    - id: address
+      description: 'Un `Range` objeto o una dirección de cadena o un nombre del intervalo que representa el origen de datos. Si la dirección no contiene un nombre de hoja, se usa la hoja activa en ese momento. \[Conjunto de api: ExcelApi 1.1 / 1.3. Antes de ExcelApi 1.3, este parámetro debe ser una cadena. A partir Excel Api 1.3, este parámetro puede ser un objeto Range o una cadena.\]'
+      type: <xref uid="excel!Excel.Range:class" /> | string
+    - id: hasHeaders
+      description: Valor booleano que indica si los datos que se importan tienen etiquetas de columna. Si el origen no contiene encabezados (es decir, cuando esta propiedad se establece en `false`<!-- -->), Excel generará automáticamente un encabezado y desplazará los datos hacia abajo por una fila.
+      type: boolean
+    return:
+      type: <xref uid="excel!Excel.Table:class" />
+      description: "\n\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nExcel.run(function (ctx) { \n    var table = ctx.workbook.tables.add('Sheet1!A1:E7', true);\n    table.load('name');\n    return ctx.sync().then(function() {\n        console.log(table.name);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- name: getCount()
+  uid: excel!Excel.TableCollection#getCount:member(1)
+  package: excel!
+  fullName: getCount()
+  summary: >-
+    Obtiene el número de tablas de la colección.
+
+
+    \[[Conjunto de API: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getCount(): OfficeExtension.ClientResult<number>;'
+    return:
+      type: <xref uid="office!OfficeExtension.ClientResult:class" />&lt;number&gt;
+      description: ''
+- name: getItem(key)
+  uid: excel!Excel.TableCollection#getItem:member(1)
+  package: excel!
+  fullName: getItem(key)
+  summary: >-
+    Obtener una tabla por nombre o identificador.
+
+
+    \[[Conjunto de API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getItem(key: string): Excel.Table;'
+    parameters:
+    - id: key
+      description: Nombre o identificador de la tabla que se va a recuperar.
+      type: string
+    return:
+      type: <xref uid="excel!Excel.Table:class" />
+      description: "\n\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nExcel.run(function (ctx) { \n    var tableName = 'Table1';\n    var table = ctx.workbook.tables.getItem(tableName);\n    table.load('name');\n    return ctx.sync().then(function() {\n            console.log(table.name);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- name: getItemAt(index)
+  uid: excel!Excel.TableCollection#getItemAt:member(1)
+  package: excel!
+  fullName: getItemAt(index)
+  summary: >-
+    Obtiene una tabla basada en su posición en la colección.
+
+
+    \[[Conjunto de API: ExcelApi 1.1](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getItemAt(index: number): Excel.Table;'
+    parameters:
+    - id: index
+      description: Valor de índice del objeto que se va a recuperar. Indizado con cero.
+      type: number
+    return:
+      type: <xref uid="excel!Excel.Table:class" />
+      description: "\n\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nExcel.run(function (ctx) { \n    var table = ctx.workbook.tables.getItemAt(0);\n    table.load('name');\n    return ctx.sync().then(function() {\n            console.log(table.name);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- name: getItemOrNullObject(key)
+  uid: excel!Excel.TableCollection#getItemOrNullObject:member(1)
+  package: excel!
+  fullName: getItemOrNullObject(key)
+  summary: >-
+    Obtener una tabla por nombre o identificador. Si la tabla no existe, esta función devolverá un objeto con su `isNullObject` propiedad establecida en `true`<!-- -->. Para obtener más información, [vea *OrNullObject methods and properties](https://docs.microsoft.com/office/dev/add-ins/develop/application-specific-api-model#ornullobject-methods-and-properties)<!-- -->.
+
+
+    \[[Conjunto de API: ExcelApi 1.4](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'getItemOrNullObject(key: string): Excel.Table;'
+    parameters:
+    - id: key
+      description: Nombre o identificador de la tabla que se va a recuperar.
+      type: string
+    return:
+      type: <xref uid="excel!Excel.Table:class" />
+      description: ''
+- name: load(options)
+  uid: excel!Excel.TableCollection#load:member(1)
+  package: excel!
+  fullName: load(options)
+  summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar a `context.sync()` antes de leer las propiedades.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(options?: Excel.Interfaces.TableCollectionLoadOptions & Excel.Interfaces.CollectionLoadOptions): Excel.TableCollection;'
+    parameters:
+    - id: options
+      description: Proporciona opciones para las propiedades del objeto que se cargarán.
+      type: <xref uid="excel!Excel.Interfaces.TableCollectionLoadOptions:interface" /> & <xref uid="excel!Excel.Interfaces.CollectionLoadOptions:interface" />
+    return:
+      type: <xref uid="excel!Excel.TableCollection:class" />
+      description: ''
+- name: load(propertyNames)
+  uid: excel!Excel.TableCollection#load:member(2)
+  package: excel!
+  fullName: load(propertyNames)
+  summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar a `context.sync()` antes de leer las propiedades.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.TableCollection;'
+    parameters:
+    - id: propertyNames
+      description: Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades que se cargarán.
+      type: string | string[]
+    return:
+      type: <xref uid="excel!Excel.TableCollection:class" />
+      description: "\n\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nExcel.run(function (ctx) { \n    var tables = ctx.workbook.tables;\n    tables.load();\n    return ctx.sync().then(function() {\n        console.log(\"tables Count: \" + tables.count);\n        for (var i = 0; i < tables.items.length; i++)\n        {\n            console.log(tables.items[i].name);\n        }\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```\n```javascript\n// Get the number of tables\nExcel.run(function (ctx) { \n    var tables = ctx.workbook.tables;\n    tables.load('count');\n    return ctx.sync().then(function() {\n        console.log(tables.count);\n    });\n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- name: load(propertyNamesAndPaths)
+  uid: excel!Excel.TableCollection#load:member(3)
+  package: excel!
+  fullName: load(propertyNamesAndPaths)
+  summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar a `context.sync()` antes de leer las propiedades.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNamesAndPaths?: OfficeExtension.LoadOption): Excel.TableCollection;'
+    parameters:
+    - id: propertyNamesAndPaths
+      description: '`propertyNamesAndPaths.select` es una cadena delimitada por comas que especifica las propiedades que se cargarán y es una cadena delimitada por comas que especifica las propiedades de navegación que `propertyNamesAndPaths.expand` se cargarán.'
+      type: <xref uid="office!OfficeExtension.LoadOption:interface" />
+    return:
+      type: <xref uid="excel!Excel.TableCollection:class" />
+      description: ''
+- name: toJSON()
+  uid: excel!Excel.TableCollection#toJSON:member(1)
+  package: excel!
+  fullName: toJSON()
+  summary: Invalida el método JavaScript para proporcionar resultados más útiles cuando se pasa un objeto API a `toJSON()``JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama `toJSON` al método del objeto que se pasa a él). Mientras que el objeto original es un objeto API, el método devuelve un objeto JavaScript sin formato `Excel.TableCollection` `toJSON` (se escribe como `Excel.Interfaces.TableCollectionData`<!-- -->) que contiene una matriz "items" con copias superficiales de las propiedades cargadas de los elementos de la colección.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'toJSON(): Excel.Interfaces.TableCollectionData;'
+    return:
+      type: <xref uid="excel!Excel.Interfaces.TableCollectionData:interface" />
+      description: ''
+events:
+- name: onAdded
+  uid: excel!Excel.TableCollection#onAdded:member
+  package: excel!
+  fullName: onAdded
+  summary: >-
+    Se produce cuando se agrega una nueva tabla en un libro.
+
+
+    \[[Conjunto de API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly onAdded: OfficeExtension.EventHandlers<Excel.TableAddedEventArgs>;'
+    return:
+      type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.TableAddedEventArgs:interface" />&gt;
+- name: onChanged
+  uid: excel!Excel.TableCollection#onChanged:member
+  package: excel!
+  fullName: onChanged
+  summary: >-
+    Se produce cuando los datos cambian en cualquier tabla de un libro o una hoja de cálculo.
+
+
+    \[[Conjunto de API: ExcelApi 1.7](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly onChanged: OfficeExtension.EventHandlers<Excel.TableChangedEventArgs>;'
+    return:
+      type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.TableChangedEventArgs:interface" />&gt;
+      description: "\n\n#### <a name=\"examples\"></a>Ejemplos\n\n```typescript\n// Link to full sample: https://raw.githubusercontent.com/OfficeDev/office-js-snippets/prod/samples/excel/30-events/events-tablecollection-changed.yaml\nawait Excel.run(async (context) => {\n    let tables = context.workbook.tables;\n    tables.onChanged.add(onChange);\n\n    await context.sync();\n    console.log(\"A handler has been registered for the table collection onChanged event\");\n});\n```"
+- name: onDeleted
+  uid: excel!Excel.TableCollection#onDeleted:member
+  package: excel!
+  fullName: onDeleted
+  summary: >-
+    Se produce cuando se elimina la tabla especificada en un libro.
+
+
+    \[[Conjunto de API: ExcelApi 1.9](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly onDeleted: OfficeExtension.EventHandlers<Excel.TableDeletedEventArgs>;'
+    return:
+      type: <xref uid="office!OfficeExtension.EventHandlers:class" />&lt;<xref uid="excel!Excel.TableDeletedEventArgs:interface" />&gt;
+extends: <xref uid="office!OfficeExtension.ClientObject:class" />
+metadata:
+  ms.openlocfilehash: 47039f1ca35761a53ec0d0c09d9e478771907821
+  ms.sourcegitcommit: 1f63896cdaa3b8ac3bfcb506161116a564538837
+  ms.translationtype: MT
+  ms.contentlocale: es-ES
+  ms.lasthandoff: 07/02/2021
+  ms.locfileid: "53274995"
