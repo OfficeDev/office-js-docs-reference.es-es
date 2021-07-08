@@ -1,0 +1,244 @@
+### YamlMime:TSType
+name: Excel.TableSort
+uid: excel!Excel.TableSort:class
+package: excel!
+fullName: Excel.TableSort
+summary: >-
+  Administra las operaciones de ordenación en `Table` objetos.
+
+
+  \[[Conjunto de API: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+remarks: ''
+isPreview: false
+isDeprecated: false
+type: class
+properties:
+- name: context
+  uid: excel!Excel.TableSort#context:member
+  package: excel!
+  fullName: context
+  summary: Contexto de solicitud asociado al objeto. Esto conecta el proceso del complemento con el Office proceso de la aplicación host.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'context: RequestContext;'
+    return:
+      type: <xref uid="excel!Excel.RequestContext:class" />
+- name: fields
+  uid: excel!Excel.TableSort#fields:member
+  package: excel!
+  fullName: fields
+  summary: >-
+    Especifica las condiciones actuales usadas para ordenar por última vez la tabla.
+
+
+    \[[Conjunto de API: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly fields: Excel.SortField[];'
+    return:
+      type: <xref uid="excel!Excel.SortField:interface" />[]
+- name: matchCase
+  uid: excel!Excel.TableSort#matchCase:member
+  package: excel!
+  fullName: matchCase
+  summary: >-
+    Especifica si la mayúscula y minúscula afecta al último tipo de tabla.
+
+
+    \[[Conjunto de API: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly matchCase: boolean;'
+    return:
+      type: boolean
+- name: method
+  uid: excel!Excel.TableSort#method:member
+  package: excel!
+  fullName: method
+  summary: >-
+    Representa el método de ordenación de caracteres chino usado por última vez para ordenar la tabla.
+
+
+    \[[Conjunto de API: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'readonly method: Excel.SortMethod | "PinYin" | "StrokeCount";'
+    return:
+      type: <xref uid="excel!Excel.SortMethod:enum" /> | "PinYin" | "StrokeCount"
+methods:
+- name: apply(fields, matchCase, method)
+  uid: excel!Excel.TableSort#apply:member(1)
+  package: excel!
+  fullName: apply(fields, matchCase, method)
+  summary: >-
+    Realizar una operación de ordenación.
+
+
+    \[[Conjunto de API: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'apply(fields: Excel.SortField[], matchCase?: boolean, method?: Excel.SortMethod): void;'
+    parameters:
+    - id: fields
+      description: La lista de condiciones por las que realizar la ordenación.
+      type: <xref uid="excel!Excel.SortField:interface" />[]
+    - id: matchCase
+      description: Opcional. Indica si la ordenación de cadenas distingue mayúsculas de minúsculas.
+      type: boolean
+    - id: method
+      description: Opcional. Método de ordenación que se usa para los caracteres chinos.
+      type: <xref uid="excel!Excel.SortMethod:enum" />
+    return:
+      type: void
+      description: "\n\n#### <a name=\"examples\"></a>Ejemplos\n\n```javascript\nExcel.run(function (ctx) { \n    var tableName = 'Table1';\n    var table = ctx.workbook.tables.getItem(tableName);\n    table.sort.apply([ \n            {\n                key: 2,\n                ascending: true\n            },\n        ], true);\n    return ctx.sync(); \n}).catch(function(error) {\n    console.log(\"Error: \" + error);\n    if (error instanceof OfficeExtension.Error) {\n        console.log(\"Debug info: \" + JSON.stringify(error.debugInfo));\n    }\n});\n```"
+- name: apply(fields, matchCase, methodString)
+  uid: excel!Excel.TableSort#apply:member(2)
+  package: excel!
+  fullName: apply(fields, matchCase, methodString)
+  summary: >-
+    Realizar una operación de ordenación.
+
+
+    \[[Conjunto de API: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'apply(fields: Excel.SortField[], matchCase?: boolean, methodString?: "PinYin" | "StrokeCount"): void;'
+    parameters:
+    - id: fields
+      description: La lista de condiciones por las que realizar la ordenación.
+      type: <xref uid="excel!Excel.SortField:interface" />[]
+    - id: matchCase
+      description: Opcional. Indica si la ordenación de cadenas distingue mayúsculas de minúsculas.
+      type: boolean
+    - id: methodString
+      description: Opcional. Método de ordenación que se usa para los caracteres chinos.
+      type: "\"PinYin\" | \"StrokeCount\""
+    return:
+      type: void
+      description: ''
+- name: clear()
+  uid: excel!Excel.TableSort#clear:member(1)
+  package: excel!
+  fullName: clear()
+  summary: >-
+    Borra la ordenación que se aplica actualmente en la tabla. Aunque esto no modifica la ordenación de la tabla, borra el estado de los botones de encabezado.
+
+
+    \[[Conjunto de API: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'clear(): void;'
+    return:
+      type: void
+      description: ''
+- name: load(options)
+  uid: excel!Excel.TableSort#load:member(1)
+  package: excel!
+  fullName: load(options)
+  summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar a `context.sync()` antes de leer las propiedades.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(options?: Excel.Interfaces.TableSortLoadOptions): Excel.TableSort;'
+    parameters:
+    - id: options
+      description: Proporciona opciones para las propiedades del objeto que se cargarán.
+      type: <xref uid="excel!Excel.Interfaces.TableSortLoadOptions:interface" />
+    return:
+      type: <xref uid="excel!Excel.TableSort:class" />
+      description: ''
+- name: load(propertyNames)
+  uid: excel!Excel.TableSort#load:member(2)
+  package: excel!
+  fullName: load(propertyNames)
+  summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar a `context.sync()` antes de leer las propiedades.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'load(propertyNames?: string | string[]): Excel.TableSort;'
+    parameters:
+    - id: propertyNames
+      description: Una cadena delimitada por comas o una matriz de cadenas que especifican las propiedades que se cargarán.
+      type: string | string[]
+    return:
+      type: <xref uid="excel!Excel.TableSort:class" />
+      description: ''
+- name: load(propertyNamesAndPaths)
+  uid: excel!Excel.TableSort#load:member(3)
+  package: excel!
+  fullName: load(propertyNamesAndPaths)
+  summary: Pone en cola un comando para cargar las propiedades especificadas del objeto. Debe llamar a `context.sync()` antes de leer las propiedades.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: >-
+      load(propertyNamesAndPaths?: {
+                  select?: string;
+                  expand?: string;
+              }): Excel.TableSort;
+    parameters:
+    - id: propertyNamesAndPaths
+      description: '`propertyNamesAndPaths.select` es una cadena delimitada por comas que especifica las propiedades que se cargarán y es una cadena delimitada por comas que especifica las propiedades de navegación que `propertyNamesAndPaths.expand` se cargarán.'
+      type: >-
+        {
+                    select?: string;
+                    expand?: string;
+                }
+    return:
+      type: <xref uid="excel!Excel.TableSort:class" />
+      description: ''
+- name: reapply()
+  uid: excel!Excel.TableSort#reapply:member(1)
+  package: excel!
+  fullName: reapply()
+  summary: >-
+    Vuelve a aplicar los parámetros de ordenación actuales a la tabla.
+
+
+    \[[Conjunto de API: ExcelApi 1.2](/office/dev/add-ins/reference/requirement-sets/excel-api-requirement-sets)\]
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'reapply(): void;'
+    return:
+      type: void
+      description: ''
+- name: toJSON()
+  uid: excel!Excel.TableSort#toJSON:member(1)
+  package: excel!
+  fullName: toJSON()
+  summary: Invalida el método JavaScript para proporcionar resultados más útiles cuando se pasa un objeto API a `toJSON()``JSON.stringify()`<!-- -->. (`JSON.stringify`<!-- -->, a su vez, llama `toJSON` al método del objeto que se pasa a él). Mientras que la Excel. El objeto TableSort es un objeto API, el método devuelve un objeto JavaScript sin formato `toJSON` (se escribe como`Excel.Interfaces.TableSortData`<!-- -->) que contiene copias superficiales de las propiedades secundarias cargadas del objeto original.
+  remarks: ''
+  isPreview: false
+  isDeprecated: false
+  syntax:
+    content: 'toJSON(): Excel.Interfaces.TableSortData;'
+    return:
+      type: <xref uid="excel!Excel.Interfaces.TableSortData:interface" />
+      description: ''
+extends: <xref uid="office!OfficeExtension.ClientObject:class" />
+metadata:
+  ms.openlocfilehash: babe81de866042067e33d95b809daf00749a9096
+  ms.sourcegitcommit: 1f63896cdaa3b8ac3bfcb506161116a564538837
+  ms.translationtype: MT
+  ms.contentlocale: es-ES
+  ms.lasthandoff: 07/02/2021
+  ms.locfileid: "53274990"
